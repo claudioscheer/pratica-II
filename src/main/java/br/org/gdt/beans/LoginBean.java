@@ -2,7 +2,6 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.Login;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean
@@ -16,7 +15,7 @@ public class LoginBean {
     }
 
     public void entrar() {
-        System.out.println("entrouu");
+        System.out.println(String.format("LOGIN - Email = %s, Senha = %s", login.getEmailUsuario(), login.getSenhaUsuario()));
     }
 
     public Login getLogin() {
