@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Gerenciador de Tarefas</title>
+        <h:outputStylesheet library="js/" name="twitter-bootstrap/css/bootstrap.css" />
+        <style type="text/css">
+            .ui-panel {
+                border: 0px !important;
+            }
+
+            .ui-inputfield {
+                box-shadow: none !important;
+            }
+        </style>        
+    </h:head>
+    <h:body>
+        <div class="container" style="width: 980px">
+            <nav class="nav navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Gerenciador de Tarefas</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li> <a href="/GerenciadorDeTarefas/faces/bloco_list.xhtml">Cadernos</a> </li>
+                        <li> <a href="#">Tarefas</a> </li>
+                    </ul>
+                </div>
+            </nav>
+            <ui:insert name="content" />
+        </div>
+    </h:body>
+</html>
+

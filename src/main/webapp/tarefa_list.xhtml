@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Gerenciar Tarefas</title>
+        <h:outputStylesheet library="js/" name="twitter-bootstrap/css/bootstrap.css" />
+        <style type="text/css">
+            .ui-panel {
+                border: 0px !important;
+            }
+
+            .ui-inputfield {
+                box-shadow: none !important;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/template.xhtml">
+            <ui:define name="content">
+                <f:metadata>
+                    <f:viewParam name="bloco" value="#{tarefaBean.tarefa.bloco}" converter="#{blocoConverter}"/>
+                </f:metadata>
+                <h:form>
+                    <h:messages />
+                    <h:inputHidden value="#{tarefaBean.tarefa.bloco}" converter="#{blocoConverter}" />
+                    <h:inputHidden value="#{tarefaBean.tarefa.id}" />
+                    <h2>Bloco: <h:outputText value="#{tarefaBean.tarefa.bloco.descricao}"/></h2>
+                    <hr />
+                    <p:panel visible="#{tarefaBean.formAtivo}">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Editar Tarefa
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group row">
+                                    <div class="col-sm-2">
+                                        <h:outputLabel value="Título:" for="titulo" />
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h:inputText id="titulo" value="#{tarefaBean.tarefa.titulo}" title="Titulo" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-2">                            
+                                        <h:outputLabel value="Descrição:" for="descricao" />
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h:inputTextarea id="descricao" value="#{tarefaBean.tarefa.descricao}" title="Descricao" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-2">                            
+                                        <h:outputLabel value="Data Prevista:" for="dataPrevista" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p:calendar id="dataPrevista" value="#{tarefaBean.tarefa.dataPrevista}" pattern="dd/MM/yyyy" mask="true" title="DataPrevista" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <h:outputLabel value="Data Conclusão:" for="dataConclusao" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p:calendar id="dataConclusao" value="#{tarefaBean.tarefa.dataConclusao}" pattern="dd/MM/yyyy" mask="true" title="DataConclusao" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:commandButton value="Salvar" action="#{tarefaBean.salvar()}" class="btn btn-primary"/>
+                                    &nbsp;
+                                    <h:commandButton value="Cancelar" action="#{tarefaBean.cancel()}" class="btn btn-default">
+                                        <f:ajax listener="#{tarefaBean.cancel()}" execute="data" />
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </p:panel>
+                    <h1><h:outputText value="Tarefas"/></h1>
+                    <h:dataTable value="#{tarefaBean.tarefas}" var="item" class="table table-hover">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Título"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titulo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Data Prevista"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataPrevista}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Status"/>
+                            </f:facet>
+                            <h:outputText value="#{item.status}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink class="btn btn-default" value="Editar" action="#{tarefaBean.prepareEdit(item)}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink class="btn btn-default" value="Excluir" action="#{tarefaBean.excluir(item)}" onclick="return confirm('Excluir tarefa?')"/>
+                        </h:column>                
+                    </h:dataTable>
+                    <br />
+                    <h:commandButton value="Nova tarefa" action="#{tarefaBean.add()}" class="btn btn-primary" />
+                    &nbsp;
+                    <h:button value="Selecionar bloco" outcome="bloco_list" class="btn btn-default"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
