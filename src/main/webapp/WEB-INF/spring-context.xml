@@ -22,7 +22,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close" p:driverClassName="org.postgresql.Driver"
           p:url="jdbc:postgresql://localhost:5432/test-jsf" p:username="postgres"
-          p:password="claudio123" />
+          p:password="postgres" />
 
     <!-- Declara a fabrica de conexoes do Hibernate JPA -->
     <!-- As configuracoes da Persistence Unit sao declaradas em persistence.xml -->
