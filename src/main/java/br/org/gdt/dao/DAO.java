@@ -8,7 +8,7 @@ public abstract class DAO<T> {
 
     @PersistenceContext
     EntityManager entityManager;
-    
+
     protected Class<T> classe;
 
     public void save(T object) {
@@ -29,6 +29,6 @@ public abstract class DAO<T> {
     }
 
     public List<T> findAll() {
-        return entityManager.createQuery("from "+classe.getName()+" as t").getResultList();
+        return entityManager.createQuery("from " + classe.getName() + " as t").getResultList();
     }
 }
