@@ -11,8 +11,8 @@ import javax.faces.convert.FacesConverter;
 
 @FacesConverter("blocoConverter")
 @ManagedBean
-public class BlocoConverter implements Converter{
-  
+public class BlocoConverter implements Converter {
+
     @ManagedProperty("#{blocoService}")
     private BlocoService blocoService;
 
@@ -23,7 +23,7 @@ public class BlocoConverter implements Converter{
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        return "" + ( (Bloco) o ).getId();
+        return "" + ((Bloco) o).getId();
     }
 
     public BlocoService getBlocoService() {
