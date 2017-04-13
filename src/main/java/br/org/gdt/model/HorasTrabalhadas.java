@@ -1,6 +1,5 @@
 package br.org.gdt.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,12 +8,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "seq_horas_trabalhadas", sequenceName = "seq_horas_trabalhadas", allocationSize = 1)
-@Table(name = "horas_trabalhadas")
+@SequenceGenerator(name = "seq_fp_horas_trabalhadas", sequenceName = "seq_fp_horas_trabalhadas", allocationSize = 1)
+@Table(name = "fp_horas_trabalhadas")
 public class HorasTrabalhadas implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
-    private long id;
+    private int id;
     private int pessoa;
     private double horasNormais;
     private double horasFaltas;
@@ -23,13 +22,12 @@ public class HorasTrabalhadas implements java.io.Serializable {
     private double horasNoturnas;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_horas_trabalhadas")
-    @Column(name = "id")
-    public long getId() {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_horas_trabalhadas")
+    public int getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
