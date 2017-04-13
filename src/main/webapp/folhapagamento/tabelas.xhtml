@@ -29,9 +29,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tabAtivo">Ativa<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tabAtivo"></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:selectBooleanCheckbox id="tabAtivo" value="#{fpTabelaBean.fpTabela.tabAtivo}" />
+                                        <div class="checkbox">
+                                            <label>
+                                                <h:selectBooleanCheckbox id="tabAtivo" value="#{fpTabelaBean.fpTabela.tabAtivo}" /> Tabela está ativa?
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -74,7 +78,7 @@
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                         <h:commandButton class="btn btn-success" value="Salvar" action="#{fpTabelaBean.save()}" />
-                                        <h:commandButton class="btn btn-primary" value="Cancelar" action="#{fpTabelaBean.cancel()}" />
+                                        <h:commandButton class="btn btn-default" value="Cancelar" action="#{fpTabelaBean.cancel()}" />
                                     </div>
                                 </div>
                             </div>
