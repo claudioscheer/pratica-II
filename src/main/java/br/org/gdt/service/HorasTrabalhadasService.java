@@ -15,7 +15,6 @@ public class HorasTrabalhadasService {
 
     @Transactional
     public void save(HorasTrabalhadas horasTrabalhadas) {
-        System.out.println(horasTrabalhadas.toString());
         horasTrabalhadasDAO.save(horasTrabalhadas);
     }
 

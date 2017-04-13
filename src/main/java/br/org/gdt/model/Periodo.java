@@ -1,5 +1,6 @@
 package br.org.gdt.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author Larissa Guder <lariguder10@gmail.com>
+ */
 @Entity
 @SequenceGenerator(name = "seq_periodo", sequenceName = "seq_periodo", allocationSize = 1)
 @Table(name = "periodo")
-public class Periodo implements java.io.Serializable {
+public class Periodo implements Serializable {
 
     private long id;
     private int mes;
@@ -41,6 +46,7 @@ public class Periodo implements java.io.Serializable {
     public void setDiasUteis(int diasUteis) {
         this.diasUteis = diasUteis;
     }
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_periodo")
@@ -52,10 +58,9 @@ public class Periodo implements java.io.Serializable {
     public void setId(long id) {
         this.id = id;
     }
-
-    @Override
+        @Override
     public String toString() {
-        return "Periodo{" + "id=" + id + ", mes=" + mes + ", ano=" + ano + ", diasUteis=" + diasUteis + '}';
+        return "Periodo{" + "id=" + id + ", mes=" + mes + ", ano=" + ano + ", diasUteis=" + diasUteis+ '}';
     }
 
 }

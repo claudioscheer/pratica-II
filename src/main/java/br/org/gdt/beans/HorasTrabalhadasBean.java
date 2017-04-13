@@ -62,11 +62,6 @@ public class HorasTrabalhadasBean {
         this.horasTrabalhadas = horasTrabalhadas;
     }
 
-    public String addTarefa(HorasTrabalhadas horasTrabalhadas) {
-        this.horasTrabalhadas = horasTrabalhadas;
-        return "horastrabalhadas";
-    }
-
     public List<HorasTrabalhadas> getTodasHorasTrabalhadas() {
         if (todasHorasTrabalhadas == null) {
             todasHorasTrabalhadas = horasTrabalhadasService.findAll();
