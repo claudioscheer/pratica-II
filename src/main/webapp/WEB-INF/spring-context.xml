@@ -21,8 +21,8 @@
     <!-- Declara um datasource com pool de conexoes do Apache DBCP -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close" p:driverClassName="org.postgresql.Driver"
-          p:url="jdbc:postgresql://localhost:5432/test-jsf" p:username="postgres"
-          p:password="claudio123" />
+          p:url="jdbc:postgresql://localhost:5432/BancoRH" p:username="postgres"
+          p:password="root" />
 
     <!-- Declara a fabrica de conexoes do Hibernate JPA -->
     <!-- As configuracoes da Persistence Unit sao declaradas em persistence.xml -->
