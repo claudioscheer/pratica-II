@@ -9,9 +9,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "seq_periodo", sequenceName = "seq_periodo", allocationSize = 1)
-@Table(name = "periodo")
-public class Periodo implements java.io.Serializable {
+@SequenceGenerator(name = "seq_fp_periodo", sequenceName = "seq_fp_periodo", allocationSize = 1)
+@Table(name = "fp_periodo")
+public class FpPeriodo implements java.io.Serializable {
 
     private long id;
     private int mes;
@@ -43,7 +43,7 @@ public class Periodo implements java.io.Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_periodo")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_periodo")
     @Column(name = "id")
     public long getId() {
         return this.id;

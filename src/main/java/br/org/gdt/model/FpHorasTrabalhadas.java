@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @SequenceGenerator(name = "seq_fp_horas_trabalhadas", sequenceName = "seq_fp_horas_trabalhadas", allocationSize = 1)
 @Table(name = "fp_horas_trabalhadas")
-public class HorasTrabalhadas implements java.io.Serializable {
+public class FpHorasTrabalhadas implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
     private int id;

@@ -1,5 +1,5 @@
 
-package bt.org.gdt.enums;
+package br.org.gdt.enums;
 
 public enum Sexo {
     masculino,
