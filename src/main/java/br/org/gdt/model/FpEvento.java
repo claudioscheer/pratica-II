@@ -29,4 +29,28 @@ public class FpEvento implements java.io.Serializable {
         this.eveId = eveId;
     }
 
+    public boolean isEveEventoVariavel() {
+        return eveEventoVariavel;
+    }
+
+    public void setEveEventoVariavel(boolean eveEventoVariavel) {
+        this.eveEventoVariavel = eveEventoVariavel;
+    }
+
+    public String getEveNome() {
+        return eveNome;
+    }
+
+    public void setEveNome(String eveNome) {
+        this.eveNome = eveNome;
+    }
+
+    public String getEveDescricao() {
+        return eveDescricao;
+    }
+
+    public void setEveDescricao(String eveDescricao) {
+        this.eveDescricao = eveDescricao;
+    }
+
 }
