@@ -25,7 +25,7 @@ public class FpPeriodoBean {
     }
 
     public void save() {
-        if (fpPeriodo.getId() > 0) {
+        if (fpPeriodo.getPerId() > 0) {
             fpPeriodoService.update(fpPeriodo);
         } else {
             fpPeriodoService.save(fpPeriodo);
@@ -45,7 +45,7 @@ public class FpPeriodoBean {
     }
 
     public String excluir(FpPeriodo fpPeriodo) {
-        fpPeriodoService.delete(fpPeriodo.getId());
+        fpPeriodoService.delete(fpPeriodo.getPerId());
         todosFpPeriodo.remove(fpPeriodo);
         return "periodos";
     }

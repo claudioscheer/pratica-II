@@ -79,9 +79,4 @@ public class FpHorasTrabalhadas implements java.io.Serializable {
         this.horasNoturnas = horasNoturnas;
     }
 
-    @Override
-    public String toString() {
-        return "HorasTrabalhadas{" + "id=" + id + ", pessoa=" + pessoa + ", horasNormais=" + horasNormais + ", horasFaltas=" + horasFaltas + ", horas50=" + horas50 + ", horas100=" + horas100 + ", horasNoturnas=" + horasNoturnas + '}';
-    }
-
 }

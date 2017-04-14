@@ -68,9 +68,4 @@ public class FpTabela implements java.io.Serializable {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Tabela{" + "tabId=" + tabId + ", tabNome=" + tabNome + ", tabAtivo=" + tabAtivo + '}';
-    }
-
 }

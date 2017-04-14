@@ -15,7 +15,7 @@
                     <h3>Horas trabalhadas</h3>
                 </div>
                 <br />
-                <h:form>
+                <h:form id="formHorasTrabalhadas">
                     <h:messages class="error" style="color: #d9534f" />
 
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpHorasTrabalhadasBean.formAtivo}">
@@ -61,8 +61,12 @@
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpHorasTrabalhadasBean.save()}" />
-                                        <h:commandButton class="btn btn-default" value="Cancelar" action="#{fpHorasTrabalhadasBean.cancel()}" />
+                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpHorasTrabalhadasBean.save()}">
+                                            <f:ajax execute="@form" render="formHorasTrabalhadas" />
+                                        </h:commandButton>
+                                        <h:commandButton class="btn btn-default" value="Cancelar" action="#{fpHorasTrabalhadasBean.cancel()}">
+                                            <f:ajax execute="@form" render="formHorasTrabalhadas" />
+                                        </h:commandButton>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +75,9 @@
 
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpHorasTrabalhadasBean.formAtivo}">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpHorasTrabalhadasBean.add()}" />
+                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpHorasTrabalhadasBean.add()}">
+                                <f:ajax execute="@form" render="formHorasTrabalhadas" />
+                            </h:commandButton>
                         </div>
                         <div class="row">
                             <div class="x_panel">
@@ -95,8 +101,12 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpHorasTrabalhadasBean.prepareEdit(horaTrabalhada)}" />
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpHorasTrabalhadasBean.excluir(horaTrabalhada)}" onclick="return confirm('Excluir hora trabalhada?')"/>
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpHorasTrabalhadasBean.prepareEdit(horaTrabalhada)}">
+                                                <f:ajax execute="@form" render="formHorasTrabalhadas" />
+                                            </h:commandLink>
+                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpHorasTrabalhadasBean.excluir(horaTrabalhada)}" onclick="return confirm('Excluir hora trabalhada?')">
+                                                <f:ajax execute="@form" render="formHorasTrabalhadas" />
+                                            </h:commandLink>
                                         </h:column>                  
                                     </h:dataTable>
                                 </div>
@@ -107,7 +117,6 @@
                 </h:form>
             </ui:define>
             <ui:define name="script">
-                <h:outputScript library="vendors/" name="jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js" />
             </ui:define>
         </ui:composition>
 

@@ -1,6 +1,5 @@
 package br.org.gdt.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,49 +12,44 @@ import javax.persistence.Table;
 @Table(name = "fp_periodo")
 public class FpPeriodo implements java.io.Serializable {
 
-    private long id;
-    private int mes;
-    private int ano;
-    private int diasUteis;
-
-    public int getMes() {
-        return mes;
-    }
-
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    public int getAno() {
-        return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-
-    public int getDiasUteis() {
-        return diasUteis;
-    }
-
-    public void setDiasUteis(int diasUteis) {
-        this.diasUteis = diasUteis;
-    }
+    private static final long serialVersionUID = -2790083349568956163L;
+    private int perId;
+    private int perMes;
+    private int perAno;
+    private int perDiasUteis;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_periodo")
-    @Column(name = "id")
-    public long getId() {
-        return this.id;
+    public int getPerId() {
+        return this.perId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPerId(int perId) {
+        this.perId = perId;
     }
 
-    @Override
-    public String toString() {
-        return "Periodo{" + "id=" + id + ", mes=" + mes + ", ano=" + ano + ", diasUteis=" + diasUteis + '}';
+    public int getPerMes() {
+        return perMes;
+    }
+
+    public void setPerMes(int perMes) {
+        this.perMes = perMes;
+    }
+
+    public int getPerAno() {
+        return perAno;
+    }
+
+    public void setPerAno(int perAno) {
+        this.perAno = perAno;
+    }
+
+    public int getPerDiasUteis() {
+        return perDiasUteis;
+    }
+
+    public void setPerDiasUteis(int perDiasUteis) {
+        this.perDiasUteis = perDiasUteis;
     }
 
 }
