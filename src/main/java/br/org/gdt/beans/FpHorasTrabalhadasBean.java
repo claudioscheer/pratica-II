@@ -23,7 +23,7 @@ public class FpHorasTrabalhadasBean {
     }
 
     public void save() {
-        if (fpHorasTrabalhadas.getId() > 0) {
+        if (fpHorasTrabalhadas.getHorId() > 0) {
             fpHorasTrabalhadasService.update(fpHorasTrabalhadas);
         } else {
             fpHorasTrabalhadasService.save(fpHorasTrabalhadas);
@@ -43,7 +43,7 @@ public class FpHorasTrabalhadasBean {
     }
 
     public String excluir(FpHorasTrabalhadas fpHorasTrabalhadas) {
-        fpHorasTrabalhadasService.delete(fpHorasTrabalhadas.getId());
+        fpHorasTrabalhadasService.delete(fpHorasTrabalhadas.getHorId());
         todasFpHorasTrabalhadas.remove(fpHorasTrabalhadas);
         return "horastrabalhadas";
     }

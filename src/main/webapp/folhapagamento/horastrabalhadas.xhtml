@@ -19,43 +19,43 @@
                     <h:messages class="error" style="color: #d9534f" />
 
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpHorasTrabalhadasBean.formAtivo}">
-                        <h:inputHidden value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.id}" />
+                        <h:inputHidden value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horId}" />
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-horizontal form-label-left">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pessoa">Pessoa<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Pessoa<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" id="pessoa" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.pessoa}" />
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horPessoa}" />
                                     </div>
                                 </div>
                                 <div class="form-group">                        
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="horas-normais">Total horas mensais<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Total horas mensais<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" id="horas-normais" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horasNormais}" disabled="true" />
+                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horHorasNormais}" disabled="true" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="horas-faltas">Horas de faltas<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Horas de faltas<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" id="horas-faltas" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horasFaltas}" />
+                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horasFaltas}" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="horas-50">Horas extras 50%<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Horas extras 50%<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" id="horas-50" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horas50}" />
+                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horHoras50}" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="horas-100">Horas extras 100%<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Horas extras 100%<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" id="horas-100" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horas100}" />
+                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horHoras100}" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="horas-noturnas">Horas noturnas<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Horas noturnas<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" id="horas-noturnas" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horasNoturnas}" />
+                                        <h:inputText a:data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" class="form-control col-md-7 col-xs-12" value="#{fpHorasTrabalhadasBean.fpHorasTrabalhadas.horHorasNoturnas}" />
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>
@@ -89,15 +89,15 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Horas 50%</f:facet>
-                                                #{horaTrabalhada.horas50}
+                                                #{horaTrabalhada.horHoras50}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Horas 100%</f:facet>
-                                                #{horaTrabalhada.horas100}
+                                                #{horaTrabalhada.horHoras100}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Horas noturnas</f:facet>
-                                                #{horaTrabalhada.horasNoturnas}
+                                                #{horaTrabalhada.horHorasNoturnas}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Opções</f:facet>

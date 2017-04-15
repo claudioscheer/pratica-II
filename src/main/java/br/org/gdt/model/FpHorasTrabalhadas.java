@@ -13,70 +13,70 @@ import javax.persistence.Table;
 public class FpHorasTrabalhadas implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
-    private int id;
-    private int pessoa;
-    private double horasNormais;
-    private double horasFaltas;
-    private double horas50;
-    private double horas100;
-    private double horasNoturnas;
+    private long horId;
+    private int horPessoa;
+    private double horHorasNormais;
+    private double horHorasFaltas;
+    private double horHoras50;
+    private double horHoras100;
+    private double horHorasNoturnas;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_horas_trabalhadas")
-    public int getId() {
-        return this.id;
+    public long getHorId() {
+        return this.horId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHorId(long horId) {
+        this.horId = horId;
     }
 
-    public int getPessoa() {
-        return pessoa;
+    public int getHorPessoa() {
+        return horPessoa;
     }
 
-    public void setPessoa(int pessoa) {
-        this.pessoa = pessoa;
+    public void setHorPessoa(int horPessoa) {
+        this.horPessoa = horPessoa;
     }
 
-    public double getHorasNormais() {
-        return 250;
+    public double getHorHorasNormais() {
+        return 220;
     }
 
-    public void setHorasNormais(double horasNormais) {
-        this.horasNormais = horasNormais;
+    public void setHorHorasNormais(double horHorasNormais) {
+        this.horHorasNormais = horHorasNormais;
     }
 
     public double getHorasFaltas() {
-        return horasFaltas;
+        return horHorasFaltas;
     }
 
     public void setHorasFaltas(double horasFaltas) {
-        this.horasFaltas = horasFaltas;
+        this.horHorasFaltas = horasFaltas;
     }
 
-    public double getHoras50() {
-        return horas50;
+    public double getHorHoras50() {
+        return horHoras50;
     }
 
-    public void setHoras50(double horas50) {
-        this.horas50 = horas50;
+    public void setHorHoras50(double horHoras50) {
+        this.horHoras50 = horHoras50;
     }
 
-    public double getHoras100() {
-        return horas100;
+    public double getHorHoras100() {
+        return horHoras100;
     }
 
-    public void setHoras100(double horas100) {
-        this.horas100 = horas100;
+    public void setHorHoras100(double horas100) {
+        this.horHoras100 = horas100;
     }
 
-    public double getHorasNoturnas() {
-        return horasNoturnas;
+    public double getHorHorasNoturnas() {
+        return horHorasNoturnas;
     }
 
-    public void setHorasNoturnas(double horasNoturnas) {
-        this.horasNoturnas = horasNoturnas;
+    public void setHorHorasNoturnas(double horHorasNoturnas) {
+        this.horHorasNoturnas = horHorasNoturnas;
     }
 
 }

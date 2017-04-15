@@ -99,6 +99,7 @@
                                                 #{evento.eveFormula}
                                         </h:column>
                                         <h:column>
+                                            <f:facet name="header">Opções</f:facet>
                                             <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpEventoBean.prepareEdit(evento)}">
                                                 <f:ajax execute="@form" render="formEvento" />
                                             </h:commandLink>

@@ -18,18 +18,18 @@ import javax.persistence.Table;
 public class FpTabela implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
-    private int tabId;
+    private long tabId;
     private String tabNome;
     private boolean tabAtivo;
     private List<FpFaixa> tabFaixas;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_tabela")
-    public int getTabId() {
+    public long getTabId() {
         return tabId;
     }
 
-    public void setTabId(int tabId) {
+    public void setTabId(long tabId) {
         this.tabId = tabId;
     }
 

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class FpEvento implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
-    private int eveId;
+    private long eveId;
     private boolean eveEventoVariavel;
     private String eveNome;
     private String eveDescricao;
@@ -22,11 +22,11 @@ public class FpEvento implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_evento")
-    public int getEveId() {
+    public long getEveId() {
         return this.eveId;
     }
 
-    public void setEveId(int eveId) {
+    public void setEveId(long eveId) {
         this.eveId = eveId;
     }
 

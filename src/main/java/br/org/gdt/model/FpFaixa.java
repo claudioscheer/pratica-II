@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 public class FpFaixa implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
-    private int faiId;
+    private long faiId;
     private FpTabela faiTabela;
     private double faiMinimo;
     private double faiMaximo;
@@ -33,11 +33,11 @@ public class FpFaixa implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_faixa")
-    public int getFaiId() {
+    public long getFaiId() {
         return faiId;
     }
 
-    public void setFaiId(int faiId) {
+    public void setFaiId(long faiId) {
         this.faiId = faiId;
     }
 
