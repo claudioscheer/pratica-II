@@ -19,57 +19,55 @@
                 <h:form id="formEvento">
                     <h:messages class="error" style="color: #d9534f" />
 
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpPeriodoBean.formAtivo}">
-                        <h:inputHidden value="#{fpPeriodoBean.fpPeriodo.perId}" />
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpEventoBean.formAtivo}">
+                        <h:inputHidden value="#{fpEventoBean.fpEvento.eveId}" />
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-horizontal form-label-left">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mes">Mês<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" id="mes" value="#{fpPeriodoBean.fpPeriodo.perMes}" />
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveNome}" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ano">Ano<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" id="ano" value="#{fpPeriodoBean.fpPeriodo.perAno}" />
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveDescricao}" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="diasUteis">Dias úteis<span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fórmula<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" id="diasUteis" value="#{fpPeriodoBean.fpPeriodo.perDiasUteis}" />
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveFormula}" />
                                     </div>
                                 </div>
-                                <fieldset>
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Data inicial<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left date-picker" />
-                                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="checkbox">
+                                            <label>
+                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveEventoVariavel}" /> Evento variável?
+                                            </label>
                                         </div>
                                     </div>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Data final<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left date-picker" />
-                                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="checkbox">
+                                            <label>
+                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveAtivo}" /> Evento está ativo?
+                                            </label>
                                         </div>
                                     </div>
-                                </fieldset>
+                                </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpPeriodoBean.save()}">
+                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpEventoBean.save()}">
                                             <f:ajax execute="@form" render="formEvento" />
                                         </h:commandButton>
-                                        <h:commandButton class="btn btn-default" value="Cancelar" action="#{fpPeriodoBean.cancel()}">
+                                        <h:commandButton class="btn btn-default" value="Cancelar" action="#{fpEventoBean.cancel()}">
                                             <f:ajax execute="@form" render="formEvento" />
                                         </h:commandButton>
                                     </div>
@@ -78,33 +76,33 @@
                         </div>
                     </h:panelGroup>
 
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpPeriodoBean.formAtivo}">
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpEventoBean.formAtivo}">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpPeriodoBean.add()}">
+                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpEventoBean.add()}">
                                 <f:ajax execute="@form" render="formEvento" />
                             </h:commandButton>
                         </div>
                         <div class="row">
                             <div class="x_panel">
                                 <div class="x_content">
-                                    <h:dataTable class="table table-striped" value="#{fpPeriodoBean.todosFpPeriodo}" var="periodo">
+                                    <h:dataTable class="table table-striped" value="#{fpEventoBean.todosFpEvento}" var="evento">
                                         <h:column>
-                                            <f:facet name="header">Mês</f:facet>
-                                                #{periodo.perMes}
+                                            <f:facet name="header">Nome</f:facet>
+                                                #{evento.eveNome}
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Ano</f:facet>
-                                                #{periodo.perAno}
+                                            <f:facet name="header">Descrição</f:facet>
+                                                #{evento.eveDescricao}
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Dias úteis</f:facet>
-                                                #{periodo.perDiasUteis}
+                                            <f:facet name="header">Fórmula</f:facet>
+                                                #{evento.eveFormula}
                                         </h:column>
                                         <h:column>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpPeriodoBean.prepareEdit(periodo)}">
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpEventoBean.prepareEdit(evento)}">
                                                 <f:ajax execute="@form" render="formEvento" />
                                             </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpPeriodoBean.excluir(periodo)}" onclick="return confirm('Excluir periodo?')">
+                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpEventoBean.excluir(evento)}" onclick="return confirm('Excluir evento?')">
                                                 <f:ajax execute="@form" render="formEvento" />
                                             </h:commandLink>
                                         </h:column>                  

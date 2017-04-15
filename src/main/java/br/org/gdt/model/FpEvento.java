@@ -1,6 +1,5 @@
 package br.org.gdt.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +17,8 @@ public class FpEvento implements java.io.Serializable {
     private boolean eveEventoVariavel;
     private String eveNome;
     private String eveDescricao;
+    private String eveFormula;
+    private boolean eveAtivo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_evento")
@@ -51,6 +52,22 @@ public class FpEvento implements java.io.Serializable {
 
     public void setEveDescricao(String eveDescricao) {
         this.eveDescricao = eveDescricao;
+    }
+
+    public String getEveFormula() {
+        return eveFormula;
+    }
+
+    public void setEveFormula(String eveFormula) {
+        this.eveFormula = eveFormula;
+    }
+
+    public boolean isEveAtivo() {
+        return eveAtivo;
+    }
+
+    public void setEveAtivo(boolean eveAtivo) {
+        this.eveAtivo = eveAtivo;
     }
 
 }
