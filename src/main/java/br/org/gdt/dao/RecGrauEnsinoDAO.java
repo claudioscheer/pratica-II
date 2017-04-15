@@ -1,4 +1,7 @@
 package br.org.gdt.dao;
-public class RecGrauEnsinoDAO {
+
+import br.org.gdt.model.RecGrauEnsino;
+
+public class RecGrauEnsinoDAO extends DAO<RecGrauEnsino>{
     
 }
