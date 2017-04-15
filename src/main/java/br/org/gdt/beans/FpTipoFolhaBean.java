@@ -1,4 +1,5 @@
 package br.org.gdt.beans;
+
 import br.org.gdt.model.FpTipoFolha;
 import br.org.gdt.service.FpTipoFolhaService;
 import java.util.List;
@@ -6,16 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-
-/**
- *
- * @author Larissa Guder <lariguder10@gmail.com>
- */
 @ManagedBean
 @SessionScoped
 public class FpTipoFolhaBean {
-    
-     private boolean formAtivo = false;
+
+    private boolean formAtivo = false;
 
     private FpTipoFolha fpTipoFolha = new FpTipoFolha();
     private List<FpTipoFolha> todosFpTiposFolha;
@@ -26,8 +22,9 @@ public class FpTipoFolhaBean {
     public FpTipoFolhaBean() {
 
     }
-        public void save() {
-        if (fpTipoFolha.getTipoId()> 0) {
+
+    public void save() {
+        if (fpTipoFolha.getTipoId() > 0) {
             fpTipoFolhaService.update(fpTipoFolha);
         } else {
             fpTipoFolhaService.save(fpTipoFolha);
@@ -49,13 +46,13 @@ public class FpTipoFolhaBean {
     public String excluir(FpTipoFolha fpTipoFolha) {
         fpTipoFolhaService.delete(fpTipoFolha.getTipoId());
         todosFpTiposFolha.remove(fpTipoFolha);
-        return "tipofolha";
+        return "tiposfolha";
     }
 
     public String prepareEdit(FpTipoFolha fpTipoFolha) {
         this.formAtivo = true;
         this.fpTipoFolha = fpTipoFolha;
-        return "tipofolha";
+        return "tiposfolha";
     }
 
     public boolean isFormAtivo() {
@@ -66,7 +63,6 @@ public class FpTipoFolhaBean {
         this.formAtivo = formAtivo;
     }
 
-    
     public FpTipoFolha getFpTipoFolha() {
         return fpTipoFolha;
     }
@@ -93,6 +89,5 @@ public class FpTipoFolhaBean {
     public void setFpTipoFolhaService(FpTipoFolhaService fpTipoFolhaService) {
         this.fpTipoFolhaService = fpTipoFolhaService;
     }
-    
-    
+
 }

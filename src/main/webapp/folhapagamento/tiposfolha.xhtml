@@ -29,8 +29,6 @@
                                         <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpTipoFolhaBean.fpTipoFolha.tipoDescricao}" />
                                     </div>
                                 </div>
-
-
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -56,7 +54,7 @@
                             <div class="x_panel">
                                 <div class="x_content">
                                     <h:dataTable class="table table-striped" value="#{fpTipoFolhaBean.todosFpTiposFolha}" var="tipoFolha">
-                                         <h:column>
+                                        <h:column>
                                             <f:facet name="header">ID</f:facet>
                                                 #{tipoFolha.tipoId}
                                         </h:column>
@@ -65,6 +63,7 @@
                                                 #{tipoFolha.tipoDescricao}
                                         </h:column>
                                         <h:column>
+                                            <f:facet name="header">Opções</f:facet>
                                             <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpTipoFolhaBean.prepareEdit(tipoFolha)}">
                                                 <f:ajax execute="@form" render="formTipoFolha" />
                                             </h:commandLink>

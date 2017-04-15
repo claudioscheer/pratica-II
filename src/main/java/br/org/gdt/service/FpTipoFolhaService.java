@@ -1,4 +1,5 @@
 package br.org.gdt.service;
+
 import br.org.gdt.dao.FpTipoFolhaDAO;
 import br.org.gdt.model.FpTipoFolha;
 import java.util.List;
@@ -6,15 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-/**
- *
- * @author Larissa Guder <lariguder10@gmail.com>
- */
 @Service("fpTipoFolhaService")
-
 public class FpTipoFolhaService {
-     @Autowired
+
+    @Autowired
     private FpTipoFolhaDAO fpTipoFolhaDAO;
 
     @Transactional
