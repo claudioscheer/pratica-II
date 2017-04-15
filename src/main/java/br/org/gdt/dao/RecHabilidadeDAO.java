@@ -1,4 +1,7 @@
 package br.org.gdt.dao;
-public class RecHabilidadeDAO {
+
+import br.org.gdt.model.RecHabilidade;
+
+public class RecHabilidadeDAO extends DAO<RecHabilidade> {
     
 }
