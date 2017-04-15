@@ -19,13 +19,16 @@ import javax.persistence.SequenceGenerator;
 @SequenceGenerator(name = "seq_habilidade", sequenceName = "seq_habilidade", allocationSize = 1)
 public class RecHabilidade implements Serializable {
 
-    @ManyToMany(mappedBy = "habilidades")
-    private List<RecPessoa> recPessoas;
+    @ManyToMany(mappedBy = "vag_habilidades")
+    private List<RecVaga> recVagas;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_habilidade")
     private int hab_id;
     private String hab_descricao;
     private HabilidadeNivel habilidadeNivel;
+    @ManyToMany(mappedBy = "habilidades")
+    private List<RecPessoa> recPessoas;
 
     public int getHab_id() {
         return hab_id;

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="head">
+                <title>Lista de Entrevistas Agendadas</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="title_left">
+                    <h3>Listagem de Entrevistas Agendadas</h3>
+                </div>
+                <br />
+                <h:form id="formVaga">
+                    <h:messages class="error" style="color: #d9534f" />
+
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <h:commandButton class="btn btn-primary" value="Agendar Entrevista">                                
+                            </h:commandButton>
+                        </div>
+                  
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+            <ui:define name="script">
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

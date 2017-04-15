@@ -14,13 +14,13 @@ public class FpEventoService {
     private FpEventoDAO fpEventoDAO;
 
     @Transactional
-    public void save(FpEvento fpPeriodo) {
-        fpEventoDAO.save(fpPeriodo);
+    public void save(FpEvento fpEvento) {
+        fpEventoDAO.save(fpEvento);
     }
 
     @Transactional
-    public void update(FpEvento fpPeriodo) {
-        fpEventoDAO.update(fpPeriodo);
+    public void update(FpEvento fpEvento) {
+        fpEventoDAO.update(fpEvento);
     }
 
     @Transactional

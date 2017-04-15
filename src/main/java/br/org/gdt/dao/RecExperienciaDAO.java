@@ -1,4 +1,7 @@
 package br.org.gdt.dao;
-public class RecExperienciaDAO {
-    
+
+import br.org.gdt.model.RecExperiencia;
+
+public class RecExperienciaDAO extends DAO<RecExperiencia> {
+
 }
