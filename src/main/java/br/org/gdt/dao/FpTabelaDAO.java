@@ -1,6 +1,6 @@
 package br.org.gdt.dao;
 
-import br.org.gdt.model.FpTabela;
+import br.org.gdt.modelOld.FpTabela;
 import org.springframework.stereotype.Repository;
 
 @Repository("fpTabelaDAO")

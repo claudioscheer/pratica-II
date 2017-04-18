@@ -1,6 +1,6 @@
 package br.org.gdt.dao;
 
-import br.org.gdt.model.Bloco;
+import br.org.gdt.modelOld.Bloco;
 import org.springframework.stereotype.Repository;
 
 @Repository("blocoDAO")

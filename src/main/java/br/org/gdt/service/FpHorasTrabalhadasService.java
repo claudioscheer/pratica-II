@@ -1,7 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.FpHorasTrabalhadasDAO;
-import br.org.gdt.model.FpHorasTrabalhadas;
+import br.org.gdt.modelOld.FpHorasTrabalhadas;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package br.org.gdt.dao;
 
-import br.org.gdt.model.FpPeriodo;
+import br.org.gdt.modelOld.FpPeriodo;
 import org.springframework.stereotype.Repository;
 
 @Repository("fpPeriodoDAO")

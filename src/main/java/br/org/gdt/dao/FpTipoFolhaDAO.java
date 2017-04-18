@@ -1,6 +1,6 @@
 package br.org.gdt.dao;
 
-import br.org.gdt.model.FpTipoFolha;
+import br.org.gdt.modelOld.FpTipoFolha;
 import org.springframework.stereotype.Repository;
 
 @Repository("fpTipoFolhaDAO")

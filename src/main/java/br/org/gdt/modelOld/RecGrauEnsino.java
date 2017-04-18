@@ -1,4 +1,4 @@
-package br.org.gdt.model;
+package br.org.gdt.modelOld;
 
 import br.org.gdt.enums.GrauEnsinoSituacao;
 import br.org.gdt.enums.GrauEnsinoTipo;

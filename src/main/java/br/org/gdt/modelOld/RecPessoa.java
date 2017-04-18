@@ -1,5 +1,5 @@
 
-package br.org.gdt.model;
+package br.org.gdt.modelOld;
 
 import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Sexo;

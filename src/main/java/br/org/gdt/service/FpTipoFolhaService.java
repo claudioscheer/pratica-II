@@ -1,7 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.FpTipoFolhaDAO;
-import br.org.gdt.model.FpTipoFolha;
+import br.org.gdt.modelOld.FpTipoFolha;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

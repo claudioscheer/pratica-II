@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="GdtPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties>
-            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-        </properties>
-    </persistence-unit>
+  <persistence-unit name="GdtPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>br.org.gdt.beans.HorasTrabalhadas</class>
+    <class>br.org.gdt.beans.GchUfs</class>
+    <class>br.org.gdt.beans.RecExperiencia_1</class>
+    <class>br.org.gdt.beans.GchAlternativasperguntas</class>
+    <class>br.org.gdt.beans.CsbffPessoaBeneficio</class>
+    <class>br.org.gdt.beans.CsbffTipoBeneficio</class>
+    <class>br.org.gdt.beans.Rechabilidade</class>
+    <class>br.org.gdt.beans.GchCursos</class>
+    <class>br.org.gdt.beans.GchTreinamentospessoas</class>
+    <class>br.org.gdt.beans.CsbffEscalaHoras</class>
+    <class>br.org.gdt.beans.FpFolhasPeriodo</class>
+    <class>br.org.gdt.beans.CsbffHistoricoSalario</class>
+    <class>br.org.gdt.beans.Recgrauensino_1</class>
+    <class>br.org.gdt.beans.CsbffPessoaDependente</class>
+    <class>br.org.gdt.beans.Recpessoa</class>
+    <class>br.org.gdt.beans.FpEventosVariaveis</class>
+    <class>br.org.gdt.beans.CsbffSalario</class>
+    <class>br.org.gdt.beans.CsbffTiposDeCargos</class>
+    <class>br.org.gdt.beans.RecGrauensino</class>
+    <class>br.org.gdt.beans.GchPerguntas</class>
+    <class>br.org.gdt.beans.RecHabilidade_1</class>
+    <class>br.org.gdt.beans.FpFaixas</class>
+    <class>br.org.gdt.beans.Recvaga</class>
+    <class>br.org.gdt.beans.Recselecao_1</class>
+    <class>br.org.gdt.beans.RecSelecao</class>
+    <class>br.org.gdt.beans.GchMunicipios</class>
+    <class>br.org.gdt.beans.GchDatas</class>
+    <class>br.org.gdt.beans.GchRespostas</class>
+    <class>br.org.gdt.beans.RecPessoa_1</class>
+    <class>br.org.gdt.beans.CsbffBeneficios</class>
+    <class>br.org.gdt.beans.RecVaga_1</class>
+    <class>br.org.gdt.beans.FpEventosTipoFolha</class>
+    <class>br.org.gdt.beans.GchAlternativas</class>
+    <class>br.org.gdt.beans.Recexperiencia</class>
+    <class>br.org.gdt.beans.CsbffCargosHistorico</class>
+    <class>br.org.gdt.beans.FpFolhasPeriodoEventos</class>
+    <class>br.org.gdt.beans.CsbffCargos</class>
+    <class>br.org.gdt.beans.Periodo</class>
+    <class>br.org.gdt.beans.GchTreinamentos</class>
+    <class>br.org.gdt.beans.CsbffDependentes</class>
+    <class>br.org.gdt.model.GchAlternativas</class>
+    <class>br.org.gdt.model.RecVaga_1</class>
+    <class>br.org.gdt.model.Recvaga</class>
+    <class>br.org.gdt.model.Recgrauensino_1</class>
+    <class>br.org.gdt.model.RecHabilidade_1</class>
+    <class>br.org.gdt.model.FpEventosTipoFolha</class>
+    <class>br.org.gdt.model.CsbffTipoBeneficio</class>
+    <class>br.org.gdt.model.RecExperiencia_1</class>
+    <class>br.org.gdt.model.Recexperiencia</class>
+    <class>br.org.gdt.model.FpFaixas</class>
+    <class>br.org.gdt.model.Recpessoa</class>
+    <class>br.org.gdt.model.GchCursos</class>
+    <class>br.org.gdt.model.GchRespostas</class>
+    <class>br.org.gdt.model.GchTreinamentospessoas</class>
+    <class>br.org.gdt.model.CsbffSalario</class>
+    <class>br.org.gdt.model.GchPerguntas</class>
+    <class>br.org.gdt.model.HorasTrabalhadas</class>
+    <class>br.org.gdt.model.GchDatas</class>
+    <class>br.org.gdt.model.Recselecao_1</class>
+    <class>br.org.gdt.model.CsbffCargos</class>
+    <class>br.org.gdt.model.GchUfs</class>
+    <class>br.org.gdt.model.FpFolhasPeriodoEventos</class>
+    <class>br.org.gdt.model.CsbffBeneficios</class>
+    <class>br.org.gdt.model.FpFolhasPeriodo</class>
+    <class>br.org.gdt.model.GchAlternativasperguntas</class>
+    <class>br.org.gdt.model.CsbffPessoaBeneficio</class>
+    <class>br.org.gdt.model.CsbffHistoricoSalario</class>
+    <class>br.org.gdt.model.CsbffDependentes</class>
+    <class>br.org.gdt.model.FpEventosVariaveis</class>
+    <class>br.org.gdt.model.CsbffEscalaHoras</class>
+    <class>br.org.gdt.model.RecPessoa_1</class>
+    <class>br.org.gdt.model.RecGrauensino</class>
+    <class>br.org.gdt.model.GchMunicipios</class>
+    <class>br.org.gdt.model.Periodo</class>
+    <class>br.org.gdt.model.GchTreinamentos</class>
+    <class>br.org.gdt.model.CsbffTiposDeCargos</class>
+    <class>br.org.gdt.model.CsbffCargosHistorico</class>
+    <class>br.org.gdt.model.Rechabilidade</class>
+    <class>br.org.gdt.model.CsbffPessoaDependente</class>
+    <class>br.org.gdt.modelOld.RecSelecao</class>
+    <class>br.org.gdt.model.RecSelecao</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+    </properties>
+  </persistence-unit>
 </persistence>

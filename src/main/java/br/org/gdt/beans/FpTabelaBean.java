@@ -1,7 +1,7 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.FpFaixa;
-import br.org.gdt.model.FpTabela;
+import br.org.gdt.modelOld.FpFaixa;
+import br.org.gdt.modelOld.FpTabela;
 import br.org.gdt.service.FpTabelaService;
 import java.util.List;
 import javax.faces.application.FacesMessage;

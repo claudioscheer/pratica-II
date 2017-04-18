@@ -1,6 +1,6 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.FpTipoFolha;
+import br.org.gdt.modelOld.FpTipoFolha;
 import br.org.gdt.service.FpTipoFolhaService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

@@ -1,7 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.FpEventoDAO;
-import br.org.gdt.model.FpEvento;
+import br.org.gdt.modelOld.FpEvento;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

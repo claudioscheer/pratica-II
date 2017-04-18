@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.org.gdt.model;
+package br.org.gdt.modelOld;
 
 import br.org.gdt.enums.Sexo;
 import java.io.Serializable;

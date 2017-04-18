@@ -1,15 +1,21 @@
-package br.org.gdt.model;
+package br.org.gdt.modelOld;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "bloco")
 public class Bloco implements java.io.Serializable {
+    @OneToMany(mappedBy = "blocoId")
+    private List<Tarefa> tarefaList;
 
     private static final long serialVersionUID = -2790083349568956163L;
     private long id;
@@ -45,5 +51,15 @@ public class Bloco implements java.io.Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public List<Tarefa> getTarefaList() {
+        return tarefaList;
+    }
+
+    public void setTarefaList(List<Tarefa> tarefaList) {
+        this.tarefaList = tarefaList;
     }
 }

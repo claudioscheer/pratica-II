@@ -1,7 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.BlocoDAO;
-import br.org.gdt.model.Bloco;
+import br.org.gdt.modelOld.Bloco;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

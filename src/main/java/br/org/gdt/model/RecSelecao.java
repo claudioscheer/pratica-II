@@ -1,68 +1,118 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.org.gdt.model;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Diego
+ */
 @Entity
-@SequenceGenerator(name = "seq_selecao", sequenceName = "seq_selecao", allocationSize = 1)
+@Table(name = "rec_selecao")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "RecSelecao.findAll", query = "SELECT r FROM RecSelecao r")})
 public class RecSelecao implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_selecao")
-    private int sel_id;
-    private String sel_descricaoentrevista;
-    private boolean sel_aprovado;
-    @OneToOne
-    private RecPessoa sel_pessoa;    
-    @ManyToOne
-    private RecVaga sel_vaga;
+    @Basic(optional = false)
+    @Column(name = "rec_idselecao")
+    private String recIdselecao;
+    @Column(name = "rec_descricaoentrevista")
+    private String recDescricaoentrevista;
+    @Column(name = "rec_aprovado")
+    private Boolean recAprovado;
+    @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
+    @ManyToOne(optional = false)
+    private RecPessoa_1 recIdpessoa;
+    @JoinColumn(name = "rec_idvaga", referencedColumnName = "rec_idvaga")
+    @ManyToOne(optional = false)
+    private RecVaga_1 recIdvaga;
 
-    public int getSel_id() {
-        return sel_id;
+    public RecSelecao() {
     }
 
-    public void setSel_id(int sel_id) {
-        this.sel_id = sel_id;
+    public RecSelecao(String recIdselecao) {
+        this.recIdselecao = recIdselecao;
     }
 
-    public String getSel_descricaoentrevista() {
-        return sel_descricaoentrevista;
+    public String getRecIdselecao() {
+        return recIdselecao;
     }
 
-    public void setSel_descricaoentrevista(String sel_descricaoentrevista) {
-        this.sel_descricaoentrevista = sel_descricaoentrevista;
+    public void setRecIdselecao(String recIdselecao) {
+        this.recIdselecao = recIdselecao;
     }
 
-    public boolean isSel_aprovado() {
-        return sel_aprovado;
+    public String getRecDescricaoentrevista() {
+        return recDescricaoentrevista;
     }
 
-    public void setSel_aprovado(boolean sel_aprovado) {
-        this.sel_aprovado = sel_aprovado;
+    public void setRecDescricaoentrevista(String recDescricaoentrevista) {
+        this.recDescricaoentrevista = recDescricaoentrevista;
     }
 
-    public RecPessoa getSel_pessoa() {
-        return sel_pessoa;
+    public Boolean getRecAprovado() {
+        return recAprovado;
     }
 
-    public void setSel_pessoa(RecPessoa sel_pessoa) {
-        this.sel_pessoa = sel_pessoa;
+    public void setRecAprovado(Boolean recAprovado) {
+        this.recAprovado = recAprovado;
     }
 
-    public RecVaga getSel_vaga() {
-        return sel_vaga;
+    public RecPessoa_1 getRecIdpessoa() {
+        return recIdpessoa;
     }
 
-    public void setSel_vaga(RecVaga sel_vaga) {
-        this.sel_vaga = sel_vaga;
+    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+        this.recIdpessoa = recIdpessoa;
     }
 
+    public RecVaga_1 getRecIdvaga() {
+        return recIdvaga;
+    }
 
+    public void setRecIdvaga(RecVaga_1 recIdvaga) {
+        this.recIdvaga = recIdvaga;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (recIdselecao != null ? recIdselecao.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof RecSelecao)) {
+            return false;
+        }
+        RecSelecao other = (RecSelecao) object;
+        if ((this.recIdselecao == null && other.recIdselecao != null) || (this.recIdselecao != null && !this.recIdselecao.equals(other.recIdselecao))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "br.org.gdt.modelNew.RecSelecao[ recIdselecao=" + recIdselecao + " ]";
+    }
     
 }

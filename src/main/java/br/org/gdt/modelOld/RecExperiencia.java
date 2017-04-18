@@ -1,4 +1,4 @@
-package br.org.gdt.model;
+package br.org.gdt.modelOld;
 
 import java.io.Serializable;
 import java.util.Date;

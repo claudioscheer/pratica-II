@@ -1,8 +1,8 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.TarefaDAO;
-import br.org.gdt.model.Bloco;
-import br.org.gdt.model.Tarefa;
+import br.org.gdt.modelOld.Bloco;
+import br.org.gdt.modelOld.Tarefa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package br.org.gdt.dao;
 
-import br.org.gdt.model.FpHorasTrabalhadas;
+import br.org.gdt.modelOld.FpHorasTrabalhadas;
 import org.springframework.stereotype.Repository;
 
 @Repository("fpHorasTrabalhadasDAO")

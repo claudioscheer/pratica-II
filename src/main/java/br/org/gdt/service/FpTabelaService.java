@@ -1,7 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.FpTabelaDAO;
-import br.org.gdt.model.FpTabela;
+import br.org.gdt.modelOld.FpTabela;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

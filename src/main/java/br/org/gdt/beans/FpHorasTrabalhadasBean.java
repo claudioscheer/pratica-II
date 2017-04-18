@@ -1,6 +1,6 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.FpHorasTrabalhadas;
+import br.org.gdt.modelOld.FpHorasTrabalhadas;
 import br.org.gdt.service.FpHorasTrabalhadasService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

@@ -1,6 +1,6 @@
 package br.org.gdt.dao;
 
-import br.org.gdt.model.FpEvento;
+import br.org.gdt.modelOld.FpEvento;
 import org.springframework.stereotype.Repository;
 
 @Repository("fpEventoDAO")

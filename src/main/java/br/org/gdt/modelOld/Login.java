@@ -1,4 +1,4 @@
-package br.org.gdt.model;
+package br.org.gdt.modelOld;
 
 public class Login implements java.io.Serializable {
 
