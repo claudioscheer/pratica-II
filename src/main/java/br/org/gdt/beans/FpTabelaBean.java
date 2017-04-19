@@ -59,6 +59,7 @@ public class FpTabelaBean {
     public void add() {
         this.formAtivo = true;
         this.fpTabela = new FpTabela();
+        this.addNovaFaixa();
     }
 
     public String excluir(FpTabela fpTabela) {

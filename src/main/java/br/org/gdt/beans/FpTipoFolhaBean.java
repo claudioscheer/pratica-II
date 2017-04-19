@@ -1,6 +1,9 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.model.FpEvento;
 import br.org.gdt.model.FpTipoFolha;
+import br.org.gdt.resources.Helper;
+import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpTipoFolhaService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -13,11 +16,16 @@ public class FpTipoFolhaBean {
 
     private boolean formAtivo = false;
 
+    private long eventoCodigo;
+
     private FpTipoFolha fpTipoFolha = new FpTipoFolha();
     private List<FpTipoFolha> todosFpTiposFolha;
 
     @ManagedProperty("#{fpTipoFolhaService}")
     private FpTipoFolhaService fpTipoFolhaService;
+
+    @ManagedProperty("#{fpEventoService}")
+    private FpEventoService fpEventoService;
 
     public FpTipoFolhaBean() {
 
@@ -41,6 +49,15 @@ public class FpTipoFolhaBean {
     public void add() {
         this.formAtivo = true;
         this.fpTipoFolha = new FpTipoFolha();
+    }
+
+    public void addEvento() {
+        FpEvento fpEvento = fpEventoService.findById(eventoCodigo);
+        if (fpEvento == null) {
+            Helper.mostrarNotificacao("Evento", "O evento não existe.", "error");
+        } else {
+            this.fpTipoFolha.getTipoEventos().add(fpEvento);
+        }
     }
 
     public String excluir(FpTipoFolha fpTipoFolha) {
@@ -88,6 +105,22 @@ public class FpTipoFolhaBean {
 
     public void setFpTipoFolhaService(FpTipoFolhaService fpTipoFolhaService) {
         this.fpTipoFolhaService = fpTipoFolhaService;
+    }
+
+    public FpEventoService getFpEventoService() {
+        return fpEventoService;
+    }
+
+    public void setFpEventoService(FpEventoService fpEventoService) {
+        this.fpEventoService = fpEventoService;
+    }
+
+    public long getEventoCodigo() {
+        return eventoCodigo;
+    }
+
+    public void setEventoCodigo(long eventoCodigo) {
+        this.eventoCodigo = eventoCodigo;
     }
 
 }

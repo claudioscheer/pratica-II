@@ -1910,30 +1910,43 @@ function init_PNotify() {
     }
     console.log('init_PNotify');
 
-    new PNotify({
-        title: "PNotify",
-        type: "info",
-        text: "Welcome. Try hovering over me. You can click things behind me, because I'm non-blocking.",
-        nonblock: {
-            nonblock: true
-        },
-        addclass: 'dark',
-        styling: 'bootstrap3',
-        hide: false,
-        before_close: function (PNotify) {
-            PNotify.update({
-                title: PNotify.options.title + " - Enjoy your Stay",
-                before_close: null
-            });
-
-            PNotify.queueRemove();
-
-            return false;
-        }
-    });
+//    new PNotify({
+//        title: "PNotify",
+//        type: "info",
+//        text: "Welcome. Try hovering over me. You can click things behind me, because I'm non-blocking.",
+//        nonblock: {
+//            nonblock: true
+//        },
+//        addclass: 'dark',
+//        styling: 'bootstrap3',
+//        hide: false,
+//        before_close: function (PNotify) {
+//            PNotify.update({
+//                title: PNotify.options.title + " - Enjoy your Stay",
+//                before_close: null
+//            });
+//
+//            PNotify.queueRemove();
+//
+//            return false;
+//        }
+//    });
 
 }
 ;
+
+function showNotification(title, message, type) {
+    new PNotify({
+        title: title,
+        text: message,
+        type: type,
+        hide: true,
+        styling: 'bootstrap3',
+        buttons: {
+            sticker: false
+        }
+    });
+}
 
 
 /* CUSTOM NOTIFICATION */

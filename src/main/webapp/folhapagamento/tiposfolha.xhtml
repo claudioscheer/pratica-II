@@ -19,16 +19,45 @@
                 <h:form id="formTipoFolha">
                     <h:messages class="error" style="color: #d9534f" />
 
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpTipoFolhaBean.formAtivo}">
+                    <h:panelGroup id="panelInserirTipoFolha" layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpTipoFolhaBean.formAtivo}">
                         <h:inputHidden value="#{fpTipoFolhaBean.fpTipoFolha.tipoId}" />
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row form-group">
+                                    <label class="control-label col-md-3 col-sm-1 col-xs-12">Descrição<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
                                         <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpTipoFolhaBean.fpTipoFolha.tipoDescricao}" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-1 col-xs-12">Evento</label>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpTipoFolhaBean.eventoCodigo}" />
+                                    </div>
+                                    <div class="text-center col-md-3 col-sm-1 col-xs-12">
+                                        <h:commandButton class="btn btn-primary" value="Adicionar evento" action="#{fpTipoFolhaBean.addEvento()}">
+                                            <f:ajax execute="@form" render="panelInserirTipoFolha" />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                                <div class="ln_solid" style="margin-top: 0"></div>
+                                <ui:repeat value="#{fpTipoFolhaBean.fpTipoFolha.tipoEventos}" var="evento" varStatus="eventoStatus">
+                                    <div class="row">
+                                        <div class="form-group col-md-2 col-sm-2">
+                                            <label class="control-label">Evento<span class="required">*</span></label>
+                                            <h:outputText class="form-control" value="#{fpTipoFolhaBean.fpTipoFolha.tipoEventos[eventoStatus.index].eveNome}" />
+                                        </div>
+                                        <div class="form-group col-md-2 col-sm-2">
+                                            <label class="control-label">Fórmula<span class="required">*</span></label>
+                                            <h:outputText class="form-control" value="#{fpTipoFolhaBean.fpTipoFolha.tipoEventos[eventoStatus.index].eveFormula}" />
+                                        </div>
+                                        <div class="text-center col-md-3 col-sm-3" style="padding-top: 27px">
+                                            <h:commandButton class="btn btn-danger btn-sm" value="Remover">
+                                                <f:ajax execute="@form" render="formTipoFolha:panelInserirTipoFolha" />
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
