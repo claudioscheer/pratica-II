@@ -1,6 +1,6 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.Tarefa;
+import br.org.gdt.modelOld.Tarefa;
 import br.org.gdt.service.TarefaService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

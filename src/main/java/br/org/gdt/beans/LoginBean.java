@@ -1,6 +1,6 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.Login;
+import br.org.gdt.modelOld.Login;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 

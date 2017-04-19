@@ -1,6 +1,6 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.Bloco;
+import br.org.gdt.modelOld.Bloco;
 import br.org.gdt.service.BlocoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

@@ -1,7 +1,7 @@
 package br.org.gdt.dao;
 
-import br.org.gdt.model.Bloco;
-import br.org.gdt.model.Tarefa;
+import br.org.gdt.modelOld.Bloco;
+import br.org.gdt.modelOld.Tarefa;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 

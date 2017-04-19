@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+
+        <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+
+
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/template.xhtml">
+            <ui:define name="content">
+
+                <div id="page" style="margin-top:75px;">
+
+                    <style>
+                        .dragAtivo {
+                            width: 198px;
+                            height: 30px;
+                            background: green;
+                            display: inline-block;
+                            margin: 3px 3px 3px 3px;
+                            border: 2px solid black;
+                            border-radius: 4px;
+                            padding: 4px 0px 0px 0px;
+                            text-align: center;
+                            cursor: move;
+                        }
+
+                        .dragInativo {
+                            width: 198px;
+                            height: 30px;
+                            background: gray;
+                            display: inline-block;
+                            margin: 3px 3px 3px 3px;
+                            border: 2px solid black;
+                            border-radius: 4px;
+                            padding: 4px 0px 0px 0px;
+                            text-align: center;
+                            cursor: move;
+                        }
+
+
+
+                        .dragAtivo:hover ,.dragInativo:hover {
+                            width: 192px;
+                            height: 30px;
+                            background: #858df5;
+                            display: inline-block;
+                            margin: 3px 3px 3px 3px;
+                            border: 2px dashed black;
+                            border-radius: 4px;
+                            padding: 4px 0px 0px 0px;
+                            text-align: center;
+                            cursor: move;
+                        }
+
+
+                        #boxB{
+                            margin-right: 2px;
+                        }
+                        #big {
+                            width: 415px;
+                            height: 400px;
+                            background: white;
+                            margin: 20px auto;
+                        }
+                        section {
+                            width: 426px;
+                            height: 200px;
+                            background:white;
+                            margin: 20px auto;
+                            border:1px solid black;
+                        }
+
+                        .ui-autocomplete{
+
+                            padding   : 5px;
+                            background: white;
+                            width: 45%;
+
+                        }
+                        .ui-menu-item{
+
+                            padding   : 5px;
+                            background:white;
+                            width: 100%;
+                            list-style-type: none;
+                            border:1px solid black;
+
+                        }
+
+                        .ui-menu-item .ui-corner-all{
+
+                            margin: 5px;
+                            background: blue;
+                            width: 100%;
+                        }
+
+                    </style>
+
+                    <script>
+
+                        $(document).ready(function () {
+
+                            $(".dragInativo").dblclick(function () {
+                                alert('Clicou em uma pessoa indisponível');
+
+                                this.appendChild(document.getElementById(data));
+
+                            });
+
+                        })
+
+                        function dragStart(ev) {
+                            ev.dataTransfer.effectAllowed = 'copyMove';
+                            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+                            var dragData = ev.dataTransfer;
+
+                            var node = dragData.mozSourceNode;
+                            ev.dataTransfer.setDragImage(ev.target, 70, 10);
+                            return true;
+                        }
+                        function dragEnter(ev) {
+                            event.preventDefault();
+
+                            var dragData = event.dataTransfer;
+
+                            var node = dragData.mozSourceNode;
+
+                            return true;
+                        }
+                        function dragOver(ev) {
+                            event.preventDefault();
+                        }
+                        function dragDrop(ev) {
+
+                            var data = ev.dataTransfer.getData("Text");
+
+                            var currentDiv = event.target.id;
+
+                            if (currentDiv == 'big') {
+
+                                if (document.getElementById(data).className == "dragAtivo") {
+
+                                    ev.target.appendChild(document.getElementById(data));
+                                    ev.stopPropagation();
+                                    return false;
+
+                                } else {
+
+                                    var confirma = confirm('Esta pessoa já está ocupada, deseja mesmo vincular ela a este treinamento?')
+
+                                    if (confirma) {
+
+                                        ev.target.appendChild(document.getElementById(data));
+                                        ev.stopPropagation();
+                                        return false;
+                                    }
+                                }
+
+                            } else {
+
+                                ev.target.appendChild(document.getElementById(data));
+                                ev.stopPropagation();
+                                return false;
+
+                            }
+
+                        }</script>
+
+
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="x_panel">
+                                    <div class="panel-heading">
+                                        <h3 class="title_left">
+                                            Cadastro de Treinamentos
+                                        </h3>
+                                    </div>
+
+                                    <div class="panel-body" style="/* align-items: center; */">
+
+                                        <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+                                        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+
+                                        <!-- Inline CSS based on choices in "Settings" tab -->
+                                        <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
+
+
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <form method="post">
+                                                        <div class="form-group">
+                                                            <label class="control-label requiredField" for="txbnomeTreinamento">
+                                                                Nome do Treinamento
+                                                                <span class="asteriskField">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input class="form-control" id="txbnomeTreinamento" name="txbnomeTreinamento" type="text"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label requiredField" for="txbLocalTreinamento">
+                                                                Local do Treinamento
+                                                                <span class="asteriskField">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input class="form-control" id="txbLocalTreinamento" name="txbLocalTreinamento" type="text"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label " for="date">
+                                                                Data do Treinamento
+                                                            </label>
+                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input class="form-control" id="date1" name="date1" placeholder="DD/MM/YYYY" type="text"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label " for="txbParticipantesTreinamento">
+                                                                Participantes
+                                                            </label>
+                                                            <div id="big" style="width: 616px;height: 250px;border:1px solid black" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+                                                            </div>
+                                                        </div>  
+                                                        <div class="form-group">
+                                                            <div>
+                                                                <button class="btn btn-primary " name="submit" type="submit">
+                                                                    Cadastrar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <section id="SessaoPessoas" style="position: absolute;top:10px;right: 50px" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+                                            <div class="dragInativo" id="boxA" draggable="true" ondragstart="return dragStart(event)">Alisson</div>
+                                            <div class="dragInativo" id="boxB" draggable="true" ondragstart="return dragStart(event)">Diego</div>
+                                            <div class="dragAtivo" id="boxC" draggable="true" ondragstart="return dragStart(event)">Florinda</div>
+                                            <div class="dragAtivo" id="boxD" draggable="true" ondragstart="return dragStart(event)">Larissa</div>
+                                            <div class="dragAtivo" id="boxE" draggable="true" ondragstart="return dragStart(event)">Claudio</div>
+                                            <div class="dragInativo" id="boxF" draggable="true" ondragstart="return dragStart(event)">Marcos</div>
+                                            <div class="dragAtivo" id="boxG" draggable="true" ondragstart="return dragStart(event)">Juliano</div>
+                                            <div class="dragAtivo" id="boxH" draggable="true" ondragstart="return dragStart(event)">Dimas</div>
+                                        </section>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div> 
+
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

@@ -1,6 +1,6 @@
 package br.org.gdt.converter;
 
-import br.org.gdt.model.Bloco;
+import br.org.gdt.modelOld.Bloco;
 import br.org.gdt.service.BlocoService;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;

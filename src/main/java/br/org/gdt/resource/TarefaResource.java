@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.org.gdt.model.Tarefa;
+import br.org.gdt.modelOld.Tarefa;
 import br.org.gdt.service.TarefaService;
 
 @Path("/tarefa")

@@ -8,10 +8,13 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring-context.xml</param-value>
     </context-param>
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
     <servlet>
         <servlet-name>CXFServlet</servlet-name>
         <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
@@ -21,7 +24,6 @@
         <servlet-name>CXFServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
-        
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -31,7 +33,6 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             30
