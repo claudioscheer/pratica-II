@@ -32,7 +32,7 @@ public class RecExperiencia implements Serializable {
     private String  exp_atividade;
     private String  exp_motivosaida;
     @ManyToMany(mappedBy = "experiencias")
-    private List<RecPessoa> recPessoas;
+    private List<RecPessoa_Old> recPessoas;
 
     public int getExp_id() {
         return exp_id;

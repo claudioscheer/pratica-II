@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.org.gdt.model;
+package br.org.gdt.modelOld;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -39,10 +39,10 @@ public class Recselecao_1 implements Serializable {
     private String selDescricaoentrevista;
     @JoinColumn(name = "sel_pessoa_pes_id", referencedColumnName = "pes_id")
     @ManyToOne
-    private Recpessoa selPessoaPesId;
+    private RecPessoa_Old selPessoaPesId;
     @JoinColumn(name = "sel_vaga_vag_id", referencedColumnName = "vag_id")
     @ManyToOne
-    private Recvaga selVagaVagId;
+    private RecVaga_old selVagaVagId;
 
     public Recselecao_1() {
     }
@@ -80,19 +80,19 @@ public class Recselecao_1 implements Serializable {
         this.selDescricaoentrevista = selDescricaoentrevista;
     }
 
-    public Recpessoa getSelPessoaPesId() {
+    public RecPessoa_Old getSelPessoaPesId() {
         return selPessoaPesId;
     }
 
-    public void setSelPessoaPesId(Recpessoa selPessoaPesId) {
+    public void setSelPessoaPesId(RecPessoa_Old selPessoaPesId) {
         this.selPessoaPesId = selPessoaPesId;
     }
 
-    public Recvaga getSelVagaVagId() {
+    public RecVaga_old getSelVagaVagId() {
         return selVagaVagId;
     }
 
-    public void setSelVagaVagId(Recvaga selVagaVagId) {
+    public void setSelVagaVagId(RecVaga_old selVagaVagId) {
         this.selVagaVagId = selVagaVagId;
     }
 

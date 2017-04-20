@@ -48,7 +48,7 @@ public class GchMunicipios implements Serializable {
     @ManyToOne(optional = false)
     private GchUfs ufCodigo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "munCodigo")
-    private List<RecPessoa_1> recPessoaList;
+    private List<RecPessoa> recPessoaList;
 
     public GchMunicipios() {
     }
@@ -106,11 +106,11 @@ public class GchMunicipios implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<RecPessoa_1> getRecPessoaList() {
+    public List<RecPessoa> getRecPessoaList() {
         return recPessoaList;
     }
 
-    public void setRecPessoaList(List<RecPessoa_1> recPessoaList) {
+    public void setRecPessoaList(List<RecPessoa> recPessoaList) {
         this.recPessoaList = recPessoaList;
     }
 

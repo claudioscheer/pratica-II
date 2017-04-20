@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @SequenceGenerator(name = "seq_grauensino", sequenceName = "seq_grauensino", allocationSize = 1)
-public class RecGrauEnsino implements Serializable {
+public class RecGrauEnsino_old implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_grauensino")
     private int                 gre_id;

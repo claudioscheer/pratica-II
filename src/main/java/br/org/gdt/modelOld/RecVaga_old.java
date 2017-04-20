@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @SequenceGenerator(name = "seq_habilidade", sequenceName = "seq_habilidade", allocationSize = 1)
-public class RecVaga implements Serializable {
+public class RecVaga_old implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_habilidade")
     private int vag_id;
@@ -34,7 +34,7 @@ public class RecVaga implements Serializable {
     @ManyToMany
     private List<RecHabilidade> vag_habilidades;
     @ManyToOne
-    private RecGrauEnsino vag_grauensino;
+    private RecGrauEnsino_old vag_grauensino;
 
     public int getVag_id() {
         return vag_id;

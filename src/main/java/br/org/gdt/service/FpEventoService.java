@@ -1,7 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.FpEventoDAO;
-import br.org.gdt.modelOld.FpEvento;
+import br.org.gdt.modelOld.FpEvento_old;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ public class FpEventoService {
     private FpEventoDAO fpEventoDAO;
 
     @Transactional
-    public void save(FpEvento fpEvento) {
+    public void save(FpEvento_old fpEvento) {
         fpEventoDAO.save(fpEvento);
     }
 
     @Transactional
-    public void update(FpEvento fpEvento) {
+    public void update(FpEvento_old fpEvento) {
         fpEventoDAO.update(fpEvento);
     }
 
@@ -28,11 +28,11 @@ public class FpEventoService {
         fpEventoDAO.delete(id);
     }
 
-    public FpEvento findById(long id) {
+    public FpEvento_old findById(long id) {
         return fpEventoDAO.findById(id);
     }
 
-    public List<FpEvento> findAll() {
+    public List<FpEvento_old> findAll() {
         return fpEventoDAO.findAll();
     }
 }

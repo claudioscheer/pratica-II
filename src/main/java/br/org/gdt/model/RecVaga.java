@@ -35,7 +35,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecVaga_1.findAll", query = "SELECT r FROM RecVaga_1 r")})
-public class RecVaga_1 implements Serializable {
+public class RecVaga implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -57,7 +57,7 @@ public class RecVaga_1 implements Serializable {
     @Column(name = "id_cargo")
     private String idCargo;
     @ManyToMany(mappedBy = "recVagaList")
-    private List<RecHabilidade_1> recHabilidadeList;
+    private List<RecHabilidade> recHabilidadeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdvaga")
     private List<RecSelecao> recSelecaoList;
     @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
@@ -67,14 +67,14 @@ public class RecVaga_1 implements Serializable {
     @ManyToOne(optional = false)
     private RecGrauensino recIdgrauensino;
 
-    public RecVaga_1() {
+    public RecVaga() {
     }
 
-    public RecVaga_1(String recIdvaga) {
+    public RecVaga(String recIdvaga) {
         this.recIdvaga = recIdvaga;
     }
 
-    public RecVaga_1(String recIdvaga, String idCargo) {
+    public RecVaga(String recIdvaga, String idCargo) {
         this.recIdvaga = recIdvaga;
         this.idCargo = idCargo;
     }
@@ -137,11 +137,11 @@ public class RecVaga_1 implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<RecHabilidade_1> getRecHabilidadeList() {
+    public List<RecHabilidade> getRecHabilidadeList() {
         return recHabilidadeList;
     }
 
-    public void setRecHabilidadeList(List<RecHabilidade_1> recHabilidadeList) {
+    public void setRecHabilidadeList(List<RecHabilidade> recHabilidadeList) {
         this.recHabilidadeList = recHabilidadeList;
     }
 
@@ -181,10 +181,10 @@ public class RecVaga_1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RecVaga_1)) {
+        if (!(object instanceof RecVaga)) {
             return false;
         }
-        RecVaga_1 other = (RecVaga_1) object;
+        RecVaga other = (RecVaga) object;
         if ((this.recIdvaga == null && other.recIdvaga != null) || (this.recIdvaga != null && !this.recIdvaga.equals(other.recIdvaga))) {
             return false;
         }

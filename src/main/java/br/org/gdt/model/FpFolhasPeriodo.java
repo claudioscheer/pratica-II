@@ -44,7 +44,7 @@ public class FpFolhasPeriodo implements Serializable {
     private FpPeriodo perIdFpPeriodo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
-    private RecPessoa_1 recIdpessoa;
+    private RecPessoa recIdpessoa;
 
     public FpFolhasPeriodo() {
     }
@@ -79,11 +79,11 @@ public class FpFolhasPeriodo implements Serializable {
         this.perIdFpPeriodo = perIdFpPeriodo;
     }
 
-    public RecPessoa_1 getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 

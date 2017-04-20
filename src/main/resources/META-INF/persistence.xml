@@ -43,13 +43,9 @@
     <class>br.org.gdt.beans.GchTreinamentos</class>
     <class>br.org.gdt.beans.CsbffDependentes</class>
     <class>br.org.gdt.model.GchAlternativas</class>
-    <class>br.org.gdt.model.RecVaga_1</class>
     <class>br.org.gdt.model.Recvaga</class>
-    <class>br.org.gdt.model.Recgrauensino_1</class>
-    <class>br.org.gdt.model.RecHabilidade_1</class>
     <class>br.org.gdt.model.FpEventosTipoFolha</class>
     <class>br.org.gdt.model.CsbffTipoBeneficio</class>
-    <class>br.org.gdt.model.RecExperiencia_1</class>
     <class>br.org.gdt.model.Recexperiencia</class>
     <class>br.org.gdt.model.FpFaixas</class>
     <class>br.org.gdt.model.Recpessoa</class>
@@ -60,7 +56,6 @@
     <class>br.org.gdt.model.GchPerguntas</class>
     <class>br.org.gdt.model.HorasTrabalhadas</class>
     <class>br.org.gdt.model.GchDatas</class>
-    <class>br.org.gdt.model.Recselecao_1</class>
     <class>br.org.gdt.model.CsbffCargos</class>
     <class>br.org.gdt.model.GchUfs</class>
     <class>br.org.gdt.model.FpFolhasPeriodoEventos</class>
@@ -72,7 +67,6 @@
     <class>br.org.gdt.model.CsbffDependentes</class>
     <class>br.org.gdt.model.FpEventosVariaveis</class>
     <class>br.org.gdt.model.CsbffEscalaHoras</class>
-    <class>br.org.gdt.model.RecPessoa_1</class>
     <class>br.org.gdt.model.RecGrauensino</class>
     <class>br.org.gdt.model.GchMunicipios</class>
     <class>br.org.gdt.model.Periodo</class>
@@ -81,8 +75,13 @@
     <class>br.org.gdt.model.CsbffCargosHistorico</class>
     <class>br.org.gdt.model.Rechabilidade</class>
     <class>br.org.gdt.model.CsbffPessoaDependente</class>
-    <class>br.org.gdt.modelOld.RecSelecao</class>
     <class>br.org.gdt.model.RecSelecao</class>
+    <class>br.org.gdt.model.RecPessoa</class>
+    <class>br.org.gdt.modelOld.RecSelecao_old</class>
+    <class>br.org.gdt.model.RecVaga</class>
+    <class>br.org.gdt.modelOld.Recselecao_1</class>
+    <class>br.org.gdt.model.RecExperiencia</class>
+    <class>br.org.gdt.model.RecHabilidade</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

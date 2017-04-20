@@ -37,7 +37,7 @@ public class GchTreinamentospessoas implements Serializable {
     private GchTreinamentos treiCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
-    private RecPessoa_1 recIdpessoa;
+    private RecPessoa recIdpessoa;
 
     public GchTreinamentospessoas() {
     }
@@ -62,11 +62,11 @@ public class GchTreinamentospessoas implements Serializable {
         this.treiCodigo = treiCodigo;
     }
 
-    public RecPessoa_1 getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 

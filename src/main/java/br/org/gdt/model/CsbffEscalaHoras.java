@@ -68,7 +68,7 @@ public class CsbffEscalaHoras implements Serializable {
     private Boolean escalaDomingo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @OneToOne(optional = false)
-    private RecPessoa_1 recIdpessoa;
+    private RecPessoa recIdpessoa;
 
     public CsbffEscalaHoras() {
     }
@@ -181,11 +181,11 @@ public class CsbffEscalaHoras implements Serializable {
         this.escalaDomingo = escalaDomingo;
     }
 
-    public RecPessoa_1 getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 

@@ -33,7 +33,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecExperiencia_1.findAll", query = "SELECT r FROM RecExperiencia_1 r")})
-public class RecExperiencia_1 implements Serializable {
+public class RecExperiencia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -62,12 +62,12 @@ public class RecExperiencia_1 implements Serializable {
         @JoinColumn(name = "rec_idexperiencia", referencedColumnName = "rec_idexperiencia")}, inverseJoinColumns = {
         @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")})
     @ManyToMany
-    private List<RecPessoa_1> recPessoaList;
+    private List<RecPessoa> recPessoaList;
 
-    public RecExperiencia_1() {
+    public RecExperiencia() {
     }
 
-    public RecExperiencia_1(Integer recIdexperiencia) {
+    public RecExperiencia(Integer recIdexperiencia) {
         this.recIdexperiencia = recIdexperiencia;
     }
 
@@ -145,11 +145,11 @@ public class RecExperiencia_1 implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<RecPessoa_1> getRecPessoaList() {
+    public List<RecPessoa> getRecPessoaList() {
         return recPessoaList;
     }
 
-    public void setRecPessoaList(List<RecPessoa_1> recPessoaList) {
+    public void setRecPessoaList(List<RecPessoa> recPessoaList) {
         this.recPessoaList = recPessoaList;
     }
 
@@ -163,10 +163,10 @@ public class RecExperiencia_1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RecExperiencia_1)) {
+        if (!(object instanceof RecExperiencia)) {
             return false;
         }
-        RecExperiencia_1 other = (RecExperiencia_1) object;
+        RecExperiencia other = (RecExperiencia) object;
         if ((this.recIdexperiencia == null && other.recIdexperiencia != null) || (this.recIdexperiencia != null && !this.recIdexperiencia.equals(other.recIdexperiencia))) {
             return false;
         }

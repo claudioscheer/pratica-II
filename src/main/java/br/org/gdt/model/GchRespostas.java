@@ -40,7 +40,7 @@ public class GchRespostas implements Serializable {
     private GchAlternativas altCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
-    private RecPessoa_1 recIdpessoa;
+    private RecPessoa recIdpessoa;
 
     public GchRespostas() {
     }
@@ -78,11 +78,11 @@ public class GchRespostas implements Serializable {
         this.altCodigo = altCodigo;
     }
 
-    public RecPessoa_1 getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 

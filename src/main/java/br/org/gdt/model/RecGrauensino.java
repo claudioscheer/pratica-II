@@ -46,9 +46,9 @@ public class RecGrauensino implements Serializable {
     @Column(name = "rec_anoconclusao")
     private String recAnoconclusao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdgrauensino")
-    private List<RecVaga_1> recVagaList;
+    private List<RecVaga> recVagaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdgrauensino")
-    private List<RecPessoa_1> recPessoaList;
+    private List<RecPessoa> recPessoaList;
 
     public RecGrauensino() {
     }
@@ -107,21 +107,21 @@ public class RecGrauensino implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<RecVaga_1> getRecVagaList() {
+    public List<RecVaga> getRecVagaList() {
         return recVagaList;
     }
 
-    public void setRecVagaList(List<RecVaga_1> recVagaList) {
+    public void setRecVagaList(List<RecVaga> recVagaList) {
         this.recVagaList = recVagaList;
     }
 
     @XmlTransient
     @JsonIgnore
-    public List<RecPessoa_1> getRecPessoaList() {
+    public List<RecPessoa> getRecPessoaList() {
         return recPessoaList;
     }
 
-    public void setRecPessoaList(List<RecPessoa_1> recPessoaList) {
+    public void setRecPessoaList(List<RecPessoa> recPessoaList) {
         this.recPessoaList = recPessoaList;
     }
 

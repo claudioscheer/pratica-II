@@ -5,7 +5,7 @@
  */
 package br.org.gdt.model;
 
-import br.org.gdt.modelOld.FpEvento;
+import br.org.gdt.modelOld.FpEvento_old;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
@@ -40,7 +40,7 @@ public class FpFolhasPeriodoEventos implements Serializable {
     private BigDecimal fpeValor;
     @JoinColumn(name = "eve_id_fp_evento", referencedColumnName = "eve_id")
     @ManyToOne
-    private FpEvento eveIdFpEvento;
+    private FpEvento_old eveIdFpEvento;
     @JoinColumn(name = "flp_id_fp_folhas_periodo", referencedColumnName = "flp_id")
     @ManyToOne
     private FpFolhasPeriodo flpIdFpFolhasPeriodo;
@@ -73,11 +73,11 @@ public class FpFolhasPeriodoEventos implements Serializable {
         this.fpeValor = fpeValor;
     }
 
-    public FpEvento getEveIdFpEvento() {
+    public FpEvento_old getEveIdFpEvento() {
         return eveIdFpEvento;
     }
 
-    public void setEveIdFpEvento(FpEvento eveIdFpEvento) {
+    public void setEveIdFpEvento(FpEvento_old eveIdFpEvento) {
         this.eveIdFpEvento = eveIdFpEvento;
     }
 

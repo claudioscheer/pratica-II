@@ -30,7 +30,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecHabilidade_1.findAll", query = "SELECT r FROM RecHabilidade_1 r")})
-public class RecHabilidade_1 implements Serializable {
+public class RecHabilidade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,17 +44,17 @@ public class RecHabilidade_1 implements Serializable {
         @JoinColumn(name = "rec_idhabilidade", referencedColumnName = "rec_idhabilidade")}, inverseJoinColumns = {
         @JoinColumn(name = "rec_idvaga", referencedColumnName = "rec_idvaga")})
     @ManyToMany
-    private List<RecVaga_1> recVagaList;
+    private List<RecVaga> recVagaList;
     @JoinTable(name = "rec_pessoa_habilidade", joinColumns = {
         @JoinColumn(name = "rec_idhabilidade", referencedColumnName = "rec_idhabilidade")}, inverseJoinColumns = {
         @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")})
     @ManyToMany
-    private List<RecPessoa_1> recPessoaList;
+    private List<RecPessoa> recPessoaList;
 
-    public RecHabilidade_1() {
+    public RecHabilidade() {
     }
 
-    public RecHabilidade_1(Integer recIdhabilidade) {
+    public RecHabilidade(Integer recIdhabilidade) {
         this.recIdhabilidade = recIdhabilidade;
     }
 
@@ -84,21 +84,21 @@ public class RecHabilidade_1 implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<RecVaga_1> getRecVagaList() {
+    public List<RecVaga> getRecVagaList() {
         return recVagaList;
     }
 
-    public void setRecVagaList(List<RecVaga_1> recVagaList) {
+    public void setRecVagaList(List<RecVaga> recVagaList) {
         this.recVagaList = recVagaList;
     }
 
     @XmlTransient
     @JsonIgnore
-    public List<RecPessoa_1> getRecPessoaList() {
+    public List<RecPessoa> getRecPessoaList() {
         return recPessoaList;
     }
 
-    public void setRecPessoaList(List<RecPessoa_1> recPessoaList) {
+    public void setRecPessoaList(List<RecPessoa> recPessoaList) {
         this.recPessoaList = recPessoaList;
     }
 
@@ -112,10 +112,10 @@ public class RecHabilidade_1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RecHabilidade_1)) {
+        if (!(object instanceof RecHabilidade)) {
             return false;
         }
-        RecHabilidade_1 other = (RecHabilidade_1) object;
+        RecHabilidade other = (RecHabilidade) object;
         if ((this.recIdhabilidade == null && other.recIdhabilidade != null) || (this.recIdhabilidade != null && !this.recIdhabilidade.equals(other.recIdhabilidade))) {
             return false;
         }

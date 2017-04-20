@@ -1,6 +1,6 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.modelOld.FpEvento;
+import br.org.gdt.modelOld.FpEvento_old;
 import br.org.gdt.service.FpEventoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -13,8 +13,8 @@ public class FpEventoBean {
 
     private boolean formAtivo = false;
 
-    private FpEvento fpEvento = new FpEvento();
-    private List<FpEvento> todosFpEvento;
+    private FpEvento_old fpEvento = new FpEvento_old();
+    private List<FpEvento_old> todosFpEvento;
 
     @ManagedProperty("#{fpEventoService}")
     private FpEventoService fpEventoService;
@@ -35,21 +35,21 @@ public class FpEventoBean {
 
     public void cancel() {
         this.formAtivo = false;
-        this.fpEvento = new FpEvento();
+        this.fpEvento = new FpEvento_old();
     }
 
     public void add() {
         this.formAtivo = true;
-        this.fpEvento = new FpEvento();
+        this.fpEvento = new FpEvento_old();
     }
 
-    public String excluir(FpEvento fpEvento) {
+    public String excluir(FpEvento_old fpEvento) {
         fpEventoService.delete(fpEvento.getEveId());
         todosFpEvento.remove(fpEvento);
         return "eventos";
     }
 
-    public String prepareEdit(FpEvento fpEvento) {
+    public String prepareEdit(FpEvento_old fpEvento) {
         this.formAtivo = true;
         this.fpEvento = fpEvento;
         return "eventos";
@@ -63,22 +63,22 @@ public class FpEventoBean {
         this.formAtivo = formAtivo;
     }
 
-    public FpEvento getFpEvento() {
+    public FpEvento_old getFpEvento() {
         return fpEvento;
     }
 
-    public void setFpEvento(FpEvento fpEvento) {
+    public void setFpEvento(FpEvento_old fpEvento) {
         this.fpEvento = fpEvento;
     }
 
-    public List<FpEvento> getTodosFpEvento() {
+    public List<FpEvento_old> getTodosFpEvento() {
         if (todosFpEvento == null) {
             todosFpEvento = fpEventoService.findAll();
         }
         return todosFpEvento;
     }
 
-    public void setTodosFpEvento(List<FpEvento> todosFpEvento) {
+    public void setTodosFpEvento(List<FpEvento_old> todosFpEvento) {
         this.todosFpEvento = todosFpEvento;
     }
 

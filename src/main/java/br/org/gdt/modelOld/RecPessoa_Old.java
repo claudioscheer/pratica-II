@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @SequenceGenerator(name = "seq_pessoa", sequenceName = "seq_pessoa", allocationSize = 1)
-public class RecPessoa implements Serializable {
+public class RecPessoa_Old implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa")
     private int                     pes_id;

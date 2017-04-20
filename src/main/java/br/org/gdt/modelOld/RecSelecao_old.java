@@ -12,16 +12,16 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name = "seq_selecao", sequenceName = "seq_selecao", allocationSize = 1)
-public class RecSelecao implements Serializable {
+public class RecSelecao_old implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_selecao")
     private int sel_id;
     private String sel_descricaoentrevista;
     private boolean sel_aprovado;
     @OneToOne
-    private RecPessoa sel_pessoa;    
+    private RecPessoa_Old sel_pessoa;    
     @ManyToOne
-    private RecVaga sel_vaga;
+    private RecVaga_old sel_vaga;
 
     public int getSel_id() {
         return sel_id;
@@ -47,19 +47,19 @@ public class RecSelecao implements Serializable {
         this.sel_aprovado = sel_aprovado;
     }
 
-    public RecPessoa getSel_pessoa() {
+    public RecPessoa_Old getSel_pessoa() {
         return sel_pessoa;
     }
 
-    public void setSel_pessoa(RecPessoa sel_pessoa) {
+    public void setSel_pessoa(RecPessoa_Old sel_pessoa) {
         this.sel_pessoa = sel_pessoa;
     }
 
-    public RecVaga getSel_vaga() {
+    public RecVaga_old getSel_vaga() {
         return sel_vaga;
     }
 
-    public void setSel_vaga(RecVaga sel_vaga) {
+    public void setSel_vaga(RecVaga_old sel_vaga) {
         this.sel_vaga = sel_vaga;
     }
 

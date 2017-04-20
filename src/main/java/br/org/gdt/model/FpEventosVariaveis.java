@@ -5,7 +5,7 @@
  */
 package br.org.gdt.model;
 
-import br.org.gdt.modelOld.FpEvento;
+import br.org.gdt.modelOld.FpEvento_old;
 import br.org.gdt.modelOld.FpPeriodo;
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -36,13 +36,13 @@ public class FpEventosVariaveis implements Serializable {
     private Integer evvId;
     @JoinColumn(name = "eve_id_fp_evento", referencedColumnName = "eve_id")
     @ManyToOne
-    private FpEvento eveIdFpEvento;
+    private FpEvento_old eveIdFpEvento;
     @JoinColumn(name = "per_id_fp_periodo", referencedColumnName = "per_id")
     @ManyToOne
     private FpPeriodo perIdFpPeriodo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
-    private RecPessoa_1 recIdpessoa;
+    private RecPessoa recIdpessoa;
 
     public FpEventosVariaveis() {
     }
@@ -59,11 +59,11 @@ public class FpEventosVariaveis implements Serializable {
         this.evvId = evvId;
     }
 
-    public FpEvento getEveIdFpEvento() {
+    public FpEvento_old getEveIdFpEvento() {
         return eveIdFpEvento;
     }
 
-    public void setEveIdFpEvento(FpEvento eveIdFpEvento) {
+    public void setEveIdFpEvento(FpEvento_old eveIdFpEvento) {
         this.eveIdFpEvento = eveIdFpEvento;
     }
 
@@ -75,11 +75,11 @@ public class FpEventosVariaveis implements Serializable {
         this.perIdFpPeriodo = perIdFpPeriodo;
     }
 
-    public RecPessoa_1 getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 

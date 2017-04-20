@@ -68,9 +68,9 @@ public class CsbffCargos implements Serializable {
     @ManyToOne
     private CsbffTiposDeCargos tipoCargoCodCsbffTiposDeCargos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargoCodigo")
-    private List<RecVaga_1> recVagaList;
+    private List<RecVaga> recVagaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargoCodigo")
-    private List<RecPessoa_1> recPessoaList;
+    private List<RecPessoa> recPessoaList;
 
     public CsbffCargos() {
     }
@@ -170,21 +170,21 @@ public class CsbffCargos implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<RecVaga_1> getRecVagaList() {
+    public List<RecVaga> getRecVagaList() {
         return recVagaList;
     }
 
-    public void setRecVagaList(List<RecVaga_1> recVagaList) {
+    public void setRecVagaList(List<RecVaga> recVagaList) {
         this.recVagaList = recVagaList;
     }
 
     @XmlTransient
     @JsonIgnore
-    public List<RecPessoa_1> getRecPessoaList() {
+    public List<RecPessoa> getRecPessoaList() {
         return recPessoaList;
     }
 
-    public void setRecPessoaList(List<RecPessoa_1> recPessoaList) {
+    public void setRecPessoaList(List<RecPessoa> recPessoaList) {
         this.recPessoaList = recPessoaList;
     }
 

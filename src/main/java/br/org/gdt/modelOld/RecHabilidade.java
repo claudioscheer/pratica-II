@@ -20,7 +20,7 @@ import javax.persistence.SequenceGenerator;
 public class RecHabilidade implements Serializable {
 
     @ManyToMany(mappedBy = "vag_habilidades")
-    private List<RecVaga> recVagas;
+    private List<RecVaga_old> recVagas;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_habilidade")
@@ -28,7 +28,7 @@ public class RecHabilidade implements Serializable {
     private String hab_descricao;
     private HabilidadeNivel habilidadeNivel;
     @ManyToMany(mappedBy = "habilidades")
-    private List<RecPessoa> recPessoas;
+    private List<RecPessoa_Old> recPessoas;
 
     public int getHab_id() {
         return hab_id;

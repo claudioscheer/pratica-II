@@ -5,7 +5,7 @@
  */
 package br.org.gdt.model;
 
-import br.org.gdt.modelOld.FpEvento;
+import br.org.gdt.modelOld.FpEvento_old;
 import br.org.gdt.modelOld.FpTipoFolha;
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -36,7 +36,7 @@ public class FpEventosTipoFolha implements Serializable {
     private Integer etfId;
     @JoinColumn(name = "eve_id_fp_evento", referencedColumnName = "eve_id")
     @ManyToOne
-    private FpEvento eveIdFpEvento;
+    private FpEvento_old eveIdFpEvento;
     @JoinColumn(name = "tpf_id_fp_tipo_folha", referencedColumnName = "tpf_id")
     @ManyToOne
     private FpTipoFolha tpfIdFpTipoFolha;
@@ -56,11 +56,11 @@ public class FpEventosTipoFolha implements Serializable {
         this.etfId = etfId;
     }
 
-    public FpEvento getEveIdFpEvento() {
+    public FpEvento_old getEveIdFpEvento() {
         return eveIdFpEvento;
     }
 
-    public void setEveIdFpEvento(FpEvento eveIdFpEvento) {
+    public void setEveIdFpEvento(FpEvento_old eveIdFpEvento) {
         this.eveIdFpEvento = eveIdFpEvento;
     }
 

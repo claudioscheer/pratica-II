@@ -38,10 +38,10 @@ public class RecSelecao implements Serializable {
     private Boolean recAprovado;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
-    private RecPessoa_1 recIdpessoa;
+    private RecPessoa recIdpessoa;
     @JoinColumn(name = "rec_idvaga", referencedColumnName = "rec_idvaga")
     @ManyToOne(optional = false)
-    private RecVaga_1 recIdvaga;
+    private RecVaga recIdvaga;
 
     public RecSelecao() {
     }
@@ -74,19 +74,19 @@ public class RecSelecao implements Serializable {
         this.recAprovado = recAprovado;
     }
 
-    public RecPessoa_1 getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 
-    public RecVaga_1 getRecIdvaga() {
+    public RecVaga getRecIdvaga() {
         return recIdvaga;
     }
 
-    public void setRecIdvaga(RecVaga_1 recIdvaga) {
+    public void setRecIdvaga(RecVaga recIdvaga) {
         this.recIdvaga = recIdvaga;
     }
 

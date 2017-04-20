@@ -42,7 +42,7 @@ public class CsbffCargosHistorico implements Serializable {
     private CsbffCargos cargoCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
-    private RecPessoa_1 recIdpessoa;
+    private RecPessoa recIdpessoa;
 
     public CsbffCargosHistorico() {
     }
@@ -80,11 +80,11 @@ public class CsbffCargosHistorico implements Serializable {
         this.cargoCodigo = cargoCodigo;
     }
 
-    public RecPessoa_1 getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa_1 recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 
