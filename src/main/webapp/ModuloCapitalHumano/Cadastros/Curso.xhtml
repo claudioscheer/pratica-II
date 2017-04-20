@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
       >
 
     <h:head>
@@ -40,7 +41,7 @@
                                                                             *
                                                                         </span>
                                                                     </label>
-                                                                    <input class="form-control" id="name" name="name" type="text"></input>
+                                                                    <h:inputText class="form-control" id="name" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label requiredField" for="txbNomePalestrante">
@@ -49,37 +50,37 @@
                                                                             *
                                                                         </span>
                                                                     </label>
-                                                                    <input class="form-control" id="txbNomePalestrante" name="txbNomePalestrante" type="text"></input>
+                                                                    <h:inputText class="form-control" id="txbNomePalestrante"/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label " for="txbEmailPalestrante">
                                                                         E-mail do Palestrante
                                                                     </label>
-                                                                    <input class="form-control" id="txbEmailPalestrante" name="txbEmailPalestrante" type="text"></input>
+                                                                    <h:inputText class="form-control" id="txbEmailPalestrante"/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label " for="txbCategoriaCurso">
                                                                         Categoria
                                                                     </label>
-                                                                    <input class="form-control" id="txbCategoriaCurso" name="txbCategoriaCurso" type="text"></input>
+                                                                    <h:inputText class="form-control" id="txbCategoriaCurso" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label " for="txbAreasAfetadas">
                                                                         Áreas afetadas
                                                                     </label>
-                                                                    <input class="form-control" id="txbAreasAfetadas" name="txbAreasAfetadas" placeholder="Informe os principais setores que se beneficiariam com este curso" type="text"></input>
+                                                                    <h:inputText class="form-control" id="txbAreasAfetadas" a:placeholder="Informe os principais setores que se beneficiariam com este curso"/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label " for="txbDescCurso">
                                                                         Descrição
                                                                     </label>
-                                                                    <textarea class="form-control" cols="40" id="txbDescCurso" name="txbDescCurso" placeholder="Informe alguns detalhes sobre o curso em questão" rows="10"></textarea>
+                                                                    <h:inputTextarea class="form-control" cols="40" id="txbDescCurso" a:placeholder="Informe alguns detalhes sobre o curso em questão" rows="10"/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <div>
-                                                                        <button class="btn btn-primary " name="submit" type="submit">
+                                                                        <h:button class="btn btn-primary ">
                                                                             Cadastrar
-                                                                        </button>
+                                                                        />
                                                                     </div>
                                                                 </div>
 
