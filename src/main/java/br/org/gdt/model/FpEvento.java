@@ -23,6 +23,10 @@ public class FpEvento implements java.io.Serializable {
     private String eveNome;
     private String eveDescricao;
     private String eveFormula;
+    // provento/desconto
+    // INSS, FGTS, IRRF
+    // tipo valor
+    // valor
     private boolean eveAtivo;
 
     @Id
