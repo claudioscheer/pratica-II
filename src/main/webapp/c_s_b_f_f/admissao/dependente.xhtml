@@ -1,19 +1,18 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
     <h:head>
-        <title>Novo cargo</title>
+        <title>Admissão de colaborador</title>
     </h:head>
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
-            <ui:define name="content">   
+            <ui:define name="content"> 
                 <div class="title_left">
-                    <h3>Cargos</h3>
+                    <h3>Cadastro de dependente</h3>
                 </div>
-                <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
                 <div class="bootstrap-iso">
                     <div class="container-fluid">
                         <div class="row">
@@ -22,7 +21,7 @@
                                     <div class="form-group ">
 
                                         <label class="control-label " for="number">
-                                            Código Cargo
+                                            Código colaborador
                                         </label>
 
                                         <input class="form-control" id="number" name="number" type="text"/>
@@ -32,13 +31,31 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <form method="post">
                                     <div class="form-group ">
-                                        <label class="control-label " for="name">
-                                            Nome
+                                        <label class="control-label " for="number">
+                                            Código dependente
                                         </label>
                                         <input class="form-control" id="name0" name="name" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="nome">
+                                            Nome dependente
+                                        </label>
+                                        <input class="form-control" id="name0" name="name" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
 
-      
-      
+                                    <div class="form-group ">
+                                        <label class="control-label " for="date">
+                                            Data de nascimento
+                                        </label>
+                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
                                     </div>
                                 </form>
                             </div>
@@ -47,7 +64,7 @@
                                     <div class="form-group ">
 
                                         <label class="control-label " for="number">
-                                            CBO
+                                            CPF
                                         </label>
 
                                         <input class="form-control" id="number" name="number" type="text"/>
@@ -58,136 +75,71 @@
                                 <form method="post">
                                     <div class="form-group ">
                                         <label class="control-label " for="select">
-                                            Tipo de Cargo
+                                            Tipo de dependente
                                         </label>
                                         <select class="select form-control" id="select" name="select">
                                             <option value="First Choice">
                                                 Selecione
                                             </option>
                                             <option value="Second Choice">
-                                                Estágio
+                                                Cônjuge
                                             </option>
                                             <option value="Third Choice">
-                                                Deficiente (PCD)
+                                                Filho(a)
                                             </option>
                                             <option value="Fourth Choice">
-                                                Carreira
+                                                Enteado(a)
+                                            </option>
+                                            <option value="Fifth Choice">
+                                                Outros
                                             </option>
                                         </select>
                                     </div>     
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Naturalidade
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Número termo/certidão nascimento
+                                        </label>
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
                                 </form>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <form method="post">
                                     <div class="form-group ">
                                         <label class="control-label " for="select">
-                                            Nível de Cargo
+                                            Dependente do Imposto de Renda?
                                         </label>
                                         <select class="select form-control" id="select" name="select">
                                             <option value="First Choice">
                                                 Selecione
                                             </option>
                                             <option value="Second Choice">
-                                                Júnior
+                                                Sim
                                             </option>
                                             <option value="Third Choice">
-                                                Pleno
-                                            </option>
-                                            <option value="Fourth Choice">
-                                                Sênior
+                                                Não
                                             </option>
                                         </select>
                                     </div>     
                                 </form>
                             </div>
-
-      
-      
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form method="post">
-                                    <div class="form-group ">
-                                        <label class="control-label " for="select">
-                                            Superior imediato
-                                        </label>
-                                        <select class="select form-control" id="select" name="select">
-                                            <option value="First Choice">
-                                                Selecione
-                                            </option>
-                                            <option value="Second Choice">
-                                                Edson
-                                            </option>
-                                            <option value="Third Choice">
-                                                Cassol
-                                            </option>
-                                            <option value="Fourth Choice">
-                                                Stein
-                                            </option>
-                                        </select>
-                                    </div>     
-                                </form>
-                            </div>
-
-
-
-
-
-
-
-                            <div class="form-group ">
-
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <form>
-
-                                        <label class="control-label " for="message">
-                                            Requisitos
-                                        </label>
-                                        <textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>
-                                    </form>
-
-                                </div>
-
-
-                            </div>
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
-
-                                    <div class="form-group ">
-                                        <label class="control-label " for="message1">
-                                            Descrição
-                                        </label>
-                                        <textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>
-                                    </div>
-                                </form>
-                            </div>
-
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
-
-                                    <div class="form-group ">
-                                        <label class="control-label " for="date">
-                                            Data de Criação
-                                        </label>
-                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
-                                    <div class="form-group">
-                                        <label class="control-label" for="date">
-
-                                        </label>
-
-                                    </div>
-
-
-                                </form>
-
-                            </div>
-
-
                             <div>
                                 <div class="row">
                                     <!--       <button class="btn btn-primary " name="submit" type="submit">
@@ -203,9 +155,7 @@
                     </div>
                 </div>
 
-
             </ui:define>
         </ui:composition>
     </h:body>
 </html>
-

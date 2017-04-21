@@ -2,29 +2,535 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Admissão de colaborador</title>
     </h:head>
     <h:body>
-       <ui:composition template="../../templates/template.xhtml">
-            <ui:define name="content">  
-                <h:form>
-                    
-                    
-                   
-                    
-                    
-                </h:form>      
+        <ui:composition template="../../templates/template.xhtml">
+            <ui:define name="content"> 
+                <div class="title_left">
+                    <h3>Contrato de Admissão</h3>
+                </div>
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colaboradorAtivo"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            <h:selectBooleanCheckbox value="colaborador ativo" /> Colaborador ativo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Código colaborador
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="name">
+                                            Nome completo
+                                        </label>
+                                        <input class="form-control" id="name0" name="name" type="text"/>
+
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            CPF
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="select">
+                                            Estado civíl
+                                        </label>
+                                        <select class="select form-control" id="select" name="select">
+                                            <option value="First Choice">
+                                                Selecione
+                                            </option>
+                                            <option value="Second Choice">
+                                                Solteiro
+                                            </option>
+                                            <option value="Third Choice">
+                                                Casado
+                                            </option>
+                                            <option value="Fourth Choice">
+                                                Viúvo
+                                            </option>
+                                            <option value="Fifth Choice">
+                                                Separado
+                                            </option>
+                                            <option value="Sixth Choice">
+                                                Divorciado
+                                            </option>
+                                            <option value="Seventh Choice">
+                                                Outros
+                                            </option>
+                                        </select>
+                                    </div>     
+                                </form>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            RG
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Órgão expedidor
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="select">
+                                            Sexo
+                                        </label>
+                                        <select class="select form-control" id="select" name="select">
+                                            <option value="First Choice">
+                                                Selecione
+                                            </option>
+                                            <option value="Second Choice">
+                                                Masculino
+                                            </option>
+                                            <option value="Third Choice">
+                                                Feminino
+                                            </option>
+
+                                        </select>
+                                    </div>     
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Nacionalidade
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="nome">
+                                            Endereço
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="nome">
+                                            Bairro
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Cidade
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            CEP
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Estado
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Telefone
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            E-mail
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Escolaridade
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Número da CTPS
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Banco que possui conta
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Número da agência
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Número da conta
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Cargo ocupado
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+
+                                    <div class="form-group ">
+                                        <label class="control-label " for="date">
+                                            Data de admissão
+                                        </label>
+                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+                                        <label class="control-label " for="number">
+                                            Código CBO
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Salário
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="select">
+                                            Possui dependentes?
+                                        </label>
+                                        <select class="select form-control" id="select" name="select">
+                                            <option value="First Choice">
+                                                Selecione
+                                            </option>
+                                            <option value="Second Choice">
+                                                Sim
+                                            </option>
+                                            <option value="Third Choice">
+                                                Não
+                                            </option>
+                                        </select>
+                                        <div class="row"><br>
+                                            <h:link class="btn btn-primary" outcome="dependente.xhtml" value="Cadastrar dependente"></h:link>
+                                        </br>
+                                        </div>
+
+                                    </div>
+                                    <!--<input type="button" value="Cadastrar dependente" name="click" class="btn btn-success"  />-->
+
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="select">
+                                            Recebe seguro desemprego?
+                                        </label>
+                                        <select class="select form-control" id="select" name="select">
+                                            <option value="First Choice">
+                                                Selecione
+                                            </option>
+                                            <option value="Second Choice">
+                                                Sim
+                                            </option>
+                                            <option value="Third Choice">
+                                                Não
+                                            </option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="select">
+                                            Insalubridade
+                                        </label>
+                                        <select class="select form-control" id="select" name="select">
+                                            <option value="First Choice">
+                                                Selecione
+                                            </option>
+                                            <option value="Second Choice">
+                                                Não 
+                                            </option>
+                                            <option value="Third Choice">
+                                                Baixo (10%) 
+                                            </option>
+                                            <option value="Fourth Choice">
+                                                Médio (20%) 
+                                            </option>
+                                            <option value="Fifth Choice">
+                                                Alto (40%) 
+                                            </option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="select">
+                                            Periculosidade
+                                        </label>
+                                        <select class="select form-control" id="select" name="select">
+                                            <option value="First Choice">
+                                                Selecione
+                                            </option>
+                                            <option value="Second Choice">
+                                                Não 
+                                            </option>
+                                            <option value="Third Choice">
+                                                Sim (30%) 
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="select">
+                                            Benefício
+                                        </label>
+                                        <select class="select form-control" id="select" name="select">
+                                            <option value="First Choice">
+                                                Selecione
+                                            </option>
+                                            <option value="Second Choice">
+                                                Alimentação
+                                            </option>
+                                            <option value="Third Choice">
+                                                Transporte
+                                            </option>
+                                            <option value="Fourth Choice">
+                                                Educação
+                                            </option>
+                                            <option value="Fifth Choice">
+                                                Moradia
+                                            </option>
+                                            <option value="Sixth Choice">
+                                                Saúde
+                                            </option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Número do título de eleitor
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Número do certificado de reservista
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Número PIS/PASEP
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <form>
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Escala de horário
+                                        </label>
+
+                                        <input class="form-control" id="number" name="number" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <!--       <button class="btn btn-primary " name="submit" type="submit">
+                                           
+                                            Salvar
+                                           </button>-->
+
+                                    <input type="button" value="SAVE" name="click" class="btn btn-success"  />
+                                    <input type="button" value="EDIT" name="click" class="btn btn-default"  />
+                                    <input type="button" value="CANCEL" name="click" class="btn btn-danger"  />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
             </ui:define>
         </ui:composition>
-              
-        
-        
-        
-        
-        
-        
+
     </h:body>
 </html>
 
