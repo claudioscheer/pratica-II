@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8" />
@@ -44,99 +45,98 @@
 
                         <!-- sidebar menu -->
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                            <div class="menu_section">
-                                <h3>Geral</h3>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-list"></i> Folha de pagamento <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="/praticaII/folhapagamento/tabelas.xhtml">Tabelas</a></li>
-                                            <li><a href="/praticaII/folhapagamento/horastrabalhadas.xhtml">Horas trabalhadas</a></li>
-                                            <li><a href="/praticaII/folhapagamento/periodos.xhtml">Períodos</a></li>
-                                            <li><a href="/praticaII/folhapagamento/tiposfolha.xhtml">Tipos de folha</a></li>
-                                            <li><a href="/praticaII/folhapagamento/eventos.xhtml">Eventos</a></li>         
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-list"></i> Recrutamento <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="/praticaII/recrutamento/vaga_lista.xhtml">Vagas</a></li>                                            
-                                            <li><a href="/praticaII/recrutamento/candidato_lista.xhtml">Candidatos</a></li>       
-                                            <li><a href="/praticaII/recrutamento/selecao_lista.xhtml">Seleção</a></li>       
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-users"></i> Capital Humano  <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="/praticaII/ModuloCapitalHumano/Cadastros/Curso.xhtml">Cursos</a></li>                                            
-                                            <li><a href="/praticaII/ModuloCapitalHumano/Cadastros/Treinamento.xhtml">Treinamentos</a></li>       
-                                            <li><a href="/praticaII/recrutamento/selecao_lista.xhtml">Análises</a></li>
-                                            <li><a href="/praticaII/recrutamento/selecao_lista.xhtml">Plano de Carreira</a></li>  
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-list"></i> Cargos <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="/praticaII/c_s_b_f_f/cargo/form_cargo.xhtml">Novo</a></li>                                            
-                                            <li><a href="/praticaII/c_s_b_f_f/cargo/form_cargo.xhtml">Alterar</a></li>       
-                                            <li><a href="/praticaII/c_s_b_f_f/cargo/form_cargo.xhtml">Consultar</a></li> 
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-list"></i> Benefícios <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="/praticaII/c_s_b_f_f/beneficio/form_beneficio.xhtml">Novo</a></li>                                            
-                                            <li><a href="/praticaII//c_s_b_f_f/beneficio/form_beneficio.xhtml">Alterar</a></li>       
-                                            <li><a href="/praticaII//c_s_b_f_f/beneficio/form_beneficio.xhtml">Consultar</a></li>       
-                                        </ul>
-                                    </li>
-                                </ul>
-                                 <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-list"></i> Admissão <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="/praticaII/c_s_b_f_f/admissao/admissao01.xhtml">Novo</a></li>                                            
-                                            <li><a href="/praticaII//c_s_b_f_f/admissao/admissao01.xhtml">Alterar</a></li>       
-                                            <li><a href="/praticaII//c_s_b_f_f/admissao/admissao_consulta.xhtml">Consultar</a></li>    
-                                        </ul>
-                                    </li>
-                                </ul>
-                                
-                                
-                            </div>
-                            <div class="menu_section">
-                                <h3>Outros</h3>
-                                <ul class="nav side-menu">
-                                    <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li>
-                                                <a href="#level1_1">Level One</a>
+                            <h:form>
+                                <div class="menu_section">
+                                    <h3>Geral</h3>
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <a><i class="fa fa-list"></i> Folha de pagamento <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><h:link outcome="/folhapagamento/tabelas.xhtml" value="Tabelas"></h:link></li>
+                                                <li><h:link outcome="/folhapagamento/horastrabalhadas.xhtml" value="Horas trabalhadas"></h:link></li>
+                                                <li><h:link outcome="/folhapagamento/periodos.xhtml" value="Períodos"></h:link></li>
+                                                <li><h:link outcome="/folhapagamento/tiposfolha.xhtml" value="Tipos de folha"></h:link></li>
+                                                <li><h:link outcome="/folhapagamento/eventos.xhtml" value="Eventos"></h:link></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <a><i class="fa fa-list"></i> Recrutamento <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><h:link outcome="/recrutamento/vaga_lista.xhtml" value="Vagas"></h:link></li>
+                                                <li><h:link outcome="/recrutamento/candidato_lista.xhtml" value="Candidatos"></h:link></li>
+                                                <li><h:link outcome="/recrutamento/selecao_lista.xhtml" value="Seleção"></h:link></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <a><i class="fa fa-users"></i> Capital humano  <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><h:link outcome="/ModuloCapitalHumano/Cadastros/Curso.xhtml" value="Cursos"></h:link></li>
+                                                <li><h:link outcome="/ModuloCapitalHumano/Cadastros/Treinamento.xhtml" value="Treinamentos"></h:link></li>
+                                                <li><h:link outcome="/recrutamento/selecao_lista.xhtml" value="Análises"></h:link></li>
+                                                <li><h:link outcome="/recrutamento/selecao_lista.xhtml" value="Plano de carreira"></h:link></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <a><i class="fa fa-list"></i> Cargos <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="/praticaII/c_s_b_f_f/cargo/form_cargo.xhtml">Novo</a></li>                                            
+                                                <li><a href="/praticaII/c_s_b_f_f/cargo/form_cargo.xhtml">Alterar</a></li>       
+                                                <li><a href="/praticaII/c_s_b_f_f/cargo/form_cargo.xhtml">Consultar</a></li> 
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <a><i class="fa fa-list"></i> Benefícios <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="/praticaII/c_s_b_f_f/beneficio/form_beneficio.xhtml">Novo</a></li>                                            
+                                                <li><a href="/praticaII//c_s_b_f_f/beneficio/form_beneficio.xhtml">Alterar</a></li>       
+                                                <li><a href="/praticaII//c_s_b_f_f/beneficio/form_beneficio.xhtml">Consultar</a></li>       
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <a><i class="fa fa-list"></i> Admissão <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="/praticaII/c_s_b_f_f/admissao/admissao01.xhtml">Novo</a></li>                                            
+                                                <li><a href="/praticaII//c_s_b_f_f/admissao/admissao01.xhtml">Alterar</a></li>       
+                                                <li><a href="/praticaII//c_s_b_f_f/admissao/admissao_consulta.xhtml">Consultar</a></li>    
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="menu_section">
+                                    <h3>Outros</h3>
+                                    <ul class="nav side-menu">
+                                        <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
                                                 <li>
-                                                    <a>Level One<span class="fa fa-chevron-down"></span></a>
-                                                    <ul class="nav child_menu">
-                                                        <li class="sub_menu"><a href="level2.html">Level Two</a>
-                                                        </li>
-                                                        <li><a href="#level2_1">Level Two</a>
-                                                        </li>
-                                                        <li><a href="#level2_2">Level Two</a>
-                                                        </li>
-                                                    </ul>
+                                                    <a href="#level1_1">Level One</a>
+                                                    <li>
+                                                        <a>Level One<span class="fa fa-chevron-down"></span></a>
+                                                        <ul class="nav child_menu">
+                                                            <li class="sub_menu"><a href="level2.html">Level Two</a>
+                                                            </li>
+                                                            <li><a href="#level2_1">Level Two</a>
+                                                            </li>
+                                                            <li><a href="#level2_2">Level Two</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#level1_2">Level One</a></li>
                                                 </li>
-                                                <li><a href="#level1_2">Level One</a></li>
-                                            </li>
-                                        </ul>
-                                    </li>                  
-                                </ul>
-                            </div>
-
+                                            </ul>
+                                        </li>                  
+                                    </ul>
+                                </div>
+                            </h:form>
                         </div>
                         <!-- /sidebar menu -->
 
