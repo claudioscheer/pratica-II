@@ -9,10 +9,10 @@
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
-                <div class="title_left">
-                    <h3>Benefícios</h3>
-                </div>
                 <h:form>
+                    <div class="title_left">
+                        <h3>Benefícios</h3>
+                    </div>
                     <div class="bootstrap-iso">
                         <div class="container-fluid">
                             <div class="row">
@@ -24,7 +24,8 @@
                                                 Código
                                             </label>
 
-                                            <input class="form-control" id="number" name="number" type="text"/>
+                                            <h:inputText class="form-control col-md-7 col-xs-12" value="" />
+
                                         </div>
                                     </form>
                                 </div>
@@ -34,9 +35,11 @@
                                             <label class="control-label " for="name">
                                                 Nome
                                             </label>
-                                            <input class="form-control" id="name0" name="name" type="text"/>
+                                            <!--         <input class="form-control" id="name" name="name" type="text"/>-->
+                                            <h:inputText class="form-control col-md-7 col-xs-12" value="" />
 
                                         </div>
+
                                     </form>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -60,6 +63,7 @@
                                         </div>     
                                     </form>
                                 </div>
+                                <!--drop de seleção bootstreap-->
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <form method="post">
                                         <div class="form-group ">
@@ -90,60 +94,81 @@
                                     </form>
                                 </div>
 
+                                <!--<div class=" col-md-6 col-md-6 col-xs-12">
+                                    <form method="post">
+                                    <div class="form-group">
+                                
+                                        Tipo de benefício
+                                <h:selectOneMenu value="">
+                                        <f:selectItem itemValue="Cream Latte" itemLabel="Coffee3 - Cream Latte" />
+                                        <f:selectItem itemValue="Extreme Mocha" itemLabel="Coffee3 - Extreme Mocha" />
+                                        <f:selectItem itemValue="Buena Vista" itemLabel="Coffee3 - Buena Vista" />
+                                </h:selectOneMenu>
+                                  
+                                        </div>
+                                        </form>
+                                </div>-->
+
+                                <!--                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <form method="post">
+                                
+                                                                        <div class="form-group ">
+                                                                            <label class="control-label " for="date">
+                                                                                Data
+                                                                            </label>
+                                
+                                                                            <h:inputText class="form-control col-md-7 col-xs-12" value="" />
+                                                                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                                                                                                   <h:inputText class="date"  ></h:inputText>
+                                                                                                   
+                                                                                                   <h:inputText class="date" id="date" />
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <form method="post">
+                                
+                                                                        <div class="form-group ">
+                                                                            <label class="control-label " for="number">
+                                                                                valor
+                                                                            </label>
+                                                                            <input class="form-control" id="number" name="number" type="text"/>
+                                                                            <h:inputText class="form-control " value=""/>
+                                
+                                                                        </div>
+                                
+                                                                    </form>
+                                                                </div>-->
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <form>
+                                    <form method="post">
+
 
                                         <div class="form-group ">
-                                            <label class="control-label " for="message1">
+                                            <label class="control-label " for="message">
                                                 Descrição
                                             </label>
-                                            <textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>
+                                            <!--                                            <textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
+                                            <h:inputTextarea class="form-control" cols="40" rows="5"/>
+
                                         </div>
-                                    </form>
-                                </div>
-
-
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <form>
-
-                                        <div class="form-group ">
-                                            <label class="control-label " for="date">
-                                                Data de Criação
-                                            </label>
-                                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <form>
                                         <div class="form-group">
-                                            <label class="control-label" for="date">
+                                            <div>
+                                                <h:commandButton class="btn btn-success" value=" salvar" />
+                                                <!--<input type="button" value="SAVE" name="click" class="btn btn-success"  />-->
+                                                <!--<input type="button" value="EDIT" name="click" class="btn btn-default"  />-->
+                                                <h:commandButton value="Editar" class="btn btn-default" />
+                                                <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                                <!--<input type="button" value="CANCEL" name="click" class="btn btn-danger"  />-->
 
-                                            </label>
-
+                                            </div>
                                         </div>
-
-
                                     </form>
-
-                                </div>
-
-
-                                <div>
-                                    <div class="row">
-                                        <!--       <button class="btn btn-primary " name="submit" type="submit">
-                                               
-                                                Salvar
-                                               </button>-->
-                                        <input type="button" value="SAVE" name="click" class="btn btn-success"  />
-                                        <input type="button" value="EDIT" name="click" class="btn btn-default"  />
-                                        <input type="button" value="CANCEL" name="click" class="btn btn-danger"  />
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </h:form>
+
 
             </ui:define>
         </ui:composition>
