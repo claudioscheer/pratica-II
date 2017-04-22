@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Cadastro benefício</title>
     </h:head>
@@ -11,9 +10,25 @@
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
                 <h:form>
+                    <div class="title_left">
+                        <h3>Benefícios</h3>
+                    </div>
                     <div class="bootstrap-iso">
                         <div class="container-fluid">
                             <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <form>
+                                        <div class="form-group ">
+
+                                            <label class="control-label " for="number">
+                                                Código
+                                            </label>
+
+                                            <h:inputText class="form-control col-md-7 col-xs-12" value="" />
+
+                                        </div>
+                                    </form>
+                                </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <form method="post">
                                         <div class="form-group ">
@@ -27,27 +42,55 @@
 
                                     </form>
                                 </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <form method="post">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Abrangência
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="First Choice">
+                                                    Selecione
+                                                </option>
+                                                <option value="Second Choice">
+                                                    Individual
+                                                </option>
+                                                <option value="Third Choice">
+                                                    Coletivo
+                                                </option>
 
+                                            </select>
+                                        </div>     
+                                    </form>
+                                </div>
                                 <!--drop de seleção bootstreap-->
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <form method="post">
                                         <div class="form-group ">
-
                                             <label class="control-label " for="select">
-                                                Tipo de Benefício
+                                                Tipo de benefício
                                             </label>
                                             <select class="select form-control" id="select" name="select">
                                                 <option value="First Choice">
-                                                    Alimentício
+                                                    Selecione
                                                 </option>
                                                 <option value="Second Choice">
-                                                    Transporte
+                                                    Alimentação
                                                 </option>
                                                 <option value="Third Choice">
+                                                    Transporte
+                                                </option>
+                                                <option value="Fourth Choice">
+                                                    Educação
+                                                </option>
+                                                <option value="Fifth Choice">
+                                                    Moradia
+                                                </option>
+                                                <option value="Sixth Choice">
                                                     Saúde
                                                 </option>
                                             </select>
-                                        </div>
+                                        </div>     
                                     </form>
                                 </div>
 
@@ -61,50 +104,41 @@
                                         <f:selectItem itemValue="Extreme Mocha" itemLabel="Coffee3 - Extreme Mocha" />
                                         <f:selectItem itemValue="Buena Vista" itemLabel="Coffee3 - Buena Vista" />
                                 </h:selectOneMenu>
-                                
-                                        
-                                        
-                                        
+                                  
                                         </div>
                                         </form>
                                 </div>-->
 
-
-
-
-
-
-
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <form method="post">
-
-                                        <div class="form-group ">
-                                            <label class="control-label " for="date">
-                                                Data
-                                            </label>
-
-                                            <h:inputText class="form-control col-md-7 col-xs-12" value="" />
-                                            <!--<input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>-->
-                                            <!--                       <h:inputText class="date"  ></h:inputText>
-                                                                   
-                                                                   <h:inputText class="date" id="date" />-->
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <form method="post">
-
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">
-                                                valor
-                                            </label>
-                                            <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                            <h:inputText class="form-control " value=""/>
-
-                                        </div>
-
-                                    </form>
-                                </div>
+                                <!--                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <form method="post">
+                                
+                                                                        <div class="form-group ">
+                                                                            <label class="control-label " for="date">
+                                                                                Data
+                                                                            </label>
+                                
+                                                                            <h:inputText class="form-control col-md-7 col-xs-12" value="" />
+                                                                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                                                                                                   <h:inputText class="date"  ></h:inputText>
+                                                                                                   
+                                                                                                   <h:inputText class="date" id="date" />
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <form method="post">
+                                
+                                                                        <div class="form-group ">
+                                                                            <label class="control-label " for="number">
+                                                                                valor
+                                                                            </label>
+                                                                            <input class="form-control" id="number" name="number" type="text"/>
+                                                                            <h:inputText class="form-control " value=""/>
+                                
+                                                                        </div>
+                                
+                                                                    </form>
+                                                                </div>-->
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <form method="post">
 
@@ -134,13 +168,6 @@
                         </div>
                     </div>
                 </h:form>
-
-
-
-
-
-
-
 
 
             </ui:define>

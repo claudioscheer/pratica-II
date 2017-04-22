@@ -360,8 +360,8 @@
                                             </option>
                                         </select>
                                         <div class="row"><br>
-                                            <h:link class="btn btn-primary" outcome="dependente.xhtml" value="Cadastrar dependente"></h:link>
-                                        </br>
+                                                <h:link class="btn btn-primary" outcome="dependente.xhtml" value="Cadastrar dependente"></h:link>
+                                            </br>
                                         </div>
 
                                     </div>
@@ -473,7 +473,7 @@
                                             Número do título de eleitor
                                         </label>
 
-                                        <input class="form-control" id="number" name="number" type="text"/>
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="" />
                                     </div>
                                 </form>
                             </div>
@@ -485,7 +485,7 @@
                                             Número do certificado de reservista
                                         </label>
 
-                                        <input class="form-control" id="number" name="number" type="text"/>
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="" />
                                     </div>
                                 </form>
                             </div>
@@ -497,7 +497,7 @@
                                             Número PIS/PASEP
                                         </label>
 
-                                        <input class="form-control" id="number" name="number" type="text"/>
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="" />
                                     </div>
                                 </form>
                             </div>
@@ -509,7 +509,7 @@
                                             Escala de horário
                                         </label>
 
-                                        <input class="form-control" id="number" name="number" type="text"/>
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="" />
                                     </div>
                                 </form>
                             </div>
@@ -520,9 +520,13 @@
                                             Salvar
                                            </button>-->
 
-                                    <input type="button" value="SAVE" name="click" class="btn btn-success"  />
-                                    <input type="button" value="EDIT" name="click" class="btn btn-default"  />
-                                    <input type="button" value="CANCEL" name="click" class="btn btn-danger"  />
+                                    <h:commandButton class="btn btn-success" value=" salvar" />
+                                    <!--<input type="button" value="SAVE" name="click" class="btn btn-success"  />-->
+                                    <!--<input type="button" value="EDIT" name="click" class="btn btn-default"  />-->
+                                    <h:commandButton value="Editar" class="btn btn-default" />
+                                    <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                    <!--<input type="button" value="CANCEL" name="click" class="btn btn-danger"  />-->
+
                                 </div>
                             </div>
                         </div>
