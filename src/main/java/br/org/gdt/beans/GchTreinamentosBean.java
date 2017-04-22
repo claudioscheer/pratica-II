@@ -6,7 +6,6 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.GchTreinamentos;
-import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.GchTreinamentosService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -20,11 +19,11 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class GchTreinamentosBean {
-      private boolean formAtivo = false;
+    private boolean formAtivo = false;
 
     private GchTreinamentos gchTreinamentos = new GchTreinamentos();
     private List<GchTreinamentos> todosGchTreinamentos;
-
+    
     @ManagedProperty("#{gchTreinamentosService}")
     private GchTreinamentosService gchTreinamentosService;
 
@@ -97,5 +96,5 @@ public class GchTreinamentosBean {
     public void setGchTreinamentosService(GchTreinamentosService gchTreinamentosService) {
         this.gchTreinamentosService = gchTreinamentosService;
     }
-    
+        
 }
