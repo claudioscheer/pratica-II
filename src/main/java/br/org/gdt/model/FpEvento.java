@@ -1,14 +1,9 @@
 package br.org.gdt.model;
 
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,10 +18,10 @@ public class FpEvento implements java.io.Serializable {
     private String eveNome;
     private String eveDescricao;
     private String eveFormula;
-    // provento/desconto
-    // INSS, FGTS, IRRF
-    // tipo valor
-    // valor
+    private boolean eveProvento;
+    private boolean eveIncideINSS;
+    private boolean eveIncideFGTS;
+    private boolean eveIncideIR;
     private boolean eveAtivo;
 
     @Id
@@ -69,6 +64,38 @@ public class FpEvento implements java.io.Serializable {
 
     public void setEveFormula(String eveFormula) {
         this.eveFormula = eveFormula;
+    }
+
+    public boolean isEveProvento() {
+        return eveProvento;
+    }
+
+    public void setEveProvento(boolean eveProvento) {
+        this.eveProvento = eveProvento;
+    }
+
+    public boolean isEveIncideINSS() {
+        return eveIncideINSS;
+    }
+
+    public void setEveIncideINSS(boolean eveIncideINSS) {
+        this.eveIncideINSS = eveIncideINSS;
+    }
+
+    public boolean isEveIncideFGTS() {
+        return eveIncideFGTS;
+    }
+
+    public void setEveIncideFGTS(boolean eveIncideFGTS) {
+        this.eveIncideFGTS = eveIncideFGTS;
+    }
+
+    public boolean isEveIncideIR() {
+        return eveIncideIR;
+    }
+
+    public void setEveIncideIR(boolean eveIncideIR) {
+        this.eveIncideIR = eveIncideIR;
     }
 
     public boolean isEveAtivo() {
