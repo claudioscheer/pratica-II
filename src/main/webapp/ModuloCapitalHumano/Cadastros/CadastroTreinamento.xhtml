@@ -205,7 +205,13 @@
                                                                         *
                                                                     </span>
                                                                 </label>                                                           
-                                                                <h:inputText class="form-control" id="txbnomeTreinamento" a:placeholder="Adicione um nome para o treinamento"/>
+                                                                <h:inputText class="form-control" id="txbnomeTreinamento" a:placeholder="Adicione um nome para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiNome}"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label requiredField" for="txbnomeTreinamento">
+                                                                   Descrição                                                                    
+                                                                </label>                                                           
+                                                                <h:inputText class="form-control" id="txbDescricaoTreinamento" a:placeholder="Adicione uma descrição para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiDescricao}"/>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="control-label requiredField" for="txbLocalTreinamento">
