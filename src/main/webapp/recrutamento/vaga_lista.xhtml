@@ -15,16 +15,35 @@
                     <h3>Listagem de Vagas</h3>
                 </div>
                 <br />
-                <h:form id="formVaga">
-                    <h:messages class="error" style="color: #d9534f" />
-
+                <h:form id="formVaga">                                        
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12">
                         <div class="row">
                             <h:commandButton class="btn btn-primary" value="Novo Registro">                                
                             </h:commandButton>
                         </div>
-                  
+                        <div class="row">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <h:dataTable class="table table-striped" value="#{vagaBean.vagas}" var="item">                                        
+                                        <h:column>
+                                            <f:facet name="header">Código</f:facet>
+                                                #{item.recIdvaga}
+                                        </h:column>                                        
+                                        <h:column>
+                                            <f:facet name="header">Opções</f:facet>
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{vagaBean.Editar(vaga)}">
+
+                                            </h:commandLink>
+                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{vagaBean.Excluir(vaga)}" onclick="return confirm('Excluir tabela?')">
+
+                                            </h:commandLink>
+                                        </h:column>                  
+                                    </h:dataTable>
+                                </div>
+                            </div>
+                        </div>
                     </h:panelGroup>
+
 
                 </h:form>
             </ui:define>
