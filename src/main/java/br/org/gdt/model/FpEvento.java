@@ -16,7 +16,6 @@ public class FpEvento implements java.io.Serializable {
     private long eveId;
     private boolean eveEventoVariavel;
     private String eveNome;
-    private String eveDescricao;
     private String eveFormula;
     private boolean eveProvento;
     private boolean eveIncideINSS;
@@ -48,14 +47,6 @@ public class FpEvento implements java.io.Serializable {
 
     public void setEveNome(String eveNome) {
         this.eveNome = eveNome;
-    }
-
-    public String getEveDescricao() {
-        return eveDescricao;
-    }
-
-    public void setEveDescricao(String eveDescricao) {
-        this.eveDescricao = eveDescricao;
     }
 
     public String getEveFormula() {

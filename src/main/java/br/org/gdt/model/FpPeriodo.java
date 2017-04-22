@@ -19,6 +19,7 @@ public class FpPeriodo implements java.io.Serializable {
     private int perMes;
     private int perAno;
     private int perDiasUteis;
+    private int perDiasNaoUteis;
     private Date perDataInicial;
     private Date perDataFinal;
 
@@ -54,6 +55,14 @@ public class FpPeriodo implements java.io.Serializable {
 
     public void setPerDiasUteis(int perDiasUteis) {
         this.perDiasUteis = perDiasUteis;
+    }
+
+    public int getPerDiasNaoUteis() {
+        return perDiasNaoUteis;
+    }
+
+    public void setPerDiasNaoUteis(int perDiasNaoUteis) {
+        this.perDiasNaoUteis = perDiasNaoUteis;
     }
 
     @Temporal(javax.persistence.TemporalType.DATE)
