@@ -26,7 +26,8 @@
                                             Código Cargo
                                         </label>
 
-                                        <input class="form-control" id="number" name="number" type="text" readonly = "true"/>
+                                        <!--<input class="form-control" id="number" name="number" type="text" readonly = "true"/>-->
+                                        <h:inputText class="form-control" readonly="true" value="#{cargoBean.cargoCodigo}"/>
                                     </div>
                                 </form>
                             </div>
@@ -38,7 +39,7 @@
                                         </label>
                                         <!--<input class="form-control" id="name0" name="name" type="text"/>-->
 
-                                        <h:inputText class=" form-control" />
+                                        <h:inputText class=" form-control"value="#{cargoBean.nome}" />
 
 
                                     </div>
@@ -53,7 +54,7 @@
                                         </label>
 
                                         <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control"/>
+                                        <h:inputText class="form-control" value="#{cargoBean.CBO}"/>
                                     </div>
                                 </form>
                             </div>
@@ -148,7 +149,7 @@
                                             Requisitos
                                         </label>
                                         <!--<textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
-                                        <h:inputTextarea class="form-control" cols="10" rows="5" />
+                                        <h:inputTextarea class="form-control" cols="10" rows="5" value="#{cargoBean.requisitos}"/>
                                     </form>
 
                                 </div>
@@ -164,7 +165,7 @@
                                             Descrição
                                         </label>
                                         <!--<textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>-->
-                                        <h:inputTextarea class="form-control" cols="10" rows="5" />
+                                        <h:inputTextarea class="form-control" cols="10" rows="5" value="#{cargoBean.descricao}" />
                                     </div>
                                 </form>
                             </div>
@@ -177,7 +178,8 @@
                                         <label class="control-label " for="date">
                                             Data de Criação
                                         </label>
-                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" value="#{cargoBean.data}"/>
+                                    
                                     </div>
                                 </form>
                             </div>
