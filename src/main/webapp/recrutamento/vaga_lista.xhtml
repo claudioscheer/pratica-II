@@ -17,7 +17,7 @@
                 </div>
                 <br />
                 <h:form id="formVaga">                                        
-                    <p:panel visible="#{vagaBean.formAtivo}">
+                    <p:panel visible="#{recVagaBean.formAtivo}">
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
@@ -132,8 +132,8 @@
                                         </h:column>                  
                                     </h:dataTable>
                                 </div>
-                                
-                                
+
+
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
@@ -145,24 +145,24 @@
                             </div>
                         </div>
                     </p:panel>
-                    
-                    
-                    <p:panel visible="#{!vagaBean.formAtivo}">
+
+
+                    <p:panel visible="#{!recVagaBean.formAtivo}">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Novo Registro" action="#{vagaBean.Adicionar()}">                                
+                            <h:commandButton class="btn btn-primary" value="Novo Registro" action="#{recVagaBean.Adicionar()}">                                
                             </h:commandButton>
                         </div>
-                        <h:dataTable class="table table-striped" value="#{vagaBean.vagas}" var="item">                                        
+                        <h:dataTable class="table table-striped" value="#{recVagaBean.vagas}" var="item">                                        
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
                                 <h:outputText value="#{item.recDescricao}"/>
                             </h:column>                                        
                             <h:column>
                                 <f:facet name="header">Opções</f:facet>
-                                <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{vagaBean.PreparaEdicao(vaga)}">
+                                <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recVagaBean.PreparaEdicao(vaga)}">
 
                                 </h:commandLink>
-                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{vagaBean.Excluir(vaga)}" onclick="return confirm('Excluir tabela?')">
+                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{recVagaBean.Excluir(vaga)}" onclick="return confirm('Excluir tabela?')">
 
                                 </h:commandLink>
                             </h:column>                  

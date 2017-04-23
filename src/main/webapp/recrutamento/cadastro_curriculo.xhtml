@@ -2,129 +2,402 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <h:outputStylesheet library="vendors/" name="bootstrap/dist/css/bootstrap.min.css" />
-        <h:outputStylesheet library="vendors/" name="font-awesome/css/font-awesome.min.css" />
-        <h:outputStylesheet library="vendors/" name="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
-        <h:outputStylesheet library="vendors/" name="bootstrap-daterangepicker/daterangepicker.css" />
-        <h:outputStylesheet library="build/" name="css/custom.min.css" />
-        <ui:insert name="head" />
-    </h:head>
-    <h:body>        
-        <div class="container body">           
-            <div class="main_container">                            
-                <h1 class="text-center">Cadastre Seu Currículo</h1>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-                <!-- page content -->
-                <div class="right_col" role="main">      
-                    <br />
-                    <h:form id="formularioCurriculo">
-                        <h3 class="text-center">Informações de Gerais</h3>
-                        <div class="col-md-12 col-sm-12 col-xs-12">                            
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome Completo
-                                        <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" required=""/>
-                                    </div>
-                                </div>                       
-                            </div>
-                        </div>     
-
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome do Pai
-                                        <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12"/>
-                                    </div>
-                                </div>                       
-                            </div>
-                        </div> 
-
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome da Mãe
-                                        <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12"/>
-                                    </div>
-                                </div>                       
-                            </div>
-                        </div> 
-
-                        <h3 class="text-center">Informações de Localização</h3>
-
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Endereço
-                                        <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12"/>
-                                    </div>
-                                </div>                       
-                            </div>
-                        </div> 
-                       
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-horizontal form-label-left">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-6 col-sm-6 col-xs-6">Bairro
-                                            <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                            <h:inputText class="form-control col-md-6 col-xs-6"/>
-                                        </div>
-                                    </div>                       
-                                </div>
-                            </div> 
-                        
-
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-6 col-sm-6 col-xs-6">Número
-                                        <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h:inputText class="form-control col-md-6 col-xs-6"/>
-                                    </div>
-                                </div>                       
-                            </div>
-                        </div>       
-                        <h3 class="text-center">Seu Grau de Ensino</h3>
-                        
-                        <h3 class="text-center">Suas Habilidades</h3>
-                        
-                        <h3 class="text-center">Suas Experiencias</h3>
-                    </h:form>
+    <h:body>
+        <ui:composition template="../recrutamento/menu_recrutamento.xhtml">
+            <ui:define name="head">
+                <title>Lista de Vagas</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="title_left">
+                    <h3>Cadastro de Currículo</h3>
                 </div>
-                <!-- /page content -->
-            </div>
-        </div>
+                <br />
+                <h:form id="formVaga">                                        
+                    <p:panel>
+                        <div class="bootstrap-iso">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Nome Completo
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                CPF
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Sexo
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Masculino
+                                                </option>
+                                                <option value="2">
+                                                    Feminino
+                                                </option>                                            
+                                            </select>
+                                        </div>     
+                                    </div>          
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Estado Civil
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Solteiro
+                                                </option>
+                                                <option value="2">
+                                                    Casado
+                                                </option>                                            
+                                            </select>
+                                        </div>     
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                RG
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Órgão Emissor
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="number" type="text"/>
+                                        </div>
+                                    </div>    
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Data de Emissão
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="number" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Nome do Pai
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Nome da Mãe
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Data de Nascimento
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="number" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                E-mail
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Telefone
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Celular
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Objetivos Profissionais
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Auto Avaliação
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Pretenção Salarial
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Foto
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                PIS/PASEP
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Certificado de Reservista
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Grau de Ensino
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Masculino
+                                                </option>
+                                                <option value="2">
+                                                    Feminino
+                                                </option>                                            
+                                            </select>
+                                        </div>     
+                                    </div>  
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Grau de Ensino
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Masculino
+                                                </option>
+                                                <option value="2">
+                                                    Feminino
+                                                </option>                                            
+                                            </select>
+                                        </div>     
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Cor
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Masculino
+                                                </option>
+                                                <option value="2">
+                                                    Feminino
+                                                </option>                                            
+                                            </select>
+                                        </div>     
+                                    </div>  
+                                </div>
 
-        <h:outputScript library="vendors/" name="jquery/dist/jquery.min.js" />
-        <h:outputScript library="vendors/" name="bootstrap/dist/js/bootstrap.min.js" />
-        <h:outputScript library="vendors/" name="moment/min/moment.min.js" />
-        <h:outputScript library="vendors/" name="bootstrap-daterangepicker/daterangepicker.js" />
-        <h:outputScript library="vendors/" name="fastclick/lib/fastclick.js" />
-        <h:outputScript library="vendors/" name="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" />
-        <h:outputScript library="vendors/" name="jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js" />
-        <h:outputScript library="build/" name="js/custom.js" />
-        <ui:insert name="script" />
+                                <hr />
+
+                                <div class="row">
+                                    <h3 class="text-center">Sua Localização</h3>   
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Endereço
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>        
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Bairro
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Bairro
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Número
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                </div>
+
+                                <hr />
+
+                                <div class="row">
+                                    <h3 class="text-center">Suas Habilidades</h3>   
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Habilidade
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Habilidade 1
+                                                </option>
+                                                <option value="2">
+                                                    Habilidade 2
+                                                </option>                                            
+                                            </select>
+                                        </div>     
+                                    </div>                            
+                                </div>
+
+                                <div class="row">
+                                    <h:commandButton class="btn btn-success" value=" Adicionar" />                            
+                                </div>
+
+                                <div class="row">
+                                    <h:dataTable class="table table-striped">                                        
+                                        <h:column>
+                                            <f:facet name="header">Código</f:facet>
+
+                                        </h:column>     
+                                        <h:column>
+                                            <f:facet name="header">Habilidade</f:facet>
+
+                                        </h:column>   
+                                        <h:column>
+                                            <f:facet name="header">Opções</f:facet>
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar">
+
+                                            </h:commandLink>
+                                            <h:commandLink class="btn btn-link btn-small" value="Excluir">
+
+                                            </h:commandLink>
+                                        </h:column>                  
+                                    </h:dataTable>
+                                </div>
+
+                                <hr />
+                                <div class="row">
+                                    <h3 class="text-center">Suas Experiencias</h3>   
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Descrição
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>          
+                                </div>
+
+                                <div class="row">
+                                    <h:commandButton class="btn btn-success" value=" Adicionar" />                            
+                                </div>
+
+                                <div class="row">
+                                    <h:dataTable class="table table-striped">                                        
+                                        <h:column>
+                                            <f:facet name="header">Código</f:facet>
+
+                                        </h:column>     
+                                        <h:column>
+                                            <f:facet name="header">Habilidade</f:facet>
+
+                                        </h:column>   
+                                        <h:column>
+                                            <f:facet name="header">Opções</f:facet>
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar">
+
+                                            </h:commandLink>
+                                            <h:commandLink class="btn btn-link btn-small" value="Excluir">
+
+                                            </h:commandLink>
+                                        </h:column>                  
+                                    </h:dataTable>
+                                </div>
+
+                                <hr></hr>
+                                <div class="pull-right">
+                                    <div class="row">
+                                        <h:commandButton class="btn btn-success" value=" salvar" />
+                                        <h:commandButton value="Editar" class="btn btn-default" />
+                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p:panel>
+
+
+
+                </h:form>
+            </ui:define>
+            <ui:define name="script">
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
-
