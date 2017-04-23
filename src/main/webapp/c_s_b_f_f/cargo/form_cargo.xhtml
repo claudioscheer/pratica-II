@@ -18,8 +18,9 @@
                 <div class="bootstrap-iso">
                     <div class="container-fluid">
                         <div class="row">
+                            <h:form>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
+                                
                                     <div class="form-group ">
 
                                         <label class="control-label " for="number">
@@ -29,7 +30,7 @@
                                         <!--<input class="form-control" id="number" name="number" type="text" readonly = "true"/>-->
                                         <h:inputText class="form-control" readonly="true" value="#{cargoBean.cargoCodigo}"/>
                                     </div>
-                                </form>
+                                
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <form method="post">
@@ -39,7 +40,7 @@
                                         </label>
                                         <!--<input class="form-control" id="name0" name="name" type="text"/>-->
 
-                                        <h:inputText class=" form-control"value="#{cargoBean.nome}" />
+                                        <h:inputText class="form-control" />
 
 
                                     </div>
@@ -207,7 +208,9 @@
                                     <h:commandButton value="Cancelar" class="btn btn-danger"/>
                                 </div>
                             </div>
+                        </h:form>
                         </div>
+                        
                     </div>
                 </div>
 
