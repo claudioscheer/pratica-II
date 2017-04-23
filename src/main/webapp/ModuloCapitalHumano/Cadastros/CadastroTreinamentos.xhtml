@@ -64,6 +64,12 @@
                                                                     </span>
                                                                 </label>   
 
+                                                                
+                                                                <h:selectOneMenu value="#{gchTreinamentosBean.ufCodigo}" class="form-control"  >
+                                                                    <f:selectItem itemLabel="Selecione o estado" itemValue="" />
+                                                                    <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
+                                                                </h:selectOneMenu>
+                                                                
                                                                 <h:selectOneMenu value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
                                                                     <f:selectItem itemLabel="Selecione..." itemValue="" />
                                                                     <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipios}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>

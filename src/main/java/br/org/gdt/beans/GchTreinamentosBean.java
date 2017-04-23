@@ -27,6 +27,9 @@ public class GchTreinamentosBean {
     @ManagedProperty("#{gchTreinamentosService}")
     private GchTreinamentosService gchTreinamentosService;
 
+    //Variavel para armazenar temporariamente 
+    private long UfCodigo;
+    
     public GchTreinamentosBean() {
 
     }
@@ -96,5 +99,13 @@ public class GchTreinamentosBean {
     public void setGchTreinamentosService(GchTreinamentosService gchTreinamentosService) {
         this.gchTreinamentosService = gchTreinamentosService;
     }
-        
+
+    public long getUfCodigo() {
+        return UfCodigo;
+    }
+
+    public void setUfCodigo(long UfCodigo) {
+        this.UfCodigo = UfCodigo;
+    }
+     
 }
