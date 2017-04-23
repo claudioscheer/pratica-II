@@ -82,6 +82,7 @@
     <class>br.org.gdt.modelOld.Recselecao_1</class>
     <class>br.org.gdt.model.RecExperiencia</class>
     <class>br.org.gdt.model.RecHabilidade</class>
+    <class>br.org.gdt.dao.GchMunicipiosDAO</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

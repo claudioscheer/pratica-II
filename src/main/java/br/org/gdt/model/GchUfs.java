@@ -37,10 +37,10 @@ public class GchUfs implements Serializable {
     private Long ufCodigo;
     @Basic(optional = false)
     @Column(name = "uf_sigla")
-    private long ufSigla;
+    private String ufSigla;
     @Basic(optional = false)
     @Column(name = "uf_nome")
-    private long ufNome;
+    private String ufNome;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ufCodigo")
     private List<GchMunicipios> gchMunicipiosList;
 
@@ -51,7 +51,7 @@ public class GchUfs implements Serializable {
         this.ufCodigo = ufCodigo;
     }
 
-    public GchUfs(Long ufCodigo, long ufSigla, long ufNome) {
+    public GchUfs(Long ufCodigo, String ufSigla, String ufNome) {
         this.ufCodigo = ufCodigo;
         this.ufSigla = ufSigla;
         this.ufNome = ufNome;
@@ -65,19 +65,19 @@ public class GchUfs implements Serializable {
         this.ufCodigo = ufCodigo;
     }
 
-    public long getUfSigla() {
+    public String getUfSigla() {
         return ufSigla;
     }
 
-    public void setUfSigla(long ufSigla) {
+    public void setUfSigla(String ufSigla) {
         this.ufSigla = ufSigla;
     }
 
-    public long getUfNome() {
+    public String getUfNome() {
         return ufNome;
     }
 
-    public void setUfNome(long ufNome) {
+    public void setUfNome(String ufNome) {
         this.ufNome = ufNome;
     }
 
