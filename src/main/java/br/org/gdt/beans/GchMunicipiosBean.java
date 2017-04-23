@@ -19,11 +19,12 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class GchMunicipiosBean {
+
     private boolean formAtivo = false;
 
     private GchMunicipios gchMunicipios = new GchMunicipios();
     private List<GchMunicipios> todosGchMunicipios;
-    
+
     @ManagedProperty("#{gchMunicipiosService}")
     private GchMunicipiosService gchMunicipiosService;
 
@@ -76,15 +77,21 @@ public class GchMunicipiosBean {
     }
 
     public List<GchMunicipios> getTodosGchMunicipios() {
-        if (todosGchMunicipios == null){
-        
-            todosGchMunicipios = gchMunicipiosService.findAll();
-        
+        if (todosGchMunicipios == null) {
+
+            todosGchMunicipios = gchMunicipiosService.findUfCodigo(43);
+
         }
-        
+
         return todosGchMunicipios;
     }
 
+    public List<GchMunicipios> getMunicipiosEstado(int ufCodigo){
+    
+        return gchMunicipiosService.findUfCodigo(ufCodigo);
+        
+    }
+    
     public void setTodosGchMunicipios(List<GchMunicipios> todosGchMunicipios) {
         this.todosGchMunicipios = todosGchMunicipios;
     }
@@ -96,5 +103,5 @@ public class GchMunicipiosBean {
     public void setGchMunicipiosService(GchMunicipiosService gchMunicipiosService) {
         this.gchMunicipiosService = gchMunicipiosService;
     }
-        
+
 }

@@ -6,6 +6,8 @@
 package br.org.gdt.dao;
 
 import br.org.gdt.model.GchMunicipios;
+import java.util.List;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,6 +22,16 @@ public class GchMunicipiosDAO extends DAO<GchMunicipios>{
         classe = GchMunicipios.class;        
     }
     
+
+    public List<GchMunicipios> findUfCodigo(long ufcodigo){
     
+        
+        Query query = entityManager.createQuery("from GchMunicipios as t where t.ufCodigo.ufCodigo = :codigo");
+        query.setParameter("codigo", ufcodigo);
+        
+        return query.getResultList();
+             
+        
+    }
     
 }
