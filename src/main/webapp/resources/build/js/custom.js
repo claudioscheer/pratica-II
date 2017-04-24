@@ -137,7 +137,7 @@ function init_sidebar() {
     // fixed sidebar
     if ($.fn.mCustomScrollbar) {
         $('.menu_fixed').mCustomScrollbar({
-            autoHideScrollbar: true,
+            autoHideScrollbar: false,
             theme: 'minimal',
             mouseWheel: {preventDefault: true}
         });

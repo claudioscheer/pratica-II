@@ -1,6 +1,6 @@
 package br.org.gdt.model;
 
-import br.org.gdt.enums.TipoValorFaixa;
+import br.org.gdt.enums.FpTipoValorFaixa;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +21,7 @@ public class FpFaixa implements java.io.Serializable {
     private double faiMinimo;
     private double faiMaximo;
     private double faiValor;
-    private TipoValorFaixa faiTipoValor;
+    private FpTipoValorFaixa faiTipoValor;
     private int faiOrdem;
 
     public FpFaixa() {
@@ -74,11 +74,11 @@ public class FpFaixa implements java.io.Serializable {
         this.faiValor = faiValor;
     }
 
-    public TipoValorFaixa getFaiTipoValor() {
+    public FpTipoValorFaixa getFaiTipoValor() {
         return faiTipoValor;
     }
 
-    public void setFaiTipoValor(TipoValorFaixa faiTipoValor) {
+    public void setFaiTipoValor(FpTipoValorFaixa faiTipoValor) {
         this.faiTipoValor = faiTipoValor;
     }
 

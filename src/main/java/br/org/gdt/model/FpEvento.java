@@ -1,5 +1,6 @@
 package br.org.gdt.model;
 
+import br.org.gdt.enums.FpTipoEvento;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class FpEvento implements java.io.Serializable {
     private boolean eveEventoVariavel;
     private String eveNome;
     private String eveFormula;
-    private boolean eveProvento;
+    private FpTipoEvento eveTipoEvento;
     private boolean eveIncideINSS;
     private boolean eveIncideFGTS;
     private boolean eveIncideIR;
@@ -57,12 +58,12 @@ public class FpEvento implements java.io.Serializable {
         this.eveFormula = eveFormula;
     }
 
-    public boolean isEveProvento() {
-        return eveProvento;
+    public FpTipoEvento getEveTipoEvento() {
+        return eveTipoEvento;
     }
 
-    public void setEveProvento(boolean eveProvento) {
-        this.eveProvento = eveProvento;
+    public void setEveTipoEvento(FpTipoEvento eveTipoEvento) {
+        this.eveTipoEvento = eveTipoEvento;
     }
 
     public boolean isEveIncideINSS() {

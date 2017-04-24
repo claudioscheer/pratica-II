@@ -26,7 +26,7 @@
                                 <div class="row form-group">
                                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Descrição<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpTipoFolhaBean.fpTipoFolha.tipoDescricao}" />
+                                        <h:inputText required="true" requiredMessage="Campo Descrição é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpTipoFolhaBean.fpTipoFolha.tipoDescricao}" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -69,7 +69,7 @@
                                         <h:commandButton class="btn btn-success" value="Salvar" action="#{fpTipoFolhaBean.save()}">
                                             <f:ajax execute="@form" render="formTipoFolha" />
                                         </h:commandButton>
-                                        <h:commandButton class="btn btn-default" value="Cancelar" action="#{fpTipoFolhaBean.cancel()}">
+                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpTipoFolhaBean.cancel()}">
                                             <f:ajax execute="@form" render="formTipoFolha" />
                                         </h:commandButton>
                                     </div>
