@@ -31,7 +31,7 @@ public class RecSelecao implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idselecao")
-    private String recIdselecao;
+    private int recIdselecao;
     @Column(name = "rec_descricaoentrevista")
     private String recDescricaoentrevista;
     @Column(name = "rec_aprovado")
@@ -46,15 +46,15 @@ public class RecSelecao implements Serializable {
     public RecSelecao() {
     }
 
-    public RecSelecao(String recIdselecao) {
+    public RecSelecao(int recIdselecao) {
         this.recIdselecao = recIdselecao;
     }
 
-    public String getRecIdselecao() {
+    public int getRecIdselecao() {
         return recIdselecao;
     }
 
-    public void setRecIdselecao(String recIdselecao) {
+    public void setRecIdselecao(int recIdselecao) {
         this.recIdselecao = recIdselecao;
     }
 
@@ -89,27 +89,7 @@ public class RecSelecao implements Serializable {
     public void setRecIdvaga(RecVaga recIdvaga) {
         this.recIdvaga = recIdvaga;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (recIdselecao != null ? recIdselecao.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RecSelecao)) {
-            return false;
-        }
-        RecSelecao other = (RecSelecao) object;
-        if ((this.recIdselecao == null && other.recIdselecao != null) || (this.recIdselecao != null && !this.recIdselecao.equals(other.recIdselecao))) {
-            return false;
-        }
-        return true;
-    }
-
+    
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.RecSelecao[ recIdselecao=" + recIdselecao + " ]";

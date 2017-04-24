@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="../recrutamento/menu_recrutamento.xhtml">
+            <ui:define name="head">
+                <title>Lista de Vagas</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="title_left">
+                    <h3>Vagas Disponíveis</h3>
+                </div>
+                <br />
+                <h:form id="formVaga">                                        
+                    <p:panel>
+
+                        <div class="row">
+                            <h:dataTable class="table table-striped">                                        
+                                <h:column>
+                                    <f:facet name="header">Código</f:facet>
+
+                                </h:column>     
+                                <h:column>
+                                    <f:facet name="header">Habilidade</f:facet>
+
+                                </h:column>   
+                                <h:column>
+                                    <f:facet name="header">Opções</f:facet>
+                                    <h:commandLink class="btn btn-link btn-small" value="Editar">
+
+                                    </h:commandLink>
+                                    <h:commandLink class="btn btn-link btn-small" value="Excluir">
+
+                                    </h:commandLink>
+                                </h:column>                  
+                            </h:dataTable>
+                        </div>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+            <ui:define name="script">
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -42,7 +42,7 @@ public class CsbffCargos implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "cargo_codigo")
-    private BigDecimal cargoCodigo;
+    private long cargoCodigo;
     @Basic(optional = false)
     @Column(name = "cargo_nome")
     private String cargoNome;
@@ -75,22 +75,22 @@ public class CsbffCargos implements Serializable {
     public CsbffCargos() {
     }
 
-    public CsbffCargos(BigDecimal cargoCodigo) {
+    public CsbffCargos(long cargoCodigo) {
         this.cargoCodigo = cargoCodigo;
     }
 
-    public CsbffCargos(BigDecimal cargoCodigo, String cargoNome, BigInteger cargoCbo, Date cargoDataDeCriacao) {
+    public CsbffCargos(long cargoCodigo, String cargoNome, BigInteger cargoCbo, Date cargoDataDeCriacao) {
         this.cargoCodigo = cargoCodigo;
         this.cargoNome = cargoNome;
         this.cargoCbo = cargoCbo;
         this.cargoDataDeCriacao = cargoDataDeCriacao;
     }
 
-    public BigDecimal getCargoCodigo() {
+    public long getCargoCodigo() {
         return cargoCodigo;
     }
 
-    public void setCargoCodigo(BigDecimal cargoCodigo) {
+    public void setCargoCodigo(long cargoCodigo) {
         this.cargoCodigo = cargoCodigo;
     }
 
@@ -188,25 +188,25 @@ public class CsbffCargos implements Serializable {
         this.recPessoaList = recPessoaList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (cargoCodigo != null ? cargoCodigo.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CsbffCargos)) {
-            return false;
-        }
-        CsbffCargos other = (CsbffCargos) object;
-        if ((this.cargoCodigo == null && other.cargoCodigo != null) || (this.cargoCodigo != null && !this.cargoCodigo.equals(other.cargoCodigo))) {
-            return false;
-        }
-        return true;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 0;
+//        hash += (cargoCodigo != null ? cargoCodigo.hashCode() : 0);
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object object) {
+//        // TODO: Warning - this method won't work in the case the id fields are not set
+//        if (!(object instanceof CsbffCargos)) {
+//            return false;
+//        }
+//        CsbffCargos other = (CsbffCargos) object;
+//        if ((this.cargoCodigo == null && other.cargoCodigo != null) || (this.cargoCodigo != null && !this.cargoCodigo.equals(other.cargoCodigo))) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     @Override
     public String toString() {

@@ -39,7 +39,7 @@ public class GchMunicipios implements Serializable {
     private Long munCodigo;
     @Basic(optional = false)
     @Column(name = "mun_descricao")
-    private long munDescricao;
+    private String munDescricao;
     @Column(name = "mun_cep")
     private Integer munCep;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "munCodigo")
@@ -57,7 +57,7 @@ public class GchMunicipios implements Serializable {
         this.munCodigo = munCodigo;
     }
 
-    public GchMunicipios(Long munCodigo, long munDescricao) {
+    public GchMunicipios(Long munCodigo, String munDescricao) {
         this.munCodigo = munCodigo;
         this.munDescricao = munDescricao;
     }
@@ -70,11 +70,11 @@ public class GchMunicipios implements Serializable {
         this.munCodigo = munCodigo;
     }
 
-    public long getMunDescricao() {
+    public String getMunDescricao() {
         return munDescricao;
     }
 
-    public void setMunDescricao(long munDescricao) {
+    public void setMunDescricao(String munDescricao) {
         this.munDescricao = munDescricao;
     }
 

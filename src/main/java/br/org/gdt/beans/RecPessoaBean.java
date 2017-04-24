@@ -9,7 +9,7 @@ import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
-public class PessoaBean {
+public class RecPessoaBean {
     
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoas;
@@ -17,7 +17,7 @@ public class PessoaBean {
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
     
-    public PessoaBean() {
+    public RecPessoaBean() {
     }
     
         public List<RecPessoa> ListarTodas() {

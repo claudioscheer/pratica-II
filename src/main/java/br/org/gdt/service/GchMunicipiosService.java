@@ -9,6 +9,7 @@ import br.org.gdt.dao.GchMunicipiosDAO;
 import br.org.gdt.model.GchMunicipios;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -16,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Diego
  */
 
-
+@Service("gchMunicipiosService")
 public class GchMunicipiosService {
-     @Autowired
+    @Autowired
     private GchMunicipiosDAO gchMunicipiosDAO;
 
     @Transactional
@@ -44,4 +45,8 @@ public class GchMunicipiosService {
         return gchMunicipiosDAO.findAll();
     }
      
+    public List<GchMunicipios> findUfCodigo(int ufCodigo) {
+        return gchMunicipiosDAO.findUfCodigo(ufCodigo);
+    }
+    
 }
