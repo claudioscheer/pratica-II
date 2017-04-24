@@ -45,7 +45,7 @@ public class GchMunicipiosService {
         return gchMunicipiosDAO.findAll();
     }
      
-    public List<GchMunicipios> findUfCodigo(int ufCodigo) {
+    public List<GchMunicipios> findUfCodigo(long ufCodigo) {
         return gchMunicipiosDAO.findUfCodigo(ufCodigo);
     }
     

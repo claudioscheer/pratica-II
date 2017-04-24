@@ -39,7 +39,7 @@
 
                                             <div class="container-fluid">
                                                 <div class="row">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
                                                         <form method="post">
                                                             <div class="form-group">
                                                                 <label class="control-label requiredField" for="txbnomeTreinamento">
@@ -63,19 +63,23 @@
                                                                         *
                                                                     </span>
                                                                 </label>   
-
-                                                                
-                                                                <h:selectOneMenu value="#{gchTreinamentosBean.ufCodigo}" class="form-control"  >
-                                                                    <f:selectItem itemLabel="Selecione o estado" itemValue="" />
-                                                                    <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
-                                                                </h:selectOneMenu>
-                                                                
-                                                                <h:selectOneMenu value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
-                                                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                                                    <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipios}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
-                                                                </h:selectOneMenu>
-
-                                                                <!--<h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>-->
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-horizontal">
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                                        <h:selectOneMenu value="#{gchMunicipiosBean.ufCodigoCombo}" onmouseout="#{gchMunicipiosBean.carregaMunicipios()}" class="form-control"  >
+                                                                            <f:selectItem itemLabel="Selecione o estado" itemValue="" />
+                                                                            <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
+                                                                        </h:selectOneMenu>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                                        <h:selectOneMenu value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
+                                                                            <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                                                            <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
+                                                                        </h:selectOneMenu>
+                                                                    </div>
+                                                                    <!--<h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>-->
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="control-label " for="date">

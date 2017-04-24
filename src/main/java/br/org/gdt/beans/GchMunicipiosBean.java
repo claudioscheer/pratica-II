@@ -10,7 +10,9 @@ import br.org.gdt.service.GchMunicipiosService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  *
@@ -24,9 +26,12 @@ public class GchMunicipiosBean {
 
     private GchMunicipios gchMunicipios = new GchMunicipios();
     private List<GchMunicipios> todosGchMunicipios;
+    private List<GchMunicipios> todosGchMunicipiosUF;
 
     @ManagedProperty("#{gchMunicipiosService}")
     private GchMunicipiosService gchMunicipiosService;
+
+    private long ufCodigoCombo;
 
     public GchMunicipiosBean() {
 
@@ -64,6 +69,23 @@ public class GchMunicipiosBean {
         return "eventos";
     }
 
+//    public void carregaMunicipios(ValueChangeEvent event) {
+    public void carregaMunicipios() {
+
+//        System.out.println("Aqui: " + event.getNewValue() + " - " + event.getOldValue());
+//        
+//        if (event.getNewValue() != event.getOldValue()) {
+//
+////            if (todosGchMunicipiosUF == null && ufCodigo > 0) {
+//            ufCodigoCombo = (long) event.getNewValue();
+        if (ufCodigoCombo > 0) {
+            todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
+        }
+
+//            }
+//        }
+    }
+
     public boolean isFormAtivo() {
         return formAtivo;
     }
@@ -79,19 +101,13 @@ public class GchMunicipiosBean {
     public List<GchMunicipios> getTodosGchMunicipios() {
         if (todosGchMunicipios == null) {
 
-            todosGchMunicipios = gchMunicipiosService.findUfCodigo(43);
+            todosGchMunicipios = gchMunicipiosService.findAll();
 
         }
 
         return todosGchMunicipios;
     }
 
-    public List<GchMunicipios> getMunicipiosEstado(int ufCodigo){
-    
-        return gchMunicipiosService.findUfCodigo(ufCodigo);
-        
-    }
-    
     public void setTodosGchMunicipios(List<GchMunicipios> todosGchMunicipios) {
         this.todosGchMunicipios = todosGchMunicipios;
     }
@@ -102,6 +118,23 @@ public class GchMunicipiosBean {
 
     public void setGchMunicipiosService(GchMunicipiosService gchMunicipiosService) {
         this.gchMunicipiosService = gchMunicipiosService;
+    }
+
+    public List<GchMunicipios> getTodosGchMunicipiosUF() {
+
+        return todosGchMunicipiosUF;
+    }
+
+    public void setTodosGchMunicipiosUF(List<GchMunicipios> todosGchMunicipiosUF) {
+        this.todosGchMunicipiosUF = todosGchMunicipiosUF;
+    }
+
+    public long getUfCodigoCombo() {
+        return ufCodigoCombo;
+    }
+
+    public void setUfCodigoCombo(long ufCodigoCombo) {
+        this.ufCodigoCombo = ufCodigoCombo;
     }
 
 }
