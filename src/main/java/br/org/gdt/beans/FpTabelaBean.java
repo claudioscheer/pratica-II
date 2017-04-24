@@ -3,6 +3,7 @@ package br.org.gdt.beans;
 import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.FpFaixa;
 import br.org.gdt.model.FpTabela;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpTabelaService;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -30,8 +31,7 @@ public class FpTabelaBean {
 
     public void save() {
         if (fpTabela.getTabFaixas().size() <= 0) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhuma faixa inserida.", null));
+            Helper.setMensagemDeErro("Nenhuma faixa inserida.");
             return;
         }
 
@@ -55,7 +55,6 @@ public class FpTabelaBean {
 
     public void removerFaixa(int index) {
         this.fpTabela.getTabFaixas().remove(index);
-        boolean b = new CsbffBeneficios().getBeneficioCodigo().doubleValue() > 0;
     }
 
     public void add() {

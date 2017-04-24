@@ -1,10 +1,16 @@
 package br.org.gdt.resources;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialResponseWriter;
 
 public class Helper {
+
+    public static void setMensagemDeErro(String mensagem) {
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, null));
+    }
 
     // tipos possíveis: success, info, error
     public static void mostrarNotificacao(String titulo, String mensagem, String tipo) {

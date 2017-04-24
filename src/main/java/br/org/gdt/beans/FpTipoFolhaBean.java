@@ -32,6 +32,11 @@ public class FpTipoFolhaBean {
     }
 
     public void save() {
+        if (fpTipoFolha.getTipoEventos().size() <= 0) {
+            Helper.setMensagemDeErro("Nenhum evento relacionado.");
+            return;
+        }
+        
         if (fpTipoFolha.getTipoId() > 0) {
             fpTipoFolhaService.update(fpTipoFolha);
         } else {
