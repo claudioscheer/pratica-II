@@ -1,6 +1,6 @@
 package br.org.gdt.enums;
 
-public enum TipoValorFaixa {
+public enum FpTipoValorFaixa {
 
     Decimal,
     Porcentagem,

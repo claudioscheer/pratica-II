@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.enums.TipoValorFaixa;
+import br.org.gdt.enums.FpTipoEvento;
+import br.org.gdt.enums.FpTipoValorFaixa;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -8,10 +9,15 @@ import javax.faces.bean.ManagedBean;
 @ApplicationScoped
 public class DadosComuns {
 
-    private TipoValorFaixa[] tipoValorFaixas;
+    private FpTipoValorFaixa[] tipoValorFaixas;
+    private FpTipoEvento[] tipoEventos;
 
-    public TipoValorFaixa[] getTipoValorFaixas() {
-        return TipoValorFaixa.values();
+    public FpTipoValorFaixa[] getTipoValorFaixas() {
+        return FpTipoValorFaixa.values();
+    }
+
+    public FpTipoEvento[] getTipoEventos() {
+        return FpTipoEvento.values();
     }
 
 }

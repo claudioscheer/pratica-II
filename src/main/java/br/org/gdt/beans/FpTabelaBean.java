@@ -1,5 +1,6 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.FpFaixa;
 import br.org.gdt.model.FpTabela;
 import br.org.gdt.service.FpTabelaService;
@@ -54,6 +55,7 @@ public class FpTabelaBean {
 
     public void removerFaixa(int index) {
         this.fpTabela.getTabFaixas().remove(index);
+        boolean b = new CsbffBeneficios().getBeneficioCodigo().doubleValue() > 0;
     }
 
     public void add() {

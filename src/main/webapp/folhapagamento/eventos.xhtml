@@ -26,13 +26,21 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveNome}" />
+                                        <h:inputText required="true" requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveNome}" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Fórmula<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveFormula}" />
+                                        <h:inputText required="true" requiredMessage="Campo Fórmula é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveFormula}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo evento<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h:selectOneMenu value="#{fpEventoBean.fpEvento.eveTipoEvento}" class="form-control">
+                                            <f:selectItems value="#{dadosComuns.tipoEventos}" />
+                                        </h:selectOneMenu>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -152,7 +160,7 @@
                                         <h:commandButton class="btn btn-success" value="Salvar" action="#{fpEventoBean.save()}">
                                             <f:ajax execute="@form" render="formEvento" />
                                         </h:commandButton>
-                                        <h:commandButton class="btn btn-default" value="Cancelar" action="#{fpEventoBean.cancel()}">
+                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpEventoBean.cancel()}">
                                             <f:ajax execute="@form" render="formEvento" />
                                         </h:commandButton>
                                     </div>
