@@ -27,10 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-/**
- *
- * @author Diego
- */
+
 @Entity
 @Table(name = "csbff_beneficios")
 @XmlRootElement
