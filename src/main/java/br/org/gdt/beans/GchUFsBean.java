@@ -10,14 +10,14 @@ import br.org.gdt.service.GchUFsService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author Diego
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class GchUFsBean {
         
     private boolean formAtivo = false;

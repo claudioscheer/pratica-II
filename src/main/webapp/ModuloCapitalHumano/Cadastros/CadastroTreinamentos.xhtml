@@ -68,7 +68,7 @@
                                                                 <div class="form-horizontal">
                                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                         <h:selectOneMenu id="comboUF" value="#{gchMunicipiosBean.ufCodigoCombo}" class="form-control" >
-                                                                            <f:ajax execute="comboUF" render=":comboMunicipio" listener="#{gchMunicipiosBean.carregaMunicipios()}" event="change"/>
+                                                                            <f:ajax execute="comboUF" render="otherForms" listener="#{gchMunicipiosBean.carregaMunicipios}" event="change"/>
 
                                                                             <f:selectItem itemLabel="Selecione o estado" itemValue="" />
                                                                             <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
