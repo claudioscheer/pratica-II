@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">    
     <h:head>
         <title>Facelet Title</title>
 
@@ -67,16 +67,22 @@
                                                             <div class="form-group">
                                                                 <div class="form-horizontal">
                                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                        <h:selectOneMenu value="#{gchMunicipiosBean.ufCodigoCombo}" onmouseout="#{gchMunicipiosBean.carregaMunicipios()}" class="form-control"  >
+                                                                        <h:selectOneMenu id="comboUF" value="#{gchMunicipiosBean.ufCodigoCombo}" class="form-control" >
+                                                                            <f:ajax execute="comboUF" render=":comboMunicipio" listener="#{gchMunicipiosBean.carregaMunicipios()}" event="change"/>
+
                                                                             <f:selectItem itemLabel="Selecione o estado" itemValue="" />
                                                                             <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
                                                                         </h:selectOneMenu>
                                                                     </div>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                        <h:selectOneMenu value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
-                                                                            <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                                                            <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
-                                                                        </h:selectOneMenu>
+                                                                        <h:panelGroup id="otherForms">
+                                                                            <h:form>
+                                                                                <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
+                                                                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                                                                    <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
+                                                                                </h:selectOneMenu>
+                                                                            </h:form>
+                                                                        </h:panelGroup>
                                                                     </div>
                                                                     <!--<h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>-->
                                                                 </div>
