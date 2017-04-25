@@ -12,14 +12,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ValueChangeEvent;
 
 /**
  *
  * @author Diego
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class GchMunicipiosBean {
 
     private boolean formAtivo = false;
@@ -69,21 +68,11 @@ public class GchMunicipiosBean {
         return "eventos";
     }
 
-//    public void carregaMunicipios(ValueChangeEvent event) {
     public void carregaMunicipios() {
 
-//        System.out.println("Aqui: " + event.getNewValue() + " - " + event.getOldValue());
-//        
-//        if (event.getNewValue() != event.getOldValue()) {
-//
-////            if (todosGchMunicipiosUF == null && ufCodigo > 0) {
-//            ufCodigoCombo = (long) event.getNewValue();
-        if (ufCodigoCombo > 0) {
-            todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
-        }
+        System.out.println("Codigo: " + ufCodigoCombo);
+        todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
 
-//            }
-//        }
     }
 
     public boolean isFormAtivo() {
@@ -122,6 +111,14 @@ public class GchMunicipiosBean {
 
     public List<GchMunicipios> getTodosGchMunicipiosUF() {
 
+        if (todosGchMunicipiosUF == null) {
+
+            todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
+
+        }
+        
+        System.out.println("Total: " + todosGchMunicipiosUF.size());
+        
         return todosGchMunicipiosUF;
     }
 

@@ -5,7 +5,7 @@ Repositório destinado à Prática Profissional Direcionada II.
 | Cargo  | Nome |
 | ------------- | ------------- |
 | Gerente de projetos  | Larissa Daiane Caneppele Guder  |
-| Gerente de software  | Claudio Roberto Scheer Jr  |
+| Gerente de software  | Claudio Roberto Scheer Jr.  |
 | Analista de sistemas | Alisson Allebrandt |
 | Analista de qualidade | Juliano Fagundes Rossi |
 | Administrador de banco de dados | Diego Schmidt |
@@ -14,21 +14,16 @@ Repositório destinado à Prática Profissional Direcionada II.
 | Redator | Maísa Diane Turra Lena |
 | Programador | João de Oliveira |
 | Programador | Marcos Dollis |
-| Analista | Dimas Henrique Rochemback |
+| Analista | Dimas Henrique Rockenbach |
 
 # PRU!
-
-
-
-
 Sistema Web para gestão de pessoas.
 Desenvolvido na linguagem `Java`, o sistema contará com quatro móodulos:
 
-
-- Cargos, salários e benefícios e ficha funcional
-- Capital humano
-- Treinamento e seleção
-- Folha de pagamento
+- Cargos, salários e benefícios e ficha funcional;
+- Capital humano;
+- Treinamento e seleção;
+- Folha de pagamento.
 
 # Layout
 - <https://colorlib.com/polygon/gentelella/index.html> - [url download](http://www.999webtemplates.com/HAvNV)
