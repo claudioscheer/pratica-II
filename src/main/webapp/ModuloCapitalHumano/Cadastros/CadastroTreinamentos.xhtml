@@ -72,7 +72,7 @@
 
                                                                     <h:selectOneMenu id="comboCursos" value="#{gchTreinamentosBean.gchTreinamentos.curCodigo}" class="form-control" >
                                                                         <f:selectItem itemLabel="Selecione o curso" itemValue="" />
-                                                                        <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
+                                                                        <f:selectItems value="#{gchCursoBean.gchTodosCursos}" var="curso" itemValue="#{curso.curCodigo}" itemLabel="#{curso.curNome}"/>
                                                                     </h:selectOneMenu>
                                                                 </div>
                                                             </div>

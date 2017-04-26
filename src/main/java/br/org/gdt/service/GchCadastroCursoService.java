@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("gchCursoService")
-public class GchCursoService {
+
+
+@Service("gchCadastroCursoService")
+public class GchCadastroCursoService {
+
     @Autowired
     private GchCursoDAO gchCursoDAO;
 
@@ -32,6 +35,7 @@ public class GchCursoService {
     }
 
     public List<GchCursos> findAll() {
+        System.out.println("Aqui estou eu");
         return gchCursoDAO.findAll();
     }
 }

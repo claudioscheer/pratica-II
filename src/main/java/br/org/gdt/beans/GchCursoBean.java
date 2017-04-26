@@ -1,36 +1,41 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.GchCursos;
-import br.org.gdt.service.GchCursoService;
+import br.org.gdt.service.GchCadastroCursoService;
+import java.util.ArrayList;
+
 import java.util.List;
-import javax.faces.bean.ManagedBean;
+import javax.annotation.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
+/**
+ *
+ * @author Diego
+ */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class GchCursoBean {
-
     
     private boolean formAtivo = false;
 
     private GchCursos gchCurso = new GchCursos();
-    private List<GchCursos> gchListaCursos;
-
-    @ManagedProperty("#{gchCursoService}")
-    private GchCursoService gchCursoService;
+    private List<GchCursos> gchTodosCursos;
+    
+    @ManagedProperty("#{gchCadastroCursoService}")   
+    private GchCadastroCursoService gchCursoService;
 
     public GchCursoBean() {
 
     }
-
+    
     public void save() {
         if (gchCurso.getCurCodigo() > 0) {
             gchCursoService.update(gchCurso);
         } else {
             gchCursoService.save(gchCurso);
         }
-        gchListaCursos = gchCursoService.findAll();
+        gchTodosCursos = gchCursoService.findAll();
         this.formAtivo = false;
     }
 
@@ -46,7 +51,7 @@ public class GchCursoBean {
 
     public String excluir(GchCursos gchCurso) {
         gchCursoService.delete(gchCurso.getCurCodigo());
-        gchListaCursos.remove(gchCurso);
+        gchTodosCursos.remove(gchCurso);
         return "eventos";
     }
 
@@ -60,10 +65,6 @@ public class GchCursoBean {
         return formAtivo;
     }
 
-    public void setFormAtivo(boolean formAtivo) {
-        this.formAtivo = formAtivo;
-    }
-
     public GchCursos getGchCurso() {
         return gchCurso;
     }
@@ -72,20 +73,30 @@ public class GchCursoBean {
         this.gchCurso = gchCurso;
     }
 
-    public List<GchCursos> getGchListaCursos() {
-        return gchListaCursos;
+    public List<GchCursos> getGchTodosCursos() {
+        
+        if (gchTodosCursos == null){
+        
+                
+            gchTodosCursos = gchCursoService.findAll();
+      
+        }
+        
+        return gchTodosCursos;
     }
 
-    public void setGchListaCursos(List<GchCursos> gchListaCursos) {
-        this.gchListaCursos = gchListaCursos;
+    public void setGchTodosCursos(List<GchCursos> gchTodosCursos) {
+        this.gchTodosCursos = gchTodosCursos;
     }
 
-    public GchCursoService getGchCursoService() {
+    public GchCadastroCursoService getGchCursoService() {
         return gchCursoService;
     }
 
-    public void setGchCursoService(GchCursoService gchCursoService) {
+    public void setGchCursoService(GchCadastroCursoService gchCursoService) {
         this.gchCursoService = gchCursoService;
     }
 
+    
+    
 }
