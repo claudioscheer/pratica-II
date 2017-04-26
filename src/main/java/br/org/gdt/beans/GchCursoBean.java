@@ -5,7 +5,7 @@ import br.org.gdt.service.GchCadastroCursoService;
 import java.util.ArrayList;
 
 import java.util.List;
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
@@ -14,23 +14,35 @@ import javax.faces.bean.RequestScoped;
  * @author Diego
  */
 @ManagedBean
+
 @RequestScoped
+
 public class GchCursoBean {
-    
+
     private boolean formAtivo = false;
 
     private GchCursos gchCurso = new GchCursos();
     private List<GchCursos> gchTodosCursos;
-    
-    @ManagedProperty("#{gchCadastroCursoService}")   
+
+    @ManagedProperty("#{gchCadastroCursoService}")
     private GchCadastroCursoService gchCursoService;
 
     public GchCursoBean() {
 
     }
-    
+
+    public void test() {
+
+        System.console().writer().print("Oiiiiiiiii");
+
+    }
+
     public void save() {
+
+        System.out.println("Entrouuuu" + gchCurso.getCurNome());
+
         if (gchCurso.getCurCodigo() > 0) {
+
             gchCursoService.update(gchCurso);
         } else {
             gchCursoService.save(gchCurso);
@@ -45,8 +57,11 @@ public class GchCursoBean {
     }
 
     public void add() {
+
         this.formAtivo = true;
         this.gchCurso = new GchCursos();
+
+        save();
     }
 
     public String excluir(GchCursos gchCurso) {
@@ -74,14 +89,13 @@ public class GchCursoBean {
     }
 
     public List<GchCursos> getGchTodosCursos() {
-        
-        if (gchTodosCursos == null){
-        
-                
+
+        if (gchTodosCursos == null) {
+
             gchTodosCursos = gchCursoService.findAll();
-      
+
         }
-        
+
         return gchTodosCursos;
     }
 
@@ -97,6 +111,4 @@ public class GchCursoBean {
         this.gchCursoService = gchCursoService;
     }
 
-    
-    
 }
