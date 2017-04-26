@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
-@Service("servicoCurso")
+@Service("gchCadastroCursoService")
 public class GchCadastroCursoService {
     
     @Autowired
@@ -37,6 +37,7 @@ public class GchCadastroCursoService {
     }
 
     public List<GchCursos> findAll() {
+        System.out.println("Aqui estou eu");
         return gchCursoDAO.findAll();
     }
 }

@@ -18,12 +18,13 @@ Repositório destinado à Prática Profissional Direcionada II.
 
 # PRU!
 Sistema Web para gestão de pessoas.
-Desenvolvido na linguagem `Java`, o sistema contará com quatro móodulos:
+Desenvolvido na linguagem `Java`, o sistema contará com cinco módulos:
 
 - Cargos, salários e benefícios e ficha funcional;
 - Capital humano;
 - Treinamento e seleção;
 - Folha de pagamento.
+- Recrutamento e Seleção
 
 # Layout
 - <https://colorlib.com/polygon/gentelella/index.html> - [url download](http://www.999webtemplates.com/HAvNV)

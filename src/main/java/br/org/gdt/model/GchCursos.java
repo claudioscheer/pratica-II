@@ -51,10 +51,10 @@ public class GchCursos implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "curCodigo")
     private List<GchTreinamentos> gchTreinamentosList;
     @Basic(optional = false)
-    @Column(name = "cur_nomePalestrante")
+    @Column(name = "cur_nome_palestrante")
     private String curNomePalestrante;
      @Basic(optional = false)
-    @Column(name = "cur_EmailPalestrante")
+    @Column(name = "cur_email_palestrante")
     private String curEmailPalestrante;
 
     public GchCursos() {

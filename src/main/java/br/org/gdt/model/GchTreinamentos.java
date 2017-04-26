@@ -50,6 +50,18 @@ public class GchTreinamentos implements Serializable {
     @Column(name = "trei_datainclusao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date treiDatainclusao;
+    
+    @Basic(optional = false)
+    @Column(name = "trei_data_inicio")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date treiDataInicio;
+    
+    @Basic(optional = false)
+    @Column(name = "trei_data_fim")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date treiDataFim;
+    
+    
     @JoinColumn(name = "cur_codigo", referencedColumnName = "cur_codigo")
     @ManyToOne(optional = false)
     private GchCursos curCodigo;
@@ -58,8 +70,7 @@ public class GchTreinamentos implements Serializable {
     private GchMunicipios munCodigo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "treiCodigo")
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treiCodigo")
-    private List<GchDatas> gchDatasList;
+    
 
     public GchTreinamentos() {
     }
@@ -133,16 +144,7 @@ public class GchTreinamentos implements Serializable {
         this.gchTreinamentospessoasList = gchTreinamentospessoasList;
     }
 
-    @XmlTransient
-    @JsonIgnore
-    public List<GchDatas> getGchDatasList() {
-        return gchDatasList;
-    }
-
-    public void setGchDatasList(List<GchDatas> gchDatasList) {
-        this.gchDatasList = gchDatasList;
-    }
-
+   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -167,5 +169,22 @@ public class GchTreinamentos implements Serializable {
     public String toString() {
         return "br.org.gdt.modelNew.GchTreinamentos[ treiCodigo=" + treiCodigo + " ]";
     }
+
+    public Date getTreiDataInicio() {
+        return treiDataInicio;
+    }
+
+    public void setTreiDataInicio(Date treiDataInicio) {
+        this.treiDataInicio = treiDataInicio;
+    }
+
+    public Date getTreiDataFim() {
+        return treiDataFim;
+    }
+
+    public void setTreiDataFim(Date treiDataFim) {
+        this.treiDataFim = treiDataFim;
+    }
+
     
 }
