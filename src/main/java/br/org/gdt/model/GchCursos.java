@@ -50,6 +50,12 @@ public class GchCursos implements Serializable {
     private Date curDatainclusao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "curCodigo")
     private List<GchTreinamentos> gchTreinamentosList;
+    @Basic(optional = false)
+    @Column(name = "cur_nomePalestrante")
+    private String curNomePalestrante;
+     @Basic(optional = false)
+    @Column(name = "cur_EmailPalestrante")
+    private String curEmailPalestrante;
 
     public GchCursos() {
     }
@@ -130,6 +136,22 @@ public class GchCursos implements Serializable {
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.GchCursos[ curCodigo=" + curCodigo + " ]";
+    }
+
+    public String getCurNomePalestrante() {
+        return curNomePalestrante;
+    }
+
+    public void setCurNomePalestrante(String curNomePalestrante) {
+        this.curNomePalestrante = curNomePalestrante;
+    }
+
+    public String getCurEmailPalestrante() {
+        return curEmailPalestrante;
+    }
+
+    public void setCurEmailPalestrante(String curEmailPalestrante) {
+        this.curEmailPalestrante = curEmailPalestrante;
     }
     
 }
