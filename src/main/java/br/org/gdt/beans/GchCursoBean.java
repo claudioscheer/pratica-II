@@ -1,9 +1,10 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.GchCursos;
-import br.org.gdt.service.GchCursoService;
+import br.org.gdt.service.GchCadastroCursoService;
+
 import java.util.List;
-import javax.faces.bean.ManagedBean;
+import javax.annotation.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
@@ -18,9 +19,9 @@ public class GchCursoBean {
     private GchCursos gchCurso = new GchCursos();
     private List<GchCursos> gchListaCursos;
     
-    @ManagedProperty("#{gchCursoService}")
+    @ManagedProperty("#{servicoCurso}")
    
-    private GchCursoService gchCursoService;
+    private GchCadastroCursoService gchCursoService;
 
     public GchCursoBean(){
     
@@ -83,11 +84,11 @@ public class GchCursoBean {
         this.gchListaCursos = gchListaCursos;
     }
 
-    public GchCursoService getCursoService() {
+    public GchCadastroCursoService getCursoService() {
         return gchCursoService;
     }
 
-    public void setCursoService(GchCursoService gchCursoService) {
+    public void setCursoService(GchCadastroCursoService gchCursoService) {
         this.gchCursoService = gchCursoService;
     }
 
