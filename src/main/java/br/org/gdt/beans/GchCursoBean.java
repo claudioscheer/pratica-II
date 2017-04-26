@@ -4,15 +4,13 @@ import br.org.gdt.model.GchCursos;
 import br.org.gdt.service.GchCadastroCursoService;
 
 import java.util.List;
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+
 
 
 
 @ManagedBean
-@SessionScoped
-
 public class GchCursoBean {
      private boolean formAtivo = false;
  
@@ -28,11 +26,21 @@ public class GchCursoBean {
     
     
 }
-    
-    
 
+    public void test(){
+        
+        System.console().writer().print("Oiiiiiiiii");
+        
+    }
+    
+    
   public void save() {
-        if (gchCurso.getCurCodigo() > 0) {
+       
+      
+      
+      System.out.println("Entrouuuu"+gchCurso.getCurNome());
+      
+      if (gchCurso.getCurCodigo() > 0) {
             gchCursoService.update(gchCurso);
         } else {
             gchCursoService.save(gchCurso);
@@ -47,8 +55,13 @@ public class GchCursoBean {
     }
 
     public void add() {
+        
+        
         this.formAtivo = true;
         this.gchCurso = new GchCursos();
+        
+        
+        save();
     }
 
     public String excluir(GchCursos gchCurso) {
@@ -89,6 +102,38 @@ public class GchCursoBean {
     }
 
     public void setCursoService(GchCadastroCursoService gchCursoService) {
+        this.gchCursoService = gchCursoService;
+    }
+
+    public boolean isFormAtivo() {
+        return formAtivo;
+    }
+
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
+    }
+
+    public GchCursos getGchCurso() {
+        return gchCurso;
+    }
+
+    public void setGchCurso(GchCursos gchCurso) {
+        this.gchCurso = gchCurso;
+    }
+
+    public List<GchCursos> getGchListaCursos() {
+        return gchListaCursos;
+    }
+
+    public void setGchListaCursos(List<GchCursos> gchListaCursos) {
+        this.gchListaCursos = gchListaCursos;
+    }
+
+    public GchCadastroCursoService getGchCursoService() {
+        return gchCursoService;
+    }
+
+    public void setGchCursoService(GchCadastroCursoService gchCursoService) {
         this.gchCursoService = gchCursoService;
     }
 

@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("servicoCurso")
 public class GchCadastroCursoService {
-
-
     
     @Autowired
     private GchCursoDAO gchCursoDAO;
@@ -20,6 +18,8 @@ public class GchCadastroCursoService {
     @Transactional
     public void save(GchCursos curso) {
         gchCursoDAO.save(curso);
+        
+        System.out.println("chamou para salvar");
     }
 
     @Transactional
