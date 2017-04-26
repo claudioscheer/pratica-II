@@ -7,30 +7,24 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-
-
 @ManagedBean
 @SessionScoped
-
 public class GchCursoBean {
-     private boolean formAtivo = false;
- 
+
+    
+    private boolean formAtivo = false;
+
     private GchCursos gchCurso = new GchCursos();
     private List<GchCursos> gchListaCursos;
-    
+
     @ManagedProperty("#{gchCursoService}")
-   
     private GchCursoService gchCursoService;
 
-    public GchCursoBean(){
-    
-    
-    
-}
-    
-    
+    public GchCursoBean() {
 
-  public void save() {
+    }
+
+    public void save() {
         if (gchCurso.getCurCodigo() > 0) {
             gchCursoService.update(gchCurso);
         } else {
@@ -61,33 +55,36 @@ public class GchCursoBean {
         this.gchCurso = gchCurso;
         return "eventos";
     }
-    
-    
-    
-    public GchCursos getCurso() {
+
+    public boolean isFormAtivo() {
+        return formAtivo;
+    }
+
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
+    }
+
+    public GchCursos getGchCurso() {
         return gchCurso;
     }
 
-    public void setCurso(GchCursos gchCurso) {
+    public void setGchCurso(GchCursos gchCurso) {
         this.gchCurso = gchCurso;
     }
 
-    public List<GchCursos> getTodosCursos() {
-        if (gchListaCursos == null) {
-            gchListaCursos = gchCursoService.findAll();
-        }
+    public List<GchCursos> getGchListaCursos() {
         return gchListaCursos;
     }
 
-    public void setTodosCursos(List<GchCursos> gchListaCursos) {
+    public void setGchListaCursos(List<GchCursos> gchListaCursos) {
         this.gchListaCursos = gchListaCursos;
     }
 
-    public GchCursoService getCursoService() {
+    public GchCursoService getGchCursoService() {
         return gchCursoService;
     }
 
-    public void setCursoService(GchCursoService gchCursoService) {
+    public void setGchCursoService(GchCursoService gchCursoService) {
         this.gchCursoService = gchCursoService;
     }
 

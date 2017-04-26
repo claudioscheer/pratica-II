@@ -9,13 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("gchCursoService")
 public class GchCursoService {
-
-    
-    public GchCursoService(){
-        
-        
-    }
-    
     @Autowired
     private GchCursoDAO gchCursoDAO;
 

@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">    
     <h:head>
-        <title>Facelet Title</title>
+        <title>Cadastro de treinamento</title>
 
         <h:outputScript library="primefaces" name="jquery/jquery.js"/>
 
@@ -40,31 +40,53 @@
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <form method="post">
+                                                        <!--<form method="post">-->
                                                             <div class="form-group">
-                                                                <label class="control-label requiredField" for="txbnomeTreinamento">
-                                                                    Nome do Treinamento
-                                                                    <span class="asteriskField">
+                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                    <label class="control-label requiredField" for="txbnomeTreinamento">
+                                                                        Nome do Treinamento
+                                                                        <span class="asteriskField">
                                                                         *
-                                                                    </span>
-                                                                </label>                                                           
-                                                                <h:inputText class="form-control" id="txbnomeTreinamento" a:placeholder="Adicione um nome para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiNome}"/>
+                                                                        </span>
+                                                                    </label>                                                           
+                                                                    
+                                                                </div>
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                                                                            
+                                                                    <h:inputText class="form-control" id="treiNome" a:placeholder="Adicione um nome para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiNome}"/>
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="control-label requiredField" for="txbnomeTreinamento">
-                                                                    Descrição                                                                    
-                                                                </label>                                                           
-                                                                <h:inputText class="form-control" id="txbDescricaoTreinamento" a:placeholder="Adicione uma descrição para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiDescricao}"/>
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                    <label class="control-label requiredField" for="txbTreiDescricao">
+                                                                        Descrição                                                                    
+                                                                    </label>                                                           
+                                                                    <h:inputText class="form-control" id="txbDescricaoTreinamento" a:placeholder="Adicione uma descrição para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiDescricao}"/>
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="control-label requiredField" for="txbLocalTreinamento">
-                                                                    Local do Treinamento
-                                                                    <span class="asteriskField">
-                                                                        *
-                                                                    </span>
-                                                                </label>   
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                    <label class="control-label requiredField" for="txbCurCodigo">
+                                                                        Curso 
+                                                                    </label>                                                           
+
+                                                                    <h:selectOneMenu id="comboCursos" value="#{gchTreinamentosBean.gchTreinamentos.curCodigo}" class="form-control" >
+                                                                        <f:selectItem itemLabel="Selecione o curso" itemValue="" />
+                                                                        <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
+                                                                    </h:selectOneMenu>
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                                    <label class="control-label requiredField" for="txbLocalTreinamento">
+                                                                        Local do Treinamento
+                                                                        <span class="asteriskField">
+                                                                            *
+                                                                        </span>
+                                                                    </label>   
+                                                                </div>
+<!--                                                            </div>
+                                                            <div class="form-group">-->
                                                                 <div class="form-horizontal">
                                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                         <h:selectOneMenu id="comboUF" value="#{gchMunicipiosBean.ufCodigoCombo}" class="form-control" >
@@ -88,22 +110,34 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="control-label " for="date">
-                                                                    Data do Treinamento
-                                                                </label>
-                                                                <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
-                                                                <h:inputText class="form-control" id="date" a:placeholder="DD/MM/YYYY" />
-                                                            </div>                                                       
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                    <label class="control-label " for="date">
+                                                                        Data de início
+                                                                    </label>
+                                                                    <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
+                                                                    <h:inputText class="form-control" id="dateInicio" a:placeholder="DD/MM/YYYY" value="#{gchTreinamentosBean.gchTreinamentos.treiDataInicio}"/>
+                                                                </div>
+                                                            </div>         
 
                                                             <div class="form-group">
-                                                                <div>
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                <label class="control-label " for="date">
+                                                                    Data de fim
+                                                                </label>
+                                                                <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
+                                                                <h:inputText class="form-control" id="dateFim" a:placeholder="DD/MM/YYYY" value="#{gchTreinamentosBean.gchTreinamentos.treiDataFim}"/>
+                                                                </div>
+                                                            </div>       
+
+                                                            <div class="form-group">
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                                                     <!--                                                                <button class="btn btn-primary " name="submit" type="submit">
                                                                                                                                         Cadastrar
                                                                                                                                     </button>-->
-                                                                    <h:commandButton class="btn btn-primary" value="Cadastrar" action="#{gchTreinamentosBean.add()}"/>
+                                                                    <h:commandButton class="btn btn-primary" value="Cadastrar" action="#{gchTreinamentosBean.save()}" label="Cadastrar"/>
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        <!--</form>-->
                                                     </div>
                                                 </div>
                                             </div>

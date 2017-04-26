@@ -7,9 +7,12 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.service.GchTreinamentosService;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -22,7 +25,7 @@ public class GchTreinamentosBean {
     private boolean formAtivo = false;
 
     private GchTreinamentos gchTreinamentos = new GchTreinamentos();
-    private List<GchTreinamentos> todosGchTreinamentos;
+    private List<GchTreinamentos> todosGchTreinamentos = new ArrayList<>();
     
     @ManagedProperty("#{gchTreinamentosService}")
     private GchTreinamentosService gchTreinamentosService;
@@ -32,10 +35,18 @@ public class GchTreinamentosBean {
     }
 
     public void save() {
+        System.out.println(gchTreinamentos.getTreiNome());
+        System.out.println(gchTreinamentos.getTreiDescricao());
+        System.out.println(gchTreinamentos.getCurCodigo());
+        System.out.println(gchTreinamentos.getTreiCodigo());
+        System.out.println(gchTreinamentos.getTreiDataInicio());
+        System.out.println(gchTreinamentos.getTreiDataFim());
+        
         if (gchTreinamentos.getTreiCodigo() > 0) {
             gchTreinamentosService.update(gchTreinamentos);
         } else {
-            gchTreinamentosService.save(gchTreinamentos);
+            gchTreinamentos.setTreiDatainclusao(new Date());
+            gchTreinamentosService.save(gchTreinamentos);            
         }
         todosGchTreinamentos = gchTreinamentosService.findAll();
         this.formAtivo = false;
@@ -76,8 +87,15 @@ public class GchTreinamentosBean {
     }
 
     public List<GchTreinamentos> getTodosGchTreinamentos() {
-        if (todosGchTreinamentos == null){
         
+        System.out.println("Aqui");
+        
+        if (todosGchTreinamentos == null){
+            
+            System.out.println("Aqui tambem");
+            
+            todosGchTreinamentos = new ArrayList<>();
+            
             todosGchTreinamentos = gchTreinamentosService.findAll();
         
         }
