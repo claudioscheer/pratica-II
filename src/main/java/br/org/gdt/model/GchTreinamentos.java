@@ -118,6 +118,22 @@ public class GchTreinamentos implements Serializable {
         this.treiDatainclusao = treiDatainclusao;
     }
 
+    public Date getTreiDataInicio() {
+        return treiDataInicio;
+    }
+
+    public void setTreiDataInicio(Date treiDataInicio) {
+        this.treiDataInicio = treiDataInicio;
+    }
+
+    public Date getTreiDataFim() {
+        return treiDataFim;
+    }
+
+    public void setTreiDataFim(Date treiDataFim) {
+        this.treiDataFim = treiDataFim;
+    }
+
     public GchCursos getCurCodigo() {
         return curCodigo;
     }
@@ -134,6 +150,9 @@ public class GchTreinamentos implements Serializable {
         this.munCodigo = munCodigo;
     }
 
+    
+    
+    
     @XmlTransient
     @JsonIgnore
     public List<GchTreinamentospessoas> getGchTreinamentospessoasList() {
@@ -170,21 +189,6 @@ public class GchTreinamentos implements Serializable {
         return "br.org.gdt.modelNew.GchTreinamentos[ treiCodigo=" + treiCodigo + " ]";
     }
 
-    public Date getTreiDataInicio() {
-        return treiDataInicio;
-    }
-
-    public void setTreiDataInicio(Date treiDataInicio) {
-        this.treiDataInicio = treiDataInicio;
-    }
-
-    public Date getTreiDataFim() {
-        return treiDataFim;
-    }
-
-    public void setTreiDataFim(Date treiDataFim) {
-        this.treiDataFim = treiDataFim;
-    }
 
     
 }
