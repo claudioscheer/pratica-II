@@ -11,7 +11,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -70,6 +69,8 @@ public class GchMunicipiosBean {
 
     public void carregaMunicipios() {
 
+//        ufCodigoCombo = (long)evento.getNewValue();
+        
         System.out.println("Codigo: " + ufCodigoCombo);
         todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
 
@@ -110,15 +111,7 @@ public class GchMunicipiosBean {
     }
 
     public List<GchMunicipios> getTodosGchMunicipiosUF() {
-
-        if (todosGchMunicipiosUF == null) {
-
-            todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
-
-        }
-        
-        System.out.println("Total: " + todosGchMunicipiosUF.size());
-        
+  
         return todosGchMunicipiosUF;
     }
 

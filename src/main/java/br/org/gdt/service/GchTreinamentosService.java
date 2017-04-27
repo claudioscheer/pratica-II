@@ -9,12 +9,14 @@ import br.org.gdt.dao.GchTreinamentoDAO;
 import br.org.gdt.model.GchTreinamentos;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Diego
  */
+@Service("gchTreinamentosService")
 public class GchTreinamentosService {
    @Autowired
     private GchTreinamentoDAO gchTreinamentoDAO;

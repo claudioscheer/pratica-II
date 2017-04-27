@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de Plano de Carreira</title>
+         
+     
+    </h:head>
+    <h:body>
+    
+         <ui:composition template="../../templates/template.xhtml">
+            <ui:define name="content">
+                   <style>
+            .AjusteWizard{     
+               display:flex;
+                padding:5px;
+   
+            }
+            
+            .AjusteWizard li{
+                margin-right: 50px;
+            }
+            </style>
+            
+            
+        <div id="rootwizard">
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <div class="container">
+	<ul class="AjusteWizard">
+	  	<li><a href="#tab1" data-toggle="tab">Informações Iniciais</a></li>
+		<li><a href="#tab2" data-toggle="tab">Graus de Conhecimento</a></li>
+		<li><a href="#tab3" data-toggle="tab">Treinamento e Capacitação</a></li>
+		<li><a href="#tab4" data-toggle="tab">Comprometimento</a></li>
+		<li><a href="#tab5" data-toggle="tab">Metas</a></li>
+		<li><a href="#tab6" data-toggle="tab">Tempo de Empresa</a></li>
+		<li><a href="#tab7" data-toggle="tab">Remuneração</a></li>
+	</ul>
+	 </div>
+	  </div>
+	</div>
+	<div class="tab-content">
+	    <div class="tab-pane" id="tab1">
+	      
+                <div class="panel-body" style="/* align-items: center; */">
+
+                                        <form>
+                                                <div class="form-horizontal form-label-left">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                                <div class="form-group">
+                                                                    <label class="control-label requiredField" for="name">
+                                                                        Nome do Plano de Carreira
+                                                                        <span class="asteriskField">
+                                                                            *
+                                                                        </span>
+                                                                    </label>
+                                                                    <h:inputText class="form-control" id="name" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label requiredField" for="txbNomePalestrante">
+                                                                        Cargo Referente
+                                                                        <span class="asteriskField">
+                                                                            *
+                                                                        </span>
+                                                                    </label>
+                                                                    <h:selectOneMenu id="txbCarreiraPessoa"  class="form-control" >
+                                                                            <f:selectItem itemLabel="Selecione o cargo referente ao novo plano" itemValue="" />
+                                                                            
+                                                                        </h:selectOneMenu>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label " for="">
+                                                                        Nível do Plano
+                                                                    </label>
+                                                                    <h:inputText class="form-control" id="txbNivel"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label " for="txbDescCurso">
+                                                                        Descrição
+                                                                    </label>
+                                                                    <h:inputTextarea class="form-control" cols="40" id="txbDescCurso" a:placeholder="Informe alguns detalhes sobre o curso em questão" rows="10" value="#{gchCursoBean.curso.curDescricao}"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <h:commandButton class="btn btn-primary "  value="Cadastrar"/>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                    </div>
+                
+                
+	    </div>
+	    <div class="tab-pane" id="tab2">
+	      2
+	    </div>
+		<div class="tab-pane" id="tab3">
+			3
+	    </div>
+		<div class="tab-pane" id="tab4">
+			4
+	    </div>
+		<div class="tab-pane" id="tab5">
+			5
+	    </div>
+		<div class="tab-pane" id="tab6">
+			6
+	    </div>
+		<div class="tab-pane" id="tab7">
+			7
+	    </div>
+		<ul class="pager wizard">
+			<li class="previous first" style="display:none;"><a href="#">Primeiro</a></li>
+			<li class="previous"><a href="#">Anterior</a></li>
+			<li class="next last" style="display:none;"><a href="#">Último</a></li>
+		  	<li class="next"><a href="#">Próximo</a></li>
+		</ul>
+	</div>
+</div>     </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
