@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 public class FpEventoVariavelBean {
 
     private boolean formAtivo = false;
+    private String codigoFuncionario = "";
 
     private FpEventoVariavel fpEventoVariavel = new FpEventoVariavel();
     private List<FpEventoVariavel> todosFpEventoVariavel;
@@ -38,7 +39,7 @@ public class FpEventoVariavelBean {
         this.fpEventoVariavel = new FpEventoVariavel();
     }
 
-    public void add() {
+    public void buscarEventos() {
         this.formAtivo = true;
         this.fpEventoVariavel = new FpEventoVariavel();
     }
@@ -61,6 +62,14 @@ public class FpEventoVariavelBean {
 
     public void setFormAtivo(boolean formAtivo) {
         this.formAtivo = formAtivo;
+    }
+
+    public String getCodigoFuncionario() {
+        return codigoFuncionario;
+    }
+
+    public void setCodigoFuncionario(String codigoFuncionario) {
+        this.codigoFuncionario = codigoFuncionario;
     }
 
     public FpEventoVariavel getFpEventoVariavel() {

@@ -10,4 +10,8 @@ public class FpPeriodoDAO extends DAO<FpPeriodo> {
         classe = FpPeriodo.class;
     }
 
+    public boolean temPeriodoAtivo() {
+        return entityManager.createQuery("from " + classe.getName() + " as t where t.perAtivo = true").getResultList().size() > 0;
+    }
+
 }
