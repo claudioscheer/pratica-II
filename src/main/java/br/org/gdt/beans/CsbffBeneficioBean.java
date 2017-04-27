@@ -36,4 +36,41 @@ private boolean formAtivo = false;
         this.formAtivo = false;
         this.csbffBeneficios = new CsbffBeneficios();
     }
+    public void add() {
+        this.formAtivo = true;
+        this.csbffBeneficios = new CsbffBeneficios();
+    }
+
+    public boolean isFormAtivo() {
+        return formAtivo;
+    }
+
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
+    }
+
+    public CsbffBeneficios getCsbffBeneficios() {
+        return csbffBeneficios;
+    }
+
+    public void setCsbffBeneficios(CsbffBeneficios csbffBeneficios) {
+        this.csbffBeneficios = csbffBeneficios;
+    }
+
+    public List<CsbffBeneficios> getTodosCsbffBeneficios() {
+        return todosCsbffBeneficios;
+    }
+
+    public void setTodosCsbffBeneficios(List<CsbffBeneficios> todosCsbffBeneficios) {
+        this.todosCsbffBeneficios = todosCsbffBeneficios;
+    }
+
+    public CsbffBeneficiosService getCsbffBeneficiosService() {
+        return csbffBeneficiosService;
+    }
+
+    public void setCsbffBeneficiosService(CsbffBeneficiosService csbffBeneficiosService) {
+        this.csbffBeneficiosService = csbffBeneficiosService;
+    }
+    
 }
