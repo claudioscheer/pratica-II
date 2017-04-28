@@ -76,7 +76,7 @@ public class FpPeriodoBean {
     }
 
     public String desativar(FpPeriodo fpPeriodo) {
-        fpPeriodo.setPerAtivo(false);
+        fpPeriodo.setPerAtivo(!fpPeriodo.isPerAtivo());
         fpPeriodoService.update(fpPeriodo);
         return "periodos";
     }
