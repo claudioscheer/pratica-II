@@ -10,26 +10,24 @@
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
+                <div class="title_left">
+                    <h3>Benefícios</h3>
+                </div>
                 <h:form id="formBeneficio">
                     <h:messages class="error" style="color: #d9534f" />
-
-                    <div class="title_left">
-                        <h3>Benefícios</h3>
-                    </div>
                     <div class="bootstrap-iso">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+<!--                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group ">
-
-                                        <!--<label class="control-label " for="number">
+                                        <label class="control-label " for="number">
                                                    Código
-                                        </label>-->
+                                        </label>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Código</label>
-                                        <h:inputText class="form-control col-md-7 col-xs-12" value="" />
-                                        <!--<h:inputText class="form-control" readonly="true" value="#"/>-->
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{csbffBeneficioBean.csbffBeneficios.beneficioCodigo}" />
+                                        <h:inputText class="form-control" readonly="true" value="#"/>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group ">
                                         <!--<label class="control-label " for="name">
@@ -60,12 +58,12 @@
                                                 </option>
                                             </select>-->
                                         
-                                        <h:selectOneMenu value="" class="form-control col-md-7 col-xs-12">
+                                        <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control col-md-7 col-xs-12">
                                             <f:selectItem itemValue="1" itemLabel="Selecione" />
                                             <f:selectItem itemValue="2" itemLabel="Individual" />
                                             <f:selectItem itemValue="3" itemLabel="Coletivo" />
                                         </h:selectOneMenu>
-                                        
+
                                     </div>
                                 </div>
                                 <!--drop de seleção bootstreap-->
@@ -95,7 +93,7 @@
                                                                                         Saúde
                                                                                     </option>
                                                                                 </select>-->
-                                        <h:selectOneMenu value="" class="form-control col-md-7 col-xs-12">
+                                        <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.tipoBeneficioCodigo}" class="form-control col-md-7 col-xs-12">
                                             <f:selectItem itemValue="1" itemLabel="Selecione" />
                                             <f:selectItem itemValue="2" itemLabel="Alimentação" />
                                             <f:selectItem itemValue="3" itemLabel="Transporte" />
@@ -148,7 +146,7 @@
                                                                                 </label>-->
                                         <label class="control-label col-md-3 col-sm-12 col-xs-12">Descrição<span class="required">*</span></label>
                                         <!--      <textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
-                                        <h:inputTextarea required="true" requiredMessage="Campo Descrição é obrigatório." class="form-control" cols="10" rows="5" value="#{csbffBeneficioBean.csbffBeneficios.beneficioDescricao}" />
+                                        <h:inputTextarea required="true" requiredMessage="Campo Descrição é obrigatório." class="form-control" cols="10" rows="10" value="#{csbffBeneficioBean.csbffBeneficios.beneficioDescricao}" />
 
                                     </div>
                                     <div class="ln_solid"></div>
