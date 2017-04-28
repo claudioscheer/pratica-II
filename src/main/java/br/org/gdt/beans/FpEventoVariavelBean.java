@@ -12,7 +12,7 @@ import javax.faces.bean.SessionScoped;
 public class FpEventoVariavelBean {
 
     private boolean formAtivo = false;
-    private String codigoFuncionario = "";
+    private long codigoFuncionario = 0;
 
     private FpEventoVariavel fpEventoVariavel = new FpEventoVariavel();
     private List<FpEventoVariavel> todosFpEventoVariavel;
@@ -64,11 +64,11 @@ public class FpEventoVariavelBean {
         this.formAtivo = formAtivo;
     }
 
-    public String getCodigoFuncionario() {
+    public long getCodigoFuncionario() {
         return codigoFuncionario;
     }
 
-    public void setCodigoFuncionario(String codigoFuncionario) {
+    public void setCodigoFuncionario(long codigoFuncionario) {
         this.codigoFuncionario = codigoFuncionario;
     }
 
