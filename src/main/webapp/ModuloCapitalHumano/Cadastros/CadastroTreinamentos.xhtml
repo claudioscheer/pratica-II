@@ -8,7 +8,7 @@
     <h:head>
         <title>Cadastro de treinamento</title>
 
-<!--        <h:outputScript library="primefaces" name="jquery/jquery.js"/>-->
+        <!--        <h:outputScript library="primefaces" name="jquery/jquery.js"/>-->
 
 
     </h:head>
@@ -37,7 +37,7 @@
                                         <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
 
                                         <h:form id="CadastroTreinamento">
-
+                                            <h:messages class="error" style="color: #d9534f" />
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -98,12 +98,12 @@
                                                                 </div>
                                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                     <!--<h:panelGroup id="otherForms">-->
-                                                                        <!--<h:form>-->
-                                                                            <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
-                                                                                <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                                                                <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
-                                                                            </h:selectOneMenu>
-                                                                        <!--</h:form>-->
+                                                                    <!--<h:form>-->
+                                                                    <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
+                                                                        <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                                                        <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
+                                                                    </h:selectOneMenu>
+                                                                    <!--</h:form>-->
                                                                     <!--</h:panelGroup>-->
                                                                 </div>
                                                                 <!--<h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>-->
@@ -137,7 +137,7 @@
 
                                                                 <h:commandButton class="btn btn-primary" action="#{gchTreinamentosBean.save()}" value="Cadastrar" />
 
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <!--</form>-->
