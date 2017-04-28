@@ -11,6 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -57,32 +59,22 @@ public class GchCursoBean {
     public void save() {
 
         gchCurso.setCurDatainclusao(new Date());
-//        gchCurso.setCurCodigo(Long.parseLong("0"));
-        System.out.println("Entrou no metodo salvar");
-        
-        
+
         if (gchCurso.getCurCodigo() > 0) {
 
             gchCursoService.update(gchCurso);
-            
-            
-            
+                
         } else {
-            
-            if(gchCurso == null){
-                
-                System.out.println("Tá nulllllllll");
-                
-            }else{
-                
-                
-                System.out.println("Nao ta nullllll");
-            }
             
             gchCursoService.save(gchCurso);
         }
+        
+     FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Cursos.xhtml");
+        
+        
+        
 //        gchTodosCursos = gchCursoService.findAll();
-        this.formAtivo = false;
+//        this.formAtivo = false;
     }
 
     public void cancel() {
@@ -100,7 +92,7 @@ public class GchCursoBean {
     public String excluir(GchCursos gchCurso) {
         gchCursoService.delete(gchCurso.getCurCodigo());
         gchTodosCursos.remove(gchCurso);
-        return "eventos";
+        return "Cursos.xhtml";
     }
 
     public String prepareEdit(GchCursos gchCurso) {
