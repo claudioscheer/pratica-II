@@ -146,7 +146,7 @@
                                             <f:facet name="header">Opções</f:facet>
                                             <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpPeriodoBean.prepareEdit(periodo)}">
                                             </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Desativar" action="#{fpPeriodoBean.desativar(periodo)}" onclick="return confirm('Desativar periodo?')">
+                                            <h:commandLink class="btn btn-link btn-small" value="Ativar/Desativar" action="#{fpPeriodoBean.desativar(periodo)}" onclick="return confirm('Ativar/Desativar periodo?')">
                                                 <f:ajax execute="@form" render="formPeriodo" />
                                             </h:commandLink>
                                         </h:column>                  

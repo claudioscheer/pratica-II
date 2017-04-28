@@ -5,7 +5,7 @@
  */
 package br.org.gdt.model;
 
-import java.io.Serializable;
+import br.org.gdt.enums.Sexo;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +38,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
-public class RecPessoa implements Serializable {
+public class RecPessoa implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,7 +50,7 @@ public class RecPessoa implements Serializable {
     @Column(name = "rec_cpf")
     private String recCpf;
     @Column(name = "rec_sexo")
-    private Integer recSexo;
+    private Sexo recSexo;
     @Column(name = "rec_estadocivil")
     private Integer recEstadocivil;
     @Column(name = "rec_rg")
@@ -145,7 +145,7 @@ public class RecPessoa implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private CsbffPessoaDependente csbffPessoaDependente;
     @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private CsbffCargos cargoCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
     @ManyToOne(optional = false)
@@ -168,6 +168,10 @@ public class RecPessoa implements Serializable {
     public RecPessoa(Integer recIdpessoa, int recInsalubridade) {
         this.recIdpessoa = recIdpessoa;
         this.recInsalubridade = recInsalubridade;
+    }
+
+    public RecPessoa(String recNomecompleto) {
+        this.recNomecompleto = recNomecompleto;
     }
 
     public Integer getRecIdpessoa() {
@@ -194,11 +198,11 @@ public class RecPessoa implements Serializable {
         this.recCpf = recCpf;
     }
 
-    public Integer getRecSexo() {
+    public Sexo getRecSexo() {
         return recSexo;
     }
 
-    public void setRecSexo(Integer recSexo) {
+    public void setRecSexo(Sexo recSexo) {
         this.recSexo = recSexo;
     }
 

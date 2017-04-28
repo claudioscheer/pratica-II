@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,6 +22,7 @@ public class FpHorasTrabalhadas implements java.io.Serializable {
     private double horHoras50;
     private double horHoras100;
     private double horHorasNoturnas;
+    private FpPeriodo horFpPeriodo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_horas_trabalhadas")
@@ -77,6 +80,23 @@ public class FpHorasTrabalhadas implements java.io.Serializable {
 
     public void setHorHorasNoturnas(double horHorasNoturnas) {
         this.horHorasNoturnas = horHorasNoturnas;
+    }
+
+    public double getHorHorasFaltas() {
+        return horHorasFaltas;
+    }
+
+    public void setHorHorasFaltas(double horHorasFaltas) {
+        this.horHorasFaltas = horHorasFaltas;
+    }
+
+    @ManyToOne
+    public FpPeriodo getHorFpPeriodo() {
+        return horFpPeriodo;
+    }
+
+    public void setHorFpPeriodo(FpPeriodo horFpPeriodo) {
+        this.horFpPeriodo = horFpPeriodo;
     }
 
 }

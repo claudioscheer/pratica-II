@@ -47,7 +47,7 @@
                     <h:panelGroup layout="block" rendered="#{!fpEventoVariavelBean.formAtivo}">
                         <div class="row">
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <h:inputText required="true" a:placeholder="Pessoa" requiredMessage="Campo Pessoa é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoVariavelBean.codigoFuncionario}" />
+                                <h:inputText label="Pessoa" required="true" a:placeholder="Pessoa" requiredMessage="Campo Pessoa é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoVariavelBean.codigoFuncionario}" />
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
                                 <h:commandButton class="btn btn-primary" value="Buscar eventos" action="#{fpEventoVariavelBean.buscarEventos()}">

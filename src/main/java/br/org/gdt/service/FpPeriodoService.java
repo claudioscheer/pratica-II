@@ -35,8 +35,12 @@ public class FpPeriodoService {
     public List<FpPeriodo> findAll() {
         return fpPeriodoDAO.findAll();
     }
-    
-    public boolean temPeriodoAtivo(){
-        return fpPeriodoDAO.temPeriodoAtivo();
+
+    public FpPeriodo getPeriodoAtivo() {
+        return fpPeriodoDAO.getPeriodoAtivo();
+    }
+
+    public boolean temPeriodoAtivo() {
+        return fpPeriodoDAO.getPeriodoAtivo() != null;
     }
 }
