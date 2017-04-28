@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import br.org.gdt.enums.Sexo;
 import java.math.BigInteger;
 import java.util.Date;
@@ -38,7 +39,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
-public class RecPessoa implements java.io.Serializable {
+public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -629,6 +630,11 @@ public class RecPessoa implements java.io.Serializable {
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.RecPessoa[ recIdpessoa=" + recIdpessoa + " ]";
+    }
+
+    @Override
+    public Long getId() {
+        return Long.valueOf(recIdpessoa);
     }
 
 }

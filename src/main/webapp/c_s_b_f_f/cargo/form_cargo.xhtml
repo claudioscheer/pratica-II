@@ -68,9 +68,9 @@
                                         Superior Responsável 
                                     </label>                                                           
 
-                                    <h:selectOneMenu id="comboResponsaveis" value="#{cargosBean.csbffcargos.cargoCodigoSuperior}" class="form-control" >
-                                        <f:selectItem itemLabel="Selecione o responsável" itemValue="0" />
-                                        <f:selectItems value="#{cargosBean.csbffcargos.recPessoaList}" var="pessoa" itemValue="#{pessoa.recIdpessoa}" itemLabel="#{pessoa.recNomecompleto}"/>
+                                    <h:selectOneMenu id="comboResponsaveis" value="#{cargosBean.recPessoa}" converter="#{generic}" class="form-control" >
+                                        <f:selectItem itemLabel="Selecione o responsável" itemValue="#{null}" />
+                                        <f:selectItems value="#{recPessoaBean.recPessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.recNomecompleto}"/>
                                     </h:selectOneMenu>
                                 </div>
 
