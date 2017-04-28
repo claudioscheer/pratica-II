@@ -6,7 +6,6 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -14,12 +13,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,6 +34,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author Diego
  */
 @Entity
+@SequenceGenerator(name = "seq_csbff_cargo", sequenceName = "seq_csbff_cargo", allocationSize = 1)
 @Table(name = "csbff_cargos")
 @XmlRootElement
 @NamedQueries({
@@ -39,7 +42,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 public class CsbffCargos implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
+   @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_csbff_cargo")
     @Basic(optional = false)
     @Column(name = "cargo_codigo")
     private long cargoCodigo;

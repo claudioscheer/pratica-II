@@ -7,11 +7,14 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.service.CsbffCargosService;
-import br.org.gdt.service.FpHorasTrabalhadasService;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+
+
 
 /**
  *
@@ -30,9 +33,18 @@ public class cargosBean {
     private CsbffCargosService csbffCargosService;
 
     public cargosBean() {
+        
+        
     }
 
+    
+    
     public void save() {
+        
+        System.out.println("teste teste");
+        csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+        csbffcargos.setCargoDataDeCriacao(new Date());
+        csbffcargos.setCargoDataUltimaAlteracao(new Date());
         csbffCargosService.save(csbffcargos);
 
     }
@@ -98,4 +110,39 @@ public class cargosBean {
 //    public void setFormAtivo(boolean formAtivo) {
 //        this.formAtivo = formAtivo;
 //    }
+
+    public boolean isFormAtivo() {
+        return formAtivo;
+    }
+
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
+    }
+
+    public CsbffCargos getCsbffcargos() {
+        return csbffcargos;
+    }
+
+    public void setCsbffcargos(CsbffCargos csbffcargos) {
+        this.csbffcargos = csbffcargos;
+    }
+
+    public List<CsbffCargos> getTodosCargos() {
+        if (todosCargos == null) {
+            todosCargos = csbffCargosService.findAll();
+        }
+        return todosCargos;
+    }
+
+    public void setTodosCargos(List<CsbffCargos> todosCargos) {
+        this.todosCargos = todosCargos;
+    }
+
+    public CsbffCargosService getCsbffCargosService() {
+        return csbffCargosService;
+    }
+
+    public void setCsbffCargosService(CsbffCargosService csbffCargosService) {
+        this.csbffCargosService = csbffCargosService;
+    }
 }
