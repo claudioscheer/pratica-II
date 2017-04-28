@@ -2,10 +2,11 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.Login;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class LoginBean {
 
     private Login login;
@@ -15,7 +16,11 @@ public class LoginBean {
     }
 
     public void entrar() {
-        System.out.println(String.format("LOGIN - Email = %s, Senha = %s", login.getEmailUsuario(), login.getSenhaUsuario()));
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().redirect("index.xhtml");
+        } catch (Exception e) {
+        }
     }
 
     public Login getLogin() {
