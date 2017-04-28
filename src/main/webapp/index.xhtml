@@ -8,10 +8,13 @@
     </h:head>
     <h:body>
         <ui:composition template="templates/template.xhtml">
+            <ui:define name="head">
+                <title>PRU!</title>
+            </ui:define>
             <ui:define name="content">
-               
-                Pagina inicial aqui
-                
+                <div class="text-center">
+                    <h:graphicImage value="#{resource['images/img.jpg']}" />
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

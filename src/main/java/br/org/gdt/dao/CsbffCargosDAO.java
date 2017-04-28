@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author MARCOS FELIPE
  */
-@Repository("csbffCargos")
+@Repository("csbffCargosDAO")
 public class CsbffCargosDAO extends DAO<CsbffCargos>{
 
 

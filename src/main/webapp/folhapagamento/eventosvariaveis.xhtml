@@ -44,36 +44,19 @@
                         </div>
                     </h:panelGroup>
 
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpEventoVariavelBean.formAtivo}">
+                    <h:panelGroup layout="block" rendered="#{!fpEventoVariavelBean.formAtivo}">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpEventoVariavelBean.add()}">
-                                <f:ajax execute="@form" render="formEventoVariavel" />
-                            </h:commandButton>
-                        </div>
-                        <div class="row">
-                            <div class="x_panel">
-                                <div class="x_content">
-                                    <h:dataTable class="table table-striped" value="#{fpEventoVariavelBean.todosFpEventoVariavel}" var="eventoVariavel">
-                                        <h:column>
-                                            <f:facet name="header">Código</f:facet>
-                                                #{eventoVariavel.evvId}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Descrição</f:facet>
-                                                #{eventoVariavel.evvDescricao}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpEventoVariavelBean.prepareEdit(eventoVariavel)}">
-                                                <f:ajax execute="@form" render="formEventoVariavel" />
-                                            </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpEventoVariavelBean.excluir(eventoVariavel)}" onclick="return confirm('Excluir evento variável?')">
-                                                <f:ajax execute="@form" render="formEventoVariavel" />
-                                            </h:commandLink>
-                                        </h:column>
-                                    </h:dataTable>
-                                </div>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <h:inputText label="Pessoa" required="true" a:placeholder="Pessoa" requiredMessage="Campo Pessoa é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoVariavelBean.codigoFuncionario}" />
                             </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12 text-center">
+                                <h:commandButton class="btn btn-primary" value="Buscar eventos" action="#{fpEventoVariavelBean.buscarEventos()}">
+                                    <f:ajax execute="@form" render="formEventoVariavel" />
+                                </h:commandButton>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <p>Digite o código do funcionário e clique em <b>Buscar eventos</b> para relacionar eventos variáveis ao funcionário.</p>
                         </div>
                     </h:panelGroup>
 

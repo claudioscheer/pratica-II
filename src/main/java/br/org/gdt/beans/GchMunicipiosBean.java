@@ -10,14 +10,14 @@ import br.org.gdt.service.GchMunicipiosService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Diego
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchMunicipiosBean {
 
     private boolean formAtivo = false;

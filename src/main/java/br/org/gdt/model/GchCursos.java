@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -140,6 +141,11 @@ public class GchCursos implements Serializable {
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.GchCursos[ curCodigo=" + curCodigo + " ]";
+    }
+
+    @Override
+    public Long getId() {
+        return Long.reverse(curCodigo);
     }
 
 

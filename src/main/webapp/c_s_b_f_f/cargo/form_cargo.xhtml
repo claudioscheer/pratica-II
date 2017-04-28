@@ -19,35 +19,24 @@
                     <div class="container-fluid">
                         <div class="row">
                             <h:form>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                
-                                    <div class="form-group ">
+                                <h:messages class=" error" style="color: red"/>
+                               
+                                <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                        <label class="control-label " for="number">
-                                            Código Cargo
-                                        </label>
-
-                                        <!--<input class="form-control" id="number" name="number" type="text" readonly = "true"/>-->
-                                        <h:inputText class="form-control" readonly="true" value="#{cargoBean.cargoCodigo}"/>
-                                    </div>
-                                
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form method="post">
                                     <div class="form-group ">
                                         <label class="control-label " for="name">
                                             Nome
                                         </label>
                                         <!--<input class="form-control" id="name0" name="name" type="text"/>-->
 
-                                        <h:inputText class="form-control"/>
+                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoNome}"/>
 
 
                                     </div>
-                                </form>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+
                                     <div class="form-group ">
 
                                         <label class="control-label " for="number">
@@ -55,162 +44,77 @@
                                         </label>
 
                                         <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control" value="#{cargoBean.CBO}"/>
+                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoCbo}"/>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form method="post">
-                                    <div class="form-group ">
-                                        <label class="control-label " for="select">
-                                            Tipo de Cargo
-                                        </label>
-                                        <select class="select form-control" id="select" name="select">
-                                            <option value="First Choice">
-                                                Selecione
-                                            </option>
-                                            <option value="Second Choice">
-                                                Estágio
-                                            </option>
-                                            <option value="Third Choice">
-                                                Deficiente (PCD)
-                                            </option>
-                                            <option value="Fourth Choice">
-                                                Carreira
-                                            </option>
-                                        </select>
-                                    </div>     
-                                </form>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form method="post">
-                                    <div class="form-group ">
-                                        <label class="control-label " for="select">
-                                            Nível de Cargo
-                                        </label>
-                                        <select class="select form-control" id="select" name="select">
-                                            <option value="First Choice">
-                                                Selecione
-                                            </option>
-                                            <option value="Second Choice">
-                                                Júnior
-                                            </option>
-                                            <option value="Third Choice">
-                                                Pleno
-                                            </option>
-                                            <option value="Fourth Choice">
-                                                Sênior
-                                            </option>
-                                        </select>
-                                    </div>     
-                                </form>
-                            </div>
 
-
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form method="post">
-                                    <div class="form-group ">
-                                        <label class="control-label " for="select">
-                                            Superior imediato
-                                        </label>
-                                        <select class="select form-control" id="select" name="select">
-                                            <option value="First Choice">
-                                                Selecione
-                                            </option>
-                                            <option value="Second Choice">
-                                                Edson
-                                            </option>
-                                            <option value="Third Choice">
-                                                Cassol
-                                            </option>
-                                            <option value="Fourth Choice">
-                                                Stein
-                                            </option>
-                                        </select>
-                                    </div>     
-                                </form>
-                            </div>
-                            <!--
-                                                        <h:selectOneMenu value="#{bean.name}">
-                                                            <f:selectItems value="#{bean.names}" />
-                                                        </h:selectOneMenu>-->
-
-
-
-
-
-
-                            <div class="form-group ">
-
+                                </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <form>
 
-                                        <label class="control-label " for="message">
-                                            Requisitos
+                                    <div class="form-group ">
+
+                                        <label class="control-label " for="number">
+                                            Salário Base
                                         </label>
-                                        <!--<textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
-                                        <h:inputTextarea class="form-control" cols="10" rows="5" value="#{cargoBean.requisitos}"/>
-                                    </form>
+
+                                        <!--<input class="form-control" id="number" name="number" type="text"/>-->
+                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoValorSalario}"/>
+                                    </div>
 
                                 </div>
 
 
-                            </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <label class="control-label requiredField" for="superiorCodigo">
+                                        Superior Responsável 
+                                    </label>                                                           
 
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
+                                    <h:selectOneMenu id="comboResponsaveis" value="#{cargosBean.csbffcargos.cargoCodigoSuperior}" class="form-control" >
+                                        <f:selectItem itemLabel="Selecione o responsável" itemValue="0" />
+                                        <f:selectItems value="#{cargosBean.csbffcargos.recPessoaList}" var="pessoa" itemValue="#{pessoa.recIdpessoa}" itemLabel="#{pessoa.recNomecompleto}"/>
+                                    </h:selectOneMenu>
+                                </div>
+
+
+
+
+                                <!--
+                                                            <h:selectOneMenu value="#{bean.name}">
+                                                                <f:selectItems value="#{bean.names}" />
+                                                            </h:selectOneMenu>-->
+
+                               
+
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+
 
                                     <div class="form-group ">
                                         <label class="control-label " for="message1">
-                                            Descrição
+                                            Descrição e Requisitos
                                         </label>
                                         <!--<textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>-->
-                                        <h:inputTextarea class="form-control" cols="10" rows="5" value="#{cargoBean.descricao}" />
+                                        <h:inputTextarea class="form-control" cols="10" rows="5" value="#{cargosBean.cargoCodigo.cargoDescricao}" />
                                     </div>
-                                </form>
-                            </div>
+
+                                </div>         
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                   
+     <div class="row">
 
 
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
-
-                                    <div class="form-group ">
-                                        <label class="control-label " for="date">
-                                            Data de Criação
-                                        </label>
-                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" value="#{cargoBean.data}"/>
-                                    
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form>
-                                    <div class="form-group">
-                                        <label class="control-label" for="date">
-
-                                        </label>
-
+                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{cargosBean.save()}" />
+                                        <h:commandButton value="Cancelar" class="btn btn-danger" action="form_cargo.xhtml"/>
                                     </div>
 
 
-                                </form>
 
-                            </div>
-
-
-                            <div>
-                                <div class="row">
-                              
-
-                                    <h:commandButton class="btn btn-success" value=" salvar" />
-                                    <h:commandButton value="Editar" class="btn btn-default" />
-                                    <h:commandButton value="Cancelar" class="btn btn-danger"/>
                                 </div>
-                            </div>
-                        </h:form>
+
+
+                            </h:form>
                         </div>
-                        
+
                     </div>
                 </div>
 

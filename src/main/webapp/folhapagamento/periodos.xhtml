@@ -95,9 +95,7 @@
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpPeriodoBean.save()}">
-                                            <f:ajax execute="@form" render="formPeriodo" />
-                                        </h:commandButton>
+                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpPeriodoBean.save()}"></h:commandButton>
                                         <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpPeriodoBean.cancel()}">
                                             <f:ajax execute="@form" render="formPeriodo" />
                                         </h:commandButton>
@@ -141,10 +139,14 @@
                                             </h:outputText>
                                         </h:column>
                                         <h:column>
+                                            <f:facet name="header">Ativo?</f:facet>
+                                            <h:selectBooleanCheckbox disabled="true" value="#{periodo.perAtivo}" />
+                                        </h:column>
+                                        <h:column>
                                             <f:facet name="header">Opções</f:facet>
                                             <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpPeriodoBean.prepareEdit(periodo)}">
                                             </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpPeriodoBean.excluir(periodo)}" onclick="return confirm('Excluir periodo?')">
+                                            <h:commandLink class="btn btn-link btn-small" value="Ativar/Desativar" action="#{fpPeriodoBean.desativar(periodo)}" onclick="return confirm('Ativar/Desativar periodo?')">
                                                 <f:ajax execute="@form" render="formPeriodo" />
                                             </h:commandLink>
                                         </h:column>                  

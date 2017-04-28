@@ -5,6 +5,7 @@
  */
 package br.org.gdt.beans;
 
+import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.service.GchTreinamentosService;
 import java.util.ArrayList;
@@ -12,8 +13,9 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.event.ActionEvent;
 
 
 /**
@@ -21,7 +23,7 @@ import javax.faces.bean.SessionScoped;
  * @author Diego
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class GchTreinamentosBean {
 
     private boolean formAtivo = false;
@@ -32,11 +34,16 @@ public class GchTreinamentosBean {
     @ManagedProperty("#{gchTreinamentosService}")
     private GchTreinamentosService gchTreinamentosService;
 
+    private GchMunicipios gchMunicipio;
+    
+    private long curCodigoCombo;
+    private long munCodigoCombo;
+    
     public GchTreinamentosBean() {
-        
+
     }
 
-    public void save() {
+    public void save(ActionEvent event) {
 //        gchTreinamentos.setTreiNome("Diego");
 //        gchTreinamentos.setTreiDescricao("Diego");
 //        gchTreinamentos.setCurCodigo(new GchCursos(Long.valueOf(1), "String" , "String", new Date()));
@@ -45,7 +52,7 @@ public class GchTreinamentosBean {
 //        gchTreinamentos.setTreiDataFim(new Date());
 //        gchTreinamentos.setTreiDatainclusao(new Date());
 //        gchTreinamentos.setMunCodigo(new GchMunicipios(Long.valueOf(1), "Diego"));
-        
+
         System.out.println(gchTreinamentos.getTreiNome());
         System.out.println(gchTreinamentos.getTreiDescricao());
         System.out.println(gchTreinamentos.getCurCodigo());
@@ -56,13 +63,14 @@ public class GchTreinamentosBean {
 //        if (gchTreinamentos.getTreiCodigo() > 0) {
 //            gchTreinamentosService.update(gchTreinamentos);
 //        } else {
-            gchTreinamentos.setTreiDatainclusao(new Date());
-            gchTreinamentosService.save(gchTreinamentos);
+        gchTreinamentos.setTreiDatainclusao(new Date());
+        gchTreinamentosService.save(gchTreinamentos);
 //        }
         todosGchTreinamentos = gchTreinamentosService.findAll();
         this.formAtivo = false;
     }
 
+    
     public void cancel() {
         this.formAtivo = false;
         this.gchTreinamentos = new GchTreinamentos();
@@ -126,5 +134,30 @@ public class GchTreinamentosBean {
     public void setGchTreinamentosService(GchTreinamentosService gchTreinamentosService) {
         this.gchTreinamentosService = gchTreinamentosService;
     }
+
+    public long getCurCodigoCombo() {
+        return curCodigoCombo;
+    }
+
+    public void setCurCodigoCombo(long curCodigoCombo) {
+        this.curCodigoCombo = curCodigoCombo;
+    }
+
+    public long getMunCodigoCombo() {
+        return munCodigoCombo;
+    }
+
+    public void setMunCodigoCombo(long munCodigoCombo) {
+        this.munCodigoCombo = munCodigoCombo;
+    }
+
+    public GchMunicipios getGchMunicipio() {
+        return gchMunicipio;
+    }
+
+    public void setGchMunicipio(GchMunicipios gchMunicipio) {
+        this.gchMunicipio = gchMunicipio;
+    }
+
 
 }
