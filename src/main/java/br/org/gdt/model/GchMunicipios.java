@@ -5,8 +5,10 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,10 +33,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchMunicipios.findAll", query = "SELECT g FROM GchMunicipios g")})
-public class GchMunicipios implements Serializable {
+
+public class GchMunicipios implements Serializable, SampleEntity {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @Basic(optional = false)    
     @Column(name = "mun_codigo")
     private Long munCodigo;
     @Basic(optional = false)
@@ -116,27 +119,37 @@ public class GchMunicipios implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (munCodigo != null ? munCodigo.hashCode() : 0);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.munCodigo);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GchMunicipios)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        GchMunicipios other = (GchMunicipios) object;
-        if ((this.munCodigo == null && other.munCodigo != null) || (this.munCodigo != null && !this.munCodigo.equals(other.munCodigo))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchMunicipios other = (GchMunicipios) obj;
+        if (!Objects.equals(this.munCodigo, other.munCodigo)) {
             return false;
         }
         return true;
     }
 
+    
+
     @Override
     public String toString() {
-        return "br.org.gdt.modelNew.GchMunicipios[ munCodigo=" + munCodigo + " ]";
+        return "br.org.gdt.model.GchMunicipios[ munCodigo=" + munCodigo + " ]";
     }
+
+    @Override
+    public Long getId() {
+       return Long.reverse(munCodigo);
+    }
+    
     
 }

@@ -34,7 +34,8 @@
                                         <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
 
                                         <h:form id="CadastroTreinamento">
-
+                                            <h:messages class="error" style="color: #d9534f" />
+                                            <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiCodigo}" />
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -67,9 +68,9 @@
                                                                     Curso 
                                                                 </label>                                                           
 
-                                                                <h:selectOneMenu id="comboCursos" value="#{gchTreinamentosBean.gchTreinamentos.curCodigo}" class="form-control" >
-                                                                    <f:selectItem itemLabel="Selecione o curso" itemValue="" />
-                                                                    <f:selectItems value="#{gchCursoBean.gchTodosCursos}" var="curso" itemValue="#{curso.curCodigo}" itemLabel="#{curso.curNome}"/>
+                                                                <h:selectOneMenu id="comboCursos" value="#{gchTreinamentosBean.gchTreinamentos.curCodigo}" converter="#{generic}" class="form-control" >
+                                                                    <f:selectItem itemLabel="Selecione o curso" itemValue="#{null}" />
+                                                                    <f:selectItems value="#{gchCursoBean.gchTodosCursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.curNome}"/>
                                                                 </h:selectOneMenu>
                                                             </div>
                                                         </div>
@@ -92,15 +93,16 @@
                                                                         <f:selectItem itemLabel="Selecione o estado" itemValue="" />
                                                                         <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
                                                                     </h:selectOneMenu>
+                                                                    
                                                                 </div>
                                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                     <!--<h:panelGroup id="otherForms">-->
-                                                                        <!--<h:form>-->
-                                                                            <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
-                                                                                <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                                                                <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
-                                                                            </h:selectOneMenu>
-                                                                        <!--</h:form>-->
+                                                                    <!--<h:form>-->
+                                                                    <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" converter="#{generic}" class="form-control"  >
+                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
+                                                                        <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.munDescricao}"  />
+                                                                    </h:selectOneMenu>
+                                                                    <!--</h:form>-->
                                                                     <!--</h:panelGroup>-->
                                                                 </div>
                                                                 <!--<h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>-->
@@ -112,7 +114,9 @@
                                                                     Data de início
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
-                                                                <h:inputText class="form-control" id="dateInicio" a:placeholder="DD/MM/YYYY" value="#{gchTreinamentosBean.gchTreinamentos.treiDataInicio}"/>
+                                                                <h:inputText class="form-control" id="dateInicio"  value="#{gchTreinamentosBean.gchTreinamentos.treiDataInicio}"> 
+                                                                    <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+                                                                </h:inputText>
                                                             </div>
                                                         </div>         
 
@@ -122,7 +126,9 @@
                                                                     Data de fim
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
-                                                                <h:inputText class="form-control" id="dateFim" a:placeholder="DD/MM/YYYY" value="#{gchTreinamentosBean.gchTreinamentos.treiDataFim}"/>
+                                                                <h:inputText class="form-control" id="dateFim" value="#{gchTreinamentosBean.gchTreinamentos.treiDataFim}">
+                                                                    <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+                                                                </h:inputText>
                                                             </div>
                                                         </div>       
 
@@ -132,9 +138,9 @@
                                                                                                                                     Cadastrar
                                                                                                                                 </button>-->
 
-                                                              
+
                                                                 <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentosBean.save}" value="Cadastrar" /> 
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <!--</form>-->
