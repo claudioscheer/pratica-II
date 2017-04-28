@@ -36,6 +36,7 @@ private boolean formAtivo = false;
         this.formAtivo = false;
         this.csbffBeneficios = new CsbffBeneficios();
     }
+    
     public void add() {
         this.formAtivo = true;
         this.csbffBeneficios = new CsbffBeneficios();
