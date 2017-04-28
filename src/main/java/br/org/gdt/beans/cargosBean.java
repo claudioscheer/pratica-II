@@ -6,6 +6,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.CsbffCargos;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffCargosService;
 import java.math.BigInteger;
 import java.util.Date;
@@ -32,6 +33,9 @@ public class cargosBean {
     @ManagedProperty("#{csbffCargosService}")
     private CsbffCargosService csbffCargosService;
 
+    private RecPessoa recPessoa;
+    
+    
     public cargosBean() {
         
         
@@ -144,5 +148,13 @@ public class cargosBean {
 
     public void setCsbffCargosService(CsbffCargosService csbffCargosService) {
         this.csbffCargosService = csbffCargosService;
+    }
+
+    public RecPessoa getRecPessoa() {
+        return recPessoa;
+    }
+
+    public void setRecPessoa(RecPessoa recPessoa) {
+        this.recPessoa = recPessoa;
     }
 }

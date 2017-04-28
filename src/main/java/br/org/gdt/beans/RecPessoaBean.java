@@ -26,4 +26,31 @@ public class RecPessoaBean {
         }
         return recPessoas;
     }
+
+    public RecPessoa getRecPessoa() {
+        return recPessoa;
+    }
+
+    public void setRecPessoa(RecPessoa recPessoa) {
+        this.recPessoa = recPessoa;
+    }
+
+    public List<RecPessoa> getRecPessoas() {
+        return recPessoas;
+    }
+
+    public void setRecPessoas(List<RecPessoa> recPessoas) {
+        this.recPessoas = recPessoas;
+    }
+
+    public RecPessoaService getRecPessoaService() {
+        return recPessoaService;
+    }
+
+    public void setRecPessoaService(RecPessoaService recPessoaService) {
+        this.recPessoaService = recPessoaService;
+    }
+        
+        
+        
 }
