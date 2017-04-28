@@ -12,7 +12,17 @@ public class RecPessoaService {
 
     @Autowired
     private RecPessoaDAO pessoaDao;
+    
+    @Transactional
+    public void save(RecPessoa recPessoa) {
+        pessoaDao.save(recPessoa);
+    }
 
+    @Transactional
+    public void update(RecPessoa recPessoa) {
+        pessoaDao.update(recPessoa);
+    }
+    
     @Transactional
     public void Inserir(RecPessoa pessoa) {
         pessoaDao.save(pessoa);
@@ -33,6 +43,9 @@ public class RecPessoaService {
     }
 
     public List<RecPessoa> ListarTodas() {
+        return pessoaDao.findAll();
+    }
+    public List<RecPessoa> findAll() {
         return pessoaDao.findAll();
     }
 }

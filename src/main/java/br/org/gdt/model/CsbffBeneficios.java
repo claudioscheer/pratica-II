@@ -5,7 +5,6 @@
  */
 package br.org.gdt.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -33,7 +32,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CsbffBeneficios.findAll", query = "SELECT c FROM CsbffBeneficios c")})
-public class CsbffBeneficios implements Serializable {
+public class CsbffBeneficios implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -47,8 +46,8 @@ public class CsbffBeneficios implements Serializable {
     @Column(name = "beneficio_descricao")
     private String beneficioDescricao;
     @Basic(optional = false)
-    @Column(name = "vinculo")
-    private BigInteger vinculo;
+    @Column(name = "abrangencia")
+    private BigInteger abrangencia;
     @Column(name = "beneficio_valor")
     private Double beneficioValor;
     @Column(name = "befencio_data_vigente")
@@ -71,7 +70,7 @@ public class CsbffBeneficios implements Serializable {
         this.beneficioCodigo = beneficioCodigo;
         this.beneficioNome = beneficioNome;
         this.beneficioDescricao = beneficioDescricao;
-        this.vinculo = vinculo;
+        this.abrangencia = vinculo;
     }
 
     public BigDecimal getBeneficioCodigo() {
@@ -98,12 +97,12 @@ public class CsbffBeneficios implements Serializable {
         this.beneficioDescricao = beneficioDescricao;
     }
 
-    public BigInteger getVinculo() {
-        return vinculo;
+    public BigInteger getAbrangencia() {
+        return abrangencia;
     }
 
-    public void setVinculo(BigInteger vinculo) {
-        this.vinculo = vinculo;
+    public void setAbrangencia(BigInteger abrangencia) {
+        this.abrangencia = abrangencia;
     }
 
     public Double getBeneficioValor() {
@@ -154,10 +153,7 @@ public class CsbffBeneficios implements Serializable {
             return false;
         }
         CsbffBeneficios other = (CsbffBeneficios) object;
-        if ((this.beneficioCodigo == null && other.beneficioCodigo != null) || (this.beneficioCodigo != null && !this.beneficioCodigo.equals(other.beneficioCodigo))) {
-            return false;
-        }
-        return true;
+        return !((this.beneficioCodigo == null && other.beneficioCodigo != null) || (this.beneficioCodigo != null && !this.beneficioCodigo.equals(other.beneficioCodigo)));
     }
 
     @Override

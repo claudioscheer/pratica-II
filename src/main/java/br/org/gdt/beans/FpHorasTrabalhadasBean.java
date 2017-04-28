@@ -1,7 +1,9 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.FpHorasTrabalhadas;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpHorasTrabalhadasService;
+import br.org.gdt.service.FpPeriodoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -19,6 +21,9 @@ public class FpHorasTrabalhadasBean {
     @ManagedProperty("#{fpHorasTrabalhadasService}")
     private FpHorasTrabalhadasService fpHorasTrabalhadasService;
 
+    @ManagedProperty("#{fpPeriodoService}")
+    private FpPeriodoService fpPeriodoService;
+
     public FpHorasTrabalhadasBean() {
     }
 
@@ -26,6 +31,7 @@ public class FpHorasTrabalhadasBean {
         if (fpHorasTrabalhadas.getHorId() > 0) {
             fpHorasTrabalhadasService.update(fpHorasTrabalhadas);
         } else {
+            fpHorasTrabalhadas.setHorFpPeriodo(fpPeriodoService.getPeriodoAtivo());
             fpHorasTrabalhadasService.save(fpHorasTrabalhadas);
         }
         todasFpHorasTrabalhadas = fpHorasTrabalhadasService.findAll();
@@ -38,6 +44,11 @@ public class FpHorasTrabalhadasBean {
     }
 
     public void add() {
+        if (!fpPeriodoService.temPeriodoAtivo()) {
+            Helper.mostrarNotificacao("Períodos", "Não há nenhum período em aberto.", "info");
+            return;
+        }
+
         this.formAtivo = true;
         this.fpHorasTrabalhadas = new FpHorasTrabalhadas();
     }
@@ -79,6 +90,14 @@ public class FpHorasTrabalhadasBean {
 
     public void setFpHorasTrabalhadasService(FpHorasTrabalhadasService fpHorasTrabalhadasService) {
         this.fpHorasTrabalhadasService = fpHorasTrabalhadasService;
+    }
+
+    public FpPeriodoService getFpPeriodoService() {
+        return fpPeriodoService;
+    }
+
+    public void setFpPeriodoService(FpPeriodoService fpPeriodoService) {
+        this.fpPeriodoService = fpPeriodoService;
     }
 
     public boolean isFormAtivo() {

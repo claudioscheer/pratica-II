@@ -8,16 +8,20 @@ package br.org.gdt.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,12 +38,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchTreinamentos.findAll", query = "SELECT g FROM GchTreinamentos g")})
+@SequenceGenerator(name = "seq_trei_codigo", sequenceName = "sequencia_treinamento_codigo", allocationSize = 1)
 public class GchTreinamentos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "trei_codigo")
-    private Long treiCodigo;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_trei_codigo")
+    private long treiCodigo;
     @Basic(optional = false)
     @Column(name = "trei_nome")
     private String treiNome;
@@ -75,22 +81,22 @@ public class GchTreinamentos implements Serializable {
     public GchTreinamentos() {
     }
 
-    public GchTreinamentos(Long treiCodigo) {
+    public GchTreinamentos(long treiCodigo) {
         this.treiCodigo = treiCodigo;
     }
 
-    public GchTreinamentos(Long treiCodigo, String treiNome, String treiDescricao, Date treiDatainclusao) {
+    public GchTreinamentos(long treiCodigo, String treiNome, String treiDescricao, Date treiDatainclusao) {
         this.treiCodigo = treiCodigo;
         this.treiNome = treiNome;
         this.treiDescricao = treiDescricao;
         this.treiDatainclusao = treiDatainclusao;
     }
 
-    public Long getTreiCodigo() {
+    public long getTreiCodigo() {
         return treiCodigo;
     }
 
-    public void setTreiCodigo(Long treiCodigo) {
+    public void setTreiCodigo(long treiCodigo) {
         this.treiCodigo = treiCodigo;
     }
 
@@ -118,6 +124,22 @@ public class GchTreinamentos implements Serializable {
         this.treiDatainclusao = treiDatainclusao;
     }
 
+    public Date getTreiDataInicio() {
+        return treiDataInicio;
+    }
+
+    public void setTreiDataInicio(Date treiDataInicio) {
+        this.treiDataInicio = treiDataInicio;
+    }
+
+    public Date getTreiDataFim() {
+        return treiDataFim;
+    }
+
+    public void setTreiDataFim(Date treiDataFim) {
+        this.treiDataFim = treiDataFim;
+    }
+
     public GchCursos getCurCodigo() {
         return curCodigo;
     }
@@ -134,6 +156,9 @@ public class GchTreinamentos implements Serializable {
         this.munCodigo = munCodigo;
     }
 
+    
+    
+    
     @XmlTransient
     @JsonIgnore
     public List<GchTreinamentospessoas> getGchTreinamentospessoasList() {
@@ -144,47 +169,39 @@ public class GchTreinamentos implements Serializable {
         this.gchTreinamentospessoasList = gchTreinamentospessoasList;
     }
 
-   
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (treiCodigo != null ? treiCodigo.hashCode() : 0);
+        int hash = 7;
+        hash = 53 * hash + (int) (this.treiCodigo ^ (this.treiCodigo >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.treiNome);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GchTreinamentos)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        GchTreinamentos other = (GchTreinamentos) object;
-        if ((this.treiCodigo == null && other.treiCodigo != null) || (this.treiCodigo != null && !this.treiCodigo.equals(other.treiCodigo))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchTreinamentos other = (GchTreinamentos) obj;
+        if (this.treiCodigo != other.treiCodigo) {
+            return false;
+        }
+        if (!Objects.equals(this.treiNome, other.treiNome)) {
             return false;
         }
         return true;
     }
 
+   
+    
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.GchTreinamentos[ treiCodigo=" + treiCodigo + " ]";
     }
 
-    public Date getTreiDataInicio() {
-        return treiDataInicio;
-    }
-
-    public void setTreiDataInicio(Date treiDataInicio) {
-        this.treiDataInicio = treiDataInicio;
-    }
-
-    public Date getTreiDataFim() {
-        return treiDataFim;
-    }
-
-    public void setTreiDataFim(Date treiDataFim) {
-        this.treiDataFim = treiDataFim;
-    }
 
     
 }

@@ -2,9 +2,12 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.GchCursos;
 import br.org.gdt.service.GchCadastroCursoService;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -14,7 +17,6 @@ import javax.faces.bean.RequestScoped;
  * @author Diego
  */
 @ManagedBean
-
 @RequestScoped
 
 public class GchCursoBean {
@@ -33,21 +35,53 @@ public class GchCursoBean {
 
     public void test() {
 
-        System.console().writer().print("Oiiiiiiiii");
+        System.out.println("Caiu no teste");
+ 
+        
+        if(gchCurso.getCurCodigo() > 0){
+            
+            
+            
+        }
+//            
+//            System.out.println("Update");
+//            
+//        }else{
+//            
+//            System.out.println("Create new");
+//            
+//        }
 
     }
 
     public void save() {
 
-        System.out.println("Entrouuuu" + gchCurso.getCurNome());
-
+        gchCurso.setCurDatainclusao(new Date());
+//        gchCurso.setCurCodigo(Long.parseLong("0"));
+        System.out.println("Entrou no metodo salvar");
+        
+        
         if (gchCurso.getCurCodigo() > 0) {
 
             gchCursoService.update(gchCurso);
+            
+            
+            
         } else {
+            
+            if(gchCurso == null){
+                
+                System.out.println("Tá nulllllllll");
+                
+            }else{
+                
+                
+                System.out.println("Nao ta nullllll");
+            }
+            
             gchCursoService.save(gchCurso);
         }
-        gchTodosCursos = gchCursoService.findAll();
+//        gchTodosCursos = gchCursoService.findAll();
         this.formAtivo = false;
     }
 
@@ -61,7 +95,6 @@ public class GchCursoBean {
         this.formAtivo = true;
         this.gchCurso = new GchCursos();
 
-        save();
     }
 
     public String excluir(GchCursos gchCurso) {

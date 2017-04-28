@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,10 +13,13 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,9 +36,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchCursos.findAll", query = "SELECT g FROM GchCursos g")})
-public class GchCursos implements Serializable {
+@SequenceGenerator(name = "seq_gch_curso", sequenceName = "seq_gch_curso", allocationSize = 1)
+public class GchCursos implements Serializable, SampleEntity {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_curso")
     @Basic(optional = false)
     @Column(name = "cur_codigo")
     private Long curCodigo;
@@ -60,17 +66,22 @@ public class GchCursos implements Serializable {
     public GchCursos() {
     }
 
-    public GchCursos(Long curCodigo) {
-        this.curCodigo = curCodigo;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public GchCursos(Long curCodigo, String curNome, String curDescricao, Date curDatainclusao) {
+    public GchCursos(Long curCodigo, String curNome, String curDescricao, Date curDatainclusao, List<GchTreinamentos> gchTreinamentosList, String curNomePalestrante, String curEmailPalestrante) {
         this.curCodigo = curCodigo;
         this.curNome = curNome;
         this.curDescricao = curDescricao;
         this.curDatainclusao = curDatainclusao;
+        this.gchTreinamentosList = gchTreinamentosList;
+        this.curNomePalestrante = curNomePalestrante;
+        this.curEmailPalestrante = curEmailPalestrante;
     }
 
+   
+  
     public Long getCurCodigo() {
         return curCodigo;
     }
@@ -102,6 +113,22 @@ public class GchCursos implements Serializable {
     public void setCurDatainclusao(Date curDatainclusao) {
         this.curDatainclusao = curDatainclusao;
     }
+    
+    public String getCurNomePalestrante() {
+        return curNomePalestrante;
+    }
+
+    public void setCurNomePalestrante(String curNomePalestrante) {
+        this.curNomePalestrante = curNomePalestrante;
+    }
+
+    public String getCurEmailPalestrante() {
+        return curEmailPalestrante;
+    }
+
+    public void setCurEmailPalestrante(String curEmailPalestrante) {
+        this.curEmailPalestrante = curEmailPalestrante;
+    }
 
     @XmlTransient
     @JsonIgnore
@@ -112,6 +139,8 @@ public class GchCursos implements Serializable {
     public void setGchTreinamentosList(List<GchTreinamentos> gchTreinamentosList) {
         this.gchTreinamentosList = gchTreinamentosList;
     }
+    
+    
 
     @Override
     public int hashCode() {
@@ -138,20 +167,11 @@ public class GchCursos implements Serializable {
         return "br.org.gdt.modelNew.GchCursos[ curCodigo=" + curCodigo + " ]";
     }
 
-    public String getCurNomePalestrante() {
-        return curNomePalestrante;
+    @Override
+    public Long getId() {
+        return Long.reverse(curCodigo);
     }
 
-    public void setCurNomePalestrante(String curNomePalestrante) {
-        this.curNomePalestrante = curNomePalestrante;
-    }
 
-    public String getCurEmailPalestrante() {
-        return curEmailPalestrante;
-    }
-
-    public void setCurEmailPalestrante(String curEmailPalestrante) {
-        this.curEmailPalestrante = curEmailPalestrante;
-    }
     
 }
