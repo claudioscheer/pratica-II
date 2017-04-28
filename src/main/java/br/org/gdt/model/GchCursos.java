@@ -37,7 +37,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = "GchCursos.findAll", query = "SELECT g FROM GchCursos g")})
 @SequenceGenerator(name = "seq_gch_curso", sequenceName = "seq_gch_curso", allocationSize = 1)
-public class GchCursos implements Serializable {
+public class GchCursos implements Serializable, SampleEntity {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_curso")
     @Basic(optional = false)
