@@ -3,6 +3,7 @@ package br.org.gdt.beans;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpPeriodoService;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -26,8 +27,9 @@ public class FpPeriodoBean {
     }
 
     public void save() {
-        if (!this.datasSaoValidas()) {
-            Helper.setMensagemDeErro("As datas são inválidas.");
+        String mensagemErro = this.datasSaoValidas();
+        if (!mensagemErro.isEmpty()) {
+            Helper.setMensagemDeErro(mensagemErro);
             return;
         }
 
@@ -41,23 +43,33 @@ public class FpPeriodoBean {
         this.formAtivo = false;
     }
 
-    private boolean datasSaoValidas() {
+    private String datasSaoValidas() {
         Calendar dataInicial = Calendar.getInstance();
         dataInicial.setTime(fpPeriodo.getPerDataInicial());
-        dataInicial.set(Calendar.DAY_OF_MONTH, 1);
-
-        Calendar dataAtual = Calendar.getInstance();
-        dataAtual.set(Calendar.DAY_OF_MONTH, 1);
-        dataAtual.add(Calendar.MONTH, -1);
-
-        if (!dataAtual.before(dataInicial)) {
-            return false;
-        }
 
         Calendar dataFinal = Calendar.getInstance();
         dataFinal.setTime(fpPeriodo.getPerDataFinal());
 
-        return dataFinal.after(dataInicial);
+        if (dataFinal.before(dataInicial)) {
+            return "A Data final precisa ser maior que a Data inicial.";
+        }
+
+        Calendar dataAtual = Calendar.getInstance();
+        dataAtual.add(Calendar.MONTH, -1);
+        dataAtual.set(Calendar.DAY_OF_MONTH, 1);
+
+        if (dataAtual.after(dataInicial)) {
+            return String.format("A Data inicial precisa ser maior que o mês %s.", new SimpleDateFormat("MM").format(dataAtual.getTime()));
+        }
+
+        int diasEntreDatas = ((int) ((dataFinal.getTimeInMillis() - dataInicial.getTimeInMillis()) / (1000 * 60 * 60 * 24))) + 1;
+        int somaDiasUteisNaoUteis = fpPeriodo.getPerDiasUteis() + fpPeriodo.getPerDiasNaoUteis();
+
+        if (diasEntreDatas != somaDiasUteisNaoUteis) {
+            return "As datas não conferem com os dias informados.";
+        }
+
+        return "";
     }
 
     public void cancel() {
@@ -67,7 +79,6 @@ public class FpPeriodoBean {
 
     public void add() {
         if (fpPeriodoService.temPeriodoAtivo()) {
-            Helper.mostrarNotificacao("Período", "Já há um período ativo.", "info");
             return;
         }
 
@@ -82,6 +93,10 @@ public class FpPeriodoBean {
     }
 
     public String prepareEdit(FpPeriodo fpPeriodo) {
+        if (!fpPeriodo.isPerAtivo()) {
+            return "";
+        }
+
         this.formAtivo = true;
         this.fpPeriodo = fpPeriodo;
         return "periodos";

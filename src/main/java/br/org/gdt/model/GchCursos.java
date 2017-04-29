@@ -135,9 +135,33 @@ public class GchCursos implements Serializable, SampleEntity {
     public void setGchTreinamentosList(List<GchTreinamentos> gchTreinamentosList) {
         this.gchTreinamentosList = gchTreinamentosList;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + (int) (this.curCodigo ^ (this.curCodigo >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchCursos other = (GchCursos) obj;
+        if (this.curCodigo != other.curCodigo) {
+            return false;
+        }
+        return true;
+    }
     
     
 
+    
+    
 
     @Override
     public String toString() {

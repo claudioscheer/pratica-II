@@ -88,6 +88,10 @@
                                 <div class="x_content">
                                     <h:dataTable class="table table-striped" value="#{fpHorasTrabalhadasBean.todasFpHorasTrabalhadas}" var="horaTrabalhada">
                                         <h:column>
+                                            <f:facet name="header">Pessoa</f:facet>
+                                                #{horaTrabalhada.horPessoa}
+                                        </h:column>
+                                        <h:column>
                                             <f:facet name="header">Horas faltas</f:facet>
                                                 #{horaTrabalhada.horasFaltas}
                                         </h:column>
