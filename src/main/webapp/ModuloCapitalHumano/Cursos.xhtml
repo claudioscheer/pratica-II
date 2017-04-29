@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
  
     <h:body>
-        <ui:composition template="../../templates/template.xhtml">
+        <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
                 <title>Cursos Cadastrados</title>
                 
@@ -52,7 +52,7 @@
                                  <div class="x_panel">
                                     <div class="form-group" style="float: right;margin-top: 10px">
                                         <div>
-                                            <h:link  outcome="/ModuloCapitalHumano/Cadastros/CadastroCurso.xhtml" class="btn btn-primary " value="Novo Curso"/>
+                                            <h:link  outcome="CadastroCurso.xhtml" class="btn btn-primary " value="Novo Curso"/>
                                         </div>
                                     </div>
                                     <div class="panel-heading">
@@ -70,12 +70,12 @@
                                                     <h:commandLink id="btnExcluir" h:tooltip="Exclui Curso" action="#{gchCursoBean.excluir(curso)}" onclick="return confirm('Voce realmente deseja excluir este curso?')">
                                                        
                                                         <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"><div class="tooltip"><span class="tooltiptext">Excluir Curso</span></div> </i>
-                                                       
                                                     </h:commandLink>
 
                                                 </h:column>
                                                 <h:column>                
-                                                    <h:commandLink action="#{gchCursoBean.prepareEdit(curso)}">
+                                                    <h:commandLink action="#{gchCursoBean.buscaPorId(curso.curCodigo)}">
+                                                       
                                                         <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
