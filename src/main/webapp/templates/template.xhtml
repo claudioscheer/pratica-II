@@ -5,8 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <link href="#{resource['images/img.ico']}" rel='shortcut icon' type='image/x-icon'/>
-        <link href="#{resource['images/img.ico']}" rel="icon" type="image/x-icon" />
+        <link href="#{resource['images/Logo-Murphy.png']}" rel='shortcut icon' type='image/x-icon'/>
+        <link href="#{resource['images/Logo-Murphy.png']}" rel="icon" type="image/x-icon" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,7 +26,7 @@
                 <div class="col-md-3 left_col menu_fixed">
                     <div class="left_col scroll-view">
                         <div class="navbar nav_title text-center" style="border: 3;">
-                            <span class="site_title" style="padding-left: 0">PRU!</span>
+                            <span class="site_title" style="padding-left: 0">Murphy</span>
                         </div>
 
                         <div class="clearfix"></div>
@@ -34,7 +34,7 @@
                         <!-- menu profile quick info -->
                         <div class="profile clearfix">
                             <div class="profile_pic">
-                                <h:graphicImage value="#{resource['images/img.jpg']}" class="img-circle profile_img" />
+                                <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img" />
                             </div>
                             <div class="profile_info">
                                 <span>Olá,</span>
@@ -76,10 +76,10 @@
                                     <li>
                                         <a><i class="fa fa-users"></i> Capital humano  <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><h:link outcome="/ModuloCapitalHumano/Consultas/Cursos.xhtml" value="Cursos"></h:link></li>
-                                            <li><h:link outcome="/ModuloCapitalHumano/Consultas/Treinamentos.xhtml" value="Treinamentos"></h:link></li>
+                                            <li><h:link outcome="/ModuloCapitalHumano/Cursos.xhtml" value="Cursos"></h:link></li>
+                                            <li><h:link outcome="/ModuloCapitalHumano/Treinamentos.xhtml" value="Treinamentos"></h:link></li>
                                             <li><h:link outcome="/recrutamento/selecao_lista.xhtml" value="Análises"></h:link></li>
-                                            <li><h:link outcome="/ModuloCapitalHumano/Consultas/PlanoCarreira.xhtml" value="Plano de carreira"></h:link></li>
+                                            <li><h:link outcome="/ModuloCapitalHumano/PlanoCarreira.xhtml" value="Plano de carreira"></h:link></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -171,8 +171,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <h:graphicImage value="#{resource['images/img.jpg']}" />Claudio Scheer
-                                        <span class=" fa fa-angle-down"></span>
+                                        Gestor <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                                         <!--<li><a href="javascript:;"> Profile</a></li>

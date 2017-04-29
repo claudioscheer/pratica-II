@@ -31,27 +31,41 @@ public class GchCursoBean {
 
     @ManagedProperty("#{gchCadastroCursoService}")
     private GchCadastroCursoService gchCursoService;
+    
+     @ManagedProperty("#{param.cursoID}")
+     private String cursoID;
 
-    public GchCursoBean() {
-
+    public String getCursoID() {
+        return cursoID;
     }
 
-    public void test() {
+    public void setCursoID(String cursoID) {
+        this.cursoID = cursoID;
+    }
+    
+    
+    public GchCursoBean() {
+        
+        System.out.println("Id do Curso"+cursoID);
+        
+//        gchCurso = buscaPorId(cursoID);
+        
+    }
 
-        System.out.println("Caiu no teste");
+    public String buscaPorId(int idCurso) {
 
-        if (gchCurso.getCurCodigo() > 0) {
-
+        System.out.println("Id do curso"+idCurso);
+        
+        if(idCurso != 0){
+           
+         gchCurso = gchCursoService.findById(idCurso);
+            
+         return "CadastroCurso";
+         
         }
-//            
-//            System.out.println("Update");
-//            
-//        }else{
-//            
-//            System.out.println("Create new");
-//            
-//        }
-
+        
+        return null;
+        
     }
 
     public void save() {
@@ -107,9 +121,8 @@ public class GchCursoBean {
     }
 
     public String prepareEdit(GchCursos gchCurso) {
-        this.formAtivo = true;
         this.gchCurso = gchCurso;
-        return "eventos";
+       return "CadastroPlanoCarreira?faces-redirect=true";
     }
 
     public boolean isFormAtivo() {
@@ -146,5 +159,6 @@ public class GchCursoBean {
     public void setGchCursoService(GchCadastroCursoService gchCursoService) {
         this.gchCursoService = gchCursoService;
     }
+
 
 }
