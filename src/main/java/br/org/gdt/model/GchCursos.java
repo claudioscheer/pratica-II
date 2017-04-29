@@ -43,7 +43,7 @@ public class GchCursos implements Serializable, SampleEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_curso")
     @Basic(optional = false)
     @Column(name = "cur_codigo")
-    private Long curCodigo;
+    private long curCodigo;
     @Basic(optional = false)
     @Column(name = "cur_nome")
     private String curNome;
@@ -66,11 +66,7 @@ public class GchCursos implements Serializable, SampleEntity {
     public GchCursos() {
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public GchCursos(Long curCodigo, String curNome, String curDescricao, Date curDatainclusao, List<GchTreinamentos> gchTreinamentosList, String curNomePalestrante, String curEmailPalestrante) {
+    public GchCursos(long curCodigo, String curNome, String curDescricao, Date curDatainclusao, List<GchTreinamentos> gchTreinamentosList, String curNomePalestrante, String curEmailPalestrante) {
         this.curCodigo = curCodigo;
         this.curNome = curNome;
         this.curDescricao = curDescricao;
@@ -82,11 +78,11 @@ public class GchCursos implements Serializable, SampleEntity {
 
    
   
-    public Long getCurCodigo() {
+    public long getCurCodigo() {
         return curCodigo;
     }
 
-    public void setCurCodigo(Long curCodigo) {
+    public void setCurCodigo(long curCodigo) {
         this.curCodigo = curCodigo;
     }
 
@@ -139,28 +135,33 @@ public class GchCursos implements Serializable, SampleEntity {
     public void setGchTreinamentosList(List<GchTreinamentos> gchTreinamentosList) {
         this.gchTreinamentosList = gchTreinamentosList;
     }
-    
-    
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (curCodigo != null ? curCodigo.hashCode() : 0);
+        int hash = 7;
+        hash = 59 * hash + (int) (this.curCodigo ^ (this.curCodigo >>> 32));
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GchCursos)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        GchCursos other = (GchCursos) object;
-        if ((this.curCodigo == null && other.curCodigo != null) || (this.curCodigo != null && !this.curCodigo.equals(other.curCodigo))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchCursos other = (GchCursos) obj;
+        if (this.curCodigo != other.curCodigo) {
             return false;
         }
         return true;
     }
+    
+    
+
+    
+    
 
     @Override
     public String toString() {

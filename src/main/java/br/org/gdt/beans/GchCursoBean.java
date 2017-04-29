@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.GchCursos;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchCadastroCursoService;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -36,12 +39,9 @@ public class GchCursoBean {
     public void test() {
 
         System.out.println("Caiu no teste");
- 
-        
-        if(gchCurso.getCurCodigo() > 0){
-            
-            
-            
+
+        if (gchCurso.getCurCodigo() > 0) {
+
         }
 //            
 //            System.out.println("Update");
@@ -56,33 +56,36 @@ public class GchCursoBean {
 
     public void save() {
 
-        gchCurso.setCurDatainclusao(new Date());
-//        gchCurso.setCurCodigo(Long.parseLong("0"));
-        System.out.println("Entrou no metodo salvar");
-        
-        
-        if (gchCurso.getCurCodigo() > 0) {
+        String MsgNotificacao = "";
 
-            gchCursoService.update(gchCurso);
-            
-            
-            
-        } else {
-            
-            if(gchCurso == null){
-                
-                System.out.println("Tá nulllllllll");
-                
-            }else{
-                
-                
-                System.out.println("Nao ta nullllll");
+        gchCurso.setCurDatainclusao(new Date());
+
+        try {
+            if (gchCurso.getCurCodigo() > 0) {
+
+                gchCursoService.update(gchCurso);
+
+                MsgNotificacao = "O curso " + gchCurso.getCurNome() + " foi atualizado com sucesso!";
+
+            } else {
+
+                gchCursoService.save(gchCurso);
+
+                MsgNotificacao = "O curso " + gchCurso.getCurNome() + " foi cadastrado com sucesso!";
             }
             
-            gchCursoService.save(gchCurso);
+             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
+        } catch (Exception ex) {
+
+            MsgNotificacao = "Houve uma falha ao cadastrar o curso "+gchCurso.getCurNome()+" , tente novamente mais tarde!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
+       
+        return;
+
 //        gchTodosCursos = gchCursoService.findAll();
-        this.formAtivo = false;
+//        this.formAtivo = false;
     }
 
     public void cancel() {
@@ -100,7 +103,7 @@ public class GchCursoBean {
     public String excluir(GchCursos gchCurso) {
         gchCursoService.delete(gchCurso.getCurCodigo());
         gchTodosCursos.remove(gchCurso);
-        return "eventos";
+        return "Cursos.xhtml";
     }
 
     public String prepareEdit(GchCursos gchCurso) {
