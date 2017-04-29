@@ -10,17 +10,17 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class RecPessoaBean {
-    
+
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoas;
-    
+
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
-    
+
     public RecPessoaBean() {
     }
-    
-        public List<RecPessoa> ListarTodas() {
+
+    public List<RecPessoa> ListarTodas() {
         if (recPessoas == null) {
             recPessoas = recPessoaService.ListarTodas();
         }
@@ -50,7 +50,5 @@ public class RecPessoaBean {
     public void setRecPessoaService(RecPessoaService recPessoaService) {
         this.recPessoaService = recPessoaService;
     }
-        
-        
-        
+
 }
