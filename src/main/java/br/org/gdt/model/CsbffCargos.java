@@ -192,26 +192,34 @@ public class CsbffCargos implements Serializable {
         this.recPessoaList = recPessoaList;
     }
 
-//    @Override
-//    public int hashCode() {
-//        int hash = 0;
-//        hash += (cargoCodigo != null ? cargoCodigo.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof CsbffCargos)) {
-//            return false;
-//        }
-//        CsbffCargos other = (CsbffCargos) object;
-//        if ((this.cargoCodigo == null && other.cargoCodigo != null) || (this.cargoCodigo != null && !this.cargoCodigo.equals(other.cargoCodigo))) {
-//            return false;
-//        }
-//        return true;
-//    }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 11 * hash + (int) (this.cargoCodigo ^ (this.cargoCodigo >>> 32));
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CsbffCargos other = (CsbffCargos) obj;
+        if (this.cargoCodigo != other.cargoCodigo) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
+    
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.CsbffCargos[ cargoCodigo=" + cargoCodigo + " ]";
