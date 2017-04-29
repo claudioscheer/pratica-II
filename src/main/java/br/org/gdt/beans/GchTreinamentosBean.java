@@ -7,6 +7,7 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.GchTreinamentos;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentosService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
-
+import org.postgresql.util.PGTimestamp;
 
 /**
  *
@@ -35,42 +36,61 @@ public class GchTreinamentosBean {
     private GchTreinamentosService gchTreinamentosService;
 
     private GchMunicipios gchMunicipio;
-    
+
     private long curCodigoCombo;
     private long munCodigoCombo;
-    
+
     public GchTreinamentosBean() {
 
     }
 
-    public void save(ActionEvent event) {
-//        gchTreinamentos.setTreiNome("Diego");
-//        gchTreinamentos.setTreiDescricao("Diego");
-//        gchTreinamentos.setCurCodigo(new GchCursos(Long.valueOf(1), "String" , "String", new Date()));
-//        gchTreinamentos.setTreiCodigo(Long.valueOf(2));
-//        gchTreinamentos.setTreiDataInicio(new Date());
-//        gchTreinamentos.setTreiDataFim(new Date());
-//        gchTreinamentos.setTreiDatainclusao(new Date());
-//        gchTreinamentos.setMunCodigo(new GchMunicipios(Long.valueOf(1), "Diego"));
+    public String save() {
 
-        System.out.println(gchTreinamentos.getTreiNome());
-        System.out.println(gchTreinamentos.getTreiDescricao());
-        System.out.println(gchTreinamentos.getCurCodigo());
-        System.out.println(gchTreinamentos.getTreiCodigo());
-        System.out.println(gchTreinamentos.getTreiDataInicio());
-        System.out.println(gchTreinamentos.getTreiDataFim());
+        String MsgNotificacao = "";
 
-//        if (gchTreinamentos.getTreiCodigo() > 0) {
-//            gchTreinamentosService.update(gchTreinamentos);
-//        } else {
-        gchTreinamentos.setTreiDatainclusao(new Date());
-        gchTreinamentosService.save(gchTreinamentos);
-//        }
-        todosGchTreinamentos = gchTreinamentosService.findAll();
-        this.formAtivo = false;
+        try {
+
+            if (gchTreinamentos.getTreiCodigo() > 0) {
+
+                gchTreinamentosService.update(gchTreinamentos);
+                MsgNotificacao = "O treinamento " + gchTreinamentos.getTreiNome() + " foi atualizado com sucesso!";
+
+            } else {
+
+                gchTreinamentos.setTreiDatainclusao(new Date());
+                gchTreinamentosService.save(gchTreinamentos);
+                MsgNotificacao = "O treinamento " + gchTreinamentos.getTreiNome() + " foi cadastrado com sucesso!";
+            }
+
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
+        } catch (Exception ex) {
+
+            MsgNotificacao = "Não foi possível cadastrar o treinamento " + gchTreinamentos.getTreiNome();
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+        }
+
+        return "Treinamentos";
+
     }
 
-    
+    public boolean buscaTreinamentosPorCurso(long id) {
+        
+        List<GchTreinamentos> retorno = new ArrayList<>();
+        
+        retorno  = gchTreinamentosService.BuscaTreinamentoPorCurso(id);
+
+        if(retorno.isEmpty()){
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
+
     public void cancel() {
         this.formAtivo = false;
         this.gchTreinamentos = new GchTreinamentos();
@@ -123,6 +143,20 @@ public class GchTreinamentosBean {
         return todosGchTreinamentos;
     }
 
+    public String buscaTreinamentoPorId(int id) {
+
+        System.out.println("Id Treinamento" + id);
+
+        if (id != 0) {
+
+            gchTreinamentos = gchTreinamentosService.findById(id);
+
+            return "CadastroTreinamentos";
+
+        }
+        return null;
+    }
+
     public void setTodosGchTreinamentos(List<GchTreinamentos> todosGchTreinamentos) {
         this.todosGchTreinamentos = todosGchTreinamentos;
     }
@@ -158,6 +192,5 @@ public class GchTreinamentosBean {
     public void setGchMunicipio(GchMunicipios gchMunicipio) {
         this.gchMunicipio = gchMunicipio;
     }
-
 
 }

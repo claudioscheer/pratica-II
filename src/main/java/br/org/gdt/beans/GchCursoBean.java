@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -31,9 +32,9 @@ public class GchCursoBean {
 
     @ManagedProperty("#{gchCadastroCursoService}")
     private GchCadastroCursoService gchCursoService;
-    
-     @ManagedProperty("#{param.cursoID}")
-     private String cursoID;
+
+    @ManagedProperty("#{param.cursoID}")
+    private String cursoID;
 
     public String getCursoID() {
         return cursoID;
@@ -42,38 +43,33 @@ public class GchCursoBean {
     public void setCursoID(String cursoID) {
         this.cursoID = cursoID;
     }
-    
-    
+
     public GchCursoBean() {
-        
-        System.out.println("Id do Curso"+cursoID);
-        
+
+        System.out.println("Id do Curso" + cursoID);
+
 //        gchCurso = buscaPorId(cursoID);
-        
     }
 
     public String buscaPorId(int idCurso) {
 
-        System.out.println("Id do curso"+idCurso);
-        
-        if(idCurso != 0){
-           
-         gchCurso = gchCursoService.findById(idCurso);
-            
-         return "CadastroCurso";
-         
+        System.out.println("Id do curso" + idCurso);
+
+        if (idCurso != 0) {
+
+            gchCurso = gchCursoService.findById(idCurso);
+
+            return "CadastroCurso";
+
         }
-        
+
         return null;
-        
+
     }
 
-    public void save() {
+    public String save() {
 
         String MsgNotificacao = "";
-
-        gchCurso.setCurDatainclusao(new Date());
-
         try {
             if (gchCurso.getCurCodigo() > 0) {
 
@@ -83,20 +79,22 @@ public class GchCursoBean {
 
             } else {
 
+                gchCurso.setCurDatainclusao(new Date());
+
                 gchCursoService.save(gchCurso);
 
                 MsgNotificacao = "O curso " + gchCurso.getCurNome() + " foi cadastrado com sucesso!";
             }
-            
-             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
 
         } catch (Exception ex) {
 
-            MsgNotificacao = "Houve uma falha ao cadastrar o curso "+gchCurso.getCurNome()+" , tente novamente mais tarde!";
+            MsgNotificacao = "Houve uma falha ao cadastrar o curso " + gchCurso.getCurNome() + ex.getMessage() + " , tente novamente mais tarde!";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
-       
-        return;
+
+        return "Cursos";
 
 //        gchTodosCursos = gchCursoService.findAll();
 //        this.formAtivo = false;
@@ -115,14 +113,50 @@ public class GchCursoBean {
     }
 
     public String excluir(GchCursos gchCurso) {
-        gchCursoService.delete(gchCurso.getCurCodigo());
-        gchTodosCursos.remove(gchCurso);
+
+        String MsgNotificacao = "";
+
+        try {
+
+            GchTreinamentosBean verificaVinculoTreinamento = new GchTreinamentosBean();
+
+            if(gchCurso != null){
+            
+            
+           // boolean PodeExcluir = verificaVinculoTreinamento.buscaTreinamentosPorCurso(gchCurso.getCurCodigo());
+
+            boolean PodeExcluir = true;    
+                
+            if (PodeExcluir) {
+
+                gchCursoService.delete(gchCurso.getCurCodigo());
+                gchTodosCursos.remove(gchCurso);
+                MsgNotificacao = "O curso " + gchCurso.getCurNome() + "foi excluído com sucesso!";
+                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                
+            } else {
+
+                MsgNotificacao = "O curso " + gchCurso.getCurNome() + " está vinculado a um ou mais treinamentos e não pode ser excluído!";
+                Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+            }
+
+            }else{
+                
+                System.out.println("Tá nulllllllllllll  :/ :/");
+                
+            }
+            
+        } catch (Exception ex) {
+            MsgNotificacao = "Uma Exceção não tratada impediu a exclusão do curso!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
+        }
+
         return "Cursos.xhtml";
     }
 
     public String prepareEdit(GchCursos gchCurso) {
         this.gchCurso = gchCurso;
-       return "CadastroPlanoCarreira?faces-redirect=true";
+        return "CadastroPlanoCarreira?faces-redirect=true";
     }
 
     public boolean isFormAtivo() {
@@ -159,6 +193,5 @@ public class GchCursoBean {
     public void setGchCursoService(GchCadastroCursoService gchCursoService) {
         this.gchCursoService = gchCursoService;
     }
-
 
 }

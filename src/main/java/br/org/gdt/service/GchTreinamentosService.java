@@ -44,5 +44,11 @@ public class GchTreinamentosService {
         return gchTreinamentoDAO.findAll();
     }
      
+   public List<GchTreinamentos> BuscaTreinamentoPorCurso(long id){
+       
+       return gchTreinamentoDAO.buscaPorCurso(id);
+       
+   }
+    
     
 }
