@@ -8,13 +8,12 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.service.GchTreinamentoPessoaService;
-import br.org.gdt.service.GchTreinamentosService;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -26,6 +25,8 @@ public class GchTreinamentoPessoaBean {
 
     private boolean formAtivo = false;
 
+    private Map<Long, Boolean> checked = new HashMap<Long, Boolean>();
+    
     private GchTreinamentospessoas gchTreinamentospessoas = new GchTreinamentospessoas();
     private List<GchTreinamentospessoas> todosGchTreinamentosPessoas;
 
@@ -60,10 +61,10 @@ public class GchTreinamentoPessoaBean {
         return "treinamentos";
     }
 
-    public String prepareEdit(GchTreinamentospessoas gchTreinamentospessoas) {
+    public String prepareEdit(GchTreinamentos gchTreinamentos) {
         this.formAtivo = true;
-        this.gchTreinamentospessoas = gchTreinamentospessoas;
-        return "treinamentos";
+        this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos); 
+        return "VincularPessoasTreinamento";
     }
 
     public boolean isFormAtivo() {
@@ -92,6 +93,14 @@ public class GchTreinamentoPessoaBean {
 
     public void setGchTreinamentospessoasService(GchTreinamentoPessoaService gchTreinamentospessoasService) {
         this.gchTreinamentospessoasService = gchTreinamentospessoasService;
+    }
+
+    public Map<Long, Boolean> getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Map<Long, Boolean> checked) {
+        this.checked = checked;
     }
 
 }

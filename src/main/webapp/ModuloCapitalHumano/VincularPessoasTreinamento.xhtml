@@ -10,7 +10,7 @@
 
     </h:head>
     <h:body>
-        <ui:composition template="../../templates/template.xhtml">
+        <ui:composition template="../templates/template.xhtml">
             <ui:define name="content">
 
                 <div id="page" style="margin-top:75px;">
@@ -29,15 +29,8 @@
                                         <h:form id="parentformid">
                                             <h:dataTable class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
 
-
-                                                <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink action="#{NULL}" onclick="return confirm('Voce realmente deseja excluir?')" >
-                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                    </h:commandLink>
-                                                </h:column>
-
                                                 <h:column>
-                                                    <h:selectBooleanCheckbox value="#{null}" />
+                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa.recidpessoa]}" />
                                                 </h:column>
 
                                                 <h:column>      

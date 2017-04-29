@@ -8,51 +8,6 @@
     <h:head>
         <title>Cadastro de treinamento</title>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">    
-    <h:head>
-        <title>Cadastro de treinamento</title>
-
-
-        <!--        <h:outputScript library="primefaces" name="jquery/jquery.js"/>-->
-
-=======
-
-<<<<<<< HEAD
-
-    </h:head>
-    <h:body>
-        <ui:composition template="../templates/template.xhtml">
-            <ui:define name="content">
-
-                <div id="page" style="margin-top:75px;">
-
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="x_panel">
-                                    <div class="panel-heading">
-                                        <h3 class="title_left">
-                                            Cadastro de Treinamentos
-                                        </h3>
-                                    </div>
-
-                                    <div class="panel-body" style="/* align-items: center; */">
-
-                                        <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-                                        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
-
-                                        <!-- Inline CSS based on choices in "Settings" tab -->
-                                        <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
-
-                                        <h:form id="CadastroTreinamento">
-                                            <h:messages class="error" style="color: #d9534f" />
-=======
-
     </h:head>
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
@@ -64,6 +19,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
+                                    
                                     <div class="panel-heading">
                                         <h3 class="title_left">
                                             Cadastro de Treinamentos
@@ -80,17 +36,7 @@
 
                                         <h:form id="CadastroTreinamento">
                                             <h:messages class="error" style="color: #d9534f" />
->>>>>>> origin/master
-=======
                                             <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiCodigo}" />
-
-<<<<<<< HEAD
-=======
-                                            <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiCodigo}" />
->>>>>>> origin/master
-
-<<<<<<< HEAD
-=======
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -153,23 +99,6 @@
                                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                     <!--<h:panelGroup id="otherForms">-->
                                                                     <!--<h:form>-->
->>>>>>> origin/master
-                                        </h3>
-                                    </div>
-
-                                    <div class="panel-body" style="/* align-items: center; */">
-
-                                        <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-                                        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
-
-                                        <!-- Inline CSS based on choices in "Settings" tab -->
-                                        <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
-
-                                        <h:form id="CadastroTreinamento">
-                                            <h:messages class="error" style="color: #d9534f" />
-
-=======
-                                            <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiCodigo}" />
                                                                     <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" converter="#{generic}" class="form-control"  >
                                                                         <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
                                                                         <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.munDescricao}"  />
@@ -195,7 +124,6 @@
                                                         <div class="form-group">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                                                 <label class="control-label " for="date">
-
                                                                     Data de fim
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
@@ -212,8 +140,6 @@
                                                                                                                                 </button>-->
 
 
-=======
-                                                                <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentosBean.save}" value="Cadastrar" /> 
                                                                 <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentosBean.save}" value="Cadastrar" /> 
 
                                                             </div>
@@ -240,15 +166,4 @@
 
     </h:body>
 </html>
-<<<<<<< HEAD
-                                                                    <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" converter="#{generic}" class="form-control"  >
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
-                                                                        <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.munDescricao}"  />
-=======
-                                                                    <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" class="form-control"  >
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                                                        <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio.munCodigo}" itemLabel="#{municipio.munDescricao}"/>
-                                                                    <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" converter="#{generic}" class="form-control"  >
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
-                                                                        <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.munDescricao}"  />
->>>>>>> origin/master
+
