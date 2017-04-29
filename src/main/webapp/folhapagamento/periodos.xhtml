@@ -111,6 +111,7 @@
                             </h:commandButton>
                         </div>
                         <div class="row">
+                            <p>Poderá ter apenas um período ativo. Períodos que já foram pagos não poderão ser alterados.</p>
                             <div class="x_panel">
                                 <div class="x_content">
                                     <h:dataTable class="table table-striped" value="#{fpPeriodoBean.todosFpPeriodo}" var="periodo">
@@ -139,14 +140,14 @@
                                             </h:outputText>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Ativo?</f:facet>
+                                            <f:facet name="header">Pago?</f:facet>
                                             <h:selectBooleanCheckbox disabled="true" value="#{periodo.perAtivo}" />
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Opções</f:facet>
                                             <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpPeriodoBean.prepareEdit(periodo)}">
                                             </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Ativar/Desativar" action="#{fpPeriodoBean.desativar(periodo)}" onclick="return confirm('Ativar/Desativar periodo?')">
+                                            <h:commandLink class="btn btn-link btn-small" value="Pagar/Despagar" action="#{fpPeriodoBean.desativar(periodo)}" onclick="return confirm('Pagar/Despagar período?')">
                                                 <f:ajax execute="@form" render="formPeriodo" />
                                             </h:commandLink>
                                         </h:column>                  
