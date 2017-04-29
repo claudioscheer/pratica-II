@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       <ui:composition template="../../templates/template.xhtml">
+        <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">
                 <h:form>
                     <div id="page" style="margin-top:75px;">
@@ -194,58 +194,26 @@
                                                 <div class="row">
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <form method="post">
-                                                            <div class="form-group">
-                                                                <label class="control-label requiredField" for="txbnomeTreinamento">
-                                                                    Nome do Treinamento
-                                                                    <span class="asteriskField">
-                                                                        *
-                                                                    </span>
-                                                                </label>                                                           
-                                                                <h:inputText class="form-control" id="txbnomeTreinamento" a:placeholder="Adicione um nome para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiNome}"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label requiredField" for="txbnomeTreinamento">
-                                                                   Descrição                                                                    
-                                                                </label>                                                           
-                                                                <h:inputText class="form-control" id="txbDescricaoTreinamento" a:placeholder="Adicione uma descrição para o treinamento" value="#{gchTreinamentosBean.gchTreinamentos.treiDescricao}"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label requiredField" for="txbLocalTreinamento">
-                                                                    Local do Treinamento
-                                                                    <span class="asteriskField">
-                                                                        *
-                                                                    </span>
-                                                                </label>                                                            
-                                                                <h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label " for="date">
-                                                                    Data do Treinamento
-                                                                </label>
-                                                                <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
-                                                                <h:inputText class="form-control" id="date" a:placeholder="DD/MM/YYYY" />
-                                                            </div>                                                       
+
                                                             <div class="form-group">
                                                                 <label class="control-label " for="txbParticipantesTreinamento">
                                                                     Participantes
                                                                 </label>
-                                                               
-                                                                    <div id="big" style="width: 616px;height: 250px;border:1px solid black" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <section id="SessaoPessoas" style="top:10px;right: 50px" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-                                                                            <div class="dragInativo" id="boxA" draggable="true" ondragstart="return dragStart(event)">Alisson</div>
-                                                                            <div class="dragInativo" id="boxB" draggable="true" ondragstart="return dragStart(event)">Diego</div>
-                                                                            <div class="dragAtivo" id="boxC" draggable="true" ondragstart="return dragStart(event)">Florinda</div>
-                                                                            <div class="dragAtivo" id="boxD" draggable="true" ondragstart="return dragStart(event)">Larissa</div>
-                                                                            <div class="dragAtivo" id="boxE" draggable="true" ondragstart="return dragStart(event)">Claudio</div>
-                                                                            <div class="dragInativo" id="boxF" draggable="true" ondragstart="return dragStart(event)">Marcos</div>
-                                                                            <div class="dragAtivo" id="boxG" draggable="true" ondragstart="return dragStart(event)">Juliano</div>
-                                                                            <div class="dragAtivo" id="boxH" draggable="true" ondragstart="return dragStart(event)">Dimas</div>
-                                                                            
-                                                                        </section>
-                                                                    </div>
-                                                              
+
+                                                                <div id="big" style="width: 616px;height: 250px;border:1px solid black" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <section id="SessaoPessoas" style="top:10px;right: 50px" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+
+                                                                        <ui:repeat value="#{recPessoaBean.recPessoas}" var="pessoa" varStatus="pessoaStatus">
+                                                                            <div class="dragInativo" id="boxA" draggable="true" ondragstart="return dragStart(event)">
+                                                                                <h:outputLabel value="#{pessoa.recNomecompleto}" />
+                                                                            </div>                                                                            
+                                                                        </ui:repeat>
+                                                                        
+                                                                    </section>
+                                                                </div>
+
                                                             </div>  
                                                             <div class="form-group">
                                                                 <div>
