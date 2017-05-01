@@ -12,6 +12,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -40,7 +41,10 @@ public class GchPerguntas implements Serializable {
     private long perDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perCodigo")
     private List<GchAlternativasperguntas> gchAlternativasperguntasList;
-
+    
+    @ManyToOne
+    private GchFormulario formulario;
+    
     public GchPerguntas() {
     }
 
@@ -67,6 +71,18 @@ public class GchPerguntas implements Serializable {
 
     public void setPerDescricao(long perDescricao) {
         this.perDescricao = perDescricao;
+    }
+    
+     public void setFaiTabela(GchFormulario formulario) {
+        this.formulario = formulario;
+    }
+
+    public GchFormulario getFormulario() {
+        return formulario;
+    }
+
+    public void setFormulario(GchFormulario formulario) {
+        this.formulario = formulario;
     }
 
     @XmlTransient

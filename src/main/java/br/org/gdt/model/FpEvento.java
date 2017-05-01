@@ -15,13 +15,12 @@ public class FpEvento implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
     private long eveId;
-    private boolean eveEventoVariavel;
     private String eveNome;
     private String eveFormula;
     private FpTipoEvento eveTipoEvento;
     private boolean eveIncideINSS;
     private boolean eveIncideFGTS;
-    private boolean eveIncideIR;
+    private boolean eveIncideIRRF;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_evento")
@@ -31,14 +30,6 @@ public class FpEvento implements java.io.Serializable {
 
     public void setEveId(long eveId) {
         this.eveId = eveId;
-    }
-
-    public boolean isEveEventoVariavel() {
-        return eveEventoVariavel;
-    }
-
-    public void setEveEventoVariavel(boolean eveEventoVariavel) {
-        this.eveEventoVariavel = eveEventoVariavel;
     }
 
     public String getEveNome() {
@@ -81,12 +72,12 @@ public class FpEvento implements java.io.Serializable {
         this.eveIncideFGTS = eveIncideFGTS;
     }
 
-    public boolean isEveIncideIR() {
-        return eveIncideIR;
+    public boolean isEveIncideIRRF() {
+        return eveIncideIRRF;
     }
 
-    public void setEveIncideIR(boolean eveIncideIR) {
-        this.eveIncideIR = eveIncideIR;
+    public void setEveIncideIRRF(boolean eveIncideIRRF) {
+        this.eveIncideIRRF = eveIncideIRRF;
     }
 
 }

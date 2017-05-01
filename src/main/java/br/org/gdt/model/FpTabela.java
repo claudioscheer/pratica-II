@@ -20,8 +20,7 @@ public class FpTabela implements java.io.Serializable {
     private static final long serialVersionUID = -2790083349568956163L;
     private long tabId;
     private String tabNome;
-    private boolean tabAtivo;
-    private List<FpFaixa> tabFaixas;
+    private List<FpTabelaVigencia> tabVigencias;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_tabela")
@@ -41,30 +40,22 @@ public class FpTabela implements java.io.Serializable {
         this.tabNome = tabNome;
     }
 
-    public boolean isTabAtivo() {
-        return tabAtivo;
-    }
-
-    public void setTabAtivo(boolean tabAtivo) {
-        this.tabAtivo = tabAtivo;
-    }
-
-    @OneToMany(mappedBy = "faiTabela", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<FpFaixa> getTabFaixas() {
-        if (this.tabFaixas == null) {
-            this.tabFaixas = new ArrayList<>();
+    @OneToMany(mappedBy = "tabVigenciaTabela", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<FpTabelaVigencia> getTabVigencias() {
+        if (this.tabVigencias == null) {
+            this.tabVigencias = new ArrayList<>();
         }
-        return tabFaixas;
+        return tabVigencias;
     }
 
-    public void setTabFaixas(List<FpFaixa> tabFaixas) {
-        this.tabFaixas = tabFaixas;
+    public void setTabVigencias(List<FpTabelaVigencia> tabVigencias) {
+        this.tabVigencias = tabVigencias;
     }
 
-    public void addFaixa(FpFaixa fpFaixa) {
-        if (fpFaixa != null) {
-            fpFaixa.setFaiTabela(this);
-            this.getTabFaixas().add(fpFaixa);
+    public void addTabVigencia(FpTabelaVigencia fpTabelaVigencia) {
+        if (fpTabelaVigencia != null) {
+            fpTabelaVigencia.setTabVigenciaTabela(this);
+            this.getTabVigencias().add(fpTabelaVigencia);
         }
     }
 

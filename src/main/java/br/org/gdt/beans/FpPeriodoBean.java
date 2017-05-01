@@ -36,7 +36,7 @@ public class FpPeriodoBean {
         if (fpPeriodo.getPerId() > 0) {
             fpPeriodoService.update(fpPeriodo);
         } else {
-            fpPeriodo.setPerAtivo(true);
+            fpPeriodo.setPerPago(true);
             fpPeriodoService.save(fpPeriodo);
         }
         todosFpPeriodo = fpPeriodoService.findAll();
@@ -52,14 +52,6 @@ public class FpPeriodoBean {
 
         if (dataFinal.before(dataInicial)) {
             return "A Data final precisa ser maior que a Data inicial.";
-        }
-
-        Calendar dataAtual = Calendar.getInstance();
-        dataAtual.add(Calendar.MONTH, -1);
-        dataAtual.set(Calendar.DAY_OF_MONTH, 1);
-
-        if (dataAtual.after(dataInicial)) {
-            return String.format("A Data inicial precisa ser maior que o mês %s.", new SimpleDateFormat("MM").format(dataAtual.getTime()));
         }
 
         int diasEntreDatas = ((int) ((dataFinal.getTimeInMillis() - dataInicial.getTimeInMillis()) / (1000 * 60 * 60 * 24))) + 1;
@@ -78,23 +70,14 @@ public class FpPeriodoBean {
     }
 
     public void add() {
-        if (fpPeriodoService.temPeriodoAtivo()) {
-            return;
-        }
-
         this.formAtivo = true;
         this.fpPeriodo = new FpPeriodo();
     }
 
-    public String desativar(FpPeriodo fpPeriodo) {
-        fpPeriodo.setPerAtivo(!fpPeriodo.isPerAtivo());
-        fpPeriodoService.update(fpPeriodo);
-        return "periodos";
-    }
-
     public String prepareEdit(FpPeriodo fpPeriodo) {
-        if (!fpPeriodo.isPerAtivo()) {
-            return "";
+        if (!fpPeriodo.isPerPago()) {
+            Helper.mostrarNotificacao("Período", "Período já está pago, não pode ser editado.", "info");
+            return "periodos";
         }
 
         this.formAtivo = true;

@@ -22,69 +22,133 @@
                         <h:inputHidden value="#{fpTabelaBean.fpTabela.tabId}" />
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText label="Nome" required="true" requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpTabelaBean.fpTabela.tabNome}" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tabAtivo"></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="checkbox">
-                                            <label>
-                                                <h:selectBooleanCheckbox value="#{fpTabelaBean.fpTabela.tabAtivo}" /> Tabela está ativa?
-                                            </label>
+
+                                <h:panelGroup layout="block" rendered="#{fpTabelaBean.adicionandoVigencia}">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Data vigência<span class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <h:inputText label="Data vigência" required="true" requiredMessage="Campo Data vigência é obrigatório." class="form-control col-md-7 col-xs-12 date-picker" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaData}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:inputText>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <h4 class="col-md-3 col-sm-3 col-xs-12">Faixas</h4>
-                                    <div class="text-center col-md-3 col-sm-3 col-xs-12 col-md-offset-6">
-                                        <h:commandButton class="btn btn-primary" value="Adicionar faixa" action="#{fpTabelaBean.addNovaFaixa()}">
-                                            <f:ajax execute="@form" render="panelInserirTabela" />
-                                        </h:commandButton>
-                                    </div>
-                                </div>
-                                <div class="ln_solid" style="margin-top: 0"></div>
-                                <ui:repeat value="#{fpTabelaBean.fpTabela.tabFaixas}" var="faixa" varStatus="faixaStatus">
-                                    <div class="row">
-                                        <div class="form-group col-md-2 col-sm-2">
-                                            <label class="control-label">Mín.(R$)<span class="required">*</span></label>
-                                            <h:inputText label="Mín.(R$)" class="form-control" value="#{fpTabelaBean.fpTabela.tabFaixas[faixaStatus.index].faiMinimo}" />
-                                        </div>
-                                        <div class="form-group col-md-2 col-sm-2">
-                                            <label class="control-label">Máx.(R$)<span class="required">*</span></label>
-                                            <h:inputText label="Máx.(R$)" class="form-control" value="#{fpTabelaBean.fpTabela.tabFaixas[faixaStatus.index].faiMaximo}" />
-                                        </div>
-                                        <div class="form-group col-md-2 col-sm-2">
-                                            <label class="control-label">Valor<span class="required">*</span></label>
-                                            <h:inputText label="Valor" class="form-control" value="#{fpTabelaBean.fpTabela.tabFaixas[faixaStatus.index].faiValor}" />
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <label class="control-label">Tipo valor<span class="required">*</span></label>
-                                            <h:selectOneMenu value="#{fpTabelaBean.fpTabela.tabFaixas[faixaStatus.index].faiTipoValor}" class="form-control">
-                                                <f:selectItems value="#{dadosComuns.tipoValorFaixas}" />
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="text-center col-md-3 col-sm-3" style="padding-top: 27px">
-                                            <h:commandButton class="btn btn-danger btn-sm" value="Remover" action="#{fpTabelaBean.removerFaixa(faixaStatus.index)}">
-                                                <f:ajax execute="@form" render="formTabela:panelInserirTabela" />
+                                    <div class="form-group">
+                                        <h4 class="col-md-3 col-sm-3 col-xs-12">Faixas</h4>
+                                        <div class="text-center col-md-3 col-sm-3 col-xs-12 col-md-offset-6">
+                                            <h:commandButton class="btn btn-primary" value="Adicionar faixa" action="#{fpTabelaBean.addNovaFaixa()}">
+                                                <f:ajax execute="@form" render="formTabela" />
                                             </h:commandButton>
                                         </div>
                                     </div>
-                                </ui:repeat>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpTabelaBean.save()}">
-                                            <f:ajax execute="@form" render="formTabela" />
-                                        </h:commandButton>
-                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpTabelaBean.cancel()}">
-                                            <f:ajax execute="@form" render="formTabela" />
-                                        </h:commandButton>
+                                    <div class="ln_solid" style="margin-top: 0"></div>
+                                    <ui:repeat value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas}" var="faixa" varStatus="faixaStatus">
+                                        <div class="row">
+                                            <div class="form-group col-md-2 col-sm-2">
+                                                <label class="control-label">Limite</label>
+                                                <h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
+                                            </div>
+                                            <div class="form-group col-md-2 col-sm-2">
+                                                <label class="control-label">Dedução</label>
+                                                <h:inputText label="Dedução" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiValorDeducao}" />
+                                            </div>
+                                            <div class="form-group col-md-2 col-sm-2">
+                                                <label class="control-label">Valor</label>
+                                                <h:inputText label="Valor" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiValor}" />
+                                            </div>
+                                            <div class="form-group col-md-3 col-sm-3">
+                                                <label class="control-label">Tipo valor</label>
+                                                <h:selectOneMenu value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiTipoValor}" class="form-control">
+                                                    <f:selectItems value="#{dadosComuns.tipoValorFaixas}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="text-center col-md-3 col-sm-3" style="padding-top: 27px">
+                                                <h:commandButton class="btn btn-danger btn-sm" value="Remover" action="#{fpTabelaBean.removerFaixa(faixaStatus.index)}">
+                                                    <f:ajax execute="@form" render="formTabela:panelInserirTabela" />
+                                                </h:commandButton>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <h:commandButton class="btn btn-success" value="Salvar vigência" action="#{fpTabelaBean.saveTabelaVigencia()}">
+                                                <f:ajax execute="@form" render="formTabela" />
+                                            </h:commandButton>
+                                            <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpTabelaBean.cancelTabelaVigencia()}">
+                                                <f:ajax execute="@form" render="formTabela" />
+                                            </h:commandButton>
+                                        </div>
                                     </div>
-                                </div>
+                                </h:panelGroup>
+
+                                <h:panelGroup layout="block" rendered="#{!fpTabelaBean.adicionandoVigencia}">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <h:inputText label="Nome" required="true" requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpTabelaBean.fpTabela.tabNome}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4 class="col-md-3 col-sm-3 col-xs-12">Vigências</h4>
+                                        <div class="text-center col-md-3 col-sm-3 col-xs-12 col-md-offset-6">
+                                            <h:commandButton class="btn btn-primary" value="Adicionar vigência" action="#{fpTabelaBean.addNovaVigencia()}">
+                                                <f:ajax execute="@form" render="formTabela" />
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                    <ui:repeat value="#{fpTabelaBean.fpTabela.tabVigencias}" var="vigencia" varStatus="vigenciaStatus">
+                                        <div class="ln_solid" style="margin-top: 0"></div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <b>Data vigência: </b>
+                                                <h:outputText value="#{vigencia.tabVigenciaData}">
+                                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpTabelaBean.editarVigencia(vigencia)}">
+                                                    <f:ajax execute="@form" render="formTabela" />
+                                                </h:commandLink>
+                                                <h:commandLink class="btn btn-link btn-small" value="Remover" action="#{fpTabelaBean.removerVigencia(vigenciaStatus.index)}" onclick="return confirm('Excluir vigência?')">
+                                                    <f:ajax execute="@form" render="formTabela" />
+                                                </h:commandLink>
+                                            </div>
+                                        </div>
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <h:dataTable class="table table-striped" value="#{vigencia.tabVigenciaFaixas}" var="faixa">
+                                                    <h:column>
+                                                        <f:facet name="header">Limite</f:facet>
+                                                            #{faixa.faiLimite}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Dedução</f:facet>
+                                                            #{faixa.faiValorDeducao}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Valor</f:facet>
+                                                            #{faixa.faiValor}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Tipo valor</f:facet>
+                                                            #{faixa.faiTipoValor}
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <h:commandButton class="btn btn-success" value="Salvar" action="#{fpTabelaBean.save()}">
+                                                <f:ajax execute="@form" render="formTabela" />
+                                            </h:commandButton>
+                                            <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpTabelaBean.cancel()}">
+                                                <f:ajax execute="@form" render="formTabela" />
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                     </h:panelGroup>
@@ -108,15 +172,11 @@
                                                 #{tabela.tabNome}
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Ativa?</f:facet>
-                                            <h:selectBooleanCheckbox disabled="true" value="#{tabela.tabAtivo}" />
-                                        </h:column>
-                                        <h:column>
                                             <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpTabelaBean.prepareEdit(tabela)}">
+                                            <h:commandLink class="btn btn-link btn-small" value="Ver vigências" action="#{fpTabelaBean.prepareEdit(tabela)}">
                                                 <f:ajax execute="@form" render="formTabela" />
                                             </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpTabelaBean.excluir(tabela)}" onclick="return confirm('Excluir tabela?')">
+                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpTabelaBean.excluir(tabela)}" onclick="return confirm('Excluir tabela e suas vigências?')">
                                                 <f:ajax execute="@form" render="formTabela" />
                                             </h:commandLink>
                                         </h:column>                  

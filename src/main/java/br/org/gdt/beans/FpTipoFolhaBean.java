@@ -32,11 +32,6 @@ public class FpTipoFolhaBean {
     }
 
     public void save() {
-        if (fpTipoFolha.getTipoEventos().size() <= 0) {
-            Helper.setMensagemDeErro("Nenhum evento relacionado.");
-            return;
-        }
-        
         if (fpTipoFolha.getTipoId() > 0) {
             fpTipoFolhaService.update(fpTipoFolha);
         } else {
@@ -61,8 +56,6 @@ public class FpTipoFolhaBean {
         FpEvento fpEvento = fpEventoService.findById(eventoCodigo);
         if (fpEvento == null) {
             Helper.mostrarNotificacao("Evento", "O evento não existe.", "error");
-        } else if (fpEvento.isEveEventoVariavel()) {
-            Helper.mostrarNotificacao("Evento", "O evento não pode ser variável.", "error");
         } else {
             boolean hasEvento = false;
             for (FpEvento e : fpTipoFolha.getTipoEventos()) {
@@ -72,7 +65,7 @@ public class FpTipoFolhaBean {
                 }
             }
             if (hasEvento) {
-                Helper.mostrarNotificacao("Evento", "Evento já adicionado.", "info");
+                Helper.mostrarNotificacao("Evento", "Evento já está adicionado.", "info");
             } else {
                 this.fpTipoFolha.getTipoEventos().add(fpEvento);
                 this.eventoCodigo = 0;

@@ -22,7 +22,7 @@ public class FpPeriodo implements java.io.Serializable {
     private int perDiasNaoUteis;
     private Date perDataInicial;
     private Date perDataFinal;
-    private boolean perAtivo;
+    private boolean perPago;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_periodo")
@@ -84,12 +84,12 @@ public class FpPeriodo implements java.io.Serializable {
         this.perDataFinal = perDataFinal;
     }
 
-    public boolean isPerAtivo() {
-        return perAtivo;
+    public boolean isPerPago() {
+        return perPago;
     }
 
-    public void setPerAtivo(boolean perAtivo) {
-        this.perAtivo = perAtivo;
+    public void setPerPago(boolean perPago) {
+        this.perPago = perPago;
     }
 
 }

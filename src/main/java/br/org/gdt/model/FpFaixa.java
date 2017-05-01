@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @SequenceGenerator(name = "seq_fp_faixa", sequenceName = "seq_fp_faixa", allocationSize = 1)
@@ -17,18 +16,13 @@ public class FpFaixa implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
     private long faiId;
-    private FpTabela faiTabela;
-    private double faiMinimo;
-    private double faiMaximo;
+    private FpTabelaVigencia faiTabelaVigencia;
+    private double faiLimite;
     private double faiValor;
+    private double faiValorDeducao;
     private FpTipoValorFaixa faiTipoValor;
-    private int faiOrdem;
 
     public FpFaixa() {
-    }
-
-    public FpFaixa(int faiOrdem) {
-        this.faiOrdem = faiOrdem;
     }
 
     @Id
@@ -42,28 +36,20 @@ public class FpFaixa implements java.io.Serializable {
     }
 
     @ManyToOne
-    public FpTabela getFaiTabela() {
-        return faiTabela;
+    public FpTabelaVigencia getFaiTabelaVigencia() {
+        return faiTabelaVigencia;
     }
 
-    public void setFaiTabela(FpTabela faiTabela) {
-        this.faiTabela = faiTabela;
+    public void setFaiTabelaVigencia(FpTabelaVigencia faiTabelaVigencia) {
+        this.faiTabelaVigencia = faiTabelaVigencia;
     }
 
-    public double getFaiMinimo() {
-        return faiMinimo;
+    public double getFaiLimite() {
+        return faiLimite;
     }
 
-    public void setFaiMinimo(double faiMinimo) {
-        this.faiMinimo = faiMinimo;
-    }
-
-    public double getFaiMaximo() {
-        return faiMaximo;
-    }
-
-    public void setFaiMaximo(double faiMaximo) {
-        this.faiMaximo = faiMaximo;
+    public void setFaiLimite(double faiLimite) {
+        this.faiLimite = faiLimite;
     }
 
     public double getFaiValor() {
@@ -74,21 +60,20 @@ public class FpFaixa implements java.io.Serializable {
         this.faiValor = faiValor;
     }
 
+    public double getFaiValorDeducao() {
+        return faiValorDeducao;
+    }
+
+    public void setFaiValorDeducao(double faiValorDeducao) {
+        this.faiValorDeducao = faiValorDeducao;
+    }
+
     public FpTipoValorFaixa getFaiTipoValor() {
         return faiTipoValor;
     }
 
     public void setFaiTipoValor(FpTipoValorFaixa faiTipoValor) {
         this.faiTipoValor = faiTipoValor;
-    }
-
-    @Transient
-    public int getFaiOrdem() {
-        return faiOrdem;
-    }
-
-    public void setFaiOrdem(int faiOrdem) {
-        this.faiOrdem = faiOrdem;
     }
 
 }
