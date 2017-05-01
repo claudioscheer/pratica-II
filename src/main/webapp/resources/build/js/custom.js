@@ -1816,6 +1816,24 @@ function init_daterangepicker_single_call() {
 
 }
 
+$(window).load(function () {
+    if (typeof (jsf) !== 'undefined') {
+        jsf.ajax.addOnEvent(function (data) {
+            if (data.status === 'success') {
+                $('.date-picker').daterangepicker({
+                    locale: {
+                        format: 'DD/MM/YYYY'
+                    },
+                    singleDatePicker: true,
+                    singleClasses: "picker_4"
+                }, function (start, end, label) {
+                    console.log(start.toISOString(), end.toISOString(), label);
+                });
+            }
+        });
+    }
+});
+
 
 function init_daterangepicker_reservation() {
 

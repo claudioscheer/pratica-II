@@ -1,25 +1,23 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.FpFaixa;
 import br.org.gdt.model.FpTabela;
+import br.org.gdt.model.FpTabelaVigencia;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpTabelaService;
 import java.util.List;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
 public class FpTabelaBean {
 
     private boolean formAtivo = false;
+    private boolean adicionandoVigencia = false;
 
-    private int indexFaixaItem = 0;
-
+    private FpTabelaVigencia fpTabelaVigencia = new FpTabelaVigencia();
     private FpTabela fpTabela = new FpTabela();
     private List<FpTabela> todasFpTabela;
 
@@ -30,11 +28,11 @@ public class FpTabelaBean {
     }
 
     public void save() {
-        if (fpTabela.getTabFaixas().size() <= 0) {
-            Helper.setMensagemDeErro("Nenhuma faixa inserida.");
+        if (fpTabela.getTabVigencias().size() <= 0){
+            Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma vigência.", "info");
             return;
         }
-
+        
         if (fpTabela.getTabId() > 0) {
             fpTabelaService.update(fpTabela);
         } else {
@@ -44,23 +42,50 @@ public class FpTabelaBean {
         this.formAtivo = false;
     }
 
+    public void saveTabelaVigencia() {
+        if (fpTabelaVigencia.getTabVigenciaFaixas().size() <= 0){
+            Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma faixa.", "info");
+            return;
+        }
+        
+        if (fpTabelaVigencia.getTabVigenciaId() <= 0) {
+            this.fpTabela.addTabVigencia(fpTabelaVigencia);
+        }
+        this.adicionandoVigencia = false;
+    }
+
     public void cancel() {
         this.formAtivo = false;
         this.fpTabela = new FpTabela();
     }
 
+    public void cancelTabelaVigencia() {
+        this.adicionandoVigencia = false;
+        this.fpTabelaVigencia = new FpTabelaVigencia();
+    }
+
+    public void addNovaVigencia() {
+        this.adicionandoVigencia = true;
+        this.fpTabelaVigencia = new FpTabelaVigencia();
+        this.addNovaFaixa();
+    }
+
+    public void removerVigencia(int index) {
+        this.fpTabela.getTabVigencias().remove(index);
+    }
+
     public void addNovaFaixa() {
-        this.fpTabela.addFaixa(new FpFaixa(++indexFaixaItem));
+        this.fpTabelaVigencia.addFaixa(new FpFaixa());
     }
 
     public void removerFaixa(int index) {
-        this.fpTabela.getTabFaixas().remove(index);
+        this.fpTabelaVigencia.getTabVigenciaFaixas().remove(index);
     }
 
     public void add() {
         this.formAtivo = true;
+        this.adicionandoVigencia = false;
         this.fpTabela = new FpTabela();
-        this.addNovaFaixa();
     }
 
     public String excluir(FpTabela fpTabela) {
@@ -74,6 +99,11 @@ public class FpTabelaBean {
         this.fpTabela = fpTabela;
         return "tabelas";
     }
+    
+    public void editarVigencia(FpTabelaVigencia fpTabelaVigencia) {
+        this.adicionandoVigencia = true;
+        this.fpTabelaVigencia = fpTabelaVigencia;
+    }
 
     public FpTabela getFpTabela() {
         return fpTabela;
@@ -81,6 +111,14 @@ public class FpTabelaBean {
 
     public void setFpTabela(FpTabela fpTabela) {
         this.fpTabela = fpTabela;
+    }
+
+    public FpTabelaVigencia getFpTabelaVigencia() {
+        return fpTabelaVigencia;
+    }
+
+    public void setFpTabelaVigencia(FpTabelaVigencia fpTabelaVigencia) {
+        this.fpTabelaVigencia = fpTabelaVigencia;
     }
 
     public List<FpTabela> getTodasFpTabela() {
@@ -108,6 +146,14 @@ public class FpTabelaBean {
 
     public void setFormAtivo(boolean formAtivo) {
         this.formAtivo = formAtivo;
+    }
+
+    public boolean isAdicionandoVigencia() {
+        return adicionandoVigencia;
+    }
+
+    public void setAdicionandoVigencia(boolean adicionandoVigencia) {
+        this.adicionandoVigencia = adicionandoVigencia;
     }
 
 }

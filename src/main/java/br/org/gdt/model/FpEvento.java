@@ -15,7 +15,6 @@ public class FpEvento implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
     private long eveId;
-    private boolean eveEventoVariavel;
     private String eveNome;
     private String eveFormula;
     private FpTipoEvento eveTipoEvento;
@@ -31,14 +30,6 @@ public class FpEvento implements java.io.Serializable {
 
     public void setEveId(long eveId) {
         this.eveId = eveId;
-    }
-
-    public boolean isEveEventoVariavel() {
-        return eveEventoVariavel;
-    }
-
-    public void setEveEventoVariavel(boolean eveEventoVariavel) {
-        this.eveEventoVariavel = eveEventoVariavel;
     }
 
     public String getEveNome() {
