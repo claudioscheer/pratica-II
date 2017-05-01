@@ -40,7 +40,7 @@ public class FpTipoFolha implements java.io.Serializable {
         this.tipoDescricao = tipoDescricao;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<FpEvento> getTipoEventos() {
         if (this.tipoEventos == null) {
             this.tipoEventos = new ArrayList<>();

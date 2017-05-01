@@ -24,6 +24,12 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-horizontal form-label-left">
                                 <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Código</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h:inputText disabled="true" class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveId}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <h:inputText required="true" requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveNome}" />
@@ -68,17 +74,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="checkbox">
                                             <label>
-                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideIR}" /> Incide IR?
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="checkbox">
-                                            <label>
-                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveEventoVariavel}" /> Evento variável?
+                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideIRRF}" /> Incide IRRF?
                                             </label>
                                         </div>
                                     </div>
@@ -123,6 +119,10 @@
                                                                 <tr>
                                                                     <th scope="row">$hm</th>
                                                                     <td>Horas mensais</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">$sf</th>
+                                                                    <td>Salário funcionário</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">$sb</th>
@@ -186,8 +186,8 @@
                                                 #{evento.eveFormula}
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Variável?</f:facet>
-                                            <h:selectBooleanCheckbox disabled="true" value="#{evento.eveEventoVariavel}" />
+                                            <f:facet name="header">Tipo</f:facet>
+                                                #{evento.eveTipoEvento}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Opções</f:facet>

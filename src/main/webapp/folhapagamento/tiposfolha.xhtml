@@ -97,6 +97,10 @@
                                                 #{tipoFolha.tipoDescricao}
                                         </h:column>
                                         <h:column>
+                                            <f:facet name="header">Eventos</f:facet>
+                                                #{tipoFolha.tipoEventos.size()}
+                                        </h:column>
+                                        <h:column>
                                             <f:facet name="header">Opções</f:facet>
                                             <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpTipoFolhaBean.prepareEdit(tipoFolha)}">
                                                 <f:ajax execute="@form" render="formTipoFolha" />
