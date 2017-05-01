@@ -9,7 +9,7 @@
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
-                <title>Cursos Cadastrados</title>
+                <title>Formulários cadastrados</title>
                 
                 <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>
             </ui:define>
@@ -22,31 +22,31 @@
                                  <div class="x_panel">
                                     <div class="form-group" style="float: right;margin-top: 10px">
                                         <div>
-                                            <h:link  outcome="CadastroCurso.xhtml" class="btn btn-primary " value="Novo Curso"/>
+                                            <h:link  outcome="CadastroFormularioDinamico.xhtml" class="btn btn-primary " value="Novo Formulário"/>
                                         </div>
                                     </div>
                                     <div class="panel-heading">
                                         <h3 class="title_left">
-                                            Cursos Cadastrados
+                                            Formulários Cadastrados
                                         </h3>
                                     </div>
                                     <div class="panel-body" style="/* align-items: center; */">
 
-                                        <h:form id="formCursos">
+                                        <h:form id="formFormulario">
 
-                                            <h:dataTable id="tabelCursos" class="table table-striped " value="#{gchCursoBean.gchTodosCursos}" var="curso" >
+                                            <h:dataTable id="tabelCursos" class="table table-striped " value="#{gchFormularioDinamico.gchTodosFormularios}" var="formulario" >
 
                                                 <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink  id="btnExcluir" h:tooltip="Exclui Curso" action="#{gchCursoBean.excluir(curso)}" onclick="return confirm('Voce realmente deseja excluir este curso?')" >
+                                                    <h:commandLink  id="btnExcluir" h:tooltip="Exclui Curso" action="#{gchFormularioDinamico.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
                                                       
-                                                        <f:ajax execute="@this"  event="action" render=":formCursos" ></f:ajax>
-                                                          <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"><div class="tooltip"><span class="tooltiptext">Excluir Curso</span></div> </i>
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" ></f:ajax>
+                                                          <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"><div class="tooltip"><span class="tooltiptext">Excluir Formulário</span></div> </i>
                                                        
                                                     </h:commandLink>
 
                                                 </h:column>
                                                 <h:column>                
-                                                    <h:commandLink action="#{gchCursoBean.buscaPorId(curso.curCodigo)}">
+                                                    <h:commandLink >
                                                        
                                                         <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                     </h:commandLink>
@@ -54,23 +54,14 @@
 
                                                 <h:column>   
                                                     <f:facet name="header">Nome</f:facet>
-                                                    <h:outputText value="#{curso.curNome}"/>                
+                                                    <h:outputText value="#{formulario.formNome}"/>                
                                                 </h:column>
 
                                                 <h:column>                
-                                                    <f:facet name="header">Palestrante</f:facet>
-                                                    <h:outputText value="#{curso.curNomePalestrante}"/>                
+                                                    <f:facet name="header">Prazo de Resposta</f:facet>
+                                                    <h:outputText value="#{formulario.formPrazoResposta}"/>                
                                                 </h:column>
 
-                                                <h:column>                
-                                                    <f:facet name="header">E-mail Palestrante</f:facet>
-                                                    <h:outputText value="#{curso.curEmailPalestrante}"/>                
-                                                </h:column>
-
-                                                <h:column>                
-                                                    <f:facet name="header">Data de Inclusão</f:facet>
-                                                    <h:outputText value="#{curso.curDatainclusao}"/>                
-                                                </h:column>
                                             </h:dataTable>
 
                                         </h:form> </div>

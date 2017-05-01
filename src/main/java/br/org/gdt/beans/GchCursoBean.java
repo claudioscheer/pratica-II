@@ -123,7 +123,7 @@ public class GchCursoBean {
             if(gchCurso != null){
             
             
-           // boolean PodeExcluir = verificaVinculoTreinamento.buscaTreinamentosPorCurso(gchCurso.getCurCodigo());
+//           boolean PodeExcluir = verificaVinculoTreinamento.buscaTreinamentosPorCurso(gchCurso.getCurCodigo());
 
             boolean PodeExcluir = true;    
                 
@@ -151,7 +151,7 @@ public class GchCursoBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
         }
 
-        return "Cursos.xhtml";
+        return "Cursos";
     }
 
     public String prepareEdit(GchCursos gchCurso) {
