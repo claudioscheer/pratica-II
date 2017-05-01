@@ -36,6 +36,9 @@ public class RecPessoaBean {
     }
 
     public List<RecPessoa> getRecPessoas() {
+        if (recPessoas == null) {
+            recPessoas = recPessoaService.ListarTodas();
+        }
         return recPessoas;
     }
 

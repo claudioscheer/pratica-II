@@ -7,25 +7,31 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchTreinamentoPessoaService;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Diego
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchTreinamentoPessoaBean {
 
     private boolean formAtivo = false;
 
-    private Map<Long, Boolean> checked = new HashMap<Long, Boolean>();
+    private Map<RecPessoa, Boolean> checked = new HashMap<RecPessoa, Boolean>();
+
+    private List<RecPessoa> pessoasVinculadas = new ArrayList<>();
     
     private GchTreinamentospessoas gchTreinamentospessoas = new GchTreinamentospessoas();
     private List<GchTreinamentospessoas> todosGchTreinamentosPessoas;
@@ -38,6 +44,26 @@ public class GchTreinamentoPessoaBean {
 //        if (gchTreinamentos.getTreiCodigo() > 0) {
 //            gchTreinamentosService.update(gchTreinamentos);
 //        } else {
+    
+        System.out.println("tyfytfy");
+        
+        Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
+        
+        while (keyIterrator.hasNext()){
+        
+            RecPessoa pessoa = keyIterrator.next();
+            Boolean value = checked.get(pessoa);
+            
+            
+            System.out.println(pessoa.getRecNomecompleto() + " - " + value);
+            
+            
+        }
+        
+        
+//        System.out.println("Salvar: " + pessoasVinculadas.get(0).getRecNomecompleto());
+//        gchTreinamentospessoas.setRecIdpessoa(pessoasVinculadas.get(0));
+        
         gchTreinamentospessoasService.save(gchTreinamentospessoas);
 //        }
         todosGchTreinamentosPessoas = gchTreinamentospessoasService.findAll();
@@ -61,9 +87,18 @@ public class GchTreinamentoPessoaBean {
         return "treinamentos";
     }
 
+    public void adicionaPessoa(RecPessoa recPessoa) {
+    
+        if (recPessoa.getRecIdpessoa() == 0)
+            return;
+        
+        pessoasVinculadas.add(recPessoa);
+                
+    }
+
     public String prepareEdit(GchTreinamentos gchTreinamentos) {
         this.formAtivo = true;
-        this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos); 
+        this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
         return "VincularPessoasTreinamento";
     }
 
@@ -95,12 +130,20 @@ public class GchTreinamentoPessoaBean {
         this.gchTreinamentospessoasService = gchTreinamentospessoasService;
     }
 
-    public Map<Long, Boolean> getChecked() {
+    public Map<RecPessoa, Boolean> getChecked() {
         return checked;
     }
 
-    public void setChecked(Map<Long, Boolean> checked) {
+    public void setChecked(Map<RecPessoa, Boolean> checked) {
         this.checked = checked;
+    }
+
+    public List<RecPessoa> getPessoasVinculadas() {
+        return pessoasVinculadas;
+    }
+
+    public void setPessoasVinculadas(List<RecPessoa> pessoasVinculadas) {
+        this.pessoasVinculadas = pessoasVinculadas;
     }
 
 }

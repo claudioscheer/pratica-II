@@ -12,26 +12,32 @@
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="content">
-                
-                <div id="page" style="margin-top:75px;">
+                <h:form id="parentformid">
+                    <h:messages class="error" style="color: #d9534f" />
+                    <div id="page" style="margin-top:75px;">
 
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="x_panel">
-                                    <div class="form-group" style="float: right;margin-top: 10px">
-                                        <div>
-                                            <h:link  outcome="/ModuloCapitalHumano/Cadastros/CadastroTreinamentos.xhtml" class="btn btn-primary " value="Novo Treinamento"/>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="x_panel">
+                                        <div class="form-group" style="float: right;margin-top: 10px">
+                                            <div>
+                                                <h:link  outcome="/ModuloCapitalHumano/Cadastros/CadastroTreinamentos.xhtml" class="btn btn-primary " value="Novo Treinamento"/>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="panel-body" style="/* align-items: center; */">
-                                        <h:form id="parentformid">
+                                        <div class="panel-body" style="/* align-items: center; */">
+
                                             <h:dataTable class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
 
                                                 <h:column>
-                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa.recidpessoa]}" />
+                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa]}" />
                                                 </h:column>
+
+                                                <h:column>      
+                                                    <f:facet name="header">Codigo</f:facet>
+                                                    <h:outputText value="#{pessoa.recIdpessoa}"/>                
+                                                </h:column>    
 
                                                 <h:column>      
                                                     <f:facet name="header">Nome</f:facet>
@@ -39,17 +45,25 @@
                                                 </h:column>
 
                                             </h:dataTable>
-                                        </h:form> </div>
-                                    <div class="panel-footer">
-                                        Gestão do Capital Humano - Todos os Direitos Reservados
-                                    </div>
-                                </div>
+                                        </div>
 
+                                        <div class="form-group">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                             
+                                                <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentoPessoaBean.save()}" value="Cadastrar" /> 
+
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            Gestão do Capital Humano - Todos os Direitos Reservados
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> 
-
+                    </div> 
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
