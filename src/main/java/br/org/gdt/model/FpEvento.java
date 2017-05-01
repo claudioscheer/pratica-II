@@ -20,7 +20,7 @@ public class FpEvento implements java.io.Serializable {
     private FpTipoEvento eveTipoEvento;
     private boolean eveIncideINSS;
     private boolean eveIncideFGTS;
-    private boolean eveIncideIR;
+    private boolean eveIncideIRRF;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_evento")
@@ -72,12 +72,12 @@ public class FpEvento implements java.io.Serializable {
         this.eveIncideFGTS = eveIncideFGTS;
     }
 
-    public boolean isEveIncideIR() {
-        return eveIncideIR;
+    public boolean isEveIncideIRRF() {
+        return eveIncideIRRF;
     }
 
-    public void setEveIncideIR(boolean eveIncideIR) {
-        this.eveIncideIR = eveIncideIR;
+    public void setEveIncideIRRF(boolean eveIncideIRRF) {
+        this.eveIncideIRRF = eveIncideIRRF;
     }
 
 }
