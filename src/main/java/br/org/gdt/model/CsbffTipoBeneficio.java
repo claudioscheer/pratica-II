@@ -8,6 +8,7 @@ package br.org.gdt.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +37,7 @@ public class CsbffTipoBeneficio implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "tipo_beneficio_codigo")
-    private BigDecimal tipoBeneficioCodigo;
+    private long tipoBeneficioCodigo;
     @Basic(optional = false)
     @Column(name = "tipo_beneficio_nome")
     private String tipoBeneficioNome;
@@ -46,20 +47,20 @@ public class CsbffTipoBeneficio implements Serializable {
     public CsbffTipoBeneficio() {
     }
 
-    public CsbffTipoBeneficio(BigDecimal tipoBeneficioCodigo) {
+    public CsbffTipoBeneficio(long tipoBeneficioCodigo) {
         this.tipoBeneficioCodigo = tipoBeneficioCodigo;
     }
 
-    public CsbffTipoBeneficio(BigDecimal tipoBeneficioCodigo, String tipoBeneficioNome) {
+    public CsbffTipoBeneficio(long tipoBeneficioCodigo, String tipoBeneficioNome) {
         this.tipoBeneficioCodigo = tipoBeneficioCodigo;
         this.tipoBeneficioNome = tipoBeneficioNome;
     }
 
-    public BigDecimal getTipoBeneficioCodigo() {
+    public long getTipoBeneficioCodigo() {
         return tipoBeneficioCodigo;
     }
 
-    public void setTipoBeneficioCodigo(BigDecimal tipoBeneficioCodigo) {
+    public void setTipoBeneficioCodigo(long tipoBeneficioCodigo) {
         this.tipoBeneficioCodigo = tipoBeneficioCodigo;
     }
 
@@ -83,23 +84,35 @@ public class CsbffTipoBeneficio implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (tipoBeneficioCodigo != null ? tipoBeneficioCodigo.hashCode() : 0);
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.tipoBeneficioCodigo);
+        hash = 97 * hash + Objects.hashCode(this.tipoBeneficioNome);
+        hash = 97 * hash + Objects.hashCode(this.csbffBeneficiosList);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CsbffTipoBeneficio)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        CsbffTipoBeneficio other = (CsbffTipoBeneficio) object;
-        if ((this.tipoBeneficioCodigo == null && other.tipoBeneficioCodigo != null) || (this.tipoBeneficioCodigo != null && !this.tipoBeneficioCodigo.equals(other.tipoBeneficioCodigo))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final CsbffTipoBeneficio other = (CsbffTipoBeneficio) obj;
+        if (!Objects.equals(this.tipoBeneficioNome, other.tipoBeneficioNome)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoBeneficioCodigo, other.tipoBeneficioCodigo)) {
+            return false;
+        }
+        return Objects.equals(this.csbffBeneficiosList, other.csbffBeneficiosList);
     }
+
+    
 
     @Override
     public String toString() {
