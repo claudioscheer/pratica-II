@@ -86,34 +86,6 @@ public class cargosBean {
     }
 
     
-    
-    
-//    public List<FpHorasTrabalhadas> getTodasFpHorasTrabalhadas() {
-//        if (todasFpHorasTrabalhadas == null) {
-//            todasFpHorasTrabalhadas = fpHorasTrabalhadasService.findAll();
-//        }
-//        return todasFpHorasTrabalhadas;
-//    }
-//
-//    public void setTodasFpHorasTrabalhadas(List<FpHorasTrabalhadas> fpHorasTrabalhadases) {
-//        this.todasFpHorasTrabalhadas = fpHorasTrabalhadases;
-//    }
-//
-//    public FpHorasTrabalhadasService getFpHorasTrabalhadasService() {
-//        return fpHorasTrabalhadasService;
-//    }
-//
-//    public void setFpHorasTrabalhadasService(FpHorasTrabalhadasService fpHorasTrabalhadasService) {
-//        this.fpHorasTrabalhadasService = fpHorasTrabalhadasService;
-//    }
-//
-//    public boolean isFormAtivo() {
-//        return formAtivo;
-//    }
-//
-//    public void setFormAtivo(boolean formAtivo) {
-//        this.formAtivo = formAtivo;
-//    }
 
     public boolean isFormAtivo() {
         return formAtivo;
