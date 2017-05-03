@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,7 +27,7 @@ public class FpTabelaVigencia implements java.io.Serializable {
     private FpTabela tabVigenciaTabela;
     private List<FpFaixa> tabVigenciaFaixas;
 
-    @Id
+    @Id 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_tabela_vigencia")
     public long getTabVigenciaId() {
         return tabVigenciaId;
@@ -58,6 +59,7 @@ public class FpTabelaVigencia implements java.io.Serializable {
         this.tabVigenciaFaixas = tabVigenciaFaixas;
     }
 
+    @OrderBy("faiLimite ASC")
     @OneToMany(mappedBy = "faiTabelaVigencia", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<FpFaixa> getTabVigenciaFaixas() {
         if (this.tabVigenciaFaixas == null) {

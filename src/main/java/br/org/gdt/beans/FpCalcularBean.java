@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class FpEventoVariavelBean {
+public class FpCalcularBean {
 
     private boolean formAtivo = false;
     private long codigoFuncionario = 0;
@@ -20,7 +20,7 @@ public class FpEventoVariavelBean {
     @ManagedProperty("#{fpEventoVariavelService}")
     private FpEventoVariavelService fpEventoVariavelService;
 
-    public FpEventoVariavelBean() {
+    public FpCalcularBean() {
 
     }
 
