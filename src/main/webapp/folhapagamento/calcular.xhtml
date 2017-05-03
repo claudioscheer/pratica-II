@@ -19,31 +19,6 @@
                 <h:form id="formEventoVariavel">
                     <h:messages class="error" style="color: #d9534f" />
 
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpCalcularBean.formAtivo}">
-                        <h:inputHidden value="#{fpCalcularBean.fpEventoVariavel.evvId}" />
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText required="true" requiredMessage="Campo Descrição é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpCalcularBean.fpEventoVariavel.evvDescricao}" />
-                                    </div>
-                                </div>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpCalcularBean.save()}">
-                                            <f:ajax execute="@form" render="formEventoVariavel" />
-                                        </h:commandButton>
-                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpCalcularBean.cancel()}">
-                                            <f:ajax execute="@form" render="formEventoVariavel" />
-                                        </h:commandButton>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </h:panelGroup>
-
                     <h:panelGroup layout="block" rendered="#{!fpCalcularBean.formAtivo}">
                         <div class="row">
                             <div class="col-md-9 col-sm-9 col-xs-12">
