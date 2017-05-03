@@ -14,14 +14,14 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Diego
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchTreinamentosBean {
 
     private boolean formAtivo = false;
