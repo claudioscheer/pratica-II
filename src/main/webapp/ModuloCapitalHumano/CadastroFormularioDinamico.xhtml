@@ -20,7 +20,7 @@
                 <h:form id="formFormulario">
                     <h:messages class="error" style="color: #d9534f" />
 
-                    <h:panelGroup id="panelInserirLinha" layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{gchPerguntasBean.formAtivo}">
+                    <h:panelGroup id="panelInserirLinha" layout="block" class="col-md-12 col-sm-12 col-xs-12">
                         <h:inputHidden value="#{gchFormularioBean.gchFormulario.formCodigo}" />
                         
                                 <div class="form-group">
@@ -49,10 +49,10 @@
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpTabelaBean.save()}">
+                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{gchFormularioBean.save()}">
                                             <f:ajax execute="@form" render="formTabela" />
                                         </h:commandButton>
-                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpTabelaBean.cancel()}">
+                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{gchFormularioBean.cancel()}">
                                             <f:ajax execute="@form" render="formTabela" />
                                         </h:commandButton>
                                     </div>
@@ -60,37 +60,24 @@
                            
                     </h:panelGroup>
 
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpTabelaBean.add()}">
+                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{gchFormularioBean.add()}">
                                 <f:ajax execute="@form" render="formTabela" />
                             </h:commandButton>
                         </div>
                         <div class="row">
                             <div class="x_panel">
                                 <div class="x_content">
-                                    <h:dataTable class="table table-striped" value="#{fpTabelaBean.todasFpTabela}" var="tabela">
+                                    <h:dataTable class="table table-striped" value="#{gchFormularioBean.gchTodosFormularios}" var="formulario">
                                         <h:column>
                                             <f:facet name="header">Código</f:facet>
-                                                #{tabela.tabId}
+                                                #{formulario.formCodigo}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Nome</f:facet>
-                                                #{tabela.tabNome}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Ativa?</f:facet>
-                                            <h:selectBooleanCheckbox disabled="true" value="#{tabela.tabAtivo}" />
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpTabelaBean.prepareEdit(tabela)}">
-                                                <f:ajax execute="@form" render="formTabela" />
-                                            </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpTabelaBean.excluir(tabela)}" onclick="return confirm('Excluir tabela?')">
-                                                <f:ajax execute="@form" render="formTabela" />
-                                            </h:commandLink>
-                                        </h:column>                  
+                                                #{formulario.formNome}
+                                        </h:column>                
                                     </h:dataTable>
                                 </div>
                             </div>
