@@ -49,19 +49,30 @@ public class CsbffAdmissaoBean implements Serializable{
     }
 
     public void save() {
-        System.out.println("SAVE:" + recPessoa.getRecIdpessoa());
+//        System.out.println("SAVE:" + recPessoa.getRecIdpessoa());
+//        
+//    
+//        recPessoaService.save(recPessoa);
+//        todosRecPessoa = recPessoaService.findAll();
+//        this.formAtivo = true;
         
-        
-        recPessoaService.update(recPessoa);
+        if (recPessoa.getRecIdpessoa()> 0) {
+            recPessoaService.update(recPessoa);
+        } else {
+            recPessoaService.save(recPessoa);
+        }
+
         todosRecPessoa = recPessoaService.findAll();
         this.formAtivo = false;
     }
+    
 
     public void cancel() {
         this.formAtivo = false;
-        this.recPessoa = null;
+        this.recPessoa = new RecPessoa( );
+        
     }
-
+     
 //    public void add() {
 //        this.formAtivo = true;
 //        this.recPessoa = new RecPessoa();
