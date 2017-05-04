@@ -44,9 +44,9 @@
                                                 </h:column>
                                                 
                                                 <h:column>                
-<!--                                                    <h:commandLink action="#{gchTreinamentoPessoaBean.prepareEdit(treinamento)}" >
+                                                    <h:commandLink action="#{gchTreinamentoPessoaBean.prepareEdit(treinamento)}" >
                                                      <i class="glyphicon glyphicon-user" style="font-size:18px" ></i>
-                                                    </h:commandLink>-->
+                                                    </h:commandLink>
                                                 </h:column>
                                                 
                                                 <h:column>      
@@ -54,6 +54,12 @@
                                                     <h:outputText value="#{treinamento.treiNome}"/>                
                                                 </h:column>
 
+                                                
+                                                 <h:column>      
+                                                    <f:facet name="header">Carga horária</f:facet>
+                                                    <h:outputText value="#{treinamento.treiCargaHorario}"/>                
+                                                </h:column>
+                                                
                                                 <h:column>                
                                                     <f:facet name="header">Início</f:facet>
                                                     <h:outputText value="#{treinamento.treiDataInicio}"/>                
