@@ -1,7 +1,11 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.enums.FpTipoFolha;
 import br.org.gdt.model.FpEventoVariavel;
+import br.org.gdt.model.FpPeriodo;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpEventoVariavelService;
+import br.org.gdt.service.FpPeriodoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,92 +15,57 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class FpCalcularBean {
 
-    private boolean formAtivo = false;
-    private long codigoFuncionario = 0;
+    private FpTipoFolha fpTipoFolha;
+    private FpPeriodo fpPeriodo = new FpPeriodo();
+    private List<FpPeriodo> todosFpPeriodo;
 
-    private FpEventoVariavel fpEventoVariavel = new FpEventoVariavel();
-    private List<FpEventoVariavel> todosFpEventoVariavel;
-
-    @ManagedProperty("#{fpEventoVariavelService}")
-    private FpEventoVariavelService fpEventoVariavelService;
+    @ManagedProperty("#{fpPeriodoService}")
+    private FpPeriodoService fpPeriodoService;
 
     public FpCalcularBean() {
 
     }
 
-    public void save() {
-        if (fpEventoVariavel.getEvvId() > 0) {
-            fpEventoVariavelService.update(fpEventoVariavel);
-        } else {
-            fpEventoVariavelService.save(fpEventoVariavel);
+    public void selecionarTipoFolha() {
+    }
+
+    public void selecionarPeriodo() {
+        int a = 0;   
+    }
+
+    public FpTipoFolha getFpTipoFolha() {
+        return fpTipoFolha;
+    }
+
+    public void setFpTipoFolha(FpTipoFolha fpTipoFolha) {
+        this.fpTipoFolha = fpTipoFolha;
+    }
+
+    public FpPeriodo getFpPeriodo() {
+        return fpPeriodo;
+    }
+
+    public void setFpPeriodo(FpPeriodo fpPeriodo) {
+        this.fpPeriodo = fpPeriodo;
+    }
+
+    public List<FpPeriodo> getTodosFpPeriodo() {
+        if (todosFpPeriodo == null) {
+            todosFpPeriodo = fpPeriodoService.findAll();
         }
-        todosFpEventoVariavel = fpEventoVariavelService.findAll();
-        this.formAtivo = false;
+        return todosFpPeriodo;
     }
 
-    public void cancel() {
-        this.formAtivo = false;
-        this.fpEventoVariavel = new FpEventoVariavel();
+    public void setTodosFpPeriodo(List<FpPeriodo> todosFpPeriodo) {
+        this.todosFpPeriodo = todosFpPeriodo;
     }
 
-    public void buscarEventos() {
-        this.formAtivo = true;
-        this.fpEventoVariavel = new FpEventoVariavel();
+    public FpPeriodoService getFpPeriodoService() {
+        return fpPeriodoService;
     }
 
-    public String excluir(FpEventoVariavel fpEventoVariavel) {
-        fpEventoVariavelService.delete(fpEventoVariavel.getEvvId());
-        todosFpEventoVariavel.remove(fpEventoVariavel);
-        return "eventosvariaveis";
-    }
-
-    public String prepareEdit(FpEventoVariavel fpEventoVariavel) {
-        this.formAtivo = true;
-        this.fpEventoVariavel = fpEventoVariavel;
-        return "eventosvariaveis";
-    }
-
-    public boolean isFormAtivo() {
-        return formAtivo;
-    }
-
-    public void setFormAtivo(boolean formAtivo) {
-        this.formAtivo = formAtivo;
-    }
-
-    public long getCodigoFuncionario() {
-        return codigoFuncionario;
-    }
-
-    public void setCodigoFuncionario(long codigoFuncionario) {
-        this.codigoFuncionario = codigoFuncionario;
-    }
-
-    public FpEventoVariavel getFpEventoVariavel() {
-        return fpEventoVariavel;
-    }
-
-    public void setFpEventoVariavel(FpEventoVariavel fpEventoVariavel) {
-        this.fpEventoVariavel = fpEventoVariavel;
-    }
-
-    public List<FpEventoVariavel> getTodosFpEventoVariavel() {
-        if (todosFpEventoVariavel == null) {
-            todosFpEventoVariavel = fpEventoVariavelService.findAll();
-        }
-        return todosFpEventoVariavel;
-    }
-
-    public void setTodosFpEventoVariavel(List<FpEventoVariavel> todosFpEventoVariavel) {
-        this.todosFpEventoVariavel = todosFpEventoVariavel;
-    }
-
-    public FpEventoVariavelService getFpEventoVariavelService() {
-        return fpEventoVariavelService;
-    }
-
-    public void setFpEventoVariavelService(FpEventoVariavelService fpEventoVariavelService) {
-        this.fpEventoVariavelService = fpEventoVariavelService;
+    public void setFpPeriodoService(FpPeriodoService fpPeriodoService) {
+        this.fpPeriodoService = fpPeriodoService;
     }
 
 }
