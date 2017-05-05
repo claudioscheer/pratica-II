@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.annotations.SortNatural;
 
 @Entity
 @SequenceGenerator(name = "seq_fp_tabela", sequenceName = "seq_fp_tabela", allocationSize = 1)
@@ -40,6 +42,7 @@ public class FpTabela implements java.io.Serializable {
         this.tabNome = tabNome;
     }
 
+    @OrderBy("tabVigenciaData DESC")
     @OneToMany(mappedBy = "tabVigenciaTabela", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<FpTabelaVigencia> getTabVigencias() {
         if (this.tabVigencias == null) {
@@ -55,7 +58,7 @@ public class FpTabela implements java.io.Serializable {
     public void addTabVigencia(FpTabelaVigencia fpTabelaVigencia) {
         if (fpTabelaVigencia != null) {
             fpTabelaVigencia.setTabVigenciaTabela(this);
-            this.getTabVigencias().add(fpTabelaVigencia);
+            this.getTabVigencias().add(0, fpTabelaVigencia);
         }
     }
 

@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -42,14 +45,16 @@ public class GchTreinamentoPessoaBean {
     @ManagedProperty("#{gchTreinamentoPessoaService}")
     private GchTreinamentoPessoaService gchTreinamentospessoasService;
 
+    public GchTreinamentoPessoaBean() {
+
+    }
+
     public void save() {
 
 //        if (gchTreinamentos.getTreiCodigo() > 0) {
 //            gchTreinamentosService.update(gchTreinamentos);
 //        } else {
-        System.out.println("tyfytfy");
-
-        gchTreinamentospessoas.setTreiCodigo(gchTreinamentosService.findById(1));
+        System.out.println("Teste teste: " + gchTreinamentospessoas.getTreiCodigo().getTreiNome());
 
         Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
 
@@ -60,11 +65,10 @@ public class GchTreinamentoPessoaBean {
 
             System.out.println(pessoa.getRecNomecompleto() + " - " + value);
 
-            
             if (value) {
-                
+
                 gchTreinamentospessoas.setRecIdpessoa(pessoa);
-                
+
                 gchTreinamentospessoasService.save(gchTreinamentospessoas);
             }
         }
@@ -72,8 +76,12 @@ public class GchTreinamentoPessoaBean {
 //        System.out.println("Salvar: " + pessoasVinculadas.get(0).getRecNomecompleto());
 //        gchTreinamentospessoas.setRecIdpessoa(pessoasVinculadas.get(0));
 //        }
-        todosGchTreinamentosPessoas = gchTreinamentospessoasService.findAll();
+        todosGchTreinamentosPessoas = null;
         this.formAtivo = false;
+        gchTreinamentospessoas = null;
+        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml");
+
+//        return "Treinamentos";
     }
 
     public void cancel() {
@@ -111,19 +119,20 @@ public class GchTreinamentoPessoaBean {
         return "VincularPessoasTreinamento";
     }
 
-//     public String buscaTreinamentoPorId(long id) {
-//
-//        System.out.println("Id Treinamento" + id);
-//
-//        if (id != 0) {
-//
-//            gchTreinamentospessoas.setTreiCodigo(gchTreinamentosService.findById(id));
-//
-//            return "VincularPessoasTreinamento";
-//
-//        }
-//        return null;
-//    }
+    public String buscaTreinamentoPorId(long id) {
+
+        System.out.println("Id Treinamento" + id);
+
+        if (id != 0) {
+
+            gchTreinamentospessoas.setTreiCodigo(gchTreinamentosService.findById(id));
+
+            return "VincularPessoasTreinamento";
+
+        }
+        return null;
+    }
+
     public boolean isFormAtivo() {
         return formAtivo;
     }
