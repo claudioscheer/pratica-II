@@ -11,7 +11,7 @@
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
                 <div class="title_left">
-                    <h3>Benefícios</h3>
+                    <h3>Cadastro de Benefícios</h3>
                 </div>
                 <h:form id="formBeneficio">
                     <h:messages class="error" style="color: #d9534f" />
@@ -82,9 +82,68 @@
                                     </div>
                                 </div>
                             </div>   
+<<<<<<< HEAD
+                        </div>
+                    </div>
+                               
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="x_panel">
+                                <div class="title_left">
+                                    <h2>Benefícios Cadastrados</h2>
+                                </div>
+                                <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffBeneficioBean.formAtivo}">
+                                    <!--                                    <div class="row">
+                                                                            <h:commandButton class="btn btn-primary" value="Adicionar" action="form_cargo.xhtml">
+                                                                                <f:ajax execute="@form" render="formTabela" />
+                                                                            </h:commandButton>
+                                                                        </div>-->
+                                    <div class="row">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <h:dataTable class="table table-striped" value="#{csbffBeneficioBean.todosCsbffBeneficios}" var="beneficio">
+                                                    <h:column>
+                                                        <f:facet name="header">Código</f:facet>
+                                                            #{beneficio.beneficioCodigo}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Benefício</f:facet>
+                                                            #{beneficio.beneficioNome}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Abrangência</f:facet>
+                                                            #{beneficio.abrangencia}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Tipo de Benefício</f:facet>
+                                                        #{beneficio.setCsbffPessoaBeneficioList(csbffPessoaBeneficioList)}" 
+                                                    </h:column>
+                                                    <!--                                                    <h:column>
+                                                    
+                                                                                                            <f:facet name="header"> Salário Base</f:facet>
+                                                    #{cargos.cargoValorSalario}" 
+                                                </h:column>-->
+<!--                                                    <h:column>
+                                                        <h:commandLink class="btn btn-link btn-small" value="Alterar" action="#{csbffBeneficioBean.prepareEdit(beneficio)}">
+                                                            <f:ajax execute="@form" render="formTabela" />
+                                                        </h:commandLink>
+                                                        <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffBeneficioBean.excluir(beneficio)}" onclick="return confirm('Excluir Linha?')">
+                                                            <f:ajax execute="@form" render="formTabela" />
+                                                        </h:commandLink>
+                                                    </h:column>                  -->
+                                                </h:dataTable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+=======
+>>>>>>> origin/master
                         </div>
                     </div>
                 </h:form>
+<<<<<<< HEAD
+=======
                 <h:form>
                     <div class="container-fluid">
                         <div class="row">
@@ -137,6 +196,7 @@
                         </div>
                     </div>
                 </h:form> 
+>>>>>>> origin/master
 
             </ui:define>
         </ui:composition>
