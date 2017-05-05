@@ -7,6 +7,7 @@ package br.org.gdt.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,10 +36,10 @@ public class GchPerguntas implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "per_codigo")
-    private Long perCodigo;
+    private long perCodigo;
     @Basic(optional = false)
     @Column(name = "per_descricao")
-    private long perDescricao;
+    private String perDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perCodigo")
     private List<GchAlternativasperguntas> gchAlternativasperguntasList;
     
@@ -52,7 +53,7 @@ public class GchPerguntas implements Serializable {
         this.perCodigo = perCodigo;
     }
 
-    public GchPerguntas(Long perCodigo, long perDescricao) {
+    public GchPerguntas(Long perCodigo, String perDescricao) {
         this.perCodigo = perCodigo;
         this.perDescricao = perDescricao;
     }
@@ -65,11 +66,11 @@ public class GchPerguntas implements Serializable {
         this.perCodigo = perCodigo;
     }
 
-    public long getPerDescricao() {
+    public String getPerDescricao() {
         return perDescricao;
     }
 
-    public void setPerDescricao(long perDescricao) {
+    public void setPerDescricao(String perDescricao) {
         this.perDescricao = perDescricao;
     }
     
@@ -97,23 +98,34 @@ public class GchPerguntas implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (perCodigo != null ? perCodigo.hashCode() : 0);
+        int hash = 5;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GchPerguntas)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        GchPerguntas other = (GchPerguntas) object;
-        if ((this.perCodigo == null && other.perCodigo != null) || (this.perCodigo != null && !this.perCodigo.equals(other.perCodigo))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchPerguntas other = (GchPerguntas) obj;
+        if (this.perCodigo != other.perCodigo) {
+            return false;
+        }
+        if (!Objects.equals(this.perDescricao, other.perDescricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.gchAlternativasperguntasList, other.gchAlternativasperguntasList)) {
+            return false;
+        }
+        if (!Objects.equals(this.formulario, other.formulario)) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public String toString() {
