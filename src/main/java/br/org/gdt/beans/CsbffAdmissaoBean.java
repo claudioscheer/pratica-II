@@ -14,7 +14,7 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class CsbffAdmissaoBean implements Serializable{
+public class CsbffAdmissaoBean implements Serializable {
 
     private boolean formAtivo = false;
 
@@ -43,10 +43,18 @@ public class CsbffAdmissaoBean implements Serializable{
 
     public List<RecPessoa> getPessoas() {
         List<RecPessoa> pessoas = new ArrayList<>();
-        pessoas.add(new RecPessoa("SELECIONE"));
+        pessoas.add(new RecPessoa(""));
         pessoas.addAll(recPessoaService.findAll());
         return pessoas;
     }
+//    public void addNovoBeneficio() {
+//        this.addNovoBeneficio(new formAtivo(++indexBeneficio));
+//    }
+//    public void add() {
+//        this.formAtivo = true;
+//        this.recPessoa = new RecPessoa();
+//        this.addNovoBeneficio();
+//    }
 
     public void save() {
 //        System.out.println("SAVE:" + recPessoa.getRecIdpessoa());
@@ -55,8 +63,8 @@ public class CsbffAdmissaoBean implements Serializable{
 //        recPessoaService.save(recPessoa);
 //        todosRecPessoa = recPessoaService.findAll();
 //        this.formAtivo = true;
-        
-        if (recPessoa.getRecIdpessoa()> 0) {
+
+        if (recPessoa.getRecIdpessoa() > 0) {
             recPessoaService.update(recPessoa);
         } else {
             recPessoaService.save(recPessoa);
@@ -65,14 +73,13 @@ public class CsbffAdmissaoBean implements Serializable{
         todosRecPessoa = recPessoaService.findAll();
         this.formAtivo = false;
     }
-    
 
     public void cancel() {
         this.formAtivo = false;
-        this.recPessoa = new RecPessoa( );
-        
+        this.recPessoa = new RecPessoa();
+
     }
-     
+
 //    public void add() {
 //        this.formAtivo = true;
 //        this.recPessoa = new RecPessoa();
