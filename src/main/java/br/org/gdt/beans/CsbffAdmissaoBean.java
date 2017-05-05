@@ -1,5 +1,6 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Sexo;
 import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.RecPessoa;
@@ -14,7 +15,7 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class CsbffAdmissaoBean implements Serializable{
+public class CsbffAdmissaoBean implements Serializable {
 
     private boolean formAtivo = false;
 
@@ -32,6 +33,9 @@ public class CsbffAdmissaoBean implements Serializable{
 
     public Sexo[] getGeneros() {
         return Sexo.values();
+    }
+    public EstadoCivil[] getEstadoCivil() {
+        return EstadoCivil.values();
     }
 
     public List<GchMunicipios> getMunicipios() {
@@ -55,8 +59,8 @@ public class CsbffAdmissaoBean implements Serializable{
 //        recPessoaService.save(recPessoa);
 //        todosRecPessoa = recPessoaService.findAll();
 //        this.formAtivo = true;
-        
-        if (recPessoa.getRecIdpessoa()> 0) {
+
+        if (recPessoa.getRecIdpessoa() > 0) {
             recPessoaService.update(recPessoa);
         } else {
             recPessoaService.save(recPessoa);
@@ -65,14 +69,13 @@ public class CsbffAdmissaoBean implements Serializable{
         todosRecPessoa = recPessoaService.findAll();
         this.formAtivo = false;
     }
-    
 
     public void cancel() {
         this.formAtivo = false;
-        this.recPessoa = new RecPessoa( );
-        
+        this.recPessoa = new RecPessoa();
+
     }
-     
+
 //    public void add() {
 //        this.formAtivo = true;
 //        this.recPessoa = new RecPessoa();

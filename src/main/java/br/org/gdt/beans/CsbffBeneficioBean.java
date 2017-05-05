@@ -25,18 +25,6 @@ public class CsbffBeneficioBean {
     }
 
     public void save() {
-//        if (csbffBeneficios.getBeneficioCodigo().doubleValue()> 0) {
-//            csbffBeneficiosService.update(csbffBeneficios);
-//        } else {
-////            csbffBeneficiosService.save(csbffBeneficios);
-////        }
-//        todosCsbffBeneficios = csbffBeneficiosService.findAll();
-//
-////        csbffBeneficios.setBeneficioNome( beneficioNome);
-//        csbffBeneficios.setAbrangencia(String.valueOf(1));
-////        csbffBeneficios.setBeneficioDescricao(beneficioDescricao);
-//        csbffBeneficiosService.save(csbffBeneficios);
-////        csbffBeneficios.setTipoBeneficioCodigo(tipoBeneficioCodigo);
         if (csbffBeneficios.getBeneficioCodigo() > 0) {
             csbffBeneficiosService.update(csbffBeneficios);
         } else {
@@ -45,7 +33,23 @@ public class CsbffBeneficioBean {
 
         todosCsbffBeneficios = csbffBeneficiosService.findAll();
         this.formAtivo = false;
-
+            
+//        csbffBeneficios.setBeneficioCodigo(0);
+//        String abrangencia = null;
+//        csbffBeneficios.setAbrangencia(abrangencia);
+//        csbffBeneficios.setBeneficioNome(abrangencia);
+//        csbffBeneficiosService.save(csbffBeneficios);
+    }
+    public String excluir(CsbffBeneficios beneficio) {
+        csbffBeneficiosService.delete(beneficio.getBeneficioCodigo());
+        todosCsbffBeneficios.remove(beneficio);
+        return "beneficio";
+    }
+ 
+    public String prepareEdit(CsbffBeneficios beneficio) {
+        this.formAtivo = true;
+        this.csbffBeneficios = beneficio;
+        return "beneficio";
     }
 
     public void cancel() {

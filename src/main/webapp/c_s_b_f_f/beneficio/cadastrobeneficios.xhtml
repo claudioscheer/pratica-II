@@ -11,78 +11,135 @@
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
                 <div class="title_left">
-                    <h3>Benefícios</h3>
+                    <h3>Cadastro de Benefícios</h3>
                 </div>
                 <h:form id="formBeneficio">
                     <h:messages class="error" style="color: #d9534f" />
                     <div class="bootstrap-iso">
                         <div class="container-fluid">
                             <div class="row">
+                                <div class="x_panel">
 
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
 
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
-                                        <h:inputText  requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group ">
-
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Abrangência<span class="required">*</span></label>
-
-                                        <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control col-md-7 col-xs-12">
-                                            <f:selectItem itemValue="1" itemLabel="Selecione" />
-                                            <f:selectItem itemValue="2" itemLabel="Individual" />
-                                            <f:selectItem itemValue="3" itemLabel="Coletivo" />
-                                        </h:selectOneMenu>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
+                                            <h:inputText  requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
+                                        </div>
 
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
 
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo benefício <span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Abrangência<span class="required">*</span></label>
 
-                                        <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.beneficioCodigo}" class="form-control col-md-7 col-xs-12">
-                                            <f:selectItem itemValue="1" itemLabel="Selecione" />
-                                            <f:selectItem itemValue="2" itemLabel="Alimentação" />
-                                            <f:selectItem itemValue="3" itemLabel="Transporte" />
-                                            <f:selectItem itemValue="4" itemLabel="Educação" />
-                                            <f:selectItem itemValue="5" itemLabel="Moradia" />
-                                            <f:selectItem itemValue="6" itemLabel="Saúde" />
-                                        </h:selectOneMenu>
-                                        
-                                    </div>     
-                                </div>
-
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group ">
-
-                                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Descrição<span class="required" >*</span></label>
-                                        <!--      <textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
-                                        <h:inputTextarea requiredMessage="Campo Descrição é obrigatório." class="form-control" cols="10" rows="10" value="#{csbffBeneficioBean.csbffBeneficios.beneficioDescricao}" />
-
-                                    </div>
-                                    <div class="ln_solid"></div>
-                                    <div class="form-group">
-                                        <div>
-
-                                            <br></br> <h:commandButton class="btn btn-success" value="Salvar" actionListener="#{csbffBeneficioBean.save()}">
-                                                <f:ajax execute="@form" render="formBeneficio" />
-                                            </h:commandButton>
-
-                                            <h:commandButton immediate="true" class="btn btn-danger" value="Cancelar" actionListener="#{csbffBeneficioBean.cancel()}"/>
-
+                                            <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control col-md-7 col-xs-12">
+                                                <f:selectItem itemValue="1" itemLabel="Selecione" />
+                                                <f:selectItem itemValue="2" itemLabel="Individual" />
+                                                <f:selectItem itemValue="3" itemLabel="Coletivo" />
+                                            </h:selectOneMenu>
 
                                         </div>
                                     </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo benefício <span class="required">*</span></label>
+
+                                            <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.beneficioCodigo}" class="form-control col-md-7 col-xs-12">
+                                                <f:selectItem itemValue="1" itemLabel="Selecione" />
+                                                <f:selectItem itemValue="2" itemLabel="Alimentação" />
+                                                <f:selectItem itemValue="3" itemLabel="Transporte" />
+                                                <f:selectItem itemValue="4" itemLabel="Educação" />
+                                                <f:selectItem itemValue="5" itemLabel="Moradia" />
+                                                <f:selectItem itemValue="6" itemLabel="Saúde" />
+                                            </h:selectOneMenu>
+
+                                        </div>     
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+
+                                            <label class="control-label col-md-3 col-sm-12 col-xs-12">Descrição<span class="required" >*</span></label>
+                                            <!--      <textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
+                                            <h:inputTextarea requiredMessage="Campo Descrição é obrigatório." class="form-control" cols="10" rows="5" value="#{csbffBeneficioBean.csbffBeneficios.beneficioDescricao}" />
+
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div>
+
+                                                <br></br> <h:commandButton class="btn btn-success" value="Cadastrar" id="cbtOk" actionListener="#{csbffBeneficioBean.save()}" onclick="return confirm('Benefício Cadastrado!')">
+
+                                                    <f:ajax execute="@form" render="formBeneficio" resetValues="true" />
+                                                </h:commandButton>
+
+                                                <h:commandButton immediate="true" class="btn btn-danger" type="submit" value="Cancelar" actionListener="#{csbffBeneficioBean.cancel()}"/>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>   
+                        </div>
+                    </div>
+                               
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="x_panel">
+                                <div class="title_left">
+                                    <h2>Benefícios Cadastrados</h2>
+                                </div>
+                                <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffBeneficioBean.formAtivo}">
+                                    <!--                                    <div class="row">
+                                                                            <h:commandButton class="btn btn-primary" value="Adicionar" action="form_cargo.xhtml">
+                                                                                <f:ajax execute="@form" render="formTabela" />
+                                                                            </h:commandButton>
+                                                                        </div>-->
+                                    <div class="row">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <h:dataTable class="table table-striped" value="#{csbffBeneficioBean.todosCsbffBeneficios}" var="beneficio">
+                                                    <h:column>
+                                                        <f:facet name="header">Código</f:facet>
+                                                            #{beneficio.beneficioCodigo}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Benefício</f:facet>
+                                                            #{beneficio.beneficioNome}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Abrangência</f:facet>
+                                                            #{beneficio.abrangencia}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Tipo de Benefício</f:facet>
+                                                        #{beneficio.setCsbffPessoaBeneficioList(csbffPessoaBeneficioList)}" 
+                                                    </h:column>
+                                                    <!--                                                    <h:column>
+                                                    
+                                                                                                            <f:facet name="header"> Salário Base</f:facet>
+                                                    #{cargos.cargoValorSalario}" 
+                                                </h:column>-->
+<!--                                                    <h:column>
+                                                        <h:commandLink class="btn btn-link btn-small" value="Alterar" action="#{csbffBeneficioBean.prepareEdit(beneficio)}">
+                                                            <f:ajax execute="@form" render="formTabela" />
+                                                        </h:commandLink>
+                                                        <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffBeneficioBean.excluir(beneficio)}" onclick="return confirm('Excluir Linha?')">
+                                                            <f:ajax execute="@form" render="formTabela" />
+                                                        </h:commandLink>
+                                                    </h:column>                  -->
+                                                </h:dataTable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                     </div>
                 </h:form>
+
             </ui:define>
         </ui:composition>
 
