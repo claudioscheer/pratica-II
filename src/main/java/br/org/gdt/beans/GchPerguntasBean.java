@@ -32,6 +32,10 @@ public class GchPerguntasBean {
     
     
     private GchPerguntasService gchPerguntasService;
+
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
+    }
     
     public GchPerguntasBean() {
         

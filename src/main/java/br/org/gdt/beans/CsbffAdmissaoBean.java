@@ -47,10 +47,18 @@ public class CsbffAdmissaoBean implements Serializable {
 
     public List<RecPessoa> getPessoas() {
         List<RecPessoa> pessoas = new ArrayList<>();
-        pessoas.add(new RecPessoa("SELECIONE"));
+        pessoas.add(new RecPessoa(""));
         pessoas.addAll(recPessoaService.findAll());
         return pessoas;
     }
+//    public void addNovoBeneficio() {
+//        this.addNovoBeneficio(new formAtivo(++indexBeneficio));
+//    }
+//    public void add() {
+//        this.formAtivo = true;
+//        this.recPessoa = new RecPessoa();
+//        this.addNovoBeneficio();
+//    }
 
     public void save() {
 //        System.out.println("SAVE:" + recPessoa.getRecIdpessoa());
