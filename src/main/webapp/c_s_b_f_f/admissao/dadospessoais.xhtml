@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Admissão de colaborador</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/template.xhtml">
+            <ui:define name="content"> 
+                <div class="title_left">
+                    <h3>Contrato de Admissão</h3>
+                </div>
+                <h:form id="dadosPessoais">                                        
+                    <p:panel>
+                        <div class="bootstrap-iso">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="title_left">
+                                        <h2>Dados Pessoais</h2>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Código colaborador
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control col-md-7 col-xs-12">
+                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
+                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="codigo" itemLabel="#{codigo.id}" itemValue="#{codigo.recIdpessoa}"/>
+                                            </h:selectOneMenu>
+                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                CPF
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recCpf}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control col-md-7 col-xs-12">
+                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
+                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.id}" itemValue="#{cpf.recCpf}"/>
+                                            </h:selectOneMenu>
+                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Sexo
+                                            </label>
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recSexo}" class="form-control col-md-7 col-xs-12">
+                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                <f:selectItems value="#{csbffAdmissaoBean.generos}" />
+                                            </h:selectOneMenu>
+                                        </div>     
+                                    </div>          
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Estado Civil
+                                            </label>
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recEstadocivil}" class="form-control col-md-7 col-xs-12">
+                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                <f:selectItems value="#{csbffAdmissaoBean.estadoCivil}" />
+                                            </h:selectOneMenu>
+                                        </div>     
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                RG
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recRg}" class="form-control col-md-7 col-xs-12">
+                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                <f:selectItems value="#{csbffAdmissaoBean.recPessoa.recRg}" />
+                                            </h:selectOneMenu>
+                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Órgão Emissor
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="number" type="text"/>
+                                        </div>
+                                    </div>    
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <!--                                    <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">-->
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Data de Emissão
+                                                <span class="required">*</span>
+                                            </label>
+                                            <!--                                        <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">-->
+                                            <h:inputText required="true" requiredMessage="Campo Data de Emissão é obrigatório." class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtemissao}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                <!--                                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>-->
+                                            </h:inputText>
+                                        </div>
+                                        <!--                                            <input class="form-control" id="number" name="number" type="text"/>-->
+                                        <!--                                        </div>-->
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Nome do Pai
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Nome da Mãe
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Data de Nascimento
+                                                <span class="required">*</span>
+                                            </label>
+                                            <!--                                            <input class="form-control" id="number" name="number" type="text"/>-->
+                                            <h:inputText required="true" requiredMessage="Campo Data de Nascimento é obrigatório." class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtnascimento}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                <!--                                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>-->
+                                            </h:inputText>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                E-mail
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Telefone
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Celular
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="form-group ">
+                                                                                <label class="control-label " for="number">                                        
+                                                                                    Objetivos Profissionais
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <input class="form-control" id="number" name="text" type="text"/>
+                                                                            </div>
+                                                                        </div>-->
+                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="form-group ">
+                                                                                <label class="control-label " for="number">                                        
+                                                                                    Auto Avaliação
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <input class="form-control" id="number" name="text" type="text"/>
+                                                                            </div>
+                                                                        </div>-->
+                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="form-group ">
+                                                                                <label class="control-label " for="number">                                        
+                                                                                    Pretenção Salarial
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <input class="form-control" id="number" name="text" type="text"/>
+                                                                            </div>
+                                                                        </div>-->
+                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="form-group ">
+                                                                                <label class="control-label " for="number">                                        
+                                                                                    Foto
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <input class="form-control" id="number" name="text" type="text"/>
+                                                                            </div>
+                                                                        </div>-->
+                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="form-group ">
+                                                                                <label class="control-label " for="number">                                        
+                                                                                    PIS/PASEP
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <input class="form-control" id="number" name="text" type="text"/>
+                                                                            </div>
+                                                                        </div>-->
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Certificado de Reservista
+                                                <span class="required">*</span>
+                                            </label>
+                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                            <h:inputText required="true" requiredMessage="Campo Número do certificado de reservista é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCertificadoReservista}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Escolaridade
+                                            </label>
+                                            <h:inputText required="true" requiredMessage="Campo Escolaridade é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recEscolaridade}" />
+                                        </div>     
+                                    </div>  
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Número do certificado de reservista
+                                            </label>
+                                            <h:inputText required="true" requiredMessage="Campo Número do certificado de reservista é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCertificadoReservista}" />
+                                        </div>    
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
+                                                Nacionalidade
+                                            </label>
+                                            <h:inputText required="true" requiredMessage="Campo Nacionalidade é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNacionalidade}" />
+                                        </div>     
+                                    </div>  
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Número
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:inputText required="true" requiredMessage="Campo Número é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNumero}" />
+                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Endereço
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:inputText required="true" requiredMessage="Campo Endereço é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recEndereco}" />
+                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                        </div>
+                                    </div>        
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Bairro
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:inputText required="true" requiredMessage="Campo Bairro é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recBairro}" />
+                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                        </div>
+                                    </div> 
+                                    <hr />
+
+                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="form-group ">
+                                                                                <label class="control-label " for="number">                                        
+                                                                                    Bairro
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <input class="form-control" id="number" name="text" type="text"/>
+                                                                            </div>
+                                                                        </div> -->
+
+                                </div>
+                                <div class="pull-right">
+                                    <div class="row">
+                                        <br></br><h:commandButton class="btn btn-success" value="Salvar" actionListener="#{csbffAdmissaoBean.save()}" onclick="return confirm('Contrato criado!')"/>
+                                        <h:commandButton immediate="true" class="btn btn-danger" value="Cancelar" actionListener="#{csbffAdmissaoBean.cancel()}"/>
+                                        <h:link class="btn btn-info" outcome="dadosprofissionais.xhtml" value="Próximo"></h:link>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p:panel>
+
+
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+
+

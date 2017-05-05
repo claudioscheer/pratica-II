@@ -1,5 +1,6 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Sexo;
 import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.RecPessoa;
@@ -32,6 +33,9 @@ public class CsbffAdmissaoBean implements Serializable {
 
     public Sexo[] getGeneros() {
         return Sexo.values();
+    }
+    public EstadoCivil[] getEstadoCivil() {
+        return EstadoCivil.values();
     }
 
     public List<GchMunicipios> getMunicipios() {
