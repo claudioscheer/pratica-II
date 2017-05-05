@@ -6,15 +6,17 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -23,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Diego
  */
 @Entity
+@SequenceGenerator(name = "seq_csbff_dependente", sequenceName = "seq_csbff_dependente", allocationSize = 1)
 @Table(name = "csbff_dependentes")
 @XmlRootElement
 @NamedQueries({
@@ -31,9 +34,10 @@ public class CsbffDependentes implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_csbff_dependente")
     @Basic(optional = false)
     @Column(name = "dependente_cod")
-    private BigDecimal dependenteCod;
+    private long dependenteCod;
     @Basic(optional = false)
     @Column(name = "dependente_nome")
     private String dependenteNome;
@@ -59,11 +63,11 @@ public class CsbffDependentes implements Serializable {
     public CsbffDependentes() {
     }
 
-    public CsbffDependentes(BigDecimal dependenteCod) {
+    public CsbffDependentes(long dependenteCod) {
         this.dependenteCod = dependenteCod;
     }
 
-    public CsbffDependentes(BigDecimal dependenteCod, String dependenteNome, BigInteger dependenteDataNascimento, String dependenteCpf, String dependenteRgCertNascimento, boolean dependenteImpostoDeRenda) {
+    public CsbffDependentes(long dependenteCod, String dependenteNome, BigInteger dependenteDataNascimento, String dependenteCpf, String dependenteRgCertNascimento, boolean dependenteImpostoDeRenda) {
         this.dependenteCod = dependenteCod;
         this.dependenteNome = dependenteNome;
         this.dependenteDataNascimento = dependenteDataNascimento;
@@ -72,11 +76,11 @@ public class CsbffDependentes implements Serializable {
         this.dependenteImpostoDeRenda = dependenteImpostoDeRenda;
     }
 
-    public BigDecimal getDependenteCod() {
+    public long getDependenteCod() {
         return dependenteCod;
     }
 
-    public void setDependenteCod(BigDecimal dependenteCod) {
+    public void setDependenteCod(long dependenteCod) {
         this.dependenteCod = dependenteCod;
     }
 
@@ -146,23 +150,30 @@ public class CsbffDependentes implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (dependenteCod != null ? dependenteCod.hashCode() : 0);
+        int hash = 3;
+        hash = 47 * hash + (int) (this.dependenteCod ^ (this.dependenteCod >>> 32));
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CsbffDependentes)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        CsbffDependentes other = (CsbffDependentes) object;
-        if ((this.dependenteCod == null && other.dependenteCod != null) || (this.dependenteCod != null && !this.dependenteCod.equals(other.dependenteCod))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CsbffDependentes other = (CsbffDependentes) obj;
+        if (this.dependenteCod != other.dependenteCod) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

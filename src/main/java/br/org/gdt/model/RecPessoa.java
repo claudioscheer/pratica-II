@@ -34,6 +34,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  *
  * @author Diego
  */
+
 @Entity
 @Table(name = "rec_pessoa")
 @XmlRootElement
@@ -45,7 +46,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idpessoa")
-    private Integer recIdpessoa;
+    private long recIdpessoa;
     @Column(name = "rec_nomecompleto")
     private String recNomecompleto;
     @Column(name = "rec_cpf")
@@ -113,7 +114,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Date recDtaAdmissao;
     @Column(name = "rec_segurodesemprego")
     private Boolean recSegurodesemprego;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "rec_insalubridade")
     private int recInsalubridade;
     @Column(name = "rec_periculosidade")
@@ -149,10 +150,10 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @ManyToOne
     private CsbffCargos cargoCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private GchMunicipios munCodigo;
     @JoinColumn(name = "rec_idgrauensino", referencedColumnName = "rec_idgrauensino")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private RecGrauensino recIdgrauensino;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<CsbffHistoricoSalario> csbffHistoricoSalarioList;
@@ -175,11 +176,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recNomecompleto = recNomecompleto;
     }
 
-    public Integer getRecIdpessoa() {
+    public long getRecIdpessoa() {
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(Integer recIdpessoa) {
+    public void setRecIdpessoa(long recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
 
@@ -607,25 +608,20 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.gchRespostasList = gchRespostasList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (recIdpessoa != null ? recIdpessoa.hashCode() : 0);
-        return hash;
-    }
+   
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RecPessoa)) {
-            return false;
-        }
-        RecPessoa other = (RecPessoa) object;
-        if ((this.recIdpessoa == null && other.recIdpessoa != null) || (this.recIdpessoa != null && !this.recIdpessoa.equals(other.recIdpessoa))) {
-            return false;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean equals(Object object) {
+//        // TODO: Warning - this method won't work in the case the id fields are not set
+//        if (!(object instanceof RecPessoa)) {
+//            return false;
+//        }
+//        RecPessoa other = (RecPessoa) object;
+//        if ((this.recIdpessoa == null && other.recIdpessoa != null) || (this.recIdpessoa != null && !this.recIdpessoa.equals(other.recIdpessoa))) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     @Override
     public String toString() {

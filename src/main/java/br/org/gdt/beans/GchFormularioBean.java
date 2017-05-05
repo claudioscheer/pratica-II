@@ -14,6 +14,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 
 
@@ -22,7 +23,7 @@ import javax.faces.bean.RequestScoped;
  * @author Alisson Allebrandt
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchFormularioBean {
 
     private boolean formAtivo = false;
@@ -52,11 +53,17 @@ public class GchFormularioBean {
 
     }
      public void addNovaPergunta() {
-        this.gchFormulario.addPergunta((new GchPerguntas(++indexPerguntaItem)));
+         
+         System.out.println("Índice Pergunta "+this.indexPerguntaItem);
+         
+        this.gchFormulario.addPergunta((new GchPerguntas()));
     }
 
     public void removerPergunta(int index) {
-        this.gchFormulario.getPerguntas().remove(index);
+    
+        System.out.println("indice"+index);
+        
+        this.gchFormulario.getPerguntas().remove(this);
     }
     
     public String excluir(GchFormulario gchFormulario) {
@@ -81,8 +88,6 @@ public class GchFormularioBean {
 
         return "Formularios";
     }
-    
-    
     
     public GchFormulario getGchFormulario() {
         return gchFormulario;

@@ -37,4 +37,5 @@ public class CsbffBeneficiosService {
     public List<CsbffBeneficios> findAll() {
         return csbffBeneficioDAO.findAll();
     }
+    
 }
