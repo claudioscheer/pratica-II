@@ -36,7 +36,6 @@ public class FpPeriodoBean {
         if (fpPeriodo.getPerId() > 0) {
             fpPeriodoService.update(fpPeriodo);
         } else {
-            fpPeriodo.setPerPago(true);
             fpPeriodoService.save(fpPeriodo);
         }
         todosFpPeriodo = fpPeriodoService.findAll();
@@ -75,7 +74,7 @@ public class FpPeriodoBean {
     }
 
     public String prepareEdit(FpPeriodo fpPeriodo) {
-        if (!fpPeriodo.isPerPago()) {
+        if (fpPeriodo.isPerPago()) {
             Helper.mostrarNotificacao("Período", "Período já está pago, não pode ser editado.", "info");
             return "periodos";
         }

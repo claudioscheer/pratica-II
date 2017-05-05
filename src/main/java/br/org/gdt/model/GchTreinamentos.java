@@ -56,7 +56,7 @@ public class GchTreinamentos implements Serializable {
     @Column(name = "trei_datainclusao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date treiDatainclusao;
-    
+        
     @Basic(optional = false)
     @Column(name = "trei_data_inicio")
     @Temporal(TemporalType.TIMESTAMP)
@@ -67,6 +67,10 @@ public class GchTreinamentos implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date treiDataFim;
     
+    
+    @Basic(optional = true)
+    @Column(name = "trei_carga_horaria")
+    private long treiCargaHorario;
     
     @JoinColumn(name = "cur_codigo", referencedColumnName = "cur_codigo")
     @ManyToOne(optional = false)
@@ -200,6 +204,14 @@ public class GchTreinamentos implements Serializable {
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.GchTreinamentos[ treiCodigo=" + treiCodigo + " ]";
+    }
+
+    public long getTreiCargaHorario() {
+        return treiCargaHorario;
+    }
+
+    public void setTreiCargaHorario(long treiCargaHorario) {
+        this.treiCargaHorario = treiCargaHorario;
     }
 
 

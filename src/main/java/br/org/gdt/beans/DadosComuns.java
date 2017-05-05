@@ -2,6 +2,7 @@ package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.enums.FpTipoValorFaixa;
+import br.org.gdt.enums.FpTipoFolha;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -11,6 +12,7 @@ public class DadosComuns {
 
     private FpTipoValorFaixa[] tipoValorFaixas;
     private FpTipoEvento[] tipoEventos;
+    private FpTipoFolha[] tipoFolhas;
 
     public FpTipoValorFaixa[] getTipoValorFaixas() {
         return FpTipoValorFaixa.values();
@@ -20,4 +22,7 @@ public class DadosComuns {
         return FpTipoEvento.values();
     }
 
+    public FpTipoFolha[] getTipoFolhas() {
+        return FpTipoFolha.values();
+    }
 }

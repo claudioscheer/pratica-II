@@ -19,20 +19,30 @@
                 <h:form id="formEventoVariavel">
                     <h:messages class="error" style="color: #d9534f" />
 
-                    <h:panelGroup layout="block" rendered="#{!fpCalcularBean.formAtivo}">
-                        <div class="row">
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                <h:inputText label="Pessoa" required="true" a:placeholder="Pessoa" requiredMessage="Campo Pessoa é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpCalcularBean.codigoFuncionario}" />
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12 text-center">
-                                <h:commandButton class="btn btn-primary" value="Buscar eventos" action="#{fpCalcularBean.buscarEventos()}">
-                                    <f:ajax execute="@form" render="formEventoVariavel" />
-                                </h:commandButton>
+                    <h:panelGroup id="panelTipoFolhaPagamento" layout="block" class="col-md-12">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Selecione a folha para calcular</label>
+                                <h:selectOneMenu value="#{fpCalcularBean.fpTipoFolha}" class="form-control">
+                                    <f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarTipoFolha()}" event="change" />
+                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                    <f:selectItems value="#{dadosComuns.tipoFolhas}" />
+                                </h:selectOneMenu>
                             </div>
                         </div>
-                        <div style="margin-top: 10px">
-                            <p>Digite o código do funcionário e clique em <b>Buscar eventos</b> para relacionar eventos variáveis ao funcionário.</p>
-                        </div>
+                        <h:panelGroup layout="block" class="col-md-7 col-sm-12 col-xs-12" rendered="#{fpCalcularBean.fpTipoFolha == 'FolhaDePagamento'}">
+                            <div class="form-group">
+                                <label class="control-label">Selecione um período</label>
+                                <h:selectOneMenu id="comboMunicipio" value="#{fpCalcularBean.fpPeriodo.perId}" class="form-control">
+                                    <f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarPeriodo()}" event="change" />
+                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                    <f:selectItems value="#{fpCalcularBean.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
+                                </h:selectOneMenu>
+                            </div>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="col-md-7 col-sm-12 col-xs-12" rendered="#{fpCalcularBean.fpTipoFolha == 'Rescisao'}">
+                            <h3>Rescisão</h3>
+                        </h:panelGroup>
                     </h:panelGroup>
 
                 </h:form>
