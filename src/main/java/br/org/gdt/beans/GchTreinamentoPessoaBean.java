@@ -27,7 +27,7 @@ import javax.faces.context.FacesContext;
  * @author Diego
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class GchTreinamentoPessoaBean {
 
     private boolean formAtivo = false;
@@ -49,7 +49,7 @@ public class GchTreinamentoPessoaBean {
 
     }
 
-    public void save() {
+    public String save() {
 
 //        if (gchTreinamentos.getTreiCodigo() > 0) {
 //            gchTreinamentosService.update(gchTreinamentos);
@@ -79,9 +79,9 @@ public class GchTreinamentoPessoaBean {
         todosGchTreinamentosPessoas = null;
         this.formAtivo = false;
         gchTreinamentospessoas = null;
-        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml");
+//        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml?faces-redirect=true");
 
-//        return "Treinamentos";
+        return "Treinamentos";
     }
 
     public void cancel() {
@@ -98,7 +98,8 @@ public class GchTreinamentoPessoaBean {
     public String excluir(GchTreinamentospessoas gchTreinamentosPessoas) {
         gchTreinamentospessoasService.delete(gchTreinamentosPessoas.getTreiPescodigo());
         todosGchTreinamentosPessoas.remove(gchTreinamentosPessoas);
-        return "treinamentos";
+//        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml?faces-redirect=true");
+        return "Treinamentos";
     }
 
     public void adicionaPessoa(RecPessoa recPessoa) {
@@ -116,7 +117,7 @@ public class GchTreinamentoPessoaBean {
 
         this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
 
-        return "VincularPessoasTreinamento";
+        return "VincularTreinamentos";
     }
 
     public String buscaTreinamentoPorId(long id) {
@@ -127,7 +128,8 @@ public class GchTreinamentoPessoaBean {
 
             gchTreinamentospessoas.setTreiCodigo(gchTreinamentosService.findById(id));
 
-            return "VincularPessoasTreinamento";
+//            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "VincularPessoasTreinamento.xhtml?faces-redirect=true");
+            return "VincularTreinamentos";
 
         }
         return null;

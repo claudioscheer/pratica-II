@@ -30,13 +30,13 @@
                                     <div class="panel-body" style="/* align-items: center; */">
                                         <h:form id="parentformid">
                                             <h:dataTable class="table table-striped" value="#{gchTreinamentosBean.todosGchTreinamentos}" var="treinamento">
-
                                                 
                                                 <h:column headerClass="alinhaColuna">                
                                                     <h:commandLink action="#{gchTreinamentosBean.excluir(treinamento)}" onclick="return confirm('Voce realmente deseja excluir?')" >
                                                         <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
                                                     </h:commandLink>
                                                 </h:column>
+                                                
                                                 <h:column>                
                                                     <h:commandLink action="#{gchTreinamentosBean.buscaTreinamentoPorId(treinamento.treiCodigo)}">
                                                      <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
@@ -44,7 +44,7 @@
                                                 </h:column>
                                                 
                                                 <h:column>                
-                                                    <h:commandLink action="#{gchTreinamentoPessoaBean.prepareEdit(treinamento)}" >
+                                                    <h:commandLink action="#{gchTreinamentoPessoaBean.buscaTreinamentoPorId(treinamento.treiCodigo)}" >
                                                      <i class="glyphicon glyphicon-user" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
@@ -53,7 +53,6 @@
                                                     <f:facet name="header">Nome</f:facet>
                                                     <h:outputText value="#{treinamento.treiNome}"/>                
                                                 </h:column>
-
                                                 
                                                  <h:column>      
                                                     <f:facet name="header">Carga horária</f:facet>
