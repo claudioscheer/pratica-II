@@ -54,12 +54,12 @@ public class GchTreinamentoPessoaBean {
 
     }
 
-    public void save() {
+    public String save() {
 
 //        if (gchTreinamentos.getTreiCodigo() > 0) {
 //            gchTreinamentosService.update(gchTreinamentos);
 //        } else {
-        System.out.println("Aqui estou salvando: " + id);
+        System.out.println("Aqui estou salvando: ");
         System.out.println("Teste teste: " + gchTreinamentospessoas.getTreiCodigo().getTreiNome());
 
         Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
@@ -86,15 +86,15 @@ public class GchTreinamentoPessoaBean {
         this.formAtivo = false;
         gchTreinamentospessoas = null;
 //        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml?faces-redirect=true");
+//
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        try {
+//            context.getExternalContext().redirect("Treinamentos.xhtml");
+//        } catch (IOException ex) {
+//
+//        }
 
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("Treinamentos.xhtml");
-        } catch (IOException ex) {
-
-        }
-
-//        return "Treinamentos";
+        return "Treinamentos.xhtml";
     }
 
     public void cancel() {
@@ -130,10 +130,10 @@ public class GchTreinamentoPessoaBean {
 
         this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
 
-        return "VincularTreinamentos";
+        return "VincularPessoasTreinamento";
     }
 
-    public void buscaTreinamentoPorId(long id) {
+    public String buscaTreinamentoPorId(long id) {
 
         System.out.println("Id Treinamento" + id);
         gchTreinamentospessoas = null;
@@ -141,17 +141,17 @@ public class GchTreinamentoPessoaBean {
 
             gchTreinamentospessoas.setTreiCodigo(gchTreinamentosService.findById(id));
 
-//            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "VincularPessoasTreinamento.xhtml?faces-redirect=true");
-            FacesContext context = FacesContext.getCurrentInstance();
-            try {
-                context.getExternalContext().redirect("VincularPessoasTreinamento.xhtml");
-            } catch (IOException ex) {
+////            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "VincularPessoasTreinamento.xhtml?faces-redirect=true");
+//            FacesContext context = FacesContext.getCurrentInstance();
+//            try {
+//                context.getExternalContext().redirect("VincularPessoasTreinamento.xhtml");
+//            } catch (IOException ex) {
+//
+//            }
 
-            }
-
-//            return "VincularTreinamentos";
+            return "VincularPessoasTreinamento";
         }
-//        return null;
+        return null;
     }
 
     public boolean isFormAtivo() {
