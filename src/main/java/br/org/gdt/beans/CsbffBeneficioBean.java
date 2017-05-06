@@ -60,18 +60,7 @@ public class CsbffBeneficioBean {
 //        csbffBeneficios.setBeneficioNome(abrangencia);
 //        csbffBeneficiosService.save(csbffBeneficios);
     }
-    public String excluir(CsbffBeneficios beneficio) {
-        csbffBeneficiosService.delete(beneficio.getBeneficioCodigo());
-        todosCsbffBeneficios.remove(beneficio);
-        return "beneficio";
-    }
- 
-    public String prepareEdit(CsbffBeneficios beneficio) {
-        this.formAtivo = true;
-        this.csbffBeneficios = beneficio;
-        return "beneficio";
-    }
-    
+        
     public void cancel() {
         this.formAtivo = false;
         this.csbffBeneficios = null;
