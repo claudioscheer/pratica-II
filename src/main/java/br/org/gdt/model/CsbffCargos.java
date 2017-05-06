@@ -10,11 +10,11 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,10 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-/**
- *
- * @author Diego
- */
+
+
+
 @Entity
 @SequenceGenerator(name = "seq_csbff_cargo", sequenceName = "seq_csbff_cargo", allocationSize = 1)
 @Table(name = "csbff_cargos")
@@ -42,9 +41,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 public class CsbffCargos implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-   @Id
+  
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_csbff_cargo")
     @Basic(optional = false)
+    @Id
     @Column(name = "cargo_codigo")
     private long cargoCodigo;
     @Basic(optional = false)
@@ -66,14 +66,14 @@ public class CsbffCargos implements Serializable {
     @Column(name = "cargo_data_ultima_alteracao")
     @Temporal(TemporalType.DATE)
     private Date cargoDataUltimaAlteracao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargoCodigo")
+    @OneToMany(mappedBy = "cargoCodigo")
     private List<CsbffCargosHistorico> csbffCargosHistoricoList;
     @JoinColumn(name = "tipo_cargo_cod_csbff_tipos_de_cargos", referencedColumnName = "tipo_cargo_cod")
     @ManyToOne
     private CsbffTiposDeCargos tipoCargoCodCsbffTiposDeCargos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargoCodigo")
+    @OneToMany(mappedBy = "cargoCodigo")
     private List<RecVaga> recVagaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargoCodigo")
+    @OneToMany(mappedBy = "cargoCodigo")
     private List<RecPessoa> recPessoaList;
 
     public CsbffCargos() {

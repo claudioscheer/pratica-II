@@ -7,8 +7,8 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffPessoaDependente;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffDependentesService;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -21,10 +21,9 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class DependenteBean implements Serializable{
-    
-    
-     private boolean formAtivo = false;
+public class DependenteBean {
+
+    private boolean formAtivo = false;
 
     private CsbffDependentes csbffdependente = new CsbffDependentes();
     private List<CsbffDependentes> todosdependentes;
@@ -32,16 +31,18 @@ public class DependenteBean implements Serializable{
     @ManagedProperty("#{csbffDependenteService}")
     private CsbffDependentesService csbffDependenteService;
 
-    CsbffPessoaDependente csbffPessoaDependente = null;
-    
-    
+    private RecPessoa recPessoa;
 
-    
-    
+    public DependenteBean() {
+
+    }
+
     public void save() {
-         System.out.println("testando ");
-        
-        csbffdependente.setCsbffPessoaDependente(csbffPessoaDependente);
+        System.out.println("testando ");
+
+        //dependente.setColabDepCodigo(BigDecimal.valueOf(1));
+        //csbffdependente.setDependenteDataNascimento(data);
+        //csbffdependente.setCsbffPessoaDependente(dependente);
         csbffdependente.setDependenteTipo(BigInteger.valueOf(1));
         csbffdependente.setDependenteImpostoDeRenda(false);
         csbffDependenteService.save(csbffdependente);
@@ -63,19 +64,18 @@ public class DependenteBean implements Serializable{
         todosdependentes.remove(dependente);
         return "dependente";
     }
- 
+
     public String prepareEdit(CsbffDependentes dependente) {
         this.formAtivo = true;
         this.csbffdependente = dependente;
         return "dependente";
     }
 
-    public CsbffDependentes getCargoCodigo(){
-        
+    public CsbffDependentes getCargoCodigo() {
+
         return csbffdependente;
     }
-    
-    
+
     public void setCargoCodigo(CsbffDependentes dependente) {
         this.csbffdependente = dependente;
     }
@@ -112,8 +112,12 @@ public class DependenteBean implements Serializable{
         this.todosdependentes = todosdependentes;
     }
 
-    
+    public RecPessoa getRecPessoa() {
+        return recPessoa;
+    }
 
-    
+    public void setRecPessoa(RecPessoa recPessoa) {
+        this.recPessoa = recPessoa;
+    }
 
 }

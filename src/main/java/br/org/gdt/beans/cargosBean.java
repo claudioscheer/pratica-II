@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 
@@ -22,7 +23,7 @@ import javax.faces.bean.SessionScoped;
  * @author MARCOS FELIPE
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class cargosBean {
 
     private boolean formAtivo = false;
@@ -51,6 +52,14 @@ public class cargosBean {
         csbffcargos.setCargoDataUltimaAlteracao(new Date());
         csbffCargosService.save(csbffcargos);
 
+    }
+    public String novo(){
+       
+        save();
+        csbffcargos = new CsbffCargos();
+        return "form_cargo";
+        
+        
     }
 
     public void cancel() {
