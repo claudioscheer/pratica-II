@@ -3,33 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
-    <h:head>
-        <title>Novo cargo</title>
-    </h:head>
-    
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-    <script type="text/javascript" src="https://raw.githubusercontent.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
-    
-    <script>
-        $(function () {
-            $("#cbo").mask("9999-99");
-            
-        });
-    </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
+            <ui:define name="head">
+                <title>Novo cargo</title>
+            </ui:define>
             <ui:define name="content">   
                 <div class="title_left">
                     <h3>Cargos</h3>
@@ -89,7 +69,8 @@
                                         </label>
 
                                         <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoValorSalario}"/>
+                                        <h:inputText class="form-control"
+                                                     a:data-inputmask="'alias': 'numeric', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'" value="#{cargosBean.cargoCodigo.cargoValorSalario}"/>
                                     </div>
 
                                 </div>
@@ -132,6 +113,7 @@
 
                                         <h:commandButton class="btn btn-success" value=" salvar" action="#{cargosBean.novo()}" />
                                         <h:commandButton value="Cancelar" class="btn btn-danger" action="form_cargo.xhtml"/>
+                                        <h:commandButton class="btn btn" value=" voltar" action="cargo_consulta.xhtml" />
                                     </div>
 
 
