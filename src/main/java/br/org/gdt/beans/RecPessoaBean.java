@@ -11,6 +11,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class RecPessoaBean {
 
+    private boolean formAtivo = false;
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoas;
 
@@ -66,6 +67,14 @@ public class RecPessoaBean {
 
     public void setRecPessoaService(RecPessoaService recPessoaService) {
         this.recPessoaService = recPessoaService;
+    }
+
+    public boolean isFormAtivo() {
+        return formAtivo;
+    }
+
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
     }
 
 }
