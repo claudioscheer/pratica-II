@@ -18,14 +18,16 @@
                 <br />
                 <h:form id="formVaga">                                        
                     <p:panel visible="#{recVagaBean.formAtivo}">
-                        <h:inputHidden value="#{recVagaBean.vaga.recIdvaga}" />
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">                                            
-                                            <h:outputLabel value="Descrição" for="descricao" />                                            
-                                            <h:inputText class="form-control" id="descricao" value="#{recVagaBean.vaga.recDescricao}" title="Descricao" />
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Descrição
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="text" type="text"/>
                                         </div>
                                     </div>                                                     
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -35,22 +37,22 @@
                                             </label>
                                             <select class="select form-control" id="select" name="select">
                                                 <option value="1">
-                                                    Masculino/Feminino
+                                                    Masculino
                                                 </option>
                                                 <option value="2">
                                                     Feminino
                                                 </option>                                            
-                                                <option value="2">
-                                                    Masculino
-                                                </option>    
                                             </select>
                                         </div>     
                                     </div>          
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
-                                            <h:outputLabel value="Salário" for="salario" />
-                                            <h:inputText class="form-control" id="salario" value="#{recVagaBean.vaga.recSalario}" title="Salário" />                                            
+                                            <label class="control-label " for="number">                                        
+                                                Salário
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" id="number" name="number" type="text"/>
                                         </div>
                                     </div>    
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -58,61 +60,74 @@
                                             <label class="control-label " for="select">
                                                 Grau de Ensino
                                             </label>
-                                            <h:selectOneMenu id="comboGrauensino" value="#{recVagaBean.vaga.recIdgrauensino}"  class="form-control" >
-                                                <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
-                                                <f:selectItem itemLabel="Ensino Fundamental" itemValue="#{3}" />
-                                                <f:selectItem itemLabel="Ensino Médio Completo" itemValue="#{4}" />
-                                                <f:selectItem itemLabel="Ensino Médio Incompleto" itemValue="#{5}" />
-                                                <f:selectItem itemLabel="Ensino Superior Completo" itemValue="#{6}" />
-                                                <f:selectItem itemLabel="Ensino Superior Incompleto" itemValue="#{7}" />
-                                                <f:selectItem itemLabel="Especialização" itemValue="#{8}" />                                                                                                
-                                            </h:selectOneMenu>                                
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Masculino
+                                                </option>
+                                                <option value="2">
+                                                    Feminino
+                                                </option>                                            
+                                            </select>
                                         </div>     
-                                    </div>                
-                                    <div class="col-md-12    col-sm-12 col-xs-12">                                
-                                        <div class="form-group">
-                                            <label class="control-label">
+                                    </div>  
+                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="select">
                                                 Cargo
-                                            </label>                                                           
-
-                                            <h:selectOneMenu id="comboCargo" value="#{recVagaBean.vaga.idCargo}"  class="form-control" >
-                                                <f:selectItem itemLabel="Selecione o Cargo" itemValue="#{null}" />
-                                                <f:selectItems value="#{cargosBean.todosCargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.cargoDescricao}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div>
+                                            </label>
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Masculino
+                                                </option>
+                                                <option value="2">
+                                                    Feminino
+                                                </option>                                            
+                                            </select>
+                                        </div>     
+                                    </div>  
                                 </div>
+
+
                                 <div class="row">
                                     <h3 class="text-center">Habilidades Necessárias</h3>   
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
-                                                Habilidades
+                                                Habilidade
                                             </label>
-
-                                            <h:selectOneMenu id="comboHabilidade" value="#{recVagaBean.habilidade}"  class="form-control" >
-                                                <f:selectItem itemLabel="Selecione a Habilidade " itemValue="#{null}" />
-                                                <f:selectItems value="#{recHabilidadeBean.ListarTodas()}" var="habilidade" itemValue="#{habilidade}" itemLabel="#{habilidade.recDescricao}"/>
-                                            </h:selectOneMenu>                                                                 
+                                            <select class="select form-control" id="select" name="select">
+                                                <option value="1">
+                                                    Habilidade 1
+                                                </option>
+                                                <option value="2">
+                                                    Habilidade 2
+                                                </option>                                            
+                                            </select>
                                         </div>     
                                     </div>                            
                                 </div>
 
                                 <div class="row">
-                                    <h:commandButton class="btn btn-success" value="Adicionar ab" />                                          
+                                    <h:commandButton class="btn btn-success" value=" Adicionar" />                            
                                 </div>
 
                                 <div class="row">
-                                    <h:dataTable class="table table-striped" value="#{recVagaBean.ListarHabilidadesVaga()}" var="item">                                        
-                                        <h:column>                                            
-                                            <f:facet name="header">Código</f:facet>                                                                                            
-                                            <h:outputText value="#{item.recDescricao}"/>
-                                        </h:column>                                         
+                                    <h:dataTable class="table table-striped">                                        
                                         <h:column>
-                                            <f:facet name="header">Opções</f:facet>                                                                                        
+                                            <f:facet name="header">Código</f:facet>
+
+                                        </h:column>     
+                                        <h:column>
+                                            <f:facet name="header">Habilidade</f:facet>
+
+                                        </h:column>   
+                                        <h:column>
+                                            <f:facet name="header">Opções</f:facet>
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar">
+
+                                            </h:commandLink>
                                             <h:commandLink class="btn btn-link btn-small" value="Excluir">
+
                                             </h:commandLink>
                                         </h:column>                  
                                     </h:dataTable>
@@ -122,7 +137,7 @@
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <h:commandButton class="btn btn-success" value="Salvar" />
+                                        <h:commandButton class="btn btn-success" value=" salvar" />
                                         <h:commandButton value="Editar" class="btn btn-default" />
                                         <h:commandButton value="Cancelar" class="btn btn-danger"/>
                                     </div>
@@ -131,25 +146,17 @@
                         </div>
                     </p:panel>
 
-                    <!--TELA DE LISTAGEM-->
+
                     <p:panel visible="#{!recVagaBean.formAtivo}">
                         <div class="row">
                             <h:commandButton class="btn btn-primary" value="Novo Registro" action="#{recVagaBean.Adicionar()}">                                
                             </h:commandButton>
                         </div>
-                        <h:dataTable class="table table-striped" value="#{recVagaBean.ListarTodas()}" var="item">                                        
+                        <h:dataTable class="table table-striped" value="#{recVagaBean.vagas}" var="item">                                        
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
-                                <h:outputText value="#{item.recIdvaga}"/>
-                            </h:column>                                        
-                            <h:column>
-                                <f:facet name="header">Descrição</f:facet>                                                                                            
                                 <h:outputText value="#{item.recDescricao}"/>
-                            </h:column>  
-                            <h:column>
-                                <f:facet name="header">Salário</f:facet>                                                                                            
-                                <h:outputText value="#{item.recSalario}"/>
-                            </h:column>  
+                            </h:column>                                        
                             <h:column>
                                 <f:facet name="header">Opções</f:facet>
                                 <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recVagaBean.PreparaEdicao(vaga)}">

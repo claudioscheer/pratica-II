@@ -1,10 +1,7 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.CsbffCargos;
-import br.org.gdt.model.RecGrauensino;
 import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecVaga;
-import br.org.gdt.service.CsbffCargosService;
 import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecVagaService;
 import java.util.List;
@@ -27,17 +24,16 @@ public class RecVagaBean {
     ///DADOS DA HABILIDADE
     @ManagedProperty("#{recHabilidadeService}")
     private RecHabilidadeService recHabilidadeService;
-    private RecHabilidade habilidade = new RecHabilidade();    
+    private RecHabilidade habilidade = new RecHabilidade();
     private List<RecHabilidade> habilidades;
-    
 
     public RecVagaBean() {
     }
 
-    public void Salvar() {        
+    public void Salvar() {
         if (vaga.getRecIdvaga() > 0) {
             recVagaService.Alterar(vaga);
-        } else {                     
+        } else {
             recVagaService.Inserir(vaga);
         }
         vagas = recVagaService.ListarTodas();
@@ -48,10 +44,6 @@ public class RecVagaBean {
             vagas = recVagaService.ListarTodas();
         }
         return vagas;
-    }        
-    
-    public List<RecHabilidade> ListarHabilidadesVaga() {          
-        return habilidades;
     }
 
     public String PreparaEdicao(RecVaga vaga) {
@@ -60,10 +52,9 @@ public class RecVagaBean {
         return "vaga_lista";
     }
 
-    public void AdicionarHabilidade(RecHabilidade habilidade) {        
+    public void AdicionarHabilidade() {
         this.habilidades.add(habilidade);
-        this.habilidade = new RecHabilidade(); 
-        this.formAtivo = true;
+        this.habilidade = new RecHabilidade();
     }
 
     public String Excluir(RecVaga vaga) {

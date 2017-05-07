@@ -2,137 +2,65 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-<<<<<<< HEAD
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-
-    <h:body>
-        <ui:composition template="../../templates/template.xhtml">
-            <ui:define name="head">
-                <title>Consulta de Benefícios</title>
-            </ui:define>
-            <ui:define name="content">
-                <div class="title_left">
-                    <h3>Consultar Benefícios</h3>
-                </div>
-                <br />
-                <h:form id="formBeneficios">
-                    <h:messages class="error" style="color: #d9534f" />
-
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{csbffBeneficioBean.formAtivo}">
-                        <h:inputHidden value="#{csbffBeneficioBean.csbffBeneficios.beneficioCodigo}" />
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome Benefício<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText required="true" requiredMessage="Campo Descrição é obrigatório." class="form-control col-md-7 col-xs-12" value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
-                                    </div>
-                                </div>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{csbffBeneficioBean.save()}">
-                                            <f:ajax execute="@form" render="formBeneficios" />
-                                        </h:commandButton>
-                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{csbffBeneficioBean.cancel()}">
-                                            <f:ajax execute="@form" render="formBeneficios" />
-                                        </h:commandButton>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </h:panelGroup>
-
-                    <h:panelGroup layout="block" rendered="#{!csbffBeneficioBean.formAtivo}">
-                        <div class="row">
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                <h:inputText label="Beneficio" required="true" a:placeholder="Digite o nome do Benefício para consulta ..." requiredMessage="Campo Busca é obrigatório." class="form-control col-md-7 col-xs-12" value="#{csbffBeneficioBean.formAtivo}" />
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12 text-center">
-                                <h:commandButton class="btn btn-primary" value="Buscar" action="#{csbffBeneficioBean.csbffBeneficios}">
-                                    <f:ajax execute="@form" render="formBeneficios" />
-                                </h:commandButton>
-                            </div>
-                        </div>
-                        <div style="margin-top: 10px">
-                            <p>Digite o nome do beneficio e clique em <b>Buscar</b> </p>
-                        </div>
-                    </h:panelGroup>
-
-                </h:form>
-            </ui:define>
-            <ui:define name="script">
-            </ui:define>
-        </ui:composition>
-
-    </h:body>
-</html>
-=======
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Consulta de Benefícios</title>
     </h:head>
     <h:body>
-     
+
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
-                <h:form>
-        
-        
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffAdmissaoBean.formAtivo}">
+
+                <h:form id="formConsulta">
+
+
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffBeneficioBean.formAtivo}">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="contratoadmissao.xhtml"/>
-                                
+                            <h:commandButton class="btn btn-primary" value="Cadastrar Benefício" action="cadastrobeneficios.xhtml">
+                                <f:ajax execute="@form" render="formConsulta" />
+                            </h:commandButton>
+                        </div>
+                        <div class="title_left">
+                            <h3>Benefícios Cadastrados</h3>
                         </div>
                         <div class="row">
                             <div class="x_panel">
-                                <div class="x_content">
-                                    <h:dataTable class="table table-striped" value="#{csbffAdmissaoBean.todosRecPessoa}" var="pessoas">
+                                <div class="x_content" >
+                                    <h:dataTable  class="table table-striped" value="#{csbffBeneficioBean.todosCsbffBeneficios}" var="beneficio">
                                         <h:column>
                                             <f:facet name="header">Código</f:facet>
-                                                #{pessoas.id}
+                                                #{beneficio.beneficioCodigo}
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Nome</f:facet>
-                                                #{pessoas.recNomecompleto}
+                                            <f:facet name="header"> Nome</f:facet>
+                                            #{beneficio.beneficioNome}" 
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">em aberto</f:facet>
-                                            <h:selectBooleanCheckbox disabled="true" value="#{tabela.tabAtivo}" />
+                                            <f:facet name="header">Abrangência </f:facet>
+                                                #{beneficio.abrangencia}
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">em aberto</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpTabelaBean.prepareEdit(tabela)}">
-                                                <f:ajax execute="@form" render="formTabela" />
-                                            </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpTabelaBean.excluir(tabela)}" onclick="return confirm('Excluir tabela?')">
-                                                <f:ajax execute="@form" render="formTabela" />
-                                            </h:commandLink>
-                                        </h:column>                  
+                                            <f:facet name="header">Tipo Benefício </f:facet>
+                                                #{beneficio.csbffPessoaBeneficioList}
+                                        </h:column>
+
+                                        <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{csbffBeneficioBean.prepareEdit(beneficio)}">
+                                            <f:ajax execute="@form" render="formConsulta" />
+                                        </h:commandLink>
+<!--                                        <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffBeneficioBean.excluir(beneficio)}" onclick="return confirm('Excluir colaborador?')">
+                                            <f:ajax execute="@form" render="formConsulta" />
+                                        </h:commandLink>-->
+
                                     </h:dataTable>
                                 </div>
                             </div>
                         </div>
                     </h:panelGroup>
-        
-        
-        
-        
-        
-        
-        
                 </h:form>      
             </ui:define>
-         </ui:composition>
-        
-        
-        
-        
-        
+        </ui:composition>
+
     </h:body>
 </html>
 
->>>>>>> origin/master

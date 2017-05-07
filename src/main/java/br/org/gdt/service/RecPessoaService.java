@@ -37,6 +37,10 @@ public class RecPessoaService {
     public void Excluir(int id) {
         pessoaDao.delete(id);
     }
+    @Transactional
+    public void delete(long id) {
+        pessoaDao.delete(id);
+    }
 
     public RecPessoa BuscarId(int id) {
         return pessoaDao.findById(id);
@@ -47,5 +51,9 @@ public class RecPessoaService {
     }
     public List<RecPessoa> findAll() {
         return pessoaDao.findAll();
+    }
+    
+    public RecPessoa findByCpf(String cpf){
+        return pessoaDao.findByCpf(cpf);
     }
 }
