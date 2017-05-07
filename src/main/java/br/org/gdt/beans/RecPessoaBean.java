@@ -20,11 +20,25 @@ public class RecPessoaBean {
     public RecPessoaBean() {
     }
 
+    public void Salvar() {
+        if (recPessoa.getId() > 0) {
+            recPessoaService.Alterar(recPessoa);
+        } else {
+            recPessoaService.Inserir(recPessoa);
+        }
+        //habilidades = recHabilidadeService.ListarTodas();
+    }
+
     public List<RecPessoa> ListarTodas() {
         if (recPessoas == null) {
             recPessoas = recPessoaService.ListarTodas();
         }
         return recPessoas;
+    }
+
+    public String Adicionar() {
+        recPessoa = new RecPessoa();
+        return "cadastro_curriculo";
     }
 
     public RecPessoa getRecPessoa() {
@@ -36,7 +50,7 @@ public class RecPessoaBean {
     }
 
     public List<RecPessoa> getRecPessoas() {
-          if (recPessoas == null) {
+        if (recPessoas == null) {
             recPessoas = recPessoaService.ListarTodas();
         }
         return recPessoas;
