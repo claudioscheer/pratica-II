@@ -120,8 +120,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private int recInsalubridade;
     @Column(name = "rec_periculosidade")
     private Boolean recPericulosidade;
-    @Column(name = "rec_centrodecusto")
-    private BigInteger recCentrodecusto;
+    @Column(name = "rec_NomeBanco")
+    private String recNomeBanco;
     @Column(name = "rec_num_titu_eleitor")
     private BigInteger recNumTituEleitor;
     @Column(name = "rec_certificado_reservista")
@@ -449,12 +449,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recPericulosidade = recPericulosidade;
     }
 
-    public BigInteger getRecCentrodecusto() {
-        return recCentrodecusto;
+    public String getRecNomeBanco() {
+        return recNomeBanco;
     }
 
-    public void setRecCentrodecusto(BigInteger recCentrodecusto) {
-        this.recCentrodecusto = recCentrodecusto;
+    public void setRecNomeBanco(String recNomeBanco) {
+        this.recNomeBanco = recNomeBanco;
     }
 
     public BigInteger getRecNumTituEleitor() {
