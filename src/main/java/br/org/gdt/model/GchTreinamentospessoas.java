@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "GchTreinamentospessoas.findAll", query = "SELECT g FROM GchTreinamentospessoas g")})
 @SequenceGenerator(name = "seq_trei_pescodigo", sequenceName = "sequencia_treinamento_pesssoa_codigo", allocationSize = 1)
-public class GchTreinamentospessoas implements Serializable {
+public class GchTreinamentospessoas implements Serializable, SampleEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -99,6 +100,11 @@ public class GchTreinamentospessoas implements Serializable {
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.GchTreinamentospessoas[ treiPescodigo=" + treiPescodigo + " ]";
+    }
+
+    @Override
+    public Long getId() {
+        return Long.valueOf(treiPescodigo);
     }
     
 }
