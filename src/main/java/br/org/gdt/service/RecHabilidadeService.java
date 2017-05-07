@@ -20,11 +20,11 @@ public class RecHabilidadeService {
 
     @Transactional
     public void Alterar(RecHabilidade habilidade) {
-        habilidadeDao.save(habilidade);
+        habilidadeDao.update(habilidade);
     }
 
     @Transactional
-    public void Excluir(int id) {
+    public void Excluir(long id) {
         habilidadeDao.delete(id);
     }
 
