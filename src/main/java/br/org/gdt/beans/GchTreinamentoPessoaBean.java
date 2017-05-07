@@ -16,13 +16,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
@@ -30,7 +26,7 @@ import javax.faces.context.FacesContext;
  * @author Diego
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchTreinamentoPessoaBean {
 
     private boolean formAtivo = false;
@@ -76,17 +72,16 @@ public class GchTreinamentoPessoaBean {
 
                     gchTreinamentospessoas.setRecIdpessoa(pessoa);
 
-                    gchTreinamentospessoasService.save(gchTreinamentospessoas);
+                    gchTreinamentospessoasService.update(gchTreinamentospessoas);
                 }
             }
 
 //        System.out.println("Salvar: " + pessoasVinculadas.get(0).getRecNomecompleto());
 //        gchTreinamentospessoas.setRecIdpessoa(pessoasVinculadas.get(0));
 //        }
-            todosGchTreinamentosPessoas = null;
             this.formAtivo = false;
-            gchTreinamentospessoas = null;
-//        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml?faces-redirect=true");
+            gchTreinamentospessoas = new GchTreinamentospessoas();
+            checked = new HashMap<RecPessoa, Boolean>();
 
             FacesContext context = FacesContext.getCurrentInstance();
             try {
@@ -130,11 +125,11 @@ public class GchTreinamentoPessoaBean {
     public String prepareEdit(GchTreinamentos gchTreinamentos) {
         this.formAtivo = true;
 
-        if (gchTreinamentos != null) {            
+        if (gchTreinamentos != null) {
             System.out.println("Ta certo");
             this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
-        }else{
-            
+        } else {
+
             System.out.println("Esta nulo o treinamento");
         }
 

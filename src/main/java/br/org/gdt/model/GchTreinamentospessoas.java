@@ -7,8 +7,8 @@ package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -79,23 +79,26 @@ public class GchTreinamentospessoas implements Serializable, SampleEntity {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (treiPescodigo != null ? treiPescodigo.hashCode() : 0);
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.treiPescodigo);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GchTreinamentospessoas)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        GchTreinamentospessoas other = (GchTreinamentospessoas) object;
-        if ((this.treiPescodigo == null && other.treiPescodigo != null) || (this.treiPescodigo != null && !this.treiPescodigo.equals(other.treiPescodigo))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchTreinamentospessoas other = (GchTreinamentospessoas) obj;
+        if (!Objects.equals(this.treiPescodigo, other.treiPescodigo)) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public String toString() {
@@ -104,7 +107,7 @@ public class GchTreinamentospessoas implements Serializable, SampleEntity {
 
     @Override
     public Long getId() {
-        return Long.valueOf(treiPescodigo);
+        return treiPescodigo;
     }
     
 }
