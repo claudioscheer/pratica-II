@@ -9,7 +9,7 @@ Repositório destinado à Prática Profissional Direcionada II.
 | Analista de sistemas | Alisson Allebrandt |
 | Analista de qualidade | Juliano Fagundes Rossi |
 | Administrador de banco de dados | Diego Schmidt |
-| Analista de qualidade | Anderson Seibert |
+| Analista de segurança | Anderson Seibert |
 | Redator | Elenara Hein |
 | Redator | Maísa Diane Turra Lena |
 | Programador | João de Oliveira |
