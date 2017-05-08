@@ -33,7 +33,7 @@ public class RecVagaBean {
     public void Salvar() {
         if (vaga.getRecIdvaga() > 0) {
             recVagaService.Alterar(vaga);
-        } else {
+        } else {            
             recVagaService.Inserir(vaga);
         }
         vagas = recVagaService.ListarTodas();

@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -19,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,11 +38,13 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecVaga.findAll", query = "SELECT r FROM RecVaga r")})
+@SequenceGenerator(name = "seq_RecVaga", sequenceName = "seq_RecVaga", allocationSize = 1)
 public class RecVaga implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idvaga")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_RecVaga")
     private int recIdvaga;
     @Column(name = "rec_descricao")
     private String recDescricao;
@@ -53,7 +58,7 @@ public class RecVaga implements Serializable {
     private Float recSalario;
     @Column(name = "rec_status")
     private Integer recStatus;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "id_cargo")
     private String idCargo;
     @ManyToMany(mappedBy = "recVagaList")
@@ -61,10 +66,10 @@ public class RecVaga implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdvaga")
     private List<RecSelecao> recSelecaoList;
     @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private CsbffCargos cargoCodigo;
     @JoinColumn(name = "rec_idgrauensino", referencedColumnName = "rec_idgrauensino")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private RecGrauensino recIdgrauensino;
 
     public RecVaga() {
