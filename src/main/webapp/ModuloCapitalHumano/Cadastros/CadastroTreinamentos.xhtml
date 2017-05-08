@@ -116,7 +116,8 @@
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
                                                                 <h:inputText class="form-control" id="dateInicio"  value="#{gchTreinamentosBean.gchTreinamentos.treiDataInicio}"> 
-                                                                    <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+                                                                    <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy" />-->
+                                                                     <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm"/>
                                                                 </h:inputText>
                                                             </div>
                                                         </div>         
@@ -128,7 +129,7 @@
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
                                                                 <h:inputText class="form-control" id="dateFim" value="#{gchTreinamentosBean.gchTreinamentos.treiDataFim}">
-                                                                    <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+                                                                    <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm"/>
                                                                 </h:inputText>
                                                             </div>
                                                         </div>       

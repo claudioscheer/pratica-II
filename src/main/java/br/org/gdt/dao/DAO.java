@@ -12,7 +12,7 @@ public abstract class DAO<T> {
     protected Class<T> classe;
 
     public void save(T object) {
-      
+        
         entityManager.persist(object);
     }
 
