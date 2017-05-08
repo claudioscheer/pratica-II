@@ -16,7 +16,7 @@ Repositório destinado à Prática Profissional Direcionada II.
 | Programador | Marcos Dollis |
 | Analista | Dimas Henrique Rockenbach |
 
-# PRU!
+# MURPHY RH!
 Sistema Web para gestão de pessoas.
 Desenvolvido na linguagem `Java`, o sistema contará com cinco módulos:
 
