@@ -101,6 +101,13 @@ public class GchTreinamentosBean {
     public void cancel() {
         this.formAtivo = false;
         this.gchTreinamentos = new GchTreinamentos();
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Treinamentos.xhtml");
+        } catch (IOException ex) {
+
+        }
     }
 
     public void add() {

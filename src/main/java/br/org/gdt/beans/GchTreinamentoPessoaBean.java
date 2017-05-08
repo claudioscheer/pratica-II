@@ -97,6 +97,13 @@ public class GchTreinamentoPessoaBean {
     public void cancel() {
         this.formAtivo = false;
         this.gchTreinamentospessoas = new GchTreinamentospessoas();
+        checked = new HashMap<RecPessoa, Boolean>();
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Treinamentos.xhtml");
+        } catch (IOException ex) {
+
+        }
     }
 
     public void add() {
@@ -189,7 +196,7 @@ public class GchTreinamentoPessoaBean {
     }
 
     public void setChecked(Map<RecPessoa, Boolean> checked) {
-       this.checked = checked;
+        this.checked = checked;
     }
 
     public List<RecPessoa> getPessoasVinculadas() {
