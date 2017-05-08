@@ -19,4 +19,6 @@ public class GchTreinamentoPessoasDAO  extends DAO<GchTreinamentospessoas>{
         classe = GchTreinamentospessoas.class;
     }
     
+    
+    
 }

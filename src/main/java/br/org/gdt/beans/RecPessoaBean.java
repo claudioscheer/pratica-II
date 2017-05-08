@@ -11,6 +11,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class RecPessoaBean {
 
+    private boolean formAtivo = false;
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoas;
 
@@ -20,11 +21,25 @@ public class RecPessoaBean {
     public RecPessoaBean() {
     }
 
+    public void Salvar() {
+        if (recPessoa.getId() > 0) {
+            recPessoaService.Alterar(recPessoa);
+        } else {
+            recPessoaService.Inserir(recPessoa);
+        }
+        //habilidades = recHabilidadeService.ListarTodas();
+    }
+
     public List<RecPessoa> ListarTodas() {
         if (recPessoas == null) {
             recPessoas = recPessoaService.ListarTodas();
         }
         return recPessoas;
+    }
+
+    public String Adicionar() {
+        recPessoa = new RecPessoa();
+        return "cadastro_curriculo";
     }
 
     public RecPessoa getRecPessoa() {
@@ -36,7 +51,7 @@ public class RecPessoaBean {
     }
 
     public List<RecPessoa> getRecPessoas() {
-          if (recPessoas == null) {
+        if (recPessoas == null) {
             recPessoas = recPessoaService.ListarTodas();
         }
         return recPessoas;
@@ -52,6 +67,14 @@ public class RecPessoaBean {
 
     public void setRecPessoaService(RecPessoaService recPessoaService) {
         this.recPessoaService = recPessoaService;
+    }
+
+    public boolean isFormAtivo() {
+        return formAtivo;
+    }
+
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
     }
 
 }

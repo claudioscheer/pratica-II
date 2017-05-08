@@ -15,6 +15,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -24,6 +26,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,12 +44,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
+@SequenceGenerator(name = "seq_RecPessoa", sequenceName = "seq_RecPessoa", allocationSize = 1)
 public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idpessoa")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_RecPessoa")
     private long recIdpessoa;
     @Column(name = "rec_nomecompleto")
     private String recNomecompleto;
@@ -120,8 +125,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private int recInsalubridade;
     @Column(name = "rec_periculosidade")
     private Boolean recPericulosidade;
-    @Column(name = "rec_centrodecusto")
-    private BigInteger recCentrodecusto;
+    @Column(name = "rec_NomeBanco")
+    private String recNomeBanco;
     @Column(name = "rec_num_titu_eleitor")
     private BigInteger recNumTituEleitor;
     @Column(name = "rec_certificado_reservista")
@@ -449,12 +454,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recPericulosidade = recPericulosidade;
     }
 
-    public BigInteger getRecCentrodecusto() {
-        return recCentrodecusto;
+    public String getRecNomeBanco() {
+        return recNomeBanco;
     }
 
-    public void setRecCentrodecusto(BigInteger recCentrodecusto) {
-        this.recCentrodecusto = recCentrodecusto;
+    public void setRecNomeBanco(String recNomeBanco) {
+        this.recNomeBanco = recNomeBanco;
     }
 
     public BigInteger getRecNumTituEleitor() {

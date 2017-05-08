@@ -10,7 +10,6 @@ import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchTreinamentoPessoaService;
 import br.org.gdt.service.GchTreinamentosService;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,7 +17,9 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
@@ -26,7 +27,7 @@ import javax.faces.context.FacesContext;
  * @author Diego
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class GchTreinamentoPessoaBean {
 
     private boolean formAtivo = false;
@@ -44,54 +45,43 @@ public class GchTreinamentoPessoaBean {
     @ManagedProperty("#{gchTreinamentoPessoaService}")
     private GchTreinamentoPessoaService gchTreinamentospessoasService;
 
-    private String id; // gettter / setter
-
     public GchTreinamentoPessoaBean() {
 
     }
 
-    public void save() {
+    public String save() {
 
 //        if (gchTreinamentos.getTreiCodigo() > 0) {
 //            gchTreinamentosService.update(gchTreinamentos);
 //        } else {
-        System.out.println("Aqui estou salvando: ");
-        if (gchTreinamentospessoas != null) {
-            System.out.println("Teste teste: " + gchTreinamentospessoas.getTreiCodigo().getTreiNome());
+        System.out.println("Teste teste: " + gchTreinamentospessoas.getTreiCodigo().getTreiNome());
 
-            Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
+        Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
 
-            while (keyIterrator.hasNext()) {
+        while (keyIterrator.hasNext()) {
 
-                RecPessoa pessoa = keyIterrator.next();
-                Boolean value = checked.get(pessoa);
+            RecPessoa pessoa = keyIterrator.next();
+            Boolean value = checked.get(pessoa);
 
-                System.out.println(pessoa.getRecNomecompleto() + " - " + value);
+            System.out.println(pessoa.getRecNomecompleto() + " - " + value);
 
-                if (value) {
+            if (value) {
 
-                    gchTreinamentospessoas.setRecIdpessoa(pessoa);
+                gchTreinamentospessoas.setRecIdpessoa(pessoa);
 
-                    gchTreinamentospessoasService.update(gchTreinamentospessoas);
-                }
+                gchTreinamentospessoasService.save(gchTreinamentospessoas);
             }
+        }
 
 //        System.out.println("Salvar: " + pessoasVinculadas.get(0).getRecNomecompleto());
 //        gchTreinamentospessoas.setRecIdpessoa(pessoasVinculadas.get(0));
 //        }
-            this.formAtivo = false;
-            gchTreinamentospessoas = new GchTreinamentospessoas();
-            checked = new HashMap<RecPessoa, Boolean>();
+        todosGchTreinamentosPessoas = null;
+        this.formAtivo = false;
+        gchTreinamentospessoas = null;
+//        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml?faces-redirect=true");
 
-            FacesContext context = FacesContext.getCurrentInstance();
-            try {
-                context.getExternalContext().redirect("Treinamentos.xhtml");
-            } catch (IOException ex) {
-
-            }
-
-        }
-//        return "Treinamentos.xhtml";
+        return "Treinamentos";
     }
 
     public void cancel() {
@@ -125,33 +115,22 @@ public class GchTreinamentoPessoaBean {
     public String prepareEdit(GchTreinamentos gchTreinamentos) {
         this.formAtivo = true;
 
-        if (gchTreinamentos != null) {
-            System.out.println("Ta certo");
-            this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
-        } else {
+        this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
 
-            System.out.println("Esta nulo o treinamento");
-        }
-
-        return "VincularPessoasTreinamento";
+        return "VincularTreinamentos";
     }
 
     public String buscaTreinamentoPorId(long id) {
 
         System.out.println("Id Treinamento" + id);
-        gchTreinamentospessoas = null;
+
         if (id != 0) {
 
             gchTreinamentospessoas.setTreiCodigo(gchTreinamentosService.findById(id));
 
-////            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "VincularPessoasTreinamento.xhtml?faces-redirect=true");
-//            FacesContext context = FacesContext.getCurrentInstance();
-//            try {
-//                context.getExternalContext().redirect("VincularPessoasTreinamento.xhtml");
-//            } catch (IOException ex) {
-//
-//            }
-            return "VincularPessoasTreinamento";
+//            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "VincularPessoasTreinamento.xhtml?faces-redirect=true");
+            return "VincularTreinamentos";
+
         }
         return null;
     }
@@ -206,14 +185,6 @@ public class GchTreinamentoPessoaBean {
 
     public void setGchTreinamentosService(GchTreinamentosService gchTreinamentosService) {
         this.gchTreinamentosService = gchTreinamentosService;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
 }

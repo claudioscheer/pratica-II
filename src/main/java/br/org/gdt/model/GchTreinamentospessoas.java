@@ -5,10 +5,9 @@
  */
 package br.org.gdt.model;
 
-import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "GchTreinamentospessoas.findAll", query = "SELECT g FROM GchTreinamentospessoas g")})
 @SequenceGenerator(name = "seq_trei_pescodigo", sequenceName = "sequencia_treinamento_pesssoa_codigo", allocationSize = 1)
-public class GchTreinamentospessoas implements Serializable, SampleEntity {
+public class GchTreinamentospessoas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -79,35 +78,27 @@ public class GchTreinamentospessoas implements Serializable, SampleEntity {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.treiPescodigo);
+        int hash = 0;
+        hash += (treiPescodigo != null ? treiPescodigo.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof GchTreinamentospessoas)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GchTreinamentospessoas other = (GchTreinamentospessoas) obj;
-        if (!Objects.equals(this.treiPescodigo, other.treiPescodigo)) {
+        GchTreinamentospessoas other = (GchTreinamentospessoas) object;
+        if ((this.treiPescodigo == null && other.treiPescodigo != null) || (this.treiPescodigo != null && !this.treiPescodigo.equals(other.treiPescodigo))) {
             return false;
         }
         return true;
     }
 
-
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.GchTreinamentospessoas[ treiPescodigo=" + treiPescodigo + " ]";
-    }
-
-    @Override
-    public Long getId() {
-        return treiPescodigo;
     }
     
 }

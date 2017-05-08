@@ -36,14 +36,10 @@
                                             <label class="control-label " for="select">
                                                 Candidato
                                             </label>
-                                            <select class="select form-control" id="select" name="select">
-                                                <option value="1">
-                                                    Anderson Seibert
-                                                </option>
-                                                <option value="2">
-                                                    João
-                                                </option>                                            
-                                            </select>
+                                            <h:selectOneMenu id="comboCandidato" value="#{recSelecaoBean.selecao.recIdpessoa}"  class="form-control" >
+                                                <f:selectItem itemLabel="Selecione o Candidato" itemValue="#{null}" />
+                                                <f:selectItems value="#{recPessoaBean.ListarTodas()}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.recNomecompleto}"/>
+                                            </h:selectOneMenu>                                                                                                             
                                         </div>     
                                     </div> 
 

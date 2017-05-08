@@ -1,7 +1,13 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.EstadoCivil;
+import br.org.gdt.enums.Insalubridade;
+import br.org.gdt.enums.NomeBanco;
+import br.org.gdt.enums.Periculosidade;
+import br.org.gdt.enums.PossuiDependentes;
+import br.org.gdt.enums.SeguroDesemprego;
 import br.org.gdt.enums.Sexo;
+import br.org.gdt.enums.TipoBeneficio;
 import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchMunicipiosService;
@@ -31,19 +37,41 @@ public class CsbffAdmissaoBean implements Serializable {
 
     }
 
+    public void buscarPessoa() {
+        recPessoa = recPessoaService.findByCpf(recPessoa.getRecCpf());
+    }
+
     public Sexo[] getGeneros() {
         return Sexo.values();
+    }
+    public NomeBanco[] getNomeBanco(){
+        return NomeBanco.values();
+    }
+     public PossuiDependentes[] getPossuiDependentes(){
+        return PossuiDependentes.values();
+    }
+    public SeguroDesemprego[] getSeguroDesemprego(){
+        return SeguroDesemprego.values();
     }
     public EstadoCivil[] getEstadoCivil() {
         return EstadoCivil.values();
     }
-
+    public Insalubridade[] getInsalubridade(){
+        return Insalubridade.values();
+    }
+    public Periculosidade[] getPericulosidade(){
+        return Periculosidade.values();
+    }
+    public TipoBeneficio[] getTipoBeneficio(){
+        return TipoBeneficio.values();
+    }
     public List<GchMunicipios> getMunicipios() {
         //buscar do banco
         List<GchMunicipios> muns = gchMunicipiosService.findAll();
 
         return muns;
     }
+    
 
     public List<RecPessoa> getPessoas() {
         List<RecPessoa> pessoas = new ArrayList<>();
@@ -82,6 +110,17 @@ public class CsbffAdmissaoBean implements Serializable {
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
 
+    }
+    public String prepareEdit(RecPessoa pessoas) {
+        this.formAtivo = true;
+        this.recPessoa = pessoas;
+        return "pessoas";
+    }
+    
+     public String excluir(RecPessoa pessoas) {
+        recPessoaService.delete(pessoas.getRecIdpessoa());
+        todosRecPessoa.remove(pessoas);
+        return "pessoas";
     }
 
 //    public void add() {

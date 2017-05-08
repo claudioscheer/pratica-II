@@ -1,5 +1,7 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.enums.AbrangenciaBeneficio;
+import br.org.gdt.enums.TipoBeneficio;
 import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.service.CsbffBeneficiosService;
 import java.util.ArrayList;
@@ -36,7 +38,12 @@ public class CsbffBeneficioBean {
         this.csbffBeneficios = beneficio;
         return "beneficio";
     }
-    
+    public TipoBeneficio[] getTipoBeneficio(){
+        return TipoBeneficio.values();
+    }
+    public AbrangenciaBeneficio[] getAbrangenciaBeneficio(){
+        return AbrangenciaBeneficio.values();
+    }
      public String excluir(CsbffBeneficios beneficio) {
         csbffBeneficiosService.delete(beneficio.getBeneficioCodigo());
         todosCsbffBeneficios.remove(beneficio);
@@ -60,7 +67,7 @@ public class CsbffBeneficioBean {
 //        csbffBeneficios.setBeneficioNome(abrangencia);
 //        csbffBeneficiosService.save(csbffBeneficios);
     }
-    
+
     public void cancel() {
         this.formAtivo = false;
         this.csbffBeneficios = null;
