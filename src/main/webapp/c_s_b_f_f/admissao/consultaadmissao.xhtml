@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Consulta Contratos de admissão</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="../../templates/template.xhtml">
+            <ui:define name="content">  
+
+                <h:form id="formConsulta">
+
+
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffAdmissaoBean.formAtivo}">
+                        <div class="row">
+                            <h:commandButton class="btn btn-primary" value="Novo Contrato" action="dadospessoais.xhtml">
+                                <f:ajax execute="@form" render="formConsulta" />
+                            </h:commandButton>
+                        </div>
+                        <div class="title_left">
+                            <h3>Contratos de Admissão Criados</h3>
+                        </div>
+                        <div class="row">
+                            <div class="x_panel">
+                                <div class="x_content" >
+                                    <h:dataTable  class="table table-striped" value="#{csbffAdmissaoBean.todosRecPessoa}" var="pessoas">
+                                        <h:column>
+                                            <f:facet name="header">Código</f:facet>
+                                                #{pessoas.recIdpessoa}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">CPF </f:facet>
+                                                #{pessoas.recCpf}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header"> Nome</f:facet>
+                                            #{pessoas.recNomecompleto}" 
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Cargo </f:facet>
+                                                #{pessoas.csbffCargosHistoricoList}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Data da Admissão</f:facet>
+                                            #{pessoas.recDtaAdmissao}"
+                                             <h:outputText value="#{periodo.perDataInicial}">
+                                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                            
+                                        </h:column>
+                                                                                
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{csbffAdmissaoBean.prepareEdit(pessoas)}">
+                                                <f:ajax execute="@form" render="formConsulta" />
+                                            </h:commandLink>
+<!--                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffAdmissaoBean.excluir(pessoas)}" onclick="return confirm('Excluir colaborador?')">
+                                                <f:ajax execute="@form" render="formConsulta" />
+                                            </h:commandLink>-->
+                                                   
+                                    </h:dataTable>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:form>      
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

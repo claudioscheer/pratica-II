@@ -9,14 +9,14 @@ Repositório destinado à Prática Profissional Direcionada II.
 | Analista de sistemas | Alisson Allebrandt |
 | Analista de qualidade | Juliano Fagundes Rossi |
 | Administrador de banco de dados | Diego Schmidt |
-| Analista de qualidade | Anderson Seibert |
+| Analista de segurança | Anderson Seibert |
 | Redator | Elenara Hein |
 | Redator | Maísa Diane Turra Lena |
 | Programador | João de Oliveira |
 | Programador | Marcos Dollis |
 | Analista | Dimas Henrique Rockenbach |
 
-# PRU!
+# MURPHY RH!
 Sistema Web para gestão de pessoas.
 Desenvolvido na linguagem `Java`, o sistema contará com cinco módulos:
 

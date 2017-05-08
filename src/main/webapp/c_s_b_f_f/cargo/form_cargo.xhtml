@@ -8,6 +8,26 @@
     <h:head>
         <title>Novo cargo</title>
     </h:head>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script type="text/javascript" src="https://raw.githubusercontent.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
+    
+    <script>
+        $(function () {
+            $("#cbo").mask("9999-99");
+            
+        });
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">   
@@ -21,11 +41,21 @@
                             <h:form>
                                 <h:messages class=" error" style="color: red"/>
 
+
+                                <div class="form-group ">
+
+                                    <label class="control-label " for="number">
+
+                                        <a href="http://www.mtecbo.gov.br/cbosite/pages/pesquisas/BuscaPorTituloA-Z.jsf;jsessionid=D1jf6B8p1pS1iUyl60T8vcWc.slave23:mte-cbo" target="_blank">Clique para verificar o cargo e o código desejado</a>
+                                    </label>
+
+
+                                </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
                                     <div class="form-group ">
                                         <label class="control-label " for="name">
-                                            Nome
+                                            Nome*
                                         </label>
                                         <!--<input class="form-control" id="name0" name="name" type="text"/>-->
 
@@ -40,20 +70,22 @@
                                     <div class="form-group ">
 
                                         <label class="control-label " for="number">
-                                            CBO
+                                            CBO*
                                         </label>
 
                                         <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoCbo}"/>
+                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoCbo}" id="cbo"/>
                                     </div>
 
                                 </div>
+
+
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
                                     <div class="form-group ">
 
                                         <label class="control-label " for="number">
-                                            Salário Base
+                                            Salário Base*
                                         </label>
 
                                         <!--<input class="form-control" id="number" name="number" type="text"/>-->
@@ -63,16 +95,6 @@
                                 </div>
 
 
-                                <!--                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                    <label class="control-label requiredField" for="superiorCodigo">
-                                                                        Superior Responsável 
-                                                                    </label>                                                           
-                                
-                                                                    <h:selectOneMenu id="comboResponsaveis" value="#{cargosBean.recPessoa}" converter="#{generic}" class="form-control" >
-                                                                        <f:selectItem itemLabel="Selecione o responsável" itemValue="#{null}" />
-                                                                        <f:selectItems value="#{recPessoaBean.recPessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.recNomecompleto}"/>
-                                                                    </h:selectOneMenu>
-                                                                </div>-->
                                 <div class="col-md-6 col-sm-7 col-xs-12">
                                     <div class="form-group ">
                                         <label class="control-label col-md-6 col-sm-12 col-xs-12">Superior responsável<span class="required">*</span></label>
@@ -85,35 +107,30 @@
                                 </div>
 
 
-
-
-                                <!--
-                                                            <h:selectOneMenu value="#{bean.name}">
-                                                                <f:selectItems value="#{bean.names}" />
-                                                            </h:selectOneMenu>-->
-
-
-
+                                
+                           
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
 
                                     <div class="form-group ">
                                         <label class="control-label " for="message1">
-                                            Descrição e Requisitos
+                                            Descrição e Requisitos*
                                         </label>
                                         <!--<textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>-->
                                         <h:inputTextarea class="form-control" cols="10" rows="5" value="#{cargosBean.cargoCodigo.cargoDescricao}" />
                                     </div>
 
                                 </div>         
+                                
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
 
                                     <div class="row">
 
+                                        <br/>
 
-                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{cargosBean.save()}" />
+                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{cargosBean.novo()}" />
                                         <h:commandButton value="Cancelar" class="btn btn-danger" action="form_cargo.xhtml"/>
                                     </div>
 

@@ -13,7 +13,7 @@ public class CsbffCargosService {
     @Autowired
     private CsbffCargosDAO csbffCargosDAO;
 
-    @Transactional
+    @Transactional(readOnly = false)
     public void save(CsbffCargos cargos) {
         csbffCargosDAO.save(cargos);
     }
