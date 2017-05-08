@@ -189,7 +189,7 @@ public class GchTreinamentoPessoaBean {
     }
 
     public void setChecked(Map<RecPessoa, Boolean> checked) {
-        this.checked = checked;
+       this.checked = checked;
     }
 
     public List<RecPessoa> getPessoasVinculadas() {
