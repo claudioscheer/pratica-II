@@ -31,7 +31,7 @@
                                             <h:dataTable class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
 
                                                 <h:column>
-                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa]}" />
+                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa]}" onclick="#{gchTreinamentoPessoaBean.podeVincularPessoa()}" />
                                                 </h:column>
 
                                                 <h:column>      

@@ -71,6 +71,8 @@ public class GchTreinamentoPessoaBean {
                 if (value) {
 
                     gchTreinamentospessoas.setRecIdpessoa(pessoa);
+                    gchTreinamentospessoas.setTreiPesDataInicio(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio());
+                    gchTreinamentospessoas.setTreiPesDataFim(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim());
 
                     gchTreinamentospessoasService.update(gchTreinamentospessoas);
                 }
@@ -143,6 +145,28 @@ public class GchTreinamentoPessoaBean {
         return "VincularPessoasTreinamento";
     }
 
+    public String podeVincularPessoa(long idPessoa){
+    
+        boolean podeVincular = true;
+        List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoa(gchTreinamentospessoas.getTreiCodigo().getTreiCodigo(), idPessoa);
+        
+        for (GchTreinamentospessoas t : list){
+        
+            podeVincular = verificaPessoa(t);
+        
+        }
+        
+        
+        return "confirm('Voce realmente deseja excluir?')";
+    
+    }
+    
+    private boolean verificaPessoa(GchTreinamentospessoas t){
+    
+        return true;
+    }
+    
+    
     public String buscaTreinamentoPorId(long id) {
 
         System.out.println("Id Treinamento" + id);
@@ -196,6 +220,9 @@ public class GchTreinamentoPessoaBean {
     }
 
     public void setChecked(Map<RecPessoa, Boolean> checked) {
+        
+        System.out.println("Marcando: " + checked.values());
+                     
         this.checked = checked;
     }
 
