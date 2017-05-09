@@ -99,7 +99,7 @@
                                             Descrição e Requisitos*
                                         </label>
                                         <!--<textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>-->
-                                        <h:inputTextarea class="form-control" cols="10" rows="5" value="#{cargosBean.cargoCodigo.cargoDescricao}" />
+                                        <h:inputTextarea class="form-control" cols="10" rows="5" a:placeholder="Descreva uma breve descrição juntamente com os requisitos necessários" value="#{cargosBean.cargoCodigo.cargoDescricao}" />
                                     </div>
 
                                 </div>         
@@ -111,7 +111,7 @@
 
                                         <br/>
 
-                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{cargosBean.novo()}" />
+                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{cargosBean.salvar()}" />
                                         <h:commandButton value="Cancelar" class="btn btn-danger" action="form_cargo.xhtml"/>
                                         <h:commandButton class="btn btn" value=" voltar" action="cargo_consulta.xhtml" />
                                     </div>
