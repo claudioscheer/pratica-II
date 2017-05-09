@@ -29,22 +29,23 @@
 
                                     <div class="panel-body" style="/* align-items: center; */">
                                         <h:form id="parentformid">
+                                            <h:messages class="error" style="color: #d9534f" />
                                             <h:dataTable class="table table-striped" value="#{gchTreinamentosBean.todosGchTreinamentos}" var="treinamento">
                                                 
                                                 <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink action="#{gchTreinamentosBean.excluir(treinamento)}" onclick="return confirm('Voce realmente deseja excluir?')" >
+                                                    <h:commandLink title="Excluir" action="#{gchTreinamentosBean.excluir(treinamento)}" onclick="return confirm('Voce realmente deseja excluir?')" >
                                                         <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
                                                     </h:commandLink>
                                                 </h:column>
                                                 
                                                 <h:column>                
-                                                    <h:commandLink action="#{gchTreinamentosBean.buscaTreinamentoPorId(treinamento.treiCodigo)}">
+                                                    <h:commandLink title="Editar" action="#{gchTreinamentosBean.buscaTreinamentoPorId(treinamento.treiCodigo)}">
                                                      <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
                                                 
                                                 <h:column>                
-                                                    <h:commandLink action="#{gchTreinamentoPessoaBean.buscaTreinamentoPorId(treinamento.treiCodigo)}" >
+                                                    <h:commandLink title="Vincular pessoas ao treinamento" action="#{gchTreinamentoPessoaBean.prepareEdit(treinamento)}" >
                                                      <i class="glyphicon glyphicon-user" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
@@ -61,12 +62,16 @@
                                                 
                                                 <h:column>                
                                                     <f:facet name="header">Início</f:facet>
-                                                    <h:outputText value="#{treinamento.treiDataInicio}"/>                
+                                                    <h:outputText value="#{treinamento.treiDataInicio}">
+                                                        <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm"/>
+                                                    </h:outputText>                
                                                 </h:column>
 
                                                 <h:column>   
                                                     <f:facet name="header">Fim</f:facet>
-                                                    <h:outputText value="#{treinamento.treiDataFim}"/>                
+                                                    <h:outputText value="#{treinamento.treiDataFim}">
+                                                        <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm"/>
+                                                    </h:outputText>
                                                 </h:column>
 
                                             </h:dataTable>

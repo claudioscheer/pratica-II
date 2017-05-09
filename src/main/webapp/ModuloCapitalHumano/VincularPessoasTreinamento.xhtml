@@ -22,7 +22,7 @@
                                     <div class="x_panel">
                                         <div class="form-group" style="float: right;margin-top: 10px">
                                             <div>
-                                                <h:link  outcome="/ModuloCapitalHumano/Cadastros/CadastroTreinamentos.xhtml" class="btn btn-primary " value="Novo Treinamento"/>
+                                                <h:link  outcome="/ModuloCapitalHumano/CadastroTreinamentos.xhtml" class="btn btn-primary " value="Novo Treinamento"/>
                                             </div>
                                         </div>
 
@@ -51,12 +51,11 @@
                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                              
                                                 <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentoPessoaBean.save()}" value="Cadastrar" /> 
+               
+                                                <h:commandButton class="btn btn-danger"  actionListener="#{gchTreinamentoPessoaBean.cancel()}" value="Cancelar" /> 
 
                                             </div>
-                                        </div>
-                                        <div class="panel-footer">
-                                            Gestão do Capital Humano - Todos os Direitos Reservados
-                                        </div>
+                                        </div>     
                                     </div>
 
                                 </div>
