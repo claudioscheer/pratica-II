@@ -67,6 +67,7 @@
                                             <li><h:link outcome="/recrutamento/vaga_lista.xhtml" value="Vagas"></h:link></li>
                                             <li><h:link outcome="/recrutamento/candidato_lista.xhtml" value="Candidatos"></h:link></li>
                                             <li><h:link outcome="/recrutamento/selecao_lista.xhtml" value="Seleção"></h:link></li>
+                                            <li><h:link outcome="/recrutamento/habilidades.xhtml" value="Habilidades"></h:link></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -76,8 +77,9 @@
                                         <ul class="nav child_menu">
                                             <li><h:link outcome="/ModuloCapitalHumano/Cursos.xhtml" value="Cursos"></h:link></li>
                                             <li><h:link outcome="/ModuloCapitalHumano/Treinamentos.xhtml" value="Treinamentos"></h:link></li>
-                                            <li><h:link outcome="/recrutamento/selecao_lista.xhtml" value="Análises"></h:link></li>
+                                            <li><h:link outcome="/ModuloCapitalHumano/Formularios.xhtml" value="Análises"></h:link></li>
                                             <li><h:link outcome="/ModuloCapitalHumano/PlanoCarreira.xhtml" value="Plano de carreira"></h:link></li>
+                                            <li><h:link outcome="/ModuloCapitalHumano/Alternativas.xhtml" value="Alternativas"></h:link></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -93,8 +95,8 @@
                                     <li>
                                         <a><i class="fa fa-list"></i> Benefícios <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="/praticaII/c_s_b_f_f/beneficio/cadastrobeneficios.xhtml">Novo</a></li>                                                 
-                                            <li><a href="/praticaII//c_s_b_f_f/beneficio/consultabeneficios.xhtml">Consultar</a></li>  
+                                            <li><a href="/praticaII/c_s_b_f_f/beneficio/consultabeneficios.xhtml">Consultar</a></li>                                                 
+<!--                                            <li><a href="/praticaII//c_s_b_f_f/beneficio/consultabeneficios.xhtml">Consultar</a></li>  -->
 
                                         </ul>
                                     </li>
@@ -103,9 +105,9 @@
                                     <li>
                                         <a><i class="fa fa-list"></i> Admissão <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="/praticaII/c_s_b_f_f/admissao/dadospessoais.xhtml">Novo</a></li>                                            
-                                            <li><a href="/praticaII//c_s_b_f_f/admissao/contratoadmissao.xhtml">Consultar</a></li> 
-                                            <li><a href="/praticaII//c_s_b_f_f/admissao/contratoadmissao.xhtml">Gerar Ficha Funcional</a></li> 
+<!--                                            <li><a href="/praticaII/c_s_b_f_f/admissao/dadospessoais.xhtml">Novo</a></li>                                            -->
+                                            <li><a href="/praticaII//c_s_b_f_f/admissao/consultaadmissao.xhtml">Consultar</a></li> 
+                                            <li><a href="">Gerar Ficha Funcional</a></li> 
 
                                         </ul>
                                     </li>
@@ -272,7 +274,8 @@
             </div>
         </div>
 
-        <h:outputScript library="vendors/" name="jquery/dist/jquery.min.js" />
+        <!--<h:outputScript library="vendors/" name="jquery/dist/jquery.min.js" /> -->
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
         <h:outputScript library="vendors/" name="bootstrap/dist/js/bootstrap.min.js" />
         <h:outputScript library="vendors/" name="moment/min/moment.min.js" />
         <h:outputScript library="vendors/" name="bootstrap-daterangepicker/daterangepicker.js" />

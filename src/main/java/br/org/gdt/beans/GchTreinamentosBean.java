@@ -9,6 +9,7 @@ import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentosService;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -68,17 +70,24 @@ public class GchTreinamentosBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
 
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Treinamentos.xhtml");
+        } catch (IOException ex) {
+
+        }
+
         return "Treinamentos";
 
     }
 
     public boolean buscaTreinamentosPorCurso(long id) {
-        
-        List<GchTreinamentos> retorno = new ArrayList<>();
-        
-        retorno  = gchTreinamentosService.BuscaTreinamentoPorCurso(id);
 
-        if(retorno.isEmpty()){
+        List<GchTreinamentos> retorno = new ArrayList<>();
+
+        retorno = gchTreinamentosService.BuscaTreinamentoPorCurso(id);
+
+        if (retorno.isEmpty()) {
 
             return true;
 
@@ -92,6 +101,13 @@ public class GchTreinamentosBean {
     public void cancel() {
         this.formAtivo = false;
         this.gchTreinamentos = new GchTreinamentos();
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Treinamentos.xhtml");
+        } catch (IOException ex) {
+
+        }
     }
 
     public void add() {

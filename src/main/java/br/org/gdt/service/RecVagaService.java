@@ -19,7 +19,7 @@ public class RecVagaService {
     }
     @Transactional
     public void Alterar(RecVaga vaga) {
-        vagaDao.save(vaga);
+        vagaDao.update(vaga);
     }
     @Transactional
     public void Excluir(int id) {

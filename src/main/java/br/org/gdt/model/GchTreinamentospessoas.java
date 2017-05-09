@@ -39,10 +39,10 @@ public class GchTreinamentospessoas implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_trei_pescodigo")
     private Long treiPescodigo;
     @JoinColumn(name = "trei_codigo", referencedColumnName = "trei_codigo")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private GchTreinamentos treiCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private RecPessoa recIdpessoa;
 
     public GchTreinamentospessoas() {
