@@ -35,12 +35,12 @@
                                         <h:inputText required="true" requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveNome}" />
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Fórmula<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <h:inputText required="true" requiredMessage="Campo Fórmula é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveFormula}" />
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo evento<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <div class="col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
                                         <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
                                             <div class="panel">
@@ -131,7 +131,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -164,10 +164,6 @@
                                         <h:column>
                                             <f:facet name="header">Nome</f:facet>
                                                 #{evento.eveNome}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Fórmula</f:facet>
-                                                #{evento.eveFormula}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Tipo</f:facet>

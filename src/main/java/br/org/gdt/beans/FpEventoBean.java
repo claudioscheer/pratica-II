@@ -27,6 +27,7 @@ public class FpEventoBean {
         if (fpEvento.getEveId() > 0) {
             fpEventoService.update(fpEvento);
         } else {
+            fpEvento.setEveFormula("$#");
             fpEventoService.save(fpEvento);
         }
         todosFpEvento = fpEventoService.findAll();
