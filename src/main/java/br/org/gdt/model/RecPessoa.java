@@ -10,10 +10,13 @@ import br.org.gdt.enums.Sexo;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -23,6 +26,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,12 +44,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
+@SequenceGenerator(name = "seq_RecPessoa", sequenceName = "seq_RecPessoa", allocationSize = 1)
 public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idpessoa")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_RecPessoa")
     private long recIdpessoa;
     @Column(name = "rec_nomecompleto")
     private String recNomecompleto;
@@ -119,8 +125,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private int recInsalubridade;
     @Column(name = "rec_periculosidade")
     private Boolean recPericulosidade;
-    @Column(name = "rec_centrodecusto")
-    private BigInteger recCentrodecusto;
+    @Column(name = "rec_NomeBanco")
+    private String recNomeBanco;
     @Column(name = "rec_num_titu_eleitor")
     private BigInteger recNumTituEleitor;
     @Column(name = "rec_certificado_reservista")
@@ -448,12 +454,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recPericulosidade = recPericulosidade;
     }
 
-    public BigInteger getRecCentrodecusto() {
-        return recCentrodecusto;
+    public String getRecNomeBanco() {
+        return recNomeBanco;
     }
 
-    public void setRecCentrodecusto(BigInteger recCentrodecusto) {
-        this.recCentrodecusto = recCentrodecusto;
+    public void setRecNomeBanco(String recNomeBanco) {
+        this.recNomeBanco = recNomeBanco;
     }
 
     public BigInteger getRecNumTituEleitor() {
@@ -608,20 +614,31 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.gchRespostasList = gchRespostasList;
     }
 
-   
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + (int) (this.recIdpessoa ^ (this.recIdpessoa >>> 32));
+        hash = 73 * hash + Objects.hashCode(this.recNomecompleto);
+        return hash;
+    }
 
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof RecPessoa)) {
-//            return false;
-//        }
-//        RecPessoa other = (RecPessoa) object;
-//        if ((this.recIdpessoa == null && other.recIdpessoa != null) || (this.recIdpessoa != null && !this.recIdpessoa.equals(other.recIdpessoa))) {
-//            return false;
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RecPessoa other = (RecPessoa) obj;
+        if (this.recIdpessoa != other.recIdpessoa) {
+            return false;
+        }
+        if (!Objects.equals(this.recNomecompleto, other.recNomecompleto)) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {

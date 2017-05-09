@@ -5,7 +5,8 @@
  */
 package br.org.gdt.beans;
 
-import br.org.gdt.model.FpFaixa;
+import br.org.gdt.model.GchAlternativas;
+import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.resources.Helper;
@@ -13,7 +14,7 @@ import br.org.gdt.service.GchFormularioService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 
 
@@ -22,7 +23,7 @@ import javax.faces.bean.RequestScoped;
  * @author Alisson Allebrandt
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchFormularioBean {
 
     private boolean formAtivo = false;
@@ -31,7 +32,12 @@ public class GchFormularioBean {
     
     private GchFormulario gchFormulario = new GchFormulario();
     private List<GchFormulario> gchTodosFormularios;
-
+    
+    
+    public GchAlternativasperguntas alternativasPerguntas = new GchAlternativasperguntas();
+    public List<GchAlternativasperguntas> todasAlternativasPerguntas;
+    
+    
     @ManagedProperty("#{gchFormularioService}")
     private GchFormularioService gchFormularioService;
     
@@ -52,12 +58,49 @@ public class GchFormularioBean {
 
     }
      public void addNovaPergunta() {
-        this.gchFormulario.addPergunta((new GchPerguntas(++indexPerguntaItem)));
+         
+         System.out.println("Índice Pergunta "+this.indexPerguntaItem);
+         
+         this.gchFormulario.addPergunta((new GchPerguntas()));
+         
+//         GchPerguntas pergunta = new GchPerguntas();
+         
+         for(GchPerguntas pergunta : gchFormulario.getPerguntas()) {
+             
+             System.out.println("Pergunta"+pergunta.getPerCodigo());
+             
+         }
+         
     }
 
     public void removerPergunta(int index) {
+    
+        System.out.println("indice"+index);
+        
         this.gchFormulario.getPerguntas().remove(index);
     }
+    
+  
+    
+    
+    public void VincularAlternativaPergunta(List<GchAlternativas> alternativas,GchPerguntas pergunta){
+        
+        if(!alternativas.isEmpty()){
+           
+            for(GchAlternativas a: alternativas){
+                
+                alternativasPerguntas.setAltCodigo(a.getAltCodigo());
+                alternativasPerguntas.setPerCodigo(pergunta);
+                alternativasPerguntas.setGchAlternativas(a);
+                
+                todasAlternativasPerguntas.add(alternativasPerguntas);
+            }
+             
+        }
+        
+        
+    }
+    
     
     public String excluir(GchFormulario gchFormulario) {
 
@@ -81,8 +124,6 @@ public class GchFormularioBean {
 
         return "Formularios";
     }
-    
-    
     
     public GchFormulario getGchFormulario() {
         return gchFormulario;

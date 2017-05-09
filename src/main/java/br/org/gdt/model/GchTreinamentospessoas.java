@@ -6,6 +6,7 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,17 +35,29 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "GchTreinamentospessoas.findAll", query = "SELECT g FROM GchTreinamentospessoas g")})
 @SequenceGenerator(name = "seq_trei_pescodigo", sequenceName = "sequencia_treinamento_pesssoa_codigo", allocationSize = 1)
 public class GchTreinamentospessoas implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "trei_pescodigo")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_trei_pescodigo")
     private Long treiPescodigo;
+
+    @Basic(optional = false)
+    @Column(name = "trei_pes_data_inicio")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date treiPesDataInicio;
+
+    @Basic(optional = false)
+    @Column(name = "trei_pes_data_fim")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date treiPesDataFim;
+
     @JoinColumn(name = "trei_codigo", referencedColumnName = "trei_codigo")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private GchTreinamentos treiCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private RecPessoa recIdpessoa;
 
     public GchTreinamentospessoas() {
@@ -100,5 +115,21 @@ public class GchTreinamentospessoas implements Serializable {
     public String toString() {
         return "br.org.gdt.modelNew.GchTreinamentospessoas[ treiPescodigo=" + treiPescodigo + " ]";
     }
-    
+
+    public Date getTreiPesDataInicio() {
+        return treiPesDataInicio;
+    }
+
+    public void setTreiPesDataInicio(Date treiPesDataInicio) {
+        this.treiPesDataInicio = treiPesDataInicio;
+    }
+
+    public Date getTreiPesDataFim() {
+        return treiPesDataFim;
+    }
+
+    public void setTreiPesDataFim(Date treiPesDataFim) {
+        this.treiPesDataFim = treiPesDataFim;
+    }
+
 }
