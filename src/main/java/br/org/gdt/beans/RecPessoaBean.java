@@ -30,6 +30,12 @@ public class RecPessoaBean {
         //habilidades = recHabilidadeService.ListarTodas();
     }
 
+    public String PreparaEdicao(RecPessoa pessoa) {
+        this.formAtivo = true;
+        this.recPessoa = pessoa;
+        return "candidato_lista";
+    }
+
     public List<RecPessoa> ListarTodas() {
         if (recPessoas == null) {
             recPessoas = recPessoaService.ListarTodas();
