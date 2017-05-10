@@ -23,6 +23,11 @@ public class CsbffBeneficioBean {
     @ManagedProperty("#{csbffBeneficiosService}")
     private CsbffBeneficiosService csbffBeneficiosService;
 
+    
+    private TipoBeneficio tipoBeneficioCombo;
+    
+    
+    
     public CsbffBeneficioBean() {
 
     }
@@ -59,7 +64,7 @@ public class CsbffBeneficioBean {
         }
 
         todosCsbffBeneficios = csbffBeneficiosService.findAll();
-        this.formAtivo = false;
+        this.formAtivo = true;
             
 //        csbffBeneficios.setBeneficioCodigo(0);
 //        String abrangencia = null;
@@ -70,8 +75,9 @@ public class CsbffBeneficioBean {
 
     public void cancel() {
         this.formAtivo = false;
-        this.csbffBeneficios = null;
+        this.csbffBeneficios = new CsbffBeneficios();
     }
+   
 
     public void add() {
         this.formAtivo = true;
@@ -148,4 +154,14 @@ public class CsbffBeneficioBean {
         this.csbffBeneficiosService = csbffBeneficiosService;
     }
 
+    public TipoBeneficio getTipoBeneficioCombo() {
+        return tipoBeneficioCombo;
+    }
+
+    public void setTipoBeneficioCombo(TipoBeneficio tipoBeneficioCombo) {
+        this.tipoBeneficioCombo = tipoBeneficioCombo;
+    }
+
+ 
+    
 }

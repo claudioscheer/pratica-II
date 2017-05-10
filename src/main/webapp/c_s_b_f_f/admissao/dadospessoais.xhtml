@@ -13,7 +13,8 @@
                 <div class="title_left">
                     <h3>Contrato de Admissão</h3>
                 </div>
-                <h:form id="dadosPessoais">                                        
+                <h:form id="dadosPessoais">
+                    <h:messages class="error" style="color: #d9534f" />
                     <!--                    <p:panel>-->
                     <div class="bootstrap-iso">
                         <div class="container-fluid">
@@ -47,7 +48,7 @@
                                             <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recCpf}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control ">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
                                                 <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.id}" itemValue="#{cpf.recCpf}"/>
-                                                <f:ajax execute="@form" render="dadosPessoais" listener="#{csbffAdmissaoBean.buscarPessoa()}" event="change"/>
+                                                <!--<f:ajax execute="@form" render="dadosPessoais" listener="#{csbffAdmissaoBean.buscarPessoa()}" event="change"/>-->
                                             </h:selectOneMenu>
                                             <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
                                         </div>
@@ -243,7 +244,7 @@
                                         </div>
                                     </div>
                                     <hr />
-                                    
+
                                 </div>
                             </div>
                             <div class="pull-right">

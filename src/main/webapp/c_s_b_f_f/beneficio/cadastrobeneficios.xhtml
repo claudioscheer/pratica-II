@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      <!--xmlns:p="http://primefaces.org/ui">-->
     <h:head>
         <title>Cadastro benefício</title>
     </h:head>
@@ -44,7 +44,7 @@
 
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo benefício <span class="required">*</span></label>
 
-                                            <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.tipoBeneficioCodigo}" class="form-control">
+                                            <h:selectOneMenu value="#{csbffBeneficioBean.tipoBeneficioCombo}" class="form-control">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                 <f:selectItems value="#{csbffBeneficioBean.tipoBeneficio}" />
                                             </h:selectOneMenu>   
@@ -64,11 +64,12 @@
                                         <div class="form-group">
                                             <div>
 
-                                                <br></br> <h:commandButton class="btn btn-success" value="Cadastrar" id="cbtOk" actionListener="#{csbffBeneficioBean.save()}" >
-                                                    <f:ajax execute="@form" render="formBeneficio" resetValues="true" />
+                                                <br></br> <h:commandButton class="btn btn-success" value="Cadastrar" action="#{csbffBeneficioBean.save()}" >
+                                                    <!--<f:ajax execute="@form" render="formBeneficio" />-->
                                                 </h:commandButton>
 
                                                 <h:commandButton immediate="true" class="btn btn-danger" type="submit" value="Cancelar" actionListener="#{csbffBeneficioBean.cancel()}"/>
+                                                <h:link class="btn btn" outcome="consultabeneficios.xhtml" value="Voltar"></h:link>
 
                                             </div>
                                         </div>

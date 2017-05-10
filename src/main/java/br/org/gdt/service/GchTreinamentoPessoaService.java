@@ -44,6 +44,9 @@ public class GchTreinamentoPessoaService {
     public List<GchTreinamentospessoas> findAll() {
         return gchTreinamentoPessoasDAO.findAll();
     }
-   
+    
+    public List<GchTreinamentospessoas> verificaPessoa(long idTreinamento, long idPessoa) {
+        return gchTreinamentoPessoasDAO.verificaPessoa(idTreinamento, idPessoa);
+    }
     
 }

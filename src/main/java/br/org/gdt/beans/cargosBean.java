@@ -7,6 +7,7 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffCargosService;
 import java.math.BigInteger;
 import java.util.Date;
@@ -41,8 +42,45 @@ public class cargosBean {
         
         
     }
-
     
+    public String salvar() {
+
+        String MsgNotificacao = "testando isso aqui";
+        try {
+            if (csbffcargos.getCargoCodigo() > 0) {
+
+                csbffCargosService.update(csbffcargos);
+                novo();
+
+                System.out.println("******teste de código" + csbffcargos);
+                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi atualizado com sucesso!";
+
+            } else {
+
+             novo();
+
+        System.out.println("******teste de código" + csbffcargos);
+                csbffCargosService.save(csbffcargos);
+                
+
+                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi cadastrado com sucesso!";
+            }
+
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
+        } catch (Exception ex) {
+
+            MsgNotificacao = "Houve uma falha ao cadastrar o cargo " + csbffcargos.getCargoNome() + ex.getMessage() + " , tente novamente mais tarde!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+        }
+
+        return "Cargos";
+
+//        gchTodosCursos = gchCursoService.findAll();
+//        this.formAtivo = false;
+    }
+    
+        
     
     public void save() {
         
@@ -61,6 +99,23 @@ public class cargosBean {
         
         
     }
+    
+    public String buscaPorId(int idcargo) {
+
+        System.out.println("Id do curso" + idcargo);
+
+        if (idcargo != 0) {
+
+            csbffcargos = csbffCargosService.findById(idcargo);
+        }
+            return "form_cargo";
+
+        }
+    
+    
+    
+    
+    
 
     public void cancel() {
         this.formAtivo = false;
