@@ -6,7 +6,6 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -62,6 +61,12 @@ public class CsbffTipoBeneficio implements Serializable {
 
     public void setTipoBeneficioCodigo(long tipoBeneficioCodigo) {
         this.tipoBeneficioCodigo = tipoBeneficioCodigo;
+    }
+
+    public CsbffTipoBeneficio(long tipoBeneficioCodigo, String tipoBeneficioNome, List<CsbffBeneficios> csbffBeneficiosList) {
+        this.tipoBeneficioCodigo = tipoBeneficioCodigo;
+        this.tipoBeneficioNome = tipoBeneficioNome;
+        this.csbffBeneficiosList = csbffBeneficiosList;
     }
 
     public String getTipoBeneficioNome() {

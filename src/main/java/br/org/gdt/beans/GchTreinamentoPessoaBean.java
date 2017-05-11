@@ -16,10 +16,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -71,6 +75,8 @@ public class GchTreinamentoPessoaBean {
                 if (value) {
 
                     gchTreinamentospessoas.setRecIdpessoa(pessoa);
+                    gchTreinamentospessoas.setTreiPesDataInicio(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio());
+                    gchTreinamentospessoas.setTreiPesDataFim(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim());
 
                     gchTreinamentospessoasService.update(gchTreinamentospessoas);
                 }
@@ -143,6 +149,69 @@ public class GchTreinamentoPessoaBean {
         return "VincularPessoasTreinamento";
     }
 
+    public void podeVincularPessoa(AjaxBehaviorEvent event) {
+
+        System.out.println("Aqui ");
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        RecPessoa pessoa = (RecPessoa) event.getComponent().getAttributes().get("pessoa");
+
+        boolean marcou = checked.get(pessoa);
+
+        if (marcou) {
+
+            boolean podeVincular = true;
+            List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoa(gchTreinamentospessoas.getTreiCodigo().getTreiCodigo(), pessoa.getRecIdpessoa());
+
+            for (GchTreinamentospessoas t : list) {
+
+                podeVincular = verificaPessoa(t);
+
+                if (!podeVincular) {
+
+                    RequestContext.getCurrentInstance().execute("confirm('Realmente deseja vincular a pessoa ao treinamento?')");
+//                    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso! Usuários administradores não podem ser excluídos.", "");
+//                    facesContext.addMessage(null, facesMessage);
+
+                    break;
+                }
+
+            }
+
+        }
+
+//        return "confirm('Voce realmente deseja excluir?')";
+    }
+
+    private boolean verificaPessoa(GchTreinamentospessoas t) {
+
+        boolean podeVincular = true;
+
+        if (t.getTreiPesDataInicio().equals(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio())
+                || t.getTreiPesDataFim().equals(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim())) {
+
+            podeVincular = false;
+
+        }
+
+        if (t.getTreiPesDataInicio().before(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio())
+                && t.getTreiPesDataFim().after(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio())) {
+
+            podeVincular = false;
+
+        }
+
+        if (t.getTreiPesDataInicio().after(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim())
+                && t.getTreiPesDataFim().before(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim())) {
+
+            podeVincular = false;
+
+        }
+
+        return podeVincular;
+    }
+
     public String buscaTreinamentoPorId(long id) {
 
         System.out.println("Id Treinamento" + id);
@@ -196,6 +265,9 @@ public class GchTreinamentoPessoaBean {
     }
 
     public void setChecked(Map<RecPessoa, Boolean> checked) {
+
+        System.out.println("Marcando: " + checked.values());
+
         this.checked = checked;
     }
 
