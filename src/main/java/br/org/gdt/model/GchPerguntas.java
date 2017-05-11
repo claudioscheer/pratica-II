@@ -6,6 +6,7 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -89,6 +90,9 @@ public class GchPerguntas implements Serializable {
     @XmlTransient
     @JsonIgnore
     public List<GchAlternativasperguntas> getGchAlternativasperguntasList() {
+        if (gchAlternativasperguntasList == null){
+            gchAlternativasperguntasList = new ArrayList<>();
+        }
         return gchAlternativasperguntasList;
     }
 

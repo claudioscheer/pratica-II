@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+      <h:form>
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputLabel for="menu" value="Basic:" />
+        <p:selectCheckboxMenu id="menu" value="#{beanTeste.selectedCities}" label="Cities"
+                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+            <f:selectItems value="#{beanTeste.cities}" />
+        </p:selectCheckboxMenu>
+ 
+    </h:panelGrid>
+ 
+    <p:commandButton value="Submit" update="displayCities" oncomplete="PF('cityDialog').show()" style="margin-top:10px;" />
+ 
+    <p:dialog header="Selected Cities" modal="true" showEffect="fade" hideEffect="fade" widgetVar="cityDialog" width="250">
+        <p:outputPanel id="displayCities">
+            <p:dataList value="#{beanTeste.selectedCities}" var="city" emptyMessage="No cities selected" style="margin-bottom: 10px;">
+                <f:facet name="header">
+                    Basic
+                </f:facet>
+                #{city}
+            </p:dataList>
+ 
+         
+        </p:outputPanel>
+    </p:dialog>
+</h:form>
+    </h:body>
+</html>
+
