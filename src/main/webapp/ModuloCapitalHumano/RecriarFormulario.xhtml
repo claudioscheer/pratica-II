@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="head">
+                <title>Cursos Cadastrados</title>
+
+                <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>
+            </ui:define>
+            <ui:define name="content">
+                <div id="page" style="margin-top:75px;">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="x_panel">
+                                    <div class="form-group" style="float: right;margin-top: 10px">
+                                        <div>
+                                            <h:link  outcome="CadastroCurso.xhtml" class="btn btn-primary " value="Novo Curso"/>
+                                        </div>
+                                    </div>
+                                    <div class="panel-heading">
+                                        <h3 class="title_left">
+                                            Cursos Cadastrados
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body" style="/* align-items: center; */">
+
+                                        <h:form id="formCursos">
+
+                                            <ui:repeat value="#{gchFormularioBean.gchFormulario.perguntas}" var="perguntas">
+                                                <div class="field">
+                                                    <h:outputLabel value="#{perguntas.perDescricao}"/>
+                                                    <h:inputText value="#{perguntas.perCodigo}" />
+           
+                                                </div>
+                                            </ui:repeat>
+<!--                                            <ui:repeat value=">
+                                                <h:selectOneRadio value="#{bean.values[field.name]}" rendered="#{field.type == 'RADIO'}">
+                                                        <f:selectItems value="#{field.options}" />
+                                                    </h:selectOneRadio>
+                                            </ui:repeat> -->
+                                        </h:form> </div>
+                                    <div class="panel-footer">
+                                        Gestão do Capital Humano - Todos os Direitos Reservados
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+
+
+

@@ -68,8 +68,10 @@
                         </div>
                         <div class="ln_solid" style="margin-top:100px"></div>
                         <ui:repeat value="#{gchFormularioBean.gchFormulario.perguntas}" var="pergunta" varStatus="perguntaStatus">
+
+
                             <div class="row" >
-                                <div class="form-group col-md-6 col-sm-6">
+                                <div class="form-group col-md-5 col-sm-5">
                                     <h:inputText  class="form-control" value="#{gchFormularioBean.gchFormulario.perguntas[perguntaStatus.index].perDescricao}" />
                                 </div>
 
@@ -79,54 +81,27 @@
                                     </h:commandButton>
                                 </div>
 
-                                <div class="form-group col-md-2 col-sm-2">
-                                    <h:selectOneMenu id="comboAlternativas" class="form-control">
-                                        <f:selectItems value="#{gchAlternativaBean.altPerLista}" var="alternativas" itemValue="#{alternativas}" itemLabel="#{alternativas.altCodigo}"/>-->
-                                        <f:ajax execute="@form" render="formFormulario:panelInserirLinha" />
-                                    </h:selectOneMenu>
-                                </div>
+                                <p:outputLabel for="alternativas" />
+                                <p:autoComplete id="alternativas" multiple="true" value="#{gchAlternativaBean.gchTodasAlternativas}" completeMethod="#{gchAlternativaBean.CompleteAlternativas}" var="alternativa" itemLabel="#{alternativa.altDescricao}" itemValue="#{alternativa}" converter="#{generic}" forceSelection="true">
+                             
+                                    <f:attribute name="teste" value="#{alternativa.altDescricao}"/>
+                                       
+                                      <p:column>
+                                            <h:outputText value="#{alternativa.altDescricao}">
 
-                                <div class="text-left col-md-2 col-sm-2" >
-                                    <p:commandButton class="btn btn-default btn-sm" value="Vincular Alternativa"  type="button" onclick="PF('dlg2').show()" update="this" />
-                                </div>
-                                
-                                <h:outputText value="#{perguntaStatus.index}"/>
-                                
-                                <p:dialog header="Vincular Alternativas" widgetVar="dlg2" modal="false" height="100">
+                                            </h:outputText>
+                                            <f:param name="codAlt" value="#{alternativa.altDescricao}"/>
+                                            <f:param name="codAlt" value="#{alternativa.altCodigo}"/>
 
-                                    <h:outputText value="#{pergunta.perDescricao}"/>
+                                        </p:column>
                                     
-                                    <h:dataTable id="tableTeste" class="table table-striped" value="#{gchAlternativaBean.gchTodasAlternativas}" var="alternativa">
-                                        
-                                       
-                                        <h:column>
-                                            <h:selectBooleanCheckbox value="#{gchAlternativaBean.checked[alternativa]}"/>
-                                        </h:column>
+                                    <f:ajax event="change" listener="#{gchFormularioBean.AgoraVai}" render="formFormulario" />
+  
+                                </p:autoComplete>
 
-                                        <h:column>      
-                                            <f:facet name="header">Codigo</f:facet>
-                                            <h:outputText value="#{alternativa.altCodigo}"/>                
-                                        </h:column>    
-
-                                        <h:column>      
-                                            <f:facet name="header">Nome</f:facet>
-                                            <h:outputText value="#{alternativa.altDescricao}"/>                
-                                        </h:column>
-                                        <h:column>      
-                                            <f:facet name="header">Prioridade</f:facet>
-                                            <h:outputText value="#{alternativa.altPrioridade}"/>                
-                                        </h:column>
-                                      
-                                       
-                                    </h:dataTable>
-                                     <div class="form-group col-md-2 col-sm-2">
-                                         <h:commandButton class="btn btn-primary" value="Vincular" action="#{gchAlternativaBean.vincularAlternativas()}"/>
-
-                                        </div>
-                                </p:dialog>  
                             </div>
                         </ui:repeat>
-                        
+
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

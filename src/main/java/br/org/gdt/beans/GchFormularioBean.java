@@ -10,13 +10,16 @@ import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.resources.Helper;
+import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-
-
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.AjaxBehaviorEvent;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -33,8 +36,14 @@ public class GchFormularioBean {
     private GchFormulario gchFormulario = new GchFormulario();
     private List<GchFormulario> gchTodosFormularios;
     
+   
     
-    public GchAlternativasperguntas alternativasPerguntas = new GchAlternativasperguntas();
+    private List<PerguntasAlternativas> PergAlt;
+       
+    @ManagedProperty("#{gchAlternativaCertoService}")
+    private GchCadastroAlternativaServiceCerto gchAlternativasService;
+    
+    private GchAlternativasperguntas alternativasPerguntas = new GchAlternativasperguntas();
     public List<GchAlternativasperguntas> todasAlternativasPerguntas;
     
     
@@ -43,6 +52,24 @@ public class GchFormularioBean {
     
     public GchFormularioBean() {
         
+        
+        
+    }
+    
+    
+    public void IsSelected(long alt){
+        
+        System.out.println("alt"+alt);
+   
+  
+        
+    }
+    
+    public void AgoraVai(AjaxBehaviorEvent event){
+        
+        GchAlternativas alt = (GchAlternativas) event.getComponent().getAttributes().get("teste");
+        
+        System.out.println("Recebeu o id");
         
     }
     
@@ -59,17 +86,14 @@ public class GchFormularioBean {
     }
      public void addNovaPergunta() {
          
-         System.out.println("Índice Pergunta "+this.indexPerguntaItem);
+       
+         GchPerguntas novaPergunta = new GchPerguntas();
          
-         this.gchFormulario.addPergunta((new GchPerguntas()));
+         novaPergunta.setPerCodigo(indexPerguntaItem);         
          
-//         GchPerguntas pergunta = new GchPerguntas();
+         this.gchFormulario.addPergunta((novaPergunta));
          
-         for(GchPerguntas pergunta : gchFormulario.getPerguntas()) {
-             
-             System.out.println("Pergunta"+pergunta.getPerCodigo());
-             
-         }
+         
          
     }
 
@@ -126,6 +150,12 @@ public class GchFormularioBean {
     }
     
     public GchFormulario getGchFormulario() {
+        
+//      gchFormulario =  gchFormularioService.findById(1);
+//        
+//        System.out.println("codigo formulario"+gchFormulario.getFormNome());
+//      
+//      
         return gchFormulario;
     }
 
@@ -154,6 +184,38 @@ public class GchFormularioBean {
 
     public void setGchFormularioService(GchFormularioService gchFormularioService) {
         this.gchFormularioService = gchFormularioService;
+    }
+
+    public GchAlternativasperguntas getAlternativasPerguntas() {
+        return alternativasPerguntas;
+    }
+
+    public void setAlternativasPerguntas(GchAlternativasperguntas alternativasPerguntas) {
+        this.alternativasPerguntas = alternativasPerguntas;
+    }
+
+    public List<PerguntasAlternativas> getPergAlt() {
+        return PergAlt;
+    }
+
+    public void setPergAlt(List<PerguntasAlternativas> PergAlt) {
+        this.PergAlt = PergAlt;
+    }
+
+    public long getIndexPerguntaItem() {
+        return indexPerguntaItem;
+    }
+
+    public void setIndexPerguntaItem(long indexPerguntaItem) {
+        this.indexPerguntaItem = indexPerguntaItem;
+    }
+
+    public GchCadastroAlternativaServiceCerto getGchAlternativasService() {
+        return gchAlternativasService;
+    }
+
+    public void setGchAlternativasService(GchCadastroAlternativaServiceCerto gchAlternativasService) {
+        this.gchAlternativasService = gchAlternativasService;
     }
 
     
