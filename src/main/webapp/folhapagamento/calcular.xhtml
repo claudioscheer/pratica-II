@@ -40,9 +40,19 @@
                         </div>
                     </h:panelGroup>
                     <h:panelGroup layout="block" rendered="#{fpCalcularBean.fpTipoFolha == 'FolhaDePagamento'}">
-                        <div class="col-md-12">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Pessoa</label>
                             <div class="row">
-
+                                <div class="col-md-3">
+                                    <h:inputText class="form-control" value="#{fpCalcularBean.pessoaId}">
+                                        <f:ajax listener="#{fpCalcularBean.buscarPessoa()}" execute="@form" render="formEventoVariavel" event="change" />
+                                    </h:inputText>
+                                </div>
+                                <div class="col-md-2">
+                                    <h:commandButton class="btn btn-primary" value="Buscar informações" action="#{fpCalcularBean.buscarPessoa()}">
+                                        <f:ajax execute="@form" render="formEventoVariavel" />
+                                    </h:commandButton>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -52,11 +62,11 @@
                         </div>
                     </h:panelGroup>
 
-                    <div class="col-md-12">
+                    <!--<div class="col-md-12">
                         <h:commandButton class="btn btn-primary" value="Adicionar dados padrões do sistema" action="#{fpCalcularBean.salvarDadosDependentes()}">
                             <f:ajax execute="@form" render="formEventoVariavel" />
                         </h:commandButton>
-                    </div>
+                    </div>-->
                 </h:form>
             </ui:define>
             <ui:define name="script">

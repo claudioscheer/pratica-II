@@ -3,11 +3,13 @@ package br.org.gdt.beans;
 import br.org.gdt.enums.FpTipoFolha;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpPeriodo;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.DependenciasFolhaPagamento;
 import br.org.gdt.resources.Helper;
-import br.org.gdt.service.folhapagamento.CalcularFolhaPagamento;
+import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.FpPeriodoService;
+import br.org.gdt.service.RecPessoaService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -19,16 +21,18 @@ public class FpCalcularBean {
 
     private FpTipoFolha fpTipoFolha;
     private FpPeriodo fpPeriodo = new FpPeriodo();
+    private RecPessoa recPessoa = new RecPessoa();
     private List<FpPeriodo> todosFpPeriodo;
+    private int pessoaId;
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
 
-    @ManagedProperty("#{dependenciasFolhaPagamento}")
-    private DependenciasFolhaPagamento dependenciasFolhaPagamento;
+    @ManagedProperty("#{calcularFolha}")
+    private CalcularFolha calcularFolha;
 
-    @ManagedProperty("#{calcularFolhaPagamento}")
-    private CalcularFolhaPagamento calcularFolhaPagamento;
+    @ManagedProperty("#{recPessoaService}")
+    private RecPessoaService recPessoaService;
 
     public FpCalcularBean() {
 
@@ -40,8 +44,13 @@ public class FpCalcularBean {
     public void selecionarPeriodo() {
     }
 
-    public void salvarDadosDependentes() {
-        dependenciasFolhaPagamento.salvarTudo();
+    public void buscarPessoa() {
+//        RecPessoa pessoa = recPessoaService.BuscarId(pessoaId);
+//        if (pessoa == null) {
+//            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe!", "info");
+//            return;
+//        }
+//        recPessoa = pessoa;
     }
 
     public void calcularFolhaPagamento() {
@@ -51,7 +60,7 @@ public class FpCalcularBean {
         }
 
         fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
-        
+
     }
 
     public FpTipoFolha getFpTipoFolha() {
@@ -78,6 +87,14 @@ public class FpCalcularBean {
         return fpPeriodoService.findAll();
     }
 
+    public int getPessoaId() {
+        return pessoaId;
+    }
+
+    public void setPessoaId(int pessoaId) {
+        this.pessoaId = pessoaId;
+    }
+
     public void setTodosFpPeriodo(List<FpPeriodo> todosFpPeriodo) {
         this.todosFpPeriodo = todosFpPeriodo;
     }
@@ -90,20 +107,28 @@ public class FpCalcularBean {
         this.fpPeriodoService = fpPeriodoService;
     }
 
-    public DependenciasFolhaPagamento getDependenciasFolhaPagamento() {
-        return dependenciasFolhaPagamento;
+    public CalcularFolha getCalcularFolha() {
+        return calcularFolha;
     }
 
-    public void setDependenciasFolhaPagamento(DependenciasFolhaPagamento dependenciasFolhaPagamento) {
-        this.dependenciasFolhaPagamento = dependenciasFolhaPagamento;
+    public void setCalcularFolha(CalcularFolha calcularFolha) {
+        this.calcularFolha = calcularFolha;
     }
 
-    public CalcularFolhaPagamento getCalcularFolhaPagamento() {
-        return calcularFolhaPagamento;
+    public RecPessoa getRecPessoa() {
+        return recPessoa;
     }
 
-    public void setCalcularFolhaPagamento(CalcularFolhaPagamento calcularFolhaPagamento) {
-        this.calcularFolhaPagamento = calcularFolhaPagamento;
+    public void setRecPessoa(RecPessoa recPessoa) {
+        this.recPessoa = recPessoa;
+    }
+
+    public RecPessoaService getRecPessoaService() {
+        return recPessoaService;
+    }
+
+    public void setRecPessoaService(RecPessoaService recPessoaService) {
+        this.recPessoaService = recPessoaService;
     }
 
 }
