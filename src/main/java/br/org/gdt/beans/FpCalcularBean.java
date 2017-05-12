@@ -27,8 +27,8 @@ public class FpCalcularBean {
     @ManagedProperty("#{dependenciasFolhaPagamento}")
     private DependenciasFolhaPagamento dependenciasFolhaPagamento;
 
-    @ManagedProperty("#{fpCalcularFolhaPagamento}")
-    private CalcularFolhaPagamento fpCalcularFolhaPagamento;
+    @ManagedProperty("#{calcularFolhaPagamento}")
+    private CalcularFolhaPagamento calcularFolhaPagamento;
 
     public FpCalcularBean() {
 
@@ -98,12 +98,12 @@ public class FpCalcularBean {
         this.dependenciasFolhaPagamento = dependenciasFolhaPagamento;
     }
 
-    public CalcularFolhaPagamento getFpCalcularFolhaPagamento() {
-        return fpCalcularFolhaPagamento;
+    public CalcularFolhaPagamento getCalcularFolhaPagamento() {
+        return calcularFolhaPagamento;
     }
 
-    public void setFpCalcularFolhaPagamento(CalcularFolhaPagamento fpCalcularFolhaPagamento) {
-        this.fpCalcularFolhaPagamento = fpCalcularFolhaPagamento;
+    public void setCalcularFolhaPagamento(CalcularFolhaPagamento calcularFolhaPagamento) {
+        this.calcularFolhaPagamento = calcularFolhaPagamento;
     }
 
 }
