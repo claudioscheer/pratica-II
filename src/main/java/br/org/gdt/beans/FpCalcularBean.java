@@ -1,10 +1,12 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoFolha;
-import br.org.gdt.model.FpEventoVariavel;
+import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpPeriodo;
+import br.org.gdt.resources.DependenciasFolhaPagamento;
 import br.org.gdt.resources.Helper;
-import br.org.gdt.service.FpEventoVariavelService;
+import br.org.gdt.service.folhapagamento.CalcularFolhaPagamento;
+import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.FpPeriodoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -22,6 +24,12 @@ public class FpCalcularBean {
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
 
+    @ManagedProperty("#{dependenciasFolhaPagamento}")
+    private DependenciasFolhaPagamento dependenciasFolhaPagamento;
+
+    @ManagedProperty("#{fpCalcularFolhaPagamento}")
+    private CalcularFolhaPagamento fpCalcularFolhaPagamento;
+
     public FpCalcularBean() {
 
     }
@@ -30,7 +38,20 @@ public class FpCalcularBean {
     }
 
     public void selecionarPeriodo() {
-        int a = 0;   
+    }
+
+    public void salvarDadosDependentes() {
+        dependenciasFolhaPagamento.salvarTudo();
+    }
+
+    public void calcularFolhaPagamento() {
+        if (fpPeriodo.getPerId() == 0) {
+            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
+            return;
+        }
+
+        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+        
     }
 
     public FpTipoFolha getFpTipoFolha() {
@@ -50,10 +71,11 @@ public class FpCalcularBean {
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
-        if (todosFpPeriodo == null) {
-            todosFpPeriodo = fpPeriodoService.findAll();
-        }
-        return todosFpPeriodo;
+//        if (todosFpPeriodo == null) {
+//            todosFpPeriodo = fpPeriodoService.findAll();
+//        }
+//        return todosFpPeriodo;
+        return fpPeriodoService.findAll();
     }
 
     public void setTodosFpPeriodo(List<FpPeriodo> todosFpPeriodo) {
@@ -66,6 +88,22 @@ public class FpCalcularBean {
 
     public void setFpPeriodoService(FpPeriodoService fpPeriodoService) {
         this.fpPeriodoService = fpPeriodoService;
+    }
+
+    public DependenciasFolhaPagamento getDependenciasFolhaPagamento() {
+        return dependenciasFolhaPagamento;
+    }
+
+    public void setDependenciasFolhaPagamento(DependenciasFolhaPagamento dependenciasFolhaPagamento) {
+        this.dependenciasFolhaPagamento = dependenciasFolhaPagamento;
+    }
+
+    public CalcularFolhaPagamento getFpCalcularFolhaPagamento() {
+        return fpCalcularFolhaPagamento;
+    }
+
+    public void setFpCalcularFolhaPagamento(CalcularFolhaPagamento fpCalcularFolhaPagamento) {
+        this.fpCalcularFolhaPagamento = fpCalcularFolhaPagamento;
     }
 
 }
