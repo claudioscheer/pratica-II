@@ -16,13 +16,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.ValueChangeEvent;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -48,7 +46,7 @@ public class GchTreinamentoPessoaBean {
     @ManagedProperty("#{gchTreinamentoPessoaService}")
     private GchTreinamentoPessoaService gchTreinamentospessoasService;
 
-    private String id; // gettter / setter
+    private RecPessoa id = new RecPessoa(); // gettter / setter
 
     public GchTreinamentoPessoaBean() {
 
@@ -100,6 +98,14 @@ public class GchTreinamentoPessoaBean {
 //        return "Treinamentos.xhtml";
     }
 
+    
+    public void removeMarcado(){
+            
+        checked.replace(id, false);
+    
+        id = new RecPessoa();
+    }
+    
     public void cancel() {
         this.formAtivo = false;
         this.gchTreinamentospessoas = new GchTreinamentospessoas();
@@ -157,22 +163,19 @@ public class GchTreinamentoPessoaBean {
 
         RecPessoa pessoa = (RecPessoa) event.getComponent().getAttributes().get("pessoa");
 
+        id = pessoa;
+        
         boolean marcou = checked.get(pessoa);
 
         if (marcou) {
 
-            boolean podeVincular = true;
             List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoa(gchTreinamentospessoas.getTreiCodigo().getTreiCodigo(), pessoa.getRecIdpessoa());
 
             for (GchTreinamentospessoas t : list) {
 
-                podeVincular = verificaPessoa(t);
+                if (!verificaPessoa(t)) {
 
-                if (!podeVincular) {
-
-                    RequestContext.getCurrentInstance().execute("confirm('Realmente deseja vincular a pessoa ao treinamento?')");
-//                    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso! Usuários administradores não podem ser excluídos.", "");
-//                    facesContext.addMessage(null, facesMessage);
+                    RequestContext.getCurrentInstance().execute("PF('confirmDlg').show();");
 
                     break;
                 }
@@ -181,7 +184,6 @@ public class GchTreinamentoPessoaBean {
 
         }
 
-//        return "confirm('Voce realmente deseja excluir?')";
     }
 
     private boolean verificaPessoa(GchTreinamentospessoas t) {
@@ -287,11 +289,11 @@ public class GchTreinamentoPessoaBean {
         this.gchTreinamentosService = gchTreinamentosService;
     }
 
-    public String getId() {
+    public RecPessoa getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(RecPessoa id) {
         this.id = id;
     }
 
