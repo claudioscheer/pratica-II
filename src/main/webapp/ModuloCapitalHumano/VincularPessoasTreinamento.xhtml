@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
 
@@ -31,7 +32,10 @@
                                             <h:dataTable class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
 
                                                 <h:column>
-                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa]}" />
+                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa]}" >
+                                                        <f:ajax listener="#{gchTreinamentoPessoaBean.podeVincularPessoa}" render="parentformid" />
+                                                        <f:attribute name="pessoa" value="#{pessoa}" />
+                                                    </h:selectBooleanCheckbox>
                                                 </h:column>
 
                                                 <h:column>      
@@ -44,18 +48,27 @@
                                                     <h:outputText value="#{pessoa.recNomecompleto}"/>                
                                                 </h:column>
 
+
+
+
                                             </h:dataTable>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                                             
+
                                                 <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentoPessoaBean.save()}" value="Cadastrar" /> 
-               
+
                                                 <h:commandButton class="btn btn-danger"  actionListener="#{gchTreinamentoPessoaBean.cancel()}" value="Cancelar" /> 
 
                                             </div>
-                                        </div>     
+                                        </div>    
+
+                                        <p:confirmDialog widgetVar="confirmDlg" message="Colaborador já vinculado em outro treinamento no mesmo período! Deseja vincular o colaborador mesmo assim?" >
+                                            <h:commandButton class="btn btn-primary"   value="Sim" />                                             
+                                            <h:commandButton class="btn btn-danger"  actionListener="#{gchTreinamentoPessoaBean.removeMarcado()}" value="Não" /> 
+                                        </p:confirmDialog>
+
                                     </div>
 
                                 </div>

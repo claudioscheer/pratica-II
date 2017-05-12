@@ -1,6 +1,6 @@
 package br.org.gdt.model;
 
-import br.org.gdt.converts.SampleEntity;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 @Entity
 @SequenceGenerator(name = "seq_fp_periodo", sequenceName = "seq_fp_periodo", allocationSize = 1)
 @Table(name = "fp_periodo")
-public class FpPeriodo implements java.io.Serializable {
+public class FpPeriodo implements Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
     private long perId;
@@ -92,5 +92,4 @@ public class FpPeriodo implements java.io.Serializable {
     public void setPerPago(boolean perPago) {
         this.perPago = perPago;
     }
-
 }
