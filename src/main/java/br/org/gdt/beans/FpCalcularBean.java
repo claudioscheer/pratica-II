@@ -10,6 +10,7 @@ import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
+import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -19,9 +20,9 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class FpCalcularBean {
 
+    private DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario;
+    private boolean gerarTodasPessoas;
     private FpTipoFolha fpTipoFolha;
-    private FpPeriodo fpPeriodo = new FpPeriodo();
-    private RecPessoa recPessoa = new RecPessoa();
     private List<FpPeriodo> todosFpPeriodo;
     private int pessoaId;
 
@@ -48,19 +49,35 @@ public class FpCalcularBean {
 //        RecPessoa pessoa = recPessoaService.BuscarId(pessoaId);
 //        if (pessoa == null) {
 //            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe!", "info");
+//            recPessoa.setRecIdpessoa(0);
 //            return;
 //        }
 //        recPessoa = pessoa;
     }
 
     public void calcularFolhaPagamento() {
-        if (fpPeriodo.getPerId() == 0) {
+        if (dadosCalculadosDoFuncionario.getPeriodo().getPerId() == 0) {
             Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
             return;
         }
+//        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
 
-        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+    }
 
+    public DadosCalculadosDoFuncionario getDadosCalculadosDoFuncionario() {
+        return dadosCalculadosDoFuncionario;
+    }
+
+    public void setDadosCalculadosDoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) {
+        this.dadosCalculadosDoFuncionario = dadosCalculadosDoFuncionario;
+    }
+
+    public boolean isGerarTodasPessoas() {
+        return gerarTodasPessoas;
+    }
+
+    public void setGerarTodasPessoas(boolean gerarTodasPessoas) {
+        this.gerarTodasPessoas = gerarTodasPessoas;
     }
 
     public FpTipoFolha getFpTipoFolha() {
@@ -69,14 +86,6 @@ public class FpCalcularBean {
 
     public void setFpTipoFolha(FpTipoFolha fpTipoFolha) {
         this.fpTipoFolha = fpTipoFolha;
-    }
-
-    public FpPeriodo getFpPeriodo() {
-        return fpPeriodo;
-    }
-
-    public void setFpPeriodo(FpPeriodo fpPeriodo) {
-        this.fpPeriodo = fpPeriodo;
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
@@ -113,14 +122,6 @@ public class FpCalcularBean {
 
     public void setCalcularFolha(CalcularFolha calcularFolha) {
         this.calcularFolha = calcularFolha;
-    }
-
-    public RecPessoa getRecPessoa() {
-        return recPessoa;
-    }
-
-    public void setRecPessoa(RecPessoa recPessoa) {
-        this.recPessoa = recPessoa;
     }
 
     public RecPessoaService getRecPessoaService() {

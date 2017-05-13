@@ -44,15 +44,22 @@
                             <label class="control-label">Pessoa</label>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <h:inputText class="form-control" value="#{fpCalcularBean.pessoaId}">
-                                        <f:ajax listener="#{fpCalcularBean.buscarPessoa()}" execute="@form" render="formEventoVariavel" event="change" />
-                                    </h:inputText>
+                                    <div class="checkbox">
+                                        <label>
+                                            <h:selectBooleanCheckbox value="#{fpCalcularBean.gerarTodasPessoas}" /> Gerar de todas as pessoas?
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <h:commandButton class="btn btn-primary" value="Buscar informações" action="#{fpCalcularBean.buscarPessoa()}">
-                                        <f:ajax execute="@form" render="formEventoVariavel" />
-                                    </h:commandButton>
-                                </div>
+                                <h:panelGroup rendered="#{fpCalcularBean.gerarTodasPessoas}">
+                                    <div class="col-md-3">
+                                        <h:inputText class="form-control" value="#{fpCalcularBean.pessoaId}" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h:commandButton class="btn btn-primary" value="Buscar informações" action="#{fpCalcularBean.buscarPessoa()}">
+                                            <f:ajax execute="@form" render="formEventoVariavel" />
+                                        </h:commandButton>
+                                    </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                         <div class="col-md-12">
