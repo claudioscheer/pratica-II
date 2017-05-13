@@ -17,6 +17,7 @@ public class FpEventoPeriodo implements java.io.Serializable {
     private FpEvento evpEvento;
     private FpFolhaPeriodo evpFolhaPeriodo;
     private double evpValor;
+    private double evpValorReferencia;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_evento_periodo")
@@ -50,6 +51,14 @@ public class FpEventoPeriodo implements java.io.Serializable {
 
     public void setEvpValor(double evpValor) {
         this.evpValor = evpValor;
+    }
+
+    public double getEvpValorReferencia() {
+        return evpValorReferencia;
+    }
+
+    public void setEvpValorReferencia(double evpValorReferencia) {
+        this.evpValorReferencia = evpValorReferencia;
     }
 
 }

@@ -1,11 +1,15 @@
 package br.org.gdt.service.folhapagamento;
 
 import br.org.gdt.enums.FpEnumEventos;
+import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.model.FpEventoPeriodo;
+import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.FpEventoService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,9 @@ public class CalcularFolha {
 
     @Autowired
     private FpEventoService fpEventoService;
+
+    @Autowired
+    private Eventos eventos;
 
     private List<FpEventoPeriodo> getEventosPadroes() {
         if (EVENTOS_PADROES != null) {
@@ -45,14 +52,29 @@ public class CalcularFolha {
     }
 
     // Falta pedir o parâmetro da pessoa e do período.
-    public void calcularFuncionario(List<FpEventoPeriodo> eventosVariaveis) {
-        DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
+    public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+        FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
 
         dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
-        dadosCalculadosDoFuncionario.getEventos().addAll(eventosVariaveis);
-        dadosCalculadosDoFuncionario.ordenarEventosParaCalcular();       
-        
-        
+
+        dadosCalculadosDoFuncionario.getEventos().stream()
+                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
+                .forEach((ev) -> {
+                    try {
+                        fpFolhaPeriodo.addForEvento(eventos.calcularEvento(ev, dadosCalculadosDoFuncionario));
+                    } catch (Exception ex) {
+                    }
+                });
+
+        dadosCalculadosDoFuncionario.getEventos().stream()
+                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
+                .forEach((ev) -> {
+                    try {
+                        fpFolhaPeriodo.addForEvento(eventos.calcularEvento(ev, dadosCalculadosDoFuncionario));
+                    } catch (Exception ex) {
+                    }
+                });
+
     }
 
 }

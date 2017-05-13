@@ -44,7 +44,7 @@
                             <div class="col-md-3 col-sm-3 col-xs-12">
                                 <div>
                                     <label class="control-label " for="name">
-                                        Buscar Código
+                                        Buscar CBO
                                     </label>
                                     <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{cargosBean.nomeCBO}"></h:inputText>
 
@@ -98,7 +98,7 @@
                                                 <f:ajax execute="@form" render="formTabela" />
                                             </h:commandLink>-->
 
-                                            <h:commandLink action="#{cargosBean.select(cargos)}">
+                                            <h:commandLink action="#{cargosBean.pg(cargos)}">
 
                                                 <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                             </h:commandLink>

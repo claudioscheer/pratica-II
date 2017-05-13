@@ -5,15 +5,18 @@ import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DadosCalculadosDoFuncionario {
 
     private FpPeriodo periodo;
     private RecPessoa pessoa;
     private List<FpEventoPeriodo> eventos;
-    private double valorAcumulado;
 
     public FpPeriodo getPeriodo() {
+        if (periodo == null) {
+            periodo = new FpPeriodo();
+        }
         return periodo;
     }
 
@@ -22,6 +25,9 @@ public class DadosCalculadosDoFuncionario {
     }
 
     public RecPessoa getPessoa() {
+        if (pessoa == null) {
+            pessoa = new RecPessoa();
+        }
         return pessoa;
     }
 
@@ -40,16 +46,10 @@ public class DadosCalculadosDoFuncionario {
         this.eventos = eventos;
     }
 
-    public double getValorAcumulado() {
-        return valorAcumulado;
-    }
-
-    public void setValorAcumulado(double valorAcumulado) {
-        this.valorAcumulado = valorAcumulado;
-    }
-
     public void ordenarEventosParaCalcular() {
-        this.eventos.stream().sorted((x, y) -> x.getEvpEvento().getEveTipoEvento().toString().compareTo(y.getEvpEvento().getEveTipoEvento().toString()));
+        this.eventos = this.eventos.stream()
+                .sorted((x, y) -> x.getEvpEvento().getEveTipoEvento().toString().compareTo(
+                y.getEvpEvento().getEveTipoEvento().toString())).collect(Collectors.toList());
     }
 
 }
