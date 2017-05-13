@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.annotations.SortNatural;
 
 @Entity
 @SequenceGenerator(name = "seq_fp_tabela", sequenceName = "seq_fp_tabela", allocationSize = 1)
@@ -22,6 +21,7 @@ public class FpTabela implements java.io.Serializable {
     private static final long serialVersionUID = -2790083349568956163L;
     private long tabId;
     private String tabNome;
+    private boolean tabPermiteExcluir;
     private List<FpTabelaVigencia> tabVigencias;
 
     @Id
@@ -40,6 +40,14 @@ public class FpTabela implements java.io.Serializable {
 
     public void setTabNome(String tabNome) {
         this.tabNome = tabNome;
+    }
+
+    public boolean isTabPermiteExcluir() {
+        return tabPermiteExcluir;
+    }
+
+    public void setTabPermiteExcluir(boolean tabPermiteExcluir) {
+        this.tabPermiteExcluir = tabPermiteExcluir;
     }
 
     @OrderBy("tabVigenciaData DESC")

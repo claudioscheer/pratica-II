@@ -6,12 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <style> .element {
-                top: 23px;
-                position: relative;
-            }</style>
-
-
+      
         <title>cargos</title>
     </h:head>
 
@@ -49,9 +44,9 @@
                             <div class="col-md-3 col-sm-3 col-xs-12">
                                 <div>
                                     <label class="control-label " for="name">
-                                        Buscar Código
+                                        Buscar CBO
                                     </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar código"></h:inputText>
+                                    <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{cargosBean.nomeCBO}"></h:inputText>
 
                                 </div>
                             </div> 
@@ -61,7 +56,7 @@
                                 <div>&nbsp;</div>
                                 <div class="element">
 
-                                    <h:commandButton class="btn btn-primary , form-control" value="Buscar"/>
+                                    <h:commandButton class="btn btn-primary , form-control" value="Buscar" action="#{cargosBean.buscaPorCbo()}"/>
                                 </div>
                                 <br></br>
                             </div>
@@ -103,7 +98,7 @@
                                                 <f:ajax execute="@form" render="formTabela" />
                                             </h:commandLink>-->
 
-                                            <h:commandLink action="#{cargosBean.buscaPorId(cargos.cargoCodigo)}">
+                                            <h:commandLink action="#{cargosBean.pg(cargos)}">
 
                                                 <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                             </h:commandLink>

@@ -29,9 +29,9 @@ public class RecHabilidadeBean {
     }
 
     public void Salvar() {
-        if (habilidade.getRecIdhabilidade() > 0) {
+        if (habilidade.getRecIdhabilidade() > 0) {                    
             recHabilidadeService.Alterar(habilidade);
-        } else {
+        } else {            
             recHabilidadeService.Inserir(habilidade);
         }
         habilidades = recHabilidadeService.ListarTodas();

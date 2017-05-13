@@ -1,7 +1,10 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecPessoaService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -15,8 +18,32 @@ public class RecPessoaBean {
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoas;
 
+    private List<RecHabilidade> pesHabilidades;
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
+
+    @ManagedProperty("#{recHabilidadeService}")
+    private RecHabilidadeService recHabilidadeService;
+
+    public List<RecHabilidade> completarHabilidade(String query) {
+        List<RecHabilidade> allThemes = recHabilidadeService.ListarTodas();
+        List<RecHabilidade> filteredThemes = new ArrayList<RecHabilidade>();
+
+        for (int i = 0; i < allThemes.size(); i++) {
+            RecHabilidade skin = allThemes.get(i);
+            if (skin.getRecDescricao().toLowerCase().startsWith(query)) {
+                filteredThemes.add(skin);
+            }
+        }
+        return filteredThemes;
+    }
+
+    public List<RecHabilidade> ListarHabilidades() {
+        if (pesHabilidades == null) {
+            pesHabilidades = recHabilidadeService.ListarTodas();
+        }
+        return pesHabilidades;
+    }
 
     public RecPessoaBean() {
     }
@@ -81,6 +108,30 @@ public class RecPessoaBean {
 
     public void setFormAtivo(boolean formAtivo) {
         this.formAtivo = formAtivo;
+    }
+
+    public RecHabilidadeService getRecHabilidadeService() {
+        return recHabilidadeService;
+    }
+
+    public void setRecHabilidadeService(RecHabilidadeService recHabilidadeService) {
+        this.recHabilidadeService = recHabilidadeService;
+    }
+
+    public List<RecHabilidade> getHabilidades() {
+        return pesHabilidades;
+    }
+
+    public void setHabilidades(List<RecHabilidade> habilidades) {
+        this.pesHabilidades = habilidades;
+    }
+
+    public List<RecHabilidade> getPesHabilidades() {
+        return pesHabilidades;
+    }
+
+    public void setPesHabilidades(List<RecHabilidade> pesHabilidades) {
+        this.pesHabilidades = pesHabilidades;
     }
 
 }

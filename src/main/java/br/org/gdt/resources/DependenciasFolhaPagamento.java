@@ -1,148 +1,121 @@
 package br.org.gdt.resources;
 
-import br.org.gdt.beans.FpEventoBean;
+import br.org.gdt.enums.FpEnumEventos;
 import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.model.FpEvento;
+import br.org.gdt.model.FpTabela;
+import br.org.gdt.model.FpTabelaVigencia;
 import br.org.gdt.service.FpEventoService;
+import br.org.gdt.service.FpTabelaService;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("dependenciasFolhaPagamento")
 public class DependenciasFolhaPagamento {
 
-    private FpEvento fpEvento = new FpEvento();
-    private FpEventoBean fpEventoBean = new FpEventoBean();
-    private FpEventoService fpEventoService = new FpEventoService();
-    public void addProventos() {
+    @Autowired
+    private FpEventoService fpEventoService;
 
-        // Máximo de horas permitidas por dia= 2h
-        // hora extra 50%
-        fpEvento.setEveFormula("$vh*1,5*$#");
+    @Autowired
+    private FpTabelaService fpTabelaService;
+
+    public void salvarTudo() {
+        salvarTodosEventos();
+    }
+
+    private void salvarTodosEventos() {
+        FpEvento fpEvento = new FpEvento();
+
+        fpEvento.setEveId(FpEnumEventos.Salario.ordinal() + 1);
+        fpEvento.setEveFormula("$sf");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
-        fpEvento.setEveNome("Hora extra 50%");
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Salário");
         fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
+        fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
-        System.out.println("Add");
 
-        // hora extra 100%
+        // Máximo de horas permitidas por dia é 2h.
+        fpEvento.setEveId(FpEnumEventos.HorasExtras50.ordinal() + 1);
+        fpEvento.setEveFormula("$vh*1.5*$#");
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Horas extras 50%");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        fpEvento.setEveId(FpEnumEventos.HorasExtras100.ordinal() + 1);
         fpEvento.setEveFormula("$vh*2*$#");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
-        fpEvento.setEveNome("Hora extra 100%");
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Horas extras 100%");
         fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
+        fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
-        // Horas noturnas
-        fpEvento.setEveFormula("$vh*1,2*$#");
+        fpEvento.setEveId(FpEnumEventos.HorasNoturnas.ordinal() + 1);
+        fpEvento.setEveFormula("$vh*1.2*$#");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
         fpEvento.setEveNome("Horas noturnas");
         fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
+        fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
-        //Periculosidade
-        fpEvento.setEveFormula("$sf*0,30");
-        fpEvento.setEveIncideFGTS(true);
-        fpEvento.setEveIncideINSS(true);
-        fpEvento.setEveIncideIRRF(true);
-        fpEvento.setEveNome("Periculosidade");
-        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
-        fpEvento = new FpEvento();
-
-        // Insalubidade 10%
-        fpEvento.setEveFormula("937 * 0,10");
-        fpEvento.setEveIncideFGTS(true);
-        fpEvento.setEveIncideINSS(true);
-        fpEvento.setEveIncideIRRF(true);
-        fpEvento.setEveNome("Insalubridade 10%");
-        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
-        fpEvento = new FpEvento();
-
-        // Insalubidade 20%
-        fpEvento.setEveFormula("937 * 0,20");
-        fpEvento.setEveIncideFGTS(true);
-        fpEvento.setEveIncideINSS(true);
-        fpEvento.setEveIncideIRRF(true);
-        fpEvento.setEveNome("Insalubridade 20%");
-        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
-        fpEvento = new FpEvento();
-
-        // Insalubidade 30%
-        fpEvento.setEveFormula("937 * 0,30");
-        fpEvento.setEveIncideFGTS(true);
-        fpEvento.setEveIncideINSS(true);
-        fpEvento.setEveIncideIRRF(true);
-        fpEvento.setEveNome("Insalubridade 30%");
-        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
-        fpEvento = new FpEvento();
-
-        // Ajuda de custo
-        // Só acrescenta ao valor final, como forma de reembolso
-        fpEvento.setEveFormula("$#");
-        fpEvento.setEveIncideFGTS(false);
-        fpEvento.setEveIncideINSS(false);
-        fpEvento.setEveIncideIRRF(false);
-        fpEvento.setEveNome("Ajuda de custo");
-        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-        fpEventoBean.save();
-        fpEvento = new FpEvento();
-    }
-
-    public void addDescontos() {
-        // DESCONTOS
-
-        // Horas faltas
+        fpEvento.setEveId(FpEnumEventos.HorasFaltas.ordinal() + 1);
         fpEvento.setEveFormula("$hm-$#");
         fpEvento.setEveIncideFGTS(false);
         fpEvento.setEveIncideINSS(false);
         fpEvento.setEveIncideIRRF(false);
         fpEvento.setEveNome("Horas faltas");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
-        fpEventoBean.save();
+        fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
-        //Vale transporte
-        fpEvento.setEveFormula("$sf*0,06");
-        fpEvento.setEveIncideFGTS(false);
-        fpEvento.setEveIncideINSS(false);
-        fpEvento.setEveIncideIRRF(false);
-        fpEvento.setEveNome("Vale transporte");
+        fpEvento.setEveId(FpEnumEventos.INSS.ordinal() + 1);
+        fpEvento.setEveFormula("$t-1*$va");
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("INSS");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
-        fpEventoBean.save();
+        fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
-        // Vale alimentação: O valor não pode exceder os 20%
-        fpEvento.setEveFormula("$sf*0,15");
-        fpEvento.setEveIncideFGTS(false);
-        fpEvento.setEveIncideINSS(false);
-        fpEvento.setEveIncideIRRF(false);
-        fpEvento.setEveNome("Vale alimentação");
+        fpEvento.setEveId(FpEnumEventos.FGTS.ordinal() + 1);
+        fpEvento.setEveFormula("$t-4*$va");
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("FGTS");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
-        fpEventoBean.save();
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        fpEvento.setEveId(FpEnumEventos.IRRF.ordinal() + 1);
+        fpEvento.setEveFormula("$t-3*$va");
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("IRRF");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
     }
-    
-    public void test(){
-                // Vale alimentação: O valor não pode exceder os 20%
-        fpEvento.setEveFormula("$sf*0,15");
-        fpEvento.setEveIncideFGTS(false);
-        fpEvento.setEveIncideINSS(false);
-        fpEvento.setEveIncideIRRF(false);
-        fpEvento.setEveNome("Vale alimentação");
-        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
-        fpEventoBean.save();
-        fpEvento = new FpEvento();
-    
-    }
-    
-
 
 }

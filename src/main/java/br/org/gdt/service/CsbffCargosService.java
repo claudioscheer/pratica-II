@@ -22,7 +22,7 @@ public class CsbffCargosService {
     public void update(CsbffCargos cargos) {
         csbffCargosDAO.update(cargos);
     }
-
+ 
     @Transactional
     public void delete(long id) {
         csbffCargosDAO.delete(id);
@@ -31,6 +31,11 @@ public class CsbffCargosService {
     public CsbffCargos findById(long id) {
         return csbffCargosDAO.findById(id);
     }
+    public List<CsbffCargos> findByCargos(long cbo) {
+        return csbffCargosDAO.findByCargos(cbo);
+    }
+    
+    
 
     public List<CsbffCargos> findAll() {
         return csbffCargosDAO.findAll();

@@ -52,7 +52,7 @@ public class CsbffCargos implements Serializable {
     private String cargoNome;
     @Basic(optional = false)
     @Column(name = "cargo_cbo")
-    private BigInteger cargoCbo;
+    private long cargoCbo;
     @Column(name = "cargo_codigo_superior")
     private BigInteger cargoCodigoSuperior;
     @Basic(optional = false)
@@ -83,7 +83,7 @@ public class CsbffCargos implements Serializable {
         this.cargoCodigo = cargoCodigo;
     }
 
-    public CsbffCargos(long cargoCodigo, String cargoNome, BigInteger cargoCbo, Date cargoDataDeCriacao) {
+    public CsbffCargos(long cargoCodigo, String cargoNome, long cargoCbo, Date cargoDataDeCriacao) {
         this.cargoCodigo = cargoCodigo;
         this.cargoNome = cargoNome;
         this.cargoCbo = cargoCbo;
@@ -106,11 +106,11 @@ public class CsbffCargos implements Serializable {
         this.cargoNome = cargoNome;
     }
 
-    public BigInteger getCargoCbo() {
+    public long getCargoCbo() {
         return cargoCbo;
     }
 
-    public void setCargoCbo(BigInteger cargoCbo) {
+    public void setCargoCbo(long cargoCbo) {
         this.cargoCbo = cargoCbo;
     }
 

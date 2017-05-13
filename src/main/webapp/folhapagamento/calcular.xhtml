@@ -22,7 +22,7 @@
                     <h:panelGroup id="panelTipoFolhaPagamento" layout="block" class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                                <label class="control-label">Selecione a folha para calcular</label>
+                                <label class="control-label">Folha para calcular</label>
                                 <h:selectOneMenu value="#{fpCalcularBean.fpTipoFolha}" class="form-control">
                                     <f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarTipoFolha()}" event="change" />
                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
@@ -30,9 +30,9 @@
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                                <label class="control-label">Selecione um período</label>
-                                <h:selectOneMenu id="comboMunicipio" value="#{fpCalcularBean.fpPeriodo.perId}" class="form-control">
-                                    <f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarPeriodo()}" event="change" />
+                                <label class="control-label">Período</label>
+                                <h:selectOneMenu value="#{fpCalcularBean.fpPeriodo.perId}" class="form-control">
+                                    <!--<f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarPeriodo()}" event="change" />-->
                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                     <f:selectItems value="#{fpCalcularBean.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
                                 </h:selectOneMenu>
@@ -40,24 +40,40 @@
                         </div>
                     </h:panelGroup>
                     <h:panelGroup layout="block" rendered="#{fpCalcularBean.fpTipoFolha == 'FolhaDePagamento'}">
-                        <div class="col-md-12">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Pessoa</label>
                             <div class="row">
-
+                                <div class="col-md-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <h:selectBooleanCheckbox value="#{fpCalcularBean.gerarTodasPessoas}" /> Gerar de todas as pessoas?
+                                        </label>
+                                    </div>
+                                </div>
+                                <h:panelGroup rendered="#{fpCalcularBean.gerarTodasPessoas}">
+                                    <div class="col-md-3">
+                                        <h:inputText class="form-control" value="#{fpCalcularBean.pessoaId}" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h:commandButton class="btn btn-primary" value="Buscar informações" action="#{fpCalcularBean.buscarPessoa()}">
+                                            <f:ajax execute="@form" render="formEventoVariavel" />
+                                        </h:commandButton>
+                                    </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <h:commandButton class="btn btn-success" value="Calcular" action="#{fpEventoBean.save()}">
+                            <h:commandButton class="btn btn-success" value="Calcular" action="#{fpCalcularBean.calcularFolhaPagamento()}">
                                 <f:ajax execute="@form" render="formEventoVariavel" />
                             </h:commandButton>
                         </div>
                     </h:panelGroup>
-                    <!--<h:panelGroup layout="block" rendered="#{fpCalcularBean.fpTipoFolha == 'Rescisao'}">
-                        <div class="col-md-12">
-                            <div class="col-md-5 col-sm-12 col-xs-12">
-                                <h3>Rescisão</h3>
-                            </div>
-                        </div>
-                    </h:panelGroup>-->
+
+                    <!--<div class="col-md-12">
+                        <h:commandButton class="btn btn-primary" value="Adicionar dados padrões do sistema" action="#{fpCalcularBean.salvarDadosDependentes()}">
+                            <f:ajax execute="@form" render="formEventoVariavel" />
+                        </h:commandButton>
+                    </div>-->
                 </h:form>
             </ui:define>
             <ui:define name="script">

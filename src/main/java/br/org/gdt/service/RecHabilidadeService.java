@@ -24,7 +24,7 @@ public class RecHabilidadeService {
     }
 
     @Transactional
-    public void Excluir(int id) {
+    public void Excluir(long id) {
         habilidadeDao.delete(id);
     }
 
