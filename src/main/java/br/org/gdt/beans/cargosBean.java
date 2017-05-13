@@ -7,7 +7,6 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.model.RecPessoa;
-import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffCargosService;
 import java.math.BigInteger;
 import java.util.Date;
@@ -19,140 +18,116 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
-
-
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
  * @author MARCOS FELIPE
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class cargosBean {
 
     private boolean formAtivo = false;
-
-    
     private int nomeCBO;
+    private CsbffCargos codigoColaborador;
     private CsbffCargos csbffcargos = new CsbffCargos();
     private List<CsbffCargos> todosCargos;
 
     @ManagedProperty("#{csbffCargosService}")
     private CsbffCargosService csbffCargosService;
-
     private RecPessoa recPessoa;
-    
-    
+
     public cargosBean() {
         csbffcargos = new CsbffCargos();
-        
+       
     }
-    
-    
-    public String pg(CsbffCargos cargo){
+
+    public String pg(CsbffCargos cargo) {
         this.csbffcargos = cargo;
-//        select(cargo);
+        select(cargo);
         return "form_cargo";
     }
-    
-//     public void select (CsbffCargos carg){
-//        this.csbffcargos = carg;
-//        codigoColaborador = carg;
-//        altera(carg);
-//      
-//        
-//    }
-//     public String altera(CsbffCargos carg){
-//         csbffcargos = carg;
-//         codigoColaborador = carg;
-//         
-//          csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(4));
-//        csbffcargos.setCargoDataDeCriacao(new Date());
-//        csbffcargos.setCargoDataUltimaAlteracao(new Date());
-//        csbffCargosService.update(codigoColaborador);
-//         System.out.println("**************"+ codigoColaborador + "*****************");
-//         
-//         return "cargo_consulta";
-//     }
-    
-//    public String salvar() {
-//
-//        String MsgNotificacao = "testando isso aqui";
-//        try {
-//            if (csbffcargos.getCargoCodigo() > 0) {
-//
-//                csbffCargosService.update(csbffcargos);
-//                novo();
-//
-//                System.out.println("******teste de código" + csbffcargos);
-//                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi atualizado com sucesso!";
-//
-//            } else {
-//
-//             novo();
-//
-//        System.out.println("******teste de código" + csbffcargos);
-//                csbffCargosService.save(csbffcargos);
-//                
-//
-//                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi cadastrado com sucesso!";
-//            }
-//
-//            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
-//
-//        } catch (Exception ex) {
-//
-//            MsgNotificacao = "Houve uma falha ao cadastrar o cargo " + csbffcargos.getCargoNome() + ex.getMessage() + " , tente novamente mais tarde!";
-//            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-//        }
-//
-//        return "Cargos";
-//
-////        gchTodosCursos = gchCursoService.findAll();
-////        this.formAtivo = false;
-//    }
-  
-  
-    
-    public List<CsbffCargos> buscaPorCbo() {
 
-      
+    public void select(CsbffCargos carg) {
+        this.csbffcargos = carg;
+        codigoColaborador = carg;
+        altera(carg);
 
-            csbffcargos = csbffCargosService.findById(nomeCBO);
-            System.out.println("**************************" +nomeCBO);
-          JOptionPane.showMessageDialog(null, "testando" + nomeCBO);
-        
-            return todosCargos;
+//        zeraSession();
+    }
 
-        }
-    
-    
-    
-  
-    
-        
-    
-    public void save() {
-        
-        System.out.println("teste teste");
-        csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+    public String altera(CsbffCargos carg) {
+//        csbffcargos = carg;
+        codigoColaborador = carg;
+
+        csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(4));
         csbffcargos.setCargoDataDeCriacao(new Date());
         csbffcargos.setCargoDataUltimaAlteracao(new Date());
-        csbffCargosService.update(csbffcargos);
+        csbffCargosService.update(codigoColaborador);
+       
+//         System.out.println("**************"+ codigoColaborador + "*****************");
+//         csbffcargos = new CsbffCargos();
+        return "cargo_consulta";
+    }
+
+
+    public String buscaPorCbo() {
+
+        if (nomeCBO != 0) {
+            todosCargos = csbffCargosService.findByCargos(nomeCBO);
+        }
+        return "cargo_consulta";
 
     }
-    public String novo(){
-      
-            
-        save();
-        csbffcargos = new CsbffCargos();
-            
-        
-        return "cargo_consulta";
-        
+    
+    
+    public void zeraSession(){
+        CsbffCargos conta = new CsbffCargos();
+
+ this.csbffcargos = new CsbffCargos(); //isso vai limpar os campos referenciados na view!
+
         
     }
-    
+
+    public void save() {
+        
+         if (csbffcargos.getCargoCodigo() > 0) {
+             csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+        csbffcargos.setCargoDataDeCriacao(new Date());
+        csbffcargos.setCargoDataUltimaAlteracao(new Date());
+            csbffCargosService.update(csbffcargos);
+            csbffcargos = new CsbffCargos();
+            zeraSession();
+        } else {
+//            fpEvento.setEvePermiteExcluir(true);
+//            fpEvento.setEveFormula("$#");
+csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+        csbffcargos.setCargoDataDeCriacao(new Date());
+        csbffcargos.setCargoDataUltimaAlteracao(new Date());
+          csbffCargosService.save(csbffcargos);
+          csbffcargos = new CsbffCargos();
+          zeraSession();
+        }
+        
+        
+        
+//
+//        System.out.println("teste teste");
+//        
+//        csbffCargosService.update(csbffcargos);
+
+    }
+
+    public String novo() {
+
+        save();
+        csbffcargos = new CsbffCargos();
+
+        return "cargo_consulta";
+
+    }
+
     public String buscaPorId(int idcargo) {
 
         System.out.println("Id do curso" + idcargo);
@@ -160,25 +135,21 @@ public class cargosBean {
         if (idcargo != 0) {
 
             csbffcargos = csbffCargosService.findById(idcargo);
-            
-        }
-            return "form_cargo";
 
         }
-    
-    
-    
-    
-    
+        return "form_cargo";
+
+    }
 
     public void cancel() {
         this.formAtivo = false;
         this.csbffcargos = new CsbffCargos();
     }
 
-    public void add() {
+    public String add() {
         this.formAtivo = true;
         this.csbffcargos = new CsbffCargos();
+        return "form_cargo";
     }
 
     public String excluir(CsbffCargos cargos) {
@@ -186,24 +157,21 @@ public class cargosBean {
         todosCargos.remove(cargos);
         return "cargos";
     }
- 
+
     public String prepareEdit(CsbffCargos cargos) {
         this.formAtivo = true;
         this.csbffcargos = cargos;
         return "cargos";
     }
 
-    public CsbffCargos getCargoCodigo(){
-        
+    public CsbffCargos getCargoCodigo() {
+
         return csbffcargos;
     }
-    
-    
+
     public void setCargoCodigo(CsbffCargos cargos) {
         this.csbffcargos = cargos;
     }
-
-    
 
     public boolean isFormAtivo() {
         return formAtivo;
