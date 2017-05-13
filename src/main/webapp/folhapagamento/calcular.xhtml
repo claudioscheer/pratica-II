@@ -40,9 +40,26 @@
                         </div>
                     </h:panelGroup>
                     <h:panelGroup layout="block" rendered="#{fpCalcularBean.fpTipoFolha == 'FolhaDePagamento'}">
-                        <div class="col-md-12">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Pessoa</label>
                             <div class="row">
-
+                                <div class="col-md-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <h:selectBooleanCheckbox value="#{fpCalcularBean.gerarTodasPessoas}" /> Gerar de todas as pessoas?
+                                        </label>
+                                    </div>
+                                </div>
+                                <h:panelGroup rendered="#{fpCalcularBean.gerarTodasPessoas}">
+                                    <div class="col-md-3">
+                                        <h:inputText class="form-control" value="#{fpCalcularBean.pessoaId}" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h:commandButton class="btn btn-primary" value="Buscar informações" action="#{fpCalcularBean.buscarPessoa()}">
+                                            <f:ajax execute="@form" render="formEventoVariavel" />
+                                        </h:commandButton>
+                                    </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -52,11 +69,11 @@
                         </div>
                     </h:panelGroup>
 
-                    <div class="col-md-12">
+                    <!--<div class="col-md-12">
                         <h:commandButton class="btn btn-primary" value="Adicionar dados padrões do sistema" action="#{fpCalcularBean.salvarDadosDependentes()}">
                             <f:ajax execute="@form" render="formEventoVariavel" />
                         </h:commandButton>
-                    </div>
+                    </div>-->
                 </h:form>
             </ui:define>
             <ui:define name="script">

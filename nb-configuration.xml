@@ -31,5 +31,6 @@
         <org-netbeans-modules-javascript2-requirejs.enabled>true</org-netbeans-modules-javascript2-requirejs.enabled>
         <org-netbeans-modules-whitelist.whitelist-oracle>false</org-netbeans-modules-whitelist.whitelist-oracle>
         <org-netbeans-modules-web-clientproject-api.js_2e_libs_2e_folder>resources/vendors/DateJS/build/production</org-netbeans-modules-web-clientproject-api.js_2e_libs_2e_folder>
+        <netbeans.compile.on.save>all</netbeans.compile.on.save>
     </properties>
 </project-shared-configuration>
