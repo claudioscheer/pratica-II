@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 @Service("eventos")
 public class Eventos {
 
+    private final int HORAS_MENSAIS = 220;
+
     @Autowired
     private FpTabelaService fpTabelaService;
 
     public FpEventoPeriodo calcularEvento(FpEventoPeriodo fpEventoPeriodo, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
         fpEventoPeriodo.setEvpValor(valorDoEvento(fpEventoPeriodo, dadosCalculadosDoFuncionario));
+        fpEventoPeriodo.setJaCalculado(true);
         return fpEventoPeriodo;
     }
 
@@ -28,8 +31,7 @@ public class Eventos {
             //return dadosCalculadosDoFuncionario.getPessoa().getRec;
 
             case INSS: {
-                double valorEventoIncideINSS = dadosCalculadosDoFuncionario.getEventos()
-                        .stream()
+                double valorEventoIncideINSS = dadosCalculadosDoFuncionario.getEventos().stream()
                         .filter(x -> x.getEvpEvento().isEveIncideINSS())
                         .mapToDouble(x -> x.getEvpValor()).sum();
 
@@ -40,8 +42,7 @@ public class Eventos {
             }
 
             case FGTS: {
-                double valorEventoIncideFGTS = dadosCalculadosDoFuncionario.getEventos()
-                        .stream()
+                double valorEventoIncideFGTS = dadosCalculadosDoFuncionario.getEventos().stream()
                         .filter(x -> x.getEvpEvento().isEveIncideFGTS())
                         .mapToDouble(x -> x.getEvpValor()).sum();
 
@@ -51,10 +52,9 @@ public class Eventos {
                         : valorEventoIncideFGTS * (fpFaixa.getFaiValor() / 100);
             }
 
-            // Precisa ser viste de onde descontar a dedução.
+            // Precisa ser visto de onde descontar a dedução. Tem a dedução por dependente ainda.
             case IRRF: {
-                double valorEventoIncideIRRF = dadosCalculadosDoFuncionario.getEventos()
-                        .stream()
+                double valorEventoIncideIRRF = dadosCalculadosDoFuncionario.getEventos().stream()
                         .filter(x -> x.getEvpEvento().isEveIncideIRRF())
                         .mapToDouble(x -> x.getEvpValor()).sum();
 
@@ -64,9 +64,49 @@ public class Eventos {
                         : valorEventoIncideIRRF * (fpFaixa.getFaiValor() / 100);
             }
 
+            case HorasExtras50: {
+                double valorHoraFuncionario = getValorHoraFuncionario(dadosCalculadosDoFuncionario);
+                return valorHoraFuncionario * fpEventoPeriodo.getEvpValorReferencia() * 1.5;
+            }
+
+            case HorasExtras100: {
+                double valorHoraFuncionario = getValorHoraFuncionario(dadosCalculadosDoFuncionario);
+                return valorHoraFuncionario * fpEventoPeriodo.getEvpValorReferencia() * 2;
+            }
+
+            case HorasFaltas: {
+                double valorHoraFuncionario = getValorHoraFuncionario(dadosCalculadosDoFuncionario);
+                return valorHoraFuncionario * fpEventoPeriodo.getEvpValorReferencia();
+            }
+
+            // Trabalhadores rurais no mínimo 25%? Fonte: http://www.mcalculos.com.br/noticias/ler/32/fonte-guia-trabalhista.html.
+            case HorasNoturnas: {
+                double valorHoraFuncionario = getValorHoraFuncionario(dadosCalculadosDoFuncionario);
+                return valorHoraFuncionario * fpEventoPeriodo.getEvpValorReferencia() * 1.2;
+            }
+
             default:
                 return fpEventoPeriodo.getEvpValor();
         }
+    }
+
+    private double getValorHoraFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+        FpEventoPeriodo fpEventoPeriodoSalario = getEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
+        return fpEventoPeriodoSalario.getEvpValor() / HORAS_MENSAIS;
+    }
+
+    private FpEventoPeriodo getEventoDosEventosDoFuncionario(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+        FpEventoPeriodo fpEventoPeriodo = dadosCalculadosDoFuncionario.getEventos().stream()
+                .filter(x -> x.getEvpEvento().getEveId() == evento.ordinal() + 1)
+                .findFirst().get();
+        return verificarEventoJaEstaCalculado(fpEventoPeriodo, dadosCalculadosDoFuncionario);
+    }
+
+    private FpEventoPeriodo verificarEventoJaEstaCalculado(FpEventoPeriodo fpEventoPeriodo, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+        if (fpEventoPeriodo.isJaCalculado()) {
+            return fpEventoPeriodo;
+        }
+        return calcularEvento(fpEventoPeriodo, dadosCalculadosDoFuncionario);
     }
 
 }

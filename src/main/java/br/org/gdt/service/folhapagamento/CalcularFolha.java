@@ -6,6 +6,7 @@ import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.FpEventoService;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,8 +52,11 @@ public class CalcularFolha {
         return EVENTOS_PADROES;
     }
 
-    // Falta pedir o parâmetro da pessoa e do período.
-    public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+    public void calcularParaTodosFuncionarios() {
+
+    }
+
+    public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException {
         FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
 
         dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
@@ -63,6 +67,7 @@ public class CalcularFolha {
                     try {
                         fpFolhaPeriodo.addForEvento(eventos.calcularEvento(ev, dadosCalculadosDoFuncionario));
                     } catch (Exception ex) {
+                        throw new RuntimeException(ex);
                     }
                 });
 
@@ -72,6 +77,7 @@ public class CalcularFolha {
                     try {
                         fpFolhaPeriodo.addForEvento(eventos.calcularEvento(ev, dadosCalculadosDoFuncionario));
                     } catch (Exception ex) {
+                        throw new RuntimeException(ex);
                     }
                 });
 

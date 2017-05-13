@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @SequenceGenerator(name = "seq_fp_evento_periodo", sequenceName = "seq_fp_evento_periodo", allocationSize = 1)
@@ -18,6 +19,7 @@ public class FpEventoPeriodo implements java.io.Serializable {
     private FpFolhaPeriodo evpFolhaPeriodo;
     private double evpValor;
     private double evpValorReferencia;
+    private boolean jaCalculado;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_evento_periodo")
@@ -59,6 +61,15 @@ public class FpEventoPeriodo implements java.io.Serializable {
 
     public void setEvpValorReferencia(double evpValorReferencia) {
         this.evpValorReferencia = evpValorReferencia;
+    }
+
+    @Transient
+    public boolean isJaCalculado() {
+        return jaCalculado;
+    }
+
+    public void setJaCalculado(boolean jaCalculado) {
+        this.jaCalculado = jaCalculado;
     }
 
 }
