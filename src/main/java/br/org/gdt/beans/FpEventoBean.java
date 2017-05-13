@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.FpEvento;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpEventoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -27,6 +28,7 @@ public class FpEventoBean {
         if (fpEvento.getEveId() > 0) {
             fpEventoService.update(fpEvento);
         } else {
+            fpEvento.setEvePermiteExcluir(true);
             fpEvento.setEveFormula("$#");
             fpEventoService.save(fpEvento);
         }
@@ -45,8 +47,12 @@ public class FpEventoBean {
     }
 
     public String excluir(FpEvento fpEvento) {
-        fpEventoService.delete(fpEvento.getEveId());
-        todosFpEvento.remove(fpEvento);
+        if (!fpEvento.isEvePermiteExcluir()) {
+            Helper.mostrarNotificacao("Evento", "Evento não pode ser excluído.", "info");
+        } else {
+            fpEventoService.delete(fpEvento.getEveId());
+            todosFpEvento.remove(fpEvento);
+        }
         return "eventos";
     }
 

@@ -22,7 +22,7 @@ public class CsbffCargosService {
     public void update(CsbffCargos cargos) {
         csbffCargosDAO.update(cargos);
     }
-
+ 
     @Transactional
     public void delete(long id) {
         csbffCargosDAO.delete(id);

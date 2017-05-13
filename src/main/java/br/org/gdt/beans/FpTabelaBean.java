@@ -28,14 +28,15 @@ public class FpTabelaBean {
     }
 
     public void save() {
-        if (fpTabela.getTabVigencias().size() <= 0){
+        if (fpTabela.getTabVigencias().size() <= 0) {
             Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma vigência.", "info");
             return;
         }
-        
+
         if (fpTabela.getTabId() > 0) {
             fpTabelaService.update(fpTabela);
         } else {
+            fpTabela.setTabPermiteExcluir(true);
             fpTabelaService.save(fpTabela);
         }
         todasFpTabela = fpTabelaService.findAll();
@@ -43,11 +44,11 @@ public class FpTabelaBean {
     }
 
     public void saveTabelaVigencia() {
-        if (fpTabelaVigencia.getTabVigenciaFaixas().size() <= 0){
+        if (fpTabelaVigencia.getTabVigenciaFaixas().size() <= 0) {
             Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma faixa.", "info");
             return;
         }
-        
+
         if (fpTabelaVigencia.getTabVigenciaId() <= 0) {
             this.fpTabela.addTabVigencia(fpTabelaVigencia);
         }
@@ -89,8 +90,12 @@ public class FpTabelaBean {
     }
 
     public String excluir(FpTabela fpTabela) {
-        fpTabelaService.delete(fpTabela.getTabId());
-        todasFpTabela.remove(fpTabela);
+        if (!fpTabela.isTabPermiteExcluir()) {
+            Helper.mostrarNotificacao("Tabela", "A tabela não pode ser excluída.", "info");
+        } else {
+            fpTabelaService.delete(fpTabela.getTabId());
+            todasFpTabela.remove(fpTabela);
+        }
         return "tabelas";
     }
 
@@ -99,7 +104,7 @@ public class FpTabelaBean {
         this.fpTabela = fpTabela;
         return "tabelas";
     }
-    
+
     public void editarVigencia(FpTabelaVigencia fpTabelaVigencia) {
         this.adicionandoVigencia = true;
         this.fpTabelaVigencia = fpTabelaVigencia;

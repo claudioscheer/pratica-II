@@ -7,19 +7,34 @@
         <Node id="resources/vendors/select2/docs/_includes/options/compatibility/initial-selection.html" x="2150" y="2250" zoom="true"/>
         <Node id="resources/vendors/select2/docs/examples.html" x="5650" y="750" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options-old/adapters.html" x="6900" y="300" zoom="true"/>
+        <Node id="resources/vendors/Chart.js/samples/bubble.html" x="5150" y="150" zoom="true"/>
         <Node id="resources/vendors/bootstrap-wysiwyg/examples/formatblock-example.html" x="2150" y="150" zoom="true"/>
+        <Node id="example-pages/chartjs.html" x="4150" y="1050" zoom="true"/>
         <Node id="resources/vendors/nprogress/index.html" x="4650" y="1200" zoom="true"/>
         <Node id="example-pages/chartjs.html" x="4150" y="1050" zoom="true"/>
         <Node id="resources/vendors/Chart.js/samples/bubble.html" x="5150" y="150" zoom="true"/>
         <Node id="resources/vendors/echarts/test/multipleGrid.html" x="150" y="3150" zoom="true"/>
         <Node id="resources/vendors/Chart.js/samples/timeScale/line-time-scale.html" x="900" y="2100" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/Chart.js/samples/scatter-multi-axis.html" x="5400" y="1200" zoom="true"/>
         <Node id="ModuloCapitalHumano/CadastroCurso.xhtml" x="150" y="2400" zoom="true"/>
+=======
+>>>>>>> origin/master
         <Node id="resources/vendors/morris.js/examples/non-date.html" x="6150" y="750" zoom="true"/>
+<<<<<<< HEAD
+=======
+        <Node id="ModuloCapitalHumano/CadastroCurso.xhtml" x="150" y="2400" zoom="true"/>
+        <Node id="resources/vendors/Chart.js/samples/scatter-multi-axis.html" x="5400" y="1200" zoom="true"/>
+        <Node id="resources/vendors/echarts/test/radar3.html" x="1650" y="750" zoom="true"/>
+>>>>>>> origin/master
         <Node id="resources/vendors/select2/docs/_includes/examples/matcher.html" x="650" y="2100" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/echarts/test/radar3.html" x="1650" y="750" zoom="true"/>
         <Node id="c_s_b_f_f/cargo/form_cargo.xhtml" x="650" y="3000" zoom="true"/>
+=======
+>>>>>>> origin/master
         <Node id="resources/vendors/select2/docs/_layouts/home.html" x="900" y="3600" zoom="true"/>
+        <Node id="c_s_b_f_f/cargo/form_cargo.xhtml" x="650" y="3000" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options/core/data-attributes.html" x="4650" y="1050" zoom="true"/>
         <Node id="recrutamento/habilidades.xhtml" x="400" y="3150" zoom="true"/>
         <Node id="recrutamento/selecao_lista.xhtml" x="1150" y="2250" zoom="true"/>
@@ -27,8 +42,15 @@
         <Node id="resources/vendors/jqvmap/examples/labels.html" x="650" y="1350" zoom="true"/>
         <Node id="resources/vendors/echarts/test/visualMap-opacity.html" x="900" y="2850" zoom="true"/>
         <Node id="resources/vendors/morris.js/examples/donut.html" x="2900" y="1950" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/select2/tests/integration.html" x="2650" y="900" zoom="true"/>
+=======
+>>>>>>> origin/master
         <Node id="example-pages/glyphicons.html" x="1150" y="3000" zoom="true"/>
+<<<<<<< HEAD
+=======
+        <Node id="resources/vendors/select2/tests/integration.html" x="2650" y="900" zoom="true"/>
+>>>>>>> origin/master
         <Node id="resources/vendors/jszip/documentation/examples/downloader.html" x="400" y="150" zoom="true"/>
         <Node id="resources/vendors/echarts/test/mapWorld.html" x="1900" y="1200" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/ajax/index.html" x="400" y="2100" zoom="true"/>
@@ -42,19 +64,26 @@
         <Node id="resources/vendors/echarts/test/bmap.html" x="4150" y="1350" zoom="true"/>
         <Node id="example-pages/general_elements.html" x="900" y="1050" zoom="true"/>
         <Node id="resources/vendors/echarts/test/getOption.html" x="5150" y="1350" zoom="true"/>
-        <Node id="resources/vendors/DateJS/reports/lcov-report/core/parsing_operators.js.html" x="1900" y="600" zoom="true"/>
         <Node id="resources/vendors/echarts/test/boxplot.html" x="2400" y="1500" zoom="true"/>
+        <Node id="resources/vendors/DateJS/reports/lcov-report/core/parsing_operators.js.html" x="1900" y="600" zoom="true"/>
         <Node id="recrutamento/candidato_lista.xhtml" x="400" y="1950" zoom="true"/>
         <Node id="resources/vendors/morris.js/examples/bar-no-axes.html" x="4150" y="1200" zoom="true"/>
         <Node id="resources/vendors/jquery-knob/index.html" x="5150" y="900" zoom="true"/>
         <Node id="resources/vendors/DateJS/reports/lcov-report/core/i18n.js.html" x="1150" y="1500" zoom="true"/>
         <Node id="resources/vendors/echarts/test/webkit-dep.html" x="900" y="1350" zoom="true"/>
-        <Node id="resources/vendors/Chart.js/samples/radar-skip-points.html" x="150" y="2100" zoom="true"/>
         <Node id="resources/vendors/DateJS/reports/lcov-report/core/sugarpak.js.html" x="3400" y="2100" zoom="true"/>
+        <Node id="resources/vendors/Chart.js/samples/radar-skip-points.html" x="150" y="2100" zoom="true"/>
         <Node id="resources/vendors/jszip/index.html" x="150" y="2550" zoom="true"/>
         <Node id="resources/vendors/echarts/test/diff.html" x="2900" y="600" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/Flot/examples/image/index.html" x="4150" y="150" zoom="true"/>
+=======
+>>>>>>> origin/master
         <Node id="resources/vendors/select2/docs/_includes/options-old/setting-default-options.html" x="150" y="4050" zoom="true"/>
+<<<<<<< HEAD
+=======
+        <Node id="resources/vendors/Flot/examples/image/index.html" x="4150" y="150" zoom="true"/>
+>>>>>>> origin/master
         <Node id="resources/vendors/Chart.js/samples/timeScale/line-time-point-data.html" x="1400" y="1050" zoom="true"/>
         <Node id="resources/vendors/echarts/test/dataZoom-rainfall-inside.html" x="1150" y="1650" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/index.html" x="2150" y="1350" zoom="true"/>
@@ -79,7 +108,10 @@
         <Node id="resources/vendors/echarts/test/radar.html" x="150" y="900" zoom="true"/>
         <Node id="resources/vendors/echarts/test/selectedMode.html" x="1650" y="2100" zoom="true"/>
         <Node id="resources/vendors/echarts/test/force.html" x="2900" y="450" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/select2/docs/_includes/options/events.html" x="650" y="150" zoom="true"/>
+=======
+>>>>>>> origin/master
         <Node id="resources/vendors/select2/docs/_includes/nav/options.html" x="2650" y="2400" zoom="true"/>
         <Node id="example-pages/plain_page.html" x="4900" y="300" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/series-types/index.html" x="3900" y="1200" zoom="true"/>
@@ -98,15 +130,18 @@
         <Node id="resources/vendors/select2/docs/_includes/options/data/array.html" x="4400" y="1050" zoom="true"/>
         <Node id="resources/vendors/echarts/test/mix.html" x="2150" y="900" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/navigation.html" x="2650" y="1800" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/echarts/test/pie.html" x="3400" y="1050" zoom="true"/>
+=======
+>>>>>>> origin/master
         <Node id="resources/vendors/jQuery-Smart-Wizard/index.htm" x="400" y="3750" zoom="true"/>
         <Node id="resources/vendors/jqvmap/examples/pins_custom.html" x="1150" y="3150" zoom="true"/>
         <Node id="resources/vendors/echarts/test/chord.html" x="4150" y="300" zoom="true"/>
         <Node id="resources/vendors/morris.js/examples/bar-colors.html" x="4900" y="150" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/interacting/index.html" x="3150" y="1050" zoom="true"/>
         <Node id="resources/vendors/google-code-prettify/styles/index.html" x="650" y="2400" zoom="true"/>
-        <Node id="resources/vendors/morris.js/examples/days.html" x="1400" y="1200" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/basic-usage/index.html" x="1900" y="1650" zoom="true"/>
+        <Node id="resources/vendors/morris.js/examples/days.html" x="1400" y="1200" zoom="true"/>
         <Node id="resources/vendors/Chart.js/samples/polar-area.html" x="2900" y="900" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options-old/dropdown.html" x="1150" y="3600" zoom="true"/>
         <Node id="resources/vendors/echarts/test/media-finance.html" x="4650" y="300" zoom="true"/>
@@ -139,8 +174,8 @@
         <Node id="resources/vendors/select2/docs/_includes/examples/disabled-results.html" x="4650" y="900" zoom="true"/>
         <Node id="resources/vendors/morris.js/spec/viz/test.html" x="1900" y="2100" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options-old/backwards-compatibility.html" x="1400" y="1350" zoom="true"/>
-        <Node id="resources/vendors/morris.js/examples/no-grid.html" x="1400" y="750" zoom="true"/>
         <Node id="resources/vendors/echarts/test/visualMap-continuous.html" x="900" y="3150" zoom="true"/>
+        <Node id="resources/vendors/morris.js/examples/no-grid.html" x="1400" y="750" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/js-source-states.html" x="1400" y="300" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/axes-time-zones/index.html" x="6400" y="450" zoom="true"/>
         <Node id="index.xhtml" x="4900" y="750" zoom="true"/>
@@ -183,10 +218,14 @@
         <Node id="resources/vendors/morris.js/examples/decimal-custom-hover.html" x="2400" y="2550" zoom="true"/>
         <Node id="resources/vendors/morris.js/examples/diagonal-xlabels.html" x="650" y="1500" zoom="true"/>
         <Node id="example-pages/form_validation.html" x="5150" y="750" zoom="true"/>
-        <Node id="resources/vendors/select2/docs/_includes/nav/examples.html" x="2900" y="1050" zoom="true"/>
         <Node id="resources/vendors/echarts/test/scale-integer.html" x="3400" y="900" zoom="true"/>
+        <Node id="resources/vendors/select2/docs/_includes/nav/examples.html" x="2900" y="1050" zoom="true"/>
         <Node id="recrutamento/cadastro_curriculo.xhtml" x="1650" y="1500" zoom="true"/>
         <Node id="folhapagamento/tiposfolha.xhtml" x="3150" y="900" zoom="true"/>
+<<<<<<< HEAD
+=======
+        <Node id="ModuloCapitalHumano/Formularios.xhtml" x="6400" y="600" zoom="true"/>
+>>>>>>> origin/master
         <Node id="resources/vendors/jqvmap/examples/pins.html" x="3400" y="150" zoom="true"/>
         <Node id="recrutamento/vaga_manutencao (2).xhtml" x="4400" y="1800" zoom="true"/>
         <Node id="ModuloCapitalHumano/Formularios.xhtml" x="6400" y="600" zoom="true"/>
@@ -204,11 +243,11 @@
         <Node id="resources/vendors/morris.js/examples/donut-colors.html" x="2400" y="300" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/examples/tokenizer.html" x="2900" y="300" zoom="true"/>
         <Node id="resources/vendors/Chart.js/samples/line-skip-points.html" x="1150" y="600" zoom="true"/>
-        <Node id="resources/vendors/select2/docs/_includes/examples/basics.html" x="900" y="750" zoom="true"/>
         <Node id="resources/vendors/echarts/test/ie8.html" x="1900" y="2400" zoom="true"/>
+        <Node id="resources/vendors/select2/docs/_includes/examples/basics.html" x="900" y="750" zoom="true"/>
         <Node id="resources/vendors/echarts/test/ut/ui.html" x="400" y="2250" zoom="true"/>
-        <Node id="resources/vendors/select2/docs/_includes/options/dropdown.html" x="400" y="300" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options/selections/templating.html" x="400" y="1200" zoom="true"/>
+        <Node id="resources/vendors/select2/docs/_includes/options/dropdown.html" x="400" y="300" zoom="true"/>
         <Node id="resources/vendors/echarts/test/dataZoom-dataShadow.html" x="3150" y="750" zoom="true"/>
         <Node id="resources/vendors/morris.js/spec/specs.html" x="1400" y="150" zoom="true"/>
         <Node id="resources/vendors/bootstrap-wysiwyg/examples/events.html" x="3650" y="1950" zoom="true"/>
@@ -245,12 +284,16 @@
         <Node id="resources/vendors/echarts/test/visualMap-pieces.html" x="4900" y="900" zoom="true"/>
         <Node id="resources/vendors/jqvmap/examples/europe.html" x="650" y="3150" zoom="true"/>
         <Node id="resources/vendors/echarts/test/pieDynamic.html" x="4650" y="600" zoom="true"/>
+<<<<<<< HEAD
+=======
+        <Node id="resources/vendors/select2/docs/_includes/options/selections.html" x="2900" y="1800" zoom="true"/>
+>>>>>>> origin/master
         <Node id="resources/vendors/echarts/test/tooltip.html" x="3400" y="1950" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options/selections.html" x="2900" y="1800" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options-old/core-options.html" x="900" y="1500" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/axes-multiple/index.html" x="5150" y="1200" zoom="true"/>
-        <Node id="resources/vendors/morris.js/examples/negative.html" x="2650" y="1950" zoom="true"/>
         <Node id="resources/vendors/echarts/test/dataZoom-axis-type.html" x="5900" y="150" zoom="true"/>
+        <Node id="resources/vendors/morris.js/examples/negative.html" x="2650" y="1950" zoom="true"/>
         <Node id="resources/vendors/echarts/test/line.html" x="650" y="3600" zoom="true"/>
         <Node id="resources/vendors/Chart.js/samples/pie.html" x="4400" y="900" zoom="true"/>
         <Node id="login.xhtml" x="5400" y="600" zoom="true"/>
@@ -258,8 +301,8 @@
         <Node id="resources/vendors/echarts/test/treemap-option2.html" x="1650" y="900" zoom="true"/>
         <Node id="resources/vendors/skycons/index.html" x="2400" y="1800" zoom="true"/>
         <Node id="resources/vendors/bootstrap-wysiwyg/examples/clear-formatting.html" x="650" y="900" zoom="true"/>
-        <Node id="resources/vendors/jqvmap/examples/world.html" x="3900" y="1350" zoom="true"/>
         <Node id="resources/vendors/jqvmap/examples/turkey.html" x="6150" y="300" zoom="true"/>
+        <Node id="resources/vendors/jqvmap/examples/world.html" x="3900" y="1350" zoom="true"/>
         <Node id="resources/vendors/Chart.js/samples/AnimationCallbacks/progress-bar.html" x="1150" y="2100" zoom="true"/>
         <Node id="resources/vendors/jqvmap/examples/multi.html" x="5400" y="1050" zoom="true"/>
         <Node id="resources/vendors/echarts/test/area2.html" x="1650" y="300" zoom="true"/>
@@ -294,8 +337,8 @@
         <Node id="resources/vendors/echarts/test/map.html" x="3150" y="2400" zoom="true"/>
         <Node id="recrutamento/menu_vaga_lista.xhtml" x="150" y="300" zoom="true"/>
         <Node id="resources/vendors/google-code-prettify/styles/demo.html" x="2150" y="750" zoom="true"/>
-        <Node id="resources/vendors/select2/docs/_includes/nav/options-old.html" x="650" y="750" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/examples/localization-rtl-diacritics.html" x="2900" y="750" zoom="true"/>
+        <Node id="resources/vendors/select2/docs/_includes/nav/options-old.html" x="650" y="750" zoom="true"/>
         <Node id="resources/vendors/DateJS/reports/lcov-report/core/index.html" x="5150" y="450" zoom="true"/>
         <Node id="resources/vendors/google-code-prettify/README.html" x="5900" y="750" zoom="true"/>
         <Node id="resources/vendors/echarts/test/axes.html" x="2150" y="2700" zoom="true"/>
@@ -334,7 +377,12 @@
         <Node id="example-pages/xx.html" x="2150" y="450" zoom="true"/>
         <Node id="folhapagamento/tabelas.xhtml" x="400" y="450" zoom="true"/>
         <Node id="example-pages/other_charts.html" x="900" y="3450" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/select2/docs/options.html" x="900" y="2400" zoom="true"/>
+=======
+        <Node id="resources/vendors/jqvmap/examples/usa.html" x="4400" y="1350" zoom="true"/>
+        <Node id="example-pages/typography.html" x="3650" y="1500" zoom="true"/>
+>>>>>>> origin/master
         <Node id="resources/vendors/echarts/test/geoLine.html" x="4150" y="1650" zoom="true"/>
         <Node id="resources/vendors/jqvmap/examples/usa.html" x="4400" y="1350" zoom="true"/>
         <Node id="example-pages/typography.html" x="3650" y="1500" zoom="true"/>
@@ -364,13 +412,13 @@
         <Node id="resources/vendors/Flot/examples/basic-options/index.html" x="1900" y="3150" zoom="true"/>
         <Node id="ModuloCapitalHumano/VincularPessoasTreinamento.xhtml" x="650" y="600" zoom="true"/>
         <Node id="resources/vendors/Flot/examples/series-pie/index.html" x="650" y="300" zoom="true"/>
-        <Node id="resources/vendors/transitionize/examples/example.html" x="2150" y="1050" zoom="true"/>
         <Node id="resources/vendors/echarts/test/largeLine.html" x="4150" y="1800" zoom="true"/>
+        <Node id="resources/vendors/transitionize/examples/example.html" x="2150" y="1050" zoom="true"/>
         <Node id="resources/vendors/DateJS/reports/lcov-report/core/time_span.js.html" x="3400" y="1650" zoom="true"/>
         <Node id="c_s_b_f_f/admissao/dadosprofissionais.xhtml" x="5400" y="750" zoom="true"/>
         <Node id="resources/vendors/Chart.js/samples/tooltip-hooks.html" x="3650" y="1350" zoom="true"/>
-        <Node id="example-pages/index3.html" x="400" y="600" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/examples/data.html" x="1400" y="1800" zoom="true"/>
+        <Node id="example-pages/index3.html" x="400" y="600" zoom="true"/>
         <Node id="resources/vendors/morris.js/examples/years.html" x="1650" y="2250" zoom="true"/>
         <Node id="example-pages/map.html" x="2400" y="2700" zoom="true"/>
         <Node id="resources/vendors/bootstrap-daterangepicker/example/browserify/index.html" x="1650" y="450" zoom="true"/>
@@ -383,9 +431,15 @@
         <Node id="resources/vendors/starrr/index.html" x="1650" y="1800" zoom="true"/>
         <Node id="resources/vendors/eve/e.html" x="5900" y="900" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/head.html" x="3400" y="600" zoom="true"/>
+<<<<<<< HEAD
         <Node id="resources/vendors/echarts/test/visualMap-categories.html" x="400" y="2400" zoom="true"/>
         <Node id="resources/vendors/echarts/test/polarScatter.html" x="3150" y="600" zoom="true"/>
+=======
+
+>>>>>>> origin/master
         <Node id="resources/vendors/morris.js/examples/bar.html" x="1150" y="3300" zoom="true"/>
+        <Node id="resources/vendors/echarts/test/visualMap-categories.html" x="400" y="2400" zoom="true"/>
+        <Node id="resources/vendors/echarts/test/polarScatter.html" x="3150" y="600" zoom="true"/>
         <Node id="resources/vendors/flot.orderbars/examples/index.html" x="2400" y="1350" zoom="true"/>
         <Node id="example-pages/page_403.html" x="1150" y="750" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/social-buttons.html" x="2150" y="300" zoom="true"/>
@@ -410,8 +464,8 @@
         <Node id="recrutamento/selecao_lista (2).xhtml" x="150" y="1050" zoom="true"/>
         <Node id="resources/vendors/morris.js/examples/donut-formatter.html" x="3650" y="1800" zoom="true"/>
         <Node id="ModuloCapitalHumano/PlanoCarreira.xhtml" x="400" y="3450" zoom="true"/>
-        <Node id="folhapagamento/eventos.xhtml" x="1400" y="2400" zoom="true"/>
         <Node id="resources/vendors/DateJS/reports/lcov-report/core/parser.js.html" x="7150" y="150" zoom="true"/>
+        <Node id="folhapagamento/eventos.xhtml" x="1400" y="2400" zoom="true"/>
         <Node id="resources/vendors/validator/index.html" x="4150" y="450" zoom="true"/>
         <Node id="resources/vendors/echarts/test/bar2.html" x="400" y="900" zoom="true"/>
         <Node id="resources/vendors/select2/docs/_includes/options-old/events.html" x="1400" y="2250" zoom="true"/>

@@ -16,6 +16,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 
 
@@ -29,6 +32,8 @@ public class cargosBean {
 
     private boolean formAtivo = false;
 
+    
+    private int nomeCBO;
     private CsbffCargos csbffcargos = new CsbffCargos();
     private List<CsbffCargos> todosCargos;
 
@@ -39,46 +44,91 @@ public class cargosBean {
     
     
     public cargosBean() {
-        
+        csbffcargos = new CsbffCargos();
         
     }
     
-    public String salvar() {
-
-        String MsgNotificacao = "testando isso aqui";
-        try {
-            if (csbffcargos.getCargoCodigo() > 0) {
-
-                csbffCargosService.update(csbffcargos);
-                novo();
-
-                System.out.println("******teste de código" + csbffcargos);
-                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi atualizado com sucesso!";
-
-            } else {
-
-             novo();
-
-        System.out.println("******teste de código" + csbffcargos);
-                csbffCargosService.save(csbffcargos);
-                
-
-                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi cadastrado com sucesso!";
-            }
-
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
-
-        } catch (Exception ex) {
-
-            MsgNotificacao = "Houve uma falha ao cadastrar o cargo " + csbffcargos.getCargoNome() + ex.getMessage() + " , tente novamente mais tarde!";
-            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-        }
-
-        return "Cargos";
-
-//        gchTodosCursos = gchCursoService.findAll();
-//        this.formAtivo = false;
+    
+    public String pg(CsbffCargos cargo){
+        this.csbffcargos = cargo;
+//        select(cargo);
+        return "form_cargo";
     }
+    
+//     public void select (CsbffCargos carg){
+//        this.csbffcargos = carg;
+//        codigoColaborador = carg;
+//        altera(carg);
+//      
+//        
+//    }
+//     public String altera(CsbffCargos carg){
+//         csbffcargos = carg;
+//         codigoColaborador = carg;
+//         
+//          csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(4));
+//        csbffcargos.setCargoDataDeCriacao(new Date());
+//        csbffcargos.setCargoDataUltimaAlteracao(new Date());
+//        csbffCargosService.update(codigoColaborador);
+//         System.out.println("**************"+ codigoColaborador + "*****************");
+//         
+//         return "cargo_consulta";
+//     }
+    
+//    public String salvar() {
+//
+//        String MsgNotificacao = "testando isso aqui";
+//        try {
+//            if (csbffcargos.getCargoCodigo() > 0) {
+//
+//                csbffCargosService.update(csbffcargos);
+//                novo();
+//
+//                System.out.println("******teste de código" + csbffcargos);
+//                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi atualizado com sucesso!";
+//
+//            } else {
+//
+//             novo();
+//
+//        System.out.println("******teste de código" + csbffcargos);
+//                csbffCargosService.save(csbffcargos);
+//                
+//
+//                MsgNotificacao = "O cargo " + csbffcargos.getCargoNome() + " foi cadastrado com sucesso!";
+//            }
+//
+//            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+//
+//        } catch (Exception ex) {
+//
+//            MsgNotificacao = "Houve uma falha ao cadastrar o cargo " + csbffcargos.getCargoNome() + ex.getMessage() + " , tente novamente mais tarde!";
+//            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+//        }
+//
+//        return "Cargos";
+//
+////        gchTodosCursos = gchCursoService.findAll();
+////        this.formAtivo = false;
+//    }
+  
+  
+    
+    public List<CsbffCargos> buscaPorCbo() {
+
+      
+
+            csbffcargos = csbffCargosService.findById(nomeCBO);
+            System.out.println("**************************" +nomeCBO);
+          JOptionPane.showMessageDialog(null, "testando" + nomeCBO);
+        
+            return todosCargos;
+
+        }
+    
+    
+    
+  
     
         
     
@@ -88,14 +138,17 @@ public class cargosBean {
         csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
         csbffcargos.setCargoDataDeCriacao(new Date());
         csbffcargos.setCargoDataUltimaAlteracao(new Date());
-        csbffCargosService.save(csbffcargos);
+        csbffCargosService.update(csbffcargos);
 
     }
     public String novo(){
-       
+      
+            
         save();
         csbffcargos = new CsbffCargos();
-        return "form_cargo";
+            
+        
+        return "cargo_consulta";
         
         
     }
@@ -107,6 +160,7 @@ public class cargosBean {
         if (idcargo != 0) {
 
             csbffcargos = csbffCargosService.findById(idcargo);
+            
         }
             return "form_cargo";
 
@@ -192,5 +246,13 @@ public class cargosBean {
 
     public void setRecPessoa(RecPessoa recPessoa) {
         this.recPessoa = recPessoa;
+    }
+
+    public int getNomeCBO() {
+        return nomeCBO;
+    }
+
+    public void setNomeCBO(int nomeCBO) {
+        this.nomeCBO = nomeCBO;
     }
 }
