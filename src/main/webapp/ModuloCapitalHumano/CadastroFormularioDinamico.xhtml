@@ -29,92 +29,106 @@
                 <br />
                 <h:form id="formFormulario">
                     <h:messages class="error" style="color: #d9534f" />
-
+                    <script src="ControleFormularios.js" type="text/javascript"></script>
+              
                     <h:panelGroup id="panelInserirLinha" layout="block" class="col-md-12 col-sm-12 col-xs-12">
-
-
                         <h:inputHidden value="#{gchFormularioBean.gchFormulario.formCodigo}" />
-                        <div class="form-group">
-                            <label class="control-label requiredField" for="txbNomeFormulario">
-                                Nome do Formulário
-                                <span class="asteriskField">
-                                    *
-                                </span>
-                            </label>
-                            <h:inputText class="form-control" id="txbNomeFormulario" value="#{gchFormularioBean.gchFormulario.formNome}" />
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label requiredField" for="txbDescricaoFormulario">
-                                Descrição
-                            </label>
-                            <h:inputText class="form-control" id="txbDescricaoFormulario" value="#{gchFormularioBean.gchFormulario.formDescricao}"/>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label requiredField" for="txbDescricaoFormulario">
-                                Prazo para respostas
-                            </label>
-                            <h:inputText label="Prazo para respostas" required="true" class="form-control col-md-7 col-xs-12 date-picker" value="#{gchFormularioBean.gchFormulario.formPrazoResposta}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:inputText>
-                        </div>
 
-                        <div class="form-group" >
-                            <h4 class="col-md-3 col-sm-3 col-xs-12" style="top:22px">Perguntas</h4>
-                            <div class="text-right col-md-3 col-sm-3 col-xs-12 col-md-offset-6" style="top:22px">
-                                <h:commandButton class="btn btn-primary" value="Adicionar pergunta" action="#{gchFormularioBean.addNovaPergunta()}">
-                                    <f:ajax execute="@form" render="panelInserirLinha" />
-                                </h:commandButton>
+                        // Essa caganeira aqui teve que ser feita por que o Java Web é horrível de criar coisas dinâmicas
+                        <h:inputHidden id="TxbParametrosCapa" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
+                        <h:inputHidden id="TxbParametrosPergunta" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
+                        <h:inputHidden id="TxbParametrosAlternativas" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
+
+
+                        <div id="InfoCapa">
+
+
+                            <div class="form-group">
+                                <label class="control-label requiredField" for="txbNomeFormulario">
+                                    Nome do Formulário
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <h:inputText class="form-control" id="txbNomeFormulario" value="#{gchFormularioBean.gchFormulario.formNome}" />
                             </div>
-                        </div>
-                        <div class="ln_solid" style="margin-top:100px"></div>
-                        <ui:repeat value="#{gchFormularioBean.gchFormulario.perguntas}" var="pergunta" varStatus="perguntaStatus">
+                            <div class="form-group">
+                                <label class="control-label requiredField" for="txbDescricaoFormulario">
+                                    Descrição
+                                </label>
+                                <h:inputText class="form-control" id="txbDescricaoFormulario" value="#{gchFormularioBean.gchFormulario.formDescricao}"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label requiredField" for="txbDescricaoFormulario">
+                                    Prazo para respostas
+                                </label>
+                                <h:inputText label="Prazo para respostas" required="true" class="form-control col-md-7 col-xs-12 date-picker" value="#{gchFormularioBean.gchFormulario.formPrazoResposta}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:inputText>
+                            </div>
 
-
-                            <div class="row" >
-                                <div class="form-group col-md-5 col-sm-5">
-                                    <h:inputText  class="form-control" value="#{gchFormularioBean.gchFormulario.perguntas[perguntaStatus.index].perDescricao}" />
-                                </div>
-
-                                <div class="text-left col-md-2 col-sm-2" >
-                                    <h:commandButton class="btn btn-danger btn-sm" value="Remover" action="#{gchFormularioBean.removerPergunta(perguntaStatus.index)}">
-                                        <f:ajax execute="@form" render="formFormulario:panelInserirLinha" />
+                            <div id="formPergunta" class="form-group" >
+                                <h4 class="col-md-3 col-sm-3 col-xs-12" style="top:22px">Perguntas</h4>
+                                <div class="text-right col-md-3 col-sm-3 col-xs-12 col-md-offset-6" style="top:22px">
+                                    <h:commandButton class="btn btn-primary" value="Adicionar pergunta" action="#{gchFormularioBean.addNovaPergunta()}">
+                                        <f:ajax execute="@form" render="panelInserirLinha" />
                                     </h:commandButton>
                                 </div>
-
-                                <p:outputLabel for="alternativas" />
-                                <p:autoComplete id="alternativas" multiple="true" value="#{gchAlternativaBean.gchTodasAlternativas}" completeMethod="#{gchAlternativaBean.CompleteAlternativas}" var="alternativa" itemLabel="#{alternativa.altDescricao}" itemValue="#{alternativa}" converter="#{generic}" forceSelection="true">
-                             
-                                    <f:attribute name="teste" value="#{alternativa.altDescricao}"/>
-                                       
-                                      <p:column>
-                                            <h:outputText value="#{alternativa.altDescricao}">
-
-                                            </h:outputText>
-                                            <f:param name="codAlt" value="#{alternativa.altDescricao}"/>
-                                            <f:param name="codAlt" value="#{alternativa.altCodigo}"/>
-
-                                        </p:column>
-                                    
-                                    <f:ajax event="change" listener="#{gchFormularioBean.AgoraVai}" render="formFormulario" />
-  
-                                </p:autoComplete>
-
                             </div>
-                        </ui:repeat>
+                            <div class="ln_solid" style="margin-top:100px"></div>
+
+                        </div>
+                      
+                        <div id="InfoPerguntas">
+                            <ui:repeat value="#{gchFormularioBean.gchFormulario.perguntas}" var="pergunta" varStatus="perguntaStatus">
+
+                                <div class="row" id="#{perguntaStatus.index}" >
+
+                                    <div id="perguntas">
+                                        <div class="form-group col-md-5 col-sm-5">
+                                            <h:inputText  class="form-control" value="#{gchFormularioBean.gchFormulario.perguntas[perguntaStatus.index].perDescricao}" />
+                                        </div>
+                                    </div>
+                                    <div class="text-left col-md-5 col-sm-5" >
+                                        <p:outputLabel for="alternativas" />
+
+                                        <p:autoComplete  id="alternativas" multiple="true" value="#{gchAlternativaBean.alternativasVinculadas}" completeMethod="#{gchAlternativaBean.CompleteAlternativas}" var="alternativa" itemLabel="#{alternativa.altDescricao}" itemValue="#{alternativa}" converter="#{generic}">
+
+                                            <p:column>
+                                                <h:outputText value="#{alternativa.altDescricao}">
+
+                                                </h:outputText>
+                                                <f:param name="codAlt" value="#{alternativa.altDescricao}"/>
+                                                <f:param name="codAlt" value="#{alternativa.altCodigo}"/>
+                                            </p:column>
+
+                                        </p:autoComplete>
+                                    </div>
+                                    <div class="text-left col-md-2 col-sm-2" >
+                                        <h:commandButton class="btn btn-danger btn-sm" value="Remover" action="#{gchFormularioBean.removerPergunta(perguntaStatus.index)}">
+                                            <f:ajax execute="@form" render="formFormulario:panelInserirLinha" />
+                                        </h:commandButton>
+                                    </div>
+
+
+                                </div>
+                            </ui:repeat>
+
+                        </div>
 
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <h:commandButton class="btn btn-success" value="Salvar" action="#{gchFormularioBean.save()}">
-                                    <f:ajax execute="@form" render="panelInserirLinha" />
-                                </h:commandButton>
+
+                                <h:commandButton id="Botao" class="btn btn-success" action="#{gchFormularioBean.SalvarFormulario}" value="Salvar"/>
                                 <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{gchFormularioBean.cancel()}">
-                                    <f:ajax execute="@form" render="panelInserirLinha" />
+                                    <f:ajax execute="@form" render="gridperg" />
                                 </h:commandButton>
                             </div>
                         </div>
 
                     </h:panelGroup>
+                      
                 </h:form>
             </ui:define>
             <ui:define name="script">
