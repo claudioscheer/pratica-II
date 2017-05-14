@@ -20,19 +20,24 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="x_panel">
-
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">Código colaborador</label>
+                                            <h:inputText label="codigo"  class="form-control" value="#{csbffBeneficioBean.csbffBeneficios.beneficioCodigo}" disabled="true" />
+                                        </div>
+                                    </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
 
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
-                                            <h:inputText  requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
+                                            <label class="control-label ">Nome<span class="required">*</span></label>
+                                            <h:inputText  requiredMessage="Campo Nome é obrigatório." class="form-control" value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
                                         </div>
 
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
 
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Abrangência<span class="required">*</span></label>
+                                            <label class="control-label ">Abrangência<span class="required">*</span></label>
                                             <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                 <f:selectItems value="#{csbffBeneficioBean.abrangenciaBeneficio}" />
@@ -42,9 +47,9 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
 
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo benefício <span class="required">*</span></label>
+                                            <label class="control-label ">Tipo benefício <span class="required">*</span></label>
 
-                                            <h:selectOneMenu value="#{csbffBeneficioBean.tipoBeneficioCombo}" class="form-control">
+                                            <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.tipoBeneficio}" class="form-control">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                 <f:selectItems value="#{csbffBeneficioBean.tipoBeneficio}" />
                                             </h:selectOneMenu>   
@@ -55,7 +60,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
 
-                                            <label class="control-label col-md-3 col-sm-12 col-xs-12">Descrição<span class="required" >*</span></label>
+                                            <label class="control-label ">Descrição<span class="required" >*</span></label>
                                             <!--      <textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
                                             <h:inputTextarea requiredMessage="Campo Descrição é obrigatório." class="form-control" cols="10" rows="5" value="#{csbffBeneficioBean.csbffBeneficios.beneficioDescricao}" />
 

@@ -22,13 +22,13 @@ public class GchFormularioService {
     private GchFormularioDAO gchFormularioDAO;
 
     @Transactional
-    public void save(GchFormulario gchTreinamentos) {
-        gchFormularioDAO.save(gchTreinamentos);
+    public void save(GchFormulario gchFormulario) {
+        gchFormularioDAO.save(gchFormulario);
     }
 
     @Transactional
-    public void update(GchFormulario gchTreinamentos) {
-        gchFormularioDAO.update(gchTreinamentos);
+    public void update(GchFormulario gchFormulario) {
+        gchFormularioDAO.update(gchFormulario);
     }
 
     @Transactional

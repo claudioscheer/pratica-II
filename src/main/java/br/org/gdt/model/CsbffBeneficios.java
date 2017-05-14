@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.enums.TipoBeneficio;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -62,6 +63,12 @@ public class CsbffBeneficios implements java.io.Serializable {
     private CsbffTipoBeneficio tipoBeneficioCodigo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "beneficioCodigo")
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
+    private TipoBeneficio tipoBeneficio;
+    
+
+    public CsbffBeneficios(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
+    }
 
     public CsbffBeneficios() {
     }
@@ -80,7 +87,7 @@ public class CsbffBeneficios implements java.io.Serializable {
         this.tipoBeneficioCodigo = tipoBeneficioCodigo;
         this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
     }
-
+        
     public long getBeneficioCodigo() {
         return beneficioCodigo;
     }
@@ -220,6 +227,14 @@ public class CsbffBeneficios implements java.io.Serializable {
       @Override
     public String toString() {
         return "br.org.gdt.modelNew.CsbffBeneficios[ beneficioCodigo=" + beneficioCodigo + " ]";
+    }
+
+    public TipoBeneficio getTipoBeneficio() {
+        return tipoBeneficio;
+    }
+
+    public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
     }
 
 }
