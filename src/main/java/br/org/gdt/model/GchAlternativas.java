@@ -59,8 +59,8 @@ public class GchAlternativas implements Serializable,SampleEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "altCodigo")
     private List<GchRespostas> gchRespostasList;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="per_codigo")
-    private List<GchPerguntas> gchPerguntasList;
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy="perCodigo")
+//    private List<GchPerguntas> gchPerguntasList;
 
     public void setGchRespostasList(List<GchRespostas> gchRespostasList) {
         this.gchRespostasList = gchRespostasList;
@@ -74,7 +74,7 @@ public class GchAlternativas implements Serializable,SampleEntity {
         hash = 67 * hash + this.altPrioridade;
         hash = 67 * hash + Objects.hashCode(this.gchAlternativasperguntas);
         hash = 67 * hash + Objects.hashCode(this.gchRespostasList);
-        hash = 67 * hash + Objects.hashCode(this.gchPerguntasList);
+//        hash = 67 * hash + Objects.hashCode(this.gchPerguntasList);
         return hash;
     }
 
@@ -102,19 +102,19 @@ public class GchAlternativas implements Serializable,SampleEntity {
         if (!Objects.equals(this.gchRespostasList, other.gchRespostasList)) {
             return false;
         }
-        if (!Objects.equals(this.gchPerguntasList, other.gchPerguntasList)) {
-            return false;
-        }
+//        if (!Objects.equals(this.gchPerguntasList, other.gchPerguntasList)) {
+//            return false;
+//        }
         return true;
     }
 
-    public List<GchPerguntas> getGchPerguntasList() {
-        return gchPerguntasList;
-    }
-
-    public void setGchPerguntasList(List<GchPerguntas> gchPerguntasList) {
-        this.gchPerguntasList = gchPerguntasList;
-    }
+//    public List<GchPerguntas> getGchPerguntasList() {
+//        return gchPerguntasList;
+//    }
+//
+//    public void setGchPerguntasList(List<GchPerguntas> gchPerguntasList) {
+//        this.gchPerguntasList = gchPerguntasList;
+//    }
     
     public GchAlternativas() {
     }

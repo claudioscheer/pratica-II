@@ -41,7 +41,7 @@ public class GchPerguntas implements Serializable {
     @Basic(optional = false)
     @Column(name = "per_descricao")
     private String perDescricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perCodigo")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GchAlternativas> gchAlternativas;
     
     @ManyToOne
