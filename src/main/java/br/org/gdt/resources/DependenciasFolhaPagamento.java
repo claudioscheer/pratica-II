@@ -30,7 +30,6 @@ public class DependenciasFolhaPagamento {
         FpEvento fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.Salario.ordinal() + 1);
-        fpEvento.setEveFormula("$sf");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
@@ -42,7 +41,6 @@ public class DependenciasFolhaPagamento {
 
         // Máximo de horas permitidas por dia é 2h.
         fpEvento.setEveId(FpEnumEventos.HorasExtras50.ordinal() + 1);
-        fpEvento.setEveFormula("$vh*1.5*$#");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
@@ -53,7 +51,6 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.HorasExtras100.ordinal() + 1);
-        fpEvento.setEveFormula("$vh*2*$#");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
@@ -64,7 +61,6 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.HorasNoturnas.ordinal() + 1);
-        fpEvento.setEveFormula("$vh*1.2*$#");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
@@ -75,7 +71,6 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.HorasFaltas.ordinal() + 1);
-        fpEvento.setEveFormula("$hm-$#");
         fpEvento.setEveIncideFGTS(false);
         fpEvento.setEveIncideINSS(false);
         fpEvento.setEveIncideIRRF(false);
@@ -85,7 +80,6 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.INSS.ordinal() + 1);
-        fpEvento.setEveFormula("$t-1*$va");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
@@ -96,7 +90,6 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.FGTS.ordinal() + 1);
-        fpEvento.setEveFormula("$t-4*$va");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
@@ -107,7 +100,6 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.IRRF.ordinal() + 1);
-        fpEvento.setEveFormula("$t-3*$va");
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
         fpEvento.setEveIncideIRRF(true);
