@@ -14,5 +14,6 @@ public enum TipoBeneficio {
     Transporte,
     Educação,
     Moradia,
-    Saúde
+    Saúde;
+
 }
