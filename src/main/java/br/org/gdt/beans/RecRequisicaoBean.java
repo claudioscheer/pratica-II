@@ -30,7 +30,7 @@ public class RecRequisicaoBean
     ///DADOS DA 
     private RecRequisicaoVaga recRecVaga = new RecRequisicaoVaga();
     private List<RecRequisicaoVaga> ListRec_Requisicao;
-    @ManagedProperty("#{recRequisicaoService}")
+    @ManagedProperty("#{recRequisicaoVagaService}")
     private RecRequisicaoVagaService recRequisicaoVagaService;
 
     public RecRequisicaoBean() {
