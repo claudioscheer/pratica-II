@@ -16,7 +16,7 @@
                     <h3>Requisiçao de Pessoal</h3>
                 </div>
                 <br />
-                <h:form id="formRecVaga">                                        .
+                <h:form id="formRecVaga">                                        
                     <p:panel visible="#{recRequisicaoBean.formAtivo}">
                         <h:inputHidden value="#{recRequisicaoBean.recRecVaga.recIdRecquisicaoVaga}" />                        
                         <div class="bootstrap-iso">
@@ -44,15 +44,7 @@
                                         </div>     
                                     </div>           
 
-                                    <!-- <div class="col-md-6 col-sm-6 col-xs-12">
-                                         <div class="form-group ">
-                                             <label class="control-label " for="number">                                        
-                                                 Salário
-                                                 <span class="required">*</span>
-                                             </label>
-                                             <h:inputText class="form-control" id="Salario" value="#{recRequisicaoBean.recRecVaga.recSalario}" />
-                                         </div>
-                                     </div>    -->
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
@@ -152,7 +144,7 @@
                         <h:dataTable class="table table-striped" value="#{recRequisicaoBean.ListarTodas()}" var="item">
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
-                                <h:outputText value="#{item.recIdvaga}"/>
+                                <h:outputText value="#{item.recIdRecquisicaoVaga}"/>
                             </h:column>                                        
                             <h:column>
                                 <f:facet name="header">Descrição</f:facet>                                                                                            
@@ -167,8 +159,8 @@
                                 <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recRequisicaoBean.PreparaEdicao(item)}">
 
                                 </h:commandLink>
-                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{recRequisicaoBean.Excluir(vaga)}" onclick="return confirm('Excluir tabela?')">
-
+                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{recRequisicaoBean.Excluir(item)}" onclick="return confirm('Excluir tabela?')">
+                                    
                                 </h:commandLink>
                             </h:column>                  
                         </h:dataTable>
