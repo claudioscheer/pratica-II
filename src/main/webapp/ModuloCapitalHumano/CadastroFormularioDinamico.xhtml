@@ -42,10 +42,11 @@
                         <h:inputHidden id="TxbParametrosCapa" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
                         <h:inputHidden id="TxbParametrosPergunta" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
                         <h:inputHidden id="TxbParametrosAlternativas" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
+                        <input id="SequencialPergunta" value="0" style="display: none" />
                         
                         <div id="TxbAlternativasDisponiveis">
                         <h:selectOneMenu>
-                            <f:selectItems value="#{gchAlternativaBean.gchTodasAlternativas}" var="curso" itemValue="#{curso}" itemLabel="#{curso.altDescricao}"/>
+                            <f:selectItems value="#{gchAlternativaBean.gchTodasAlternativas}" var="alternativa" itemValue="#{alternativa.altCodigo}" itemLabel="#{alternativa.altDescricao}"/>
                         </h:selectOneMenu>
                        </div>
 
@@ -79,9 +80,7 @@
                             <div id="formPergunta" class="form-group" >
                                 <h4 class="col-md-3 col-sm-3 col-xs-12" style="top:22px">Perguntas</h4>
                                 <div class="text-right col-md-3 col-sm-3 col-xs-12 col-md-offset-6" style="top:22px">
-                                    <h:commandButton class="btn btn-primary" value="Adicionar pergunta" action="#{gchFormularioBean.addNovaPergunta()}">
-                                        <f:ajax execute="@form" render="panelInserirLinha" />
-                                    </h:commandButton>
+                                    <input type="button" class="btn btn-primary" value="Adicionar Pergunta" onclick="AddNovaPergunta()" />
                                 </div>
                             </div>
                             <div class="ln_solid" style="margin-top:100px"></div>
@@ -89,46 +88,7 @@
                         </div>
 
                         <div id="InfoPerguntas">
-                            <ui:repeat value="#{gchFormularioBean.gchFormulario.perguntas}" var="pergunta" varStatus="perguntaStatus">
-
-                                <div class="row" id="#{perguntaStatus.index}" >
-
-                                    <div id="perguntas">
-                                        <div class="form-group col-md-5 col-sm-5">
-                                            <h:inputText  class="form-control" value="#{gchFormularioBean.gchFormulario.perguntas[perguntaStatus.index].perDescricao}" />
-                                        </div>
-                                    </div>
-
-
-                                    <div class="text-left col-md-5 col-sm-5" >
-
-                                        <div class="side-by-side clearfix">
-                                            <div id="#{perguntaStatus.index}">
-                                                <select id="#{perguntaStatus.index}" style="width:400px" data-placeholder="Selecione uma alternativa" class="chosen-select" multiple="true" tabindex="4">
-                                                    <option value=""></option>
-                                                    <option value="1">Sim</option>
-                                                    <option value="2">Não</option>
-                                                    <option value="3">As Vezes</option>
-                                                    <option value="4">Nem sempre</option>
-                                                    <option value="5">Claro que sim</option>
-                                                    <option value="6">Nunca</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="text-left col-md-2 col-sm-2" >
-                                        <h:commandButton class="btn btn-danger btn-sm" value="Remover" action="#{gchFormularioBean.removerPergunta(perguntaStatus.index)}">
-                                            <f:ajax execute="@form" render="formFormulario:panelInserirLinha" />
-                                        </h:commandButton>
-                                    </div>
-
-
-                                </div>
-                            </ui:repeat>
-
+ 
                         </div>
 
                         <div class="ln_solid"></div>
@@ -136,9 +96,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 
                                 <h:commandButton id="Botao" class="btn btn-success" action="#{gchFormularioBean.alimentarVariaveis}" value="Salvar"/>
-                                <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{gchFormularioBean.cancel()}">
-                                    <f:ajax execute="@form" render="formFormulario:panelInserirLinha" />
-                                </h:commandButton>
+                                <input type="button" class="btn btn-default" onclick="CancelarTudo()" value="Cancelar" />
 
                                 <p:remoteCommand name="myRemote" actionListener="#{gchFormularioBean.salvarFormulario}" process="@this"/>
 

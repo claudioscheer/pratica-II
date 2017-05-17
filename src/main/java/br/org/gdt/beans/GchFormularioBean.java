@@ -176,8 +176,8 @@ public class GchFormularioBean {
                     novaAlternativa = gchAlternativasService.findById(Long.parseLong(altPergunta[j]));
 
                     altperg = new GchAlternativasperguntas();
-
-                    altperg.setAltCodigo(novaAlternativa);
+//
+//                    altperg.setAltCodigo(novaAlternativa);
 //                    altperg.setPerAltCodigo(Long.parseLong(altPergunta[j])); //essa nao precisa ter pq essa vai ser alimentado pelo sequence
                     //To ligado, vamos testar? Gruda
                     altperg.setPerCodigo(pergunta);
@@ -210,7 +210,8 @@ public class GchFormularioBean {
 
     public void addNovaPergunta() {
 
-        this.gchFormulario.addPergunta(new GchPerguntas(++indexPerguntaItem));
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.execute("AddNovaPergunta()");
 
     }
 

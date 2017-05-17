@@ -42,7 +42,7 @@ function MontarPerguntasAlternativas() {
     //Percorre as linhas de alternativas e para cada alternativa busca os valores selecionados
     alternativasPergunta.get().forEach(function (elemento, indice, array) {
 
-        var opcoes = elemento.options;
+        var opcoes = elemento.selectedOptions;
 
         for (var i = 0; i < opcoes.length; i++) {
 
@@ -65,9 +65,9 @@ function MontarPerguntasAlternativas() {
 
     myRemote();
 
-//    alert(parametrosPergunta.value);
-//    alert(parametrosCapa.value);
-//    alert(parametrosAlternativas.value);
+    alert(parametrosPergunta.value);;
+    alert(parametrosCapa.value);
+    alert(parametrosAlternativas.value);
 
 }
 
@@ -76,11 +76,33 @@ function AddNovaPergunta(){
 	
 var divPerguntas = $('#InfoPerguntas');
 
-var divAlternativas = $('#TxbAlternativasDisponiveis')[0].children;
+var id = parseInt($('#SequencialPergunta')[0].value) + 1;
 
-var InputText = '<div class="row"><div id="perguntas"><div class="form-group col-md-5 col-sm-5"><input type="text" name="formFormulario:j_idt56:0:j_idt58" value="" class="form-control"></div></div><div class="text-left col-md-5 col-sm-5"><div class="side-by-side clearfix"><div id="0"><select id="0" style="width:400px" data-placeholder="Selecione uma alternativa" class="chosen-select" multiple="true" tabindex="4">'+divAlternativas.innerHTML+'</select></div></div></div></div>'
+var incrementa = parseInt($('#SequencialPergunta')[0].value) + 1;
 
+$('#SequencialPergunta')[0].value = incrementa;
+
+
+var divAlternativas = $('#TxbAlternativasDisponiveis');
+
+var InputText = '<div class="row" id="'+id+'"><div id="perguntas"><div class="form-group col-md-5 col-sm-5"><input type="text" name="formFormulario:j_idt56:0:j_idt58" value="" class="form-control"></div></div><div class="text-left col-md-5 col-sm-5"><div class="side-by-side clearfix"><div id="0"><select id="0" style="width:400px" data-placeholder="Selecione uma alternativa" class="chosen-select" multiple="true" tabindex="4">'+divAlternativas[0].children[0].innerHTML+'</select></div></div></div><input type="button" class="btn btn-danger" value="Remover" onclick="removerLinha('+id+')"/></div>';
 
 divPerguntas.append(InputText);
 
+
+$(".chosen-select").chosen();
+
+}
+
+function CancelarTudo(){
+    
+    $('#InfoPerguntas').empty();
+    $('#SequencialPergunta')[0].value = 1;
+}
+
+
+function removerLinha(id){
+    
+    $('#'+id).remove();
+    
 }
