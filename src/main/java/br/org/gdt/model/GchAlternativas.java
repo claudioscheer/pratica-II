@@ -54,6 +54,86 @@ public class GchAlternativas implements Serializable,SampleEntity {
     @Basic(optional = false)
     @Column(name = "alt_prioridade")
     private short altPrioridade;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "gchAlternativas")
+    private GchAlternativasperguntas gchAlternativasperguntas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "altCodigo")
+    private List<GchRespostas> gchRespostasList;
+
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy="perCodigo")
+//    private List<GchPerguntas> gchPerguntasList;
+
+    public void setGchRespostasList(List<GchRespostas> gchRespostasList) {
+        this.gchRespostasList = gchRespostasList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.altDescricao);
+        hash = 67 * hash + this.altPrioridade;
+        hash = 67 * hash + Objects.hashCode(this.gchAlternativasperguntas);
+        hash = 67 * hash + Objects.hashCode(this.gchRespostasList);
+//        hash = 67 * hash + Objects.hashCode(this.gchPerguntasList);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchAlternativas other = (GchAlternativas) obj;
+        if (this.altCodigo != other.altCodigo) {
+            return false;
+        }
+        if (!Objects.equals(this.altDescricao, other.altDescricao)) {
+            return false;
+        }
+        if (this.altPrioridade != other.altPrioridade) {
+            return false;
+        }
+        if (!Objects.equals(this.gchAlternativasperguntas, other.gchAlternativasperguntas)) {
+            return false;
+        }
+        if (!Objects.equals(this.gchRespostasList, other.gchRespostasList)) {
+            return false;
+        }
+//        if (!Objects.equals(this.gchPerguntasList, other.gchPerguntasList)) {
+//            return false;
+//        }
+        return true;
+    }
+
+//    public List<GchPerguntas> getGchPerguntasList() {
+//        return gchPerguntasList;
+//    }
+//
+//    public void setGchPerguntasList(List<GchPerguntas> gchPerguntasList) {
+//        this.gchPerguntasList = gchPerguntasList;
+//    }
+    
+    public GchAlternativas() {
+    }
+
+
+
+    @XmlTransient
+    @JsonIgnore
+    public List<GchRespostas> getGchRespostasList() {
+        return gchRespostasList;
+    }
+
+
+
+    @Override
+    public Long getId() {
+      
+        return Long.valueOf(altCodigo);
+    }
 
     public long getAltCodigo() {
         return altCodigo;
