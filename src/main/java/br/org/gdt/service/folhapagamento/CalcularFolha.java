@@ -65,7 +65,6 @@ public class CalcularFolha {
         FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
         fpFolhaPeriodo.setForGeradaEm(Calendar.getInstance().getTime());
         fpFolhaPeriodo.setForPeriodo(dadosCalculadosDoFuncionario.getPeriodo());
-        // fpFolhaPeriodo.setForPessoa(dadosCalculadosDoFuncionario.getPessoa());
         
         dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
 

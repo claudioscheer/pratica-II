@@ -27,35 +27,35 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(1000);
 
         } else if (evento == FpEnumEventos.INSS.ordinal()) {
-            double valorEventoIncideINSS = dadosCalculadosDoFuncionario.getEventos().stream()
+            double valorEventosIncideINSS = dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideINSS() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
                     .mapToDouble(x -> x.getEvpValor()).sum();
 
-            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventoIncideINSS, 1);
+            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideINSS, 1);
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
                     ? fpFaixa.getFaiValor()
-                    : valorEventoIncideINSS * (fpFaixa.getFaiValor() / 100));
+                    : valorEventosIncideINSS * (fpFaixa.getFaiValor() / 100));
 
         } else if (evento == FpEnumEventos.FGTS.ordinal()) {
-            double valorEventoIncideFGTS = dadosCalculadosDoFuncionario.getEventos().stream()
+            double valorEventosIncideFGTS = dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideFGTS() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
                     .mapToDouble(x -> x.getEvpValor()).sum();
 
-            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventoIncideFGTS, 4);
+            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideFGTS, 4);
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
                     ? fpFaixa.getFaiValor()
-                    : valorEventoIncideFGTS * (fpFaixa.getFaiValor() / 100));
+                    : valorEventosIncideFGTS * (fpFaixa.getFaiValor() / 100));
 
         } else if (evento == FpEnumEventos.IRRF.ordinal()) {
             // Precisa ser visto de onde descontar a dedução. Tem a dedução por dependente ainda.
-            double valorEventoIncideIRRF = dadosCalculadosDoFuncionario.getEventos().stream()
+            double valorEventosIncideIRRF = dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideIRRF() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
                     .mapToDouble(x -> x.getEvpValor()).sum();
 
-            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventoIncideIRRF, 3);
+            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideIRRF, 3);
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
                     ? fpFaixa.getFaiValor()
-                    : valorEventoIncideIRRF * (fpFaixa.getFaiValor() / 100));
+                    : valorEventosIncideIRRF * (fpFaixa.getFaiValor() / 100));
 
         } else if (evento == FpEnumEventos.HorasExtras50.ordinal()) {
             double valorHoraFuncionario = getValorHoraFuncionario(dadosCalculadosDoFuncionario);
@@ -75,6 +75,7 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(valorHoraFuncionario * fpEventoPeriodo.getEvpValorReferencia() * 1.2);
 
         } else {
+            fpEventoPeriodo.setEvpValorReferencia(fpEventoPeriodo.getEvpValorReferencia());
             fpEventoPeriodo.setEvpValor(fpEventoPeriodo.getEvpValor());
         }
 
