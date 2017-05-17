@@ -6,8 +6,10 @@ import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.FpEventoService;
+import br.org.gdt.service.FpFolhaPeriodoService;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,9 @@ public class CalcularFolha {
 
     @Autowired
     private Eventos eventos;
+
+    @Autowired
+    private FpFolhaPeriodoService fpFolhaPeriodoService;
 
     private List<FpEventoPeriodo> getEventosPadroes() {
         if (EVENTOS_PADROES != null) {
@@ -58,7 +63,10 @@ public class CalcularFolha {
 
     public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException {
         FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
-
+        fpFolhaPeriodo.setForGeradaEm(Calendar.getInstance().getTime());
+        fpFolhaPeriodo.setForPeriodo(dadosCalculadosDoFuncionario.getPeriodo());
+        // fpFolhaPeriodo.setForPessoa(dadosCalculadosDoFuncionario.getPessoa());
+        
         dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
 
         dadosCalculadosDoFuncionario.getEventos().stream()
@@ -70,7 +78,6 @@ public class CalcularFolha {
                         throw new RuntimeException(ex);
                     }
                 });
-
         dadosCalculadosDoFuncionario.getEventos().stream()
                 .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
                 .forEach((ev) -> {
@@ -80,7 +87,8 @@ public class CalcularFolha {
                         throw new RuntimeException(ex);
                     }
                 });
-
+        
+        fpFolhaPeriodoService.save(fpFolhaPeriodo);
     }
 
 }

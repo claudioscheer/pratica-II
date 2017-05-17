@@ -33,7 +33,7 @@ public class CsbffPessoaBeneficio implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "pessoa_beneficio_codigo")
-    private BigDecimal pessoaBeneficioCodigo;
+    private BigDecimal  pessoaBeneficioCodigo;
     @JoinColumn(name = "beneficio_codigo", referencedColumnName = "beneficio_codigo")
     @ManyToOne(optional = false)
     private CsbffBeneficios beneficioCodigo;
@@ -44,15 +44,15 @@ public class CsbffPessoaBeneficio implements Serializable {
     public CsbffPessoaBeneficio() {
     }
 
-    public CsbffPessoaBeneficio(BigDecimal pessoaBeneficioCodigo) {
+    public CsbffPessoaBeneficio(BigDecimal  pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
-    public BigDecimal getPessoaBeneficioCodigo() {
+    public BigDecimal  getPessoaBeneficioCodigo() {
         return pessoaBeneficioCodigo;
     }
 
-    public void setPessoaBeneficioCodigo(BigDecimal pessoaBeneficioCodigo) {
+    public void setPessoaBeneficioCodigo(BigDecimal  pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
@@ -72,29 +72,29 @@ public class CsbffPessoaBeneficio implements Serializable {
         this.recIdpessoa = recIdpessoa;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (pessoaBeneficioCodigo != null ? pessoaBeneficioCodigo.hashCode() : 0);
-        return hash;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 0;
+//        hash += (pessoaBeneficioCodigo != null ? pessoaBeneficioCodigo.hashCode() : 0);
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object object) {
+//        // TODO: Warning - this method won't work in the case the id fields are not set
+//        if (!(object instanceof CsbffPessoaBeneficio)) {
+//            return false;
+//        }
+//        CsbffPessoaBeneficio other = (CsbffPessoaBeneficio) object;
+//        if ((this.pessoaBeneficioCodigo == null && other.pessoaBeneficioCodigo != null) || (this.pessoaBeneficioCodigo != null && !this.pessoaBeneficioCodigo.equals(other.pessoaBeneficioCodigo))) {
+//            return false;
+//        }
+//        return true;
+//    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CsbffPessoaBeneficio)) {
-            return false;
-        }
-        CsbffPessoaBeneficio other = (CsbffPessoaBeneficio) object;
-        if ((this.pessoaBeneficioCodigo == null && other.pessoaBeneficioCodigo != null) || (this.pessoaBeneficioCodigo != null && !this.pessoaBeneficioCodigo.equals(other.pessoaBeneficioCodigo))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.org.gdt.modelNew.CsbffPessoaBeneficio[ pessoaBeneficioCodigo=" + pessoaBeneficioCodigo + " ]";
-    }
+//    @Override
+//    public String toString() {
+//        return "br.org.gdt.modelNew.CsbffPessoaBeneficio[ pessoaBeneficioCodigo=" + pessoaBeneficioCodigo + " ]";
+//    }
     
 }

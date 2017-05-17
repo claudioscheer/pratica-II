@@ -1,6 +1,7 @@
 package br.org.gdt.model;
 
 import br.org.gdt.enums.FpTipoEvento;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -66,6 +67,9 @@ public class FpFolhaPeriodo implements java.io.Serializable {
 
     @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<FpEventoPeriodo> getForEventos() {
+        if (forEventos == null) {
+            forEventos = new ArrayList<>();
+        }
         return forEventos;
     }
 

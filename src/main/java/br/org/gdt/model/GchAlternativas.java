@@ -17,11 +17,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -56,49 +54,6 @@ public class GchAlternativas implements Serializable,SampleEntity {
     @Basic(optional = false)
     @Column(name = "alt_prioridade")
     private short altPrioridade;
-    
-    @OneToMany(mappedBy = "altCodigo")
-    private List<GchAlternativasperguntas> gchAlternativasperguntas;
-    
-    
-    @ManyToMany
-    private List<GchRespostas> gchRespostasList;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<GchPerguntas> gchPerguntasList;
-
-    public void setGchRespostasList(List<GchRespostas> gchRespostasList) {
-        this.gchRespostasList = gchRespostasList;
-    }
-
-    
-
-    public List<GchPerguntas> getGchPerguntasList() {
-        return gchPerguntasList;
-    }
-
-    public void setGchPerguntasList(List<GchPerguntas> gchPerguntasList) {
-        this.gchPerguntasList = gchPerguntasList;
-    }
-    
-    public GchAlternativas() {
-    }
-
-
-
-    @XmlTransient
-    @JsonIgnore
-    public List<GchRespostas> getGchRespostasList() {
-        return gchRespostasList;
-    }
-
-
-
-    @Override
-    public Long getId() {
-      
-        return Long.valueOf(altCodigo);
-    }
 
     public long getAltCodigo() {
         return altCodigo;
@@ -126,9 +81,9 @@ public class GchAlternativas implements Serializable,SampleEntity {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
-        hash = 37 * hash + Objects.hashCode(this.altDescricao);
+        int hash = 7;
+        hash = 79 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.altDescricao);
         return hash;
     }
 
@@ -150,6 +105,10 @@ public class GchAlternativas implements Serializable,SampleEntity {
         return true;
     }
 
+    @Override
+    public Long getId() {
+        return Long.reverse(this.altCodigo);
+    }
 
     
 }

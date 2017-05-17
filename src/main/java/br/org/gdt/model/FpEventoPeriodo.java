@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -31,6 +32,7 @@ public class FpEventoPeriodo implements java.io.Serializable {
         this.evpId = evpId;
     }
 
+    @ManyToOne
     public FpEvento getEvpEvento() {
         return evpEvento;
     }
@@ -39,6 +41,7 @@ public class FpEventoPeriodo implements java.io.Serializable {
         this.evpEvento = evpEvento;
     }
 
+    @ManyToOne
     public FpFolhaPeriodo getEvpFolhaPeriodo() {
         return evpFolhaPeriodo;
     }

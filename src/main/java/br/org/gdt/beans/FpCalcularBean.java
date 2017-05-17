@@ -1,13 +1,10 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoFolha;
-import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
-import br.org.gdt.resources.DependenciasFolhaPagamento;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.folhapagamento.CalcularFolha;
-import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
@@ -46,6 +43,12 @@ public class FpCalcularBean {
     }
 
     public void buscarPessoa() {
+//        RecPessoa recPessoa = recPessoaService.BuscarId(pessoaId);
+//                if (recPessoa == null) {
+//                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+//                    return;
+//                }
+
 
     }
 
@@ -63,10 +66,10 @@ public class FpCalcularBean {
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
                 RecPessoa recPessoa = recPessoaService.BuscarId(pessoaId);
-                if (recPessoa == null) {
-                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe!", "info");
-                    return;
-                }
+//                if (recPessoa == null) {
+//                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+//                    return;
+//                }
                 dadosCalculadosDoFuncionario.setPessoa(recPessoa);
 
                 calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);

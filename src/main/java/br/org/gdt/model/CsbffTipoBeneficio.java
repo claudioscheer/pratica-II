@@ -5,17 +5,21 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.enums.TipoBeneficio;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -31,6 +35,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = "CsbffTipoBeneficio.findAll", query = "SELECT c FROM CsbffTipoBeneficio c")})
 public class CsbffTipoBeneficio implements Serializable {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -40,8 +45,30 @@ public class CsbffTipoBeneficio implements Serializable {
     @Basic(optional = false)
     @Column(name = "tipo_beneficio_nome")
     private String tipoBeneficioNome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoBeneficioCodigo")
-    private List<CsbffBeneficios> csbffBeneficiosList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoBeneficio")
+    @OneToMany
+    private List<CsbffTipoBeneficio> csbffBeneficiosList;
+    @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
+    @ManyToOne(optional = false)
+    @OneToOne(mappedBy = "tipoBeneficio")
+    private RecPessoa recIdpessoa;
+    private TipoBeneficio tipoBeneficio;
+
+    public CsbffTipoBeneficio(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
+    }
+
+    public CsbffTipoBeneficio(RecPessoa recIdpessoa) {
+        this.recIdpessoa = recIdpessoa;
+    }
+
+    public RecPessoa getRecIdpessoa() {
+        return recIdpessoa;
+    }
+
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
+        this.recIdpessoa = recIdpessoa;
+    }
 
     public CsbffTipoBeneficio() {
     }
@@ -66,7 +93,6 @@ public class CsbffTipoBeneficio implements Serializable {
     public CsbffTipoBeneficio(long tipoBeneficioCodigo, String tipoBeneficioNome, List<CsbffBeneficios> csbffBeneficiosList) {
         this.tipoBeneficioCodigo = tipoBeneficioCodigo;
         this.tipoBeneficioNome = tipoBeneficioNome;
-        this.csbffBeneficiosList = csbffBeneficiosList;
     }
 
     public String getTipoBeneficioNome() {
@@ -79,49 +105,22 @@ public class CsbffTipoBeneficio implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<CsbffBeneficios> getCsbffBeneficiosList() {
+    public List<CsbffTipoBeneficio> getCsbffBeneficiosList() {
         return csbffBeneficiosList;
     }
 
-    public void setCsbffBeneficiosList(List<CsbffBeneficios> csbffBeneficiosList) {
+    public void setCsbffBeneficiosList(List<CsbffTipoBeneficio> csbffBeneficiosList) {
         this.csbffBeneficiosList = csbffBeneficiosList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.tipoBeneficioCodigo);
-        hash = 97 * hash + Objects.hashCode(this.tipoBeneficioNome);
-        hash = 97 * hash + Objects.hashCode(this.csbffBeneficiosList);
-        return hash;
+    public TipoBeneficio getTipoBeneficio() {
+        return tipoBeneficio;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CsbffTipoBeneficio other = (CsbffTipoBeneficio) obj;
-        if (!Objects.equals(this.tipoBeneficioNome, other.tipoBeneficioNome)) {
-            return false;
-        }
-        if (!Objects.equals(this.tipoBeneficioCodigo, other.tipoBeneficioCodigo)) {
-            return false;
-        }
-        return Objects.equals(this.csbffBeneficiosList, other.csbffBeneficiosList);
+    public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
     }
 
     
 
-    @Override
-    public String toString() {
-        return "br.org.gdt.modelNew.CsbffTipoBeneficio[ tipoBeneficioCodigo=" + tipoBeneficioCodigo + " ]";
-    }
-    
 }

@@ -42,7 +42,7 @@ public class GchPerguntas implements Serializable {
     @Basic(optional = false)
     @Column(name = "per_descricao")
     private String perDescricao;
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GchAlternativas> gchAlternativas;
     
     @ManyToOne
@@ -86,9 +86,9 @@ public class GchPerguntas implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + (int) (this.perCodigo ^ (this.perCodigo >>> 32));
-        hash = 31 * hash + Objects.hashCode(this.perDescricao);
+        int hash = 7;
+        hash = 79 * hash + (int) (this.perCodigo ^ (this.perCodigo >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.perDescricao);
         return hash;
     }
 
@@ -110,7 +110,7 @@ public class GchPerguntas implements Serializable {
         return true;
     }
 
-    
+
 
     @Override
     public String toString() {
