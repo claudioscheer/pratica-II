@@ -13,7 +13,9 @@ public class GenericConvert implements Converter, Serializable {
     @Override
     public Object getAsObject(FacesContext ctx, UIComponent component, String value) {
         if (value != null) {
+            
             return this.getAttributesFrom(component).get(value);
+            
         }
         return null;
     }
@@ -28,6 +30,7 @@ public class GenericConvert implements Converter, Serializable {
             this.addAttribute(component, entity);
 
             Long codigo = entity.getId();
+            
             if (codigo != null) {
                 return String.valueOf(codigo);
             }
