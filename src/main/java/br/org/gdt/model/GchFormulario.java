@@ -61,6 +61,7 @@ implements Serializable {
     @OneToMany(mappedBy = "formulario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<GchPerguntas> perguntas;
     
+    
 
     public long getFormCodigo() {
         return formCodigo;

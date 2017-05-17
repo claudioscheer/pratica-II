@@ -5,7 +5,6 @@
  */
 package br.org.gdt.model;
 
-import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,12 +35,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = "GchAlternativas.findAll", query = "SELECT g FROM GchAlternativas g")})
 @SequenceGenerator(name = "seq_gch_alt", sequenceName = "seq_gch_alt", allocationSize = 1)
-public class GchAlternativas implements Serializable,SampleEntity {
+public class GchAlternativas implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_alt")
     @Basic(optional = false)
@@ -59,22 +53,79 @@ public class GchAlternativas implements Serializable,SampleEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "altCodigo")
     private List<GchRespostas> gchRespostasList;
 
-//    @OneToMany(cascade = CascadeType.ALL,mappedBy="perCodigo")
-//    private List<GchPerguntas> gchPerguntasList;
+    
+    public GchAlternativas() {
+    }
+
+    public GchAlternativas(Long altCodigo) {
+        this.altCodigo = altCodigo;
+    }
+
+    public GchAlternativas(Long altCodigo, String altDescricao, short altPrioridade) {
+        this.altCodigo = altCodigo;
+        this.altDescricao = altDescricao;
+        this.altPrioridade = altPrioridade;
+    }
+
+    public Long getAltCodigo() {
+        return altCodigo;
+    }
+
+    public void setAltCodigo(Long altCodigo) {
+        this.altCodigo = altCodigo;
+    }
+
+    public String getAltDescricao() {
+        return altDescricao;
+    }
+
+    public void setAltDescricao(String altDescricao) {
+        this.altDescricao = altDescricao;
+    }
+
+    public short getAltPrioridade() {
+        return altPrioridade;
+    }
+
+    public void setAltPrioridade(short altPrioridade) {
+        this.altPrioridade = altPrioridade;
+    }
+
+    public GchAlternativasperguntas getGchAlternativasperguntas() {
+        return gchAlternativasperguntas;
+    }
+
+    public void setGchAlternativasperguntas(GchAlternativasperguntas gchAlternativasperguntas) {
+        this.gchAlternativasperguntas = gchAlternativasperguntas;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public List<GchRespostas> getGchRespostasList() {
+        return gchRespostasList;
+    }
 
     public void setGchRespostasList(List<GchRespostas> gchRespostasList) {
         this.gchRespostasList = gchRespostasList;
     }
 
+    public void setAltCodigo(long altCodigo) {
+        this.altCodigo = altCodigo;
+    }
+
+    @Override
+    public String toString() {
+        return "br.org.gdt.modelNew.GchAlternativas[ altCodigo=" + altCodigo + " ]";
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
-        hash = 67 * hash + Objects.hashCode(this.altDescricao);
-        hash = 67 * hash + this.altPrioridade;
-        hash = 67 * hash + Objects.hashCode(this.gchAlternativasperguntas);
-        hash = 67 * hash + Objects.hashCode(this.gchRespostasList);
-//        hash = 67 * hash + Objects.hashCode(this.gchPerguntasList);
+        int hash = 5;
+        hash = 89 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.altDescricao);
+        hash = 89 * hash + this.altPrioridade;
+        hash = 89 * hash + Objects.hashCode(this.gchAlternativasperguntas);
+        hash = 89 * hash + Objects.hashCode(this.gchRespostasList);
         return hash;
     }
 
@@ -102,69 +153,7 @@ public class GchAlternativas implements Serializable,SampleEntity {
         if (!Objects.equals(this.gchRespostasList, other.gchRespostasList)) {
             return false;
         }
-//        if (!Objects.equals(this.gchPerguntasList, other.gchPerguntasList)) {
-//            return false;
-//        }
         return true;
-    }
-
-//    public List<GchPerguntas> getGchPerguntasList() {
-//        return gchPerguntasList;
-//    }
-//
-//    public void setGchPerguntasList(List<GchPerguntas> gchPerguntasList) {
-//        this.gchPerguntasList = gchPerguntasList;
-//    }
-    
-    public GchAlternativas() {
-    }
-
-
-
-    @XmlTransient
-    @JsonIgnore
-    public List<GchRespostas> getGchRespostasList() {
-        return gchRespostasList;
-    }
-
-
-
-    @Override
-    public Long getId() {
-      
-        return Long.valueOf(altCodigo);
-    }
-
-    public long getAltCodigo() {
-        return altCodigo;
-    }
-
-    public void setAltCodigo(long altCodigo) {
-        this.altCodigo = altCodigo;
-    }
-
-    public String getAltDescricao() {
-        return altDescricao;
-    }
-
-    public void setAltDescricao(String altDescricao) {
-        this.altDescricao = altDescricao;
-    }
-
-    public short getAltPrioridade() {
-        return altPrioridade;
-    }
-
-    public void setAltPrioridade(short altPrioridade) {
-        this.altPrioridade = altPrioridade;
-    }
-
-    public GchAlternativasperguntas getGchAlternativasperguntas() {
-        return gchAlternativasperguntas;
-    }
-
-    public void setGchAlternativasperguntas(GchAlternativasperguntas gchAlternativasperguntas) {
-        this.gchAlternativasperguntas = gchAlternativasperguntas;
     }
     
 }

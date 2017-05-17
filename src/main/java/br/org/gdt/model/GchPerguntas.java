@@ -14,6 +14,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -86,9 +87,8 @@ public class GchPerguntas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + (int) (this.perCodigo ^ (this.perCodigo >>> 32));
-        hash = 13 * hash + Objects.hashCode(this.perDescricao);
-        hash = 13 * hash + Objects.hashCode(this.gchAlternativas);
+        hash = 79 * hash + (int) (this.perCodigo ^ (this.perCodigo >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.perDescricao);
         return hash;
     }
 
@@ -107,10 +107,14 @@ public class GchPerguntas implements Serializable {
         if (!Objects.equals(this.perDescricao, other.perDescricao)) {
             return false;
         }
-        if (!Objects.equals(this.gchAlternativas, other.gchAlternativas)) {
-            return false;
-        }
         return true;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return this.perDescricao;
     }
 
     public GchPerguntas(long perCodigo) {

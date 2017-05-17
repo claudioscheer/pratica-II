@@ -41,7 +41,7 @@ public class GchAlternativaBean {
 
     private Map<GchAlternativas, Boolean> checked = new HashMap<GchAlternativas, Boolean>();
 
-    private List<GchAlternativas> alternativasVinculadas;
+    private List<GchAlternativas> alternativasVinculadas = new ArrayList<>();
     
     private String codigo;
     
@@ -62,9 +62,10 @@ public class GchAlternativaBean {
     private GchCadastroAlternativaServiceCerto gchAlternativasService;
 
     public GchAlternativaBean() {
-
+        
+ 
     }
-   
+
     public List<String> completeText(String query) {
         
         System.out.println("Agora vai");
@@ -202,55 +203,6 @@ public class GchAlternativaBean {
         return "Alternativas";
 
     }
-
-    public void vincularAlternativas(){
-        
-        System.out.println("Teste teste: " + gchAlternativas.getAltCodigo());
-
-        Iterator<GchAlternativas> keyIterrator = checked.keySet().iterator();
-
-        while (keyIterrator.hasNext()) {
-
-            GchAlternativas alt = keyIterrator.next();
-            Boolean value = checked.get(alt);
-
-            System.out.println(alt.getAltDescricao() + " - " + value);
-
-            if (value) {
-
-                System.out.println("Está marcado");
-                
-                GchAlternativasperguntas altperg = new GchAlternativasperguntas();
-                
-                altperg.setAltCodigo(alt.getAltCodigo());
-                altperg.setGchAlternativas(gchAlternativas);
-                
-                GchPerguntas pergunta = new GchPerguntas();
-                
-                pergunta.setPerCodigo(Long.MIN_VALUE);
-                
-//                altperg.setPerCodigo(pergunta);
-                altperg.setAlpCodigo(Long.MIN_VALUE);
-                
-                altPerLista.add(altperg);
-                
-
-            }
-        }
-
-        
-        
-        
-//        System.out.println("Salvar: " + pessoasVinculadas.get(0).getRecNomecompleto());
-//        gchTreinamentospessoas.setRecIdpessoa(pessoasVinculadas.get(0));
-//        }
-//        todosGchTreinamentosPessoas = null;
-//        this.formAtivo = false;
-//        gchTreinamentospessoas = null;
-//        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml");
-        
-        
-    }
     
     
     public String excluir(GchAlternativas gchAlternativas) {
@@ -286,23 +238,8 @@ public class GchAlternativaBean {
 
     public List<GchAlternativas> getGchTodasAlternativas() {
 
-        try {
+        gchTodasAlternativas = gchAlternativasService.findAll();
 
-            System.out.println("Entrou na Bean");
-
-            if (gchTodasAlternativas == null) {
-
-                gchTodasAlternativas = gchAlternativasService.findAll();
-
-            }
-
-            System.out.println("Saindo da Bean");
-
-        } catch (Exception ex) {
-
-            System.out.println("DEu excecãooooo " + ex.toString());
-
-        }
         return gchTodasAlternativas;
     }
 
