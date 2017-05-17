@@ -7,10 +7,10 @@ package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
 import br.org.gdt.enums.Sexo;
+import br.org.gdt.enums.TipoBeneficio;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,7 +38,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  *
  * @author Diego
  */
-
 @Entity
 @Table(name = "rec_pessoa")
 @XmlRootElement
@@ -56,7 +55,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_nomecompleto")
     private String recNomecompleto;
     @Column(name = "rec_cpf")
-    private String recCpf;
+    private int recCpf;
     @Column(name = "rec_sexo")
     private Sexo recSexo;
     @Column(name = "rec_estadocivil")
@@ -165,6 +164,21 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffHistoricoSalario> csbffHistoricoSalarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchRespostas> gchRespostasList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+//    private List<TipoBeneficio> csbffBeneficiosList;
+    @OneToMany
+    private List<CsbffBeneficios> csbffBeneficiosList;
+//    @OneToMany
+    @OneToOne
+    private CsbffTipoBeneficio tipoBeneficio;
+
+    public RecPessoa(CsbffTipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
+    }
+
+    public RecPessoa(List<CsbffBeneficios> csbffBeneficiosList) {
+        this.csbffBeneficiosList = csbffBeneficiosList;
+    }
 
     public RecPessoa() {
     }
@@ -173,6 +187,9 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recIdpessoa = recIdpessoa;
     }
 
+//    public RecPessoa(List<TipoBeneficio> csbffBeneficiosList) {
+//        this.csbffBeneficiosList = csbffBeneficiosList;
+//    }
     public RecPessoa(Integer recIdpessoa, int recInsalubridade) {
         this.recIdpessoa = recIdpessoa;
         this.recInsalubridade = recInsalubridade;
@@ -198,11 +215,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recNomecompleto = recNomecompleto;
     }
 
-    public String getRecCpf() {
+    public int getRecCpf() {
         return recCpf;
     }
 
-    public void setRecCpf(String recCpf) {
+    public void setRecCpf(int recCpf) {
         this.recCpf = recCpf;
     }
 
@@ -614,40 +631,25 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.gchRespostasList = gchRespostasList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + (int) (this.recIdpessoa ^ (this.recIdpessoa >>> 32));
-        hash = 73 * hash + Objects.hashCode(this.recNomecompleto);
-        return hash;
+    public List<CsbffBeneficios> getCsbffBeneficiosList() {
+        return csbffBeneficiosList;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final RecPessoa other = (RecPessoa) obj;
-        if (this.recIdpessoa != other.recIdpessoa) {
-            return false;
-        }
-        if (!Objects.equals(this.recNomecompleto, other.recNomecompleto)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.org.gdt.modelNew.RecPessoa[ recIdpessoa=" + recIdpessoa + " ]";
+    public void setCsbffBeneficiosList(List<CsbffBeneficios> csbffBeneficiosList) {
+        this.csbffBeneficiosList = csbffBeneficiosList;
     }
 
     @Override
     public Long getId() {
-        return Long.valueOf(recIdpessoa);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public CsbffTipoBeneficio getTipoBeneficio() {
+        return tipoBeneficio;
+    }
+
+    public void setTipoBeneficio(CsbffTipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
     }
 
 }

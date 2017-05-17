@@ -46,10 +46,4 @@ public class DadosCalculadosDoFuncionario {
         this.eventos = eventos;
     }
 
-    public void ordenarEventosParaCalcular() {
-        this.eventos = this.eventos.stream()
-                .sorted((x, y) -> x.getEvpEvento().getEveTipoEvento().toString().compareTo(
-                y.getEvpEvento().getEveTipoEvento().toString())).collect(Collectors.toList());
-    }
-
 }

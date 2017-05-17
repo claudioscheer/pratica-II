@@ -16,7 +16,6 @@ public class FpEvento implements java.io.Serializable {
     private static final long serialVersionUID = -2790083349568956163L;
     private long eveId;
     private String eveNome;
-    private String eveFormula;
     private FpTipoEvento eveTipoEvento;
     private boolean eveIncideINSS;
     private boolean eveIncideFGTS;
@@ -39,14 +38,6 @@ public class FpEvento implements java.io.Serializable {
 
     public void setEveNome(String eveNome) {
         this.eveNome = eveNome;
-    }
-
-    public String getEveFormula() {
-        return eveFormula;
-    }
-
-    public void setEveFormula(String eveFormula) {
-        this.eveFormula = eveFormula;
     }
 
     public FpTipoEvento getEveTipoEvento() {

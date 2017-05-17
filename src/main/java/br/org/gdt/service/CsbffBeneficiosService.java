@@ -16,13 +16,13 @@ public class CsbffBeneficiosService {
     private CsbffBeneficioDAO csbffBeneficioDAO;
 
     @Transactional
-    public void save(CsbffBeneficios csbffBeneficios) {
-        csbffBeneficioDAO.save(csbffBeneficios);
+    public void save(CsbffBeneficios beneficio) {
+        csbffBeneficioDAO.save(beneficio);
     }
 
     @Transactional
-    public void update(CsbffBeneficios csbffBeneficios) {
-        csbffBeneficioDAO.update(csbffBeneficios);
+    public void update(CsbffBeneficios beneficio) {
+        csbffBeneficioDAO.update(beneficio);
     }
 
     @Transactional
@@ -33,9 +33,12 @@ public class CsbffBeneficiosService {
     public CsbffBeneficios findById(long id) {
         return csbffBeneficioDAO.findById(id);
     }
-
-    public List<CsbffBeneficios> findAll() {
+    
+    public List<CsbffBeneficios> findAll(long nomeBeneficio) {
+        return csbffBeneficioDAO.findAll(nomeBeneficio);
+    }
+   
+     public List<CsbffBeneficios> findAll() {
         return csbffBeneficioDAO.findAll();
     }
-    
 }
