@@ -12,11 +12,11 @@ import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
-import com.sun.faces.facelets.tag.jsf.core.LoadBundleHandler;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +26,10 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import org.primefaces.event.SelectEvent;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -39,15 +39,27 @@ import org.primefaces.event.SelectEvent;
 @SessionScoped
 public class GchFormularioBean {
 
+    public GchFormulario getGchFormulario() {
+        return gchFormulario;
+    }
+
     private boolean formAtivo = false;
 
     private long indexPerguntaItem = 0;
-
+    private List<GchAlternativas> alternativasVinculadas;
     private GchFormulario gchFormulario = new GchFormulario();
     private List<GchFormulario> gchTodosFormularios;
 
+    public List<GchAlternativas> getAlternativasVinculadas() {
+        return alternativasVinculadas;
+    }
+
+    public void setAlternativasVinculadas(List<GchAlternativas> alternativasVinculadas) {
+        this.alternativasVinculadas = alternativasVinculadas;
+    }
+
     private List<PerguntasAlternativas> PergAlt;
-//
+////
 //    @ManagedProperty("#{gchAlternativaCertoService}")
 //    private GchCadastroAlternativaServiceCerto gchAlternativasService;
 ////
@@ -57,8 +69,11 @@ public class GchFormularioBean {
     @ManagedProperty("#{gchFormularioService}")
     private GchFormularioService gchFormularioService;
 
-    public GchFormularioBean() {
+    @ManagedProperty("#{gchAlternativaCertoService}")
+    private GchCadastroAlternativaServiceCerto gchAlternativasService;
 
+    public GchFormularioBean() {
+        gchFormulario.addPergunta(new GchPerguntas(1)); 
     }
 
     public void Salvar() {
@@ -89,23 +104,30 @@ public class GchFormularioBean {
 
     }
 
+    public void alimentarVariaveis() {
+
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.execute("MontarPerguntasAlternativas()");
+
+    }
+
     public void SalvarFormulario() {
 
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
         //Busca parametros concatenados 
-        String parametrosCapa           = params.get("formFormulario:TxbParametrosCapa");
-        String parametrosPerguntas      = params.get("formFormulario:TxbParametrosPergunta");
-        String parametrosAlternativas   = params.get("formFormulario:TxbParametrosAlternativas");
+        String parametrosCapa = params.get("formFormulario:TxbParametrosCapa");
+        String parametrosPerguntas = params.get("formFormulario:TxbParametrosPergunta");
+        String parametrosAlternativas = params.get("formFormulario:TxbParametrosAlternativas");
 
-        String inputsCapa   []  = parametrosCapa.split("§");
-        String Perguntas    []  = parametrosPerguntas.split("§");
-        String Alternativas []  = parametrosAlternativas.split("¬");
+        String inputsCapa[] = parametrosCapa.split("§");
+        String Perguntas[] = parametrosPerguntas.split("§");
+        String Alternativas[] = parametrosAlternativas.split("¬");
 
         GchFormulario formulario = new GchFormulario();
 
         Date date = null;
-        
+
         try {
 
             //Roda inputs da capa
@@ -116,14 +138,14 @@ public class GchFormularioBean {
 
             date = (Date) formatter.parse(inputsCapa[2]);
             formulario.setFormPrazoResposta(date);
-            
+
         } catch (ParseException ex) {
             Logger.getLogger(GchFormularioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         //Somente executa o processo se tiver recebebido as informaçõs de acordo
         if (Perguntas.length == Alternativas.length) {
-            
+
             GchPerguntas pergunta;
             String[] altPergunta;
             GchAlternativasperguntas altperg;
@@ -131,55 +153,58 @@ public class GchFormularioBean {
             List<GchAlternativasperguntas> listaAlternativaPergunta = new ArrayList<>();
             List<GchPerguntas> listaPerguntas = new ArrayList<>();
             List<GchAlternativas> AlternativaPergunta = new ArrayList<>();
-          
+
             //Roda input das perguntas
             for (int i = 0; i < Perguntas.length; i++) {
 
                 String codigoPergunta = String.valueOf(i + 1);
 
                 pergunta = new GchPerguntas();
-                
+
                 pergunta.setPerCodigo(Long.parseLong(codigoPergunta));
                 pergunta.setPerDescricao(Perguntas[i]);
-               
-               
+
+                GchAlternativas novaAlternativa = new GchAlternativas();
+
                 //Busca todas alternativas de cada pergunta e armazena no array
                 altPergunta = Alternativas[i].split("§");
 
                 //Percorre alternativas da pergunta
                 for (int j = 0; j < altPergunta.length; j++) {
 
+//                     novaAlternativa.setAltCodigo(Long.parseLong(altPergunta[j]));
+                    novaAlternativa = gchAlternativasService.findById(Long.parseLong(altPergunta[j]));
+
                     altperg = new GchAlternativasperguntas();
 
-                    GchAlternativas novaAlternativa = new GchAlternativas();
-                    
-                    novaAlternativa.setAltCodigo(Long.valueOf(altPergunta[j]));
-                    
-                    AlternativaPergunta.add(novaAlternativa);
-                    
-//                    
-//                    altperg.setAltCodigo(Long.valueOf(altPergunta[j]));
-//                    altperg.setPerCodigo(pergunta);
-//                    altperg.setAlpCodigo(indexPerguntaItem);
-//                    
-//                    listaAlternativaPergunta.add(altperg);
+                    altperg.setAltCodigo(novaAlternativa);
+//                    altperg.setPerAltCodigo(Long.parseLong(altPergunta[j])); //essa nao precisa ter pq essa vai ser alimentado pelo sequence
+                    //To ligado, vamos testar? Gruda
+                    altperg.setPerCodigo(pergunta);
+                    //aqui nao teria que ter classe inteira GchAlternativa?
+                    //Tipo so ta passando o codigo isso costuma dar problema
+
+                    //Poisé, eu to achanado que só precisaria desse altperg que é do tipo alternativasperguntas
+                    //Tipo assim
+                    //agora tu vai ter que passar a classe inteira 
+                    //como tu fez com o setPerCodigo
+                    listaAlternativaPergunta.add(altperg);
 
                 }
 
                 pergunta.setGchAlternativas(AlternativaPergunta);
-                
+
                 AlternativaPergunta.clear();
-                
+
                 listaPerguntas.add(pergunta);
 
             }
 
             formulario.setPerguntas(listaPerguntas);
-            
+
             //Salva no banco de dados
             gchFormularioService.save(formulario);
-           
-            
+
         }
     }
 
@@ -194,22 +219,6 @@ public class GchFormularioBean {
         System.out.println("indice" + index);
 
         this.gchFormulario.getPerguntas().remove(index);
-    }
-
-    public void VincularAlternativaPergunta(List<GchAlternativas> alternativas, GchPerguntas pergunta) {
-
-//        if (!alternativas.isEmpty()) {
-//
-//            for (GchAlternativas a : alternativas) {
-//
-//                alternativasPerguntas.setAltCodigo(a.getAltCodigo());
-//                alternativasPerguntas.setPerCodigo(pergunta);
-//                alternativasPerguntas.setGchAlternativas(a);
-//
-//                todasAlternativasPerguntas.add(alternativasPerguntas);
-//            }
-//
-//        }
     }
 
     public String excluir(GchFormulario gchFormulario) {
@@ -233,16 +242,6 @@ public class GchFormularioBean {
         }
 
         return "Formularios";
-    }
-
-    public GchFormulario getGchFormulario() {
-
-//      gchFormulario =  gchFormularioService.findById(1);
-//        
-//        System.out.println("codigo formulario"+gchFormulario.getFormNome());
-//      
-//      
-        return gchFormulario;
     }
 
     public void setGchFormulario(GchFormulario gchFormulario) {
@@ -290,6 +289,14 @@ public class GchFormularioBean {
 
     public void setGchFormularioService(GchFormularioService gchFormularioService) {
         this.gchFormularioService = gchFormularioService;
+    }
+
+    public GchCadastroAlternativaServiceCerto getGchAlternativasService() {
+        return gchAlternativasService;
+    }
+
+    public void setGchAlternativasService(GchCadastroAlternativaServiceCerto gchAlternativasService) {
+        this.gchAlternativasService = gchAlternativasService;
     }
 
 }

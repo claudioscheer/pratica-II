@@ -63,8 +63,22 @@ function MontarPerguntasAlternativas() {
     });
 
 
-    alert(parametrosPergunta.value);
-    alert(parametrosCapa.value);
-    alert(parametrosAlternativas.value);
+    myRemote();
+
+//    alert(parametrosPergunta.value);
+//    alert(parametrosCapa.value);
+//    alert(parametrosAlternativas.value);
+
+}
+
+
+function AddNovaPergunta(){
+	
+var divPerguntas = $('#InfoPerguntas');
+
+var InputText = '<div class="row"><div id="perguntas"><div class="form-group col-md-5 col-sm-5"><input type="text" name="formFormulario:j_idt56:0:j_idt58" value="" class="form-control"></div></div><div class="text-left col-md-5 col-sm-5"><div class="side-by-side clearfix"><div id="0"><select id="0" style="width:400px" data-placeholder="Selecione uma alternativa" class="chosen-select" multiple="true" tabindex="4"><option value=""/><option value="1">Sim</option><option value="2">Não</option><option value="3">As Vezes</option><option value="4">Nem sempre</option><option value="5">Claro que sim</option><option value="6">Nunca</option></select></div></div></div></div>'
+
+
+divPerguntas.append(InputText);
 
 }

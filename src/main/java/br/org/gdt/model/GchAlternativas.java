@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,6 +40,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @SequenceGenerator(name = "seq_gch_alt", sequenceName = "seq_gch_alt", allocationSize = 1)
 public class GchAlternativas implements Serializable,SampleEntity {
     private static final long serialVersionUID = 1L;
+   
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -54,59 +56,22 @@ public class GchAlternativas implements Serializable,SampleEntity {
     @Basic(optional = false)
     @Column(name = "alt_prioridade")
     private short altPrioridade;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "gchAlternativas")
-    private GchAlternativasperguntas gchAlternativasperguntas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "altCodigo")
+    
+    @OneToMany(mappedBy = "altCodigo")
+    private List<GchAlternativasperguntas> gchAlternativasperguntas;
+    
+    
+    @ManyToMany
     private List<GchRespostas> gchRespostasList;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="per_codigo")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GchPerguntas> gchPerguntasList;
 
     public void setGchRespostasList(List<GchRespostas> gchRespostasList) {
         this.gchRespostasList = gchRespostasList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
-        hash = 67 * hash + Objects.hashCode(this.altDescricao);
-        hash = 67 * hash + this.altPrioridade;
-        hash = 67 * hash + Objects.hashCode(this.gchAlternativasperguntas);
-        hash = 67 * hash + Objects.hashCode(this.gchRespostasList);
-        hash = 67 * hash + Objects.hashCode(this.gchPerguntasList);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GchAlternativas other = (GchAlternativas) obj;
-        if (this.altCodigo != other.altCodigo) {
-            return false;
-        }
-        if (!Objects.equals(this.altDescricao, other.altDescricao)) {
-            return false;
-        }
-        if (this.altPrioridade != other.altPrioridade) {
-            return false;
-        }
-        if (!Objects.equals(this.gchAlternativasperguntas, other.gchAlternativasperguntas)) {
-            return false;
-        }
-        if (!Objects.equals(this.gchRespostasList, other.gchRespostasList)) {
-            return false;
-        }
-        if (!Objects.equals(this.gchPerguntasList, other.gchPerguntasList)) {
-            return false;
-        }
-        return true;
-    }
+    
 
     public List<GchPerguntas> getGchPerguntasList() {
         return gchPerguntasList;
@@ -159,12 +124,32 @@ public class GchAlternativas implements Serializable,SampleEntity {
         this.altPrioridade = altPrioridade;
     }
 
-    public GchAlternativasperguntas getGchAlternativasperguntas() {
-        return gchAlternativasperguntas;
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.altDescricao);
+        return hash;
     }
 
-    public void setGchAlternativasperguntas(GchAlternativasperguntas gchAlternativasperguntas) {
-        this.gchAlternativasperguntas = gchAlternativasperguntas;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchAlternativas other = (GchAlternativas) obj;
+        if (this.altCodigo != other.altCodigo) {
+            return false;
+        }
+        if (!Objects.equals(this.altDescricao, other.altDescricao)) {
+            return false;
+        }
+        return true;
     }
+
+
     
 }

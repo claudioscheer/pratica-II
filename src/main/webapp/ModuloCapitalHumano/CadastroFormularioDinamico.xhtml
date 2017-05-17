@@ -26,19 +26,28 @@
                         Cadastro de formulário de análise
                     </h3>
                 </div>
+
                 <br />
                 <h:form id="formFormulario">
                     <h:messages class="error" style="color: #d9534f" />
                     <script src="ControleFormularios.js" type="text/javascript"></script>
-              
+                    <script src="Js/chosen.jquery.js" type="text/javascript"></script>
+                    <link href="Js/chosen.min.css" rel="stylesheet" type="text/css"/>
+
+
                     <h:panelGroup id="panelInserirLinha" layout="block" class="col-md-12 col-sm-12 col-xs-12">
-                        <h:inputHidden value="#{gchFormularioBean.gchFormulario.formCodigo}" />
+
 
                         // Essa caganeira aqui teve que ser feita por que o Java Web é horrível de criar coisas dinâmicas
                         <h:inputHidden id="TxbParametrosCapa" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
                         <h:inputHidden id="TxbParametrosPergunta" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
                         <h:inputHidden id="TxbParametrosAlternativas" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
-
+                        
+                        <div id="TxbAlternativasDisponiveis">
+                        <h:selectOneMenu>
+                            <f:selectItems value="#{gchAlternativaBean.gchTodasAlternativas}" var="curso" itemValue="#{curso}" itemLabel="#{curso.altDescricao}"/>
+                        </h:selectOneMenu>
+                       </div>
 
                         <div id="InfoCapa">
 
@@ -78,7 +87,7 @@
                             <div class="ln_solid" style="margin-top:100px"></div>
 
                         </div>
-                      
+
                         <div id="InfoPerguntas">
                             <ui:repeat value="#{gchFormularioBean.gchFormulario.perguntas}" var="pergunta" varStatus="perguntaStatus">
 
@@ -89,20 +98,26 @@
                                             <h:inputText  class="form-control" value="#{gchFormularioBean.gchFormulario.perguntas[perguntaStatus.index].perDescricao}" />
                                         </div>
                                     </div>
+
+
                                     <div class="text-left col-md-5 col-sm-5" >
-                                        <p:outputLabel for="alternativas" />
 
-                                        <p:autoComplete  id="alternativas" multiple="true" value="#{gchAlternativaBean.alternativasVinculadas}" completeMethod="#{gchAlternativaBean.CompleteAlternativas}" var="alternativa" itemLabel="#{alternativa.altDescricao}" itemValue="#{alternativa}" converter="#{generic}">
+                                        <div class="side-by-side clearfix">
+                                            <div id="#{perguntaStatus.index}">
+                                                <select id="#{perguntaStatus.index}" style="width:400px" data-placeholder="Selecione uma alternativa" class="chosen-select" multiple="true" tabindex="4">
+                                                    <option value=""></option>
+                                                    <option value="1">Sim</option>
+                                                    <option value="2">Não</option>
+                                                    <option value="3">As Vezes</option>
+                                                    <option value="4">Nem sempre</option>
+                                                    <option value="5">Claro que sim</option>
+                                                    <option value="6">Nunca</option>
 
-                                            <p:column>
-                                                <h:outputText value="#{alternativa.altDescricao}">
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                                </h:outputText>
-                                                <f:param name="codAlt" value="#{alternativa.altDescricao}"/>
-                                                <f:param name="codAlt" value="#{alternativa.altCodigo}"/>
-                                            </p:column>
 
-                                        </p:autoComplete>
                                     </div>
                                     <div class="text-left col-md-2 col-sm-2" >
                                         <h:commandButton class="btn btn-danger btn-sm" value="Remover" action="#{gchFormularioBean.removerPergunta(perguntaStatus.index)}">
@@ -120,15 +135,19 @@
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 
-                                <h:commandButton id="Botao" class="btn btn-success" action="#{gchFormularioBean.SalvarFormulario}" value="Salvar"/>
+                                <h:commandButton id="Botao" class="btn btn-success" action="#{gchFormularioBean.alimentarVariaveis}" value="Salvar"/>
                                 <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{gchFormularioBean.cancel()}">
-                                    <f:ajax execute="@form" render="gridperg" />
+                                    <f:ajax execute="@form" render="formFormulario:panelInserirLinha" />
                                 </h:commandButton>
+
+                                <p:remoteCommand name="myRemote" actionListener="#{gchFormularioBean.salvarFormulario}" process="@this"/>
+
+
                             </div>
                         </div>
 
                     </h:panelGroup>
-                      
+
                 </h:form>
             </ui:define>
             <ui:define name="script">
