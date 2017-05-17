@@ -69,7 +69,9 @@
 
                                                 <h:column>                
                                                     <f:facet name="header">Data de Inclusão</f:facet>
-                                                    <h:outputText value="#{curso.curDatainclusao}"/>                
+                                                    <h:outputText value="#{curso.curDatainclusao}">
+                                                        <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm"/>
+                                                    </h:outputText>                
                                                 </h:column>
                                             </h:dataTable>
 

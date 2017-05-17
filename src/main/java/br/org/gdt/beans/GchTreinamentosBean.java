@@ -174,6 +174,11 @@ public class GchTreinamentosBean {
 
             gchTreinamentos = gchTreinamentosService.findById(id);
 
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+            dataInicio = formatter.format(gchTreinamentos.getTreiDataInicio());
+            dataFim = formatter.format(gchTreinamentos.getTreiDataFim());
+
             return "CadastroTreinamentos";
 
         }
