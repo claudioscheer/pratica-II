@@ -14,6 +14,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,12 +33,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Alisson Allebrandt
  */
+
+
+
+
+
 @Entity
 @Table(name = "gch_formulario")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchFormulario.findAll", query = "SELECT g FROM GchFormulario g")})
 @SequenceGenerator(name = "seq_gch_form", sequenceName = "seq_gch_form", allocationSize = 1)
+
 public class GchFormulario
 implements Serializable {
 
@@ -58,7 +65,8 @@ implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date formPrazoResposta;
     
-    @OneToMany(mappedBy = "formulario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//  @OneToMany(mappedBy = "formulario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "formulario", cascade = CascadeType.ALL)
     private List<GchPerguntas> perguntas;
     
     

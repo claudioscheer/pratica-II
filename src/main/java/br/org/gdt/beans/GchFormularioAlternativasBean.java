@@ -6,7 +6,10 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.GchAlternativas;
+import br.org.gdt.model.GchFormulario;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
+import br.org.gdt.service.GchFormularioService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,7 +18,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.AjaxBehaviorEvent;
+
 
 /**
  *
@@ -25,106 +28,45 @@ import javax.faces.event.AjaxBehaviorEvent;
 @SessionScoped
 public class GchFormularioAlternativasBean {
 
-    private boolean formAtivo = false;
+    private List<GchAlternativas> todasAlternativas = new ArrayList<>();
 
-    private Map<GchAlternativas, Boolean> checked = new HashMap<GchAlternativas, Boolean>();
+    private GchAlternativas gchAlternativas = new GchAlternativas();
 
-    private List<GchAlternativas> alternativasVinculadas = new ArrayList<>();
-
-    private GchAlternativas gchalternativas = new GchAlternativas();
-//    private List<GchTreinamentospessoas> todosGchTreinamentosPessoas;
-
+    private Map<GchAlternativas, Boolean> radio = new HashMap<GchAlternativas, Boolean>();
+    
+    
     @ManagedProperty("#{gchAlternativaCertoService}")
     private GchCadastroAlternativaServiceCerto gchAlternativasService;
-//
-//    @ManagedProperty("#{gchTreinamentoPessoaService}")
-//    private GchTreinamentoPessoaService gchTreinamentospessoasService;
 
+     @ManagedProperty("#{gchFormularioService}")
+    private GchFormularioService gchFormularioService;
+
+     private GchFormulario gchFormularios;
+     
+    
     public GchFormularioAlternativasBean() {
 
     }
 
 
-    
-    public void addAlternativa(GchAlternativas alternativa) {
-
-        if (alternativasVinculadas.contains(alternativa)) {
-
-            alternativasVinculadas.remove(alternativa);
-
-        } else {
-
-            alternativasVinculadas.add(alternativa);
-
-        }
-
-        for (int i = 0; i < alternativasVinculadas.size(); i++) {
-            
-            System.out.println("Alternativa"+alternativasVinculadas.get(i).getAltDescricao());
-            
-        }
-        
-    }
 
     public void save() {
-
-//        if (gchTreinamentos.getTreiCodigo() > 0) {
-//            gchTreinamentosService.update(gchTreinamentos);
-//        } else {
-//        System.out.println("Teste teste: " + gchTreinamentospessoas.getTreiCodigo().getTreiNome());
-        System.out.println("Entrou no método salvar");
-
-        Iterator<GchAlternativas> keyIterrator = checked.keySet().iterator();
-
-        while (keyIterrator.hasNext()) {
-
-            GchAlternativas alternativa = keyIterrator.next();
-            Boolean value = checked.get(alternativa);
-
-            System.out.println(alternativa.getAltDescricao() + " - " + value);
-
-            if (value) {
-
-                System.out.println("valor marcado iterator" + value);
-
-//                gchTreinamentospessoas.setRecIdpessoa(pessoa);
-//
-//                gchTreinamentospessoasService.save(gchTreinamentospessoas);
-            }
-
-        }
     }
 
-    public boolean isFormAtivo() {
-        return formAtivo;
+    public List<GchAlternativas> getTodasAlternativas() {
+        return todasAlternativas;
     }
 
-    public void setFormAtivo(boolean formAtivo) {
-        this.formAtivo = formAtivo;
+    public void setTodasAlternativas(List<GchAlternativas> todasAlternativas) {
+        this.todasAlternativas = todasAlternativas;
     }
 
-    public Map<GchAlternativas, Boolean> getChecked() {
-        return checked;
+    public GchAlternativas getGchAlternativas() {
+        return gchAlternativas;
     }
 
-    public void setChecked(Map<GchAlternativas, Boolean> checked) {
-        this.checked = checked;
-    }
-
-    public List<GchAlternativas> getAlternativasVinculadas() {
-        return alternativasVinculadas;
-    }
-
-    public void setAlternativasVinculadas(List<GchAlternativas> alternativasVinculadas) {
-        this.alternativasVinculadas = alternativasVinculadas;
-    }
-
-    public GchAlternativas getGchalternativas() {
-        return gchalternativas;
-    }
-
-    public void setGchalternativas(GchAlternativas gchalternativas) {
-        this.gchalternativas = gchalternativas;
+    public void setGchAlternativas(GchAlternativas gchAlternativas) {
+        this.gchAlternativas = gchAlternativas;
     }
 
     public GchCadastroAlternativaServiceCerto getGchAlternativasService() {
@@ -134,4 +76,40 @@ public class GchFormularioAlternativasBean {
     public void setGchAlternativasService(GchCadastroAlternativaServiceCerto gchAlternativasService) {
         this.gchAlternativasService = gchAlternativasService;
     }
+
+    public GchFormularioService getGchFormularioService() {
+        return gchFormularioService;
+    }
+
+    public void setGchFormularioService(GchFormularioService gchFormularioService) {
+        this.gchFormularioService = gchFormularioService;
+    }
+
+    public GchFormulario getGchFormularios() {
+        
+        if (gchFormularios == null){
+        
+            gchFormularios = gchFormularioService.findById(1);
+            
+        }
+        
+        return gchFormularios;
+    }
+
+    public void setGchFormularios(GchFormulario gchFormularios) {
+        this.gchFormularios = gchFormularios;
+    }
+
+    public Map<GchAlternativas, Boolean> getRadio() {
+        return radio;
+    }
+
+    public void setRadio(Map<GchAlternativas, Boolean> radio) {
+        this.radio = radio;
+    }
+
+    
+    
+    
+
 }

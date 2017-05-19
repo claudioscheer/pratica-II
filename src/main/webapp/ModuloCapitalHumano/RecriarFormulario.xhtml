@@ -27,29 +27,28 @@
                                     </div>
                                     <div class="panel-heading">
                                         <h3 class="title_left">
-                                            Cursos Cadastrados
+                                            Formulário
                                         </h3>
                                     </div>
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <h:form id="formCursos">
 
-                                            <ui:repeat value="#{gchFormularioBean.gchFormulario.perguntas}" var="perguntas">
+                                            <ui:repeat value="#{gchFormularioAlternativasBean.gchFormularios.perguntas}" var="perguntas">
                                                 <div class="field">
                                                     <h:outputLabel value="#{perguntas.perDescricao}"/>
                                                     <h:inputText value="#{perguntas.perCodigo}" />
-           
+
+                                                    <h:selectOneRadio value="#{gchFormularioAlternativasBean.radio}" >
+                                                        <f:selectItems value="#{gchFormularioAlternativasBean.todasAlternativas}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.altDescricao}"/>
+                                                    </h:selectOneRadio>
+
                                                 </div>
                                             </ui:repeat>
-<!--                                            <ui:repeat value=">
-                                                <h:selectOneRadio value="#{bean.values[field.name]}" rendered="#{field.type == 'RADIO'}">
-                                                        <f:selectItems value="#{field.options}" />
-                                                    </h:selectOneRadio>
-                                            </ui:repeat> -->
-                                        </h:form> </div>
-                                    <div class="panel-footer">
-                                        Gestão do Capital Humano - Todos os Direitos Reservados
+
+                                        </h:form> 
                                     </div>
+
                                 </div>
 
                             </div>
