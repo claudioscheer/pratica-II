@@ -6,23 +6,25 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 /**
  *
@@ -33,9 +35,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchPerguntas.findAll", query = "SELECT g FROM GchPerguntas g")})
+@SequenceGenerator(name = "seq_gch_per", sequenceName = "seq_gch_per", allocationSize = 1)
 public class GchPerguntas implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_per")
     @Basic(optional = false)
     @Column(name = "per_codigo")
     private long perCodigo;
@@ -45,6 +50,7 @@ public class GchPerguntas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<GchAlternativas> gchAlternativas;
     
+    @JoinColumn(name = "form_codigo", referencedColumnName = "form_codigo")
     @ManyToOne
     private GchFormulario formulario;
 

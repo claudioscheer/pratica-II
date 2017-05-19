@@ -1,9 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.GchAlternativaCertoDAO;
-import br.org.gdt.dao.GchCursoDAO;
 import br.org.gdt.model.GchAlternativas;
-import br.org.gdt.model.GchCursos;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
