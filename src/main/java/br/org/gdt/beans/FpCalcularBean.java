@@ -1,9 +1,12 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoFolha;
+import br.org.gdt.model.FpEvento;
+import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
+import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
@@ -22,6 +25,7 @@ public class FpCalcularBean {
     private FpTipoFolha fpTipoFolha;
     private List<FpPeriodo> todosFpPeriodo;
     private int pessoaId;
+    private FpEventoPeriodo fpEventoPeriodo = new FpEventoPeriodo();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -32,8 +36,20 @@ public class FpCalcularBean {
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
 
+    @ManagedProperty("#{fpEventoService}")
+    private FpEventoService fpEventoService;
+
     public FpCalcularBean() {
 
+    }
+
+    public void selecionarEvento() {
+        FpEvento fpEvento = fpEventoService.findById(fpEventoPeriodo.getEvpEvento().getEveId());
+        if (fpEvento == null) {
+            Helper.mostrarNotificacao("Evento variável", "O evento não existe.", "info");
+            fpEvento = new FpEvento();
+        }
+        fpEventoPeriodo.setEvpEvento(fpEvento);
     }
 
     public void selecionarTipoFolha() {
@@ -48,7 +64,6 @@ public class FpCalcularBean {
 //                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
 //                    return;
 //                }
-
 
     }
 
@@ -123,6 +138,17 @@ public class FpCalcularBean {
         this.todosFpPeriodo = todosFpPeriodo;
     }
 
+    public FpEventoPeriodo getFpEventoPeriodo() {
+        if (fpEventoPeriodo.getEvpEvento() == null) {
+            fpEventoPeriodo.setEvpEvento(new FpEvento());
+        }
+        return fpEventoPeriodo;
+    }
+
+    public void setFpEventoPeriodo(FpEventoPeriodo fpEventoPeriodo) {
+        this.fpEventoPeriodo = fpEventoPeriodo;
+    }
+
     public FpPeriodoService getFpPeriodoService() {
         return fpPeriodoService;
     }
@@ -145,6 +171,14 @@ public class FpCalcularBean {
 
     public void setRecPessoaService(RecPessoaService recPessoaService) {
         this.recPessoaService = recPessoaService;
+    }
+
+    public FpEventoService getFpEventoService() {
+        return fpEventoService;
+    }
+
+    public void setFpEventoService(FpEventoService fpEventoService) {
+        this.fpEventoService = fpEventoService;
     }
 
 }
