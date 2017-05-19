@@ -6,15 +6,20 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,49 +32,37 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchAlternativasperguntas.findAll", query = "SELECT g FROM GchAlternativasperguntas g")})
+@SequenceGenerator(name = "seq_gch_alt", sequenceName = "seq_gch_alt", allocationSize = 1)
 public class GchAlternativasperguntas implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+
+    @Id    
     @Basic(optional = false)
-    @Column(name = "alp_codigo")
-    private Long alpCodigo;
-    @Basic(optional = false)
-    @Column(name = "alt_codigo")
-    private long altCodigo;
-    @JoinColumn(name = "alp_codigo", referencedColumnName = "alt_codigo", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @Column(name = "alt_perCodigo")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_alt")
+    private long altPerCodigo;
+
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "alt_codigo")
     private GchAlternativas gchAlternativas;
     @JoinColumn(name = "per_codigo", referencedColumnName = "per_codigo")
     @ManyToOne(optional = false)
     private GchPerguntas perCodigo;
 
+    
+    public long getAltPerCodigo() {
+        return altPerCodigo;
+    }
+
+    public void setAltPerCodigo(long altPerCodigo) {
+        this.altPerCodigo = altPerCodigo;
+    }
+    
     public GchAlternativasperguntas() {
     }
 
-    public GchAlternativasperguntas(Long alpCodigo) {
-        this.alpCodigo = alpCodigo;
-    }
-
-    public GchAlternativasperguntas(Long alpCodigo, long altCodigo) {
-        this.alpCodigo = alpCodigo;
-        this.altCodigo = altCodigo;
-    }
-
-    public Long getAlpCodigo() {
-        return alpCodigo;
-    }
-
-    public void setAlpCodigo(Long alpCodigo) {
-        this.alpCodigo = alpCodigo;
-    }
-
-    public long getAltCodigo() {
-        return altCodigo;
-    }
-
-    public void setAltCodigo(long altCodigo) {
-        this.altCodigo = altCodigo;
-    }
+   
 
     public GchAlternativas getGchAlternativas() {
         return gchAlternativas;
@@ -87,29 +80,26 @@ public class GchAlternativasperguntas implements Serializable {
         this.perCodigo = perCodigo;
     }
 
-    @Override
+   @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (alpCodigo != null ? alpCodigo.hashCode() : 0);
+        int hash = 7;
+        hash = 47 * hash + (int) (this.altPerCodigo ^ (this.altPerCodigo >>> 32));
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GchAlternativasperguntas)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        GchAlternativasperguntas other = (GchAlternativasperguntas) object;
-        if ((this.alpCodigo == null && other.alpCodigo != null) || (this.alpCodigo != null && !this.alpCodigo.equals(other.alpCodigo))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchAlternativasperguntas other = (GchAlternativasperguntas) obj;
+        if (this.altPerCodigo != other.altPerCodigo) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.org.gdt.modelNew.GchAlternativasperguntas[ alpCodigo=" + alpCodigo + " ]";
-    }
-    
+  
 }

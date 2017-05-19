@@ -21,7 +21,8 @@ function MontarPerguntasAlternativas() {
         if ((indice + 1) !== array.length) {
             quebra = "§";
         }
-
+        
+        
         parametrosCapa.value += elemento.value + quebra;
 
     });
@@ -63,11 +64,9 @@ function MontarPerguntasAlternativas() {
     });
 
 
-    myRemote();
-
-    alert(parametrosPergunta.value);;
-    alert(parametrosCapa.value);
-    alert(parametrosAlternativas.value);
+//    alert(parametrosPergunta.value);;
+//    alert(parametrosCapa.value);
+//    alert(parametrosAlternativas.value);
 
 }
 
@@ -77,6 +76,10 @@ function AddNovaPergunta(){
 var divPerguntas = $('#InfoPerguntas');
 
 var id = parseInt($('#SequencialPergunta')[0].value) + 1;
+
+if(id === 1){ //Add a primeira pergunta
+    document.getElementById('botaoSalvar').onmouseover=function(){MontarPerguntasAlternativas();};
+}
 
 var incrementa = parseInt($('#SequencialPergunta')[0].value) + 1;
 
@@ -90,7 +93,15 @@ var InputText = '<div class="row" id="'+id+'"><div id="perguntas"><div class="fo
 divPerguntas.append(InputText);
 
 
-$(".chosen-select").chosen();
+$(".chosen-select").chosen({
+    
+        no_results_text: "Alternativa não encontrada",
+        display_selected_options: false,
+        max_shown_results: 5,
+        hide_results_on_select: true
+      
+    
+    });
 
 }
 

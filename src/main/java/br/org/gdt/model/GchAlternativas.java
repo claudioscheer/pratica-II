@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,7 +40,6 @@ public class GchAlternativas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_alt")
-    @Basic(optional = false)
     @Column(name = "alt_codigo")
     private long altCodigo;
     @Basic(optional = false)
@@ -121,11 +121,11 @@ public class GchAlternativas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
-        hash = 89 * hash + Objects.hashCode(this.altDescricao);
-        hash = 89 * hash + this.altPrioridade;
-        hash = 89 * hash + Objects.hashCode(this.gchAlternativasperguntas);
-        hash = 89 * hash + Objects.hashCode(this.gchRespostasList);
+        hash = 97 * hash + (int) (this.altCodigo ^ (this.altCodigo >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.altDescricao);
+        hash = 97 * hash + this.altPrioridade;
+        hash = 97 * hash + Objects.hashCode(this.gchAlternativasperguntas);
+        hash = 97 * hash + Objects.hashCode(this.gchRespostasList);
         return hash;
     }
 
@@ -155,5 +155,7 @@ public class GchAlternativas implements Serializable {
         }
         return true;
     }
+
+
     
 }

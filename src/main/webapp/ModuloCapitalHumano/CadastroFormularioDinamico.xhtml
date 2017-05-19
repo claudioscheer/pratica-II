@@ -15,7 +15,7 @@
 
     </h:head>
 
-    <h:body>
+    <h:body > 
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
                 <title>Cadastro de Formulário de Análise - Folha de pagamento</title>
@@ -37,15 +37,13 @@
 
                     <h:panelGroup id="panelInserirLinha" layout="block" class="col-md-12 col-sm-12 col-xs-12">
 
-
-                        // Essa caganeira aqui teve que ser feita por que o Java Web é horrível de criar coisas dinâmicas
                         <h:inputHidden id="TxbParametrosCapa" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
                         <h:inputHidden id="TxbParametrosPergunta" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
                         <h:inputHidden id="TxbParametrosAlternativas" value="#{gchFormularioBean.gchFormulario.formDescricao}" />
                         <input id="SequencialPergunta" value="0" style="display: none" />
                         
                         <div id="TxbAlternativasDisponiveis">
-                        <h:selectOneMenu>
+                        <h:selectOneMenu style="display:none">
                             <f:selectItems value="#{gchAlternativaBean.gchTodasAlternativas}" var="alternativa" itemValue="#{alternativa.altCodigo}" itemLabel="#{alternativa.altDescricao}"/>
                         </h:selectOneMenu>
                        </div>
@@ -94,11 +92,10 @@
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-
-                                <h:commandButton id="Botao" class="btn btn-success" action="#{gchFormularioBean.alimentarVariaveis}" value="Salvar"/>
+                                <div id="botaoSalvar">
+                                <h:commandButton id="Botao" class="btn btn-success" action="#{gchFormularioBean.SalvarFormulario}" value="Salvar"/>
                                 <input type="button" class="btn btn-default" onclick="CancelarTudo()" value="Cancelar" />
-
-                                <p:remoteCommand name="myRemote" actionListener="#{gchFormularioBean.salvarFormulario}" process="@this"/>
+                                </div>
 
 
                             </div>
