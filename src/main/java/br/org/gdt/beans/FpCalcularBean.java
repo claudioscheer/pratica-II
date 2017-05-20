@@ -1,13 +1,13 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoFolha;
+import br.org.gdt.model.FpEvento;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
-import br.org.gdt.resources.DependenciasFolhaPagamento;
 import br.org.gdt.resources.Helper;
+import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.folhapagamento.CalcularFolha;
-import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
@@ -20,11 +20,12 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class FpCalcularBean {
 
-    private DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario;
     private boolean gerarTodasPessoas;
+    private FpPeriodo fpPeriodo = new FpPeriodo();
     private FpTipoFolha fpTipoFolha;
     private List<FpPeriodo> todosFpPeriodo;
     private int pessoaId;
+    private FpEventoPeriodo fpEventoPeriodo = new FpEventoPeriodo();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -35,8 +36,20 @@ public class FpCalcularBean {
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
 
+    @ManagedProperty("#{fpEventoService}")
+    private FpEventoService fpEventoService;
+
     public FpCalcularBean() {
 
+    }
+
+    public void selecionarEvento() {
+        FpEvento fpEvento = fpEventoService.findById(fpEventoPeriodo.getEvpEvento().getEveId());
+        if (fpEvento == null) {
+            Helper.mostrarNotificacao("Evento variável", "O evento não existe.", "info");
+            fpEvento = new FpEvento();
+        }
+        fpEventoPeriodo.setEvpEvento(fpEvento);
     }
 
     public void selecionarTipoFolha() {
@@ -46,30 +59,39 @@ public class FpCalcularBean {
     }
 
     public void buscarPessoa() {
-//        RecPessoa pessoa = recPessoaService.BuscarId(pessoaId);
-//        if (pessoa == null) {
-//            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe!", "info");
-//            recPessoa.setRecIdpessoa(0);
-//            return;
-//        }
-//        recPessoa = pessoa;
+//        RecPessoa recPessoa = recPessoaService.BuscarId(pessoaId);
+//                if (recPessoa == null) {
+//                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+//                    return;
+//                }
+
     }
 
     public void calcularFolhaPagamento() {
-        if (dadosCalculadosDoFuncionario.getPeriodo().getPerId() == 0) {
+        if (fpPeriodo.getPerId() == 0) {
             Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
             return;
         }
-//        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+        if (gerarTodasPessoas) {
+            calcularFolha.calcularParaTodosFuncionarios();
+        } else {
+            try {
+                DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
+                dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
-    }
+                RecPessoa recPessoa = recPessoaService.BuscarId(pessoaId);
+//                if (recPessoa == null) {
+//                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+//                    return;
+//                }
+                dadosCalculadosDoFuncionario.setPessoa(recPessoa);
 
-    public DadosCalculadosDoFuncionario getDadosCalculadosDoFuncionario() {
-        return dadosCalculadosDoFuncionario;
-    }
-
-    public void setDadosCalculadosDoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) {
-        this.dadosCalculadosDoFuncionario = dadosCalculadosDoFuncionario;
+                calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
+            } catch (Exception e) {
+                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
+            }
+        }
     }
 
     public boolean isGerarTodasPessoas() {
@@ -78,6 +100,14 @@ public class FpCalcularBean {
 
     public void setGerarTodasPessoas(boolean gerarTodasPessoas) {
         this.gerarTodasPessoas = gerarTodasPessoas;
+    }
+
+    public FpPeriodo getFpPeriodo() {
+        return fpPeriodo;
+    }
+
+    public void setFpPeriodo(FpPeriodo fpPeriodo) {
+        this.fpPeriodo = fpPeriodo;
     }
 
     public FpTipoFolha getFpTipoFolha() {
@@ -108,6 +138,17 @@ public class FpCalcularBean {
         this.todosFpPeriodo = todosFpPeriodo;
     }
 
+    public FpEventoPeriodo getFpEventoPeriodo() {
+        if (fpEventoPeriodo.getEvpEvento() == null) {
+            fpEventoPeriodo.setEvpEvento(new FpEvento());
+        }
+        return fpEventoPeriodo;
+    }
+
+    public void setFpEventoPeriodo(FpEventoPeriodo fpEventoPeriodo) {
+        this.fpEventoPeriodo = fpEventoPeriodo;
+    }
+
     public FpPeriodoService getFpPeriodoService() {
         return fpPeriodoService;
     }
@@ -130,6 +171,14 @@ public class FpCalcularBean {
 
     public void setRecPessoaService(RecPessoaService recPessoaService) {
         this.recPessoaService = recPessoaService;
+    }
+
+    public FpEventoService getFpEventoService() {
+        return fpEventoService;
+    }
+
+    public void setFpEventoService(FpEventoService fpEventoService) {
+        this.fpEventoService = fpEventoService;
     }
 
 }

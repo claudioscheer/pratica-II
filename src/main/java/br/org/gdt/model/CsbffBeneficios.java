@@ -5,29 +5,22 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.enums.TipoBeneficio;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 
 @Entity
 @Table(name = "csbff_beneficios")
@@ -36,6 +29,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "CsbffBeneficios.findAll", query = "SELECT c FROM CsbffBeneficios c")})
 @SequenceGenerator(name = "seq_CsbffBeneficios", sequenceName = "seq_CsbffBeneficios", allocationSize = 1)
 public class CsbffBeneficios implements java.io.Serializable {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -57,11 +51,16 @@ public class CsbffBeneficios implements java.io.Serializable {
     @Column(name = "befencio_data_vigente")
     @Temporal(TemporalType.DATE)
     private Date befencioDataVigente;
-    @JoinColumn(name = "tipo_beneficio_codigo", referencedColumnName = "tipo_beneficio_codigo")
-    @ManyToOne(optional = true)
-    private CsbffTipoBeneficio tipoBeneficioCodigo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "beneficioCodigo")
-    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
+//    @JoinColumn(name = "tipo_beneficio_codigo", referencedColumnName = "tipo_beneficio_codigo")
+//    @ManyToOne(optional = true)
+//    private CsbffTipoBeneficio tipoBeneficioCodigo;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "beneficioCodigo")
+//    @Column(name="tipobeneficio")
+    private TipoBeneficio tipoBeneficio;
+
+    public CsbffBeneficios(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
+    }
 
     public CsbffBeneficios() {
     }
@@ -70,17 +69,8 @@ public class CsbffBeneficios implements java.io.Serializable {
         this.beneficioCodigo = beneficioCodigo;
     }
 
-        public CsbffBeneficios(long beneficioCodigo, String beneficioNome, String beneficioDescricao, String abrangencia, Double beneficioValor, Date befencioDataVigente, CsbffTipoBeneficio tipoBeneficioCodigo, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
-        this.beneficioCodigo = beneficioCodigo;
-        this.beneficioNome = beneficioNome;
-        this.beneficioDescricao = beneficioDescricao;
-        this.abrangencia = abrangencia;
-        this.beneficioValor = beneficioValor;
-        this.befencioDataVigente = befencioDataVigente;
-        this.tipoBeneficioCodigo = tipoBeneficioCodigo;
-        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-    }
-
+//    public CsbffBeneficios(String string) {
+//    }
     public long getBeneficioCodigo() {
         return beneficioCodigo;
     }
@@ -129,24 +119,6 @@ public class CsbffBeneficios implements java.io.Serializable {
         this.befencioDataVigente = befencioDataVigente;
     }
 
-    public CsbffTipoBeneficio getTipoBeneficioCodigo() {
-        return tipoBeneficioCodigo;
-    }
-
-    public void setTipoBeneficioCodigo(CsbffTipoBeneficio tipoBeneficioCodigo) {
-        this.tipoBeneficioCodigo = tipoBeneficioCodigo;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
-        return csbffPessoaBeneficioList;
-    }
-
-    public void setCsbffPessoaBeneficioList(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
-        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-    }
-
 //    @Override
 //    public int hashCode() {
 //        int hash = 0;
@@ -163,7 +135,6 @@ public class CsbffBeneficios implements java.io.Serializable {
 //        CsbffBeneficios other = (CsbffBeneficios) object;
 //        return !((this.beneficioCodigo == null && other.beneficioCodigo != null) || (this.beneficioCodigo != null && !this.beneficioCodigo.equals(other.beneficioCodigo)));
 //    }
-
 //  
     @Override
     public int hashCode() {
@@ -174,8 +145,7 @@ public class CsbffBeneficios implements java.io.Serializable {
         hash = 89 * hash + Objects.hashCode(this.abrangencia);
         hash = 89 * hash + Objects.hashCode(this.beneficioValor);
         hash = 89 * hash + Objects.hashCode(this.befencioDataVigente);
-        hash = 89 * hash + Objects.hashCode(this.tipoBeneficioCodigo);
-        hash = 89 * hash + Objects.hashCode(this.csbffPessoaBeneficioList);
+        hash = 89 * hash + Objects.hashCode(this.tipoBeneficio);
         return hash;
     }
 
@@ -209,17 +179,24 @@ public class CsbffBeneficios implements java.io.Serializable {
         if (!Objects.equals(this.befencioDataVigente, other.befencioDataVigente)) {
             return false;
         }
-        if (!Objects.equals(this.tipoBeneficioCodigo, other.tipoBeneficioCodigo)) {
+        if (!Objects.equals(this.tipoBeneficio, other.tipoBeneficio)) {
             return false;
         }
-        if (!Objects.equals(this.csbffPessoaBeneficioList, other.csbffPessoaBeneficioList)) {
-            return false;
-        }
+
         return true;
     }
-      @Override
+
+    @Override
     public String toString() {
         return "br.org.gdt.modelNew.CsbffBeneficios[ beneficioCodigo=" + beneficioCodigo + " ]";
+    }
+
+    public TipoBeneficio getTipoBeneficio() {
+        return tipoBeneficio;
+    }
+
+    public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
     }
 
 }

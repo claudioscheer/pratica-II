@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.enums.PossuiDependentes;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
@@ -33,26 +34,31 @@ public class CsbffPessoaDependente implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "colab_dep_codigo")
-    private BigDecimal colabDepCodigo;
+    private long colabDepCodigo;
     @JoinColumn(name = "dependente_cod", referencedColumnName = "dependente_cod")
     @OneToOne
     private CsbffDependentes dependenteCod;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @OneToOne(optional = false)
     private RecPessoa recIdpessoa;
+    private PossuiDependentes possuiDependentes;
+
+    public CsbffPessoaDependente(PossuiDependentes possuiDependentes) {
+        this.possuiDependentes = possuiDependentes;
+    }
 
     public CsbffPessoaDependente() {
     }
 
-    public CsbffPessoaDependente(BigDecimal colabDepCodigo) {
+    public CsbffPessoaDependente(long colabDepCodigo) {
         this.colabDepCodigo = colabDepCodigo;
     }
 
-    public BigDecimal getColabDepCodigo() {
+    public long getColabDepCodigo() {
         return colabDepCodigo;
     }
 
-    public void setColabDepCodigo(BigDecimal colabDepCodigo) {
+    public void setColabDepCodigo(long colabDepCodigo) {
         this.colabDepCodigo = colabDepCodigo;
     }
 
@@ -72,29 +78,15 @@ public class CsbffPessoaDependente implements Serializable {
         this.recIdpessoa = recIdpessoa;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (colabDepCodigo != null ? colabDepCodigo.hashCode() : 0);
-        return hash;
+    public PossuiDependentes getPossuiDependentes() {
+        return possuiDependentes;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CsbffPessoaDependente)) {
-            return false;
-        }
-        CsbffPessoaDependente other = (CsbffPessoaDependente) object;
-        if ((this.colabDepCodigo == null && other.colabDepCodigo != null) || (this.colabDepCodigo != null && !this.colabDepCodigo.equals(other.colabDepCodigo))) {
-            return false;
-        }
-        return true;
+    public void setPossuiDependentes(PossuiDependentes possuiDependentes) {
+        this.possuiDependentes = possuiDependentes;
     }
 
-    @Override
-    public String toString() {
-        return "br.org.gdt.modelNew.CsbffPessoaDependente[ colabDepCodigo=" + colabDepCodigo + " ]";
     }
-    
-}
+
+  
+

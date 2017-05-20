@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Admissão de colaborador</title>
     </h:head>
@@ -26,17 +27,8 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">Código colaborador</label>
-                                            <!--                                                <span class="required">*</span>-->
-
                                             <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" disabled="true" />
-                                            <!--                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                        <h:inputText label="Código" class="form-control col-md-7 col-xs-12" value="#{fpTabelaBean.fpTabela.tabId}" disabled="true" />
-                                                                                    </div>-->
-                                            <!--                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control col-md-7 col-xs-12">
-                                                                                            <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
-                                                                                            <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="codigo" itemLabel="#{codigo.id}" itemValue="#{codigo.recIdpessoa}"/>
-                                                                                        </h:selectOneMenu>-->
-                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                            
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -45,10 +37,9 @@
                                                 CPF
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recCpf}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control ">
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recCpf}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control " a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
-                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.id}" itemValue="#{cpf.recCpf}"/>
-                                                <!--<f:ajax execute="@form" render="dadosPessoais" listener="#{csbffAdmissaoBean.buscarPessoa()}" event="change"/>-->
+                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.recIdpessoa}" itemValue="#{cpf.recCpf}"/>
                                             </h:selectOneMenu>
                                             <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
                                         </div>
@@ -81,12 +72,8 @@
                                                 RG
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recRg}" />
-<!--                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recRg}" class="form-control col-md-7 col-xs-12">
-                                             <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                             <f:selectItems value="#{csbffAdmissaoBean.recPessoa.recRg}" />
-                                         </h:selectOneMenu>-->
-                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                            <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recRg}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'" />
+                                            
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -96,11 +83,11 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recOrgaoemissor}" />
-                                            <!--                                            <input class="form-control" id="number" name="number" type="text"/>-->
+                                            
                                         </div>
                                     </div>    
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <!--                                    <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">-->
+                                        
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Data de Emissão
@@ -185,7 +172,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Número do certificado de reservista é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCertificadoReservista}" />
+                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Número do certificado de reservista é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCertificadoReservista}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -201,7 +188,7 @@
                                             <label class="control-label " for="select">
                                                 Número do certificado de reservista
                                             </label>
-                                            <h:inputText required="true" requiredMessage="Campo Número do certificado de reservista é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCertificadoReservista}" />
+                                            <h:inputText required="true" requiredMessage="Campo Número do certificado de reservista é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCertificadoReservista}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
                                         </div>    
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -239,7 +226,7 @@
                                                 Número
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText required="true" requiredMessage="Campo Número é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNumero}" />
+                                            <h:inputText required="true" requiredMessage="Campo Número é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNumero}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
                                             <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
                                         </div>
                                     </div>

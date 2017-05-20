@@ -12,7 +12,7 @@ public class RecPessoaService {
 
     @Autowired
     private RecPessoaDAO pessoaDao;
-    
+
     @Transactional
     public void save(RecPessoa recPessoa) {
         pessoaDao.save(recPessoa);
@@ -22,7 +22,7 @@ public class RecPessoaService {
     public void update(RecPessoa recPessoa) {
         pessoaDao.update(recPessoa);
     }
-    
+
     @Transactional
     public void Inserir(RecPessoa pessoa) {
         pessoaDao.save(pessoa);
@@ -37,6 +37,7 @@ public class RecPessoaService {
     public void Excluir(int id) {
         pessoaDao.delete(id);
     }
+
     @Transactional
     public void delete(long id) {
         pessoaDao.delete(id);
@@ -49,11 +50,27 @@ public class RecPessoaService {
     public List<RecPessoa> ListarTodas() {
         return pessoaDao.findAll();
     }
+
     public List<RecPessoa> findAll() {
         return pessoaDao.findAll();
     }
-    
-    public RecPessoa findByCpf(String cpf){
+
+//    public RecPessoa findByCpf(String cpf) {
+//        return pessoaDao.findByCpf(cpf);
+//    }
+
+    /**
+     *
+     * @param cpf
+     * @return
+     */
+
+    public List<RecPessoa> findByCpf(long cpf) {
         return pessoaDao.findByCpf(cpf);
+        
+       
+
+//    public List<RecPessoa> findByCpf(int cpf) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

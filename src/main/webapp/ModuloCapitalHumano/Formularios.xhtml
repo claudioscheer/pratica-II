@@ -34,7 +34,7 @@
 
                                         <h:form id="formFormulario">
 
-                                            <h:dataTable id="tabelCursos" class="table table-striped " value="#{gchFormularioDinamico.gchTodosFormularios}" var="formulario" >
+                                            <h:dataTable id="tabelCursos" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
                                                 <h:column headerClass="alinhaColuna">                
                                                     <h:commandLink  id="btnExcluir" h:tooltip="Exclui Curso" action="#{gchFormularioDinamico.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >

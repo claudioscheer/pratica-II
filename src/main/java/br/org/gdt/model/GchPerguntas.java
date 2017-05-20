@@ -6,22 +6,25 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 /**
  *
@@ -32,38 +35,42 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchPerguntas.findAll", query = "SELECT g FROM GchPerguntas g")})
+@SequenceGenerator(name = "seq_gch_per", sequenceName = "seq_gch_per", allocationSize = 1)
 public class GchPerguntas implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_per")
     @Basic(optional = false)
     @Column(name = "per_codigo")
     private long perCodigo;
     @Basic(optional = false)
     @Column(name = "per_descricao")
     private String perDescricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perCodigo")
-    private List<GchAlternativasperguntas> gchAlternativasperguntasList;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<GchAlternativas> gchAlternativas;
     
+    @JoinColumn(name = "form_codigo", referencedColumnName = "form_codigo")
     @ManyToOne
     private GchFormulario formulario;
+
+    public GchFormulario getFormulario() {
+        return formulario;
+    }
+
+    public void setFormulario(GchFormulario formulario) {
+        this.formulario = formulario;
+    }
+    
     
     public GchPerguntas() {
     }
 
-    public GchPerguntas(Long perCodigo) {
-        this.perCodigo = perCodigo;
-    }
-
-    public GchPerguntas(Long perCodigo, String perDescricao) {
-        this.perCodigo = perCodigo;
-        this.perDescricao = perDescricao;
-    }
-
-    public Long getPerCodigo() {
+    public long getPerCodigo() {
         return perCodigo;
     }
 
-    public void setPerCodigo(Long perCodigo) {
+    public void setPerCodigo(long perCodigo) {
         this.perCodigo = perCodigo;
     }
 
@@ -74,35 +81,20 @@ public class GchPerguntas implements Serializable {
     public void setPerDescricao(String perDescricao) {
         this.perDescricao = perDescricao;
     }
-    
-     public void setFaiTabela(GchFormulario formulario) {
-        this.formulario = formulario;
+
+    public List<GchAlternativas> getGchAlternativas() {
+        return gchAlternativas;
     }
 
-    public GchFormulario getFormulario() {
-        return formulario;
-    }
-
-    public void setFormulario(GchFormulario formulario) {
-        this.formulario = formulario;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public List<GchAlternativasperguntas> getGchAlternativasperguntasList() {
-        if (gchAlternativasperguntasList == null){
-            gchAlternativasperguntasList = new ArrayList<>();
-        }
-        return gchAlternativasperguntasList;
-    }
-
-    public void setGchAlternativasperguntasList(List<GchAlternativasperguntas> gchAlternativasperguntasList) {
-        this.gchAlternativasperguntasList = gchAlternativasperguntasList;
+    public void setGchAlternativas(List<GchAlternativas> gchAlternativas) {
+        this.gchAlternativas = gchAlternativas;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
+        hash = 79 * hash + (int) (this.perCodigo ^ (this.perCodigo >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.perDescricao);
         return hash;
     }
 
@@ -121,19 +113,20 @@ public class GchPerguntas implements Serializable {
         if (!Objects.equals(this.perDescricao, other.perDescricao)) {
             return false;
         }
-        if (!Objects.equals(this.gchAlternativasperguntasList, other.gchAlternativasperguntasList)) {
-            return false;
-        }
-        if (!Objects.equals(this.formulario, other.formulario)) {
-            return false;
-        }
         return true;
     }
 
 
+
     @Override
     public String toString() {
-        return "br.org.gdt.modelNew.GchPerguntas[ perCodigo=" + perCodigo + " ]";
+        return this.perDescricao;
     }
+
+    public GchPerguntas(long perCodigo) {
+        this.perCodigo = perCodigo;
+    }
+
+   
     
 }

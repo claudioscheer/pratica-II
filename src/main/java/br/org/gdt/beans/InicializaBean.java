@@ -40,7 +40,7 @@ public class InicializaBean {
             RequestContext.getCurrentInstance().execute("alert('Não foi possivel inicializar os dados')");
         }
         
-        RequestContext.getCurrentInstance().execute("a lert('Dados inicializado com sucesso!');");
+        RequestContext.getCurrentInstance().execute("alert('Dados inicializado com sucesso!');");
         
         return "InicializaSistema";        
         

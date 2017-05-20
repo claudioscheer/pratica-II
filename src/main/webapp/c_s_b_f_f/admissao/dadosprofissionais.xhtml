@@ -16,322 +16,270 @@
                 </div>
                 <h:form id="dadosprofissionais">
                     <h:messages class="error" style="color: #d9534f" />
-                    <div class="bootstrap-iso">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="x_panel">
-                                    <div class="title_left">
-                                        <h2>Dados Profissionais</h2>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Número da CTPS
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Número da CTPS é obrigatório." class="form-control " value="#{csbffAdmissaoBean.recPessoa.recNumCtps}" />
+                    <h:panelGroup id="panelDados" layout="block">
+                        <div class="bootstrap-iso">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="x_panel">
+                                        <div class="title_left">
+                                            <h2>Dados Profissionais</h2>
                                         </div>
-                                    </div> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Banco que possui conta
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recNomeBanco}" class="form-control">
-                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.nomeBanco}" />
-                                            </h:selectOneMenu>
-                                            <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">
-                                                Número da conta
-                                            </label>
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Número da conta é obrigatório." class="form-control " value="#{csbffAdmissaoBean.recPessoa.recNumeroContaBanco}" />
-                                        </div>     
-                                    </div>          
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">
-                                                Número da agência
-                                            </label>
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Número da agência é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recAgenciaBancaria}" />
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Número da CTPS
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Número da CTPS é obrigatório." class="form-control " value="#{csbffAdmissaoBean.recPessoa.recNumCtps}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'" />
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Banco que possui conta
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recNomeBanco}" class="form-control">
+                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                    <f:selectItems value="#{csbffAdmissaoBean.nomeBanco}" />
+                                                </h:selectOneMenu>
+                                                <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">
+                                                    Número da conta
+                                                </label>
+                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Número da conta é obrigatório." class="form-control " value="#{csbffAdmissaoBean.recPessoa.recNumeroContaBanco}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
+                                            </div>     
+                                        </div>          
+                                        <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                            <div class="form-group ">
+                                                <label class="control-label " for="select">
+                                                    Número da agência
+                                                </label>
+                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Número da agência é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recAgenciaBancaria}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
 
-                                        </div>     
-                                    </div> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
+                                            </div>     
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <!--<div class="form-group ">-->
                                             <label class="control-label " for="number">                                        
                                                 Cargo ocupado
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Cargo ocupado é obrigatório." class="form-control" value="#{cargosBean.csbffcargos.cargoNome}" />
-
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Data de Admissão
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputText required="true" requiredMessage="Campo Data de Admissão é obrigatório." class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtaAdmissao}">
-                                                <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                <!--                                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>-->
-                                            </h:inputText>
-                                        </div>
-                                    </div>    
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <!--                                    <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">-->
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Código CBO
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Código CBO é obrigatório." class="form-control" value="#{cargosBean.csbffcargos.cargoCbo}" />
-                                        </div>
-                                        <!--                                            <input class="form-control" id="number" name="number" type="text"/>-->
-                                        <!--                                        </div>-->
-                                    </div> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Salário (R$)
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Salário é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recPretencaosalarial}" />
-
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">                                        
-                                                Possui dependentes?
-                                                <span class="required">*</span>
-                                            </label>
-
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.csbffPessoaDependente}" class="form-control">
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.csbffCargosList}" class="form-control">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.possuiDependentes}" />
+                                                <f:selectItems value="#{csbffAdmissaoBean.cargos}" var="cargos" itemValue="#{cargos.cargoCodigo}" itemLabel="#{cargos.cargoNome}" />
                                             </h:selectOneMenu>
-                                            <br></br><h:link class="btn btn-primary" outcome="dependente.xhtml" value="Cadastrar dependente"></h:link>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">                                        
-                                                Recebe seguro desemprego?
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recSegurodesemprego}" class="form-control">
-                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.seguroDesemprego}" />
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div> 
+                                          <!--                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Cargo ocupado é obrigatório." class="form-control" value="#{cargosBean.csbffcargos.cargoNome}" />-->
+                                            <!--</div>-->
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Data de Admissão
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:inputText required="true" requiredMessage="Campo Data de Admissão é obrigatório." class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtaAdmissao}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    <!--                                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>-->
+                                                </h:inputText>
+                                            </div>
+                                        </div>    
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <!--                                    <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">-->
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Código CBO
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Código CBO é obrigatório." class="form-control" value="#{cargosBean.csbffcargos.cargoCbo}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
+                                            </div>
+                                            <!--                                            <input class="form-control" id="number" name="number" type="text"/>-->
+                                            <!--                                        </div>-->
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Salário (R$)
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Salário é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recPretencaosalarial}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '.', 'digits': 2, 'digitsOptional': false, 'placeholder': '0'"/>
 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">                                        
-                                                Insalubridade
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recInsalubridade}" class="form-control">
-                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.insalubridade}" />
-                                            </h:selectOneMenu>                               
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Benefício
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.csbffPessoaBeneficioList}" class="form-control">
-                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.tipoBeneficio}" />
-                                            </h:selectOneMenu>     
-                                            <br></br><h:commandButton class="btn btn-primary" value="Adicionar Benefício" action="#{csbffAdmissaoBean.recPessoa.csbffPessoaBeneficioList}">
-                                                <f:ajax execute="@form" render="dadosProfissionais" />
-                                            </h:commandButton>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">                                        
-                                                Periculosidade
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recPericulosidade}" class="form-control ">
-                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.periculosidade}" />
-                                            </h:selectOneMenu>                           
-                                        </div>
-                                    </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="select">                                        
+                                                    Possui dependentes?
+                                                    <span class="required">*</span>
+                                                </label>
 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Número PIS/PASEP
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputText label="codigo" required="true" requiredMessage="Campo Número PIS/PASEP é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recPispasep}" />
-                                        </div>
-                                    </div>
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.possuiDependente}" class="form-control">
+                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                    <f:selectItems value="#{csbffAdmissaoBean.possuiDependentes}" />
+                                                </h:selectOneMenu>
+                                                <br></br><h:link class="btn btn-primary" outcome="dependente.xhtml" value="Cadastrar dependente"></h:link>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="select">                                        
+                                                    Recebe seguro desemprego?
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recSegurodesemprego}" class="form-control">
+                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                    <f:selectItems value="#{csbffAdmissaoBean.seguroDesemprego}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div> 
 
-                                    <hr />
-
-                                    <!--                                    <div class="col-md-12 col-sm-12 col-xs-12">                                
-                                                                            <div class="form-group ">
-                                                                                <div class="title_left">
-                                                                                    <h2>Escala de Horários</h2>
-                                                                                </div>
-                                                                                <h:column>
-                                                                                    <div class="checkbox">
-                                                                                        <label>                       
-                                                                                            <h:selectBooleanCheckbox value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaDomingo}" /> Domingo
-                                                                                        </label>
-                                                                                        
-                                                                                    </div>
-                                                                                    <div class="checkbox">
-                                                                                        <label> 
-                                                                                            <h:selectBooleanCheckbox value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaSegunda}" /> Segunda-Feira
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="checkbox">
-                                                                                        <label> 
-                                                                                            <h:selectBooleanCheckbox value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaTerca}" /> Terça-Feira
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="checkbox">
-                                                                                        <label> 
-                                                                                            <h:selectBooleanCheckbox value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaQuarta}" /> Quarta-Feira
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="checkbox">
-                                                                                        <label> 
-                                                                                            <h:selectBooleanCheckbox value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaQuinta}" /> Quinta-Feira
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="checkbox">
-                                                                                        <label> 
-                                                                                            <h:selectBooleanCheckbox value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaSexta}" /> Sexta-Feira
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="checkbox">
-                                                                                        <label> 
-                                                                                            <h:selectBooleanCheckbox value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaSabado}" /> Sábado
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </h:column>
-                                                                            </div>     
-                                                                        </div>  -->
-
-                                    <h:panelGroup layout="block" >
-                                        <div class="form-group">
-                                            <h4 class="col-md-12 col-sm-12 col-xs-12">Escala de Horários</h4>
-                                            <div class="ln_solid" style="margin-top: 0"></div>
-                                            <div class="row">
-                                                <div class="form-group col-md-2 col-sm-2">
-                                                    <label class="control-label">Hora Entrada</label>
-                                                    <h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-
-                                                </div>
-                                                <div class="form-group col-md-2 col-sm-2">
-                                                    <label class="control-label">Hora Saída</label>
-                                                    <h:inputText label="Dedução" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiValorDeducao}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-
-                                                </div>
-                                                <div class="form-group col-md-2 col-sm-2">
-                                                    <label class="control-label">Hora Entrada</label>
-                                                    <h:inputText label="Valor" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiValor}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-
-                                                </div>
-                                                <div class="form-group col-md-2 col-sm-2">
-                                                    <label class="control-label">Hora Saída</label>
-                                                    <h:inputText label="Valor" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiValor}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-                                                    <br></br><h:inputText label="Limite" class="form-control" value="#{fpTabelaBean.fpTabelaVigencia.tabVigenciaFaixas[faixaStatus.index].faiLimite}" />
-
-                                                </div>
-                                                <div class="form-group col-md-2 col-sm-2">
-                                                    <label class="control-label">Dias a Trabalhar</label>
-                                                    <h:selectOneMenu value="#{csbffEscalaHorasBean.todosCsbffEscalaHoras}" class="form-control ">
-                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                        <f:selectItems value="#{csbffEscalaHorasBean.diasATrabalhar}" />
-                                                    </h:selectOneMenu> 
-                                                    <br></br><h:selectOneMenu value="#{csbffEscalaHorasBean.todosCsbffEscalaHoras}" class="form-control ">
-                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                        <f:selectItems value="#{csbffEscalaHorasBean.diasATrabalhar}" />
-                                                    </h:selectOneMenu>
-                                                    <br></br><h:selectOneMenu value="#{csbffEscalaHorasBean.todosCsbffEscalaHoras}" class="form-control ">
-                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                        <f:selectItems value="#{csbffEscalaHorasBean.diasATrabalhar}" />
-                                                    </h:selectOneMenu>
-                                                    <br></br><h:selectOneMenu value="#{csbffEscalaHorasBean.todosCsbffEscalaHoras}" class="form-control ">
-                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                        <f:selectItems value="#{csbffEscalaHorasBean.diasATrabalhar}" />
-                                                    </h:selectOneMenu>
-                                                    <br></br><h:selectOneMenu value="#{csbffEscalaHorasBean.todosCsbffEscalaHoras}" class="form-control ">
-                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                        <f:selectItems value="#{csbffEscalaHorasBean.diasATrabalhar}" />
-                                                    </h:selectOneMenu>
-                                                    <br></br><h:selectOneMenu value="#{csbffEscalaHorasBean.todosCsbffEscalaHoras}" class="form-control ">
-                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                        <f:selectItems value="#{csbffEscalaHorasBean.diasATrabalhar}" />
-                                                    </h:selectOneMenu>
-                                                    <br></br><h:selectOneMenu value="#{csbffEscalaHorasBean.todosCsbffEscalaHoras}" class="form-control ">
-                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                        <f:selectItems value="#{csbffEscalaHorasBean.diasATrabalhar}" />
-                                                    </h:selectOneMenu>
-                                                </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="select">                                        
+                                                    Insalubridade
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recInsalubridade}" class="form-control">
+                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                    <f:selectItems value="#{csbffAdmissaoBean.insalubridade}" />
+                                                </h:selectOneMenu>                               
                                             </div>
                                         </div>
-                                        <div class="ln_solid"></div>
 
-                                    </h:panelGroup>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="select">                                        
+                                                    Benefício
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.csbffBeneficiosList}" class="form-control" >
+                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                    <f:selectItems value="#{csbffAdmissaoBean.beneficios}" var="beneficio" itemValue="#{beneficio.beneficioCodigo}" itemLabel="#{beneficio.beneficioNome}" />
 
+                                                </h:selectOneMenu>
+                                                <div class="form-group">
+                                                    <br></br><h:commandButton class="btn btn-primary" type="button" value="Adicionar Benefício" action="#{csbffAdmissaoBean.addBeneficioPessoa()}">
+                                                        <f:ajax execute="@form" render="dadosprofissionais"/>
+                                                    </h:commandButton>
+                                                </div>
+                                                <ui:repeat value="#{csbffAdmissaoBean.recPessoa.csbffBeneficiosList}" var="beneficioCol" varStatus="statusBeneficios">
 
-                                    <hr />
+                                                    <div class="row">
+                                                        <h:outputText value="#{csbffAdmissaoBean.beneficiosColaborador[statusBeneficios.index].beneficioNome}"/>
+                                                        <h:commandButton class="btn btn-primary" type="button" value="Remover Benefício" action="#{csbffAdmissaoBean.removerBeneficioPessoa(index)}">
+                                                            <f:ajax execute="@form" render="dadosprofissionais:panelDados"/>
+                                                        </h:commandButton>
+
+                                                    </div>
+
+                                                </ui:repeat>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="select">                                        
+                                                    Periculosidade
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recPericulosidade}" class="form-control">
+                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                    <f:selectItems value="#{csbffAdmissaoBean.periculosidade}" />
+                                                </h:selectOneMenu>                           
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Número PIS/PASEP
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Número PIS/PASEP é obrigatório." class="form-control" value="#{csbffAdmissaoBean.recPessoa.recPispasep}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'" />
+                                            </div>
+                                        </div>
+                                        <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" layout="block" rendered="#{!csbffAdmissaoBean.formAtivo}">
+                                            <div class="form-group">
+                                                <label>
+                                                    Escala de Horários
+                                                </label>                                        
+                                                <div class="row">
+    <!--                                                <ui:repeat value="#{csbffAdmissaoBean.csbffEscalaHoras.csbffEscalaHorasList}" var="faixa" varStatus="repeat">-->
+                                                    <div class="form-group col-md-2 col-sm-2">
+                                                        <label class="control-label">Hora Entrada</label>
+                                                        <h:inputText class="form-control" value="#{csbffAdmissaoBean.csbffEscalaHoras.escalaHora1}" />
+                                                    </div>
+                                                    <div class="form-group col-md-2 col-sm-2">
+                                                        <label class="control-label">Hora Saída</label>
+                                                        <h:inputText class="form-control" value="#{csbffAdmissaoBean.csbffEscalaHoras.escalaHora2}" />
+
+                                                    </div>
+                                                    <div class="form-group col-md-2 col-sm-2">
+                                                        <label class="control-label">Hora Entrada</label>
+                                                        <h:inputText class="form-control" value="#{csbffAdmissaoBean.csbffEscalaHoras.escalaHora3}" />
+
+                                                    </div>
+                                                    <div class="form-group col-md-2 col-sm-2">
+                                                        <label class="control-label">Hora Saída</label>
+                                                        <h:inputText class="form-control" value="#{csbffAdmissaoBean.csbffEscalaHoras.escalaHora4}" />
+
+                                                    </div>
+                                                    <div class="form-group col-md-2 col-sm-2">
+                                                        <label class="control-label">Dias a Trabalhar</label>
+                                                        <h:selectOneMenu value="#{csbffAdmissaoBean.csbffEscalaHoras.escalaCodigo}" class="form-control ">
+                                                            <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                            <f:selectItems value="#{csbffAdmissaoBean.diasATrabalhar}" />
+                                                        </h:selectOneMenu> 
+                                                    </div>
+                                                    <!--</ui:repeat>-->
+                                                    <br></br> <h:commandButton class="btn btn-primary" type="button" value="Adicionar Escala" action="#{csbffAdmissaoBean.addNovaEscala(csbffEscalaHoras)}">
+
+                                                    </h:commandButton>
+                                                </div>
+                                                <h:dataTable  class="table table-striped" value="#{csbffAdmissaoBean.csbffEscalaHoras.csbffEscalaHorasList}" var="escala">
+                                                    <h:column>
+                                                        <f:facet name="header"> Hora Entrada</f:facet>
+                                                            #{escala.escalaHora1}  
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"> Hora Saída</f:facet>
+                                                            #{escala.escalaHora2}  
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"> Hora Entrada</f:facet>
+                                                            #{escala.escalaHora3}  
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"> Hora Saída</f:facet>
+                                                            #{escala.escalaHora4}  
+                                                    </h:column>
+                                                    <h:column>
+                                                        <h:commandLink class="btn btn-danger btn-sm" type="button" value="Remover Escala" action="#{csbffAdmissaoBean.removerEscala(csbffEscalaHoras)}" onclick="return confirm('Remover Escala?')"/>
+                                                    </h:column> 
+                                                </h:dataTable>
+
+                                            </div>
+                                        </h:panelGroup>
+                                        <hr />
+                                        <hr />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="row">
+                                <div class="pull-right">
+                                    <div class="row">
 
-                                    <h:link class="btn btn-info" outcome="dadospessoais.xhtml" value="Anterior"></h:link>
-                                    <h:commandButton class="btn btn-success" value="Salvar" actionListener="#{csbffAdmissaoBean.save()}"/>
-                                    <h:commandButton immediate="true" class="btn btn-danger" value="Cancelar" actionListener="#{csbffAdmissaoBean.cancel()}"/>
+                                        <h:link class="btn btn-info" outcome="dadospessoais.xhtml" value="Anterior"></h:link>
+                                        <h:commandButton class="btn btn-success" value="Salvar" actionListener="#{csbffAdmissaoBean.save()}"/>
+                                        <h:commandButton immediate="true" class="btn btn-danger" value="Cancelar" actionListener="#{csbffAdmissaoBean.cancel()}"/>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </h:panelGroup>
                 </h:form>
             </ui:define>
         </ui:composition>

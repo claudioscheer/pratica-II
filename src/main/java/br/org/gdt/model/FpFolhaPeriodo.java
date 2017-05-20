@@ -1,6 +1,7 @@
 package br.org.gdt.model;
 
 import br.org.gdt.enums.FpTipoEvento;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ public class FpFolhaPeriodo implements java.io.Serializable {
 
     private static final long serialVersionUID = -2790083349568956163L;
     private long forId;
-    // private RecPessoa forPessoa;
+    private RecPessoa forPessoa;
     private FpPeriodo forPeriodo;
     private Date forGeradaEm;
     private List<FpEventoPeriodo> forEventos;
@@ -35,6 +36,15 @@ public class FpFolhaPeriodo implements java.io.Serializable {
 
     public void setForId(long forId) {
         this.forId = forId;
+    }
+
+    @ManyToOne
+    public RecPessoa getForPessoa() {
+        return forPessoa;
+    }
+
+    public void setForPessoa(RecPessoa forPessoa) {
+        this.forPessoa = forPessoa;
     }
 
     @ManyToOne
@@ -57,6 +67,9 @@ public class FpFolhaPeriodo implements java.io.Serializable {
 
     @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<FpEventoPeriodo> getForEventos() {
+        if (forEventos == null) {
+            forEventos = new ArrayList<>();
+        }
         return forEventos;
     }
 

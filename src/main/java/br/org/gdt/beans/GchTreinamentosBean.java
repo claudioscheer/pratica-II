@@ -10,6 +10,7 @@ import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentosService;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +41,9 @@ public class GchTreinamentosBean {
     private long curCodigoCombo;
     private long munCodigoCombo;
 
+    private String dataInicio;
+    private String dataFim;
+
     public GchTreinamentosBean() {
 
     }
@@ -48,7 +52,12 @@ public class GchTreinamentosBean {
 
         String MsgNotificacao = "";
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
         try {
+
+            gchTreinamentos.setTreiDataInicio(formatter.parse(dataInicio));
+            gchTreinamentos.setTreiDataFim(formatter.parse(dataFim));
 
             if (gchTreinamentos.getTreiCodigo() > 0) {
 
@@ -101,7 +110,7 @@ public class GchTreinamentosBean {
     public void cancel() {
         this.formAtivo = false;
         this.gchTreinamentos = new GchTreinamentos();
-        
+
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             context.getExternalContext().redirect("Treinamentos.xhtml");
@@ -165,6 +174,11 @@ public class GchTreinamentosBean {
 
             gchTreinamentos = gchTreinamentosService.findById(id);
 
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+            dataInicio = formatter.format(gchTreinamentos.getTreiDataInicio());
+            dataFim = formatter.format(gchTreinamentos.getTreiDataFim());
+
             return "CadastroTreinamentos";
 
         }
@@ -205,6 +219,22 @@ public class GchTreinamentosBean {
 
     public void setGchMunicipio(GchMunicipios gchMunicipio) {
         this.gchMunicipio = gchMunicipio;
+    }
+
+    public String getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(String dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public String getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(String dataFim) {
+        this.dataFim = dataFim;
     }
 
 }

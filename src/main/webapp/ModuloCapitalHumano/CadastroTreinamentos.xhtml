@@ -125,9 +125,9 @@
                                                                     Data de início
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
-                                                                <h:inputText class="form-control" id="dateInicio"  value="#{gchTreinamentosBean.gchTreinamentos.treiDataInicio}"> 
-                                                                    <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
-                                                                </h:inputText>
+                                                                <h:inputText class="form-control" id="dateInicio"  value="#{gchTreinamentosBean.dataInicio}" a:placeholder="dd/mm/aaaa hh:mm" /> 
+                                                                    <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
+                                                                
                                                             </div>
                                                         </div>         
 
@@ -137,9 +137,9 @@
                                                                     Data de fim
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
-                                                                <h:inputText class="form-control" id="dateFim" value="#{gchTreinamentosBean.gchTreinamentos.treiDataFim}">
-                                                                    <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
-                                                                </h:inputText>
+                                                                <h:inputText class="form-control" id="dateFim" value="#{gchTreinamentosBean.dataFim}" a:placeholder="dd/mm/aaaa hh:mm" />
+                                                                    <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
+                                                                
                                                             </div>
                                                         </div>       
 

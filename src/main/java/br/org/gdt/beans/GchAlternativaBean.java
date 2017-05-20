@@ -22,6 +22,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.event.SelectEvent;
@@ -33,14 +34,14 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 
-@ViewScoped
+@RequestScoped
 public class GchAlternativaBean {
 
     private boolean formAtivo = false;
 
     private Map<GchAlternativas, Boolean> checked = new HashMap<GchAlternativas, Boolean>();
 
-    private List<GchAlternativas> alternativasVinculadas;
+    private List<GchAlternativas> alternativasVinculadas = new ArrayList<>();
     
     private String codigo;
     
@@ -61,9 +62,10 @@ public class GchAlternativaBean {
     private GchCadastroAlternativaServiceCerto gchAlternativasService;
 
     public GchAlternativaBean() {
-
+        
+ 
     }
-   
+
     public List<String> completeText(String query) {
         
         System.out.println("Agora vai");
@@ -84,10 +86,27 @@ public class GchAlternativaBean {
         
     }
     
+    public String VincularAlternativa(FacesContext event){
+        
+      
+        Map<String, String> parameterMap = (Map<String, String>) event.getExternalContext().getRequestParameterMap();
+        
+        String param = parameterMap.get("valorPerguntas");
+       
+        System.out.println("Valor recebido por parametro"+param);
+       
+        return "1";
+    }
+    
+    
     public String VinculaPerguntaAlternativa(){
         
         Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 	 
+         String param = params.get("valorPerguntas");
+        
+         System.out.println("valor recebido"+param);
+         
       FacesContext context = FacesContext.getCurrentInstance();
       String a = (String) UIComponent.getCurrentComponent(context).getAttributes().get("teste");
         
@@ -102,7 +121,7 @@ public class GchAlternativaBean {
 //        pergunta.setPerCodigo(perg.getPerCodigo());
 //        pergunta.setPerDescricao(perg.getPerDescricao());
     
-        altPergunta.setPerCodigo(pergunta);
+//        altPergunta.setPerCodigo(pergunta);
     
         altPerLista.add(altPergunta);
         
@@ -112,6 +131,10 @@ public class GchAlternativaBean {
     }
     
     public List<GchAlternativas> CompleteAlternativas(String query) {
+       
+        String filterValue = (String) UIComponent.getCurrentComponent(FacesContext.getCurrentInstance()).getAttributes().get("teste");
+        
+        
         List<GchAlternativas> TodasAlternativas = gchAlternativasService.findAll();
         List<GchAlternativas> AlternativasFiltradas = new ArrayList<GchAlternativas>();
          
@@ -154,80 +177,31 @@ public class GchAlternativaBean {
 
         System.out.println("Chegou");
         
-//        String MsgNotificacao = "";
-//        try {
-//            if (gchAlternativas.getAltCodigo() > 0) {
-//
-//                gchAlternativasService.update(gchAlternativas);
-//
-//                MsgNotificacao = "A alternativa " + gchAlternativas.getAltDescricao() + " foi atualizada com sucesso!";
-//
-//            } else {
-//
-//                gchAlternativasService.save(gchAlternativas);
-//
-//                MsgNotificacao = "A alternatuva " + gchAlternativas.getAltDescricao() + " foi cadastrada com sucesso!";
-//            }
-//
-//            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
-//
-//        } catch (Exception ex) {
-//
-//            MsgNotificacao = "Houve uma falha ao cadastrar a alternativa " + gchAlternativas.getAltDescricao() + ex.getMessage() + " , tente novamente mais tarde!";
-//            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-//        }
+        String MsgNotificacao = "";
+        try {
+            if (gchAlternativas.getAltCodigo() > 0) {
+
+                gchAlternativasService.update(gchAlternativas);
+
+                MsgNotificacao = "A alternativa " + gchAlternativas.getAltDescricao() + " foi atualizada com sucesso!";
+
+            } else {
+
+                gchAlternativasService.save(gchAlternativas);
+
+                MsgNotificacao = "A alternatuva " + gchAlternativas.getAltDescricao() + " foi cadastrada com sucesso!";
+            }
+
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
+        } catch (Exception ex) {
+
+            MsgNotificacao = "Houve uma falha ao cadastrar a alternativa " + gchAlternativas.getAltDescricao() + ex.getMessage() + " , tente novamente mais tarde!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+        }
 
         return "Alternativas";
 
-    }
-
-    public void vincularAlternativas(){
-        
-        System.out.println("Teste teste: " + gchAlternativas.getAltCodigo());
-
-        Iterator<GchAlternativas> keyIterrator = checked.keySet().iterator();
-
-        while (keyIterrator.hasNext()) {
-
-            GchAlternativas alt = keyIterrator.next();
-            Boolean value = checked.get(alt);
-
-            System.out.println(alt.getAltDescricao() + " - " + value);
-
-            if (value) {
-
-                System.out.println("Está marcado");
-                
-                GchAlternativasperguntas altperg = new GchAlternativasperguntas();
-                
-                altperg.setAltCodigo(alt.getAltCodigo());
-                altperg.setGchAlternativas(gchAlternativas);
-                
-                GchPerguntas pergunta = new GchPerguntas();
-                
-                pergunta.setPerCodigo(Long.MIN_VALUE);
-                
-                altperg.setPerCodigo(pergunta);
-                altperg.setAlpCodigo(Long.MIN_VALUE);
-                
-                altPerLista.add(altperg);
-                
-
-            }
-        }
-
-        
-        
-        
-//        System.out.println("Salvar: " + pessoasVinculadas.get(0).getRecNomecompleto());
-//        gchTreinamentospessoas.setRecIdpessoa(pessoasVinculadas.get(0));
-//        }
-//        todosGchTreinamentosPessoas = null;
-//        this.formAtivo = false;
-//        gchTreinamentospessoas = null;
-//        FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "Treinamentos.xhtml");
-        
-        
     }
     
     
@@ -264,23 +238,8 @@ public class GchAlternativaBean {
 
     public List<GchAlternativas> getGchTodasAlternativas() {
 
-        try {
+        gchTodasAlternativas = gchAlternativasService.findAll();
 
-            System.out.println("Entrou na Bean");
-
-            if (gchTodasAlternativas == null) {
-
-                gchTodasAlternativas = gchAlternativasService.findAll();
-
-            }
-
-            System.out.println("Saindo da Bean");
-
-        } catch (Exception ex) {
-
-            System.out.println("DEu excecãooooo " + ex.toString());
-
-        }
         return gchTodasAlternativas;
     }
 

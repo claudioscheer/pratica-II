@@ -7,7 +7,9 @@ package br.org.gdt.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,31 +36,37 @@ public class CsbffPessoaBeneficio implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "pessoa_beneficio_codigo")
-    private BigDecimal pessoaBeneficioCodigo;
+    private long  pessoaBeneficioCodigo;
     @JoinColumn(name = "beneficio_codigo", referencedColumnName = "beneficio_codigo")
     @ManyToOne(optional = false)
     private CsbffBeneficios beneficioCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
     private RecPessoa recIdpessoa;
-
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
+    
     public CsbffPessoaBeneficio() {
     }
 
-    public CsbffPessoaBeneficio(BigDecimal pessoaBeneficioCodigo) {
+    public CsbffPessoaBeneficio(long  pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
-    public BigDecimal getPessoaBeneficioCodigo() {
+    public long  getPessoaBeneficioCodigo() {
         return pessoaBeneficioCodigo;
     }
 
-    public void setPessoaBeneficioCodigo(BigDecimal pessoaBeneficioCodigo) {
+    public void setPessoaBeneficioCodigo(long  pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
     public CsbffBeneficios getBeneficioCodigo() {
         return beneficioCodigo;
+    }
+
+    public CsbffPessoaBeneficio(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
+        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
     }
 
     public void setBeneficioCodigo(CsbffBeneficios beneficioCodigo) {
@@ -72,29 +81,41 @@ public class CsbffPessoaBeneficio implements Serializable {
         this.recIdpessoa = recIdpessoa;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (pessoaBeneficioCodigo != null ? pessoaBeneficioCodigo.hashCode() : 0);
-        return hash;
+//    @Override
+//    public int hashCode() {
+//        int hash = 0;
+//        hash += (pessoaBeneficioCodigo != null ? pessoaBeneficioCodigo.hashCode() : 0);
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object object) {
+//        // TODO: Warning - this method won't work in the case the id fields are not set
+//        if (!(object instanceof CsbffPessoaBeneficio)) {
+//            return false;
+//        }
+//        CsbffPessoaBeneficio other = (CsbffPessoaBeneficio) object;
+//        if ((this.pessoaBeneficioCodigo == null && other.pessoaBeneficioCodigo != null) || (this.pessoaBeneficioCodigo != null && !this.pessoaBeneficioCodigo.equals(other.pessoaBeneficioCodigo))) {
+//            return false;
+//        }
+//        return true;
+//    }
+
+//    @Override
+//    public String toString() {
+//        return "br.org.gdt.modelNew.CsbffPessoaBeneficio[ pessoaBeneficioCodigo=" + pessoaBeneficioCodigo + " ]";
+//    }
+
+    public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
+        return csbffPessoaBeneficioList;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CsbffPessoaBeneficio)) {
-            return false;
-        }
-        CsbffPessoaBeneficio other = (CsbffPessoaBeneficio) object;
-        if ((this.pessoaBeneficioCodigo == null && other.pessoaBeneficioCodigo != null) || (this.pessoaBeneficioCodigo != null && !this.pessoaBeneficioCodigo.equals(other.pessoaBeneficioCodigo))) {
-            return false;
-        }
-        return true;
+    public void setCsbffPessoaBeneficioList(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
+        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
     }
 
-    @Override
-    public String toString() {
-        return "br.org.gdt.modelNew.CsbffPessoaBeneficio[ pessoaBeneficioCodigo=" + pessoaBeneficioCodigo + " ]";
+    public Object csbffPessoaBeneficioList() {
+        return csbffPessoaBeneficioList;
     }
     
 }

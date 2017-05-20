@@ -5,14 +5,16 @@
  */
 package br.org.gdt.model;
 
-import br.org.gdt.converts.SampleEntity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,13 +33,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Alisson Allebrandt
  */
+
+
+
+
+
 @Entity
 @Table(name = "gch_formulario")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchFormulario.findAll", query = "SELECT g FROM GchFormulario g")})
 @SequenceGenerator(name = "seq_gch_form", sequenceName = "seq_gch_form", allocationSize = 1)
-public class GchFormulario {
+
+public class GchFormulario
+implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,8 +65,11 @@ public class GchFormulario {
     @Temporal(TemporalType.TIMESTAMP)
     private Date formPrazoResposta;
     
-    @OneToMany(mappedBy = "formulario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//  @OneToMany(mappedBy = "formulario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "formulario", cascade = CascadeType.ALL)
     private List<GchPerguntas> perguntas;
+    
+    
 
     public long getFormCodigo() {
         return formCodigo;
@@ -74,6 +86,30 @@ public class GchFormulario {
     public void setFormNome(String formNome) {
         this.formNome = formNome;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (int) (this.formCodigo ^ (this.formCodigo >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchFormulario other = (GchFormulario) obj;
+        if (this.formCodigo != other.formCodigo) {
+            return false;
+        }
+        return true;
+    }
+
+   
 
     public String getFormDescricao() {
         return formDescricao;
@@ -93,11 +129,12 @@ public class GchFormulario {
 
     public void addPergunta(GchPerguntas gchPergunta) {
         if (gchPergunta != null) {
-            gchPergunta.setFormulario(this);
+          
             this.getPerguntas().add(gchPergunta);
         }
-    }
+    };
 
+    
     public List<GchPerguntas> getPerguntas() {
 
         if (this.perguntas == null) {

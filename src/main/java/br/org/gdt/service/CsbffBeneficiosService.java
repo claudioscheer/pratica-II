@@ -1,4 +1,3 @@
-
 package br.org.gdt.service;
 
 import br.org.gdt.dao.CsbffBeneficioDAO;
@@ -8,14 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service("csbffBeneficiosService")
 public class CsbffBeneficiosService {
-    
+
+    public CsbffBeneficioDAO getCsbffBeneficioDAO() {
+        return csbffBeneficioDAO;
+    }
+
+    public void setCsbffBeneficioDAO(CsbffBeneficioDAO csbffBeneficioDAO) {
+        this.csbffBeneficioDAO = csbffBeneficioDAO;
+    }
+
     @Autowired
     private CsbffBeneficioDAO csbffBeneficioDAO;
 
-    @Transactional
+    @Transactional(readOnly = false)
     public void save(CsbffBeneficios csbffBeneficios) {
         csbffBeneficioDAO.save(csbffBeneficios);
     }
@@ -37,5 +43,4 @@ public class CsbffBeneficiosService {
     public List<CsbffBeneficios> findAll() {
         return csbffBeneficioDAO.findAll();
     }
-    
 }

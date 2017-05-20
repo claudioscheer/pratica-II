@@ -29,7 +29,6 @@ public class FpEventoBean {
             fpEventoService.update(fpEvento);
         } else {
             fpEvento.setEvePermiteExcluir(true);
-            fpEvento.setEveFormula("$#");
             fpEventoService.save(fpEvento);
         }
         todosFpEvento = fpEventoService.findAll();

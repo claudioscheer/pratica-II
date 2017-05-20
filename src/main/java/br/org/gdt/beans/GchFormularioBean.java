@@ -10,69 +10,133 @@ import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.resources.Helper;
+import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
-import java.util.ArrayList;
+import br.org.gdt.service.GchPerguntasService;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.event.AjaxBehaviorEvent;
-import org.primefaces.event.SelectEvent;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
  * @author Alisson Allebrandt
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class GchFormularioBean {
+
+    public GchFormulario getGchFormulario() {
+        return gchFormulario;
+    }
 
     private boolean formAtivo = false;
 
-     private long indexPerguntaItem = 0;
-    
+    private long indexPerguntaItem = 0;
+    private List<GchAlternativas> alternativasVinculadas;
     private GchFormulario gchFormulario = new GchFormulario();
     private List<GchFormulario> gchTodosFormularios;
-    
-   
-    
+
+    public List<GchAlternativas> getAlternativasVinculadas() {
+        return alternativasVinculadas;
+    }
+
+    public void setAlternativasVinculadas(List<GchAlternativas> alternativasVinculadas) {
+        this.alternativasVinculadas = alternativasVinculadas;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.gchFormularioService);
+        hash = 83 * hash + Objects.hashCode(this.gchAlternativasService);
+        hash = 83 * hash + Objects.hashCode(this.gchAlternativasPerguntaService);
+        hash = 83 * hash + Objects.hashCode(this.gchPerguntasService);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GchFormularioBean other = (GchFormularioBean) obj;
+        if (!Objects.equals(this.gchFormularioService, other.gchFormularioService)) {
+            return false;
+        }
+        if (!Objects.equals(this.gchAlternativasService, other.gchAlternativasService)) {
+            return false;
+        }
+        if (!Objects.equals(this.gchAlternativasPerguntaService, other.gchAlternativasPerguntaService)) {
+            return false;
+        }
+        if (!Objects.equals(this.gchPerguntasService, other.gchPerguntasService)) {
+            return false;
+        }
+        return true;
+    }
+
     private List<PerguntasAlternativas> PergAlt;
-       
+
+    public GchAlternativasPerguntaService getGchAlternativasPerguntaService() {
+        return gchAlternativasPerguntaService;
+    }
+
+    public void setGchAlternativasPerguntaService(GchAlternativasPerguntaService gchAlternativasPerguntaService) {
+        this.gchAlternativasPerguntaService = gchAlternativasPerguntaService;
+    }
+
+    public GchPerguntasService getGchPerguntasService() {
+        return gchPerguntasService;
+    }
+
+    public void setGchPerguntasService(GchPerguntasService gchPerguntasService) {
+        this.gchPerguntasService = gchPerguntasService;
+    }
+
+    @ManagedProperty("#{gchFormularioService}")
+    private GchFormularioService gchFormularioService;
+
     @ManagedProperty("#{gchAlternativaCertoService}")
     private GchCadastroAlternativaServiceCerto gchAlternativasService;
     
-    private GchAlternativasperguntas alternativasPerguntas = new GchAlternativasperguntas();
-    public List<GchAlternativasperguntas> todasAlternativasPerguntas;
+    @ManagedProperty("#{gchAlternativaPerguntasService}")
+    private GchAlternativasPerguntaService gchAlternativasPerguntaService;
+    
+     @ManagedProperty("#{gchPerguntaService}")
+    private GchPerguntasService gchPerguntasService;
     
     
-    @ManagedProperty("#{gchFormularioService}")
-    private GchFormularioService gchFormularioService;
-    
+
     public GchFormularioBean() {
-        
-        
-        
+    
     }
-    
-    
-    public void IsSelected(long alt){
-        
-        System.out.println("alt"+alt);
-   
-  
-        
+
+    public void Salvar() {
+
     }
-    
-    public void AgoraVai(AjaxBehaviorEvent event){
-        
-        GchAlternativas alt = (GchAlternativas) event.getComponent().getAttributes().get("teste");
-        
-        System.out.println("Recebeu o id");
-        
+
+    public void IsSelected(long alt) {
+
+        System.out.println("alt" + alt);
+
     }
-    
+
     public void cancel() {
         this.formAtivo = false;
         this.gchFormulario = new GchFormulario();
@@ -84,79 +148,133 @@ public class GchFormularioBean {
         this.gchFormulario = new GchFormulario();
 
     }
-     public void addNovaPergunta() {
-         
-       
-         GchPerguntas novaPergunta = new GchPerguntas();
-         
-         novaPergunta.setPerCodigo(indexPerguntaItem);         
-         
-         this.gchFormulario.addPergunta((novaPergunta));
-         
-         
-         
+
+    public void alimentarVariaveis() {
+
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.execute("MontarPerguntasAlternativas()");
+
+    }
+
+    public void SalvarFormulario() {
+
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+
+        //Busca parametros concatenados 
+        String parametrosCapa           = params.get("formFormulario:TxbParametrosCapa");
+        String parametrosPerguntas      = params.get("formFormulario:TxbParametrosPergunta");
+        String parametrosAlternativas   = params.get("formFormulario:TxbParametrosAlternativas");
+
+        String inputsCapa[]     = parametrosCapa.split("§");
+        String Perguntas[]      = parametrosPerguntas.split("§");
+        String Alternativas[]   = parametrosAlternativas.split("¬");
+
+        GchFormulario formulario = new GchFormulario();
+
+        Date date = null;
+        
+        try {
+
+            // -------------- Inputs da Capa --------------------------//
+            
+            formulario.setFormNome(inputsCapa[0]); //Nome do Formulário
+            formulario.setFormDescricao(inputsCapa[1]); // Descricao do Formulário
+
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+            date = (Date) formatter.parse(inputsCapa[2]);
+            
+            formulario.setFormPrazoResposta(date);
+            
+            gchFormularioService.save(formulario);
+ 
+
+        } catch (ParseException ex) {
+            Logger.getLogger(GchFormularioBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//      Somente continua se a quantidade de linhas de perguntas for igual a de alternativas
+        if (Perguntas.length == Alternativas.length) {
+
+            GchPerguntas pergunta;
+            String[] altPergunta;
+            GchAlternativasperguntas altperg;
+            
+            // ----------- Informações das perguntas ------------------//
+            
+            for (int i = 0; i < Perguntas.length; i++) {
+
+
+                pergunta = new GchPerguntas();
+
+                pergunta.setPerDescricao(Perguntas[i]);
+                pergunta.setFormulario(formulario);
+                
+                gchPerguntasService.save(pergunta);
+                   
+                /* Busca todas alternativas de cada pergunta e armazena no array
+                - O ponto de quebra é o caractere § e o mesmo é concatenado no arquivo ControleFormularios.Js
+                */
+                altPergunta = Alternativas[i].split("§");
+                
+                //Percorre alternativas da pergunta
+                for(int j = 0; j < altPergunta.length; j++) {
+
+                    GchAlternativas novaAlternativa = gchAlternativasService.findById(Long.parseLong(altPergunta[j]));
+
+                    altperg = new GchAlternativasperguntas();
+
+                    altperg.setGchAlternativas(novaAlternativa);
+                    altperg.setPerCodigo(pergunta);
+                   
+                    
+                    gchAlternativasPerguntaService.save(altperg);
+
+                }
+            }
+
+        }else{ //Carregar Alerta
+            
+            
+            
+        }
+    }
+
+    public void addNovaPergunta() {
+
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.execute("AddNovaPergunta()");
+
     }
 
     public void removerPergunta(int index) {
-    
-        System.out.println("indice"+index);
-        
+
+        System.out.println("indice" + index);
+
         this.gchFormulario.getPerguntas().remove(index);
     }
-    
-  
-    
-    
-    public void VincularAlternativaPergunta(List<GchAlternativas> alternativas,GchPerguntas pergunta){
-        
-        if(!alternativas.isEmpty()){
-           
-            for(GchAlternativas a: alternativas){
-                
-                alternativasPerguntas.setAltCodigo(a.getAltCodigo());
-                alternativasPerguntas.setPerCodigo(pergunta);
-                alternativasPerguntas.setGchAlternativas(a);
-                
-                todasAlternativasPerguntas.add(alternativasPerguntas);
-            }
-             
-        }
-        
-        
-    }
-    
-    
+
     public String excluir(GchFormulario gchFormulario) {
 
         String MsgNotificacao = "";
 
         try {
 
-            if(gchFormulario != null){
-           
+            if (gchFormulario != null) {
+
                 gchFormularioService.delete(gchFormulario.getFormCodigo());
                 gchTodosFormularios.remove(gchFormulario);
                 MsgNotificacao = "O formulário " + gchFormulario.getFormNome() + "foi excluído com sucesso!";
                 Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
-                
+
             }
-            
+
         } catch (Exception ex) {
             MsgNotificacao = "Uma Exceção não tratada impediu a exclusão do formulário!";
             Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
         }
 
         return "Formularios";
-    }
-    
-    public GchFormulario getGchFormulario() {
-        
-//      gchFormulario =  gchFormularioService.findById(1);
-//        
-//        System.out.println("codigo formulario"+gchFormulario.getFormNome());
-//      
-//      
-        return gchFormulario;
     }
 
     public void setGchFormulario(GchFormulario gchFormulario) {
@@ -165,41 +283,17 @@ public class GchFormularioBean {
 
     public List<GchFormulario> getGchTodosFormularios() {
 
-        if (gchTodosFormularios == null) {
-
-            gchTodosFormularios = gchFormularioService.findAll();
-
-        }
-
+        gchTodosFormularios = gchFormularioService.findAll();
+       
         return gchTodosFormularios;
     }
 
-    public void setGchTodosFormularios(List<GchFormulario> gchTodosFormularios) {
-        this.gchTodosFormularios = gchTodosFormularios;
+    public boolean isFormAtivo() {
+        return formAtivo;
     }
 
-    public GchFormularioService getGchFormularioService() {
-        return gchFormularioService;
-    }
-
-    public void setGchFormularioService(GchFormularioService gchFormularioService) {
-        this.gchFormularioService = gchFormularioService;
-    }
-
-    public GchAlternativasperguntas getAlternativasPerguntas() {
-        return alternativasPerguntas;
-    }
-
-    public void setAlternativasPerguntas(GchAlternativasperguntas alternativasPerguntas) {
-        this.alternativasPerguntas = alternativasPerguntas;
-    }
-
-    public List<PerguntasAlternativas> getPergAlt() {
-        return PergAlt;
-    }
-
-    public void setPergAlt(List<PerguntasAlternativas> PergAlt) {
-        this.PergAlt = PergAlt;
+    public void setFormAtivo(boolean formAtivo) {
+        this.formAtivo = formAtivo;
     }
 
     public long getIndexPerguntaItem() {
@@ -210,6 +304,22 @@ public class GchFormularioBean {
         this.indexPerguntaItem = indexPerguntaItem;
     }
 
+    public List<PerguntasAlternativas> getPergAlt() {
+        return PergAlt;
+    }
+
+    public void setPergAlt(List<PerguntasAlternativas> PergAlt) {
+        this.PergAlt = PergAlt;
+    }
+
+    public GchFormularioService getGchFormularioService() {
+        return gchFormularioService;
+    }
+
+    public void setGchFormularioService(GchFormularioService gchFormularioService) {
+        this.gchFormularioService = gchFormularioService;
+    }
+
     public GchCadastroAlternativaServiceCerto getGchAlternativasService() {
         return gchAlternativasService;
     }
@@ -218,5 +328,4 @@ public class GchFormularioBean {
         this.gchAlternativasService = gchAlternativasService;
     }
 
-    
 }
