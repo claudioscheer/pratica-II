@@ -4,9 +4,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui">    
+    <head>
 
-    <h:body>
+    </head>
+    <h:body>        
         <ui:composition template="../recrutamento/menu_recrutamento.xhtml">
             <ui:define name="head">
                 <title>Cadastro de Currículo</title>
@@ -31,7 +33,12 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="CPF" for="cpf" />                                            
-                                            <h:inputText class="form-control" id="cpf" value="#{recPessoaBean.recPessoa.recCpf}" title="CPF" />
+                                            <h:inputText class="form-control" 
+                                                         id="cpf"                                                          
+                                                         maxlength="14" 
+                                                         binding="#{campocpf}"
+                                                         onkeypress="this.value = MascaraCPF(this.value)"
+                                                         value="#{recPessoaBean.recPessoa.recCpf}" title="CPF" />
                                         </div>
                                     </div> 
                                     <!-- FALTA COMPLETAR
@@ -64,7 +71,9 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="RG" for="rg" />                                            
-                                            <h:inputText class="form-control" id="rg" value="#{recPessoaBean.recPessoa.recRg}" title="RG" />
+                                            <h:inputText class="form-control" 
+                                                         id="rg" 
+                                                         value="#{recPessoaBean.recPessoa.recRg}" title="RG" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -86,7 +95,10 @@
                                             </label>
                                             <input class="form-control" 
                                                    id="number" 
-                                                   name="number" 
+                                                   name="number"
+                                                   maxlength="10"
+                                                   onkeypress="this.value = MascaraData(this.value)"
+                                                   value="#{recPessoaBean.recPessoa.recDtemissao}"
                                                    type="text"/>
                                         </div>
                                     </div> 
@@ -117,6 +129,9 @@
                                             <input class="form-control" 
                                                    id="number" 
                                                    name="number" 
+                                                   maxlength="10"
+                                                   onkeypress="this.value = MascaraData(this.value)"
+                                                   value="#{recPessoaBean.recPessoa.recDtnascimento}"
                                                    type="text"/>
                                         </div>
                                     </div> 
@@ -134,7 +149,10 @@
                                             <h:outputLabel value="Telefone" for="telefone" />                                            
                                             <h:inputText class="form-control" 
                                                          id="telefone" 
-                                                         value="#{recPessoaBean.recPessoa.recTelefone}" title="telefone" />
+                                                         maxlength="15"
+                                                         onkeypress="this.value = MascaraTelefone(this.value)"
+                                                         value="#{recPessoaBean.recPessoa.recTelefone}" 
+                                                         title="telefone" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -142,6 +160,8 @@
                                             <h:outputLabel value="Celular" for="celular" />                                            
                                             <h:inputText class="form-control" 
                                                          id="celular" 
+                                                         maxlength="15"
+                                                         onkeypress="this.value = MascaraTelefone(this.value)"
                                                          value="#{recPessoaBean.recPessoa.recCelular}" 
                                                          title="celular" />
                                         </div>
@@ -178,7 +198,10 @@
                                                 Pretensão Salarial
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recPretencaosalarial}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         maxlength="9"
+                                                         onkeypress="this.value = MascaraValorMonetario(this.value)"
+                                                         value="#{recPessoaBean.recPessoa.recPretencaosalarial}"/>                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -215,20 +238,17 @@
                                             </label>
                                             <h:selectOneMenu id="comboCor" value="#{recPessoaBean.recPessoa.recCor}"  class="form-control" >
                                                 <f:selectItem itemLabel="Selecione a Cor" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Branco" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Afro" itemValue="#{2}" />
-                                                <f:selectItem itemLabel="Vermelho" itemValue="#{3}" />
-                                                <f:selectItem itemLabel="Laranjado com Amarelo" itemValue="#{4}" />
+                                                <f:selectItem itemLabel="Branco" itemValue="#{1}" />                                                                                                                                                
                                             </h:selectOneMenu>                                                                                                                        
                                         </div>     
                                     </div> 
-                                    <!-- 
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Grau de Ensino
                                             </label>
-                                            <h:selectOneMenu id="comboGrauensino" value="#{recPessoaBean.recPessoa.recIdgrauensino}"  class="form-control" >
+                                            <h:selectOneMenu id="comboGrauensino" value="#{recPessoaBean.recPessoa.recPesGrauEnsino}"  class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
@@ -241,7 +261,7 @@
                                             </h:selectOneMenu>
                                         </div>     
                                     </div>
-                                    -->
+                                    
                                 </div>
                                 <hr />
                                 <div class="row">

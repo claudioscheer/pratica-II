@@ -48,13 +48,15 @@ public class RecPessoaBean {
     public RecPessoaBean() {
     }
 
-    public void Salvar() {
+    public String Salvar() {
         if (recPessoa.getId() > 0) {
             recPessoaService.Alterar(recPessoa);
         } else {
             recPessoaService.Inserir(recPessoa);
         }
+        return "cadastro_curriculo_sucesso";
         //habilidades = recHabilidadeService.ListarTodas();
+        
     }
 
     public String PreparaEdicao(RecPessoa pessoa) {

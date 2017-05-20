@@ -88,7 +88,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recAutoavaliacao;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "rec_pretencaosalarial")
-    private Float recPretencaosalarial;
+    private String recPretencaosalarial;
     @Lob
     @Column(name = "rec_foto")
     private byte[] recFoto;
@@ -175,6 +175,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private PossuiDependentes possuiDependente;
     @OneToMany
     private List<CsbffCargos> csbffCargosList;
+    private Integer recPesGrauEnsino;
 
     public RecPessoa(PossuiDependentes possuiDependente) {
         this.possuiDependente = possuiDependente;
@@ -344,11 +345,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recAutoavaliacao = recAutoavaliacao;
     }
 
-    public Float getRecPretencaosalarial() {
+    public String getRecPretencaosalarial() {
         return recPretencaosalarial;
     }
 
-    public void setRecPretencaosalarial(Float recPretencaosalarial) {
+    public void setRecPretencaosalarial(String recPretencaosalarial) {
         this.recPretencaosalarial = recPretencaosalarial;
     }
 
@@ -642,7 +643,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.recIdpessoa;
     }
 
     public Insalubridade getInsalubridade() {
@@ -677,7 +678,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.possuiDependente = possuiDependente;
     }
 
-    public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, Sexo recSexo, Integer recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, Float recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, List<GchTreinamentospessoas> gchTreinamentospessoasList, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Periculosidade periculosidade) {
+    public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, Sexo recSexo, Integer recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, String recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, List<GchTreinamentospessoas> gchTreinamentospessoasList, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Periculosidade periculosidade) {
         this.recIdpessoa = recIdpessoa;
         this.recNomecompleto = recNomecompleto;
         this.recCpf = recCpf;
@@ -741,6 +742,22 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setCsbffCargosList(List<CsbffCargos> csbffCargosList) {
         this.csbffCargosList = csbffCargosList;
+    }
+
+    public Integer getRecPesGrauEnsino() {
+        return recPesGrauEnsino;
+    }
+
+    public void setRecPesGrauEnsino(Integer recPesGrauEnsino) {
+        this.recPesGrauEnsino = recPesGrauEnsino;
+    }
+
+    public CsbffEscalaHoras getCsbffEscalaHoras() {
+        return csbffEscalaHoras;
+    }
+
+    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
+        this.csbffEscalaHoras = csbffEscalaHoras;
     }
 
 }
