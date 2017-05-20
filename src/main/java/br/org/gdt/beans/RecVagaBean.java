@@ -14,6 +14,7 @@ import javax.faces.bean.RequestScoped;
 public class RecVagaBean {
 
     private boolean formAtivo = false;
+    private String stringBusca;
 
     ///DADOS DA VAGA
     private RecVaga vaga = new RecVaga();
@@ -45,13 +46,31 @@ public class RecVagaBean {
         }
         return vagas;
     }
-
+    
+    public List<RecVaga> PesquisarPorDescricao(){
+        if(stringBusca == null){
+            vagas = recVagaService.ListarTodas();
+        }else{
+            vagas = recVagaService.PesquisarPorDescricao(stringBusca);
+        }        
+        return vagas;
+    }
+    
     public String PreparaEdicao(RecVaga vaga) {
         this.formAtivo = true;
         this.vaga = vaga;
         return "vaga_lista";
     }
+    
+    public String VisualizarVaga(RecVaga vaga) {
+        this.formAtivo = true;
+        this.vaga = vaga;
+        return "menu_vaga_lista";
+    }
 
+    public String CandidatarParaVaga(){
+        return "cadastro_curriculo";
+    }
     public void AdicionarHabilidade() {
         this.habilidades.add(habilidade);
         this.habilidade = new RecHabilidade();
@@ -126,5 +145,13 @@ public class RecVagaBean {
 
     public void setHabilidades(List<RecHabilidade> habilidades) {
         this.habilidades = habilidades;
+    }
+
+    public String getStringBusca() {
+        return stringBusca;
+    }
+
+    public void setStringBusca(String stringBusca) {
+        this.stringBusca = stringBusca;
     }
 }

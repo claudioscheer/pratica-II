@@ -57,7 +57,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_nomecompleto")
     private String recNomecompleto;
     @Column(name = "rec_cpf")
-    private int recCpf;
+    private String recCpf;
     @Column(name = "rec_sexo")
     private Sexo recSexo;
     @Column(name = "rec_estadocivil")
@@ -232,11 +232,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recNomecompleto = recNomecompleto;
     }
 
-    public int getRecCpf() {
+    public String getRecCpf() {
         return recCpf;
     }
 
-    public void setRecCpf(int recCpf) {
+    public void setRecCpf(String recCpf) {
         this.recCpf = recCpf;
     }
 
@@ -677,7 +677,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.possuiDependente = possuiDependente;
     }
 
-    public RecPessoa(long recIdpessoa, String recNomecompleto, int recCpf, Sexo recSexo, Integer recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, Float recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, List<GchTreinamentospessoas> gchTreinamentospessoasList, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Periculosidade periculosidade) {
+    public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, Sexo recSexo, Integer recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, Float recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, List<GchTreinamentospessoas> gchTreinamentospessoasList, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Periculosidade periculosidade) {
         this.recIdpessoa = recIdpessoa;
         this.recNomecompleto = recNomecompleto;
         this.recCpf = recCpf;
