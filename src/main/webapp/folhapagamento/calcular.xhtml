@@ -130,10 +130,7 @@
                                 </div>
                                 <div class="row" style="margin-top: 10px">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <h:commandButton class="btn btn-primary" value="Salvar eventos" action="#{fpCalcularBean.calcularFolhaPagamento()}">
-                                            <f:ajax execute="@form" render="formEventoVariavel" />
-                                        </h:commandButton>
-                                        <h:commandButton class="btn btn-success" value="Calcular folha" action="#{fpCalcularBean.calcularFolhaPagamento()}">
+                                        <h:commandButton class="btn btn-primary" value="Salvar e calcular eventos" action="#{fpCalcularBean.calcularFolhaPagamento()}">
                                             <f:ajax execute="@form" render="formEventoVariavel" />
                                         </h:commandButton>
                                     </div>
