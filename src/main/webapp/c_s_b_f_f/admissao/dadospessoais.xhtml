@@ -39,7 +39,7 @@
                                             </label>
                                             <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recCpf}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control " a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
-                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.recCpf}" itemValue="#{cpf.recCpf}"/>
+                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.recIdpessoa}" itemValue="#{cpf.recCpf}"/>
                                             </h:selectOneMenu>
                                             <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
                                         </div>
