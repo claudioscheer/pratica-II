@@ -18,7 +18,7 @@
                     <h3>Cadastro de Currículo</h3>
                 </div>
                 <br />
-                <h:form id="formVaga">                                        
+                <h:form id="formCurriculo">                                        
                     <p:panel>
                         <h:inputHidden value="#{recPessoaBean.recPessoa.recIdpessoa}" />                        
                         <div class="bootstrap-iso">
@@ -387,7 +387,11 @@
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{recPessoaBean.Salvar()}" />                                        
+                                        <h:commandButton class="btn btn-success" 
+                                                         value="Salvar" 
+                                                         action="#{recPessoaBean.Salvar()}" >
+                                            <f:ajax execute="@form" render="formCurriculo" />
+                                        </h:commandButton>
                                         <h:commandButton value="Cancelar" class="btn btn-danger"/>
                                     </div>
                                 </div>

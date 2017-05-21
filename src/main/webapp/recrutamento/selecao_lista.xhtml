@@ -21,17 +21,8 @@
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Data Entrevista
-                                                <span class="required">*</span>
-                                            </label>
-                                            <input class="form-control" id="number" name="text" type="text"/>
-                                        </div>
-                                    </div>   
-
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                    
+                                    <div class="col-md-12 col-sm-12 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Candidato
@@ -42,20 +33,35 @@
                                             </h:selectOneMenu>                                                                                                             
                                         </div>     
                                     </div> 
+                                    
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Data Entrevista
+                                                <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control date-picker" 
+                                                   id="number" 
+                                                   name="text" 
+                                                   type="text"/>
+                                        </div>
+                                    </div>   
+                                    
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Vaga
                                             </label>
-                                            <select class="select form-control" id="select" name="select">
-                                                <option value="1">
-                                                    Programador Java
-                                                </option>
-                                                <option value="2">
-                                                    DBA
-                                                </option>                                            
-                                            </select>
+                                            
+                                            <h:selectOneMenu id="comboVaga" value="#{recSelecaoBean.selecao.recIdvaga}"  class="form-control" >
+                                                <f:selectItem itemLabel="Selecione a Vaga" itemValue="#{null}" />
+                                                <f:selectItems value="#{recVagaBean.ListarTodas()}" 
+                                                               var="vaga" 
+                                                               itemValue="#{vaga}" 
+                                                               itemLabel="#{vaga.recDescricao}"/>
+                                            </h:selectOneMenu>                                                                                                             
+                                            
                                         </div>     
                                     </div> 
 
@@ -63,8 +69,7 @@
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <h:commandButton class="btn btn-success" value=" salvar" />
-                                        <h:commandButton value="Editar" class="btn btn-default" />
+                                        <h:commandButton class="btn btn-success" value="Salvar" />                                        
                                         <h:commandButton value="Cancelar" class="btn btn-danger"/>
                                     </div>
                                 </div>

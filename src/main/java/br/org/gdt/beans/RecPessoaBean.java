@@ -2,6 +2,7 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecPessoaService;
 import java.util.ArrayList;
@@ -49,14 +50,14 @@ public class RecPessoaBean {
     }
 
     public String Salvar() {
-        if (recPessoa.getId() > 0) {
-            recPessoaService.Alterar(recPessoa);
-        } else {
-            recPessoaService.Inserir(recPessoa);
+        if (ValidarCampos()) {
+            if (recPessoa.getId() > 0) {
+                recPessoaService.Alterar(recPessoa);
+            } else {
+                recPessoaService.Inserir(recPessoa);
+            }            
         }
         return "cadastro_curriculo_sucesso";
-        //habilidades = recHabilidadeService.ListarTodas();
-        
     }
 
     public String PreparaEdicao(RecPessoa pessoa) {
@@ -136,4 +137,48 @@ public class RecPessoaBean {
         this.pesHabilidades = pesHabilidades;
     }
 
+    public boolean ValidarCampos() {
+        if (recPessoa.getRecNomecompleto().isEmpty()) {
+            Helper.mostrarNotificacao("Nome Completo", "Preencha o Nome Completo", "error");
+            return false;
+        }
+        if (recPessoa.getRecCpf().isEmpty()) {
+            Helper.mostrarNotificacao("CPF", "Preencha o CPF", "error");
+            return false;
+        }
+        if (recPessoa.getRecRg().isEmpty()) {
+            Helper.mostrarNotificacao("RG", "Preencha o RG", "error");
+            return false;
+        }
+        if (recPessoa.getRecRg().isEmpty()) {
+            Helper.mostrarNotificacao("Orgão Emissor", "Preencha o Orgão Emissor do RG", "error");
+            return false;
+        }
+
+        if (recPessoa.getRecEmail().isEmpty()) {
+            Helper.mostrarNotificacao("E-mail", "Preencha o E-mail", "error");
+            return false;
+        }
+        if (recPessoa.getRecTelefone().isEmpty()) {
+            Helper.mostrarNotificacao("Telefone", "Preencha o Telefone", "error");
+            return false;
+        }
+        if (recPessoa.getRecCelular().isEmpty()) {
+            Helper.mostrarNotificacao("Celular", "Preencha o Celular", "error");
+            return false;
+        }
+        if (recPessoa.getRecEndereco().isEmpty()) {
+            Helper.mostrarNotificacao("Endereço", "Preencha o Endereço", "error");
+            return false;
+        }
+        if (recPessoa.getRecBairro().isEmpty()) {
+            Helper.mostrarNotificacao("Bairro", "Preencha o Bairro", "error");
+            return false;
+        }
+        if (recPessoa.getRecNumero().isEmpty()) {
+            Helper.mostrarNotificacao("Número", "Preencha o Número", "error");
+            return false;
+        }
+        return true;
+    }
 }
