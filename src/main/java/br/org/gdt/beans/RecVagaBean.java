@@ -2,6 +2,7 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecVaga;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecVagaService;
 import java.util.List;
@@ -33,18 +34,21 @@ public class RecVagaBean {
     }
 
     public void Salvar() {
-        if (vaga.getRecIdvaga() > 0) {
-            if (habilidades != null) {                
-                vaga.setRecHabilidadeList(habilidades);
+
+        if (ValidarCampos()) {
+            if (vaga.getRecIdvaga() > 0) {
+                if (habilidades != null) {
+                    vaga.setRecHabilidadeList(habilidades);
+                }
+                recVagaService.Alterar(vaga);
+            } else {
+                if (habilidades != null) {
+                    vaga.setRecHabilidadeList(habilidades);
+                }
+                recVagaService.Inserir(vaga);
             }
-            recVagaService.Alterar(vaga);
-        } else {
-            if (habilidades != null) {
-                vaga.setRecHabilidadeList(habilidades);
-            }
-            recVagaService.Inserir(vaga);
+            vagas = recVagaService.ListarTodas();
         }
-        vagas = recVagaService.ListarTodas();
     }
 
     public List<RecVaga> ListarTodas() {
@@ -86,7 +90,7 @@ public class RecVagaBean {
         return "cadastro_curriculo";
     }
 
-    public void AdicionarHabilidade() {        
+    public void AdicionarHabilidade() {
         this.habilidades.add(habilidade);
         this.habilidade = new RecHabilidade();
         vaga.setRecHabilidadeList(habilidades);
@@ -169,5 +173,26 @@ public class RecVagaBean {
 
     public void setStringBusca(String stringBusca) {
         this.stringBusca = stringBusca;
+    }
+
+    
+    public boolean ValidarCampos() {
+        if (vaga.getRecDescricao().isEmpty()) {
+            Helper.mostrarNotificacao("Descrição", "Preencha a Descrição da Vaga", "error");
+            return false;
+        }
+        if (vaga.getRecSexo() == null) {
+            Helper.mostrarNotificacao("Sexo", "Selecione o Sexo", "error");
+            return false;
+        }
+        if (vaga.getRecGrauensino() == null) {
+            Helper.mostrarNotificacao("Grau de Ensino", "Selecione o Sexo", "error");
+            return false;
+        }
+        if (vaga.getRecSalario() == null) {
+            Helper.mostrarNotificacao("Salário", "Preencha o Salário", "error");
+            return false;
+        }
+        return true;
     }
 }
