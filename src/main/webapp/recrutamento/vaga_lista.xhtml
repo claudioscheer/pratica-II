@@ -89,7 +89,7 @@
                                 </div>
                             </div>
 
-                            <!-- Habilidades 
+                            <!-- Habilidades -->
                             <div class="row">
                                 <h3 class="text-center">Habilidades Necessárias</h3>   
                                 <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -97,31 +97,27 @@
                                         <label class="control-label " for="select">
                                             Habilidade
                                         </label>
-                                        <select class="select form-control" id="select" name="select">
-                                            <option value="1">
-                                                Habilidade 1
-                                            </option>
-                                            <option value="2">
-                                                Habilidade 2
-                                            </option>                                            
-                                        </select>
+                                        <h:selectOneMenu id="comboHabilidade" value="#{recVagaBean.habilidade}"  class="form-control" >
+                                            <f:selectItem itemLabel="Selecione as Habilidades" itemValue="#{null}" />
+                                            <f:selectItems value="#{recHabilidadeBean.ListarTodas()}" var="habilidade" itemValue="#{habilidade}" itemLabel="#{habilidade.recDescricao}"/>
+                                        </h:selectOneMenu>                                 
                                     </div>     
                                 </div>                            
                             </div>
 
                             <div class="row">
-                                <h:commandButton class="btn btn-success" value=" Adicionar" />                            
+                                <h:commandButton class="btn btn-success" value="Adicionar" action="#{recVagaBean.AdicionarHabilidade()}" />                            
                             </div>
 
                             <div class="row">
-                                <h:dataTable class="table table-striped">                                        
+                                <h:dataTable class="table table-striped" value="#{recVagaBean.vaga.recHabilidadeList}" var="item">                                        
                                     <h:column>
                                         <f:facet name="header">Código</f:facet>
-
+                                        <h:outputText value="#{item.recIdhabilidade}"/>                                
                                     </h:column>     
                                     <h:column>
                                         <f:facet name="header">Habilidade</f:facet>
-
+                                        <h:outputText value="#{item.recDescricao}"/>                                
                                     </h:column>   
                                     <h:column>
                                         <f:facet name="header">Opções</f:facet>
@@ -134,7 +130,7 @@
                                     </h:column>                  
                                 </h:dataTable>
                             </div>
-                            -->
+
 
                             <hr></hr>
                             <div class="pull-right">

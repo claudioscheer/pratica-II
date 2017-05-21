@@ -5,6 +5,7 @@ import br.org.gdt.model.RecVaga;
 import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecVagaService;
 import java.util.List;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -33,8 +34,14 @@ public class RecVagaBean {
 
     public void Salvar() {
         if (vaga.getRecIdvaga() > 0) {
+            if (habilidades != null) {                
+                vaga.setRecHabilidadeList(habilidades);
+            }
             recVagaService.Alterar(vaga);
-        } else {            
+        } else {
+            if (habilidades != null) {
+                vaga.setRecHabilidadeList(habilidades);
+            }
             recVagaService.Inserir(vaga);
         }
         vagas = recVagaService.ListarTodas();
@@ -46,34 +53,43 @@ public class RecVagaBean {
         }
         return vagas;
     }
-    
-    public List<RecVaga> PesquisarPorDescricao(){
-        if(stringBusca == null){
+
+    public List<RecHabilidade> ListarHabilidade() {
+        if (habilidades == null) {
+            habilidades = recHabilidadeService.ListarTodas();
+        }
+        return habilidades;
+    }
+
+    public List<RecVaga> PesquisarPorDescricao() {
+        if (stringBusca == null) {
             vagas = recVagaService.ListarTodas();
-        }else{
+        } else {
             vagas = recVagaService.PesquisarPorDescricao(stringBusca);
-        }        
+        }
         return vagas;
     }
-    
+
     public String PreparaEdicao(RecVaga vaga) {
         this.formAtivo = true;
         this.vaga = vaga;
         return "vaga_lista";
     }
-    
+
     public String VisualizarVaga(RecVaga vaga) {
         this.formAtivo = true;
         this.vaga = vaga;
         return "menu_vaga_lista";
     }
 
-    public String CandidatarParaVaga(){
+    public String CandidatarParaVaga() {
         return "cadastro_curriculo";
     }
-    public void AdicionarHabilidade() {
+
+    public void AdicionarHabilidade() {        
         this.habilidades.add(habilidade);
         this.habilidade = new RecHabilidade();
+        vaga.setRecHabilidadeList(habilidades);
     }
 
     public String Excluir(RecVaga vaga) {
