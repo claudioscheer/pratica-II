@@ -72,7 +72,8 @@ public class GchCursoBean {
         String MsgNotificacao = "";
         try {
             if (gchCurso.getCurCodigo() > 0) {
-
+                
+                gchCurso.setCurDatainclusao(new Date());    
                 gchCursoService.update(gchCurso);
 
                 MsgNotificacao = "O curso " + gchCurso.getCurNome() + " foi atualizado com sucesso!";

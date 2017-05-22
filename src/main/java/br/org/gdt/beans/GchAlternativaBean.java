@@ -204,6 +204,21 @@ public class GchAlternativaBean {
 
     }
     
+    public String buscaPorId(int idAlternativa) {
+
+        System.out.println("Id do curso" + idAlternativa);
+
+        if (idAlternativa != 0) {
+
+            gchAlternativas = gchAlternativasService.findById(idAlternativa);
+
+            return "CadastroCurso";
+
+        }
+
+        return null;
+
+    }
     
     public String excluir(GchAlternativas gchAlternativas) {
 

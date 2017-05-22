@@ -30,12 +30,14 @@
                                     </div>
                                     <div class="panel-body" style="/* align-items: center; */">
                
-                                        <h:form id="formCadCurso">           
+                                        <h:form id="formCadCurso"> 
+                                           <h:messages class="error" style="color: #d9534f" />
                                                 <div class="form-horizontal form-label-left">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                                 <h:inputHidden value="#{gchCursoBean.gchCurso.curCodigo}"/>
+                                                             
                                                                 <div class="form-group">
                                                                     <label class="control-label requiredField" for="name">
                                                                         Nome do Curso
