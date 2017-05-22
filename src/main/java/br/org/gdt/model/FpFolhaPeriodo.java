@@ -1,5 +1,6 @@
 package br.org.gdt.model;
 
+import br.org.gdt.enums.FpStatusFolhaPeriodo;
 import br.org.gdt.enums.FpTipoEvento;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +28,7 @@ public class FpFolhaPeriodo implements java.io.Serializable {
     private FpPeriodo forPeriodo;
     private Date forGeradaEm;
     private List<FpEventoPeriodo> forEventos;
+    private FpStatusFolhaPeriodo forFpStatusFolhaPeriodo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_folha_periodo")
@@ -63,6 +65,14 @@ public class FpFolhaPeriodo implements java.io.Serializable {
 
     public void setForGeradaEm(Date forGeradaEm) {
         this.forGeradaEm = forGeradaEm;
+    }
+
+    public FpStatusFolhaPeriodo getForFpStatusFolhaPeriodo() {
+        return forFpStatusFolhaPeriodo;
+    }
+
+    public void setForFpStatusFolhaPeriodo(FpStatusFolhaPeriodo forFpStatusFolhaPeriodo) {
+        this.forFpStatusFolhaPeriodo = forFpStatusFolhaPeriodo;
     }
 
     @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
