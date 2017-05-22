@@ -28,7 +28,7 @@ public class FpFolhaPeriodo implements java.io.Serializable {
     private FpPeriodo forPeriodo;
     private Date forGeradaEm;
     private List<FpEventoPeriodo> forEventos;
-    private FpStatusFolhaPeriodo forFpStatusFolhaPeriodo;
+    private FpStatusFolhaPeriodo forStatusFolhaPeriodo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_folha_periodo")
@@ -67,12 +67,12 @@ public class FpFolhaPeriodo implements java.io.Serializable {
         this.forGeradaEm = forGeradaEm;
     }
 
-    public FpStatusFolhaPeriodo getForFpStatusFolhaPeriodo() {
-        return forFpStatusFolhaPeriodo;
+    public FpStatusFolhaPeriodo getForStatusFolhaPeriodo() {
+        return forStatusFolhaPeriodo;
     }
 
-    public void setForFpStatusFolhaPeriodo(FpStatusFolhaPeriodo forFpStatusFolhaPeriodo) {
-        this.forFpStatusFolhaPeriodo = forFpStatusFolhaPeriodo;
+    public void setForStatusFolhaPeriodo(FpStatusFolhaPeriodo forStatusFolhaPeriodo) {
+        this.forStatusFolhaPeriodo = forStatusFolhaPeriodo;
     }
 
     @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
