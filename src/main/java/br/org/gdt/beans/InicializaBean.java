@@ -6,11 +6,13 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.service.InicializaService;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -34,6 +36,8 @@ public class InicializaBean {
 
             inicializaUF();
             inicializaMunicipios();
+            inicializaTabelas();
+            inicializaPessoas();
 
         } catch (Exception e) {
 
@@ -44,6 +48,25 @@ public class InicializaBean {
 
         return "InicializaSistema";
 
+    }
+
+    public void inicializaPessoas() {
+        List<String> sqls = new ArrayList<>();
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (1,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'000.000.000-00','larissa@murphy.com','Setrem',1,'Larissa Daiane Caneppele Guder','Iria Guder','Halário Guder','950','Crescer na firma','SSP',7,'1.500.00','0000000000','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (2,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'111.111.111-11','claudio@murphy.com','Setrem',1,'Claudio Roberto Scheer Jr','Maria Scheer','João Scheer','950','Crescer na firma','SSP',7,'1.500.00','1111111111','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (3,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'222.222.222-22','dimas@murphy.com','Setrem',1,'Dimas Rochenback','Maria Rochenback','João Rochenback','950','Crescer na firma','SSP',7,'1.500.00','2222222222','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (4,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'333.333.333-33','alisson@murphy.com','Setrem',1,'Alisson Allebrandt','Maria Allebrandt','João Allebrandt','950','Crescer na firma','SSP',7,'1.500.00','3333333333','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (5,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'444.444.444-44','diego@murphy.com','Setrem',1,'Diego Schmidtt','Maria Schmidtt','João Schmidtt','950','Crescer na firma','SSP',7,'1.500.00','4444444444','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (6,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'555.555.555-55','marcos@murphy.com','Setrem',1,'Marcos Dollis','Maria Dollis','João Dollis','950','Crescer na firma','SSP',7,'1.500.00','5555555555','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (7,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'666.666.666-66','juliano@murphy.com','Setrem',1,'Juliano Rossi','Maria Rossi','João Rossi','950','Crescer na firma','SSP',7,'1.500.00','6666666666','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (8,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'777.777.777-77','anderson@murphy.com','Setrem',1,'Anderson Seibert','Maria Seibert','João Seibert','950','Crescer na firma','SSP',7,'1.500.00','7777777777','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (9,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'888.888.888-88','joao@murphy.com','Setrem',1,'João Oliveira','Maria Oliveira','João Oliveira','950','Crescer na firma','SSP',7,'1.500.00','8888888888','(55) 4343-3434');");
+
+        for (int i = 0; i < sqls.size(); i++) {
+
+            inicializaService.inicializar(sqls.get(i));
+
+        }
     }
 
     public void inicializaTabelas() {
