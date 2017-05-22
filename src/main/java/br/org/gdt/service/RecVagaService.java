@@ -22,7 +22,7 @@ public class RecVagaService {
         vagaDao.update(vaga);
     }
     @Transactional
-    public void Excluir(int id) {
+    public void Excluir(long id) {
         vagaDao.delete(id);
     }
     
@@ -32,5 +32,9 @@ public class RecVagaService {
     
     public List<RecVaga> ListarTodas() {
         return vagaDao.findAll();
+    }
+    
+    public List<RecVaga> PesquisarPorDescricao(String busca){
+        return vagaDao.PesquisarPorDescricao(busca);
     }
 }

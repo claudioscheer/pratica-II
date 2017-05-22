@@ -25,14 +25,22 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Descrição" for="descricao" />                                            
-                                            <h:inputText class="form-control" id="descricao" value="#{recHabilidadeBean.habilidade.recDescricao}" title="Descricao" />
+                                            <h:inputText class="form-control" id="descricao" 
+                                                         value="#{recHabilidadeBean.habilidade.recDescricao}" 
+                                                         title="Descricao" />
                                         </div>
                                     </div> 
-                                    
+
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group ">                                            
-                                            <h:outputLabel value="Nível" for="nivel" />                                            
-                                            <h:inputText class="form-control" id="nivel" value="#{recHabilidadeBean.habilidade.recHabilidadenivel}" title="Nível" />
+                                            <h:outputLabel value="Nível" for="nivel" />                                                                                        
+                                            <h:selectOneMenu id="comboGrauensino" 
+                                                             value="#{recHabilidadeBean.habilidade.recHabilidadenivel}"  
+                                                             class="form-control" >                                            
+                                                <f:selectItem itemLabel="Básico" itemValue="#{1}" />                                                
+                                                <f:selectItem itemLabel="Intermediário" itemValue="#{2}" />                                            
+                                                <f:selectItem itemLabel="Avançado" itemValue="#{3}" />
+                                            </h:selectOneMenu>
                                         </div>
                                     </div>
                                 </div>                                                                            
@@ -61,8 +69,14 @@
                             </h:column>                                                                                                                       
                             <h:column>
                                 <f:facet name="header">Descrição</f:facet>                                                                                            
-                                <h:outputText value="#{item.recDescricao}"/>                                
+                                <h:outputText value="#{item.recDescricao}" />                                                          
                             </h:column>    
+                            <h:column>
+                                <f:facet name="header">Nível</f:facet>                                                                                            
+                                <h:outputText value="Básico"        rendered="#{item.recHabilidadenivel == 1}" />
+                                <h:outputText value="Intermediário" rendered="#{item.recHabilidadenivel == 2}" />
+                                <h:outputText value="Avançado"      rendered="#{item.recHabilidadenivel == 3}" />                                
+                            </h:column>   
                             <h:column>
                                 <f:facet name="header">Opções</f:facet>                                                                                            
                                 <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recHabilidadeBean.PreparaEdicao(item)}">                                    

@@ -40,7 +40,7 @@
                                                     <h:inputText value="#{perguntas.perCodigo}" />
 
                                                     <h:selectOneRadio value="#{gchFormularioAlternativasBean.radio}" >
-                                                        <f:selectItems value="#{gchFormularioAlternativasBean.todasAlternativas}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.altDescricao}"/>
+                                                        <f:selectItems value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.altDescricao}"/>
                                                     </h:selectOneRadio>
 
                                                 </div>

@@ -20,6 +20,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -64,13 +65,11 @@ implements Serializable {
     @Column(name = "form_prazoResposta")
     @Temporal(TemporalType.TIMESTAMP)
     private Date formPrazoResposta;
-    
-//  @OneToMany(mappedBy = "formulario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @OneToMany(mappedBy = "formulario", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "formulario")
     private List<GchPerguntas> perguntas;
     
     
-
     public long getFormCodigo() {
         return formCodigo;
     }

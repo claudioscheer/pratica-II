@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +26,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 /**
  *
@@ -48,9 +50,9 @@ public class GchAlternativas implements Serializable {
     @Basic(optional = false)
     @Column(name = "alt_prioridade")
     private short altPrioridade;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "gchAlternativas")
+    @ManyToOne
     private GchAlternativasperguntas gchAlternativasperguntas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "altCodigo")
+    @OneToMany
     private List<GchRespostas> gchRespostasList;
 
     

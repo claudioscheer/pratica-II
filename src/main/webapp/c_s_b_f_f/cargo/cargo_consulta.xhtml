@@ -23,7 +23,7 @@
 
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="form_cargo.xhtml">
+                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{csbffCargosBean.add()}">
                                 <f:ajax execute="@form" render="formTabela" />
                             </h:commandButton>
                             
@@ -35,7 +35,7 @@
                                     <label class="control-label " for="name">
                                         Buscar Nome
                                     </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar nome"></h:inputText>
+                                    <h:inputText class="form-control" a:placeholder=" Buscar nome" value="#{csbffCargosBean.nomeCBO}"></h:inputText>
 
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                     <label class="control-label " for="name">
                                         Buscar CBO
                                     </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{cargosBean.nomeCBO}"></h:inputText>
+                                    <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{csbffCargosBean.numeroCBO}"></h:inputText>
 
                                 </div>
                             </div> 
@@ -56,7 +56,7 @@
                                 <div>&nbsp;</div>
                                 <div class="element">
 
-                                    <h:commandButton class="btn btn-primary , form-control" value="Buscar" action="#{cargosBean.buscaPorCbo()}"/>
+                                    <h:commandButton class="btn btn-primary , form-control" value="Buscar" action="#{csbffCargosBean.buscaPorCbo()}"/>
                                 </div>
                                 <br></br>
                             </div>
@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="x_panel">
                                 <div class="x_content">
-                                    <h:dataTable class="table table-striped" value="#{cargosBean.todosCargos}" var="cargos">
+                                    <h:dataTable class="table table-striped" value="#{csbffCargosBean.todosCargos}" var="cargos">
                                         <h:column>
                                             <f:facet name="header">Código</f:facet>
                                                 #{cargos.cargoCodigo}
@@ -94,17 +94,17 @@
                                             #{cargos.cargoValorSalario}" 
                                         </h:column>
                                         <h:column>
-<!--                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{cargosBean.prepareEdit(cargos)}">
+<!--                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{csbffCargosBean.prepareEdit(cargos)}">
                                                 <f:ajax execute="@form" render="formTabela" />
                                             </h:commandLink>-->
 
-                                            <h:commandLink action="#{cargosBean.pg(cargos)}">
+                                            <h:commandLink action="#{csbffCargosBean.pg(cargos)}">
 
                                                 <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                             </h:commandLink>
 
 
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{cargosBean.excluir(cargos)}" onclick="return confirm('Excluir tabela?')">
+                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffCargosBean.excluir(cargos)}" onclick="return confirm('Excluir tabela?')">
                                                 <f:ajax execute="@form" render="formTabela" />
                                             </h:commandLink>
                                         </h:column>                  

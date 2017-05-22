@@ -7,12 +7,12 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.GchAlternativas;
 import br.org.gdt.model.GchFormulario;
-import br.org.gdt.model.RecPessoa;
+import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
+import br.org.gdt.service.GchPerguntasService;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
@@ -34,10 +34,14 @@ public class GchFormularioAlternativasBean {
 
     private Map<GchAlternativas, Boolean> radio = new HashMap<GchAlternativas, Boolean>();
     
+    private List<GchPerguntas> todasPerguntas;
     
     @ManagedProperty("#{gchAlternativaCertoService}")
     private GchCadastroAlternativaServiceCerto gchAlternativasService;
 
+    @ManagedProperty("#{gchPerguntaService}")
+    private GchPerguntasService gchPerguntasService; 
+    
      @ManagedProperty("#{gchFormularioService}")
     private GchFormularioService gchFormularioService;
 
@@ -51,6 +55,12 @@ public class GchFormularioAlternativasBean {
 
 
     public void save() {
+    }
+    
+    public List<GchAlternativas> buscaAlternativas(GchPerguntas gchPerguntas){
+    
+        return gchAlternativasService.findAll();
+    
     }
 
     public List<GchAlternativas> getTodasAlternativas() {
@@ -90,7 +100,7 @@ public class GchFormularioAlternativasBean {
         if (gchFormularios == null){
         
             gchFormularios = gchFormularioService.findById(1);
-            
+           
         }
         
         return gchFormularios;
@@ -106,6 +116,22 @@ public class GchFormularioAlternativasBean {
 
     public void setRadio(Map<GchAlternativas, Boolean> radio) {
         this.radio = radio;
+    }
+
+    public GchPerguntasService getGchPerguntasService() {
+        return gchPerguntasService;
+    }
+
+    public void setGchPerguntasService(GchPerguntasService gchPerguntasService) {
+        this.gchPerguntasService = gchPerguntasService;
+    }
+
+    public List<GchPerguntas> getTodasPerguntas() {
+        return todasPerguntas;
+    }
+
+    public void setTodasPerguntas(List<GchPerguntas> todasPerguntas) {
+        this.todasPerguntas = todasPerguntas;
     }
 
     

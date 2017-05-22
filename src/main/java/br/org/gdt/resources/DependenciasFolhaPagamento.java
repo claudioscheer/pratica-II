@@ -29,6 +29,8 @@ public class DependenciasFolhaPagamento {
     private void salvarTodosEventos() {
         FpEvento fpEvento = new FpEvento();
 
+        // Salário
+        //Ajustado
         fpEvento.setEveId(FpEnumEventos.Salario.ordinal() + 1);
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
@@ -40,6 +42,7 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         // Máximo de horas permitidas por dia é 2h.
+        //Ajustado
         fpEvento.setEveId(FpEnumEventos.HorasExtras50.ordinal() + 1);
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
@@ -50,6 +53,7 @@ public class DependenciasFolhaPagamento {
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
+        //Ajustado
         fpEvento.setEveId(FpEnumEventos.HorasExtras100.ordinal() + 1);
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
@@ -60,6 +64,7 @@ public class DependenciasFolhaPagamento {
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
+        //Ajustado
         fpEvento.setEveId(FpEnumEventos.HorasNoturnas.ordinal() + 1);
         fpEvento.setEveIncideFGTS(true);
         fpEvento.setEveIncideINSS(true);
@@ -70,6 +75,7 @@ public class DependenciasFolhaPagamento {
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
+        // Ajustado
         fpEvento.setEveId(FpEnumEventos.HorasFaltas.ordinal() + 1);
         fpEvento.setEveIncideFGTS(false);
         fpEvento.setEveIncideINSS(false);
@@ -106,6 +112,183 @@ public class DependenciasFolhaPagamento {
         fpEvento.setEvePermiteExcluir(false);
         fpEvento.setEveNome("IRRF");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        fpEvento.setEveId(FpEnumEventos.PensaoJudicialFixo.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Pensão judicial - fixo");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+        
+        
+        fpEvento.setEveId(FpEnumEventos.PensaoJudicialMinimo.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Pensão judicial - %Salário mínimo");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        fpEvento.setEveId(FpEnumEventos.PensaoJudicialPorcentagem.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Pensão Judicial - %Salário");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        // Ajustado
+        fpEvento.setEveId(FpEnumEventos.SalarioFamilia.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Salário família");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.SalarioMaternidade.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Salário maternidade");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.Insalubridade10.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Insalubridade 10");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.Insalubridade20.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Insalubridade 20");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.Insalubridade40.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Insalubridade 40");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.Periculosidade.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Periculosidade");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.Transporte.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Vale transporte");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        // Verificar se é desconto
+        fpEvento.setEveId(FpEnumEventos.Alimentacao.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Vale alimentação");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        //Verificar se é desconto
+        fpEvento.setEveId(FpEnumEventos.Refeicao.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Vale refeição");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.PlanoSaude.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Plano de saúde");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.ContribuicaoSindical.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Contribuição sindical");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado
+        fpEvento.setEveId(FpEnumEventos.GratificacoesDiversas.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Gratificações diversas");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
+
+        //Ajustado 
+        //Até 15 dias
+        fpEvento.setEveId(FpEnumEventos.AuxilioDoenca.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("Auxilio doença");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
     }

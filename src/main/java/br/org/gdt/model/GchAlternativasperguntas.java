@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,11 +44,11 @@ public class GchAlternativasperguntas implements Serializable {
     private long altPerCodigo;
 
     
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "alt_codigo")
+    @ManyToOne(optional = true)
+//    @JoinColumn(name = "alt_codigo")
     private GchAlternativas gchAlternativas;
-    @JoinColumn(name = "per_codigo", referencedColumnName = "per_codigo")
-    @ManyToOne(optional = false)
+//    @JoinColumn(name = "per_codigo", referencedColumnName = "per_codigo")
+    @ManyToOne(optional = true)
     private GchPerguntas perCodigo;
 
     

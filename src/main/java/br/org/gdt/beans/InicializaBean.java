@@ -6,11 +6,13 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.service.InicializaService;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -31,19 +33,76 @@ public class InicializaBean {
     public String inicializar() {
 
         try {
-            
+
             inicializaUF();
             inicializaMunicipios();
-        
+            inicializaTabelas();
+            inicializaPessoas();
+
         } catch (Exception e) {
-        
+
             RequestContext.getCurrentInstance().execute("alert('Não foi possivel inicializar os dados')");
         }
-        
+
         RequestContext.getCurrentInstance().execute("alert('Dados inicializado com sucesso!');");
-        
-        return "InicializaSistema";        
-        
+
+        return "InicializaSistema";
+
+    }
+
+    public void inicializaPessoas() {
+        List<String> sqls = new ArrayList<>();
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (1,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'000.000.000-00','larissa@murphy.com','Setrem',1,'Larissa Daiane Caneppele Guder','Iria Guder','Halário Guder','950','Crescer na firma','SSP',7,'1.500.00','0000000000','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (2,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'111.111.111-11','claudio@murphy.com','Setrem',1,'Claudio Roberto Scheer Jr','Maria Scheer','João Scheer','950','Crescer na firma','SSP',7,'1.500.00','1111111111','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (3,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'222.222.222-22','dimas@murphy.com','Setrem',1,'Dimas Rochenback','Maria Rochenback','João Rochenback','950','Crescer na firma','SSP',7,'1.500.00','2222222222','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (4,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'333.333.333-33','alisson@murphy.com','Setrem',1,'Alisson Allebrandt','Maria Allebrandt','João Allebrandt','950','Crescer na firma','SSP',7,'1.500.00','3333333333','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (5,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'444.444.444-44','diego@murphy.com','Setrem',1,'Diego Schmidtt','Maria Schmidtt','João Schmidtt','950','Crescer na firma','SSP',7,'1.500.00','4444444444','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (6,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'555.555.555-55','marcos@murphy.com','Setrem',1,'Marcos Dollis','Maria Dollis','João Dollis','950','Crescer na firma','SSP',7,'1.500.00','5555555555','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (7,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'666.666.666-66','juliano@murphy.com','Setrem',1,'Juliano Rossi','Maria Rossi','João Rossi','950','Crescer na firma','SSP',7,'1.500.00','6666666666','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (8,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'777.777.777-77','anderson@murphy.com','Setrem',1,'Anderson Seibert','Maria Seibert','João Seibert','950','Crescer na firma','SSP',7,'1.500.00','7777777777','(55) 4343-3434');");
+        sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (9,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'888.888.888-88','joao@murphy.com','Setrem',1,'João Oliveira','Maria Oliveira','João Oliveira','950','Crescer na firma','SSP',7,'1.500.00','8888888888','(55) 4343-3434');");
+
+        for (int i = 0; i < sqls.size(); i++) {
+
+            inicializaService.inicializar(sqls.get(i));
+
+        }
+    }
+
+    public void inicializaTabelas() {
+        List<String> sqls = new ArrayList<>();
+
+        sqls.add("INSERT INTO fp_tabela VALUES (1, 'INSS', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (3, 'IRRF', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (4, 'FGTS', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (5, 'Salário mínimo', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (6, 'Salário família', false);");
+
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (1, '2017-01-01', 1);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (3, '2017-01-01', 3);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (4, '2017-01-01', 4);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (5, '2017-01-01', 5);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (6, '2017-01-01', 6);");
+
+        sqls.add("INSERT INTO fp_faixa VALUES (1, 1659.3800000000001, 1, 8, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (2, 2765.6599999999999, 1, 9, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (3, 5531.3100000000004, 1, 11, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (5, 1903.98, 0, 0, 0, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (6, 2826.6500000000001, 1, 7.5, 142.80000000000001, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (7, 3751.0500000000002, 1, 15, 354.80000000000001, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (8, 4664.6800000000003, 1, 22.5, 636.13, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (9, 0, 1, 27.5, 869.36000000000001, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (10, 0, 1, 8, 0, 4);");
+        sqls.add("INSERT INTO fp_faixa VALUES (11, 0, 0, 937, 0, 5);");
+        sqls.add("INSERT INTO fp_faixa VALUES (12, 0, 0, 608.44000000000005, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (13, 859.88,0,44.09,0,6);");
+        sqls.add("INSERT INTO fp_faixa VALUES (14, 1292.43,0,31.07,0,6);");
+
+        for (int i = 0; i < sqls.size(); i++) {
+
+            inicializaService.inicializar(sqls.get(i));
+
+        }
     }
 
     public void inicializaUF() {

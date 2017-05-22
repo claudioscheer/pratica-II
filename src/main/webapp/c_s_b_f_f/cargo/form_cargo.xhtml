@@ -4,14 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
     <h:head>
         <title>Novo cargo</title>
     </h:head>
-    
-    
-    
+
+
+
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">   
@@ -43,7 +43,7 @@
                                         </label>
                                         <!--<input class="form-control" id="name0" name="name" type="text"/>-->
 
-                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoNome}"/>
+                                        <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoNome}"/>
 
 
                                     </div>
@@ -58,7 +58,7 @@
                                         </label>
 
                                         <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoCbo}" id="cbo" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
+                                        <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoCbo}" id="cbo" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
                                     </div>
 
                                 </div>
@@ -73,26 +73,26 @@
                                         </label>
 
                                         <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control" value="#{cargosBean.cargoCodigo.cargoValorSalario}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '.', 'digits': 2, 'digitsOptional': false, 'placeholder': '0'"/>
+                                        <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoValorSalario}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '.', 'digits': 2, 'digitsOptional': false, 'placeholder': '0'"/>
                                     </div>
 
                                 </div>
 
 
-                                <div class="col-md-6 col-sm-7 col-xs-12">
+<!--                                <div class="col-md-6 col-sm-7 col-xs-12">
                                     <div class="form-group ">
                                         <label class="control-label col-md-6 col-sm-12 col-xs-12">Superior responsável<span class="required">*</span></label>
-                                        <!--                                            <input class="form-control" id="name0" name="name" type="text"/>-->
+                                                                                    <input class="form-control" id="name0" name="name" type="text"/>
                                         <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control col-md-7 col-xs-12">
                                             <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="nome" itemLabel="#{nome.recNomecompleto}" itemValue="#{nome.recIdpessoa}"/>
 
                                         </h:selectOneMenu>
                                     </div>
-                                </div>
+                                </div>-->
 
 
-                                
-                           
+
+
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
@@ -102,11 +102,11 @@
                                             Descrição e Requisitos*
                                         </label>
                                         <!--<textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>-->
-                                        <h:inputTextarea class="form-control" cols="10" rows="5" a:placeholder="Descreva uma breve descrição juntamente com os requisitos necessários" value="#{cargosBean.cargoCodigo.cargoDescricao}" />
+                                        <h:inputTextarea class="form-control" cols="10" rows="5" a:placeholder="Descreva uma breve descrição juntamente com os requisitos necessários" value="#{csbffCargosBean.cargoCodigo.cargoDescricao}" />
                                     </div>
 
                                 </div>         
-                                
+
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
 
@@ -114,10 +114,9 @@
 
                                         <br/>
 
-                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{cargosBean.novo()}" />
+                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{csbffCargosBean.save()}" />
                                         <h:commandButton value="Cancelar" class="btn btn-danger" action="form_cargo.xhtml"/>
-                                        <h:commandButton class="btn btn-default" value=" alterar" action="#{cargosBean.altera(cargosBean.buscaPorId(idcargo))}" />                                   
-                                         <h:commandButton class="btn btn-success" value=" voltar " action="cargo_consulta.xhtml" />
+                                        <h:commandButton class="btn btn-success" value=" voltar " action="cargo_consulta.xhtml" />
                                     </div>
 
 
