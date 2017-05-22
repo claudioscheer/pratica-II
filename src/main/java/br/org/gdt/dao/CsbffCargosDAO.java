@@ -5,6 +5,7 @@
  */
 package br.org.gdt.dao;
 
+import br.org.gdt.beans.CsbffCargosBean;
 import br.org.gdt.model.CsbffCargos;
 import java.util.List;
 import javax.persistence.Query;
@@ -15,23 +16,27 @@ import org.springframework.stereotype.Repository;
  * @author MARCOS FELIPE
  */
 @Repository("csbffCargosDAO")
-public class CsbffCargosDAO extends DAO<CsbffCargos>{
-
+public class CsbffCargosDAO extends DAO<CsbffCargos> {
 
     public CsbffCargosDAO() {
         classe = CsbffCargos.class;
     }
     
-    public List<CsbffCargos> findByCargos(long cbo){
     
+    public List<CsbffCargos> findByNome( String nome){
+        Query query = entityManager.createQuery("from CsbffCargos where t.cargoNome like '%:nome%'");
+        query.setParameter("nome", nome);
         
-        Query query = entityManager.createQuery("from CsbffCargos as t where t.cargoCbo = :codigo");
-        query.setParameter("codigo", cbo);
-        
-        return query.getResultList();
-             
-        
+           return query.getResultList();
     }
-    
+
+    public List<CsbffCargos> findByCargos(long cbo) {
+
+        Query query = entityManager.createQuery("from CsbffCargos as t where t.cargoCbo = :codigo" );
+        query.setParameter("codigo", cbo);
+
+        return query.getResultList();
+
+    }
 
 }

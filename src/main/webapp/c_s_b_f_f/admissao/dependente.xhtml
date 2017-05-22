@@ -215,10 +215,10 @@
                                                         #{dependete.dependenteDataNascimento}" 
                                                     </h:column>
                                                                                                         <h:column>
-                                                        <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{cargosBean.prepareEdit(cargos)}">
+                                                        <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{csbffCargosBean.prepareEdit(cargos)}">
                                                             <f:ajax execute="@form" render="formTabela" />
                                                         </h:commandLink>
-                                                        <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{cargosBean.excluir(cargos)}" onclick="return confirm('Excluir tabela?')">
+                                                        <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffCargosBean.excluir(cargos)}" onclick="return confirm('Excluir tabela?')">
                                                             <f:ajax execute="@form" render="formTabela" />
                                                         </h:commandLink>
                                                     </h:column>                  

@@ -31,7 +31,14 @@ public class CsbffCargosService {
     public CsbffCargos findById(long id) {
         return csbffCargosDAO.findById(id);
     }
+    public List<CsbffCargos> findByNome(String nome){
+        
+        return csbffCargosDAO.findByCargos(0);
+    }
+    
     public List<CsbffCargos> findByCargos(long cbo) {
+        
+        
         return csbffCargosDAO.findByCargos(cbo);
     }
     

@@ -45,7 +45,7 @@ public class RecVaga implements Serializable {
     @Basic(optional = false)
     @Column(name = "rec_idvaga")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_RecVaga")
-    private int recIdvaga;
+    private long recIdvaga;
     @Column(name = "rec_descricao")
     private String recDescricao;
     @Column(name = "rec_sexo")
@@ -71,24 +71,25 @@ public class RecVaga implements Serializable {
     @JoinColumn(name = "rec_idgrauensino", referencedColumnName = "rec_idgrauensino")
     @ManyToOne(optional = true)
     private RecGrauensino recIdgrauensino;
+    private Integer recGrauensino;
 
     public RecVaga() {
     }
 
-    public RecVaga(int recIdvaga) {
+    public RecVaga(long recIdvaga) {
         this.recIdvaga = recIdvaga;
     }
 
-    public RecVaga(int recIdvaga, String idCargo) {
+    public RecVaga(long recIdvaga, String idCargo) {
         this.recIdvaga = recIdvaga;
         this.idCargo = idCargo;
     }
 
-    public int getRecIdvaga() {
+    public long getRecIdvaga() {
         return recIdvaga;
     }
 
-    public void setRecIdvaga(int recIdvaga) {
+    public void setRecIdvaga(long recIdvaga) {
         this.recIdvaga = recIdvaga;
     }
 
@@ -175,4 +176,12 @@ public class RecVaga implements Serializable {
     public void setRecIdgrauensino(RecGrauensino recIdgrauensino) {
         this.recIdgrauensino = recIdgrauensino;
     }         
+
+    public Integer getRecGrauensino() {
+        return recGrauensino;
+    }
+
+    public void setRecGrauensino(Integer recGrauensino) {
+        this.recGrauensino = recGrauensino;
+    }
 }

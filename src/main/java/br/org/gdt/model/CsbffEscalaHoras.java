@@ -6,11 +6,13 @@
 package br.org.gdt.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -35,17 +37,17 @@ public class CsbffEscalaHoras implements java.io.Serializable {
     @Temporal(TemporalType.DATE)
     private Date escalaDataVigente;
     @Column(name = "escala_hora1")
-    @Temporal(TemporalType.TIME)
-    private Date escalaHora1;
+//    @Temporal(TemporalType.TIME)
+    private double escalaHora1;
     @Column(name = "escala_hora2")
-    @Temporal(TemporalType.TIME)
-    private Date escalaHora2;
+//    @Temporal(TemporalType.TIME)
+    private double escalaHora2;
     @Column(name = "escala_hora3")
-    @Temporal(TemporalType.DATE)
-    private Date escalaHora3;
+//    @Temporal(TemporalType.DATE)
+    private double escalaHora3;
     @Column(name = "escala_hora4")
-    @Temporal(TemporalType.TIME)
-    private Date escalaHora4;
+//    @Temporal(TemporalType.TIME)
+    private double escalaHora4;
     @Column(name = "escala_segunda")
     private Boolean escalaSegunda;
     @Column(name = "escala_terca")
@@ -63,11 +65,17 @@ public class CsbffEscalaHoras implements java.io.Serializable {
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @OneToOne(optional = false)
     private RecPessoa recIdpessoa;
+    @OneToMany
+    private List<CsbffEscalaHoras> csbffEscalaHorasList;
 
     public CsbffEscalaHoras() {
     }
 
-    public CsbffEscalaHoras(long escalaCodigo, Date escalaDataVigente, Date escalaHora1, Date escalaHora2, Date escalaHora3, Date escalaHora4, Boolean escalaSegunda, Boolean escalaTerca, Boolean escalaQuarta, Boolean escalaQuinta, Boolean escalaSexta, Boolean escalaSabado, Boolean escalaDomingo, RecPessoa recIdpessoa) {
+    public CsbffEscalaHoras(List<CsbffEscalaHoras> csbffEscalaHorasList) {
+        this.csbffEscalaHorasList = csbffEscalaHorasList;
+    }
+
+    public CsbffEscalaHoras(long escalaCodigo, Date escalaDataVigente, double escalaHora1, double escalaHora2, double escalaHora3, double escalaHora4, Boolean escalaSegunda, Boolean escalaTerca, Boolean escalaQuarta, Boolean escalaQuinta, Boolean escalaSexta, Boolean escalaSabado, Boolean escalaDomingo, RecPessoa recIdpessoa) {
         this.escalaCodigo = escalaCodigo;
         this.escalaDataVigente = escalaDataVigente;
         this.escalaHora1 = escalaHora1;
@@ -104,44 +112,11 @@ public class CsbffEscalaHoras implements java.io.Serializable {
         if (csbffEscalaHoras != null) {
             csbffEscalaHoras.setEscalaCodigo(1);
 
-            
         }
     }
 
     public void setEscalaDataVigente(Date escalaDataVigente) {
         this.escalaDataVigente = escalaDataVigente;
-    }
-
-    public Date getEscalaHora1() {
-        return escalaHora1;
-    }
-
-    public void setEscalaHora1(Date escalaHora1) {
-        this.escalaHora1 = escalaHora1;
-    }
-
-    public Date getEscalaHora2() {
-        return escalaHora2;
-    }
-
-    public void setEscalaHora2(Date escalaHora2) {
-        this.escalaHora2 = escalaHora2;
-    }
-
-    public Date getEscalaHora3() {
-        return escalaHora3;
-    }
-
-    public void setEscalaHora3(Date escalaHora3) {
-        this.escalaHora3 = escalaHora3;
-    }
-
-    public Date getEscalaHora4() {
-        return escalaHora4;
-    }
-
-    public void setEscalaHora4(Date escalaHora4) {
-        this.escalaHora4 = escalaHora4;
     }
 
     public Boolean getEscalaSegunda() {
@@ -230,6 +205,46 @@ public class CsbffEscalaHoras implements java.io.Serializable {
     @Override
     public String toString() {
         return "br.org.gdt.modelNew.CsbffEscalaHoras[ escalaCodigo=" + escalaCodigo + " ]";
+    }
+
+    public double getEscalaHora1() {
+        return escalaHora1;
+    }
+
+    public void setEscalaHora1(double escalaHora1) {
+        this.escalaHora1 = escalaHora1;
+    }
+
+    public double getEscalaHora2() {
+        return escalaHora2;
+    }
+
+    public void setEscalaHora2(double escalaHora2) {
+        this.escalaHora2 = escalaHora2;
+    }
+
+    public double getEscalaHora3() {
+        return escalaHora3;
+    }
+
+    public void setEscalaHora3(double escalaHora3) {
+        this.escalaHora3 = escalaHora3;
+    }
+
+    public double getEscalaHora4() {
+        return escalaHora4;
+    }
+
+    public void setEscalaHora4(double escalaHora4) {
+        this.escalaHora4 = escalaHora4;
+    }
+
+    public List<CsbffEscalaHoras> getCsbffEscalaHorasList() {
+        return csbffEscalaHorasList;
+    }
+
+    public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
+        this.csbffEscalaHorasList = csbffEscalaHorasList;
     }
 
 }

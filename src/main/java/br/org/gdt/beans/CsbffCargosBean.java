@@ -13,12 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.swing.JOptionPane;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -26,10 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @ManagedBean
 @SessionScoped
-public class cargosBean {
+public class CsbffCargosBean {
 
     private boolean formAtivo = false;
-    private int nomeCBO;
+    private int numeroCBO;
+    private String nomeCBO;
     private CsbffCargos codigoColaborador;
     private CsbffCargos csbffcargos = new CsbffCargos();
     private List<CsbffCargos> todosCargos;
@@ -38,9 +34,9 @@ public class cargosBean {
     private CsbffCargosService csbffCargosService;
     private RecPessoa recPessoa;
 
-    public cargosBean() {
+    public CsbffCargosBean() {
         csbffcargos = new CsbffCargos();
-       
+
     }
 
     public String pg(CsbffCargos cargo) {
@@ -54,91 +50,82 @@ public class cargosBean {
         codigoColaborador = carg;
         altera(carg);
 
-//        zeraSession();
     }
 
     public String altera(CsbffCargos carg) {
-//        csbffcargos = carg;
+
         codigoColaborador = carg;
 
         csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(4));
         csbffcargos.setCargoDataDeCriacao(new Date());
         csbffcargos.setCargoDataUltimaAlteracao(new Date());
         csbffCargosService.update(codigoColaborador);
-       
-//         System.out.println("**************"+ codigoColaborador + "*****************");
-//         csbffcargos = new CsbffCargos();
+
         return "cargo_consulta";
     }
 
+    public String buscaNomeCBO() {
+
+        if (nomeCBO != null) {
+            todosCargos = csbffCargosService.findByCargos(numeroCBO);
+            
+        }
+        return "cargo_consulta";
+    }
 
     public String buscaPorCbo() {
 
-        if (nomeCBO != 0) {
-            todosCargos = csbffCargosService.findByCargos(nomeCBO);
-        }
-        return "cargo_consulta";
-
-    }
-    
-    
-    public void zeraSession(){
-        CsbffCargos conta = new CsbffCargos();
-
- this.csbffcargos = new CsbffCargos(); //isso vai limpar os campos referenciados na view!
-
-        
-    }
-
-    public void save() {
-        
-         if (csbffcargos.getCargoCodigo() > 0) {
-             csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
-        csbffcargos.setCargoDataDeCriacao(new Date());
-        csbffcargos.setCargoDataUltimaAlteracao(new Date());
-            csbffCargosService.update(csbffcargos);
-            csbffcargos = new CsbffCargos();
-            zeraSession();
+        if (numeroCBO != 0) {
+            todosCargos = csbffCargosService.findByCargos(numeroCBO);
+            
         } else {
-//            fpEvento.setEvePermiteExcluir(true);
-//            fpEvento.setEveFormula("$#");
-csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
-        csbffcargos.setCargoDataDeCriacao(new Date());
-        csbffcargos.setCargoDataUltimaAlteracao(new Date());
-          csbffCargosService.save(csbffcargos);
-          csbffcargos = new CsbffCargos();
-          zeraSession();
+            todosCargos = csbffCargosService.findAll();
+            
         }
-        
-        
-        
-//
-//        System.out.println("teste teste");
-//        
-//        csbffCargosService.update(csbffcargos);
-
-    }
-
-    public String novo() {
-
-        save();
-        csbffcargos = new CsbffCargos();
-
         return "cargo_consulta";
-
     }
+
+    public String save() {
+
+        if (csbffcargos.getCargoCodigo() > 0) {
+            csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+            csbffcargos.setCargoDataDeCriacao(new Date());
+            csbffcargos.setCargoDataUltimaAlteracao(new Date());
+            csbffCargosService.update(csbffcargos);
+          
+
+        } else {
+   
+            csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+            csbffcargos.setCargoDataDeCriacao(new Date());
+            csbffcargos.setCargoDataUltimaAlteracao(new Date());
+            csbffCargosService.save(csbffcargos);
+            
+
+        }
+        add2();
+        return "cargo_consulta";
+    }
+
+//   public String novo() {
+//
+//        save();
+//
+//        return "cargo_consulta";
+//
+//    }
 
     public String buscaPorId(int idcargo) {
-
-        System.out.println("Id do curso" + idcargo);
-
         if (idcargo != 0) {
-
             csbffcargos = csbffCargosService.findById(idcargo);
 
         }
         return "form_cargo";
-
+    }
+    public String prepareEdit(CsbffCargos cargos) {
+        this.formAtivo = true;
+        this.csbffcargos = cargos;
+        return "cargo_consulta";
     }
 
     public void cancel() {
@@ -151,6 +138,11 @@ csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
         this.csbffcargos = new CsbffCargos();
         return "form_cargo";
     }
+    public String add2() {
+        this.formAtivo = true;
+        this.csbffcargos = new CsbffCargos();
+        return "cargo_consulta";
+    }
 
     public String excluir(CsbffCargos cargos) {
         csbffCargosService.delete(cargos.getCargoCodigo());
@@ -158,14 +150,8 @@ csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
         return "cargos";
     }
 
-    public String prepareEdit(CsbffCargos cargos) {
-        this.formAtivo = true;
-        this.csbffcargos = cargos;
-        return "cargos";
-    }
 
     public CsbffCargos getCargoCodigo() {
-
         return csbffcargos;
     }
 
@@ -216,11 +202,27 @@ csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
         this.recPessoa = recPessoa;
     }
 
-    public int getNomeCBO() {
+    public int getNumeroCBO() {
+        return numeroCBO;
+    }
+
+    public void setNumeroCBO(int numeroCBO) {
+        this.numeroCBO = numeroCBO;
+    }
+
+    public String getNomeCBO() {
         return nomeCBO;
     }
 
-    public void setNomeCBO(int nomeCBO) {
+    public void setNomeCBO(String nomeCBO) {
         this.nomeCBO = nomeCBO;
+    }
+
+    public CsbffCargos getCodigoColaborador() {
+        return codigoColaborador;
+    }
+
+    public void setCodigoColaborador(CsbffCargos codigoColaborador) {
+        this.codigoColaborador = codigoColaborador;
     }
 }

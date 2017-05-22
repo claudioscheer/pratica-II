@@ -25,13 +25,20 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Nome Completo" for="NomeCompleto" />                                            
-                                            <h:inputText class="form-control" id="NomeCompleto" value="#{recPessoaBean.recPessoa.recNomecompleto}" />
+                                            <h:inputText class="form-control" 
+                                                         id="NomeCompleto" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recNomecompleto}" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="CPF" for="cpf" />                                            
-                                            <h:inputText class="form-control" id="cpf" value="#{recPessoaBean.recPessoa.recCpf}" title="CPF" />
+                                            <h:inputText class="form-control" 
+                                                         id="cpf" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recCpf}" 
+                                                         title="CPF" />
                                         </div>
                                     </div> 
                                     <!-- FALTA COMPLETAR
@@ -53,7 +60,10 @@
                                             <label class="control-label " for="select">
                                                 Estado Civil
                                             </label>
-                                            <h:selectOneMenu id="comboEstadoCivil" value="#{recPessoaBean.recPessoa.recEstadocivil}" class="form-control" >
+                                            <h:selectOneMenu 
+                                                id="comboEstadoCivil" 
+                                                disabled="true"
+                                                value="#{recPessoaBean.recPessoa.recEstadocivil}" class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Estado Civil" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Solteiro" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="Casado" itemValue="#{2}" />   
@@ -64,13 +74,20 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="RG" for="rg" />                                            
-                                            <h:inputText class="form-control" id="rg" value="#{recPessoaBean.recPessoa.recRg}" title="RG" />
+                                            <h:inputText class="form-control" 
+                                                         id="rg" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recRg}" title="RG" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Orgao Emissor" for="OrgaoEmissor" />                                            
-                                            <h:inputText class="form-control" id="OrgaoEmissor" value="#{recPessoaBean.recPessoa.recOrgaoemissor}" title="OrgaoEmissor" />
+                                            <h:inputText class="form-control" 
+                                                         id="OrgaoEmissor" 
+                                                         value="#{recPessoaBean.recPessoa.recOrgaoemissor}" 
+                                                         disabled="true"
+                                                         title="OrgaoEmissor" />
                                         </div>
                                     </div>    
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -79,19 +96,31 @@
                                                 Data de Emissão
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="form-control" id="number" name="number" type="text"/>
+                                            <input class="form-control" 
+                                                   id="number" 
+                                                   disabled="true"
+                                                   name="number" 
+                                                   type="text"/>
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Nome do Pai" for="NomePai" />                                            
-                                            <h:inputText class="form-control" id="NomePai" value="#{recPessoaBean.recPessoa.recNomepai}" title="NomePai" />
+                                            <h:inputText class="form-control" 
+                                                         id="NomePai" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recNomepai}" 
+                                                         title="NomePai" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Nome da Mãe" for="NomeMae" />                                            
-                                            <h:inputText class="form-control" id="NomeMae" value="#{recPessoaBean.recPessoa.recNomemae}" title="NomeMae" />
+                                            <h:inputText class="form-control" 
+                                                         id="NomeMae" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recNomemae}" 
+                                                         title="NomeMae" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -100,25 +129,41 @@
                                                 Data de Nascimento
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="form-control" id="number" name="number" type="text"/>
+                                            <input class="form-control" 
+                                                   id="number" 
+                                                   disabled="true"
+                                                   name="number" 
+                                                   type="text"/>
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="E-mail" for="email" />                                            
-                                            <h:inputText class="form-control" id="email" value="#{recPessoaBean.recPessoa.recEmail}" title="email" />
+                                            <h:inputText class="form-control" 
+                                                         id="email" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recEmail}" 
+                                                         title="email" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Telefone" for="telefone" />                                            
-                                            <h:inputText class="form-control" id="telefone" value="#{recPessoaBean.recPessoa.recTelefone}" title="telefone" />
+                                            <h:inputText class="form-control" 
+                                                         id="telefone" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recTelefone}" 
+                                                         title="telefone" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Celular" for="celular" />                                            
-                                            <h:inputText class="form-control" id="celular" value="#{recPessoaBean.recPessoa.recCelular}" title="celular" />
+                                            <h:inputText class="form-control" 
+                                                         id="celular" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recCelular}" 
+                                                         title="celular" />
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -127,7 +172,12 @@
                                                 Objetivos Profissionais
                                                 <span class="required">*</span>
                                             </label>                                            
-                                            <h:inputTextarea class="form-control" cols="40" id="objProf" value="#{recPessoaBean.recPessoa.recObjprofissional}" rows="10"/>                                            
+                                            <h:inputTextarea class="form-control" 
+                                                             cols="40" 
+                                                             id="objProf" 
+                                                             disabled="true"
+                                                             value="#{recPessoaBean.recPessoa.recObjprofissional}" 
+                                                             rows="10"/>                                            
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -136,7 +186,12 @@
                                                 Auto Avaliação
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputTextarea class="form-control" cols="40" id="AutoAvaliacao" value="#{recPessoaBean.recPessoa.recAutoavaliacao}" rows="10"/>                                            
+                                            <h:inputTextarea class="form-control" 
+                                                             cols="40" 
+                                                             id="AutoAvaliacao" 
+                                                             value="#{recPessoaBean.recPessoa.recAutoavaliacao}" 
+                                                             disabled="true"
+                                                             rows="10"/>                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -145,7 +200,9 @@
                                                 Pretenção Salarial
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recPretencaosalarial}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recPretencaosalarial}"/>                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -163,7 +220,9 @@
                                                 PIS/PASEP
                                                 <span class="required">*</span>
                                             </label>                                            
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recPispasep}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recPispasep}"/>                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -172,7 +231,9 @@
                                                 Certificado de Reservista
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recReservista}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recReservista}"/>                                            
                                         </div>
                                     </div>  
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -180,7 +241,10 @@
                                             <label class="control-label " for="select">
                                                 Cor
                                             </label>
-                                            <h:selectOneMenu id="comboCor" value="#{recPessoaBean.recPessoa.recCor}"  class="form-control" >
+                                            <h:selectOneMenu id="comboCor" 
+                                                             value="#{recPessoaBean.recPessoa.recCor}"  
+                                                             disabled="true"
+                                                             class="form-control" >
                                                 <f:selectItem itemLabel="Selecione a Cor" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Branco" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="Afro" itemValue="#{2}" />
@@ -189,13 +253,16 @@
                                             </h:selectOneMenu>                                                                                                                        
                                         </div>     
                                     </div> 
-                                    <!-- 
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Grau de Ensino
                                             </label>
-                                            <h:selectOneMenu id="comboGrauensino" value="#{recPessoaBean.recPessoa.recIdgrauensino}"  class="form-control" >
+                                            <h:selectOneMenu id="comboGrauensino" 
+                                                             value="#{recPessoaBean.recPessoa.recPesGrauEnsino}"  
+                                                             disabled="true"
+                                                             class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
@@ -208,7 +275,7 @@
                                             </h:selectOneMenu>
                                         </div>     
                                     </div>
-                                    -->
+                                    
                                 </div>
                                 <hr />
                                 <div class="row">
@@ -219,7 +286,9 @@
                                                 Endereço
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recEndereco}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recEndereco}"/>                                            
                                         </div>
                                     </div>        
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -228,7 +297,9 @@
                                                 Bairro
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recBairro}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recBairro}"/>                                            
                                         </div>
                                     </div>                                     
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -237,7 +308,9 @@
                                                 Número
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recNumero}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recNumero}"/>                                            
                                         </div>
                                     </div> 
                                 </div>
@@ -305,21 +378,15 @@
 
                                 <hr></hr>
                                 <div class="pull-right">
-                                    <div class="row">
-                                        <!-- 
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{recPessoaBean.Salvar()}" />                                        
-                                        --> 
-                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                    <div class="row">                                        
+                                        <h:commandButton value="Voltar" class="btn btn-danger"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </p:panel>
                     <p:panel visible="#{!recPessoaBean.formAtivo}">
-                        <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Novo Registro" >                                
-                            </h:commandButton>
-                        </div>
+                       
                         <h:dataTable class="table table-striped" value="#{recPessoaBean.ListarTodas()}" var="item">                                        
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            

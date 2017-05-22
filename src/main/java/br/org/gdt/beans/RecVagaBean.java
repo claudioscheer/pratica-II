@@ -2,9 +2,11 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecVaga;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecVagaService;
 import java.util.List;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -14,6 +16,7 @@ import javax.faces.bean.RequestScoped;
 public class RecVagaBean {
 
     private boolean formAtivo = false;
+    private String stringBusca;
 
     ///DADOS DA VAGA
     private RecVaga vaga = new RecVaga();
@@ -31,17 +34,42 @@ public class RecVagaBean {
     }
 
     public void Salvar() {
-        if (vaga.getRecIdvaga() > 0) {
-            recVagaService.Alterar(vaga);
-        } else {            
-            recVagaService.Inserir(vaga);
+
+        if (ValidarCampos()) {
+            if (vaga.getRecIdvaga() > 0) {
+                if (habilidades != null) {
+                    vaga.setRecHabilidadeList(habilidades);
+                }
+                recVagaService.Alterar(vaga);
+            } else {
+                if (habilidades != null) {
+                    vaga.setRecHabilidadeList(habilidades);
+                }
+                recVagaService.Inserir(vaga);
+            }
+            vagas = recVagaService.ListarTodas();
         }
-        vagas = recVagaService.ListarTodas();
     }
 
     public List<RecVaga> ListarTodas() {
         if (vagas == null) {
             vagas = recVagaService.ListarTodas();
+        }
+        return vagas;
+    }
+
+    public List<RecHabilidade> ListarHabilidade() {
+        if (habilidades == null) {
+            habilidades = recHabilidadeService.ListarTodas();
+        }
+        return habilidades;
+    }
+
+    public List<RecVaga> PesquisarPorDescricao() {
+        if (stringBusca == null) {
+            vagas = recVagaService.ListarTodas();
+        } else {
+            vagas = recVagaService.PesquisarPorDescricao(stringBusca);
         }
         return vagas;
     }
@@ -52,9 +80,20 @@ public class RecVagaBean {
         return "vaga_lista";
     }
 
+    public String VisualizarVaga(RecVaga vaga) {
+        this.formAtivo = true;
+        this.vaga = vaga;
+        return "menu_vaga_lista";
+    }
+
+    public String CandidatarParaVaga() {
+        return "cadastro_curriculo";
+    }
+
     public void AdicionarHabilidade() {
         this.habilidades.add(habilidade);
         this.habilidade = new RecHabilidade();
+        vaga.setRecHabilidadeList(habilidades);
     }
 
     public String Excluir(RecVaga vaga) {
@@ -126,5 +165,34 @@ public class RecVagaBean {
 
     public void setHabilidades(List<RecHabilidade> habilidades) {
         this.habilidades = habilidades;
+    }
+
+    public String getStringBusca() {
+        return stringBusca;
+    }
+
+    public void setStringBusca(String stringBusca) {
+        this.stringBusca = stringBusca;
+    }
+
+    
+    public boolean ValidarCampos() {
+        if (vaga.getRecDescricao().isEmpty()) {
+            Helper.mostrarNotificacao("Descrição", "Preencha a Descrição da Vaga", "error");
+            return false;
+        }
+        if (vaga.getRecSexo() == null) {
+            Helper.mostrarNotificacao("Sexo", "Selecione o Sexo", "error");
+            return false;
+        }
+        if (vaga.getRecGrauensino() == null) {
+            Helper.mostrarNotificacao("Grau de Ensino", "Selecione o Sexo", "error");
+            return false;
+        }
+        if (vaga.getRecSalario() == null) {
+            Helper.mostrarNotificacao("Salário", "Preencha o Salário", "error");
+            return false;
+        }
+        return true;
     }
 }
