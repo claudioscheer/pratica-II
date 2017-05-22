@@ -36,7 +36,7 @@ public class Eventos {
             // Descontos onde incide INSS.
             valorEventosIncideINSS -= dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideINSS() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
-                    .map(x -> {
+                    .map((x) -> {
                         try {
                             return verificarEventoJaEstaCalculado(x, dadosCalculadosDoFuncionario);
                         } catch (Exception ex) {
@@ -59,7 +59,7 @@ public class Eventos {
             // Descontos onde incide FGTS.
             valorEventosIncideFGTS -= dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideFGTS() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
-                    .map(x -> {
+                    .map((x) -> {
                         try {
                             return verificarEventoJaEstaCalculado(x, dadosCalculadosDoFuncionario);
                         } catch (Exception ex) {

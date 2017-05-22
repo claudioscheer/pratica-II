@@ -11,7 +11,9 @@ import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -26,6 +28,7 @@ public class FpCalcularBean {
     private List<FpPeriodo> todosFpPeriodo;
     private int pessoaId;
     private FpEventoPeriodo fpEventoPeriodo = new FpEventoPeriodo();
+    private List<FpEventoPeriodo> todosFpEventoPeriodo = new ArrayList<>();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -58,13 +61,35 @@ public class FpCalcularBean {
     public void selecionarPeriodo() {
     }
 
+    public void adicionarEvento() {
+        if (fpEventoPeriodo.getEvpEvento().getEveId() <= 0) {
+            Helper.mostrarNotificacao("Evento variável", "Selecione um evento.", "info");
+            return;
+        }
+
+        if (todosFpEventoPeriodo.stream()
+                .filter(x -> x.getEvpEvento().getEveId() == fpEventoPeriodo.getEvpEvento().getEveId())
+                .count() > 0) {
+            Helper.mostrarNotificacao("Evento variável", "Evento já adicionado.", "info");
+            return;
+        }
+
+        todosFpEventoPeriodo.add(fpEventoPeriodo);
+        fpEventoPeriodo = new FpEventoPeriodo();
+    }
+
+    public void removerEvento(FpEventoPeriodo fpEventoPeriodo) {
+        todosFpEventoPeriodo = todosFpEventoPeriodo.stream()
+                .filter(x -> x.getEvpEvento().getEveId() != fpEventoPeriodo.getEvpEvento().getEveId())
+                .collect(Collectors.toList());
+    }
+
     public void buscarPessoa() {
 //        RecPessoa recPessoa = recPessoaService.BuscarId(pessoaId);
 //                if (recPessoa == null) {
 //                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
 //                    return;
 //                }
-
     }
 
     public void calcularFolhaPagamento() {
@@ -147,6 +172,14 @@ public class FpCalcularBean {
 
     public void setFpEventoPeriodo(FpEventoPeriodo fpEventoPeriodo) {
         this.fpEventoPeriodo = fpEventoPeriodo;
+    }
+
+    public List<FpEventoPeriodo> getTodosFpEventoPeriodo() {
+        return todosFpEventoPeriodo;
+    }
+
+    public void setTodosFpEventoPeriodo(List<FpEventoPeriodo> todosFpEventoPeriodo) {
+        this.todosFpEventoPeriodo = todosFpEventoPeriodo;
     }
 
     public FpPeriodoService getFpPeriodoService() {
