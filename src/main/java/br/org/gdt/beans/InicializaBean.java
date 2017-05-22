@@ -31,19 +31,55 @@ public class InicializaBean {
     public String inicializar() {
 
         try {
-            
+
             inicializaUF();
             inicializaMunicipios();
-        
+
         } catch (Exception e) {
-        
+
             RequestContext.getCurrentInstance().execute("alert('Não foi possivel inicializar os dados')");
         }
-        
+
         RequestContext.getCurrentInstance().execute("alert('Dados inicializado com sucesso!');");
-        
-        return "InicializaSistema";        
-        
+
+        return "InicializaSistema";
+
+    }
+
+    public void inicializaTabelas() {
+        List<String> sqls = new ArrayList<>();
+
+        sqls.add("INSERT INTO fp_tabela VALUES (1, 'INSS', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (3, 'IRRF', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (4, 'FGTS', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (5, 'Salário mínimo', false);");
+        sqls.add("INSERT INTO fp_tabela VALUES (6, 'Salário família', false);");
+
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (1, '2017-01-01', 1);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (3, '2017-01-01', 3);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (4, '2017-01-01', 4);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (5, '2017-01-01', 5);");
+        sqls.add("INSERT INTO fp_tabela_vigencia VALUES (6, '2017-01-01', 6);");
+
+        sqls.add("INSERT INTO fp_faixa VALUES (1, 1659.3800000000001, 1, 8, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (2, 2765.6599999999999, 1, 9, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (3, 5531.3100000000004, 1, 11, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (5, 1903.98, 0, 0, 0, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (6, 2826.6500000000001, 1, 7.5, 142.80000000000001, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (7, 3751.0500000000002, 1, 15, 354.80000000000001, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (8, 4664.6800000000003, 1, 22.5, 636.13, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (9, 0, 1, 27.5, 869.36000000000001, 3);");
+        sqls.add("INSERT INTO fp_faixa VALUES (10, 0, 1, 8, 0, 4);");
+        sqls.add("INSERT INTO fp_faixa VALUES (11, 0, 0, 937, 0, 5);");
+        sqls.add("INSERT INTO fp_faixa VALUES (12, 0, 0, 608.44000000000005, 0, 1);");
+        sqls.add("INSERT INTO fp_faixa VALUES (13, 859.88,0,44.09,0,6);");
+        sqls.add("INSERT INTO fp_faixa VALUES (14, 1292.43,0,31.07,0,6);");
+
+        for (int i = 0; i < sqls.size(); i++) {
+
+            inicializaService.inicializar(sqls.get(i));
+
+        }
     }
 
     public void inicializaUF() {

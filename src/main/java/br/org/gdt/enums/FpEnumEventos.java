@@ -10,4 +10,22 @@ public enum FpEnumEventos {
     INSS,
     FGTS,
     IRRF,
+    PensaoJudicialFixo,
+    PensaoJudicialMinimo,
+    PensaoJudicialPorcentagem,
+    SalarioFamilia,
+    SalarioMaternidade,
+    Insalubridade10,
+    Insalubridade20,
+    Insalubridade40,
+    Periculosidade,
+    Transporte,
+    Alimentacao,
+    Refeicao,
+    PlanoSaude,
+    ContribuicaoSindical,
+    GratificacoesDiversas,
+    AuxilioDoenca,
+    
+    
 }
