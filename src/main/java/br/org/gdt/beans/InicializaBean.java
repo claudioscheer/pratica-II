@@ -36,9 +36,21 @@ public class InicializaBean {
     }
 
     public void inicializarFolhaDePagamento() {
-        //inicializaTabelas();
-        //dependenciasFolhaPagamento.salvarTodosEventos();
-        dependenciasFolhaPagamento.salvarPeriodo();
+        try {
+            inicializaTabelas();
+        } catch (Exception e) {
+
+        }
+        try {
+            dependenciasFolhaPagamento.salvarTodosEventos();
+        } catch (Exception e) {
+
+        }
+        try {
+            dependenciasFolhaPagamento.salvarPeriodo();
+        } catch (Exception e) {
+
+        }
     }
 
     public void inicializarPeriodo() {
