@@ -20,6 +20,7 @@ public class FpEventoPeriodo implements java.io.Serializable {
     private FpFolhaPeriodo evpFolhaPeriodo;
     private double evpValor;
     private double evpValorReferencia;
+    private boolean evpEventoPadrao;
     private boolean jaCalculado;
 
     @Id
@@ -64,6 +65,14 @@ public class FpEventoPeriodo implements java.io.Serializable {
 
     public void setEvpValorReferencia(double evpValorReferencia) {
         this.evpValorReferencia = evpValorReferencia;
+    }
+
+    public boolean isEvpEventoPadrao() {
+        return evpEventoPadrao;
+    }
+
+    public void setEvpEventoPadrao(boolean evpEventoPadrao) {
+        this.evpEventoPadrao = evpEventoPadrao;
     }
 
     @Transient

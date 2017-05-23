@@ -3,10 +3,12 @@ package br.org.gdt.beans;
 import br.org.gdt.enums.FpTipoFolha;
 import br.org.gdt.model.FpEvento;
 import br.org.gdt.model.FpEventoPeriodo;
+import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpEventoService;
+import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
@@ -42,6 +44,9 @@ public class FpCalcularBean {
     @ManagedProperty("#{fpEventoService}")
     private FpEventoService fpEventoService;
 
+    @ManagedProperty("#{fpFolhaPeriodoService}")
+    private FpFolhaPeriodoService fpFolhaPeriodoService;
+
     public FpCalcularBean() {
 
     }
@@ -74,6 +79,7 @@ public class FpCalcularBean {
             return;
         }
 
+        fpEventoPeriodo.setEvpEventoPadrao(false);
         todosFpEventoPeriodo.add(fpEventoPeriodo);
         fpEventoPeriodo = new FpEventoPeriodo();
     }
@@ -84,7 +90,7 @@ public class FpCalcularBean {
                 .collect(Collectors.toList());
     }
 
-    public void buscarPessoa() {
+    public void selecionarPessoa() {
         RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
         if (pessoa == null) {
             Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
@@ -95,7 +101,7 @@ public class FpCalcularBean {
     }
 
     public void calcularFolhaPagamento() {
-        if (fpPeriodo.getPerId() == 0) {
+        if (fpPeriodo.getPerId() <= 0) {
             Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
             return;
         }
@@ -108,16 +114,36 @@ public class FpCalcularBean {
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
                 if (recPessoa.getRecIdpessoa() <= 0) {
-                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe. Selecione um colaborador.", "info");
+                    Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
                     return;
                 }
                 dadosCalculadosDoFuncionario.setPessoa(recPessoa);
                 dadosCalculadosDoFuncionario.setEventos((List) ((ArrayList) todosFpEventoPeriodo).clone());
 
                 calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
+                Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "info");
             } catch (Exception e) {
                 Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
             }
+        }
+    }
+
+    public void buscarEventosPessoaPeriodo() {
+        if (fpPeriodo.getPerId() <= 0) {
+            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
+            return;
+        }
+        if (recPessoa.getRecIdpessoa() <= 0) {
+            Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+            return;
+        }
+        FpFolhaPeriodo fpFolhaPeriodo = fpFolhaPeriodoService.findByPessoaEPeriodo(fpPeriodo, recPessoa);
+        if (fpFolhaPeriodo == null) {
+            todosFpEventoPeriodo = new ArrayList<>();
+        } else {
+            todosFpEventoPeriodo = fpFolhaPeriodo.getForEventos().stream()
+                    .filter(x -> !x.isEvpEventoPadrao())
+                    .collect(Collectors.toList());
         }
     }
 
@@ -214,6 +240,14 @@ public class FpCalcularBean {
 
     public void setFpEventoService(FpEventoService fpEventoService) {
         this.fpEventoService = fpEventoService;
+    }
+
+    public FpFolhaPeriodoService getFpFolhaPeriodoService() {
+        return fpFolhaPeriodoService;
+    }
+
+    public void setFpFolhaPeriodoService(FpFolhaPeriodoService fpFolhaPeriodoService) {
+        this.fpFolhaPeriodoService = fpFolhaPeriodoService;
     }
 
 }

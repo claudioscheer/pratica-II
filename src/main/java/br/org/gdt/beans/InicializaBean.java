@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.resources.DependenciasFolhaPagamento;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.InicializaService;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ public class InicializaBean {
         try {
             inicializaUF();
             inicializaMunicipios();
-            inicializaPessoas();
         } catch (Exception e) {
             RequestContext.getCurrentInstance().execute("alert('Não foi possivel inicializar os dados');");
         }
@@ -35,26 +35,31 @@ public class InicializaBean {
         return "InicializaSistema";
     }
 
-    public void inicializarFolhaDePagamento() {
-        try {
-            inicializaTabelas();
-        } catch (Exception e) {
-
-        }
+    public void inicializarEventos() {
         try {
             dependenciasFolhaPagamento.salvarTodosEventos();
+            Helper.mostrarNotificacao("Eventos", "Eventos inicializados.", "info");
         } catch (Exception e) {
-
-        }
-        try {
-            dependenciasFolhaPagamento.salvarPeriodo();
-        } catch (Exception e) {
-
+            Helper.mostrarNotificacao("Eventos", e.getMessage(), "error");
         }
     }
 
-    public void inicializarPeriodo() {
+    public void inicializarPeriodos() {
+        try {
+            dependenciasFolhaPagamento.salvarPeriodo();
+            Helper.mostrarNotificacao("Períodos", "Períodos inicializados.", "info");
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Períodos", e.getMessage(), "error");
+        }
+    }
 
+    public void inicializarTabelas() {
+        try {
+            inicializaTabelas();
+            Helper.mostrarNotificacao("Tabelas", "Tabelas inicializadas.", "info");
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Tabelas", e.getMessage(), "error");
+        }
     }
 
     public void inicializaTabelas() {
@@ -92,8 +97,9 @@ public class InicializaBean {
         sqls.forEach(sql -> inicializaService.inicializar(sql));
     }
 
-    public void inicializaPessoas() {
+    public void inicializarPessoas() {
         List<String> sqls = new ArrayList<>();
+
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (1,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'000.000.000-00','larissa@murphy.com','Setrem',1,'Larissa Daiane Caneppele Guder','Iria Guder','Halário Guder','950','Crescer na firma','SSP',7,'1.500.00','0000000000','(55) 4343-3434');");
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (2,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'111.111.111-11','claudio@murphy.com','Setrem',1,'Claudio Roberto Scheer Jr','Maria Scheer','João Scheer','950','Crescer na firma','SSP',7,'1.500.00','1111111111','(55) 4343-3434');");
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (3,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'222.222.222-22','dimas@murphy.com','Setrem',1,'Dimas Rockenbach','Maria Rockenbach','João Rockenbach','950','Crescer na firma','SSP',7,'1.500.00','2222222222','(55) 4343-3434');");
@@ -104,10 +110,11 @@ public class InicializaBean {
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (8,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'777.777.777-77','anderson@murphy.com','Setrem',1,'Anderson Seibert','Maria Seibert','João Seibert','950','Crescer na firma','SSP',7,'1.500.00','7777777777','(55) 4343-3434');");
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (9,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'888.888.888-88','joao@murphy.com','Setrem',1,'João Oliveira','Maria Oliveira','João Oliveira','950','Crescer na firma','SSP',7,'1.500.00','8888888888','(55) 4343-3434');");
 
-        for (int i = 0; i < sqls.size(); i++) {
-
-            inicializaService.inicializar(sqls.get(i));
-
+        try {
+            sqls.forEach(sql -> inicializaService.inicializar(sql));
+            Helper.mostrarNotificacao("Pessoas", "Pessoas inicializadas.", "info");
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Pessoas", e.getMessage(), "error");
         }
     }
 

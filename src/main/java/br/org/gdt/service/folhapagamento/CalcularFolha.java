@@ -1,25 +1,21 @@
 package br.org.gdt.service.folhapagamento;
 
 import br.org.gdt.enums.FpEnumEventos;
+import br.org.gdt.enums.FpStatusFolhaPeriodo;
 import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFolhaPeriodo;
-import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpFolhaPeriodoService;
-import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("calcularFolha")
 public class CalcularFolha {
 
-    private final double SALARIO = 5908.33;
     private List<FpEventoPeriodo> EVENTOS_PADROES;
 
     @Autowired
@@ -40,22 +36,27 @@ public class CalcularFolha {
 
         FpEventoPeriodo eventoSalario = new FpEventoPeriodo();
         eventoSalario.setEvpEvento(fpEventoService.findById(FpEnumEventos.Salario.ordinal() + 1));
+        eventoSalario.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoSalario);
 
         FpEventoPeriodo eventoINSS = new FpEventoPeriodo();
         eventoINSS.setEvpEvento(fpEventoService.findById(FpEnumEventos.INSS.ordinal() + 1));
+        eventoSalario.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoINSS);
 
         FpEventoPeriodo eventoFGTS = new FpEventoPeriodo();
         eventoFGTS.setEvpEvento(fpEventoService.findById(FpEnumEventos.FGTS.ordinal() + 1));
+        eventoSalario.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoFGTS);
 
         FpEventoPeriodo eventoIRRF = new FpEventoPeriodo();
         eventoIRRF.setEvpEvento(fpEventoService.findById(FpEnumEventos.IRRF.ordinal() + 1));
+        eventoSalario.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoIRRF);
-        
+
         FpEventoPeriodo eventoDSR = new FpEventoPeriodo();
         eventoDSR.setEvpEvento(fpEventoService.findById(FpEnumEventos.DSR.ordinal() + 1));
+        eventoSalario.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoDSR);
 
         return EVENTOS_PADROES;
@@ -70,7 +71,7 @@ public class CalcularFolha {
         fpFolhaPeriodo.setForGeradaEm(Calendar.getInstance().getTime());
         fpFolhaPeriodo.setForPeriodo(dadosCalculadosDoFuncionario.getPeriodo());
         fpFolhaPeriodo.setForPessoa(dadosCalculadosDoFuncionario.getPessoa());
-        
+
         dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
 
         dadosCalculadosDoFuncionario.getEventos().stream()
@@ -91,7 +92,7 @@ public class CalcularFolha {
                         throw new RuntimeException(ex);
                     }
                 });
-        
+        fpFolhaPeriodo.setForStatusFolhaPeriodo(FpStatusFolhaPeriodo.Calculada);
         fpFolhaPeriodoService.save(fpFolhaPeriodo);
     }
 
