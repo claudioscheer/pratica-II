@@ -53,6 +53,10 @@ public class CalcularFolha {
         FpEventoPeriodo eventoIRRF = new FpEventoPeriodo();
         eventoIRRF.setEvpEvento(fpEventoService.findById(FpEnumEventos.IRRF.ordinal() + 1));
         EVENTOS_PADROES.add(eventoIRRF);
+        
+        FpEventoPeriodo eventoDSR = new FpEventoPeriodo();
+        eventoDSR.setEvpEvento(fpEventoService.findById(FpEnumEventos.DSR.ordinal() + 1));
+        EVENTOS_PADROES.add(eventoDSR);
 
         return EVENTOS_PADROES;
     }
@@ -61,10 +65,11 @@ public class CalcularFolha {
 
     }
 
-    public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException {
+    public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException, Exception {
         FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
         fpFolhaPeriodo.setForGeradaEm(Calendar.getInstance().getTime());
         fpFolhaPeriodo.setForPeriodo(dadosCalculadosDoFuncionario.getPeriodo());
+        fpFolhaPeriodo.setForPessoa(dadosCalculadosDoFuncionario.getPessoa());
         
         dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
 

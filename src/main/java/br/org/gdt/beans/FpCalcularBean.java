@@ -24,9 +24,9 @@ public class FpCalcularBean {
 
     private boolean gerarTodasPessoas;
     private FpPeriodo fpPeriodo = new FpPeriodo();
+    private RecPessoa recPessoa = new RecPessoa();
     private FpTipoFolha fpTipoFolha;
     private List<FpPeriodo> todosFpPeriodo;
-    private int pessoaId;
     private FpEventoPeriodo fpEventoPeriodo = new FpEventoPeriodo();
     private List<FpEventoPeriodo> todosFpEventoPeriodo = new ArrayList<>();
 
@@ -85,11 +85,13 @@ public class FpCalcularBean {
     }
 
     public void buscarPessoa() {
-//        RecPessoa recPessoa = recPessoaService.BuscarId(pessoaId);
-//                if (recPessoa == null) {
-//                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
-//                    return;
-//                }
+        RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
+        if (pessoa == null) {
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+            recPessoa = new RecPessoa();
+            return;
+        }
+        recPessoa = pessoa;
     }
 
     public void calcularFolhaPagamento() {
@@ -105,12 +107,12 @@ public class FpCalcularBean {
                 DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
-                RecPessoa recPessoa = recPessoaService.BuscarId(pessoaId);
-//                if (recPessoa == null) {
-//                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
-//                    return;
-//                }
+                if (recPessoa.getRecIdpessoa() <= 0) {
+                    Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe. Selecione um colaborador.", "info");
+                    return;
+                }
                 dadosCalculadosDoFuncionario.setPessoa(recPessoa);
+                dadosCalculadosDoFuncionario.setEventos((List) ((ArrayList) todosFpEventoPeriodo).clone());
 
                 calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
             } catch (Exception e) {
@@ -151,12 +153,12 @@ public class FpCalcularBean {
         return fpPeriodoService.findAll();
     }
 
-    public int getPessoaId() {
-        return pessoaId;
+    public RecPessoa getRecPessoa() {
+        return recPessoa;
     }
 
-    public void setPessoaId(int pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setRecPessoa(RecPessoa recPessoa) {
+        this.recPessoa = recPessoa;
     }
 
     public void setTodosFpPeriodo(List<FpPeriodo> todosFpPeriodo) {

@@ -6,4 +6,5 @@ public enum FpEnumTabelas {
     IRRF,
     FGTS,
     SalarioMinimo,
+    SalarioFamilia,
 }

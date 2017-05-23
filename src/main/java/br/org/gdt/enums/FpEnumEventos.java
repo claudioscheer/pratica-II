@@ -26,6 +26,5 @@ public enum FpEnumEventos {
     ContribuicaoSindical,
     GratificacoesDiversas,
     AuxilioDoenca,
-    
-    
+    DSR,
 }

@@ -22,6 +22,10 @@ public class Eventos {
     private FpTabelaService fpTabelaService;
 
     public FpEventoPeriodo calcularEvento(FpEventoPeriodo fpEventoPeriodo, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+        if (fpEventoPeriodo.isJaCalculado()) {
+            return fpEventoPeriodo;
+        }
+        
         int evento = FpEnumEventos.values()[(int) fpEventoPeriodo.getEvpEvento().getEveId() - 1].ordinal();
         if (evento == FpEnumEventos.Salario.ordinal()) {
             fpEventoPeriodo.setEvpValorReferencia(HORAS_MENSAIS);
@@ -31,7 +35,8 @@ public class Eventos {
             // Proventos onde incide INSS.
             double valorEventosIncideINSS = dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideINSS() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
-                    .mapToDouble(x -> x.getEvpValor()).sum();
+                    .mapToDouble(x -> x.getEvpValor())
+                    .sum();
 
             // Descontos onde incide INSS.
             valorEventosIncideINSS -= dadosCalculadosDoFuncionario.getEventos().stream()
@@ -43,7 +48,8 @@ public class Eventos {
                             throw new RuntimeException(ex);
                         }
                     }).
-                    mapToDouble(x -> x.getEvpValor()).sum();
+                    mapToDouble(x -> x.getEvpValor())
+                    .sum();
 
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideINSS, FpEnumTabelas.INSS.ordinal() + 1);
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
@@ -54,7 +60,8 @@ public class Eventos {
             // Proventos onde incide FGTS.
             double valorEventosIncideFGTS = dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideFGTS() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
-                    .mapToDouble(x -> x.getEvpValor()).sum();
+                    .mapToDouble(x -> x.getEvpValor())
+                    .sum();
 
             // Descontos onde incide FGTS.
             valorEventosIncideFGTS -= dadosCalculadosDoFuncionario.getEventos().stream()
@@ -66,7 +73,8 @@ public class Eventos {
                             throw new RuntimeException(ex);
                         }
                     }).
-                    mapToDouble(x -> x.getEvpValor()).sum();
+                    mapToDouble(x -> x.getEvpValor())
+                    .sum();
 
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideFGTS, FpEnumTabelas.FGTS.ordinal() + 1);
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
@@ -77,7 +85,8 @@ public class Eventos {
             // Proventos onde incide IRRF.
             double valorEventosIncideIRRF = dadosCalculadosDoFuncionario.getEventos().stream()
                     .filter(x -> x.getEvpEvento().isEveIncideIRRF() && x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
-                    .mapToDouble(x -> x.getEvpValor()).sum();
+                    .mapToDouble(x -> x.getEvpValor())
+                    .sum();
 
             // Descontar o valor do evento INSS.
             valorEventosIncideIRRF -= getEventoDosEventosDoFuncionario(FpEnumEventos.INSS, dadosCalculadosDoFuncionario).getEvpValor();
@@ -118,9 +127,15 @@ public class Eventos {
             double valorHoraFuncionario = getValorHoraFuncionario(dadosCalculadosDoFuncionario);
             fpEventoPeriodo.setEvpValor(valorHoraFuncionario * fpEventoPeriodo.getEvpValorReferencia() * 1.2);
 
-        } else {
-            fpEventoPeriodo.setEvpValorReferencia(fpEventoPeriodo.getEvpValorReferencia());
-            fpEventoPeriodo.setEvpValor(fpEventoPeriodo.getEvpValor());
+        } else if (evento == FpEnumEventos.DSR.ordinal()) {
+            double valorHorasExtras50 = getEventoDosEventosDoFuncionario(FpEnumEventos.HorasExtras50, dadosCalculadosDoFuncionario).getEvpValor();
+            double valorHorasExtras100 = getEventoDosEventosDoFuncionario(FpEnumEventos.HorasExtras100, dadosCalculadosDoFuncionario).getEvpValor();
+            double valorHorasNoturnas = getEventoDosEventosDoFuncionario(FpEnumEventos.HorasNoturnas, dadosCalculadosDoFuncionario).getEvpValor();
+
+            double valorHorasExtras = valorHorasExtras50 + valorHorasExtras100 + valorHorasNoturnas;
+
+            fpEventoPeriodo.setEvpValor((valorHorasExtras / dadosCalculadosDoFuncionario.getPeriodo().getPerDiasUteis()) * dadosCalculadosDoFuncionario.getPeriodo().getPerDiasNaoUteis());
+
         }
 
         fpEventoPeriodo.setJaCalculado(true);
