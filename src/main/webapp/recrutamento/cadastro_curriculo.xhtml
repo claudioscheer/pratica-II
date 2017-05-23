@@ -306,20 +306,21 @@
                                                 habilidade                                                
                                             </label>
                                             <p:autoComplete multiple="true" 
-                                                            value="#{recPessoaBean.habilidades}" 
+                                                            value="#{recPessoaBean.recPessoa.recHabilidadeList}" 
                                                             completeMethod="#{recPessoaBean.completarHabilidade}"
                                                             var="item" 
                                                             itemLabel="#{item.recDescricao}" 
                                                             itemValue="#{item}" 
-                                                            forceSelection="true">
-                                                <!-- 
+                                                            forceSelection="true"
+                                                            converter="#{generic}">
+                                                
                                                 <p:column style="width:10%">
                                                     <h:outputText styleClass="ui-theme ui-theme-#{item.recDescricao}" />
                                                 </p:column>
 
                                                 <p:column>
                                                     <h:outputText class="form-control" value="#{item.recDescricao}" />
-                                                </p:column>-->
+                                                </p:column>
                                             </p:autoComplete>        
                                         </div>     
                                     </div>                            

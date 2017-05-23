@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -34,7 +35,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = "RecHabilidade.findAll", query = "SELECT r FROM RecHabilidade r")})
 @SequenceGenerator(name = "seq_RecHabilidade", sequenceName = "seq_RecHabilidade", allocationSize = 1)
-public class RecHabilidade implements Serializable {
+public class RecHabilidade implements Serializable,SampleEntity {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -160,5 +161,11 @@ public class RecHabilidade implements Serializable {
     //public String toString() {
       //  return "br.org.gdt.modelNew.RecHabilidade[ recIdhabilidade=" + recIdhabilidade + " ]";
     //}
+
+    @Override
+    public Long getId()
+    {
+        return this.recIdhabilidade;
+    }
     
 }
