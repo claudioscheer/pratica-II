@@ -79,9 +79,9 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.INSS.ordinal() + 1);
-        fpEvento.setEveIncideFGTS(true);
-        fpEvento.setEveIncideINSS(true);
-        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
         fpEvento.setEvePermiteExcluir(false);
         fpEvento.setEveNome("INSS");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
@@ -89,9 +89,9 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.FGTS.ordinal() + 1);
-        fpEvento.setEveIncideFGTS(true);
-        fpEvento.setEveIncideINSS(true);
-        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
         fpEvento.setEvePermiteExcluir(false);
         fpEvento.setEveNome("FGTS");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
@@ -99,9 +99,9 @@ public class DependenciasFolhaPagamento {
         fpEvento = new FpEvento();
 
         fpEvento.setEveId(FpEnumEventos.IRRF.ordinal() + 1);
-        fpEvento.setEveIncideFGTS(true);
-        fpEvento.setEveIncideINSS(true);
-        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEveIncideFGTS(false);
+        fpEvento.setEveIncideINSS(false);
+        fpEvento.setEveIncideIRRF(false);
         fpEvento.setEvePermiteExcluir(false);
         fpEvento.setEveNome("IRRF");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
