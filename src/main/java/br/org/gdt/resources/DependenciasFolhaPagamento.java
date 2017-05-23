@@ -281,6 +281,17 @@ public class DependenciasFolhaPagamento {
         fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
+        
+        // Ajustado.
+        fpEvento.setEveId(FpEnumEventos.DSR.ordinal() + 1);
+        fpEvento.setEveIncideFGTS(true);
+        fpEvento.setEveIncideINSS(true);
+        fpEvento.setEveIncideIRRF(true);
+        fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNome("DSR - Descanso Semanal Remunerado");
+        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
+        fpEventoService.update(fpEvento);
+        fpEvento = new FpEvento();
     }
 
     public void salvarPeriodo() {
