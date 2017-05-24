@@ -12,10 +12,10 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         classe = RecPessoa.class;
     }
 
-    public List<RecPessoa> findByCpf(long cpf) {
+    public List<RecPessoa> findByRecCpf(long recCpf) {
 
-        Query query = entityManager.createQuery("from RecPessoa as t where t.recCpf = :cpf");
-        query.setParameter("cpf", cpf);
+        Query query = entityManager.createQuery("from RecPessoa as t where t.recCpf = :recCpf");
+        query.setParameter("recCpf", recCpf);
 
         return query.getResultList();
 
