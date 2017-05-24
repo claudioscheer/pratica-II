@@ -8,13 +8,18 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import org.apache.cxf.transport.http.HTTPSession;
+import static org.primefaces.behavior.confirm.ConfirmBehavior.PropertyKeys.message;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -33,6 +38,10 @@ public class GchCursoBean {
     @ManagedProperty("#{gchCadastroCursoService}")
     private GchCadastroCursoService gchCursoService;
 
+    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+    Map<String, Object> sessionMap = externalContext.getSessionMap();
+    
+    
     @ManagedProperty("#{param.cursoID}")
     private String cursoID;
 
@@ -50,6 +59,16 @@ public class GchCursoBean {
 
 //        gchCurso = buscaPorId(cursoID);
     }
+    @PostConstruct
+public void init() {
+   
+        System.out.println("Entrou no metodo");
+        String notificacao = (String) sessionMap.get("somekey");
+        
+        Helper.mostrarNotificacao("Sucesso", notificacao, "sucess");
+//        RequestContext.getCurrentInstance().execute("<script>$.notify('"+notificacao+"','success')</script>");
+    
+}
 
     public String buscaPorId(int idCurso) {
 
@@ -95,10 +114,10 @@ public class GchCursoBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
 
+       sessionMap.put("notificacao", MsgNotificacao);
+        
         return "Cursos";
 
-//        gchTodosCursos = gchCursoService.findAll();
-//        this.formAtivo = false;
     }
 
     public void cancel() {
@@ -113,6 +132,18 @@ public class GchCursoBean {
 
     }
 
+    public void LancarNotificacao(){
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HTTPSession session = (HTTPSession) facesContext.getExternalContext().getSession(true);
+        
+        String notificacao = (String) session.get("notificacao");
+        
+        RequestContext.getCurrentInstance().execute("<script>$.notify('"+notificacao+"','success')</script>");
+        
+    }
+    
+    
     public String excluir(GchCursos gchCurso) {
 
         String MsgNotificacao = "";
@@ -128,17 +159,22 @@ public class GchCursoBean {
 
             boolean PodeExcluir = true;    
                 
+            FacesContext context = FacesContext.getCurrentInstance();
+            
             if (PodeExcluir) {
 
                 gchCursoService.delete(gchCurso.getCurCodigo());
                 gchTodosCursos.remove(gchCurso);
                 MsgNotificacao = "O curso " + gchCurso.getCurNome() + "foi excluído com sucesso!";
-                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                context.addMessage(null, new FacesMessage("Sucessosss", MsgNotificacao) );
                 
             } else {
 
                 MsgNotificacao = "O curso " + gchCurso.getCurNome() + " está vinculado a um ou mais treinamentos e não pode ser excluído!";
-                Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+                
+         
+                context.addMessage(null, new FacesMessage("Erro", MsgNotificacao) );
+                
             }
 
             }else{

@@ -35,7 +35,7 @@ import org.primefaces.context.RequestContext;
  * @author Alisson Allebrandt
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchFormularioBean {
 
     public GchFormulario getGchFormulario() {
@@ -48,6 +48,18 @@ public class GchFormularioBean {
     private List<GchAlternativas> alternativasVinculadas;
     private GchFormulario gchFormulario = new GchFormulario();
     private List<GchFormulario> gchTodosFormularios;
+
+    public String getNotificacao() {
+        return Notificacao;
+    }
+
+    public void setNotificacao(String Notificacao) {
+        this.Notificacao = Notificacao;
+    }
+    
+    
+    private String Notificacao = "";
+    
 
     public List<GchAlternativas> getAlternativasVinculadas() {
         return alternativasVinculadas;
@@ -127,8 +139,16 @@ public class GchFormularioBean {
     
     }
 
-    public void Salvar() {
+    public void VerificaNotificacao() {
 
+        if(!Notificacao.isEmpty()){
+            
+            Helper.mostrarNotificacao("Sucesso",Notificacao,"sucess");
+            
+            Notificacao = "";
+        }    
+            
+        
     }
 
     public void IsSelected(long alt) {
@@ -156,7 +176,7 @@ public class GchFormularioBean {
 
     }
 
-    public void SalvarFormulario() {
+    public String SalvarFormulario() {
 
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
@@ -235,11 +255,14 @@ public class GchFormularioBean {
                 }
             }
 
-        }else{ //Carregar Alerta
+            //Salvou com sucesso, retorna para página de listagem
+            Notificacao = "O formulário "+gchFormulario.getFormNome()+" foi cadastrado com sucesso!";
             
-            
-            
+            gchFormulario = new GchFormulario();  
+       
         }
+        
+         return "Formularios";
     }
 
     public void addNovaPergunta() {
