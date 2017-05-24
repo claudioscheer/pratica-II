@@ -59,14 +59,10 @@ public class RecPessoaService {
 //        return pessoaDao.findByCpf(cpf);
 //    }
 
-    /**
-     *
-     * @param cpf
-     * @return
-     */
+   
 
-    public List<RecPessoa> findByCpf(long cpf) {
-        return pessoaDao.findByCpf(cpf);
+    public List<RecPessoa> findByRecCpf(long recCpf) {
+        return pessoaDao.findByRecCpf(recCpf);
         
        
 

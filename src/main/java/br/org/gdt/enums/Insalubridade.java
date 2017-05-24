@@ -11,7 +11,7 @@ package br.org.gdt.enums;
  */
 public enum Insalubridade {
     Não,
-    Baixo10,
-    Médio20,                                       
-    Alto40                                       
+    Baixo,
+    Médio,                                       
+    Alto                                       
 }

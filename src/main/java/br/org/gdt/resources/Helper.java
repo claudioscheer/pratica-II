@@ -4,6 +4,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialResponseWriter;
+import org.primefaces.context.RequestContext;
 
 public class Helper {
 
@@ -18,24 +19,25 @@ public class Helper {
     }
 
     public static void executarScript(String script) {
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        ExternalContext extContext = ctx.getExternalContext();
-        if (ctx.getPartialViewContext().isAjaxRequest()) {
-            try {
-                extContext.setResponseContentType("text/xml");
-                extContext.addResponseHeader("Cache - Control ", "no - cache");
-                PartialResponseWriter writer = ctx.getPartialViewContext().getPartialResponseWriter();
-                writer.startDocument();
-                writer.startEval();
-                writer.write(script);
-                writer.endEval();
-                writer.endDocument();
-                writer.flush();
-                ctx.responseComplete();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
+        RequestContext.getCurrentInstance().execute(script);
+//        FacesContext ctx = FacesContext.getCurrentInstance();
+//        ExternalContext extContext = ctx.getExternalContext();
+//        if (ctx.getPartialViewContext().isAjaxRequest()) {
+//            try {
+//                extContext.setResponseContentType("text/xml");
+//                extContext.addResponseHeader("Cache - Control ", "no - cache");
+//                PartialResponseWriter writer = ctx.getPartialViewContext().getPartialResponseWriter();
+//                writer.startDocument();
+//                writer.startEval();
+//                writer.write(script);
+//                writer.endEval();
+//                writer.endDocument();
+//                writer.flush();
+//                ctx.responseComplete();
+//            } catch (Exception e) {
+//                System.out.println(e);
+//            }
+//        }
     }
 
 }

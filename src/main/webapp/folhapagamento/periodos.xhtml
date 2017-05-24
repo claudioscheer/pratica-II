@@ -130,6 +130,10 @@
                                                 #{periodo.perDiasUteis}
                                         </h:column>
                                         <h:column>
+                                            <f:facet name="header">Dias não úteis</f:facet>
+                                                #{periodo.perDiasNaoUteis}
+                                        </h:column>
+                                        <h:column>
                                             <f:facet name="header">Data inicial</f:facet>
                                             <h:outputText value="#{periodo.perDataInicial}">
                                                 <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
