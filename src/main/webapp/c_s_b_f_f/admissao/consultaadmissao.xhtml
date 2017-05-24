@@ -24,23 +24,23 @@
                         </div>
                         <div>
                             <br></br> 
-                            <div class="col-md-5 col-sm-5 col-xs-12">
-                                <div>
-                                    <label class="control-label " for="name">
-                                        Código Colaborador
-                                    </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar por Código" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"></h:inputText>
+                            <!--                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                                            <div>
+                                                                <label class="control-label " for="name">
+                                                                    Código Colaborador
+                                                                </label>
+                                                                <h:inputText class="form-control" a:placeholder=" Buscar por Código" value="" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"></h:inputText>
+                            
+                                                            </div>
+                                                        </div>-->
 
-                                </div>
-                            </div>
 
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
                                 <div>
                                     <label class="control-label " for="name">
                                         CPF
                                     </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar por CPF" value="#{csbffAdmissaoBean.cpf}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"></h:inputText>
+                                    <h:inputText class="form-control" value="#{csbffAdmissaoBean.recCpf}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 20, 'digitsOptional': true, 'placeholder': '000.000.000-00'"></h:inputText>
 
                                 </div>
                             </div> 
@@ -50,16 +50,12 @@
                                 <div>&nbsp;</div>
                                 <div class="element">
 
-                                    <h:commandButton class="btn btn-primary , form-control" value="Buscar" action="#{csbffAdmissaoBean.buscarCpf()}"/>
+                                    <h:commandButton class="btn btn-primary , form-control" value="Buscar" action="#{csbffAdmissaoBean.buscarRecCpf()}"/>
                                 </div>
                                 <br></br>
                             </div>
-
-
                         </div>
-
-
-                        <div class="title_left">
+                        <br></br><div class="title_left">
                             <h3>Contratos de Admissão Criados</h3>
                         </div>
                         <div class="row">
@@ -90,6 +86,15 @@
                                             </h:outputText>
 
                                         </h:column>
+                                        <h:column>
+                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{csbffAdmissaoBean.editaConsulta(pessoas)}">
+
+                                                <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                            </h:commandLink>
+                                            <!--                                                <f:ajax execute="@form" render="formConsulta" />
+                                                                                        </h:commandLink>-->
+                                        </h:column>
+
 
                                         <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{csbffAdmissaoBean.prepareEdit(pessoas)}">
                                             <f:ajax execute="@form" render="formConsulta" />

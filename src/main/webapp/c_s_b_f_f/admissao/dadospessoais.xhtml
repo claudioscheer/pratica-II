@@ -33,14 +33,15 @@
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
+                                            <label class="control-label cpf " for="number">                                        
                                                 CPF
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recCpf}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control " a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'">
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recCpf}" required="true" requiredMessage="Campo Nome colaborador é obrigatório." class="form-control ">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
-                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.recIdpessoa}" itemValue="#{cpf.recCpf}"/>
+                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="cpf" itemLabel="#{cpf.recCpf}" itemValue="#{cpf.recCpf}"/>
                                             </h:selectOneMenu>
+                                            
                                             <!--                                            <input class="form-control" id="number" name="text" type="text"/>-->
                                         </div>
                                     </div> 
@@ -49,20 +50,20 @@
                                             <label class="control-label " for="select">
                                                 Sexo
                                             </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recSexo}" class="form-control">
-                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.generos}" />
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.pessoas}" class="form-control">
+<!--                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />-->
+                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="sexo" itemLabel="#{sexo.recSexo}" itemValue="#{sexo.recSexo}"/>
                                             </h:selectOneMenu>
                                         </div>     
                                     </div>          
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
+                                        <div class="form-group">
                                             <label class="control-label " for="select">
                                                 Estado Civil
                                             </label>
-                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recEstadocivil}" class="form-control">
-                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                <f:selectItems value="#{csbffAdmissaoBean.estadoCivil}" />
+                                            <h:selectOneMenu value="#{csbffAdmissaoBean.pessoas}" class="form-control" converter="#{generic}">
+                                                <!--<f:selectItem itemLabel="Selecione..." itemValue="#{null}" />-->
+                                                <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="estadoCivil" itemLabel="#{estadoCivil.recEstadocivil}" itemValue="#{estadoCivil.recEstadocivil}"/>
                                             </h:selectOneMenu>
                                         </div>     
                                     </div> 
@@ -72,7 +73,7 @@
                                                 RG
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recRg}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'" />
+                                            <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.pessoas}" />
                                             
                                         </div>
                                     </div> 
