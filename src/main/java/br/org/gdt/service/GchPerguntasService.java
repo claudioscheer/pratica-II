@@ -43,5 +43,12 @@ public class GchPerguntasService {
     public List<GchPerguntas> findAll() {
         return gchPerguntasDAO.findAll();
     }
+    
+    public boolean ExcluirPerguntasFormulario(int id){
+        
+        return gchPerguntasDAO.ExcluirPerguntasFormulario(id);
+        
+        
+    }
   
 }

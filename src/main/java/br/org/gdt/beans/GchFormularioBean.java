@@ -14,6 +14,7 @@ import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
+import br.org.gdt.service.GchRespostasService;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -133,6 +134,16 @@ public class GchFormularioBean {
      @ManagedProperty("#{gchPerguntaService}")
     private GchPerguntasService gchPerguntasService;
     
+     @ManagedProperty("#{gchRespostaService}")
+     private GchRespostasService gchRespostasService;
+
+    public GchRespostasService getGchRespostasService() {
+        return gchRespostasService;
+    }
+
+    public void setGchRespostasService(GchRespostasService gchRespostasService) {
+        this.gchRespostasService = gchRespostasService;
+    }
     
 
     public GchFormularioBean() {
@@ -247,7 +258,7 @@ public class GchFormularioBean {
                   
                     altperg.setGchAlternativas(novaAlternativa);
                     altperg.setPerCodigo(pergunta);
-               
+                  
                    
                     
                     gchAlternativasPerguntaService.save(altperg);
@@ -286,12 +297,24 @@ public class GchFormularioBean {
         try {
 
             if (gchFormulario != null) {
-
-                gchFormularioService.delete(gchFormulario.getFormCodigo());
-                gchTodosFormularios.remove(gchFormulario);
-                MsgNotificacao = "O formulário " + gchFormulario.getFormNome() + "foi excluído com sucesso!";
-                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
-
+                
+                // Se não encontrou formulário vinculado
+                if(!VerificaExclusaoFormulario(gchFormulario.getFormCodigo())){
+                    
+                    gchFormularioService.delete(gchFormulario.getFormCodigo());
+                    gchTodosFormularios.remove(gchFormulario);
+                    MsgNotificacao = "O formulário <b>" + gchFormulario.getFormNome() + " </b>foi excluído com sucesso!";
+                    Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                  
+                   
+                   
+                }else{
+                    
+                    MsgNotificacao = "O formulário <b>" + gchFormulario.getFormNome() + " </b>já foi respondido e não será excluído !";
+                    Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+                   
+                }
+                
             }
 
         } catch (Exception ex) {
@@ -299,9 +322,17 @@ public class GchFormularioBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
         }
 
+        RequestContext.getCurrentInstance().update("formFormulario:tabelFormularios");
+        
         return "Formularios";
     }
 
+    
+    public boolean VerificaExclusaoFormulario(long id){
+     
+        return gchRespostasService.VerificaExistenciaFormulario(id);
+    }
+    
     public void setGchFormulario(GchFormulario gchFormulario) {
         this.gchFormulario = gchFormulario;
     }

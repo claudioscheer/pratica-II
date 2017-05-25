@@ -35,18 +35,13 @@
 
                                         <h:form id="formFormulario">
 
-
-                                            <f:metadata>
-                                                <f:event type="preRenderView" listener="#{gchFormularioBean.VerificaNotificacao}"/>
-                                            </f:metadata>
-
-                                            <h:dataTable id="tabelCursos" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
+                                            <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
                                                 <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink  id="btnExcluir" h:tooltip="Exclui Curso" action="#{gchFormularioDinamico.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
+                                                    <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
 
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" ></f:ajax>
-                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"><div class="tooltip"><span class="tooltiptext">Excluir Formulário</span></div> </i>
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
 
                                                     </h:commandLink>
 
@@ -54,9 +49,18 @@
                                                 <h:column>                
                                                     <h:commandLink >
 
-                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                        <i class="glyphicon glyphicon-eye-open" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
+                                                <h:column>
+                                                    <h:commandLink >
+
+                                                        <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
+                                                    </h:commandLink>
+                                                    
+                                                    
+                                                </h:column>
+                                                
 
                                                 <h:column>   
                                                     <f:facet name="header">Nome</f:facet>

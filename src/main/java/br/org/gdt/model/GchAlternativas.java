@@ -52,7 +52,7 @@ public class GchAlternativas implements Serializable {
     private short altPrioridade;
     @ManyToOne
     private GchAlternativasperguntas gchAlternativasperguntas;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<GchRespostas> gchRespostasList;
 
     
