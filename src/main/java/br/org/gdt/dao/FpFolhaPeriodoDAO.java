@@ -14,19 +14,19 @@ public class FpFolhaPeriodoDAO extends DAO<FpFolhaPeriodo> {
     }
 
     public List<FpFolhaPeriodo> findAllPeriodo(FpPeriodo fpPeriodo) {
-        return entityManager.createQuery(String.format(
-                "from FpFolhaPeriodo as t where t.forPeriodo.perId = %s",
-                fpPeriodo.getPerId()))
+        return entityManager.createQuery(
+                "from FpFolhaPeriodo as t where t.forPeriodo.perId = :perId")
+                .setParameter("perId", fpPeriodo.getPerId())
                 .getResultList();
     }
 
     public FpFolhaPeriodo findByPessoaEPeriodo(FpPeriodo fpPeriodo, RecPessoa recPessoa) {
         try {
             return (FpFolhaPeriodo) entityManager.createQuery(
-                    String.format(
-                            "from FpFolhaPeriodo as t where t.forPeriodo.perId = %s and t.forPessoa.recIdpessoa = %s",
-                            fpPeriodo.getPerId(), recPessoa.getRecIdpessoa())
-            ).getSingleResult();
+                    "from FpFolhaPeriodo as t where t.forPeriodo.perId = :perId and t.forPessoa.recIdpessoa = :recIdpessoa")
+                    .setParameter("perId", fpPeriodo.getPerId())
+                    .setParameter("recIdpessoa", recPessoa.getRecIdpessoa())
+                    .getSingleResult();
         } catch (Exception e) {
             return null;
         }

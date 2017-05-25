@@ -148,7 +148,7 @@
                                                 </div>
                                                 <div class="col-md-2 text-center">
                                                     <div class="empty-div">&nbsp;</div>
-                                                    <h:commandLink class="btn btn-default" action="#{fpCalcularBean.adicionarEvento()}" value="Adicionar">
+                                                    <h:commandLink class="btn btn-dark" action="#{fpCalcularBean.adicionarEvento()}" value="Adicionar">
                                                         <f:ajax execute="@form" render="formEventoVariavel" />
                                                     </h:commandLink>
                                                 </div>
@@ -169,15 +169,21 @@
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Referência</f:facet>
-                                                        <h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;" />
+                                                            #{eventoVariavel.evpValorReferencia}
+                                                            <!--<h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;" />-->
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Valor</f:facet>
-                                                        <h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;" />
+                                                            #{eventoVariavel.evpValor}
+                                                            <!--<h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;" />-->
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Opções</f:facet>
-                                                        <h:commandLink class="btn btn-link" action="#{fpCalcularBean.removerEvento(eventoVariavel)}" onclick="return confirm('Remover evento?')" >
+                                                        <h:commandLink class="btn btn-link" action="#{fpCalcularBean.editarEvento(eventoVariavel)}">
+                                                            <f:ajax execute="@form" render="formEventoVariavel"></f:ajax>
+                                                            <i class="glyphicon glyphicon-edit"></i>
+                                                        </h:commandLink>
+                                                        <h:commandLink class="btn btn-link" action="#{fpCalcularBean.removerEvento(eventoVariavel)}" onclick="return confirm('Remover evento?')">
                                                             <f:ajax execute="@form" render="formEventoVariavel"></f:ajax>
                                                             <i class="glyphicon glyphicon-remove"></i>
                                                         </h:commandLink>
@@ -203,6 +209,12 @@
             <ui:define name="script">
 
                 <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(document).on('submit', 'form', function (e) {
+                            return false;
+                        });
+                    });
+
 //                    function selecionarEvento(e) {
 //                        var row = $(e).parent().parent();
 //                        var codigoEvento = row.find('td').eq(0).text().trim();

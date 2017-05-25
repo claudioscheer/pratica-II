@@ -75,7 +75,7 @@ public class FpFolhaPeriodo implements java.io.Serializable {
         this.forStatusFolhaPeriodo = forStatusFolhaPeriodo;
     }
 
-    @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     public List<FpEventoPeriodo> getForEventos() {
         if (forEventos == null) {
             forEventos = new ArrayList<>();
