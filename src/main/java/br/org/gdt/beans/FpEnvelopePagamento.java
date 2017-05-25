@@ -1,5 +1,6 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.enums.FpTipoFolha;
 import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
@@ -22,6 +23,7 @@ public class FpEnvelopePagamento {
     private FpPeriodo fpPeriodo = new FpPeriodo();
     private RecPessoa recPessoa = new RecPessoa();
     private FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
+    private FpTipoFolha fpTipoFolha;
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -47,8 +49,24 @@ public class FpEnvelopePagamento {
             Helper.mostrarNotificacao("Período", "Selecione um período.", "info");
             return;
         }
-        
+
         mostrarTodasFolhasPeriodo = true;
+    }
+
+    public void selecionarTipoFolha() {
+    }
+
+    public void selecionarPeriodo() {
+    }
+
+    public void selecionarPessoa() {
+        RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
+        if (pessoa == null) {
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+            recPessoa = new RecPessoa();
+            return;
+        }
+        recPessoa = pessoa;
     }
 
     public void buscarFolhaPeriodo() {
@@ -108,6 +126,14 @@ public class FpEnvelopePagamento {
 
     public void setFpFolhaPeriodo(FpFolhaPeriodo fpFolhaPeriodo) {
         this.fpFolhaPeriodo = fpFolhaPeriodo;
+    }
+
+    public FpTipoFolha getFpTipoFolha() {
+        return fpTipoFolha;
+    }
+
+    public void setFpTipoFolha(FpTipoFolha fpTipoFolha) {
+        this.fpTipoFolha = fpTipoFolha;
     }
 
     public FpPeriodoService getFpPeriodoService() {

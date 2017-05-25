@@ -9,206 +9,104 @@
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
-                <title>Calcular - Folha de pagamento</title>
+                <title>Envelope de pagamento - Folha de pagamento</title>
             </ui:define>
             <ui:define name="content">
                 <div class="title_left">
-                    <h3>Calcular</h3>
+                    <h3>Envelope de pagamento</h3>
                 </div>
                 <br />
-                <h:form id="formEventoVariavel">
+                <h:form id="formEnvelopePagamento">
                     <h:messages class="error" style="color: #d9534f" />
 
-                    <h:panelGroup id="panelTipoFolhaPagamento" layout="block" class="col-md-12">
+                    <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                                <label class="control-label">Folha para calcular</label>
-                                <h:selectOneMenu value="#{fpCalcularBean.fpTipoFolha}" class="form-control">
-                                    <f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarTipoFolha()}" event="change" />
+                                <label class="control-label">Folha</label>
+                                <h:selectOneMenu value="#{fpEnvelopePagamento.fpTipoFolha}" class="form-control">
+                                    <f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamento.selecionarTipoFolha()}" event="change" />
                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                     <f:selectItems value="#{dadosComuns.tipoFolhas}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                 <label class="control-label">Período</label>
-                                <h:selectOneMenu value="#{fpCalcularBean.fpPeriodo.perId}" class="form-control">
-                                    <!--<f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarPeriodo()}" event="change" />-->
+                                <h:selectOneMenu value="#{fpEnvelopePagamento.fpPeriodo.perId}" class="form-control">
+                                    <!--<f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamento.selecionarPeriodo()}" event="change" />-->
                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                    <f:selectItems value="#{fpCalcularBean.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
+                                    <f:selectItems value="#{fpEnvelopePagamento.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
                                 </h:selectOneMenu>
                             </div>
                         </div>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" rendered="#{fpCalcularBean.fpTipoFolha == 'FolhaDePagamento'}">
-                        <div class="form-group col-md-12">
-                            <label class="control-label">Pessoa</label>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <h:selectBooleanCheckbox value="#{fpCalcularBean.gerarTodasPessoas}">
-                                                <f:ajax execute="@form" render="formEventoVariavel" listener="#{fpCalcularBean.selecionarTipoFolha()}" event="change" />
-                                            </h:selectBooleanCheckbox> Calcular todas as pessoas?
-                                        </label>
-                                    </div>
-                                </div>
-                                <h:panelGroup rendered="#{fpCalcularBean.gerarTodasPessoas}">
-                                    <div class="col-md-6">
-                                        Serão levados em consideração para o cálculo, todos os eventos já lançados para o funcionário no período.
-                                    </div>
-                                    <div class="col-md-3 text-center">
-                                        <h:commandButton class="btn btn-primary" value="Calcular todos funcionários" action="#{fpCalcularBean.calcularFolhaPagamento()}">
-                                            <f:ajax execute="@form" render="formEventoVariavel" />
-                                        </h:commandButton>
-                                    </div>
-                                </h:panelGroup>
-                                <h:panelGroup rendered="#{!fpCalcularBean.gerarTodasPessoas}">
-                                    <div class="col-md-2">
-                                        <h:inputText class="form-control" value="#{fpCalcularBean.recPessoa.recIdpessoa}" />
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h:commandButton class="btn btn-primary" value="Buscar pessoa" action="#{fpCalcularBean.buscarPessoa()}">
-                                            <f:ajax execute="@form" render="formEventoVariavel" />
-                                        </h:commandButton>
-                                    </div>
-                                    <div class="col-md-4" style="margin-top: 5px">
-                                        #{fpCalcularBean.recPessoa.recNomecompleto}
-                                    </div>
-                                </h:panelGroup>
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <label class="control-label">Pessoa</label>
+                                <h:inputText label="Código pessoa" class="form-control" value="#{fpEnvelopePagamento.recPessoa.recIdpessoa}">
+                                    <f:ajax listener="#{fpEnvelopePagamento.selecionarPessoa()}" execute="@form" render="formEnvelopePagamento" event="change" />
+                                </h:inputText>
                             </div>
-                            <div class="ln_solid"></div>
-                            <h:panelGroup rendered="#{!fpCalcularBean.gerarTodasPessoas}">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="dashboard_graph">
-                                            <div class="row x_title">
-                                                <div class="col-md-2">
-                                                    <label class="control-label">Código evento <span style="cursor: pointer" data-toggle="modal" data-target="#modal-selecionar-evento"><i class="fa fa-exclamation-circle"></i></span></label>
-
-                                                    <div class="modal fade" id="modal-selecionar-evento" tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                            <div class="modal-content">
-
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                                                    </button>
-                                                                    <h4 class="modal-title" id="myModalLabel">Eventos</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-
-                                                                    <!--<div>
-                                                                        <input type="text" placeholder="Buscar evento" id="txtBuscarEvento" class="form-control" />
-                                                                    </div>-->
-
-                                                                    <h:dataTable class="table table-striped" value="#{fpEventoBean.todosFpEvento}" var="evento">
-                                                                        <h:column>
-                                                                            <f:facet name="header">Código</f:facet>
-                                                                                #{evento.eveId}
-                                                                        </h:column>
-                                                                        <h:column>
-                                                                            <f:facet name="header">Nome</f:facet>
-                                                                                #{evento.eveNome}
-                                                                        </h:column>
-                                                                        <h:column>
-                                                                            <f:facet name="header">Tipo</f:facet>
-                                                                                #{evento.eveTipoEvento}
-                                                                        </h:column>
-                                                                        <!--<h:column>
-                                                                            <f:facet name="header">Opções</f:facet>
-                                                                            <input type="button" class="btn btn-link btn-small" value="Selecionar" onclick="selecionarEvento(this)" />
-                                                                        </h:column>-->
-                                                                    </h:dataTable>
-
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <h:inputText label="Código evento" class="form-control" a:placeholder="Evento" value="#{fpCalcularBean.fpEventoPeriodo.evpEvento.eveId}">
-                                                        <f:ajax listener="#{fpCalcularBean.selecionarEvento()}" execute="@form" render="formEventoVariavel" event="change" />
-                                                    </h:inputText>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="empty-div">&nbsp;</div>
-                                                    <h5>#{fpCalcularBean.fpEventoPeriodo.evpEvento.eveNome}</h5>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="control-label">Referência</label>
-                                                    <h:inputText label="Valor referência" class="form-control" value="#{fpCalcularBean.fpEventoPeriodo.evpValorReferencia}" />
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="control-label">Valor (R$)</label>
-                                                    <h:inputText label="Valor evento" class="form-control" value="#{fpCalcularBean.fpEventoPeriodo.evpValor}" />
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                    <div class="empty-div">&nbsp;</div>
-                                                    <h:commandLink class="btn btn-default" action="#{fpCalcularBean.adicionarEvento()}" value="Adicionar">
-                                                        <f:ajax execute="@form" render="formEventoVariavel" />
-                                                    </h:commandLink>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h:dataTable class="table table-striped" value="#{fpCalcularBean.todosFpEventoPeriodo}" var="eventoVariavel">
-                                                    <h:column>
-                                                        <f:facet name="header">Código</f:facet>
-                                                            #{eventoVariavel.evpEvento.eveId}
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">Nome</f:facet>
-                                                            #{eventoVariavel.evpEvento.eveNome}
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">Tipo</f:facet>
-                                                            #{eventoVariavel.evpEvento.eveTipoEvento}
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">Referência</f:facet>
-                                                        <h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;" />
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">Valor</f:facet>
-                                                        <h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;" />
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">Opções</f:facet>
-                                                        <h:commandLink class="btn btn-link" action="#{fpCalcularBean.removerEvento(eventoVariavel)}" onclick="return confirm('Remover evento?')" >
-                                                            <f:ajax execute="@form" render="formEventoVariavel"></f:ajax>
-                                                            <i class="glyphicon glyphicon-remove"></i>
-                                                        </h:commandLink>
-                                                    </h:column>
-                                                </h:dataTable>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top: 10px">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <h:commandButton class="btn btn-primary" value="Salvar e calcular eventos" action="#{fpCalcularBean.calcularFolhaPagamento()}">
-                                            <f:ajax execute="@form" render="formEventoVariavel" />
-                                        </h:commandButton>
-                                    </div>
-                                </div>
-                            </h:panelGroup>
+                            <div class="col-md-4" style="margin-top: 5px">
+                                <div class="empty-div">&nbsp;</div>
+                                #{fpEnvelopePagamento.recPessoa.recNomecompleto}
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="empty-div">&nbsp;</div>
+                                <h:commandButton class="btn btn-primary" value="Buscar eventos" action="#{fpEnvelopePagamento.buscarFolhaPeriodo()}">
+                                    <f:ajax execute="@form" render="formEnvelopePagamento" />
+                                </h:commandButton>
+                            </div>
                         </div>
-                    </h:panelGroup>
+                        <div class="ln_solid"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamento.fpFolhaPeriodo.forEventos}" var="eventoVariavel">
+                                    <h:column>
+                                        <f:facet name="header">Código</f:facet>
+                                            #{eventoVariavel.evpEvento.eveId}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Nome</f:facet>
+                                            #{eventoVariavel.evpEvento.eveNome}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Tipo</f:facet>
+                                            #{eventoVariavel.evpEvento.eveTipoEvento}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Referência</f:facet>
+                                            #{eventoVariavel.evpValorReferencia}
+                                            <!--<h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;" />-->
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Valor</f:facet>
+                                            #{eventoVariavel.evpValor}
+                                            <!--<h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;" />-->
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Opções</f:facet>
+                                        <h:commandLink class="btn btn-link" action="#{fpEnvelopePagamento.editarEvento(eventoVariavel)}">
+                                            <f:ajax execute="@form" render="formEnvelopePagamento"></f:ajax>
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </h:commandLink>
+                                        <h:commandLink class="btn btn-link" action="#{fpEnvelopePagamento.removerEvento(eventoVariavel)}" onclick="return confirm('Remover evento?')">
+                                            <f:ajax execute="@form" render="formEnvelopePagamento"></f:ajax>
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </h:commandLink>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
                 </h:form>
             </ui:define>
             <ui:define name="script">
 
                 <script type="text/javascript">
-//                    function selecionarEvento(e) {
-//                        var row = $(e).parent().parent();
-//                        var codigoEvento = row.find('td').eq(0).text().trim();
-//                        var input = $(document.getElementById('formEventoVariavel:j_idt89'));
-//                        input.val(codigoEvento);
-//
-//                        $('#modal-selecionar-evento').modal('hide');
-//                    }
+                    $(document).ready(function () {
+                        $(document).on('submit', 'form', function (e) {
+                            return false;
+                        });
+                    });
                 </script>
 
             </ui:define>
