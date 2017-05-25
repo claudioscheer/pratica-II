@@ -8,17 +8,25 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchAlternativas;
 import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
+import br.org.gdt.model.GchFormularioPessoa;
 import br.org.gdt.model.GchPerguntas;
+import br.org.gdt.model.GchTreinamentospessoas;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
+import br.org.gdt.service.GchFormularioPessoaService;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
 import br.org.gdt.service.GchRespostasService;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -49,7 +57,32 @@ public class GchFormularioBean {
     private List<GchAlternativas> alternativasVinculadas;
     private GchFormulario gchFormulario = new GchFormulario();
     private List<GchFormulario> gchTodosFormularios;
+    private Map<RecPessoa, Boolean> checked = new HashMap<RecPessoa, Boolean>();
+    private GchFormularioPessoa gchFormulariopessoa = new GchFormularioPessoa();
+    private List<RecPessoa> pessoasVinculadas = new ArrayList<>();
+    private RecPessoa id = new RecPessoa(); 
+    private String Notificacao = "";
 
+    
+    @ManagedProperty("#{gchFormularioService}")
+    private GchFormularioService gchFormularioService;
+
+    @ManagedProperty("#{gchAlternativaCertoService}")
+    private GchCadastroAlternativaServiceCerto gchAlternativasService;
+    
+    @ManagedProperty("#{gchAlternativaPerguntasService}")
+    private GchAlternativasPerguntaService gchAlternativasPerguntaService;
+    
+    @ManagedProperty("#{gchPerguntaService}")
+    private GchPerguntasService gchPerguntasService;
+    
+    @ManagedProperty("#{gchRespostaService}")
+    private GchRespostasService gchRespostasService;
+
+    @ManagedProperty("#{gchFormularioPessoaService}")
+    private GchFormularioPessoaService gchFormularioPessoaService;
+    
+    
     public String getNotificacao() {
         return Notificacao;
     }
@@ -57,10 +90,47 @@ public class GchFormularioBean {
     public void setNotificacao(String Notificacao) {
         this.Notificacao = Notificacao;
     }
-    
-    
-    private String Notificacao = "";
-    
+
+    public Map<RecPessoa, Boolean> getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Map<RecPessoa, Boolean> checked) {
+        this.checked = checked;
+    }
+
+    public GchFormularioPessoa getGchFormulariopessoa() {
+        return gchFormulariopessoa;
+    }
+
+    public void setGchFormulariopessoa(GchFormularioPessoa gchFormulariopessoa) {
+        this.gchFormulariopessoa = gchFormulariopessoa;
+    }
+
+    public List<RecPessoa> getPessoasVinculadas() {
+        return pessoasVinculadas;
+    }
+
+    public void setPessoasVinculadas(List<RecPessoa> pessoasVinculadas) {
+        this.pessoasVinculadas = pessoasVinculadas;
+    }
+
+    public RecPessoa getId() {
+        return id;
+    }
+
+    public void setId(RecPessoa id) {
+        this.id = id;
+    }
+
+    public GchFormularioPessoaService getGchFormularioPessoaService() {
+        return gchFormularioPessoaService;
+    }
+
+    public void setGchFormularioPessoaService(GchFormularioPessoaService gchFormularioPessoaService) {
+        this.gchFormularioPessoaService = gchFormularioPessoaService;
+    }
+   
 
     public List<GchAlternativas> getAlternativasVinculadas() {
         return alternativasVinculadas;
@@ -121,22 +191,7 @@ public class GchFormularioBean {
     public void setGchPerguntasService(GchPerguntasService gchPerguntasService) {
         this.gchPerguntasService = gchPerguntasService;
     }
-
-    @ManagedProperty("#{gchFormularioService}")
-    private GchFormularioService gchFormularioService;
-
-    @ManagedProperty("#{gchAlternativaCertoService}")
-    private GchCadastroAlternativaServiceCerto gchAlternativasService;
     
-    @ManagedProperty("#{gchAlternativaPerguntasService}")
-    private GchAlternativasPerguntaService gchAlternativasPerguntaService;
-    
-     @ManagedProperty("#{gchPerguntaService}")
-    private GchPerguntasService gchPerguntasService;
-    
-     @ManagedProperty("#{gchRespostaService}")
-     private GchRespostasService gchRespostasService;
-
     public GchRespostasService getGchRespostasService() {
         return gchRespostasService;
     }
@@ -173,6 +228,20 @@ public class GchFormularioBean {
         this.gchFormulario = new GchFormulario();
     }
 
+    public void cancelDialog(){
+        
+        this.formAtivo = false;
+        this.gchFormulariopessoa = new GchFormularioPessoa();
+        checked = new HashMap<RecPessoa, Boolean>();
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Treinamentos.xhtml");
+        } catch (IOException ex) {
+
+        }
+        
+    }
+    
     public void add() {
 
         this.formAtivo = true;
@@ -187,6 +256,54 @@ public class GchFormularioBean {
 
     }
 
+    
+     public void salvarPessoasFormulario() {
+
+        if (gchFormulariopessoa != null) {
+        
+            Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
+
+            boolean vinculou = false;
+            
+            while (keyIterrator.hasNext()) {
+
+                RecPessoa pessoa = keyIterrator.next();
+                Boolean value = checked.get(pessoa);
+
+                if (value) {
+
+                    //Seta null para não dar pau no Hibernate
+                    gchFormulariopessoa.setFormPesCodigo(0);
+                    
+                    gchFormulariopessoa.setRecIdpessoa(pessoa);
+                    gchFormulariopessoa.setFormulario(gchFormulario);
+                    gchFormulariopessoa.setFormRespondido(false);
+             
+
+                    gchFormularioPessoaService.save(gchFormulariopessoa);
+                    
+                    
+                    vinculou = true;
+                    
+                }
+            }
+
+            this.formAtivo = false;
+            gchFormulariopessoa = new GchFormularioPessoa();
+            checked = new HashMap<RecPessoa, Boolean>();
+
+         
+            if(vinculou){
+            String MsgNotificacao = "Formulário disponibilizado para as pessoas selecionadas!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            }
+        }
+
+    }
+    
+    
+    
+    
     public String SalvarFormulario() {
 
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -283,6 +400,15 @@ public class GchFormularioBean {
 
     }
 
+    public void vincularPessoas(GchFormulario formulario){
+        
+        gchFormulario = formulario;
+        
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('dialogSelecaoPessoas').show();");
+        
+    }
+    
     public void removerPergunta(int index) {
 
         System.out.println("indice" + index);
