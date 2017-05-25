@@ -44,11 +44,11 @@ public class GchAlternativasperguntas implements Serializable {
     private long altPerCodigo;
 
     
-    @ManyToOne(optional = true)
-//    @JoinColumn(name = "alt_codigo")
+
+    @ManyToOne
     private GchAlternativas gchAlternativas;
-//    @JoinColumn(name = "per_codigo", referencedColumnName = "per_codigo")
-    @ManyToOne(optional = true)
+   
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private GchPerguntas perCodigo;
 
     

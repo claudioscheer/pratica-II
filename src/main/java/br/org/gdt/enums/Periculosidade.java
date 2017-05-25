@@ -11,5 +11,5 @@ package br.org.gdt.enums;
  */
 public enum Periculosidade {
     Não,
-    Sim30
+    Sim
 }

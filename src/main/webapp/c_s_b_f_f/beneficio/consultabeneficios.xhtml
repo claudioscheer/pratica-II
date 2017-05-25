@@ -23,27 +23,6 @@
                             <!--                                <f:ajax execute="@form" render="formConsulta" />
                                                         </h:commandButton>-->
                         </div>
-                        <div>
-                            <br></br> 
-                            <div class="col-md-11 col-sm-11 col-xs-12">
-                                <div>
-                                    <label class="control-label " for="name">
-                                        Nome
-                                    </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar por Nome do Benefício"></h:inputText>
-
-                                </div>
-                            </div>
-
-                            <!--                            <div class="col-md-3 col-sm-3 col-xs-12">-->
-                            <div>&nbsp;</div>
-                            <div >
-                                <h:commandButton class="btn btn-primary" value="Buscar" action="#{csbffBeneficioBean.buscaNome()}"/>
-                            </div>
-                            <br></br>
-                            <!--</div>-->
-                        </div>
-
                         <div class="title_left">
                             <h3>Benefícios Cadastrados</h3>
                         </div>
@@ -57,7 +36,7 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header"> Nome</f:facet>
-                                            #{beneficio.beneficioNome} 
+                                                #{beneficio.beneficioNome} 
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Abrangência </f:facet>
@@ -73,8 +52,8 @@
                                                 <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                             </h:commandLink>
                                             <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffBeneficioBean.excluir(beneficio)}" onclick="return confirm('Excluir?')"/>
-<!--                                                <f:ajax execute="@form" render="formConsulta" />
-                                            </h:commandLink>-->
+                                            <!--                                                <f:ajax execute="@form" render="formConsulta" />
+                                                                                        </h:commandLink>-->
                                         </h:column> 
                                     </h:dataTable>
                                 </div>

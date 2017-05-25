@@ -20,4 +20,21 @@ public class GchPerguntasDAO  extends DAO<GchPerguntas>{
         classe = GchPerguntas.class;
     }
     
+    public boolean ExcluirPerguntasFormulario(int id){
+
+        try{
+        entityManager.createQuery(
+                   String.format(
+                            "delete from GchPerguntas as t where t.formulario.formCodigo = %s",
+                            id)
+            ).executeUpdate();
+        
+        return true;
+        }catch(Exception ex){
+            
+            return false;
+            
+        }
+    }
+    
 }

@@ -27,6 +27,8 @@ public abstract class DAO<T> {
 
     public T findById(long id) {
         return entityManager.find(classe, id);
+     
+        
         
     }
     
