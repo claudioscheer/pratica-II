@@ -137,6 +137,22 @@ public class Eventos {
 
             fpEventoPeriodo.setEvpValor((valorHorasExtras / dadosCalculadosDoFuncionario.getPeriodo().getPerDiasUteis()) * dadosCalculadosDoFuncionario.getPeriodo().getPerDiasNaoUteis());
 
+        } else if (evento == FpEnumEventos.SalarioFamilia.ordinal()) {
+            double valorSalario = getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
+            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorSalario, FpEnumTabelas.SalarioFamilia.ordinal() + 1);
+            // Buscar a quantidade de filhos abaixo de 14 anos.
+            int quantidadeFilhos = 1;
+            fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * quantidadeFilhos);
+            fpEventoPeriodo.setEvpValorReferencia(quantidadeFilhos);
+
+        } else if (evento == FpEnumEventos.Insalubridade.ordinal()) {
+            FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.SalarioMinimo.ordinal() + 1);
+
+            // Buscar o nível de insalubridade da pessoa.
+            double nivelInsalubridade = 1.1;
+            fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * nivelInsalubridade);
+            fpEventoPeriodo.setEvpValorReferencia(nivelInsalubridade);
+
         }
 
         fpEventoPeriodo.setJaCalculado(true);
