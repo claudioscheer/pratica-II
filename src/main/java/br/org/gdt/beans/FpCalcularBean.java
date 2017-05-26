@@ -90,6 +90,11 @@ public class FpCalcularBean {
                 .collect(Collectors.toList());
     }
 
+    public void editarEvento(FpEventoPeriodo eventoPeriodo) {
+        removerEvento(eventoPeriodo);
+        this.fpEventoPeriodo = eventoPeriodo;
+    }
+
     public void selecionarPessoa() {
         RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
         if (pessoa == null) {
@@ -118,9 +123,13 @@ public class FpCalcularBean {
                     return;
                 }
                 dadosCalculadosDoFuncionario.setPessoa(recPessoa);
-                dadosCalculadosDoFuncionario.setEventos((List) ((ArrayList) todosFpEventoPeriodo).clone());
+                dadosCalculadosDoFuncionario.setEventos(todosFpEventoPeriodo);
 
                 calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
+
+                todosFpEventoPeriodo = new ArrayList<>();
+                recPessoa = new RecPessoa();
+                fpEventoPeriodo = new FpEventoPeriodo();
                 Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "info");
             } catch (Exception e) {
                 Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
@@ -141,9 +150,11 @@ public class FpCalcularBean {
         if (fpFolhaPeriodo == null) {
             todosFpEventoPeriodo = new ArrayList<>();
         } else {
-            todosFpEventoPeriodo = fpFolhaPeriodo.getForEventos().stream()
+            List<FpEventoPeriodo> eventosPadraoPeriodo = fpFolhaPeriodo.getForEventos().stream()
                     .filter(x -> !x.isEvpEventoPadrao())
                     .collect(Collectors.toList());
+            eventosPadraoPeriodo.forEach(x -> x.setEvpValor(0));
+            todosFpEventoPeriodo = eventosPadraoPeriodo;
         }
     }
 
