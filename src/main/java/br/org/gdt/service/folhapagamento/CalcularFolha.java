@@ -68,6 +68,11 @@ public class CalcularFolha {
         eventoInsalubridade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Insalubridade.ordinal() + 1));
         eventoInsalubridade.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoInsalubridade);
+        
+        FpEventoPeriodo eventoPericulosidade = new FpEventoPeriodo();
+        eventoPericulosidade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Periculosidade.ordinal() + 1));
+        eventoPericulosidade.setEvpEventoPadrao(true);
+        EVENTOS_PADROES.add(eventoPericulosidade);
 
         return EVENTOS_PADROES;
     }

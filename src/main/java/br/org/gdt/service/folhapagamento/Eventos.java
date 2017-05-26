@@ -149,9 +149,17 @@ public class Eventos {
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.SalarioMinimo.ordinal() + 1);
 
             // Buscar o nível de insalubridade da pessoa.
-            double nivelInsalubridade = 1.1;
+            double nivelInsalubridade = 0.1;
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * nivelInsalubridade);
             fpEventoPeriodo.setEvpValorReferencia(nivelInsalubridade);
+
+        } else if (evento == FpEnumEventos.Periculosidade.ordinal()) {
+            double valorSalario = getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
+
+            // Buscar se a pessoa tem periculosidade.
+            double nivelPericulosidade = 0.3;
+            fpEventoPeriodo.setEvpValor(valorSalario * nivelPericulosidade);
+            fpEventoPeriodo.setEvpValorReferencia(nivelPericulosidade);
 
         }
 
