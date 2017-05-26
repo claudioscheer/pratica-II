@@ -74,24 +74,15 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">Referência</f:facet>
-                                            #{eventoVariavel.evpValorReferencia}
-                                            <!--<h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;" />-->
+                                        <h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:inputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">Valor</f:facet>
-                                            #{eventoVariavel.evpValor}
-                                            <!--<h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;" />-->
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Opções</f:facet>
-                                        <h:commandLink class="btn btn-link" action="#{fpEnvelopePagamento.editarEvento(eventoVariavel)}">
-                                            <f:ajax execute="@form" render="formEnvelopePagamento"></f:ajax>
-                                            <i class="glyphicon glyphicon-edit"></i>
-                                        </h:commandLink>
-                                        <h:commandLink class="btn btn-link" action="#{fpEnvelopePagamento.removerEvento(eventoVariavel)}" onclick="return confirm('Remover evento?')">
-                                            <f:ajax execute="@form" render="formEnvelopePagamento"></f:ajax>
-                                            <i class="glyphicon glyphicon-remove"></i>
-                                        </h:commandLink>
+                                        <h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:inputText>
                                     </h:column>
                                 </h:dataTable>
                             </div>
@@ -105,6 +96,10 @@
                     $(document).ready(function () {
                         $(document).on('submit', 'form', function (e) {
                             return false;
+                        });
+
+                        $(document).on('focus', 'input[type="text"]', function () {
+                            $(this).select();
                         });
                     });
                 </script>

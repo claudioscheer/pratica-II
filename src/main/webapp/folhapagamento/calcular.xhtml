@@ -140,11 +140,15 @@
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="control-label">Referência</label>
-                                                    <h:inputText label="Valor referência" class="form-control" value="#{fpCalcularBean.fpEventoPeriodo.evpValorReferencia}" />
+                                                    <h:inputText label="Valor referência" class="form-control" value="#{fpCalcularBean.fpEventoPeriodo.evpValorReferencia}">
+                                                        <f:convertNumber pattern="#0.00" />
+                                                    </h:inputText>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label class="control-label">Valor (R$)</label>
-                                                    <h:inputText label="Valor evento" class="form-control" value="#{fpCalcularBean.fpEventoPeriodo.evpValor}" />
+                                                    <h:inputText label="Valor evento" class="form-control" value="#{fpCalcularBean.fpEventoPeriodo.evpValor}">
+                                                        <f:convertNumber pattern="#0.00" />
+                                                    </h:inputText>
                                                 </div>
                                                 <div class="col-md-2 text-center">
                                                     <div class="empty-div">&nbsp;</div>
@@ -213,6 +217,11 @@
                         $(document).on('submit', 'form', function (e) {
                             return false;
                         });
+
+                        $(document).on('focus', 'input[type="text"]', function () {
+                            $(this).select();
+                        });
+
                     });
                 </script>
 
