@@ -30,6 +30,7 @@ public abstract class DAO<T> {
      
         
         
+        
     }
     
     public List<T> findAll() {

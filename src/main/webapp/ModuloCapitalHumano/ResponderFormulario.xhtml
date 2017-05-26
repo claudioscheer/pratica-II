@@ -34,17 +34,12 @@
 
                                         <h:form id="formCursos">
 
-                                            <ui:repeat value="#{gchFormularioAlternativasBean.gchFormularios.perguntas}" var="perguntas">
-                                                <div class="field">
-                                                    <h:outputLabel value="#{perguntas.perDescricao}"/>
-                                                    <h:inputText value="#{perguntas.perCodigo}" />
-
-                                                    <h:selectOneRadio value="#{gchFormularioAlternativasBean.radio}" >
-                                                        <f:selectItems value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.altDescricao}"/>
-                                                    </h:selectOneRadio>
-
-                                                </div>
-                                            </ui:repeat>
+                                            
+                                            <h:commandButton value="parametro" action="#{gchFormularioBean.LeituraParametroLink}">
+                                            
+                                                <f:ajax render="formCursos"/>
+                                            </h:commandButton>
+                                      
 
                                         </h:form> 
                                     </div>
