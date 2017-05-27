@@ -1,6 +1,6 @@
 package br.org.gdt.model;
 
-import br.org.gdt.enums.FpTipoEvento;
+import br.org.gdt.enums.FpStatusFolhaPeriodo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,6 +28,7 @@ public class FpFolhaPeriodo implements java.io.Serializable {
     private FpPeriodo forPeriodo;
     private Date forGeradaEm;
     private List<FpEventoPeriodo> forEventos;
+    private FpStatusFolhaPeriodo forStatusFolhaPeriodo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_folha_periodo")
@@ -65,7 +67,16 @@ public class FpFolhaPeriodo implements java.io.Serializable {
         this.forGeradaEm = forGeradaEm;
     }
 
-    @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public FpStatusFolhaPeriodo getForStatusFolhaPeriodo() {
+        return forStatusFolhaPeriodo;
+    }
+
+    public void setForStatusFolhaPeriodo(FpStatusFolhaPeriodo forStatusFolhaPeriodo) {
+        this.forStatusFolhaPeriodo = forStatusFolhaPeriodo;
+    }
+
+    @OrderBy("evpEvento.eveId ASC")
+    @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     public List<FpEventoPeriodo> getForEventos() {
         if (forEventos == null) {
             forEventos = new ArrayList<>();

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"      
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">    
     <h:head>
         <title>Cadastro de treinamento</title>
@@ -18,7 +18,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                                    
+
                                     <div class="panel-heading">
                                         <h3 class="title_left">
                                             Cadastro de Treinamentos
@@ -37,7 +37,7 @@
                                             <h:messages class="error" style="color: #d9534f" />
                                             <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiCodigo}" />
                                             <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiDatainclusao}">
-                                            <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+                                                <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
                                             </h:inputHidden>
                                             <div class="container-fluid">
                                                 <div class="row">
@@ -104,7 +104,7 @@
                                                                         <f:selectItem itemLabel="Selecione o estado" itemValue="" />
                                                                         <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
                                                                     </h:selectOneMenu>
-                                                                    
+
                                                                 </div>
                                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                     <!--<h:panelGroup id="otherForms">-->
@@ -126,7 +126,7 @@
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
                                                                 <h:inputText class="form-control" id="dateInicio"  value="#{gchTreinamentosBean.dataInicio}" a:placeholder="dd/mm/aaaa hh:mm" /> 
-                                                                    <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
+                                                                <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
                                                                 
                                                             </div>
                                                         </div>         
@@ -138,8 +138,8 @@
                                                                 </label>
                                                                 <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
                                                                 <h:inputText class="form-control" id="dateFim" value="#{gchTreinamentosBean.dataFim}" a:placeholder="dd/mm/aaaa hh:mm" />
-                                                                    <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
-                                                                
+                                                                <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
+
                                                             </div>
                                                         </div>       
 

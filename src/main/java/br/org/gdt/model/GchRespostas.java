@@ -32,6 +32,20 @@ public class GchRespostas implements Serializable {
     @Basic(optional = false)
     @Column(name = "res_codigo")
     private Long resCodigo;
+    
+    @Basic(optional = false)
+    @Column(name = "form_codigo")
+    private int formCodigo;
+
+    public int getFormCodigo() {
+        return formCodigo;
+    }
+
+    public void setFormCodigo(int formCodigo) {
+        this.formCodigo = formCodigo;
+    }
+
+
     @Basic(optional = false)
     @Column(name = "per_codigo")
     private long perCodigo;

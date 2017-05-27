@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import br.org.gdt.enums.TipoBeneficio;
 import java.util.Date;
 import java.util.Objects;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CsbffBeneficios.findAll", query = "SELECT c FROM CsbffBeneficios c")})
 @SequenceGenerator(name = "seq_CsbffBeneficios", sequenceName = "seq_CsbffBeneficios", allocationSize = 1)
-public class CsbffBeneficios implements java.io.Serializable {
+public class CsbffBeneficios implements java.io.Serializable,SampleEntity {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -51,11 +52,6 @@ public class CsbffBeneficios implements java.io.Serializable {
     @Column(name = "befencio_data_vigente")
     @Temporal(TemporalType.DATE)
     private Date befencioDataVigente;
-//    @JoinColumn(name = "tipo_beneficio_codigo", referencedColumnName = "tipo_beneficio_codigo")
-//    @ManyToOne(optional = true)
-//    private CsbffTipoBeneficio tipoBeneficioCodigo;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "beneficioCodigo")
-//    @Column(name="tipobeneficio")
     private TipoBeneficio tipoBeneficio;
 
     public CsbffBeneficios(TipoBeneficio tipoBeneficio) {
@@ -119,23 +115,7 @@ public class CsbffBeneficios implements java.io.Serializable {
         this.befencioDataVigente = befencioDataVigente;
     }
 
-//    @Override
-//    public int hashCode() {
-//        int hash = 0;
-//        hash += (beneficioCodigo != null ? beneficioCodigo.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof CsbffBeneficios)) {
-//            return false;
-//        }
-//        CsbffBeneficios other = (CsbffBeneficios) object;
-//        return !((this.beneficioCodigo == null && other.beneficioCodigo != null) || (this.beneficioCodigo != null && !this.beneficioCodigo.equals(other.beneficioCodigo)));
-//    }
-//  
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -197,6 +177,12 @@ public class CsbffBeneficios implements java.io.Serializable {
 
     public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
         this.tipoBeneficio = tipoBeneficio;
+    }
+
+    @Override
+    public Long getId() {
+        return Long.valueOf(this.beneficioCodigo);
+        
     }
 
 }

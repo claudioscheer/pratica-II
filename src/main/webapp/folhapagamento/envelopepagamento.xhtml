@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="head">
+                <title>Envelope de pagamento - Folha de pagamento</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="title_left">
+                    <h3>Envelope de pagamento</h3>
+                </div>
+                <br />
+                <h:form id="formEnvelopePagamento">
+                    <h:messages class="error" style="color: #d9534f" />
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                <label class="control-label">Folha</label>
+                                <h:selectOneMenu value="#{fpEnvelopePagamento.fpTipoFolha}" class="form-control">
+                                    <f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamento.selecionarTipoFolha()}" event="change" />
+                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                    <f:selectItems value="#{dadosComuns.tipoFolhas}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                <label class="control-label">Período</label>
+                                <h:selectOneMenu value="#{fpEnvelopePagamento.fpPeriodo.perId}" class="form-control">
+                                    <!--<f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamento.selecionarPeriodo()}" event="change" />-->
+                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                    <f:selectItems value="#{fpEnvelopePagamento.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <label class="control-label">Pessoa</label>
+                                <h:inputText label="Código pessoa" class="form-control" value="#{fpEnvelopePagamento.recPessoa.recIdpessoa}">
+                                    <f:ajax listener="#{fpEnvelopePagamento.selecionarPessoa()}" execute="@form" render="formEnvelopePagamento" event="change" />
+                                </h:inputText>
+                            </div>
+                            <div class="col-md-4" style="margin-top: 5px">
+                                <div class="empty-div">&nbsp;</div>
+                                #{fpEnvelopePagamento.recPessoa.recNomecompleto}
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="empty-div">&nbsp;</div>
+                                <h:commandButton class="btn btn-primary" value="Buscar eventos" action="#{fpEnvelopePagamento.buscarFolhaPeriodo()}">
+                                    <f:ajax execute="@form" render="formEnvelopePagamento" />
+                                </h:commandButton>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamento.fpFolhaPeriodo.forEventos}" var="eventoVariavel">
+                                    <h:column>
+                                        <f:facet name="header">Código</f:facet>
+                                            #{eventoVariavel.evpEvento.eveId}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Nome</f:facet>
+                                            #{eventoVariavel.evpEvento.eveNome}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Tipo</f:facet>
+                                            #{eventoVariavel.evpEvento.eveTipoEvento}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Referência</f:facet>
+                                        <h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:inputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Valor</f:facet>
+                                        <h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:inputText>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <h:commandButton class="btn btn-primary" value="Recalcular folha" action="#{fpEnvelopePagamento.recalcularFolhaPeriodo()}">
+                                    <f:ajax execute="@form" render="formEnvelopePagamento" />
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+            <ui:define name="script">
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(document).on('submit', 'form', function (e) {
+                            return false;
+                        });
+
+                        $(document).on('focus', 'input[type="text"]', function () {
+                            $(this).select();
+                        });
+                    });
+                </script>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -2,6 +2,8 @@ package br.org.gdt.service;
 
 import br.org.gdt.dao.FpFolhaPeriodoDAO;
 import br.org.gdt.model.FpFolhaPeriodo;
+import br.org.gdt.model.FpPeriodo;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +36,21 @@ public class FpFolhaPeriodoService {
 
     public List<FpFolhaPeriodo> findAll() {
         return fpFolhaPeriodoDAO.findAll();
+    }
+
+    public List<FpFolhaPeriodo> findAllPeriodo(FpPeriodo fpPeriodo) {
+        return fpFolhaPeriodoDAO.findAllPeriodo(fpPeriodo);
+    }
+
+    public FpFolhaPeriodo findByPessoaEPeriodo(FpPeriodo fpPeriodo, RecPessoa recPessoa) {
+        return fpFolhaPeriodoDAO.findByPessoaEPeriodo(fpPeriodo, recPessoa);
+    }
+
+    @Transactional
+    public void deleteByPessoaEPeriodo(FpPeriodo fpPeriodo, RecPessoa recPessoa) {
+        FpFolhaPeriodo fpFolhaPeriodo = findByPessoaEPeriodo(fpPeriodo, recPessoa);
+        if (fpFolhaPeriodo != null) {
+            delete(fpFolhaPeriodo.getForId());
+        }
     }
 }

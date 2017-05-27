@@ -5,21 +5,21 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
- 
+
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
                 <title>Formulários cadastrados</title>
-                
+
                 <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>
             </ui:define>
             <ui:define name="content">
-               <div id="page" style="margin-top:75px;">
+                <div id="page" style="margin-top:75px;">
 
                     <div class="container-fluid">
                         <div class="row">
-                               <div class="col-md-12">
-                                 <div class="x_panel">
+                            <div class="col-md-12">
+                                <div class="x_panel">
                                     <div class="form-group" style="float: right;margin-top: 10px">
                                         <div>
                                             <h:link  outcome="CadastroFormularioDinamico.xhtml" class="btn btn-primary " value="Novo Formulário"/>
@@ -28,29 +28,41 @@
                                     <div class="panel-heading">
                                         <h3 class="title_left">
                                             Formulários Cadastrados
+
                                         </h3>
                                     </div>
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <h:form id="formFormulario">
 
-                                            <h:dataTable id="tabelCursos" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
+                                                  
+                                            <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
                                                 <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink  id="btnExcluir" h:tooltip="Exclui Curso" action="#{gchFormularioDinamico.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
-                                                      
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" ></f:ajax>
-                                                          <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"><div class="tooltip"><span class="tooltiptext">Excluir Formulário</span></div> </i>
-                                                       
+                                                    <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
+
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+
                                                     </h:commandLink>
 
                                                 </h:column>
                                                 <h:column>                
                                                     <h:commandLink >
-                                                       
-                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+
+                                                        <i class="glyphicon glyphicon-eye-open" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
+                                                <h:column>
+                                                    <h:commandLink  action="#{gchFormularioBean.vincularPessoas(formulario)}">
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
+                                                        
+                                                    </h:commandLink>
+
+
+                                                </h:column>
+
 
                                                 <h:column>   
                                                     <f:facet name="header">Nome</f:facet>
@@ -63,6 +75,46 @@
                                                 </h:column>
 
                                             </h:dataTable>
+
+                                            <p:dialog modal="true" header="Seleção de pessoas" widgetVar="dialogSelecaoPessoas" >
+
+                                                <div class="panel-body" style="/* a lign-items: center; */">
+
+                                                    <h:dataTable class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
+
+                                                        <h:column>
+                                                            <h:selectBooleanCheckbox value="#{gchFormularioBean.checked[pessoa]}" >
+                      
+                                                                <f:attribute name="pessoa" value="#{pessoa}" />
+                                                            </h:selectBooleanCheckbox>
+                                                        </h:column>
+
+                                                        <h:column>      
+                                                            <f:facet name="header">Codigo</f:facet>
+                                                            <h:outputText value="#{pessoa.recIdpessoa}"/>                
+                                                        </h:column>    
+
+                                                        <h:column>      
+                                                            <f:facet name="header">Nome</f:facet>
+                                                            <h:outputText value="#{pessoa.recNomecompleto}"/>                
+                                                        </h:column>
+
+                                                    </h:dataTable>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+
+                                                        <h:commandButton class="btn btn-primary"  actionListener="#{gchFormularioBean.salvarPessoasFormulario}" value="Cadastrar" /> 
+
+                                                        <h:commandButton class="btn btn-danger"  actionListener="#{gchFormularioBean.cancelDialog()}" value="Cancelar" /> 
+
+                                                    </div>
+                                                </div>    
+
+                                            </p:dialog>
+
+
 
                                         </h:form> </div>
                                     <div class="panel-footer">

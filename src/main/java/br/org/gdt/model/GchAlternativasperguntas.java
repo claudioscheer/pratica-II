@@ -41,14 +41,14 @@ public class GchAlternativasperguntas implements Serializable {
     @Basic(optional = false)
     @Column(name = "alt_perCodigo")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_alt")
-    private long altPerCodigo;
+    private long altPerCodigo;                            
 
     
-    @ManyToOne(optional = true)
-//    @JoinColumn(name = "alt_codigo")
+
+    @ManyToOne
     private GchAlternativas gchAlternativas;
-//    @JoinColumn(name = "per_codigo", referencedColumnName = "per_codigo")
-    @ManyToOne(optional = true)
+   
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private GchPerguntas perCodigo;
 
     

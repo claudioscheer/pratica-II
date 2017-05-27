@@ -47,12 +47,23 @@ public class GchPerguntas implements Serializable {
     @Basic(optional = false)
     @Column(name = "per_descricao")
     private String perDescricao;
-    @OneToMany(cascade = CascadeType.ALL)
+   
+    @OneToMany
     private List<GchAlternativas> gchAlternativas;
     
     @JoinColumn(name = "form_codigo", referencedColumnName = "form_codigo")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private GchFormulario formulario;
+    @OneToMany(mappedBy = "perCodigo",cascade =  CascadeType.REMOVE)
+    private List<GchAlternativasperguntas> gchAlternativasperguntass;
+
+    public List<GchAlternativasperguntas> getGchAlternativasperguntass() {
+        return gchAlternativasperguntass;
+    }
+
+    public void setGchAlternativasperguntass(List<GchAlternativasperguntas> gchAlternativasperguntass) {
+        this.gchAlternativasperguntass = gchAlternativasperguntass;
+    }
 
     public GchFormulario getFormulario() {
         return formulario;

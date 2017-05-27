@@ -10,18 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("csbffBeneficiosService")
 public class CsbffBeneficiosService {
 
-    public CsbffBeneficioDAO getCsbffBeneficioDAO() {
-        return csbffBeneficioDAO;
-    }
-
-    public void setCsbffBeneficioDAO(CsbffBeneficioDAO csbffBeneficioDAO) {
-        this.csbffBeneficioDAO = csbffBeneficioDAO;
-    }
-
     @Autowired
     private CsbffBeneficioDAO csbffBeneficioDAO;
 
-    @Transactional(readOnly = false)
+    @Transactional
     public void save(CsbffBeneficios csbffBeneficios) {
         csbffBeneficioDAO.save(csbffBeneficios);
     }
@@ -34,6 +26,14 @@ public class CsbffBeneficiosService {
     @Transactional
     public void delete(long id) {
         csbffBeneficioDAO.delete(id);
+    }
+
+    public CsbffBeneficioDAO getCsbffBeneficioDAO() {
+        return csbffBeneficioDAO;
+    }
+
+    public void setCsbffBeneficioDAO(CsbffBeneficioDAO csbffBeneficioDAO) {
+        this.csbffBeneficioDAO = csbffBeneficioDAO;
     }
 
     public CsbffBeneficios findById(long id) {

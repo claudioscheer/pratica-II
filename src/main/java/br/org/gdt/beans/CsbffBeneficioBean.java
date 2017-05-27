@@ -3,54 +3,34 @@ package br.org.gdt.beans;
 import br.org.gdt.enums.AbrangenciaBeneficio;
 import br.org.gdt.enums.TipoBeneficio;
 import br.org.gdt.model.CsbffBeneficios;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffBeneficiosService;
+import br.org.gdt.service.CsbffDependentesService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CsbffBeneficioBean {
 
     private int nomeBeneficio;
-//    private CsbffBeneficios codigoBeneficio;
-
-    /**
-     * @param tipoBeneficio the tipoBeneficio to set
-     */
-
-    /**
-     * @return the csbffTipoBeneficiosList
-     */
-    public List<TipoBeneficio> getCsbffTipoBeneficiosList() {
-        return csbffTipoBeneficiosList;
-    }
-
-    /**
-     * @param csbffTipoBeneficiosList the csbffTipoBeneficiosList to set
-     */
-    public void setCsbffTipoBeneficiosList(List<TipoBeneficio> csbffTipoBeneficiosList) {
-        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
-    }
-
+    private CsbffBeneficios codigoBeneficio;
     private boolean formAtivo = false;
 //    private int nomeBeneficio;
     private CsbffBeneficios csbffBeneficios = new CsbffBeneficios();
     private List<CsbffBeneficios> todosCsbffBeneficios;
     private List<TipoBeneficio> csbffTipoBeneficiosList;
 
-    public CsbffBeneficioBean(List<CsbffBeneficios> todosCsbffBeneficios, TipoBeneficio tipoBeneficio, List<TipoBeneficio> csbffTipoBeneficiosList, CsbffBeneficiosService csbffBeneficiosService) {
-        this.todosCsbffBeneficios = todosCsbffBeneficios;
-        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
-        this.csbffBeneficiosService = csbffBeneficiosService;
-    }
-
     @ManagedProperty("#{csbffBeneficiosService}")
     private CsbffBeneficiosService csbffBeneficiosService;
 
+    @ManagedProperty("#{csbffDependentesService}")
+    private CsbffDependentesService csbffDependentesService;
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -76,7 +56,24 @@ public class CsbffBeneficioBean {
         return true;
     }
 
-//    private TipoBeneficio tipoBeneficioCombo;
+    public CsbffBeneficioBean(CsbffBeneficios codigoBeneficio) {
+        this.codigoBeneficio = codigoBeneficio;
+    }
+
+    public CsbffBeneficioBean(List<CsbffBeneficios> todosCsbffBeneficios, TipoBeneficio tipoBeneficio, List<TipoBeneficio> csbffTipoBeneficiosList, CsbffBeneficiosService csbffBeneficiosService) {
+        this.todosCsbffBeneficios = todosCsbffBeneficios;
+        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
+        this.csbffBeneficiosService = csbffBeneficiosService;
+    }
+
+    public List<TipoBeneficio> getCsbffTipoBeneficiosList() {
+        return csbffTipoBeneficiosList;
+    }
+
+    public void setCsbffTipoBeneficiosList(List<TipoBeneficio> csbffTipoBeneficiosList) {
+        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
+    }
+
     public CsbffBeneficioBean() {
 
     }
@@ -95,19 +92,37 @@ public class CsbffBeneficioBean {
         return beneficios;
     }
 
-    public String buscaNome() {
+//    public String buscaNome() {
+//
+//        if (nomeBeneficio !=0) {
+//            csbffBeneficios = (CsbffBeneficios) csbffBeneficiosService.findAll();
+//        }
+//        return csbffBeneficios.getBeneficioNome();
+//
+//    }
+//     public String prepareEdit(CsbffBeneficios beneficio) {
+//        this.formAtivo = true;
+//        this.csbffBeneficios = beneficio;
+//        return "beneficio";
+//    }
+    public String altera(CsbffBeneficios beneficio) {
+        codigoBeneficio = beneficio;
+        csbffBeneficiosService.update(beneficio);
 
-        if (nomeBeneficio != 0) {
-            todosCsbffBeneficios = csbffBeneficiosService.findAll();
-        }
-        return "consultabeneficios";
+        return "cadastrobeneficios";
+    }
+
+    public void select(CsbffBeneficios beneficio) {
+        this.csbffBeneficios = beneficio;
+        codigoBeneficio = beneficio;
+        altera(beneficio);
 
     }
 
-    public String prepareEdit(CsbffBeneficios csbffBeneficios) {
-        this.formAtivo = true;
-        this.csbffBeneficios = csbffBeneficios;
-        return "beneficio";
+    public String edita(CsbffBeneficios beneficio) {
+        this.csbffBeneficios = beneficio;
+        select(beneficio);
+        return "cadastrobeneficios";
     }
 
     public TipoBeneficio[] getTipoBeneficio() {
@@ -124,40 +139,19 @@ public class CsbffBeneficioBean {
         return "consultabeneficios";
     }
 
-//    public String edita(CsbffBeneficios beneficio) {
-//        this.csbffBeneficios = beneficio;
-//        select(beneficio);
-//        return "cadastrobeneficios";
-//    }
-
-//    public void select(CsbffBeneficios beneficio) {
-//        this.csbffBeneficios = beneficio;
-//        codigoBeneficio = beneficio;
-//        altera(beneficio);
-//
-//    }
-
-//    public String altera(CsbffBeneficios beneficio) {
-//        codigoBeneficio = beneficio;
-//        csbffBeneficiosService.update(beneficio);
-//
-//        return "cadastrobeneficios";
-//    }
-
-    public void save() {
-        System.out.println("aqui"+csbffBeneficios.getBeneficioCodigo());
-        
-        
+    public String save() {
+//        this.formAtivo = true;
         if (csbffBeneficios.getBeneficioCodigo() > 0) {
             csbffBeneficiosService.update(csbffBeneficios);
+
         } else {
             csbffBeneficiosService.save(csbffBeneficios);
-            
+
         }
-
         todosCsbffBeneficios = csbffBeneficiosService.findAll();
-        this.formAtivo = true;
-
+        this.csbffBeneficios = new CsbffBeneficios();
+//        this.formAtivo = false;
+        return "consultabeneficios";
     }
 
     public void cancel() {
@@ -205,21 +199,20 @@ public class CsbffBeneficioBean {
     public void setCsbffBeneficiosService(CsbffBeneficiosService csbffBeneficiosService) {
         this.csbffBeneficiosService = csbffBeneficiosService;
     }
-//
-//    public CsbffBeneficios getCodigoBeneficio() {
-//        return codigoBeneficio;
-//    }
-//
-//    public void setCodigoBeneficio(CsbffBeneficios codigoBeneficio) {
-//        this.codigoBeneficio = codigoBeneficio;
-//    }
 
+    public CsbffBeneficios getCodigoBeneficio() {
+        return codigoBeneficio;
+    }
+
+    public void setCodigoBeneficio(CsbffBeneficios codigoBeneficio) {
+        this.codigoBeneficio = codigoBeneficio;
+    }
+
+    public CsbffDependentesService getCsbffDependentesService() {
+        return csbffDependentesService;
+    }
+
+    public void setCsbffDependentesService(CsbffDependentesService csbffDependentesService) {
+        this.csbffDependentesService = csbffDependentesService;
+    }
 }
-//    public TipoBeneficio getTipoBeneficioCombo() {
-//        return tipoBeneficioCombo;
-//    }
-
-//    public void setTipoBeneficioCombo(TipoBeneficio tipoBeneficioCombo) {
-//        this.tipoBeneficioCombo = tipoBeneficioCombo;
-//    }
-

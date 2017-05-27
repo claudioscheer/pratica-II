@@ -1,6 +1,8 @@
 package br.org.gdt.dao;
 
 import br.org.gdt.model.GchAlternativas;
+import java.util.List;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 
@@ -11,6 +13,5 @@ public class GchAlternativaCertoDAO extends DAO<GchAlternativas> {
         classe = GchAlternativas.class;
         System.out.println("Classe: " + classe.getName());
     }
-
     
 }
