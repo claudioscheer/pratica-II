@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
@@ -38,7 +39,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CsbffCargos.findAll", query = "SELECT c FROM CsbffCargos c")})
-public class CsbffCargos implements Serializable {
+public class CsbffCargos implements Serializable,SampleEntity {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
   
@@ -216,14 +217,18 @@ public class CsbffCargos implements Serializable {
         }
         return true;
     }
-
-
-    
-    
     
     @Override
     public String toString() {
-        return "br.org.gdt.modelNew.CsbffCargos[ cargoCodigo=" + cargoCodigo + " ]";
+//        return "br.org.gdt.modelNew.CsbffCargos[ cargoCodigo=" + cargoCodigo + " ]";
+return cargoNome;
     }
+    
+    @Override
+    public Long getId(){
+       return Long.valueOf(this.cargoCodigo);
+        
+    }
+    
     
 }
