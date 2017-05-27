@@ -7,7 +7,9 @@ package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
 import br.org.gdt.enums.TipoBeneficio;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CsbffBeneficios.findAll", query = "SELECT c FROM CsbffBeneficios c")})
 @SequenceGenerator(name = "seq_CsbffBeneficios", sequenceName = "seq_CsbffBeneficios", allocationSize = 1)
-public class CsbffBeneficios implements java.io.Serializable,SampleEntity {
+public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -53,6 +56,12 @@ public class CsbffBeneficios implements java.io.Serializable,SampleEntity {
     @Temporal(TemporalType.DATE)
     private Date befencioDataVigente;
     private TipoBeneficio tipoBeneficio;
+    @OneToMany
+    private List<CsbffBeneficios> csbffBeneficiosList;
+
+    public CsbffBeneficios(List<CsbffBeneficios> csbffBeneficiosList) {
+        this.csbffBeneficiosList = csbffBeneficiosList;
+    }
 
     public CsbffBeneficios(TipoBeneficio tipoBeneficio) {
         this.tipoBeneficio = tipoBeneficio;
@@ -114,7 +123,6 @@ public class CsbffBeneficios implements java.io.Serializable,SampleEntity {
     public void setBefencioDataVigente(Date befencioDataVigente) {
         this.befencioDataVigente = befencioDataVigente;
     }
-
 
     @Override
     public int hashCode() {
@@ -182,7 +190,19 @@ public class CsbffBeneficios implements java.io.Serializable,SampleEntity {
     @Override
     public Long getId() {
         return Long.valueOf(this.beneficioCodigo);
+
+    }
+
+    public List<CsbffBeneficios> getCsbffBeneficiosList() {
+        if (this.csbffBeneficiosList == null) {
+            this.csbffBeneficiosList = new ArrayList<>();
+        }
         
+        return csbffBeneficiosList;
+    }
+
+    public void setCsbffBeneficiosList(List<CsbffBeneficios> csbffBeneficiosList) {
+        this.csbffBeneficiosList = csbffBeneficiosList;
     }
 
 }

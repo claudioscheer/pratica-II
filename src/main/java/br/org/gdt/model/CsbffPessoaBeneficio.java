@@ -81,30 +81,7 @@ public class CsbffPessoaBeneficio implements Serializable {
         this.recIdpessoa = recIdpessoa;
     }
 
-//    @Override
-//    public int hashCode() {
-//        int hash = 0;
-//        hash += (pessoaBeneficioCodigo != null ? pessoaBeneficioCodigo.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof CsbffPessoaBeneficio)) {
-//            return false;
-//        }
-//        CsbffPessoaBeneficio other = (CsbffPessoaBeneficio) object;
-//        if ((this.pessoaBeneficioCodigo == null && other.pessoaBeneficioCodigo != null) || (this.pessoaBeneficioCodigo != null && !this.pessoaBeneficioCodigo.equals(other.pessoaBeneficioCodigo))) {
-//            return false;
-//        }
-//        return true;
-//    }
 
-//    @Override
-//    public String toString() {
-//        return "br.org.gdt.modelNew.CsbffPessoaBeneficio[ pessoaBeneficioCodigo=" + pessoaBeneficioCodigo + " ]";
-//    }
 
     public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
         return csbffPessoaBeneficioList;
@@ -117,5 +94,13 @@ public class CsbffPessoaBeneficio implements Serializable {
     public Object csbffPessoaBeneficioList() {
         return csbffPessoaBeneficioList;
     }
+    public void addBePessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
+        if (csbffPessoaBeneficio != null) {
+            csbffPessoaBeneficio.setCsbffPessoaBeneficioList((List<CsbffPessoaBeneficio>) this);
+            this.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
+        
+        }
+    }    
+         
     
 }
