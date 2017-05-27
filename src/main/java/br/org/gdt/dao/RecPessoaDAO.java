@@ -2,7 +2,9 @@ package br.org.gdt.dao;
 
 import br.org.gdt.model.RecPessoa;
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 @Repository("recPessoaDAO")
@@ -12,13 +14,17 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         classe = RecPessoa.class;
     }
 
-    public List<RecPessoa> findByRecCpf(long recCpf) {
+    public RecPessoa findByRecCpf(int recCpf) {
 
-        Query query = entityManager.createQuery("from RecPessoa as t where t.recCpf = :recCpf");
+        TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa as t where t.recCpf = :recCpf", RecPessoa.class);
         query.setParameter("recCpf", recCpf);
+        try {
+            return query.getSingleResult();
 
-        return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
 
+        }
     }
 
 }
