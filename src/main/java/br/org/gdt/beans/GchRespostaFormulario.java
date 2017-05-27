@@ -6,8 +6,10 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.GchAlternativas;
+import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
+import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
@@ -41,6 +43,9 @@ public class GchRespostaFormulario {
     @ManagedProperty("#{gchRespostaService}")
     private GchRespostasService gchRespostasService;
 
+    @ManagedProperty("#{gchAlternativaPerguntasService}")
+    private GchAlternativasperguntas gchAlternativasperguntas;
+    
     public GchRespostaFormulario(GchFormulario gchFormulario, List<GchPerguntas> gchPerguntas, List<GchAlternativas> gchAlternativas) {
         this.gchFormulario = gchFormulario;
         this.gchPerguntas = gchPerguntas;
@@ -73,11 +78,58 @@ public class GchRespostaFormulario {
     }
 
     public List<GchAlternativas> getGchAlternativas() {
+        if (gchPerguntas == null){
+        
+            gchAlternativas = gchAlternativasperguntas.
+            
+        }
+        
+        
         return gchAlternativas;
     }
 
     public void setGchAlternativas(List<GchAlternativas> gchAlternativas) {
         this.gchAlternativas = gchAlternativas;
+    }
+
+    public GchFormularioService getGchFormularioService() {
+        return gchFormularioService;
+    }
+
+    public void setGchFormularioService(GchFormularioService gchFormularioService) {
+        this.gchFormularioService = gchFormularioService;
+    }
+
+    public GchCadastroAlternativaServiceCerto getGchAlternativasService() {
+        return gchAlternativasService;
+    }
+
+    public void setGchAlternativasService(GchCadastroAlternativaServiceCerto gchAlternativasService) {
+        this.gchAlternativasService = gchAlternativasService;
+    }
+
+    public GchPerguntasService getGchPerguntasService() {
+        return gchPerguntasService;
+    }
+
+    public void setGchPerguntasService(GchPerguntasService gchPerguntasService) {
+        this.gchPerguntasService = gchPerguntasService;
+    }
+
+    public GchRespostasService getGchRespostasService() {
+        return gchRespostasService;
+    }
+
+    public void setGchRespostasService(GchRespostasService gchRespostasService) {
+        this.gchRespostasService = gchRespostasService;
+    }
+
+    public GchAlternativasperguntas getGchAlternativasperguntas() {
+        return gchAlternativasperguntas;
+    }
+
+    public void setGchAlternativasperguntas(GchAlternativasperguntas gchAlternativasperguntas) {
+        this.gchAlternativasperguntas = gchAlternativasperguntas;
     }
 
 }
