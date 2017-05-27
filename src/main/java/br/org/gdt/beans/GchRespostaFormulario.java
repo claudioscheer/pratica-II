@@ -80,7 +80,7 @@ public class GchRespostaFormulario {
     public List<GchAlternativas> getGchAlternativas() {
         if (gchPerguntas == null){
         
-            gchAlternativas = gchAlternativasperguntas.
+//            gchAlternativas = gchAlternativasperguntas.
             
         }
         
