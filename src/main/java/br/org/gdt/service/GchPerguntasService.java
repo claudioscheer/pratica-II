@@ -18,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("gchPerguntaService")
 public class GchPerguntasService {
-   @Autowired
+
+    @Autowired
     private GchPerguntasDAO gchPerguntasDAO;
 
     @Transactional
@@ -43,5 +44,15 @@ public class GchPerguntasService {
     public List<GchPerguntas> findAll() {
         return gchPerguntasDAO.findAll();
     }
-  
+
+    public boolean ExcluirPerguntasFormulario(int id) {
+
+        return gchPerguntasDAO.ExcluirPerguntasFormulario(id);
+
+    }
+
+    public List<GchPerguntas> buscaPergutasFormulario(int id) {
+        return gchPerguntasDAO.buscaPergutasFormulario(id);
+    }
+
 }

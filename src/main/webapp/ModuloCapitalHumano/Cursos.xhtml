@@ -38,12 +38,10 @@
 
                                                         <h:column headerClass="alinhaColuna">                
 
-                                                            <h:commandButton value="Excluir"  action="#{gchCursoBean.excluir(curso)}" >
-
+                                                            <h:commandLink action="#{gchCursoBean.excluir(curso)}" onclick="return confirm('Voce realmente deseja excluir este curso?')" >
+                                                                 <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
                                                                 <f:ajax render="formCursos" />
-                                                                </h:commandButton>
-
-
+                                                            </h:commandLink>
 
                                                         </h:column>
                                                         <h:column>                
@@ -69,13 +67,13 @@
                                                         </h:column>
 
                                                         <h:column>                
-                                                            <f:facet name="header">Data de Inclusão</f:facet>
+                                                            <f:facet name="header">Data de Inclusão/Atualização</f:facet>
                                                             <h:outputText value="#{curso.curDatainclusao}">
                                                                 <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm"/>
                                                             </h:outputText>                
                                                         </h:column>
                                                     </h:dataTable>
-
+                                    
                                         </h:form> </div>
                                     <div class="panel-footer">
                                         Gestão do Capital Humano - Todos os Direitos Reservados

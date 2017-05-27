@@ -41,23 +41,38 @@ public class CalcularFolha {
 
         FpEventoPeriodo eventoINSS = new FpEventoPeriodo();
         eventoINSS.setEvpEvento(fpEventoService.findById(FpEnumEventos.INSS.ordinal() + 1));
-        eventoSalario.setEvpEventoPadrao(true);
+        eventoINSS.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoINSS);
 
         FpEventoPeriodo eventoFGTS = new FpEventoPeriodo();
         eventoFGTS.setEvpEvento(fpEventoService.findById(FpEnumEventos.FGTS.ordinal() + 1));
-        eventoSalario.setEvpEventoPadrao(true);
+        eventoFGTS.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoFGTS);
 
         FpEventoPeriodo eventoIRRF = new FpEventoPeriodo();
         eventoIRRF.setEvpEvento(fpEventoService.findById(FpEnumEventos.IRRF.ordinal() + 1));
-        eventoSalario.setEvpEventoPadrao(true);
+        eventoIRRF.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoIRRF);
 
         FpEventoPeriodo eventoDSR = new FpEventoPeriodo();
         eventoDSR.setEvpEvento(fpEventoService.findById(FpEnumEventos.DSR.ordinal() + 1));
-        eventoSalario.setEvpEventoPadrao(true);
+        eventoDSR.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoDSR);
+
+        FpEventoPeriodo eventoSalarioFamilia = new FpEventoPeriodo();
+        eventoSalarioFamilia.setEvpEvento(fpEventoService.findById(FpEnumEventos.SalarioFamilia.ordinal() + 1));
+        eventoSalarioFamilia.setEvpEventoPadrao(true);
+        EVENTOS_PADROES.add(eventoSalarioFamilia);
+
+        FpEventoPeriodo eventoInsalubridade = new FpEventoPeriodo();
+        eventoInsalubridade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Insalubridade.ordinal() + 1));
+        eventoInsalubridade.setEvpEventoPadrao(true);
+        EVENTOS_PADROES.add(eventoInsalubridade);
+        
+        FpEventoPeriodo eventoPericulosidade = new FpEventoPeriodo();
+        eventoPericulosidade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Periculosidade.ordinal() + 1));
+        eventoPericulosidade.setEvpEventoPadrao(true);
+        EVENTOS_PADROES.add(eventoPericulosidade);
 
         return EVENTOS_PADROES;
     }
@@ -66,7 +81,9 @@ public class CalcularFolha {
 
     }
 
-    public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException, Exception {
+    public FpFolhaPeriodo calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException, Exception {
+        fpFolhaPeriodoService.deleteByPessoaEPeriodo(dadosCalculadosDoFuncionario.getPeriodo(), dadosCalculadosDoFuncionario.getPessoa());
+
         FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
         fpFolhaPeriodo.setForGeradaEm(Calendar.getInstance().getTime());
         fpFolhaPeriodo.setForPeriodo(dadosCalculadosDoFuncionario.getPeriodo());
@@ -93,7 +110,9 @@ public class CalcularFolha {
                     }
                 });
         fpFolhaPeriodo.setForStatusFolhaPeriodo(FpStatusFolhaPeriodo.Calculada);
-        fpFolhaPeriodoService.save(fpFolhaPeriodo);
+        fpFolhaPeriodoService.update(fpFolhaPeriodo);
+
+        return fpFolhaPeriodo;
     }
 
 }

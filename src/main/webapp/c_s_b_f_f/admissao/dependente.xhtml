@@ -9,29 +9,6 @@
         <title>Admissão de colaborador</title>
     </h:head>
 
-    <script>
-        jQuery(function ($) {
-            $("#date").mask("99/99/9999");
-            $("#phone").mask("(99) 999-9999");
-            $("#cpf").mask("999/999/999/99");
-            $("#ssn").mask("999-99-9999");
-        });
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content"> 
@@ -102,14 +79,7 @@
                                         </label>
 
                                         <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteCpf}"/>
-<!--                                    <p:inputMask id="cpf" value="#{maskView.cpf}" mask="999/999/999-99"/>-->
-                                    <!--<h:inputText id= "phone" value="#{item.cpf}" />-->
-<!--                                    <h:dataTable id="phones" value="#{profile.user.userPhones}" var="item">
-            <h:column>
-                <h:inputText id= "phone" value="#{item.phone}" />
-            </h:column>
-                                        </h:dataTable>
-                                        -->
+
                                     </div>
 
                                 </div>

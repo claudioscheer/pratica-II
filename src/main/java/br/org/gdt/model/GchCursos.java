@@ -54,7 +54,7 @@ public class GchCursos implements Serializable, SampleEntity {
     @Column(name = "cur_datainclusao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date curDatainclusao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curCodigo")
+    @OneToMany(mappedBy = "curCodigo")
     private List<GchTreinamentos> gchTreinamentosList;
     @Basic(optional = false)
     @Column(name = "cur_nome_palestrante")

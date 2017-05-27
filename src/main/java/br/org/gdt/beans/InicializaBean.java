@@ -93,6 +93,7 @@ public class InicializaBean {
         sqls.add("INSERT INTO fp_faixa VALUES (13, 859.88,0,44.09,0,6);");
         sqls.add("INSERT INTO fp_faixa VALUES (14, 1292.43,0,31.07,0,6);");
         sqls.add("INSERT INTO fp_faixa VALUES (15, 189.59, 0, 0, 0, 2);");
+        sqls.add("INSERT INTO fp_faixa VALUES (16, 0, 0, 0, 0, 6);");
 
         sqls.forEach(sql -> inicializaService.inicializar(sql));
     }

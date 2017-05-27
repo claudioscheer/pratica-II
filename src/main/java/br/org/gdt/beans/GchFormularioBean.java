@@ -8,16 +8,30 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchAlternativas;
 import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
+import br.org.gdt.model.GchFormularioPessoa;
 import br.org.gdt.model.GchPerguntas;
+import br.org.gdt.model.GchTreinamentospessoas;
+import br.org.gdt.model.ParametrosEmail;
+import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.EncryptDecryptString;
+import br.org.gdt.resources.GerenciadorEmail;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
+import br.org.gdt.service.GchFormularioPessoaService;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
+import br.org.gdt.service.GchRespostasService;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,6 +42,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.xml.bind.DatatypeConverter;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -48,6 +63,29 @@ public class GchFormularioBean {
     private List<GchAlternativas> alternativasVinculadas;
     private GchFormulario gchFormulario = new GchFormulario();
     private List<GchFormulario> gchTodosFormularios;
+    private Map<RecPessoa, Boolean> checked = new HashMap<RecPessoa, Boolean>();
+    private GchFormularioPessoa gchFormulariopessoa = new GchFormularioPessoa();
+    private List<RecPessoa> pessoasVinculadas = new ArrayList<>();
+    private RecPessoa id = new RecPessoa();
+    private String Notificacao = "";
+
+    @ManagedProperty("#{gchFormularioService}")
+    private GchFormularioService gchFormularioService;
+
+    @ManagedProperty("#{gchAlternativaCertoService}")
+    private GchCadastroAlternativaServiceCerto gchAlternativasService;
+
+    @ManagedProperty("#{gchAlternativaPerguntasService}")
+    private GchAlternativasPerguntaService gchAlternativasPerguntaService;
+
+    @ManagedProperty("#{gchPerguntaService}")
+    private GchPerguntasService gchPerguntasService;
+
+    @ManagedProperty("#{gchRespostaService}")
+    private GchRespostasService gchRespostasService;
+
+    @ManagedProperty("#{gchFormularioPessoaService}")
+    private GchFormularioPessoaService gchFormularioPessoaService;
 
     public String getNotificacao() {
         return Notificacao;
@@ -56,10 +94,46 @@ public class GchFormularioBean {
     public void setNotificacao(String Notificacao) {
         this.Notificacao = Notificacao;
     }
-    
-    
-    private String Notificacao = "";
-    
+
+    public Map<RecPessoa, Boolean> getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Map<RecPessoa, Boolean> checked) {
+        this.checked = checked;
+    }
+
+    public GchFormularioPessoa getGchFormulariopessoa() {
+        return gchFormulariopessoa;
+    }
+
+    public void setGchFormulariopessoa(GchFormularioPessoa gchFormulariopessoa) {
+        this.gchFormulariopessoa = gchFormulariopessoa;
+    }
+
+    public List<RecPessoa> getPessoasVinculadas() {
+        return pessoasVinculadas;
+    }
+
+    public void setPessoasVinculadas(List<RecPessoa> pessoasVinculadas) {
+        this.pessoasVinculadas = pessoasVinculadas;
+    }
+
+    public RecPessoa getId() {
+        return id;
+    }
+
+    public void setId(RecPessoa id) {
+        this.id = id;
+    }
+
+    public GchFormularioPessoaService getGchFormularioPessoaService() {
+        return gchFormularioPessoaService;
+    }
+
+    public void setGchFormularioPessoaService(GchFormularioPessoaService gchFormularioPessoaService) {
+        this.gchFormularioPessoaService = gchFormularioPessoaService;
+    }
 
     public List<GchAlternativas> getAlternativasVinculadas() {
         return alternativasVinculadas;
@@ -121,34 +195,27 @@ public class GchFormularioBean {
         this.gchPerguntasService = gchPerguntasService;
     }
 
-    @ManagedProperty("#{gchFormularioService}")
-    private GchFormularioService gchFormularioService;
+    public GchRespostasService getGchRespostasService() {
+        return gchRespostasService;
+    }
 
-    @ManagedProperty("#{gchAlternativaCertoService}")
-    private GchCadastroAlternativaServiceCerto gchAlternativasService;
-    
-    @ManagedProperty("#{gchAlternativaPerguntasService}")
-    private GchAlternativasPerguntaService gchAlternativasPerguntaService;
-    
-     @ManagedProperty("#{gchPerguntaService}")
-    private GchPerguntasService gchPerguntasService;
-    
-    
+    public void setGchRespostasService(GchRespostasService gchRespostasService) {
+        this.gchRespostasService = gchRespostasService;
+    }
 
     public GchFormularioBean() {
-    
+
     }
 
     public void VerificaNotificacao() {
 
-        if(!Notificacao.isEmpty()){
-            
-            Helper.mostrarNotificacao("Sucesso",Notificacao,"sucess");
-            
+        if (!Notificacao.isEmpty()) {
+
+            Helper.mostrarNotificacao("Sucesso", Notificacao, "sucess");
+
             Notificacao = "";
-        }    
-            
-        
+        }
+
     }
 
     public void IsSelected(long alt) {
@@ -160,6 +227,20 @@ public class GchFormularioBean {
     public void cancel() {
         this.formAtivo = false;
         this.gchFormulario = new GchFormulario();
+    }
+
+    public void cancelDialog() {
+
+        this.formAtivo = false;
+        this.gchFormulariopessoa = new GchFormularioPessoa();
+        checked = new HashMap<RecPessoa, Boolean>();
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Treinamentos.xhtml");
+        } catch (IOException ex) {
+
+        }
+
     }
 
     public void add() {
@@ -175,39 +256,142 @@ public class GchFormularioBean {
         requestContext.execute("MontarPerguntasAlternativas()");
 
     }
+    
+    
+    
+    public void LeituraParametroLink(){
+        
+     
+     
+   
+    }
+    
+
+    public void salvarPessoasFormulario() {
+
+        if (gchFormulariopessoa != null) {
+
+            Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
+
+            ArrayList<ParametrosEmail> parametros = new ArrayList<>();
+
+            ParametrosEmail ItemParametro;
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            EncryptDecryptString cripto = new EncryptDecryptString();
+            
+            //Configurações da caixa de e-mail padrão do sistema
+            String emailResponsavel = "murphyrhnotifica@gmail.com";
+            String senha = "murphy2017";
+            String assunto = "Preenchimento de Formulário";
+            String url = context.getExternalContext().getRequestServerName() + ":" + context.getExternalContext().getRequestServerPort() + context.getExternalContext().getApplicationContextPath() + "/ModuloCapitalHumano/ResponderFormulario.xhtml?%1s";
+            String mensagem = "";
+
+            boolean vinculou = false;
+            parametros.clear();
+
+            while (keyIterrator.hasNext()) {
+
+                RecPessoa pessoa = keyIterrator.next();
+                Boolean value = checked.get(pessoa);
+
+                if (value) {
+
+                    //Seta null para não dar pau no Hibernate
+                    gchFormulariopessoa.setFormPesCodigo(0);
+
+                    gchFormulariopessoa.setRecIdpessoa(pessoa);
+                    gchFormulariopessoa.setFormulario(gchFormulario);
+                    gchFormulariopessoa.setFormRespondido(false);
+
+                    gchFormularioPessoaService.save(gchFormulariopessoa);
+
+                    String parametroUrl = gchFormulario.getFormCodigo()+"&"+pessoa.getId();
+                    
+    
+                    String parametroBase64 = DatatypeConverter.printBase64Binary(parametroUrl.getBytes());
+
+                   
+                    String urlFormatada = String.format(url, "id="+parametroBase64);
+                    
+                    System.out.println("Texto Formatado"+urlFormatada);
+                    
+                    String msgFormatada = "<html><div style='background-color:gray;border:1px solid black;width:80%;height:20%'><span>" + gchFormulario.getFormNome() + "</span></div></br></br><p>Você acaba de receber um formulário com algumas perguntas para que possamos lhe conhecer melhor. O prazo de respostas é até " + gchFormulario.getFormPrazoResposta().toString() + "</p></br>Para acessá-lo clique <a href='http://"+urlFormatada+"'>aqui</a></html>";
+
+                    System.out.println("Mensagem Formatada"+msgFormatada);
+                    
+                    //Cria item de parametro de email
+                    ItemParametro = new ParametrosEmail();
+
+                    ItemParametro.setRemetente(emailResponsavel);
+                    ItemParametro.setSenha(senha);
+                    ItemParametro.setAssunto(assunto);
+                    ItemParametro.setMensagem(msgFormatada);
+                    ItemParametro.setDestinatario(pessoa.getRecEmail());
+                    ItemParametro.setFormularioPessoa(gchFormulariopessoa);
+
+                    parametros.add(ItemParametro);
+
+                    vinculou = true;
+
+                }
+            }
+
+            this.formAtivo = false;
+            gchFormulariopessoa = new GchFormularioPessoa();
+            checked = new HashMap<RecPessoa, Boolean>();
+
+            //Se vinculou ao menos 1 envia e-mail
+            if (vinculou) {
+
+                System.out.println("Url absoluta " + url);
+
+                GerenciadorEmail novoEnvio = new GerenciadorEmail();
+
+                try {
+                    novoEnvio.EnviarEmail(parametros);
+                } catch (Exception ex) {
+                    Logger.getLogger(GchFormularioBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+            String MsgNotificacao = "Formulário disponibilizado para as pessoas selecionadas!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+        }
+
+    }
 
     public String SalvarFormulario() {
 
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
         //Busca parametros concatenados 
-        String parametrosCapa           = params.get("formFormulario:TxbParametrosCapa");
-        String parametrosPerguntas      = params.get("formFormulario:TxbParametrosPergunta");
-        String parametrosAlternativas   = params.get("formFormulario:TxbParametrosAlternativas");
+        String parametrosCapa = params.get("formFormulario:TxbParametrosCapa");
+        String parametrosPerguntas = params.get("formFormulario:TxbParametrosPergunta");
+        String parametrosAlternativas = params.get("formFormulario:TxbParametrosAlternativas");
 
-        String inputsCapa[]     = parametrosCapa.split("§");
-        String Perguntas[]      = parametrosPerguntas.split("§");
-        String Alternativas[]   = parametrosAlternativas.split("¬");
+        String inputsCapa[] = parametrosCapa.split("§");
+        String Perguntas[] = parametrosPerguntas.split("§");
+        String Alternativas[] = parametrosAlternativas.split("¬");
 
         GchFormulario formulario = new GchFormulario();
 
         Date date = null;
-        
+
         try {
 
             // -------------- Inputs da Capa --------------------------//
-            
             formulario.setFormNome(inputsCapa[0]); //Nome do Formulário
             formulario.setFormDescricao(inputsCapa[1]); // Descricao do Formulário
 
             DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
             date = (Date) formatter.parse(inputsCapa[2]);
-            
+
             formulario.setFormPrazoResposta(date);
-            
+
             gchFormularioService.save(formulario);
- 
 
         } catch (ParseException ex) {
             Logger.getLogger(GchFormularioBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,56 +403,60 @@ public class GchFormularioBean {
             GchPerguntas pergunta;
             String[] altPergunta;
             GchAlternativasperguntas altperg;
-            
-            // ----------- Informações das perguntas ------------------//
-            
-            for (int i = 0; i < Perguntas.length; i++) {
 
+            // ----------- Informações das perguntas ------------------//
+            for (int i = 0; i < Perguntas.length; i++) {
 
                 pergunta = new GchPerguntas();
 
                 pergunta.setPerDescricao(Perguntas[i]);
                 pergunta.setFormulario(formulario);
-                
+
                 gchPerguntasService.save(pergunta);
-                   
+
                 /* Busca todas alternativas de cada pergunta e armazena no array
-                - O ponto de quebra é o caractere § e o mesmo é concatenado no arquivo ControleFormularios.Js
-                */
+                 - O ponto de quebra é o caractere § e o mesmo é concatenado no arquivo ControleFormularios.Js
+                 */
                 altPergunta = Alternativas[i].split("§");
-                
+
                 //Percorre alternativas da pergunta
-                for(int j = 0; j < altPergunta.length; j++) {
+                for (int j = 0; j < altPergunta.length; j++) {
 
                     GchAlternativas novaAlternativa = gchAlternativasService.findById(Long.parseLong(altPergunta[j]));
 
                     altperg = new GchAlternativasperguntas();
 
-                  
                     altperg.setGchAlternativas(novaAlternativa);
                     altperg.setPerCodigo(pergunta);
-               
-                   
-                    
+
                     gchAlternativasPerguntaService.save(altperg);
 
                 }
             }
 
             //Salvou com sucesso, retorna para página de listagem
-            Notificacao = "O formulário "+gchFormulario.getFormNome()+" foi cadastrado com sucesso!";
-            
-            gchFormulario = new GchFormulario();  
-       
+            Notificacao = "O formulário " + gchFormulario.getFormNome() + " foi cadastrado com sucesso!";
+
+            gchFormulario = new GchFormulario();
+
         }
-        
-         return "Formularios";
+
+        return "Formularios";
     }
 
     public void addNovaPergunta() {
 
         RequestContext requestContext = RequestContext.getCurrentInstance();
         requestContext.execute("AddNovaPergunta()");
+
+    }
+
+    public void vincularPessoas(GchFormulario formulario) {
+
+        gchFormulario = formulario;
+
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('dialogSelecaoPessoas').show();");
 
     }
 
@@ -287,10 +475,20 @@ public class GchFormularioBean {
 
             if (gchFormulario != null) {
 
-                gchFormularioService.delete(gchFormulario.getFormCodigo());
-                gchTodosFormularios.remove(gchFormulario);
-                MsgNotificacao = "O formulário " + gchFormulario.getFormNome() + "foi excluído com sucesso!";
-                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                // Se não encontrou formulário vinculado
+                if (!VerificaExclusaoFormulario(gchFormulario.getFormCodigo())) {
+
+                    gchFormularioService.delete(gchFormulario.getFormCodigo());
+                    gchTodosFormularios.remove(gchFormulario);
+                    MsgNotificacao = "O formulário <b>" + gchFormulario.getFormNome() + " </b>foi excluído com sucesso!";
+                    Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
+                } else {
+
+                    MsgNotificacao = "O formulário <b>" + gchFormulario.getFormNome() + " </b>já foi respondido e não será excluído !";
+                    Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+
+                }
 
             }
 
@@ -299,7 +497,14 @@ public class GchFormularioBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
         }
 
+        RequestContext.getCurrentInstance().update("formFormulario:tabelFormularios");
+
         return "Formularios";
+    }
+
+    public boolean VerificaExclusaoFormulario(long id) {
+
+        return gchRespostasService.VerificaExistenciaFormulario(id);
     }
 
     public void setGchFormulario(GchFormulario gchFormulario) {
@@ -309,7 +514,7 @@ public class GchFormularioBean {
     public List<GchFormulario> getGchTodosFormularios() {
 
         gchTodosFormularios = gchFormularioService.findAll();
-       
+
         return gchTodosFormularios;
     }
 

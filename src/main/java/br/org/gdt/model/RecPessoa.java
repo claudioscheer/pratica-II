@@ -169,6 +169,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffHistoricoSalario> csbffHistoricoSalarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchRespostas> gchRespostasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+    private List<GchFormularioPessoa> gchFormularioPessoas;
+
+  
+    
+    
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
 //    private List<TipoBeneficio> csbffBeneficiosList;
     @OneToMany
@@ -260,6 +266,14 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.cargos = cargos;
     }
 
+      public List<GchFormularioPessoa> getGchFormularioPessoas() {
+        return gchFormularioPessoas;
+    }
+
+    public void setGchFormularioPessoas(List<GchFormularioPessoa> gchFormularioPessoas) {
+        this.gchFormularioPessoas = gchFormularioPessoas;
+    }
+    
     public RecPessoa() {
     }
 

@@ -41,8 +41,16 @@ public class FpFolhaPeriodoService {
     public List<FpFolhaPeriodo> findAllPeriodo(FpPeriodo fpPeriodo) {
         return fpFolhaPeriodoDAO.findAllPeriodo(fpPeriodo);
     }
-    
+
     public FpFolhaPeriodo findByPessoaEPeriodo(FpPeriodo fpPeriodo, RecPessoa recPessoa) {
         return fpFolhaPeriodoDAO.findByPessoaEPeriodo(fpPeriodo, recPessoa);
+    }
+
+    @Transactional
+    public void deleteByPessoaEPeriodo(FpPeriodo fpPeriodo, RecPessoa recPessoa) {
+        FpFolhaPeriodo fpFolhaPeriodo = findByPessoaEPeriodo(fpPeriodo, recPessoa);
+        if (fpFolhaPeriodo != null) {
+            delete(fpFolhaPeriodo.getForId());
+        }
     }
 }

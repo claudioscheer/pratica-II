@@ -48,6 +48,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class GchFormulario
 implements Serializable {
+    @OneToMany(mappedBy = "formulario")
+    private List<GchFormularioPessoa> gchFormularioPessoas;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,8 +68,18 @@ implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date formPrazoResposta;
 
-    @OneToMany(mappedBy = "formulario")
+    @OneToMany(mappedBy = "formulario", cascade = CascadeType.REMOVE)
     private List<GchPerguntas> perguntas;
+
+    public List<GchFormularioPessoa> getGchFormularioPessoas() {
+        return gchFormularioPessoas;
+    }
+
+    public void setGchFormularioPessoas(List<GchFormularioPessoa> gchFormularioPessoas) {
+        this.gchFormularioPessoas = gchFormularioPessoas;
+    }
+    
+    
     
     
     public long getFormCodigo() {
