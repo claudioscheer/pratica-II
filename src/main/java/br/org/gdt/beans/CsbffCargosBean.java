@@ -9,10 +9,12 @@ import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffCargosService;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -35,77 +37,67 @@ public class CsbffCargosBean {
     private RecPessoa recPessoa;
 
     public CsbffCargosBean() {
-        csbffcargos = new CsbffCargos();
+       
 
     }
 
     public String pg(CsbffCargos cargo) {
         this.csbffcargos = cargo;
-        select(cargo);
-        return "form_cargo";
+          return "form_cargo";
     }
 
-    public void select(CsbffCargos carg) {
-        this.csbffcargos = carg;
-        codigoColaborador = carg;
-        altera(carg);
 
-    }
-
-    public String altera(CsbffCargos carg) {
-
-        codigoColaborador = carg;
-
-        csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(4));
-        csbffcargos.setCargoDataDeCriacao(new Date());
-        csbffcargos.setCargoDataUltimaAlteracao(new Date());
-        csbffCargosService.update(codigoColaborador);
-
-        return "cargo_consulta";
-    }
 
     public String buscaNomeCBO() {
 
         if (nomeCBO != null) {
             todosCargos = csbffCargosService.findByCargos(numeroCBO);
-            
+
         }
         return "cargo_consulta";
     }
 
     public String buscaPorCbo() {
-
+        //System.out.println("BuscaPorCBO");
         if (numeroCBO != 0) {
             todosCargos = csbffCargosService.findByCargos(numeroCBO);
-            
+
         } else {
             todosCargos = csbffCargosService.findAll();
-            
+
         }
+        numeroCBO = 0;
         return "cargo_consulta";
     }
 
     public String save() {
+
+      System.out.println("Salvando: " + csbffcargos.getCargoNome());
 
         if (csbffcargos.getCargoCodigo() > 0) {
             csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
             csbffcargos.setCargoDataDeCriacao(new Date());
             csbffcargos.setCargoDataUltimaAlteracao(new Date());
             csbffCargosService.update(csbffcargos);
-          
 
         } else {
-   
+
             csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
             csbffcargos.setCargoDataDeCriacao(new Date());
             csbffcargos.setCargoDataUltimaAlteracao(new Date());
             csbffCargosService.save(csbffcargos);
-            
 
         }
-        add2();
+        this.formAtivo = true;
+        this.csbffcargos = new CsbffCargos();
+
+        todosCargos = null;
         return "cargo_consulta";
     }
+    
+    
+    
+    
 
 //   public String novo() {
 //
@@ -114,7 +106,6 @@ public class CsbffCargosBean {
 //        return "cargo_consulta";
 //
 //    }
-
     public String buscaPorId(int idcargo) {
         if (idcargo != 0) {
             csbffcargos = csbffCargosService.findById(idcargo);
@@ -122,6 +113,7 @@ public class CsbffCargosBean {
         }
         return "form_cargo";
     }
+
     public String prepareEdit(CsbffCargos cargos) {
         this.formAtivo = true;
         this.csbffcargos = cargos;
@@ -134,12 +126,13 @@ public class CsbffCargosBean {
     }
 
     public String add() {
-        this.formAtivo = true;
+        this.formAtivo = false;
         this.csbffcargos = new CsbffCargos();
         return "form_cargo";
     }
+
     public String add2() {
-        this.formAtivo = true;
+        this.formAtivo = false;
         this.csbffcargos = new CsbffCargos();
         return "cargo_consulta";
     }
@@ -149,7 +142,6 @@ public class CsbffCargosBean {
         todosCargos.remove(cargos);
         return "cargos";
     }
-
 
     public CsbffCargos getCargoCodigo() {
         return csbffcargos;
@@ -176,6 +168,7 @@ public class CsbffCargosBean {
     }
 
     public List<CsbffCargos> getTodosCargos() {
+        System.out.println("FindALLTodosCargos");
         if (todosCargos == null) {
             todosCargos = csbffCargosService.findAll();
         }

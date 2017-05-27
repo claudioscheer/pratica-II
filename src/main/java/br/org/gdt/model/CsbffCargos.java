@@ -194,8 +194,8 @@ public class CsbffCargos implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + (int) (this.cargoCodigo ^ (this.cargoCodigo >>> 32));
+        int hash = 7;
+        hash = 67 * hash + (int) (this.cargoCodigo ^ (this.cargoCodigo >>> 32));
         return hash;
     }
 
@@ -216,6 +216,7 @@ public class CsbffCargos implements Serializable {
         }
         return true;
     }
+
 
     
     

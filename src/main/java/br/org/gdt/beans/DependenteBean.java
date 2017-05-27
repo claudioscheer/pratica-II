@@ -5,6 +5,7 @@
  */
 package br.org.gdt.beans;
 
+import br.org.gdt.enums.PossuiDependentes;
 import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffPessoaDependente;
 import br.org.gdt.model.RecPessoa;
@@ -36,16 +37,34 @@ public class DependenteBean {
     public DependenteBean() {
 
     }
+    
+    
+    
 
     public void save() {
-        System.out.println("testando ");
-
-        //dependente.setColabDepCodigo(BigDecimal.valueOf(1));
-        //csbffdependente.setDependenteDataNascimento(data);
-        //csbffdependente.setCsbffPessoaDependente(dependente);
+        System.out.println("testando " + csbffdependente.getDependenteCpf());
+        System.out.println("2"+csbffdependente.getDependenteDataNascimento());
+        System.out.println("3"+csbffdependente.getDependenteImpostoDeRenda());
+        System.out.println("4"+ csbffdependente.getDependenteNaturalidade());
+        System.out.println("5" +csbffdependente.getDependenteNome());
+        System.out.println("6"+ csbffdependente.getDependenteRgCertNascimento());
+        System.out.println("7" +csbffdependente.getDependenteTipo());
+        
+        CsbffPessoaDependente dependente = new CsbffPessoaDependente();
+        
+        
+        
+        csbffdependente.setCsbffPessoaDependente(dependente);
+        dependente.setDependenteCod(csbffdependente);
+        
+        dependente.setRecIdpessoa(recPessoa);
+        dependente.setPossuiDependentes(PossuiDependentes.Sim);        
+        
         csbffdependente.setDependenteTipo(BigInteger.valueOf(1));
         csbffdependente.setDependenteImpostoDeRenda(false);
         csbffDependenteService.save(csbffdependente);
+        
+        
 
     }
 
