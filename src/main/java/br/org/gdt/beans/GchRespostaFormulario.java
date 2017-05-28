@@ -44,7 +44,7 @@ public class GchRespostaFormulario {
     private GchRespostasService gchRespostasService;
 
     @ManagedProperty("#{gchAlternativaPerguntasService}")
-    private GchAlternativasperguntas gchAlternativasperguntas;
+    private GchAlternativasPerguntaService gchAlternativasperguntasService;
     
     public GchRespostaFormulario(GchFormulario gchFormulario, List<GchPerguntas> gchPerguntas, List<GchAlternativas> gchAlternativas) {
         this.gchFormulario = gchFormulario;
@@ -71,6 +71,15 @@ public class GchRespostaFormulario {
 
     }
 
+//    public List<GchAlternativas> buscaAlternativas(GchPerguntas gchPergunta){
+//    
+//        GchAlternativasperguntas gchAlternativasPerguntas = gchAlternativasperguntasService.buscaAlternativasPerguntas(gchPergunta.getPerCodigo());
+//        
+//        return gchAlternativasPerguntas.getGchAlternativas()
+//        
+//    
+//    }
+    
     public void setGchPerguntas(List<GchPerguntas> gchPerguntas) {
 
         this.gchPerguntas = gchPerguntas;
@@ -78,13 +87,6 @@ public class GchRespostaFormulario {
     }
 
     public List<GchAlternativas> getGchAlternativas() {
-        if (gchPerguntas == null){
-        
-//            gchAlternativas = gchAlternativasperguntas.
-            
-        }
-        
-        
         return gchAlternativas;
     }
 
@@ -124,12 +126,14 @@ public class GchRespostaFormulario {
         this.gchRespostasService = gchRespostasService;
     }
 
-    public GchAlternativasperguntas getGchAlternativasperguntas() {
-        return gchAlternativasperguntas;
+    public GchAlternativasPerguntaService getGchAlternativasperguntasService() {
+        return gchAlternativasperguntasService;
     }
 
-    public void setGchAlternativasperguntas(GchAlternativasperguntas gchAlternativasperguntas) {
-        this.gchAlternativasperguntas = gchAlternativasperguntas;
+    public void setGchAlternativasperguntasService(GchAlternativasPerguntaService gchAlternativasperguntasService) {
+        this.gchAlternativasperguntasService = gchAlternativasperguntasService;
     }
+
+   
 
 }

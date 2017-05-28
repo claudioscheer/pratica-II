@@ -17,10 +17,10 @@ public class GchAlternativasPerguntasDAO extends DAO<GchAlternativasperguntas> {
     }
 
     
-    public List<GchAlternativas> buscaAlternativasPerguntas(long codigo){
+    public List<GchAlternativasperguntas> buscaAlternativasPerguntas(long codigo){
     
         
-       Query query = entityManager.createQuery("from GchAlternativasperguntas as s where s.altPerCodigo.");
+       Query query = entityManager.createQuery("from GchAlternativasperguntas as s where s.altPerCodigo.perCodigo = :codigo");
        query.setParameter("codigo", codigo);
        
        return query.getResultList();
