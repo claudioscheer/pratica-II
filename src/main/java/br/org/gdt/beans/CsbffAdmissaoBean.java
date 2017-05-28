@@ -25,7 +25,6 @@ import br.org.gdt.service.CsbffPessoaBeneficioService;
 import br.org.gdt.service.GchMunicipiosService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -35,13 +34,11 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class CsbffAdmissaoBean implements Serializable {
 
-    private CsbffCargos csbffcargos = new CsbffCargos();
     private boolean formAtivo = false;
-    private boolean adicionandoBeneficio = false;
     private int recCpf;
-    private RecPessoa recIdpessoa;
+
     private RecPessoa recPessoa = new RecPessoa();
-    private List<RecPessoa> todosRecPessoa;
+    private List<RecPessoa> recPessoaList;
 //    private boolean adicionarBeneficio = false;
 
     @ManagedProperty("#{recPessoaService}")
@@ -55,7 +52,6 @@ public class CsbffAdmissaoBean implements Serializable {
     private CsbffPessoaDependente csbffPessoaDependente;
     private CsbffDependentes csbffDependentes;
     private List<CsbffBeneficios> csbffBeneficiosList;
-    private List<CsbffBeneficios> beneficiosColaborador;
     private CsbffBeneficios csbffBeneficios = new CsbffBeneficios();
     private CsbffEscalaHoras csbffEscalaHoras;
     private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
@@ -67,18 +63,15 @@ public class CsbffAdmissaoBean implements Serializable {
     private CsbffCargos csbffCargos;
     private CsbffPessoaBeneficioService csbffPessoaBeneficioService;
     private CsbffPessoaBeneficio csbffPessoaBeneficio;
-    private List<CsbffPessoaBeneficio> todosCsbffPessoaBeneficio;
+    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
     private SeguroDesemprego seguroDesemprego;
     private RecPessoa admissaoDescricao;
     private CsbffCargos cargoCbo;
     @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependentesService;
-    private RecPessoa recSexo;
-    private RecPessoa recEstadocivil;
-    private RecPessoa recRg;
 
     public CsbffAdmissaoBean() {
-        csbffcargos = new CsbffCargos();
+
     }
 
     public List<CsbffCargos> getCargos() {
@@ -87,10 +80,10 @@ public class CsbffAdmissaoBean implements Serializable {
         return cargos;
     }
 
-    public List<CsbffBeneficios> getBeneficios() {
+    public List<CsbffBeneficios> getCsbffBeneficiosList() {
 //        return new ArrayList<>();//buscAR do banco
-        List<CsbffBeneficios> beneficios = csbffBeneficiosService.findAll();//ISSO BUSCA DO BANCO!!!!!
-        return beneficios;
+        List<CsbffBeneficios> csbffBeneficiosList = csbffBeneficiosService.findAll();//ISSO BUSCA DO BANCO!!!!!
+        return csbffBeneficiosList;
     }
 
     /**
@@ -150,75 +143,51 @@ public class CsbffAdmissaoBean implements Serializable {
         return muns;
     }
 
-    public List<RecPessoa> getPessoas() {
-//        List<RecPessoa> pessoas = new ArrayList<>();
-//        pessoas.add(new RecPessoa(""));
-//        pessoas.addAll(recPessoaService.findAll());
-//        return pessoas;
+    public void buscarCpf() {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
+        recPessoa = recPessoaService.findByRecCpf(recCpf);
+    }
 
+    public List<RecPessoa> getPessoas() {
         List<RecPessoa> pessoas = recPessoaService.findAll();
+
         return pessoas;
     }
 
-    public void save() {
+    public String save() {
         if (recPessoa.getRecIdpessoa() > 0) {
             recPessoaService.update(recPessoa);
         } else {
             recPessoaService.save(recPessoa);
         }
-        todosRecPessoa = recPessoaService.findAll();
-        this.formAtivo = false;
+        recPessoaList = recPessoaService.findAll();
+        this.recPessoa = new RecPessoa();
+        return "consultaadmissao";
     }
 
-    public void removerBeneficioPessoa(int index) {
-
-        this.recPessoa.getCsbffPessoaBeneficioList().remove(index);
-    }
-
-//    public void addBeneficioPessoa(CsbffPessoaBeneficio beneficioNome) {
-//        if (recPessoa.getCsbffBeneficiosList()== null) {
-//            recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());
-//        }
-//        recPessoa.getCsbffPessoaBeneficioList().add(beneficioNome);
-//    }
-//    public String addBeneficioPessoa() {
-//
-//        save();
-//        csbffPessoaBeneficio = new CsbffPessoaBeneficio();
-//        return null;
-//
-//    }
-    public void addNovaEscala(CsbffEscalaHoras csbffEscalaHoras) {
-        if (csbffEscalaHoras.getEscalaCodigo() > 0) {
-            csbffEscalaHorasService.update(csbffEscalaHoras);
-        } else {
-            csbffEscalaHorasService.save(csbffEscalaHoras);
-        }
-        todosCsbffEscalaHoras = csbffEscalaHorasService.findAll();
-        this.formAtivo = true;
-    }
-
-    public void removerEscala(CsbffEscalaHoras csbffEscalaHoras) {
-        this.csbffEscalaHoras.getCsbffEscalaHorasList().remove(csbffEscalaHoras);
+    public void removerBeneficioPessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
+//        this.recPessoa.getCsbffPessoaBeneficioList().remove(csbffPessoaBeneficio);
+        csbffPessoaBeneficioService.delete(csbffPessoaBeneficio.getPessoaBeneficioCodigo());
+        csbffPessoaBeneficioList.remove(csbffPessoaBeneficio);
     }
 
     public void addBeneficioPessoa() {
-        this.csbffPessoaBeneficio = new CsbffPessoaBeneficio();
-        this.recPessoa.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
+        this.recPessoa.getCsbffPessoaBeneficioList().add(new CsbffPessoaBeneficio());
 
-//        if (csbffPessoaBeneficio.getPessoaBeneficioCodigo() > 0) {
-//            csbffPessoaBeneficioService.update(csbffPessoaBeneficio);
-//        } else {
-//            csbffPessoaBeneficioService.save(csbffPessoaBeneficio);
-//
-//        }
-//
-//        todosCsbffPessoaBeneficio = csbffPessoaBeneficioService.findAll();
-//        this.formAtivo = true;
     }
 
-    public void removerCsbffBeneficios(int index) {
-        this.recPessoa.getCsbffBeneficiosList().remove(index);
+    public void addNovaEscala() {
+        this.recPessoa.getCsbffEscalaHorasList().add(new CsbffEscalaHoras());
+    }
+
+    public void removerEscala(CsbffEscalaHoras csbffEscalaHoras) {
+//        this.recPessoa.getCsbffEscalaHorasList().remove(csbffEscalaHoras);
+        csbffEscalaHorasService.delete(csbffEscalaHoras.getEscalaCodigo());
+        todosCsbffEscalaHoras.remove(csbffEscalaHoras);
+    }
+
+    public void removerCsbffBeneficios(CsbffBeneficios csbffBeneficios) {
+        this.recPessoa.getCsbffBeneficiosList().remove(csbffBeneficios);
     }
 
     public void cancel() {
@@ -231,18 +200,18 @@ public class CsbffAdmissaoBean implements Serializable {
 //        this.formAtivo = true;
         this.recPessoa = pessoas;
         selectConsulta(pessoas);
-        return "pessoas";
+        return "dadospessoais";
     }
 
     public void selectConsulta(RecPessoa pessoas) {
         this.recPessoa = pessoas;
-        recIdpessoa = pessoas;
+
         alteraConsulta(pessoas);
 
     }
 
     public String alteraConsulta(RecPessoa pessoas) {
-        recIdpessoa = pessoas;
+
         recPessoaService.update(pessoas);
 
         return "pessoas";
@@ -250,18 +219,17 @@ public class CsbffAdmissaoBean implements Serializable {
 
     public String excluir(RecPessoa pessoas) {
         recPessoaService.delete(pessoas.getRecIdpessoa());
-        todosRecPessoa.remove(pessoas);
+        recPessoaList.remove(pessoas);
         return "pessoas";
     }
 
     public String buscarRecCpf() {
         if (recCpf != 0) {
-            todosRecPessoa = recPessoaService.findByRecCpf(recCpf);
+//            recPessoaList = recPessoaService.findByRecCpf(recCpf);
         } else {
-            todosRecPessoa = recPessoaService.findAll();
+            recPessoaList = recPessoaService.findAll();
         }
         return "consultaadmissao";
-
     }
 
     public DiasATrabalhar[] getDiasATrabalhar() {
@@ -280,16 +248,16 @@ public class CsbffAdmissaoBean implements Serializable {
         return recPessoa;
     }
 
+    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
+        this.csbffEscalaHoras = csbffEscalaHoras;
+    }
+
     public CsbffEscalaHoras getCsbffEscalaHoras() {
         if (csbffEscalaHoras == null) {
             csbffEscalaHoras = new CsbffEscalaHoras();
         }
         return csbffEscalaHoras;
 
-    }
-
-    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
-        this.csbffEscalaHoras = csbffEscalaHoras;
     }
 
     public List<CsbffEscalaHoras> getTodosCsbffEscalaHoras() {
@@ -312,12 +280,12 @@ public class CsbffAdmissaoBean implements Serializable {
         this.recPessoa = recPessoa;
     }
 
-    public List<RecPessoa> getTodosRecPessoa() {
-        return todosRecPessoa;
+    public List<RecPessoa> getRecPessoaList() {
+        return recPessoaList;
     }
 
-    public void setTodosRecPessoa(List<RecPessoa> todosRecPessoa) {
-        this.todosRecPessoa = todosRecPessoa;
+    public void setRecPessoaList(List<RecPessoa> recPessoaList) {
+        this.recPessoaList = recPessoaList;
     }
 
     public RecPessoaService getRecPessoaService() {
@@ -334,22 +302,6 @@ public class CsbffAdmissaoBean implements Serializable {
 
     public void setGchMunicipiosService(GchMunicipiosService gchMunicipiosService) {
         this.gchMunicipiosService = gchMunicipiosService;
-    }
-
-    public int getRecCpf() {
-        return recCpf;
-    }
-
-    public void setRecCpf(int recCpf) {
-        this.recCpf = recCpf;
-    }
-
-    public boolean isAdicionandoBeneficio() {
-        return adicionandoBeneficio;
-    }
-
-    public void setAdicionandoBeneficio(boolean adicionandoBeneficio) {
-        this.adicionandoBeneficio = adicionandoBeneficio;
     }
 
     public CsbffPessoaDependente getCsbffPessoaDependente() {
@@ -384,10 +336,6 @@ public class CsbffAdmissaoBean implements Serializable {
         this.csbffBeneficios = csbffBeneficios;
     }
 
-    public List<CsbffBeneficios> getCsbffBeneficiosList() {
-        return csbffBeneficiosList;
-    }
-
     public void setCsbffBeneficiosList(List<CsbffBeneficios> csbffBeneficiosList) {
         this.csbffBeneficiosList = csbffBeneficiosList;
     }
@@ -416,12 +364,12 @@ public class CsbffAdmissaoBean implements Serializable {
         this.csbffCargosList = csbffCargosList;
     }
 
-    public CsbffCargos getCsbffCargos() {
-        return csbffCargos;
-    }
-
     public void setCsbffCargos(CsbffCargos csbffCargos) {
         this.csbffCargos = csbffCargos;
+    }
+
+    public CsbffCargos getCsbffCargos() {
+        return csbffCargos;
     }
 
     public CsbffPessoaBeneficioService getCsbffPessoaBeneficioService() {
@@ -440,30 +388,6 @@ public class CsbffAdmissaoBean implements Serializable {
         this.csbffPessoaBeneficio = csbffPessoaBeneficio;
     }
 
-    public List<CsbffPessoaBeneficio> getTodosCsbffPessoaBeneficio() {
-        return todosCsbffPessoaBeneficio;
-    }
-
-    public void setTodosCsbffPessoaBeneficio(List<CsbffPessoaBeneficio> todosCsbffPessoaBeneficio) {
-        this.todosCsbffPessoaBeneficio = todosCsbffPessoaBeneficio;
-    }
-
-    public List<CsbffBeneficios> getBeneficiosColaborador() {
-        return beneficiosColaborador;
-    }
-
-    public void setBeneficiosColaborador(List<CsbffBeneficios> beneficiosColaborador) {
-        this.beneficiosColaborador = beneficiosColaborador;
-    }
-
-    public RecPessoa getRecIdpessoa() {
-        return recIdpessoa;
-    }
-
-    public void setRecIdpessoa(RecPessoa recIdpessoa) {
-        this.recIdpessoa = recIdpessoa;
-    }
-
     public RecPessoa getAdmissaoDescricao() {
         return admissaoDescricao;
     }
@@ -472,28 +396,12 @@ public class CsbffAdmissaoBean implements Serializable {
         this.admissaoDescricao = admissaoDescricao;
     }
 
-    public CsbffCargos getCargoCbo() {
-        return cargoCbo;
-    }
-
     public void setCargoCbo(CsbffCargos cargoCbo) {
         this.cargoCbo = cargoCbo;
     }
 
-    public CsbffCargos getCargoCodigo() {
-        return csbffcargos;
-    }
-
-    public void setCargoCodigo(CsbffCargos cargos) {
-        this.csbffcargos = cargos;
-    }
-
-    public CsbffCargos getCsbffcargos() {
-        return csbffcargos;
-    }
-
-    public void setCsbffcargos(CsbffCargos csbffcargos) {
-        this.csbffcargos = csbffcargos;
+    public CsbffCargos getCargoCbo() {
+        return cargoCbo;
     }
 
     public CsbffDependentesService getCsbffDependentesService() {
@@ -504,60 +412,21 @@ public class CsbffAdmissaoBean implements Serializable {
         this.csbffDependentesService = csbffDependentesService;
     }
 
-    public CsbffAdmissaoBean(int recCpf, RecPessoa recIdpessoa, List<RecPessoa> todosRecPessoa, RecPessoaService recPessoaService, GchMunicipiosService gchMunicipiosService, CsbffBeneficiosService csbffBeneficiosService, List<TipoBeneficio> csbffTipoBeneficiosList, TipoBeneficio tipoBeneficio, CsbffPessoaDependente csbffPessoaDependente, CsbffDependentes csbffDependentes, List<CsbffBeneficios> csbffBeneficiosList, List<CsbffBeneficios> beneficiosColaborador, CsbffEscalaHoras csbffEscalaHoras, List<CsbffEscalaHoras> todosCsbffEscalaHoras, CsbffEscalaHorasService csbffEscalaHorasService, CsbffCargosService csbffCargosService, List<CsbffCargos> csbffCargosList, CsbffCargos csbffCargos, CsbffPessoaBeneficioService csbffPessoaBeneficioService, CsbffPessoaBeneficio csbffPessoaBeneficio, List<CsbffPessoaBeneficio> todosCsbffPessoaBeneficio, SeguroDesemprego seguroDesemprego, RecPessoa admissaoDescricao, CsbffCargos cargoCbo, CsbffDependentesService csbffDependentesService, RecPessoa recSexo, RecPessoa recEstadocivil) {
+    public int getRecCpf() {
+        return recCpf;
+    }
+
+    public void setRecCpf(int recCpf) {
+        System.out.println("cpp " + recCpf);
         this.recCpf = recCpf;
-        this.recIdpessoa = recIdpessoa;
-        this.todosRecPessoa = todosRecPessoa;
-        this.recPessoaService = recPessoaService;
-        this.gchMunicipiosService = gchMunicipiosService;
-        this.csbffBeneficiosService = csbffBeneficiosService;
-        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
-        this.tipoBeneficio = tipoBeneficio;
-        this.csbffPessoaDependente = csbffPessoaDependente;
-        this.csbffDependentes = csbffDependentes;
-        this.csbffBeneficiosList = csbffBeneficiosList;
-        this.beneficiosColaborador = beneficiosColaborador;
-        this.csbffEscalaHoras = csbffEscalaHoras;
-        this.todosCsbffEscalaHoras = todosCsbffEscalaHoras;
-        this.csbffEscalaHorasService = csbffEscalaHorasService;
-        this.csbffCargosService = csbffCargosService;
-        this.csbffCargosList = csbffCargosList;
-        this.csbffCargos = csbffCargos;
-        this.csbffPessoaBeneficioService = csbffPessoaBeneficioService;
-        this.csbffPessoaBeneficio = csbffPessoaBeneficio;
-        this.todosCsbffPessoaBeneficio = todosCsbffPessoaBeneficio;
-        this.seguroDesemprego = seguroDesemprego;
-        this.admissaoDescricao = admissaoDescricao;
-        this.cargoCbo = cargoCbo;
-        this.csbffDependentesService = csbffDependentesService;
-        this.recSexo = recSexo;
-        this.recEstadocivil = recEstadocivil;
     }
 
-    
-    public RecPessoa getRecSexo() {
-        return recSexo;
+    public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
+        return csbffPessoaBeneficioList;
     }
 
-    public void setRecSexo(RecPessoa recSexo) {
-        this.recSexo = recSexo;
+    public void setCsbffPessoaBeneficioList(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
+        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
     }
 
-    public RecPessoa getRecEstadocivil() {
-        return recEstadocivil;
-    }
-
-    public void setRecEstadocivil(RecPessoa recEstadocivil) {
-        this.recEstadocivil = recEstadocivil;
-    }
-
-    public RecPessoa getRecRg() {
-        return recRg;
-    }
-
-    public void setRecRg(RecPessoa recRg) {
-        this.recRg = recRg;
-    }
-
-      
 }

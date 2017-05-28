@@ -61,7 +61,7 @@ public class RecPessoaService {
 
    
 
-    public List<RecPessoa> findByRecCpf(long recCpf) {
+    public RecPessoa findByRecCpf(int recCpf) {
         return pessoaDao.findByRecCpf(recCpf);
         
        
