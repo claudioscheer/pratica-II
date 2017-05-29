@@ -9,7 +9,6 @@ import br.org.gdt.converts.SampleEntity;
 import br.org.gdt.enums.DiasATrabalhar;
 import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Insalubridade;
-import br.org.gdt.enums.Periculosidade;
 import br.org.gdt.enums.PossuiDependentes;
 import br.org.gdt.enums.Sexo;
 import java.math.BigInteger;
@@ -171,10 +170,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchRespostas> gchRespostasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchFormularioPessoa> gchFormularioPessoas;
-
-  
-    
-    
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
 //    private List<TipoBeneficio> csbffBeneficiosList;
     @OneToMany
@@ -196,9 +191,19 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
     private CsbffCargos cargos;
+    private CsbffBeneficios beneficios;
     private DiasATrabalhar diasATrabalhar;
     @OneToOne
     private CsbffCargos cargoValorSalario;
+    private CsbffBeneficios beneficioNome;
+    private CsbffEscalaHoras escalaCodigo;
+    @OneToOne
+    private CsbffPessoaBeneficio pessoaBeneficioNome;
+    
+    
+       public RecPessoa(CsbffBeneficios beneficioNome) {
+        this.beneficioNome = beneficioNome;
+    }
 
     public RecPessoa(long recIdpessoa, String recNomecompleto, int recCpf, Sexo recSexo, EstadoCivil recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, String recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, CsbffEscalaHoras csbffEscalaHoras, List<GchTreinamentospessoas> gchTreinamentospessoasList, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Integer recPesGrauEnsino, List<RecPessoa> recPessoaList, CsbffCargos cargoCbo, CsbffCargos cargoNome, String admissaoDescricao, List<CsbffEscalaHoras> csbffEscalaHorasList, CsbffCargos cargos) {
         this.recIdpessoa = recIdpessoa;
@@ -266,14 +271,14 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.cargos = cargos;
     }
 
-      public List<GchFormularioPessoa> getGchFormularioPessoas() {
+    public List<GchFormularioPessoa> getGchFormularioPessoas() {
         return gchFormularioPessoas;
     }
 
     public void setGchFormularioPessoas(List<GchFormularioPessoa> gchFormularioPessoas) {
         this.gchFormularioPessoas = gchFormularioPessoas;
     }
-    
+
     public RecPessoa() {
     }
 
@@ -643,12 +648,20 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.gchTreinamentospessoasList = gchTreinamentospessoasList;
     }
 
+    public List<CsbffEscalaHoras> getCsbffEscalaHorasList() {
+        if (this.csbffEscalaHorasList == null) {
+            this.csbffEscalaHorasList = new ArrayList<>();
+//            this.csbffEscalaHorasList.add(new CsbffEscalaHoras());
+        }
+        return csbffEscalaHorasList;
+    }
+
     @XmlTransient
     @JsonIgnore
     public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
         if (this.csbffPessoaBeneficioList == null) {
             this.csbffPessoaBeneficioList = new ArrayList<>();
-            this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
+//            this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
         }
 
         return csbffPessoaBeneficioList;
@@ -771,6 +784,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     }
 
     public void setCargoNome(CsbffCargos cargoNome) {
+
         this.cargoNome = cargoNome;
     }
 
@@ -788,14 +802,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
         this.csbffEscalaHorasList = csbffEscalaHorasList;
-    }
-
-    public List<CsbffEscalaHoras> getCsbffEscalaHorasList() {
-        if (this.csbffEscalaHorasList == null) {
-            this.csbffEscalaHorasList = new ArrayList<>();
-            this.csbffEscalaHorasList.add(new CsbffEscalaHoras());
-        }
-        return csbffEscalaHorasList;
     }
 
     public List<RecPessoa> getRecPessoaList() {
@@ -831,5 +837,38 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setCargoValorSalario(CsbffCargos cargoValorSalario) {
         this.cargoValorSalario = cargoValorSalario;
+    }
+
+    public CsbffBeneficios getBeneficioNome() {
+        return beneficioNome;
+    }
+
+    public void setBeneficioNome(CsbffBeneficios beneficioNome) {
+        this.beneficioNome = beneficioNome;
+    }
+
+    public CsbffEscalaHoras getEscalaCodigo() {
+        return escalaCodigo;
+    }
+
+    public void setEscalaCodigo(CsbffEscalaHoras escalaCodigo) {
+        this.escalaCodigo = escalaCodigo;
+    }
+
+
+    public CsbffBeneficios getBeneficios() {
+        return beneficios;
+    }
+
+    public void setBeneficios(CsbffBeneficios beneficios) {
+        this.beneficios = beneficios;
+    }
+
+    public CsbffPessoaBeneficio getPessoaBeneficioNome() {
+        return pessoaBeneficioNome;
+    }
+
+    public void setPessoaBeneficioNome(CsbffPessoaBeneficio pessoaBeneficioNome) {
+        this.pessoaBeneficioNome = pessoaBeneficioNome;
     }
 }

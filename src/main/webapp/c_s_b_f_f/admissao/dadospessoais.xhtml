@@ -11,37 +11,44 @@
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content"> 
-                <div class="title_left">
-                    <h3>Contrato de Admissão</h3>
-                </div>
-                <h:messages class="error" style="color: #d9534f" />
 
-                <h:form id="busca">
+                <h:form id="busca" style="margin-top:75px;">
                     <div class="x_panel">
-                        <div class="title_left">
-                            <h2>Dados Pessoais</h2>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-group ">
-                                <label class="control-label" >                                        
-                                    CPF
-                                    <span class="required">*</span>
-                                </label>
-                                <h:inputText label="codigo"  class="form-control" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffAdmissaoBean.recCpf}" />
-                            </div>
+                        <h:messages class="error" style="color: #d9534f" />
+                        <div class="bootstrap-iso">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="title_left">
+                                        <h3>Contrato de Admissão</h3>
+                                    </div>
+                                    <br></br><div class="title_left">
+                                        <h2>Dados Pessoais</h2>
+                                    </div>
+                                    <br></br><div class="ln_solid" style="margin-top: 0"></div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group ">
+                                            <label class="control-label" >                                        
+                                                CPF
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:inputText label="codigo"  class="form-control" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffAdmissaoBean.recCpf}" />
+                                        </div>
 
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-group ">
-                                <label class="control-label">Código colaborador</label>
-                                <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" disabled="true" />
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group ">
+                                            <label class="control-label">Código colaborador</label>
+                                            <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" disabled="true" />
 
-                            </div>
-                        </div> 
+                                        </div>
+                                    </div> 
 
-                        <div class="col-md-3 col-sm-3 col-xs-12">
-                            <div class="element">
-                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffAdmissaoBean.buscarCpf()}"/>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="element">
+                                            <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffAdmissaoBean.buscarCpf()}"/>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -52,7 +59,7 @@
                             <div class="container-fluid" >
                                 <div class="row">
                                     <div class="x_panel">
-                                        <div class="col-md-12 col-sm-12 ">                                
+                                        <div class="col-md-6 col-sm-6 ">                                
                                             <div class="form-group ">
                                                 <label class="control-label " >
                                                     Nome Colaborador
@@ -60,13 +67,13 @@
                                                 </label>
                                                 <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome deve ser preenchido." value="#{csbffAdmissaoBean.recPessoa.recNomecompleto}" />
                                             </div>     
-                                        </div> <!--
-                                        -->                                        <div class="col-md-6 col-sm-6 ">                                
+                                        </div> 
+                                        <div class="col-md-6 col-sm-6 ">                                
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     Estado Civil
                                                 </label>
-                                                <h:selectOneMenu value="#{csbffAdmissaoBean.pessoas}" class="form-control">
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recEstadocivil}" class="form-control" >
                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                     <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="estadoCivil" itemLabel="#{estadoCivil.recEstadocivil}" itemValue="#{estadoCivil.recEstadocivil}"/>
                                                 </h:selectOneMenu>
@@ -77,10 +84,8 @@
                                                 <label class="control-label ">
                                                     Sexo
                                                 </label>
-                                                <h:selectOneMenu value="#{csbffAdmissaoBean.pessoas}" class="form-control">
-                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                    <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="sexo" itemLabel="#{sexo.recSexo}" itemValue="#{sexo.recSexo}"/>
-                                                </h:selectOneMenu>
+                                                <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome deve ser preenchido." value="#{csbffAdmissaoBean.recPessoa.recSexo}" />
+
                                             </div>     
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -130,6 +135,7 @@
                                                 <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome do Pai é obrigatório." value="#{csbffAdmissaoBean.recPessoa.recNomepai}" />
                                             </div>
                                         </div> 
+
                                         <div class="col-md-6 col-sm-6 ">
                                             <div class="form-group ">
                                                 <label class="control-label ">                                        
@@ -138,6 +144,23 @@
                                                 </label>
                                                 <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome da Mãe é obrigatório." value="#{csbffAdmissaoBean.recPessoa.recNomemae}" />
                                             </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">                                
+                                            <div class="form-group ">
+                                                <label class="control-label " for="select">
+                                                    Escolaridade
+                                                </label>
+                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recEscolaridade}" class="form-control">
+                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                    <f:selectItem itemValue="1" itemLabel="1ºGrau Completo (Fundamental)" />
+                                                    <f:selectItem itemValue="2" itemLabel="2ºGrau Completo (Ensino Médio)" />
+                                                    <f:selectItem itemValue="3" itemLabel="Especialização (Cursos Técnicos)" />
+                                                    <f:selectItem itemValue="4" itemLabel="Ensino Superior Completo (Bacharel, Licenciatura, Tecnólogo)" />
+                                                    <f:selectItem itemValue="5" itemLabel="Mestrado " />
+                                                    <f:selectItem itemValue="6" itemLabel="Doutorado" />
+                                                    <f:selectItem itemValue="7" itemLabel="Pós-doutorado" />
+                                                </h:selectOneMenu>
+                                            </div>     
                                         </div>
                                         <div class="col-md-6 col-sm-6 ">
                                             <div class="form-group ">
@@ -164,23 +187,7 @@
                                                 <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Certificado de Reservista é obrigatório." value="#{csbffAdmissaoBean.recPessoa.recReservista}" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">                                
-                                            <div class="form-group ">
-                                                <label class="control-label " for="select">
-                                                    Escolaridade
-                                                </label>
-                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recEscolaridade}" class="form-control">
-                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                    <f:selectItem itemValue="1" itemLabel="1ºGrau Completo (Fundamental)" />
-                                                    <f:selectItem itemValue="2" itemLabel="2ºGrau Completo (Ensino Médio)" />
-                                                    <f:selectItem itemValue="3" itemLabel="Especialização (Cursos Técnicos)" />
-                                                    <f:selectItem itemValue="4" itemLabel="Ensino Superior Completo (Bacharel, Licenciatura, Tecnólogo)" />
-                                                    <f:selectItem itemValue="5" itemLabel="Mestrado " />
-                                                    <f:selectItem itemValue="6" itemLabel="Doutorado" />
-                                                    <f:selectItem itemValue="7" itemLabel="Pós-doutorado" />
-                                                </h:selectOneMenu>
-                                            </div>     
-                                        </div>  
+
                                         <div class="col-md-6 col-sm-6">                                
                                             <div class="form-group ">
                                                 <label class="control-label " for="select">
@@ -189,14 +196,6 @@
                                                 <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNacionalidade}" />
                                             </div>     
                                         </div>  
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="form-group ">
-                                                <label class="control-label " for="number">                                        
-                                                    Bairro
-                                                </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recBairro}" />
-                                            </div>
-                                        </div> 
                                         <div class="col-md-6 col-sm-6 ">
                                             <div class="form-group ">
                                                 <label class="control-label " for="number">                                        
@@ -213,6 +212,16 @@
                                                 <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNumero}" />
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Bairro
+                                                </label>
+                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recBairro}" />
+                                            </div>
+                                        </div> 
+
+
 
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group ">
@@ -228,9 +237,9 @@
                                 </div>
                                 <div class="pull-right">
                                     <div class="row">
-<!--                                        <br></br><h:commandButton class="btn btn-success" type="button" value="Salvar" actionListener="#{csbffAdmissaoBean.save()}"/>-->
-                                        <h:commandButton immediate="true" class="btn btn-danger" type="button" value="Cancelar" actionListener="#{csbffAdmissaoBean.cancel()}"/>
-                                        <h:link class="btn btn-info" outcome="dadosprofissionais.xhtml" type="button" value="Próximo"></h:link>
+                                        <br></br><h:commandLink class="btn btn-success" type="button" value="Salvar" action="#{csbffAdmissaoBean.saveAdmissao()}"/>
+                                        <h:commandLink immediate="true" class="btn btn-danger" type="button" value="Cancelar" action="#{csbffAdmissaoBean.cancel()}"/>
+                                        <!--<h:link class="btn btn-info" outcome="dadosprofissionais.xhtml" type="button" value="Próximo"></h:link>-->
 
                                     </div>
                                 </div>

@@ -176,7 +176,7 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
 
     @Override
     public String toString() {
-        return "br.org.gdt.modelNew.CsbffBeneficios[ beneficioCodigo=" + beneficioCodigo + " ]";
+        return beneficioNome;
     }
 
     public TipoBeneficio getTipoBeneficio() {
@@ -189,15 +189,14 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
 
     @Override
     public Long getId() {
-        return Long.valueOf(this.beneficioCodigo);
+        return this.beneficioCodigo;
 
     }
-
     public List<CsbffBeneficios> getCsbffBeneficiosList() {
-        if (this.csbffBeneficiosList == null) {
-            this.csbffBeneficiosList = new ArrayList<>();
-        }
-        
+//        if (this.csbffBeneficiosList == null) {
+//            this.csbffBeneficiosList = new ArrayList<>();
+//        }
+//        
         return csbffBeneficiosList;
     }
 
