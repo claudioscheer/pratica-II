@@ -236,7 +236,7 @@ public class GchFormularioBean {
         checked = new HashMap<RecPessoa, Boolean>();
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            context.getExternalContext().redirect("Treinamentos.xhtml");
+            context.getExternalContext().redirect("Formularios.xhtml");
         } catch (IOException ex) {
 
         }
