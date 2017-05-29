@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoFolha;
+import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
@@ -10,6 +11,8 @@ import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
+import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -82,10 +85,31 @@ public class FpEnvelopePagamento {
 
         FpFolhaPeriodo folhaPeriodo = fpFolhaPeriodoService.findByPessoaEPeriodo(fpPeriodo, recPessoa);
         if (folhaPeriodo == null) {
-            Helper.mostrarNotificacao("Folha período", "Folha não encontrada para esta pessoa.", "info");
+            Helper.mostrarNotificacao("Folha", "Folha não encontrada para esta pessoa.", "info");
             folhaPeriodo = new FpFolhaPeriodo();
         }
         fpFolhaPeriodo = folhaPeriodo;
+    }
+
+    public void recalcularFolhaPeriodo() {
+        try {
+            DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
+            dadosCalculadosDoFuncionario.setRecalcular(true);
+            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
+
+            if (recPessoa.getRecIdpessoa() <= 0) {
+                Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+                return;
+            }
+            dadosCalculadosDoFuncionario.setPessoa(recPessoa);
+            dadosCalculadosDoFuncionario.setEventos(fpFolhaPeriodo.getForEventos());
+
+            fpFolhaPeriodo = calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
+
+            Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "info");
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
+        }
     }
 
     public boolean isMostrarTodasFolhasPeriodo() {

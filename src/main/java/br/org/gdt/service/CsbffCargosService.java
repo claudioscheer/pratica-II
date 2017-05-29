@@ -37,13 +37,9 @@ public class CsbffCargosService {
     }
     
     public List<CsbffCargos> findByCargos(long cbo) {
-        
-        
-        return csbffCargosDAO.findByCargos(cbo);
+       return csbffCargosDAO.findByCargos(cbo);
     }
     
-    
-
     public List<CsbffCargos> findAll() {
         return csbffCargosDAO.findAll();
     }

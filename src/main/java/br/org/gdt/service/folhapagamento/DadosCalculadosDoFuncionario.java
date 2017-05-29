@@ -5,13 +5,21 @@ import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.model.RecPessoa;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DadosCalculadosDoFuncionario {
 
+    private boolean recalcular;
     private FpPeriodo periodo;
     private RecPessoa pessoa;
     private List<FpEventoPeriodo> eventos;
+
+    public boolean isRecalcular() {
+        return recalcular;
+    }
+
+    public void setRecalcular(boolean recalcular) {
+        this.recalcular = recalcular;
+    }
 
     public FpPeriodo getPeriodo() {
         if (periodo == null) {

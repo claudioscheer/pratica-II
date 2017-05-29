@@ -59,6 +59,21 @@ public class CalcularFolha {
         eventoDSR.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoDSR);
 
+        FpEventoPeriodo eventoSalarioFamilia = new FpEventoPeriodo();
+        eventoSalarioFamilia.setEvpEvento(fpEventoService.findById(FpEnumEventos.SalarioFamilia.ordinal() + 1));
+        eventoSalarioFamilia.setEvpEventoPadrao(true);
+        EVENTOS_PADROES.add(eventoSalarioFamilia);
+
+        FpEventoPeriodo eventoInsalubridade = new FpEventoPeriodo();
+        eventoInsalubridade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Insalubridade.ordinal() + 1));
+        eventoInsalubridade.setEvpEventoPadrao(true);
+        EVENTOS_PADROES.add(eventoInsalubridade);
+        
+        FpEventoPeriodo eventoPericulosidade = new FpEventoPeriodo();
+        eventoPericulosidade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Periculosidade.ordinal() + 1));
+        eventoPericulosidade.setEvpEventoPadrao(true);
+        EVENTOS_PADROES.add(eventoPericulosidade);
+
         return EVENTOS_PADROES;
     }
 
@@ -66,7 +81,7 @@ public class CalcularFolha {
 
     }
 
-    public void calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException, Exception {
+    public FpFolhaPeriodo calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException, Exception {
         fpFolhaPeriodoService.deleteByPessoaEPeriodo(dadosCalculadosDoFuncionario.getPeriodo(), dadosCalculadosDoFuncionario.getPessoa());
 
         FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
@@ -96,6 +111,8 @@ public class CalcularFolha {
                 });
         fpFolhaPeriodo.setForStatusFolhaPeriodo(FpStatusFolhaPeriodo.Calculada);
         fpFolhaPeriodoService.update(fpFolhaPeriodo);
+
+        return fpFolhaPeriodo;
     }
 
 }

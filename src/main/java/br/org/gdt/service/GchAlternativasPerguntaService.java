@@ -39,7 +39,12 @@ public class GchAlternativasPerguntaService {
     }
 
     public List<GchAlternativasperguntas> findAll() {
-        System.out.println("Aqui estou eu");
         return gchAlternativasPerguntasDAO.findAll();
     }
+    
+    public List<GchAlternativasperguntas> buscaAlternativasPerguntas(long codigo) {
+        return gchAlternativasPerguntasDAO.buscaAlternativasPerguntas(codigo);
+    }
+    
+    
 }

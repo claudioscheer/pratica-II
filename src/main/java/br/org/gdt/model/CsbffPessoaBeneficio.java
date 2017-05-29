@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -31,48 +32,58 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CsbffPessoaBeneficio.findAll", query = "SELECT c FROM CsbffPessoaBeneficio c")})
 public class CsbffPessoaBeneficio implements Serializable {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "pessoa_beneficio_codigo")
-    private long  pessoaBeneficioCodigo;
-    @JoinColumn(name = "beneficio_codigo", referencedColumnName = "beneficio_codigo")
-    @ManyToOne(optional = false)
-    private CsbffBeneficios beneficioCodigo;
+    private long pessoaBeneficioCodigo;
+//    @JoinColumn(name = "beneficio_codigo", referencedColumnName = "beneficio_codigo")
+//    @ManyToOne(optional = false)
+//    private CsbffBeneficios beneficioCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
     private RecPessoa recIdpessoa;
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
-    
+    @Basic(optional = true)
+    @Column(name = "pessoa_beneficioNome")
+    private String pessoaBeneficioNome;
+
     public CsbffPessoaBeneficio() {
     }
 
-    public CsbffPessoaBeneficio(long  pessoaBeneficioCodigo) {
+    public CsbffPessoaBeneficio(long pessoaBeneficioCodigo, RecPessoa recIdpessoa, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, String pessoaBeneficioNome) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
+        this.recIdpessoa = recIdpessoa;
+        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
+        this.pessoaBeneficioNome = pessoaBeneficioNome;
     }
 
-    public long  getPessoaBeneficioCodigo() {
+    public void addBePessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
+        if (csbffPessoaBeneficio != null) {
+            csbffPessoaBeneficio.setCsbffPessoaBeneficioList((List<CsbffPessoaBeneficio>) this);
+            this.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
+
+        }
+    }
+
+    public long getPessoaBeneficioCodigo() {
         return pessoaBeneficioCodigo;
     }
 
-    public void setPessoaBeneficioCodigo(long  pessoaBeneficioCodigo) {
+    public void setPessoaBeneficioCodigo(long pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
-    public CsbffBeneficios getBeneficioCodigo() {
-        return beneficioCodigo;
-    }
-
-    public CsbffPessoaBeneficio(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
-        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-    }
-
-    public void setBeneficioCodigo(CsbffBeneficios beneficioCodigo) {
-        this.beneficioCodigo = beneficioCodigo;
-    }
-
+//    public CsbffBeneficios getBeneficioCodigo() {
+//        return beneficioCodigo;
+//    }
+//
+//    public void setBeneficioCodigo(CsbffBeneficios beneficioCodigo) {
+//        this.beneficioCodigo = beneficioCodigo;
+//    }
     public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
@@ -80,31 +91,6 @@ public class CsbffPessoaBeneficio implements Serializable {
     public void setRecIdpessoa(RecPessoa recIdpessoa) {
         this.recIdpessoa = recIdpessoa;
     }
-
-//    @Override
-//    public int hashCode() {
-//        int hash = 0;
-//        hash += (pessoaBeneficioCodigo != null ? pessoaBeneficioCodigo.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof CsbffPessoaBeneficio)) {
-//            return false;
-//        }
-//        CsbffPessoaBeneficio other = (CsbffPessoaBeneficio) object;
-//        if ((this.pessoaBeneficioCodigo == null && other.pessoaBeneficioCodigo != null) || (this.pessoaBeneficioCodigo != null && !this.pessoaBeneficioCodigo.equals(other.pessoaBeneficioCodigo))) {
-//            return false;
-//        }
-//        return true;
-//    }
-
-//    @Override
-//    public String toString() {
-//        return "br.org.gdt.modelNew.CsbffPessoaBeneficio[ pessoaBeneficioCodigo=" + pessoaBeneficioCodigo + " ]";
-//    }
 
     public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
         return csbffPessoaBeneficioList;
@@ -114,8 +100,26 @@ public class CsbffPessoaBeneficio implements Serializable {
         this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
     }
 
-    public Object csbffPessoaBeneficioList() {
-        return csbffPessoaBeneficioList;
+//    public CsbffBeneficios getBeneficioNome() {
+//        return beneficioNome;
+//    }
+//
+//    public void setBeneficioNome(CsbffBeneficios beneficioNome) {
+//        this.beneficioNome = beneficioNome;
+//    }
+//
+//    public CsbffBeneficios getPessoaBeneficioNome() {
+//        return pessoaBeneficioNome;
+//    }
+//    public void setPessoaBeneficioNome(CsbffBeneficios pessoaBeneficioNome) {
+//        this.pessoaBeneficioNome = pessoaBeneficioNome;
+//    }
+    public String getPessoaBeneficioNome() {
+        return pessoaBeneficioNome;
     }
-    
+
+    public void setPessoaBeneficioNome(String pessoaBeneficioNome) {
+        this.pessoaBeneficioNome = pessoaBeneficioNome;
+    }
+
 }
