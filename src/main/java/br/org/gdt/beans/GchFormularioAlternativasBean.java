@@ -6,8 +6,10 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.GchAlternativas;
+import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
+import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
@@ -18,7 +20,6 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-
 
 /**
  *
@@ -33,34 +34,48 @@ public class GchFormularioAlternativasBean {
     private GchAlternativas gchAlternativas = new GchAlternativas();
 
     private Map<GchAlternativas, Boolean> radio = new HashMap<GchAlternativas, Boolean>();
-    
-    private List<GchPerguntas> todasPerguntas;
-    
+
+    private List<GchPerguntas> todasPerguntas = new ArrayList<>();
+
     @ManagedProperty("#{gchAlternativaCertoService}")
     private GchCadastroAlternativaServiceCerto gchAlternativasService;
 
     @ManagedProperty("#{gchPerguntaService}")
-    private GchPerguntasService gchPerguntasService; 
-    
-     @ManagedProperty("#{gchFormularioService}")
+    private GchPerguntasService gchPerguntasService;
+
+    @ManagedProperty("#{gchFormularioService}")
     private GchFormularioService gchFormularioService;
 
-     private GchFormulario gchFormularios;
-     
-    
+    @ManagedProperty("#{gchAlternativaPerguntasService}")
+    private GchAlternativasPerguntaService gchAlternativasPerguntaService;
+
+    private GchFormulario gchFormularios;
+
     public GchFormularioAlternativasBean() {
+        if (gchFormularios == null) {
 
+            gchFormularios = gchFormularioService.findById(1);
+
+        }
     }
-
-
 
     public void save() {
     }
-    
-    public List<GchAlternativas> buscaAlternativas(GchPerguntas gchPerguntas){
-    
-        return gchAlternativasService.findAll();
-    
+
+    public List<GchAlternativas> buscaAlternativas(GchPerguntas gchPerguntas) {
+
+        List<GchAlternativasperguntas> gchAlternativasPergunta = gchAlternativasPerguntaService.buscaAlternativasPerguntas(gchPerguntas.getPerCodigo());
+
+        List<GchAlternativas> gchAlternativasList = new ArrayList<>();
+
+        for (GchAlternativasperguntas item : gchAlternativasPergunta) {
+
+            gchAlternativasList.add(item.getGchAlternativas());
+
+        }
+
+        return gchAlternativasList;
+
     }
 
     public List<GchAlternativas> getTodasAlternativas() {
@@ -96,13 +111,13 @@ public class GchFormularioAlternativasBean {
     }
 
     public GchFormulario getGchFormularios() {
-        
-        if (gchFormularios == null){
-        
+
+        if (gchFormularios == null) {
+
             gchFormularios = gchFormularioService.findById(1);
-           
+
         }
-        
+
         return gchFormularios;
     }
 
@@ -134,8 +149,12 @@ public class GchFormularioAlternativasBean {
         this.todasPerguntas = todasPerguntas;
     }
 
-    
-    
-    
+    public GchAlternativasPerguntaService getGchAlternativasPerguntaService() {
+        return gchAlternativasPerguntaService;
+    }
+
+    public void setGchAlternativasPerguntaService(GchAlternativasPerguntaService gchAlternativasPerguntaService) {
+        this.gchAlternativasPerguntaService = gchAlternativasPerguntaService;
+    }
 
 }
