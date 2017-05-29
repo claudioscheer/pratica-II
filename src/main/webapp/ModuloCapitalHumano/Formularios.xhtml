@@ -125,7 +125,7 @@
                                                         
                                                         <h:commandButton id="enviarEmail" class="btn btn-primary" value="Cadastrar" >
 
-                                                            <f:ajax event="click" execute="@form"   listener="#{gchFormularioBean.salvarPessoasFormulario}"   />
+                                                            <f:ajax event="click" render="formFormulario"  listener="#{gchFormularioBean.salvarPessoasFormulario}"   />
                                                             
                                                         </h:commandButton>
 
