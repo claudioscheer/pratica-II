@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      >
 
     <h:body>
         <ui:composition template="../templates/template.xhtml">
@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="panel-body" style="/* align-items: center; */">
 
-                                        <h:form id="formCursos">
+                                        <h:form id="formResposta">
                                             <div class="container-fluid">
                                                 <div class="row">
 
@@ -45,27 +45,32 @@
 
                                                             <ui:repeat value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa">
 
-                                                                
-                                                                    <div class="col-md-3 col-sm-3 col-xs-3"> 
 
-                                                                        <div class="radio">
+                                                                <div class="col-md-3 col-sm-3 col-xs-3"> 
 
-                                                                            <label >
+                                                                    <div class="radio">
 
-                                                                                <div class="iradio_flat-green">
-                                                                                    <input class="flat" type="radio" name="#{perguntas.perCodigo}"  value="#{gchFormularioAlternativasBean.radioValue}" checked="#{radioValue == gchFormularioAlternativasBean.selectedRadioValue ? 'checked' : ''}" />
+                                                                        <label >
 
-                                                                                </div>
+                                                                            <div class="iradio_flat-green">
+                                                                                <input class="flat" type="radio" name="#{perguntas.perCodigo}"  value="#{gchFormularioAlternativasBean.radio[alternativa]}" checked="#{gchFormularioAlternativasBean.verificaMarcado(alternativa)}">
 
-                                                                                #{alternativa.altDescricao}
+                                                                                    <f:ajax listener="#{gchFormularioAlternativasBean.verificaMarcado}" render="formResposta" />
+                                                                                    <f:attribute name="alternativa" value="#{alternativa}" />
 
-                                                                            </label>
+                                                                                </input>
 
-                                                                        </div>
+                                                                            </div>
 
-                                                                    </div> 
+                                                                            #{alternativa.altDescricao}
 
-                                                                
+                                                                        </label>
+
+                                                                    </div>
+
+                                                                </div> 
+
+
                                                             </ui:repeat>
 
                                                         </div>

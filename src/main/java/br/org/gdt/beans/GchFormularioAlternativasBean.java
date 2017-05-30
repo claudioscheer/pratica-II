@@ -9,6 +9,7 @@ import br.org.gdt.model.GchAlternativas;
 import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
@@ -20,6 +21,8 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 /**
  *
@@ -29,10 +32,10 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class GchFormularioAlternativasBean {
 
-    private String selectedRadioValue;
+    private String selectedRadioValue = "";
 
-    private String radioValue;
-    
+    private String radioValue = null;
+
     private List<GchAlternativas> todasAlternativas = new ArrayList<>();
 
     private GchAlternativas gchAlternativas = new GchAlternativas();
@@ -60,14 +63,41 @@ public class GchFormularioAlternativasBean {
     }
 
     public void save() {
+
     }
 
     public List<GchPerguntas> buscaPerguntas() {
 
         gchFormularios = gchFormularioService.findById(1);
-        
+
         return gchFormularios.getPerguntas();
+
+    }
+
+    public String verificaMarcado(AjaxBehaviorEvent event) {
+
+        System.out.println("Aqui primeiro");
         
+         FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        GchAlternativas alternativa = (GchAlternativas) event.getComponent().getAttributes().get("alternativa");
+        
+        
+        if (selectedRadioValue.equals(radioValue)) {
+
+            
+            radio.put(gchAlternativas, Boolean.TRUE);
+            
+            return "checked";
+
+        } else {
+
+            radio.put(gchAlternativas, Boolean.FALSE);
+            
+            return "";
+
+        }
+
     }
 
     public List<GchAlternativas> buscaAlternativas(GchPerguntas gchPerguntas) {
