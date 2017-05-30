@@ -41,7 +41,7 @@ public class GchAlternativasperguntas implements Serializable {
     @Basic(optional = false)
     @Column(name = "alt_perCodigo")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_alt")
-    private long altPerCodigo;
+    private long altPerCodigo;                            
 
     
 

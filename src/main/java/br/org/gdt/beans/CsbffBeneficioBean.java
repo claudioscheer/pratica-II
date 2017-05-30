@@ -3,7 +3,6 @@ package br.org.gdt.beans;
 import br.org.gdt.enums.AbrangenciaBeneficio;
 import br.org.gdt.enums.TipoBeneficio;
 import br.org.gdt.model.CsbffBeneficios;
-import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffBeneficiosService;
 import br.org.gdt.service.CsbffDependentesService;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class CsbffBeneficioBean {
 
-    private int nomeBeneficio;
+    private CsbffBeneficios nomeBeneficio;
     private CsbffBeneficios codigoBeneficio;
     private boolean formAtivo = false;
 //    private int nomeBeneficio;
@@ -78,13 +77,7 @@ public class CsbffBeneficioBean {
 
     }
 
-    public int getNomeBeneficio() {
-        return nomeBeneficio;
-    }
-
-    public void setNomeBeneficio(int nomeBeneficio) {
-        this.nomeBeneficio = nomeBeneficio;
-    }
+ 
 
     public List<CsbffBeneficios> getBeneficios() {
         List<CsbffBeneficios> beneficios = new ArrayList<>();
@@ -214,5 +207,13 @@ public class CsbffBeneficioBean {
 
     public void setCsbffDependentesService(CsbffDependentesService csbffDependentesService) {
         this.csbffDependentesService = csbffDependentesService;
+    }
+
+    public CsbffBeneficios getNomeBeneficio() {
+        return nomeBeneficio;
+    }
+
+    public void setNomeBeneficio(CsbffBeneficios nomeBeneficio) {
+        this.nomeBeneficio = nomeBeneficio;
     }
 }

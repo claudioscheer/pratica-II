@@ -5,6 +5,7 @@
  */
 package br.org.gdt.model;
 
+import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
@@ -29,19 +30,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-
-
-
 @Entity
 @SequenceGenerator(name = "seq_csbff_cargo", sequenceName = "seq_csbff_cargo", allocationSize = 1)
 @Table(name = "csbff_cargos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CsbffCargos.findAll", query = "SELECT c FROM CsbffCargos c")})
-public class CsbffCargos implements Serializable {
+public class CsbffCargos implements Serializable, SampleEntity {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-  
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_csbff_cargo")
     @Basic(optional = false)
     @Id
@@ -81,6 +80,10 @@ public class CsbffCargos implements Serializable {
 
     public CsbffCargos(long cargoCodigo) {
         this.cargoCodigo = cargoCodigo;
+    }
+
+    public CsbffCargos(Double cargoValorSalario) {
+        this.cargoValorSalario = cargoValorSalario;
     }
 
     public CsbffCargos(long cargoCodigo, String cargoNome, long cargoCbo, Date cargoDataDeCriacao) {
@@ -194,8 +197,8 @@ public class CsbffCargos implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + (int) (this.cargoCodigo ^ (this.cargoCodigo >>> 32));
+        int hash = 7;
+        hash = 67 * hash + (int) (this.cargoCodigo ^ (this.cargoCodigo >>> 32));
         return hash;
     }
 
@@ -217,12 +220,16 @@ public class CsbffCargos implements Serializable {
         return true;
     }
 
-    
-    
-    
     @Override
     public String toString() {
-        return "br.org.gdt.modelNew.CsbffCargos[ cargoCodigo=" + cargoCodigo + " ]";
+//        return "br.org.gdt.modelNew.CsbffCargos[ cargoCodigo=" + cargoCodigo + " ]";
+        return cargoNome;
     }
-    
+
+    @Override
+    public Long getId() {
+        return this.cargoCodigo;
+
+    }
+
 }

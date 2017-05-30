@@ -10,10 +10,6 @@
         <title>cargos</title>
     </h:head>
 
-
-
-
-
     <h:body>
 
         <ui:composition template="../../templates/template.xhtml">
@@ -24,7 +20,7 @@
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
                         <div class="row">
                             <h:commandButton class="btn btn-primary" value="Adicionar" action="#{csbffCargosBean.add()}">
-                                <f:ajax execute="@form" render="formTabela" />
+                                <!--<f:ajax execute="@form" render="formTabela" />-->
                             </h:commandButton>
                             
                         </div>
@@ -71,7 +67,7 @@
                         <div class="row">
                             <div class="x_panel">
                                 <div class="x_content">
-                                    <h:dataTable class="table table-striped" value="#{csbffCargosBean.todosCargos}" var="cargos">
+                                    <h:dataTable class="table table-striped" value="#{csbffCargosBean.todosCargos}" var="cargos" >
                                         <h:column>
                                             <f:facet name="header">Código</f:facet>
                                                 #{cargos.cargoCodigo}
@@ -113,12 +109,6 @@
                             </div>
                         </div>
                     </h:panelGroup>
-
-
-
-
-
-
 
                 </h:form>      
             </ui:define>

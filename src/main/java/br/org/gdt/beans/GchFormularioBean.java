@@ -236,7 +236,7 @@ public class GchFormularioBean {
         checked = new HashMap<RecPessoa, Boolean>();
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            context.getExternalContext().redirect("Treinamentos.xhtml");
+            context.getExternalContext().redirect("Formularios.xhtml");
         } catch (IOException ex) {
 
         }
@@ -267,10 +267,12 @@ public class GchFormularioBean {
     }
     
 
-    public void salvarPessoasFormulario() {
+    public String salvarPessoasFormulario() {
 
         if (gchFormulariopessoa != null) {
 
+            RequestContext contextReq = RequestContext.getCurrentInstance();          
+            
             Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
 
             ArrayList<ParametrosEmail> parametros = new ArrayList<>();
@@ -278,6 +280,8 @@ public class GchFormularioBean {
             ParametrosEmail ItemParametro;
             FacesContext context = FacesContext.getCurrentInstance();
 
+        
+            
             EncryptDecryptString cripto = new EncryptDecryptString();
             
             //Configurações da caixa de e-mail padrão do sistema
@@ -358,8 +362,10 @@ public class GchFormularioBean {
 
             String MsgNotificacao = "Formulário disponibilizado para as pessoas selecionadas!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            
+            
         }
-
+return "Formularios";
     }
 
     public String SalvarFormulario() {

@@ -140,9 +140,10 @@ public class GchAlternativaBean {
         return AlternativasFiltradas;
     }
 
-    public void cancel() {
+    public String cancel() {
         this.formAtivo = false;
         this.gchAlternativas = new GchAlternativas();
+        return "Alternativas";
     }
 
     public void add() {

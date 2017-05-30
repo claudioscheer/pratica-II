@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Admissão de colaborador</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/template.xhtml">
+            <ui:define name="content"> 
+                <h:form id="busca">
+                    <div class="x_panel">
+                        <h:messages class="error" style="color: #d9534f" />
+                        <div class="bootstrap-iso">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="title_left">
+                                        <h3>Escala</h3>
+                                    </div>
+                                    <br></br><div class="ln_solid" style="margin-top: 0"></div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group ">
+                                            <label class="control-label" >                                        
+                                                CPF
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:inputText label="codigo"  class="form-control" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffAdmissaoBean.recCpf}" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group ">
+                                            <label class="control-label">Código colaborador</label>
+                                            <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" disabled="true" />
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 ">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " >
+                                                Nome Colaborador
+                                            </label>
+                                            <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNomecompleto}" disabled="true"/>
+                                        </div>     
+                                    </div> 
+
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="element">
+                                            <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffAdmissaoBean.buscarCpf()}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+                <h:form id="escala" style="margin-top:75px;">
+                    <div class="x_panel">
+                        <h:messages class="error" style="color: #d9534f" />
+                        <h:panelGroup id="panelDados" layout="block">
+                            <div class="bootstrap-iso">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" layout="block" >
+
+                                            <br></br><div class="form-group">
+                                                <h2 class="col-md-3 col-sm-3 col-xs-12">Escala de Horários</h2>
+                                                <div class="form-group">
+                                                    <div class="text-center col-md-3 col-sm-3 col-xs-12 col-md-offset-6">
+                                                        <h:commandButton class="btn btn-primary" value="Adicionar Escala" action="#{csbffAdmissaoBean.addNovaEscala()}">
+                                                            <f:ajax execute="@form" render="escala" />
+                                                        </h:commandButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br></br><br></br><br></br><div class="ln_solid" style="margin-top: 0"></div>
+
+                                            <ui:repeat value="#{csbffAdmissaoBean.recPessoa.csbffEscalaHorasList}" var="faixa" varStatus="repeat">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-2 col-sm-2">
+                                                            <label class="control-label">Hora Entrada</label>
+                                                            <h:inputText label="HoraEntrada" class="form-control" value="#{csbffAdmissaoBean.recPessoa.csbffEscalaHorasList[repeat.index].escalaHora1}"/>
+
+                                                        </div>
+                                                        <div class="form-group col-md-2 col-sm-2">
+                                                            <label class="control-label">Hora Saída</label>
+                                                            <h:inputText label="HoraSaida" class="form-control" value="#{csbffAdmissaoBean.recPessoa.csbffEscalaHorasList[repeat.index].escalaHora2}"/>
+
+                                                        </div>
+                                                        <div class="form-group col-md-2 col-sm-2">
+                                                            <label class="control-label">Hora Entrada</label>
+                                                            <h:inputText label="HoraEntrada" class="form-control" value="#{csbffAdmissaoBean.recPessoa.csbffEscalaHorasList[repeat.index].escalaHora3}"/>
+
+                                                        </div>
+                                                        <div class="form-group col-md-2 col-sm-2">
+                                                            <label class="control-label">Hora Saída</label>
+                                                            <h:inputText label="HoraSaida" class="form-control" value="#{csbffAdmissaoBean.recPessoa.csbffEscalaHorasList[repeat.index].escalaHora4}"/>
+
+                                                        </div>
+
+
+                                                        <div class="form-group col-md-2 col-sm-2">
+                                                            <label class="control-label">Dias a Trabalhar</label>
+                                                            <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.csbffEscalaHorasList[repeat.index].diaDaSemana}" class="form-control">
+                                                                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                <f:selectItems value="#{csbffAdmissaoBean.diasATrabalhar}" />
+                                                            </h:selectOneMenu> 
+                                                        </div>
+                                                        <div class="text-center col-md-2 col-sm-2" style="padding-top: 27px">
+                                                            <h:commandLink class="btn btn-danger btn-sm" value="Remover Escala" action="#{csbffAdmissaoBean.removerEscala(repeat.index)}" onclick="return confirm('Remover Escala?')"/>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </ui:repeat>
+
+                                            <!--                                                    <div class="ln_solid" style="margin-top: 0"></div>-->
+
+                                        </h:panelGroup>
+                                        <hr />
+                                        <hr />
+                                    </div>
+                                </div>
+                            </div>
+                            <br></br><div class="pull-right">
+                                <div class="row">
+
+                                    <h:commandButton class="btn btn-success" value="Salvar" action="#{csbffAdmissaoBean.saveEscalas()}"/>
+                                    <h:commandButton immediate="true" class="btn btn-danger" value="Cancelar" action="#{csbffAdmissaoBean.cancelEscala()}"/>
+                                    <h:link class="btn btn" outcome="dadosprofissionais.xhtml" value="Voltar"></h:link>
+
+                                </div>
+                            </div>
+
+
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+
+
