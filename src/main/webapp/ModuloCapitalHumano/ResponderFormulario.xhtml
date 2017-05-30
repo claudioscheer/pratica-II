@@ -20,11 +20,6 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                                    <div class="form-group" style="float: right;margin-top: 10px">
-                                        <div>
-                                            <h:link  outcome="CadastroCurso.xhtml" class="btn btn-primary " value="Novo Curso"/>
-                                        </div>
-                                    </div>
                                     <div class="panel-heading">
                                         <h3 class="title_left">
                                             Formulário
@@ -33,26 +28,59 @@
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <h:form id="formCursos">
+                                            <div class="container-fluid">
+                                                <div class="row">
+
+                                                    <ui:repeat value="#{gchFormularioAlternativasBean.buscaPerguntas()}" var="perguntas">
+                                                        <div class="form-group">
+
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                                                <h:outputLabel class="control-label requiredField" value="#{perguntas.perDescricao}"/>
+                                                                <h:inputHidden value="#{perguntas.perCodigo}" />
+
+                                                            </div>
 
 
-                                            <ui:repeat value="#{gchFormularioAlternativasBean.gchFormularios.perguntas}" var="perguntas">
-                                                <div class="field">
-                                                    <h:outputLabel value="#{perguntas.perDescricao}"/>
-                                                    <h:inputText value="#{perguntas.perCodigo}" />
 
-                                                    <h:selectOneRadio value="#{gchFormularioAlternativasBean.radio}" >
-                                                        <f:selectItems value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.altDescricao}"/>
-                                                    </h:selectOneRadio>
+                                                            <ui:repeat value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa">
+
+                                                                
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3"> 
+
+                                                                        <div class="radio">
+
+                                                                            <label >
+
+                                                                                <div class="iradio_flat-green">
+                                                                                    <input class="flat" type="radio" name="#{perguntas.perCodigo}"  value="#{gchFormularioAlternativasBean.radioValue}" checked="#{radioValue == gchFormularioAlternativasBean.selectedRadioValue ? 'checked' : ''}" />
+
+                                                                                </div>
+
+                                                                                #{alternativa.altDescricao}
+
+                                                                            </label>
+
+                                                                        </div>
+
+                                                                    </div> 
+
+                                                                
+                                                            </ui:repeat>
+
+                                                        </div>
+                                                    </ui:repeat>
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <h:commandButton class="btn btn-primary" value="Finalizar" action="#{gchFormularioAlternativasBean.save()}" />
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
-                                            </ui:repeat>
-
-
-                                            <h:commandButton value="parametro" action="#{gchFormularioBean.LeituraParametroLink}">
-
-                                                <f:ajax render="formCursos"/>
-                                            </h:commandButton>
-
+                                            </div>
 
                                         </h:form> 
                                     </div>

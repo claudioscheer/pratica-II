@@ -29,6 +29,10 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class GchFormularioAlternativasBean {
 
+    private String selectedRadioValue;
+
+    private String radioValue;
+    
     private List<GchAlternativas> todasAlternativas = new ArrayList<>();
 
     private GchAlternativas gchAlternativas = new GchAlternativas();
@@ -49,17 +53,21 @@ public class GchFormularioAlternativasBean {
     @ManagedProperty("#{gchAlternativaPerguntasService}")
     private GchAlternativasPerguntaService gchAlternativasPerguntaService;
 
-    private GchFormulario gchFormularios;
+    private GchFormulario gchFormularios = new GchFormulario();
 
     public GchFormularioAlternativasBean() {
-        if (gchFormularios == null) {
 
-            gchFormularios = gchFormularioService.findById(1);
-
-        }
     }
 
     public void save() {
+    }
+
+    public List<GchPerguntas> buscaPerguntas() {
+
+        gchFormularios = gchFormularioService.findById(1);
+        
+        return gchFormularios.getPerguntas();
+        
     }
 
     public List<GchAlternativas> buscaAlternativas(GchPerguntas gchPerguntas) {
@@ -155,6 +163,22 @@ public class GchFormularioAlternativasBean {
 
     public void setGchAlternativasPerguntaService(GchAlternativasPerguntaService gchAlternativasPerguntaService) {
         this.gchAlternativasPerguntaService = gchAlternativasPerguntaService;
+    }
+
+    public String getSelectedRadioValue() {
+        return selectedRadioValue;
+    }
+
+    public void setSelectedRadioValue(String selectedRadioValue) {
+        this.selectedRadioValue = selectedRadioValue;
+    }
+
+    public String getRadioValue() {
+        return radioValue;
+    }
+
+    public void setRadioValue(String radioValue) {
+        this.radioValue = radioValue;
     }
 
 }
