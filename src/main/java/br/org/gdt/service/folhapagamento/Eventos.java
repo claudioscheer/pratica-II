@@ -56,6 +56,7 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
                     ? fpFaixa.getFaiValor()
                     : valorEventosIncideINSS * (fpFaixa.getFaiValor() / 100));
+            fpEventoPeriodo.setEvpValorReferencia(fpFaixa.getFaiValor());
 
         } else if (evento == FpEnumEventos.FGTS.ordinal()) {
             // Proventos onde incide FGTS.
@@ -81,6 +82,7 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
                     ? fpFaixa.getFaiValor()
                     : valorEventosIncideFGTS * (fpFaixa.getFaiValor() / 100));
+            fpEventoPeriodo.setEvpValorReferencia(fpFaixa.getFaiValor());
 
         } else if (evento == FpEnumEventos.IRRF.ordinal()) {
             // Proventos onde incide IRRF.
@@ -110,6 +112,7 @@ public class Eventos {
             valor -= fpFaixa.getFaiValorDeducao();
 
             fpEventoPeriodo.setEvpValor(valor);
+            fpEventoPeriodo.setEvpValorReferencia(fpFaixa.getFaiValor());
 
         } else if (evento == FpEnumEventos.HorasExtras50.ordinal()) {
             double valorHoraFuncionario = getValorHoraFuncionario(dadosCalculadosDoFuncionario);
