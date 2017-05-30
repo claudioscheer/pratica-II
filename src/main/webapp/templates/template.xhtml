@@ -25,16 +25,20 @@
             <div class="main_container">
                 <div class="col-md-3 left_col menu_fixed">
                     <div class="left_col scroll-view">
-                        <div class="navbar nav_title text-center" style="border: 3;">
-                            <span class="site_title" style="padding-left: 0">Murphy</span>
-                        </div>
+                        <h:link outcome="/index.xhtml">
+                            <div class="navbar nav_title text-center" style="border: 3;">
+                                <span class="site_title" style="padding-left: 0">Murphy</span>
+                            </div>
+                        </h:link>
 
                         <div class="clearfix"></div>
 
                         <!-- menu profile quick info -->
                         <div class="profile clearfix">
                             <div class="profile_pic">
-                                <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img" />
+                                <h:link outcome="/index.xhtml">
+                                    <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img"/>
+                                </h:link>    
                             </div>
                             <div class="profile_info">
                                 <span>Olá,</span>
@@ -48,15 +52,15 @@
                         <!-- sidebar menu -->
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
-                                <h3>Geral</h3>
+                                <h3>Menu</h3>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><li><h:link outcome="/InicializaSistema.xhtml"><i class="fa fa-calculator"></i> Inicializar dados</h:link></li></a>
+                                        <a><li><h:link outcome="/InicializaSistema.xhtml"><i class="fa fa-magic"></i> Inicializar dados</h:link></li></a>
                                     </li>
                                 </ul>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-calculator"></i> Folha de pagamento <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-calculator"></i> Folha de Pagamento <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><h:link outcome="/folhapagamento/envelopepagamento.xhtml" value="Envelope pagamento" /></li>
                                             <li><h:link outcome="/folhapagamento/calcular.xhtml" value="Calcular" /></li>
@@ -80,7 +84,7 @@
                                 </ul>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-users"></i> Capital humano  <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-users"></i> Capital Humano  <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><h:link outcome="/ModuloCapitalHumano/Cursos.xhtml" value="Cursos"></h:link></li>
                                             <li><h:link outcome="/ModuloCapitalHumano/Treinamentos.xhtml" value="Treinamentos"></h:link></li>
@@ -92,7 +96,7 @@
                                 </ul>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-list"></i> Cargos <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-line-chart"></i> Cargos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><h:link outcome="/c_s_b_f_f/cargo/cargo_consulta.xhtml" value="Cargos"></h:link></li>
                                         </ul>
