@@ -142,7 +142,7 @@ public class RecPessoaBean {
             Helper.mostrarNotificacao("Nome Completo", "Preencha o Nome Completo", "error");
             return false;
         }
-        if (recPessoa.getRecCpf() == 0) {
+        if (recPessoa.getRecCpf().isEmpty()) {
             Helper.mostrarNotificacao("CPF", "Preencha o CPF", "error");
             return false;
         }
