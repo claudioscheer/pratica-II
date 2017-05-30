@@ -69,7 +69,7 @@
     <error-page>
         <!-- Missing login -->
         <error-code>401</error-code>
-        <location>/general-error.html</location>
+        <location>/General-Error.html</location>
     </error-page>
     <error-page>
         <!-- Forbidden directory listing -->
@@ -80,6 +80,16 @@
         <!-- Missing resource -->
         <error-code>404</error-code>
         <location>/Error404.html</location>
+    </error-page>
+    <error-page>
+        <!-- Uncaught exception -->
+        <error-code>500</error-code>
+        <location>/General-Error.html</location>
+    </error-page>
+    <error-page>
+        <!-- Unsupported servlet method -->
+        <error-code>503</error-code>
+        <location>/General-Error.html</location>
     </error-page>
    
 </web-app>
