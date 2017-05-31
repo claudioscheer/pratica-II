@@ -17,7 +17,6 @@ import br.org.gdt.model.CsbffPessoaBeneficio;
 import br.org.gdt.model.CsbffPessoaDependente;
 import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.RecPessoa;
-import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffBeneficiosService;
 import br.org.gdt.service.CsbffCargosService;
 import br.org.gdt.service.CsbffDependentesService;
@@ -26,18 +25,18 @@ import br.org.gdt.service.CsbffPessoaBeneficioService;
 import br.org.gdt.service.GchMunicipiosService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @SessionScoped
 public class CsbffAdmissaoBean implements Serializable {
 
     private boolean formAtivo = false;
-    private int recCpf;
+    private String recCpf;
 
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoaList;
@@ -55,7 +54,7 @@ public class CsbffAdmissaoBean implements Serializable {
     private CsbffDependentes csbffDependentes;
     private List<CsbffBeneficios> csbffBeneficiosList;
     private CsbffBeneficios csbffBeneficios = new CsbffBeneficios();
-    private CsbffEscalaHoras csbffEscalaHoras;
+    private CsbffEscalaHoras csbffEscalaHoras = new CsbffEscalaHoras();
     private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
     @ManagedProperty("#{csbffEscalaHorasService}")
     private CsbffEscalaHorasService csbffEscalaHorasService;
@@ -74,7 +73,7 @@ public class CsbffAdmissaoBean implements Serializable {
     private boolean adicionandoEscala = false;
     private CsbffEscalaHoras diaDaSemana;
     private boolean adicionandoBenficio = false;
-    
+    private List<CsbffEscalaHoras> csbffEscalaHorasList;
 
     public CsbffAdmissaoBean() {
 
@@ -85,7 +84,7 @@ public class CsbffAdmissaoBean implements Serializable {
         List<CsbffCargos> cargos = csbffCargosService.findAll();//ISSO BUSCA DO BANCO!!!!!
         return cargos;
     }
-    
+
     public List<CsbffCargos> getCsbffCargosList() {
         return csbffCargosList;
     }
@@ -93,6 +92,7 @@ public class CsbffAdmissaoBean implements Serializable {
     public void setCsbffCargosList(List<CsbffCargos> csbffCargosList) {
         this.csbffCargosList = csbffCargosList;
     }
+
     public List<CsbffBeneficios> getCsbffBeneficiosList() {
         List<CsbffBeneficios> csbffBeneficiosList = csbffBeneficiosService.findAll();
         return csbffBeneficiosList;
@@ -110,7 +110,6 @@ public class CsbffAdmissaoBean implements Serializable {
 //    public void setBeneficiosList(List<CsbffBeneficios> beneficiosList) {
 //        this.beneficiosList = beneficiosList;
 //    }
-
     public void setSeguroDesemprego(SeguroDesemprego seguroDesemprego) {
         this.seguroDesemprego = seguroDesemprego;
     }
@@ -165,6 +164,9 @@ public class CsbffAdmissaoBean implements Serializable {
     public void buscarCpf() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
         recPessoa = recPessoaService.findByRecCpf(recCpf);
+        if (recPessoa == null) {
+            recPessoa = new RecPessoa();
+        }
     }
 
     public List<RecPessoa> getPessoas() {
@@ -173,44 +175,67 @@ public class CsbffAdmissaoBean implements Serializable {
         return pessoas;
     }
 
-    public String saveAdmissao() { //remover SAVE
+    public void saveAdmissao() {
         if (recPessoa.getRecIdpessoa() > 0) {
             recPessoaService.update(recPessoa);
         }
         recPessoaList = recPessoaService.findAll();
-        this.recPessoa = new RecPessoa();
         this.formAtivo = false;
-        return null;
+        this.recPessoa = new RecPessoa();
+//        return null;
     }
 
-    public void removerBeneficioPessoa(int index) {
-        this.recPessoa.getCsbffPessoaBeneficioList().remove(index);
-//        csbffPessoaBeneficioService.delete(csbffPessoaBeneficio.getPessoaBeneficioCodigo());
-//        csbffPessoaBeneficioList.remove(csbffPessoaBeneficio);
+    public void removerBeneficioPessoa(CsbffPessoaBeneficio bp) {
+        this.recPessoa.getCsbffPessoaBeneficioList().remove(bp);
     }
 
     public void addBeneficioPessoa() {
-        this.recPessoa.getCsbffPessoaBeneficioList().add(new CsbffPessoaBeneficio());
-
+        CsbffPessoaBeneficio pb = new CsbffPessoaBeneficio();
+        pb.setRecIdpessoa(this.recPessoa);
+        pb.setBeneficioCodigo(this.csbffBeneficios);
+        if (this.recPessoa.getCsbffPessoaBeneficioList() == null) {
+            this.recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());
+        }
+        this.recPessoa.getCsbffPessoaBeneficioList().add(pb);
     }
 
     public void addNovaEscala() {
-        this.recPessoa.getCsbffEscalaHorasList().add(new CsbffEscalaHoras());
+//        this.recPessoa.getCsbffEscalaHorasList().add(new CsbffEscalaHoras());
+        CsbffEscalaHoras eh = new CsbffEscalaHoras();
+        eh.setRecIdpessoa(this.recPessoa);
+//        eh.setEscalaCodigo(this.csbffEscalaHoras);
+        if (this.recPessoa.getCsbffEscalaHorasList() == null) {
+            this.recPessoa.setCsbffEscalaHorasList(new ArrayList<>());
+        }
+        this.recPessoa.getCsbffEscalaHorasList().add(eh);
     }
 
-      public void salvarEscalas() {
+    public void removerEscala(CsbffEscalaHoras eh) {
+        this.recPessoa.getCsbffEscalaHorasList().remove(eh);
+//        csbffEscalaHorasService.delete(csbffEscalaHoras.getEscalaCodigo());
+//        todosCsbffEscalaHoras.remove(csbffEscalaHoras);
+    }
+
+//    public void addEscalaColaborador() {
+//        this.formAtivo = true;
+//        this.adicionandoEscala = false;
+//        this.csbffEscalaHoras = new CsbffEscalaHoras();
+//
+//    }
+    public void salvarEscalas() {
 //        if (recPessoa.getCsbffEscalaHorasList().size() <= 0) {
 //            Helper.mostrarNotificacao("Escala", "Preencha todos os campos.", "info");
 //            return;
 //        }
-        if (recPessoa.getId() <= 0) {
+        if (csbffEscalaHoras.getEscalaCodigo() > 0) {
 //            this.recPessoa.getCsbffEscalaHorasList().add(new CsbffEscalaHoras());
             csbffEscalaHorasService.update(csbffEscalaHoras);
+//            csbffEscalaHorasService.save(csbffEscalaHoras);
         }
         todosCsbffEscalaHoras = csbffEscalaHorasService.findAll();
+        this.csbffEscalaHoras = new CsbffEscalaHoras();
         this.formAtivo = false;
-//        this.adicionandoEscala = false;
-//        return "dadosprofissionais";
+
     }
 
 //    public void adicionarEscalaColaborador() {
@@ -223,22 +248,24 @@ public class CsbffAdmissaoBean implements Serializable {
 //            this.recPessoa.getCsbffEscalaHorasList().add(csbffEscalaHoras);
 //        }
 //        this.adicionandoEscala = false;
-//    }
-    public void removerEscala(int index) {
-        this.recPessoa.getCsbffEscalaHorasList().remove(index);
-//        csbffEscalaHorasService.delete(csbffEscalaHoras.getEscalaCodigo());
-//        todosCsbffEscalaHoras.remove(csbffEscalaHoras);
-    }
-
     public void cancelEscala() {
         this.formAtivo = false;
+        this.adicionandoEscala = false;
         this.csbffEscalaHoras = new CsbffEscalaHoras();
 //        return "dadosprofissionais";
     }
-
-    public void removerCsbffBeneficios(CsbffBeneficios csbffBeneficios) {
-        this.recPessoa.getCsbffBeneficiosList().remove(csbffBeneficios);
-    }
+//
+//    public void removerCsbffBeneficios(CsbffBeneficios csbffBeneficios) {
+//        this.csbffBeneficiosList.remove(csbffBeneficios);
+//    }
+//
+//    public void addCsbffBeneficios() {
+//        if (this.csbffBeneficiosList == null) {
+//            this.csbffBeneficiosList = new ArrayList<>();
+//
+//        }
+//        this.csbffBeneficiosList.add(csbffBeneficios);
+//    }
 
     public void cancel() {
         this.formAtivo = false;
@@ -273,15 +300,22 @@ public class CsbffAdmissaoBean implements Serializable {
         return "pessoas";
     }
 
-    public String buscarRecCpf() {
-        if (recCpf != 0) {
-//            recPessoaList = recPessoaService.findByRecCpf(recCpf);
-        } else {
-            recPessoaList = recPessoaService.findAll();
-        }
-        return "consultaadmissao";
-    }
-
+//    public String buscarRecCpf() {
+//        if (recCpf != 0) {
+////            recPessoaList = recPessoaService.findByRecCpf(recCpf);
+//        } else {
+//            recPessoaList = recPessoaService.findAll();
+//        }
+//        return "consultaadmissao";
+//    }
+//      public void buscarRecCpf() {
+//        if (recCpf == "0") {
+//            recPessoaList = (List<RecPessoa>) recPessoaService.findByRecCpf(recCpf);
+////        } else {
+////            recPessoaList = recPessoaService.findAll();
+//        }
+////        return "consultaadmissao";
+//    }
     public DiasATrabalhar[] getDiasATrabalhar() {
         return DiasATrabalhar.values();
     }
@@ -452,11 +486,11 @@ public class CsbffAdmissaoBean implements Serializable {
         this.csbffDependentesService = csbffDependentesService;
     }
 
-    public int getRecCpf() {
+    public String getRecCpf() {
         return recCpf;
     }
 
-    public void setRecCpf(int recCpf) {
+    public void setRecCpf(String recCpf) {
         System.out.println("cpp " + recCpf);
         this.recCpf = recCpf;
     }
@@ -499,6 +533,14 @@ public class CsbffAdmissaoBean implements Serializable {
 
     public void setAdicionandoBenficio(boolean adicionandoBenficio) {
         this.adicionandoBenficio = adicionandoBenficio;
+    }
+
+    public List<CsbffEscalaHoras> getCsbffEscalaHorasList() {
+        return csbffEscalaHorasList;
+    }
+
+    public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
+        this.csbffEscalaHorasList = csbffEscalaHorasList;
     }
 
 }

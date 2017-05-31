@@ -61,7 +61,7 @@ public class RecPessoaService {
 
    
 
-    public RecPessoa findByRecCpf(int recCpf) {
+    public RecPessoa findByRecCpf(String recCpf) {
         return pessoaDao.findByRecCpf(recCpf);
         
        
