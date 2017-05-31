@@ -118,8 +118,9 @@ public class CsbffAdmissaoBean implements Serializable {
         this.tipoBeneficio = tipoBeneficio;
     }
 
-    public void buscarPessoa() {
+    public String buscarPessoa() {
         recPessoa = (RecPessoa) recPessoaService.findByRecCpf(recCpf);
+        return null;
     }
 
     public Sexo[] getGeneros() {
@@ -175,14 +176,14 @@ public class CsbffAdmissaoBean implements Serializable {
         return pessoas;
     }
 
-    public void saveAdmissao() {
+    public String saveAdmissao() {
         if (recPessoa.getRecIdpessoa() > 0) {
             recPessoaService.update(recPessoa);
         }
         recPessoaList = recPessoaService.findAll();
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
-//        return null;
+        return null;
     }
 
     public void removerBeneficioPessoa(CsbffPessoaBeneficio bp) {
@@ -222,7 +223,7 @@ public class CsbffAdmissaoBean implements Serializable {
 //        this.csbffEscalaHoras = new CsbffEscalaHoras();
 //
 //    }
-    public void salvarEscalas() {
+    public String salvarEscalas() {
 //        if (recPessoa.getCsbffEscalaHorasList().size() <= 0) {
 //            Helper.mostrarNotificacao("Escala", "Preencha todos os campos.", "info");
 //            return;
@@ -235,6 +236,7 @@ public class CsbffAdmissaoBean implements Serializable {
         todosCsbffEscalaHoras = csbffEscalaHorasService.findAll();
         this.csbffEscalaHoras = new CsbffEscalaHoras();
         this.formAtivo = false;
+        return "dadosprofissionais";
 
     }
 
@@ -248,11 +250,11 @@ public class CsbffAdmissaoBean implements Serializable {
 //            this.recPessoa.getCsbffEscalaHorasList().add(csbffEscalaHoras);
 //        }
 //        this.adicionandoEscala = false;
-    public void cancelEscala() {
+    public String cancelEscala() {
         this.formAtivo = false;
         this.adicionandoEscala = false;
         this.csbffEscalaHoras = new CsbffEscalaHoras();
-//        return "dadosprofissionais";
+        return null;
     }
 //
 //    public void removerCsbffBeneficios(CsbffBeneficios csbffBeneficios) {
@@ -267,9 +269,10 @@ public class CsbffAdmissaoBean implements Serializable {
 //        this.csbffBeneficiosList.add(csbffBeneficios);
 //    }
 
-    public void cancel() {
+    public String cancel() {
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
+        return null;
 
     }
 
