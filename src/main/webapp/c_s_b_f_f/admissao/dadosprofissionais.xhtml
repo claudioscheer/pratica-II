@@ -105,7 +105,7 @@
                                                     Código CBO
                                                     <span class="required"></span>
                                                 </label>
-                                                <h:inputText label="codigo" class="form-control" value="#{csbffAdmissaoBean.recPessoa.cargoCbo}" converter="#{generic}"/>
+                                                <h:inputText label="codigo" class="form-control" value="#{csbffAdmissaoBean.csbffCargosList}" converter="#{generic}"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -235,14 +235,29 @@
 
                                             </div>
                                         </div>
-
-
                                         <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" layout="block">
+                                            <h:dataTable  class="table table-striped" value="#{csbffAdmissaoBean.recPessoa.csbffEscalaHorasList}" var="escala">
+                                                <h:column>
+                                                    <f:facet name="header"> Hora Entrada</f:facet>
+                                                        #{escala.escalaHora1}  
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"> Hora Saída</f:facet>
+                                                        #{escala.escalaHora2}  
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"> Hora Entrada</f:facet>
+                                                        #{escala.escalaHora3}  
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"> Hora Saída</f:facet>
+                                                        #{escala.escalaHora4}  
+                                                </h:column>
+                                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffAdmissaoBean.removerEscala(csbffEscalaHoras)}" onclick="return confirm('Excluir escala?')">
+                                                    <!--<f:ajax execute="@form" render="formTabela" />-->
+                                                </h:commandLink>
 
-
-
-
-
+                                            </h:dataTable>
                                         </h:panelGroup>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group ">
