@@ -256,23 +256,17 @@ public class GchFormularioBean {
         requestContext.execute("MontarPerguntasAlternativas()");
 
     }
-    
-    
-    
-    public void LeituraParametroLink(){
-        
-     
-     
-   
+
+    public void LeituraParametroLink() {
+
     }
-    
 
     public String salvarPessoasFormulario() {
 
         if (gchFormulariopessoa != null) {
 
-            RequestContext contextReq = RequestContext.getCurrentInstance();          
-            
+            RequestContext contextReq = RequestContext.getCurrentInstance();
+
             Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
 
             ArrayList<ParametrosEmail> parametros = new ArrayList<>();
@@ -280,10 +274,8 @@ public class GchFormularioBean {
             ParametrosEmail ItemParametro;
             FacesContext context = FacesContext.getCurrentInstance();
 
-        
-            
             EncryptDecryptString cripto = new EncryptDecryptString();
-            
+
             //Configurações da caixa de e-mail padrão do sistema
             String emailResponsavel = "murphyrhnotifica@gmail.com";
             String senha = "murphy2017";
@@ -310,20 +302,18 @@ public class GchFormularioBean {
 
                     gchFormularioPessoaService.save(gchFormulariopessoa);
 
-                    String parametroUrl = gchFormulario.getFormCodigo()+"&"+pessoa.getId();
-                    
-    
+                    String parametroUrl = gchFormulario.getFormCodigo() + "&" + pessoa.getId();
+
                     String parametroBase64 = DatatypeConverter.printBase64Binary(parametroUrl.getBytes());
 
-                   
-                    String urlFormatada = String.format(url, "id="+parametroBase64);
-                    
-                    System.out.println("Texto Formatado"+urlFormatada);
-                    
-                    String msgFormatada = "<html><div style='background-color:gray;border:1px solid black;width:80%;height:20%'><span>" + gchFormulario.getFormNome() + "</span></div></br></br><p>Você acaba de receber um formulário com algumas perguntas para que possamos lhe conhecer melhor. O prazo de respostas é até " + gchFormulario.getFormPrazoResposta().toString() + "</p></br>Para acessá-lo clique <a href='http://"+urlFormatada+"'>aqui</a></html>";
+                    String urlFormatada = String.format(url, "id=" + parametroBase64);
 
-                    System.out.println("Mensagem Formatada"+msgFormatada);
-                    
+                    System.out.println("Texto Formatado" + urlFormatada);
+
+                    String msgFormatada = "<html><div style='background-color:gray;border:1px solid black;width:80%;height:20%'><span>" + gchFormulario.getFormNome() + "</span></div></br></br><p>Você acaba de receber um formulário com algumas perguntas para que possamos lhe conhecer melhor. O prazo de respostas é até " + gchFormulario.getFormPrazoResposta().toString() + "</p></br>Para acessá-lo clique <a href='http://" + urlFormatada + "'>aqui</a></html>";
+
+                    System.out.println("Mensagem Formatada" + msgFormatada);
+
                     //Cria item de parametro de email
                     ItemParametro = new ParametrosEmail();
 
@@ -362,10 +352,9 @@ public class GchFormularioBean {
 
             String MsgNotificacao = "Formulário disponibilizado para as pessoas selecionadas!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
-            
-            
+
         }
-return "Formularios";
+        return "Formularios";
     }
 
     public String SalvarFormulario() {
@@ -448,6 +437,16 @@ return "Formularios";
         }
 
         return "Formularios";
+    }
+
+    public void responderFormulario() {
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("ResponderFormulario.xhtml");
+        } catch (IOException ex) {
+
+        }
     }
 
     public void addNovaPergunta() {
