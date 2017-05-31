@@ -55,7 +55,7 @@ public class RecVaga implements Serializable {
     private Date recDatavencimento;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "rec_salario")
-    private Float recSalario;
+    private String recSalario;
     @Column(name = "rec_status")
     private Integer recStatus;
     @Basic(optional = true)
@@ -117,11 +117,11 @@ public class RecVaga implements Serializable {
         this.recDatavencimento = recDatavencimento;
     }
 
-    public Float getRecSalario() {
+    public String getRecSalario() {
         return recSalario;
     }
 
-    public void setRecSalario(Float recSalario) {
+    public void setRecSalario(String recSalario) {
         this.recSalario = recSalario;
     }
 
