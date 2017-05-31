@@ -9,11 +9,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -26,11 +29,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GchRespostas.findAll", query = "SELECT g FROM GchRespostas g")})
+@SequenceGenerator(name = "seq_gch_resposta", sequenceName = "seq_gch_resposta", allocationSize = 1)
 public class GchRespostas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "res_codigo")
+     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gch_resposta")
     private Long resCodigo;
     
     @Basic(optional = false)

@@ -35,34 +35,32 @@
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <h:form id="formFormulario">
-                                            <h:panelGroup>
-                                                <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
+                                            
+                                            
+                                            <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
-                                                    <h:column headerClass="alinhaColuna">                
-                                                        <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
+                                                <h:column headerClass="alinhaColuna">                
+                                                    <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
 
-                                                            <f:ajax execute="@this"  event="action" render="formFormulario" />
-                                                            <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
 
-                                                        </h:commandLink>
+                                                    </h:commandLink>
 
-                                                    </h:column>
-                                                    <h:column>                
-                                                        <h:commandLink >
+                                                </h:column>
+                                                <h:column>                
+                                                    <h:commandLink action="ResponderFormulario">
 
-                                                            <i class="glyphicon glyphicon-eye-open" style="font-size:18px" ></i>
-                                                        </h:commandLink>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <h:commandLink>
-                                                            <f:ajax listener="#{gchFormularioBean.vincularPessoas(formulario)}" event="action" render="formFormulario" />
-                                                            <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
+                                                        <i class="glyphicon glyphicon-eye-open" style="font-size:18px" ></i>
+                                                    </h:commandLink>
+                                                </h:column>
+                                               <h:column>   
+                                                    <h:commandLink  action="#{gchFormularioBean.vincularPessoas(formulario)}">
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
 
-                                                        </h:commandLink>
-
-
-                                                    </h:column>
-
+                                                    </h:commandLink>
+</h:column>
 
                                                     <h:column>   
                                                         <f:facet name="header">Nome</f:facet>
@@ -76,9 +74,6 @@
 
                                                 </h:dataTable>
 
-
-
-                                            </h:panelGroup>
                                         </h:form> </div>
 
                                     <h:form id="formDialog">
@@ -128,8 +123,8 @@
 
                                         </p:dialog>
 
-
                                     </h:form>
+                                   
 
 
                                     <div class="panel-footer">

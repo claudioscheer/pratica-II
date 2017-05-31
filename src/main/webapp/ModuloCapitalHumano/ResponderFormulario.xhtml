@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <h:body>
         <ui:composition template="../templates/template.xhtml">
@@ -20,11 +21,6 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                                    <div class="form-group" style="float: right;margin-top: 10px">
-                                        <div>
-                                            <h:link  outcome="CadastroCurso.xhtml" class="btn btn-primary " value="Novo Curso"/>
-                                        </div>
-                                    </div>
                                     <div class="panel-heading">
                                         <h3 class="title_left">
                                             Formulário
@@ -32,27 +28,39 @@
                                     </div>
                                     <div class="panel-body" style="/* align-items: center; */">
 
-                                        <h:form id="formCursos">
+                                        <h:form id="formResposta">
+                                            <div class="container-fluid">
+                                                <div class="row">
+
+                                                    <ui:repeat value="#{gchFormularioAlternativasBean.buscaPerguntas()}" var="perguntas">
+                                                        <div class="form-group">
+
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                                                <h:outputLabel class="control-label requiredField" value="#{perguntas.perDescricao}"/>
+                                                                <h:inputHidden value="#{perguntas.perCodigo}" />
+
+                                                            </div>
 
 
-                                            <ui:repeat value="#{gchFormularioAlternativasBean.gchFormularios.perguntas}" var="perguntas">
-                                                <div class="field">
-                                                    <h:outputLabel value="#{perguntas.perDescricao}"/>
-                                                    <h:inputText value="#{perguntas.perCodigo}" />
+                                                            <h:selectOneRadio value="#{gchFormularioAlternativasBean.radioValue}" >
+                                                                <f:selectItems value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa.altCodigo}-#{perguntas.perCodigo}" itemLabel="#{alternativa.altDescricao}"/>
+                                                            </h:selectOneRadio>
 
-                                                    <h:selectOneRadio value="#{gchFormularioAlternativasBean.radio}" >
-                                                        <f:selectItems value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.altDescricao}"/>
-                                                    </h:selectOneRadio>
+
+                                                        </div>
+                                                    </ui:repeat>
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <h:commandButton class="btn btn-primary" value="Finalizar" action="#{gchFormularioAlternativasBean.save()}" />
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
-                                            </ui:repeat>
-
-
-                                            <h:commandButton value="parametro" action="#{gchFormularioBean.LeituraParametroLink}">
-
-                                                <f:ajax render="formCursos"/>
-                                            </h:commandButton>
-
+                                            </div>
 
                                         </h:form> 
                                     </div>

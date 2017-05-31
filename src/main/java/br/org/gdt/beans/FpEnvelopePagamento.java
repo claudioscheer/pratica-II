@@ -12,15 +12,29 @@ import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
+import java.io.File;
+import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.springframework.stereotype.Service;
 
 @ManagedBean
 @SessionScoped
-public class FpEnvelopePagamento {
+public class FpEnvelopePagamento implements java.io.Serializable {
 
     private boolean mostrarTodasFolhasPeriodo = false;
     private FpPeriodo fpPeriodo = new FpPeriodo();
@@ -109,6 +123,17 @@ public class FpEnvelopePagamento {
             Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "info");
         } catch (Exception e) {
             Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
+        }
+    }
+
+    public void gerarFolhaPagamento() {
+        try {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("pessoa", "Claudio Roberto Scheer Junior");
+
+            Helper.gerarBaixarRelatorioPDF("folha-pagamento", "/folhapagamento/relatorio/folha.jasper", parametros, fpFolhaPeriodo.getForEventos());
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
         }
     }
 

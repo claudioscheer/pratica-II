@@ -15,6 +15,33 @@
                 <div class="text-center">
                     <h:graphicImage style="max-width: 300px" value="#{resource['images/Logo-Murphy-RH.png']}" />
                 </div>
+                <div class="row" tag="linha1" style="padding: 10px; margin-top: 80px" >
+                    <div class="col-md-6 text-center">
+                        <h:link class="btn btn-primary btn-lg" outcome="/folhapagamento/calcular.xhtml">
+                            <i class="fa fa-calculator"/> Folha de Pagamento
+                        </h:link>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <button class="btn btn-primary btn-lg"><i class="fa fa-list"/> Recrutamento</button>
+                    </div>
+                </div>
+                <div class="row" tag="linha2" style="padding: 10px">
+                    <div class="col-md-6 text-center">
+                        <button class="btn btn-primary btn-lg"><i class="fa fa-users"/> Capital Humano</button>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <button class="btn btn-primary btn-lg"><i class="fa fa-line-chart"/> Cargos</button>
+                    </div>
+                </div>
+                <div class="row" tag="linha3" style="padding: 10px">
+                    <div class="col-md-6 text-center">
+                        <button class="btn btn-primary btn-lg"><i class="fa fa-plus-square"/> Benefícios</button>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <button class="btn btn-primary btn-lg"><i class="fa fa-briefcase"/> Admissão</button>
+                    </div>
+                </div>
+                
             </ui:define>
         </ui:composition>
     </h:body>
