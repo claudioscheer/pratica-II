@@ -137,6 +137,14 @@ public class GchTreinamentoPessoaBean {
             
             this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
         
+//            List<GchTreinamentospessoas> gchTreinemntoPessoasList =  gchTreinamentospessoasService.verificaPessoasVinculadoTreinamento(gchTreinamentos.getTreiCodigo());
+//            
+//            for (GchTreinamentospessoas gchTreinamentospessoa : gchTreinemntoPessoasList){
+//            
+//                checked.replace(gchTreinamentospessoa.getRecIdpessoa(), true);
+//                
+//            }
+            
         }
 
         return "VincularPessoasTreinamento";
