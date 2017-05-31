@@ -31,7 +31,7 @@
                                                 CPF
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText  class="form-control" id="cpf" maxlength="14" binding="#{campocpf}" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffAdmissaoBean.recCpf}" title="CPF" />
+                                            <h:inputText label="codigo"  class="form-control" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffAdmissaoBean.recCpf}" />
                                         </div>
 
                                     </div>
@@ -63,9 +63,9 @@
                                             <div class="form-group ">
                                                 <label class="control-label " >
                                                     Nome Colaborador
-<!--                                                    <span class="required">*</span>-->
+                                                    <span class="required">*</span>
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNomecompleto}" />
+                                                <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome deve ser preenchido." value="#{csbffAdmissaoBean.recPessoa.recNomecompleto}" />
                                             </div>     
                                         </div> 
                                         <div class="col-md-6 col-sm-6 ">                                
@@ -92,9 +92,9 @@
                                             <div class="form-group ">
                                                 <label class="control-label ">                                        
                                                     Data de Nascimento
-                                                    <!--<span class="required">*</span>-->
+                                                    <span class="required">*</span>
                                                 </label>
-                                                <h:inputText class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtnascimento}">
+                                                <h:inputText required="true" requiredMessage="Campo Data de Nascimento é obrigatório." class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtnascimento}">
                                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                                 </h:inputText>
                                             </div>
@@ -103,9 +103,9 @@
                                             <div class="form-group">
                                                 <label class="control-label " >
                                                     RG
-<!--                                                    <span class="required">*</span>-->
+                                                    <span class="required">*</span>
                                                 </label>
-                                                <h:inputText label="number"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recRg}" />
+                                                <h:inputText label="number"  class="form-control" required="true" requiredMessage="Campo RG é deve ser preenchido." value="#{csbffAdmissaoBean.recPessoa.recRg}" />
                                             </div>
                                         </div> 
                                         <div class="col-md-6 col-sm-6 ">
@@ -130,9 +130,9 @@
                                             <div class="form-group ">
                                                 <label class="control-label " >                                        
                                                     Nome do Pai
-                                                    <!--<span class="required">*</span>-->
+                                                    <span class="required">*</span>
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNomepai}" />
+                                                <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome do Pai é obrigatório." value="#{csbffAdmissaoBean.recPessoa.recNomepai}" />
                                             </div>
                                         </div> 
 
@@ -140,9 +140,9 @@
                                             <div class="form-group ">
                                                 <label class="control-label ">                                        
                                                     Nome da Mãe
-                                                    <!--<span class="required">*</span>-->
+                                                    <span class="required">*</span>
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNomemae}" />
+                                                <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome da Mãe é obrigatório." value="#{csbffAdmissaoBean.recPessoa.recNomemae}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">                                
@@ -167,7 +167,7 @@
                                                 <label class="control-label " for="number">                                        
                                                     Telefone
                                                 </label>
-                                                <h:inputText  id="telefone" maxlength="15" onkeypress="this.value = MascaraTelefone(this.value)" title="telefone"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recTelefone}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recTelefone}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 ">
@@ -175,16 +175,16 @@
                                                 <label class="control-label " for="number">                                        
                                                     Celular
                                                 </label>
-                                                <h:inputText id="celular" maxlength="15" onkeypress="this.value = MascaraTelefone(this.value)" title="celular"   class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCelular}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCelular}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 ">
                                             <div class="form-group ">
                                                 <label class="control-label " for="number">                                        
                                                     Certificado de Reservista
-                                                    <!--<span class="required">*</span>-->
+                                                    <span class="required">*</span>
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recReservista}" />
+                                                <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Certificado de Reservista é obrigatório." value="#{csbffAdmissaoBean.recPessoa.recReservista}" />
                                             </div>
                                         </div>
 
@@ -220,6 +220,9 @@
                                                 <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recBairro}" />
                                             </div>
                                         </div> 
+
+
+
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group ">
                                                 <label class="control-label ">                                        
@@ -234,8 +237,8 @@
                                 </div>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <br></br><h:commandLink  immediate="true" class="btn btn-success" value="Salvar" action="#{csbffAdmissaoBean.saveAdmissao()}"/>
-                                        <h:commandLink immediate="true" class="btn btn-danger" value="Cancelar" action="#{csbffAdmissaoBean.cancel()}"/>
+                                        <br></br><h:commandLink class="btn btn-success" type="button" value="Salvar" action="#{csbffAdmissaoBean.saveAdmissao()}"/>
+                                        <h:commandLink immediate="true" class="btn btn-danger" type="button" value="Cancelar" action="#{csbffAdmissaoBean.cancel()}"/>
                                         <!--<h:link class="btn btn-info" outcome="dadosprofissionais.xhtml" type="button" value="Próximo"></h:link>-->
 
                                     </div>

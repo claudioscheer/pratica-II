@@ -126,9 +126,14 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + (int) (this.beneficioCodigo ^ (this.beneficioCodigo >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.beneficioNome);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.beneficioCodigo);
+        hash = 89 * hash + Objects.hashCode(this.beneficioNome);
+        hash = 89 * hash + Objects.hashCode(this.beneficioDescricao);
+        hash = 89 * hash + Objects.hashCode(this.abrangencia);
+        hash = 89 * hash + Objects.hashCode(this.beneficioValor);
+        hash = 89 * hash + Objects.hashCode(this.befencioDataVigente);
+        hash = 89 * hash + Objects.hashCode(this.tipoBeneficio);
         return hash;
     }
 
@@ -144,16 +149,30 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
             return false;
         }
         final CsbffBeneficios other = (CsbffBeneficios) obj;
-        if (this.beneficioCodigo != other.beneficioCodigo) {
-            return false;
-        }
         if (!Objects.equals(this.beneficioNome, other.beneficioNome)) {
             return false;
         }
+        if (!Objects.equals(this.beneficioDescricao, other.beneficioDescricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.abrangencia, other.abrangencia)) {
+            return false;
+        }
+        if (!Objects.equals(this.beneficioCodigo, other.beneficioCodigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.beneficioValor, other.beneficioValor)) {
+            return false;
+        }
+        if (!Objects.equals(this.befencioDataVigente, other.befencioDataVigente)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoBeneficio, other.tipoBeneficio)) {
+            return false;
+        }
+
         return true;
     }
-
-    
 
     @Override
     public String toString() {

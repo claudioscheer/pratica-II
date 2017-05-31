@@ -6,8 +6,10 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -35,43 +39,36 @@ public class CsbffPessoaBeneficio implements Serializable {
     @Basic(optional = false)
     @Column(name = "pessoa_beneficio_codigo")
     private long pessoaBeneficioCodigo;
-
-    @JoinColumn(name = "beneficio_codigo", referencedColumnName = "beneficio_codigo")
-    @ManyToOne(optional = false)
-    private CsbffBeneficios beneficioCodigo;
-
+//    @JoinColumn(name = "beneficio_codigo", referencedColumnName = "beneficio_codigo")
+//    @ManyToOne(optional = false)
+//    private CsbffBeneficios beneficioCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
     private RecPessoa recIdpessoa;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
+    @Basic(optional = true)
+    @Column(name = "pessoa_beneficioNome")
+    private String pessoaBeneficioNome;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
-//    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
-//    @Basic(optional = true)
-//    @Column(name = "pessoa_beneficioNome")
-//    private String pessoaBeneficioNome;
     public CsbffPessoaBeneficio() {
     }
 
-//    public CsbffPessoaBeneficio(long pessoaBeneficioCodigo, RecPessoa recIdpessoa, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, String pessoaBeneficioNome) {
-//        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
-//        this.recIdpessoa = recIdpessoa;
-//        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-//        this.pessoaBeneficioNome = pessoaBeneficioNome;
-//    }
-    public CsbffPessoaBeneficio(long pessoaBeneficioCodigo, CsbffBeneficios beneficioCodigo, RecPessoa recIdpessoa) {
+    public CsbffPessoaBeneficio(long pessoaBeneficioCodigo, RecPessoa recIdpessoa, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, String pessoaBeneficioNome) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
-        this.beneficioCodigo = beneficioCodigo;
         this.recIdpessoa = recIdpessoa;
+        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
+        this.pessoaBeneficioNome = pessoaBeneficioNome;
     }
 
-//
-//    public void addBePessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
-//        if (csbffPessoaBeneficio != null) {
-//            csbffPessoaBeneficio.setCsbffPessoaBeneficioList((List<CsbffPessoaBeneficio>) this);
-//            this.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
-//
-//        }
-//    }
+    public void addBePessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
+        if (csbffPessoaBeneficio != null) {
+            csbffPessoaBeneficio.setCsbffPessoaBeneficioList((List<CsbffPessoaBeneficio>) this);
+            this.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
+
+        }
+    }
+
     public long getPessoaBeneficioCodigo() {
         return pessoaBeneficioCodigo;
     }
@@ -80,14 +77,13 @@ public class CsbffPessoaBeneficio implements Serializable {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
-    public CsbffBeneficios getBeneficioCodigo() {
-        return beneficioCodigo;
-    }
-
-    public void setBeneficioCodigo(CsbffBeneficios beneficioCodigo) {
-        this.beneficioCodigo = beneficioCodigo;
-    }
-
+//    public CsbffBeneficios getBeneficioCodigo() {
+//        return beneficioCodigo;
+//    }
+//
+//    public void setBeneficioCodigo(CsbffBeneficios beneficioCodigo) {
+//        this.beneficioCodigo = beneficioCodigo;
+//    }
     public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
     }
@@ -96,13 +92,14 @@ public class CsbffPessoaBeneficio implements Serializable {
         this.recIdpessoa = recIdpessoa;
     }
 
-//    public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
-//        return csbffPessoaBeneficioList;
-//    }
-//
-//    public void setCsbffPessoaBeneficioList(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
-//        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-//    }
+    public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
+        return csbffPessoaBeneficioList;
+    }
+
+    public void setCsbffPessoaBeneficioList(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
+        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
+    }
+
 //    public CsbffBeneficios getBeneficioNome() {
 //        return beneficioNome;
 //    }
@@ -117,46 +114,12 @@ public class CsbffPessoaBeneficio implements Serializable {
 //    public void setPessoaBeneficioNome(CsbffBeneficios pessoaBeneficioNome) {
 //        this.pessoaBeneficioNome = pessoaBeneficioNome;
 //    }
-//    public String getPessoaBeneficioNome() {
-//        return pessoaBeneficioNome;
-//    }
-//
-//    public void setPessoaBeneficioNome(String pessoaBeneficioNome) {
-//        this.pessoaBeneficioNome = pessoaBeneficioNome;
-//    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + (int) (this.pessoaBeneficioCodigo ^ (this.pessoaBeneficioCodigo >>> 32));
-        hash = 53 * hash + Objects.hashCode(this.beneficioCodigo);
-        hash = 53 * hash + Objects.hashCode(this.recIdpessoa);
-        return hash;
+    public String getPessoaBeneficioNome() {
+        return pessoaBeneficioNome;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CsbffPessoaBeneficio other = (CsbffPessoaBeneficio) obj;
-        if (this.pessoaBeneficioCodigo != other.pessoaBeneficioCodigo) {
-            return false;
-        }
-        if (!Objects.equals(this.beneficioCodigo, other.beneficioCodigo)) {
-            return false;
-        }
-        if (!Objects.equals(this.recIdpessoa, other.recIdpessoa)) {
-            return false;
-        }
-        return true;
+    public void setPessoaBeneficioNome(String pessoaBeneficioNome) {
+        this.pessoaBeneficioNome = pessoaBeneficioNome;
     }
-
 
 }

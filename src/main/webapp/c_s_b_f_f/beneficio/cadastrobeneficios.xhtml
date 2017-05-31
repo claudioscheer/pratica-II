@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <!--xmlns:p="http://primefaces.org/ui">-->
+      <!--xmlns:p="http://primefaces.org/ui">-->
     <h:head>
         <title>Cadastro benefício</title>
     </h:head>
@@ -30,7 +30,7 @@
                                         <div class="form-group ">
 
                                             <label class="control-label ">Nome<span class="required">*</span></label>
-                                            <h:inputText required="true" requiredMessage="Campo Nome é obrigatório." class="form-control" value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
+                                            <h:inputText  requiredMessage="Campo Nome é obrigatório." class="form-control" value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
                                         </div>
 
                                     </div>
@@ -38,7 +38,7 @@
                                         <div class="form-group ">
 
                                             <label class="control-label ">Abrangência<span class="required">*</span></label>
-                                            <h:selectOneMenu required="true" requiredMessage="Campo Abrangência deve ser escolhido." value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control">
+                                            <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                 <f:selectItems value="#{csbffBeneficioBean.abrangenciaBeneficio}" />
                                             </h:selectOneMenu>
@@ -49,7 +49,7 @@
 
                                             <label class="control-label ">Tipo benefício <span class="required">*</span></label>
 
-                                            <h:selectOneMenu required="true" requiredMessage="Campo Tipo Benefício deve ser escolhido." value="#{csbffBeneficioBean.csbffBeneficios.tipoBeneficio}" class="form-control">
+                                            <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.tipoBeneficio}" class="form-control">
                                                 <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                 <f:selectItems value="#{csbffBeneficioBean.tipoBeneficio}" />
                                             </h:selectOneMenu>   
@@ -60,9 +60,9 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
 
-                                            <label class="control-label ">Descrição</label>
+                                            <label class="control-label ">Descrição<span class="required" >*</span></label>
                                             <!--      <textarea class="form-control" cols="40" id="message" name="message" rows="10"></textarea>-->
-                                            <h:inputTextarea class="form-control" cols="10" rows="5" value="#{csbffBeneficioBean.csbffBeneficios.beneficioDescricao}" />
+                                            <h:inputTextarea requiredMessage="Campo Descrição é obrigatório." class="form-control" cols="10" rows="5" value="#{csbffBeneficioBean.csbffBeneficios.beneficioDescricao}" />
 
                                         </div>
                                         <div class="ln_solid"></div>
