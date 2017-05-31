@@ -18,17 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("CsbffEscalaHorasService")
 public class CsbffEscalaHorasService {
+
     @Autowired
     private CsbffEscalaHorasDAO csbffEscalaHorasDAO;
 
     @Transactional
-    public void save(CsbffEscalaHoras csbffEscalaHoras) {
-        csbffEscalaHorasDAO.save(csbffEscalaHoras);
+    public void save(CsbffEscalaHoras escala) {
+        csbffEscalaHorasDAO.save(escala);
     }
 
     @Transactional
-    public void update(CsbffEscalaHoras csbffEscalaHoras) {
-        csbffEscalaHorasDAO.update(csbffEscalaHoras);
+    public void update(CsbffEscalaHoras escala) {
+        csbffEscalaHorasDAO.update(escala);
     }
 
     @Transactional
@@ -43,5 +44,5 @@ public class CsbffEscalaHorasService {
     public List<CsbffEscalaHoras> findAll() {
         return csbffEscalaHorasDAO.findAll();
     }
-    
+
 }

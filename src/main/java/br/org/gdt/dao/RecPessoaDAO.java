@@ -1,6 +1,9 @@
 package br.org.gdt.dao;
 
+import br.org.gdt.model.CsbffBeneficios;
+import br.org.gdt.model.CsbffPessoaBeneficio;
 import br.org.gdt.model.RecPessoa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -14,12 +17,21 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         classe = RecPessoa.class;
     }
 
-    public RecPessoa findByRecCpf(int recCpf) {
+    public RecPessoa findByRecCpf(String recCpf) {
 
-        TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa as t where t.recCpf = :recCpf", RecPessoa.class);
+        TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa as p left join fetch p.csbffPessoaBeneficioList where p.recCpf = :recCpf", RecPessoa.class);
         query.setParameter("recCpf", recCpf);
         try {
-            return query.getSingleResult();
+            RecPessoa pessoa = query.getSingleResult();
+            
+//            List<CsbffPessoaBeneficio> beneficiosPessoa = new ArrayList<>();
+//            for (CsbffPessoaBeneficio pb : pessoa.getCsbffPessoaBeneficioList() ){
+//                beneficiosPessoa.add(pb);
+//            }
+//                    
+//            pessoa.setCsbffPessoaBeneficioList(beneficiosPessoa);
+            
+            return pessoa;
 
         } catch (NoResultException e) {
             return null;
