@@ -10,6 +10,7 @@ import br.org.gdt.service.FpFolhaPeriodoService;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +69,7 @@ public class CalcularFolha {
         eventoInsalubridade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Insalubridade.ordinal() + 1));
         eventoInsalubridade.setEvpEventoPadrao(true);
         EVENTOS_PADROES.add(eventoInsalubridade);
-        
+
         FpEventoPeriodo eventoPericulosidade = new FpEventoPeriodo();
         eventoPericulosidade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Periculosidade.ordinal() + 1));
         eventoPericulosidade.setEvpEventoPadrao(true);
@@ -110,6 +111,13 @@ public class CalcularFolha {
                     }
                 });
         fpFolhaPeriodo.setForStatusFolhaPeriodo(FpStatusFolhaPeriodo.Calculada);
+
+        fpFolhaPeriodo.setForEventos(
+                fpFolhaPeriodo.getForEventos().stream()
+                        .filter(x -> x.getEvpValor() != 0d)
+                        .collect(Collectors.toList())
+        );
+
         fpFolhaPeriodoService.update(fpFolhaPeriodo);
 
         return fpFolhaPeriodo;

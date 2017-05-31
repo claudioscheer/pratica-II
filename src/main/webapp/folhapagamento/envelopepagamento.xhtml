@@ -90,6 +90,8 @@
                         <div class="ln_solid"></div>
                         <div class="row">
                             <div class="col-md-12 text-right">
+                                <h:commandButton class="btn btn-dark" value="Imprimir folha" action="#{fpEnvelopePagamento.gerarFolhaPagamento()}" />
+
                                 <h:commandButton class="btn btn-primary" value="Recalcular folha" action="#{fpEnvelopePagamento.recalcularFolhaPeriodo()}">
                                     <f:ajax execute="@form" render="formEnvelopePagamento" />
                                 </h:commandButton>
@@ -102,10 +104,6 @@
 
                 <script type="text/javascript">
                     $(document).ready(function () {
-                        $(document).on('submit', 'form', function (e) {
-                            return false;
-                        });
-
                         $(document).on('focus', 'input[type="text"]', function () {
                             $(this).select();
                         });

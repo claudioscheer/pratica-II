@@ -68,7 +68,7 @@ implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date formPrazoResposta;
 
-    @OneToMany(mappedBy = "formulario", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "formulario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<GchPerguntas> perguntas;
 
     public List<GchFormularioPessoa> getGchFormularioPessoas() {

@@ -9,6 +9,7 @@ import br.org.gdt.model.GchAlternativas;
 import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
@@ -20,6 +21,8 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 /**
  *
@@ -28,6 +31,10 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class GchFormularioAlternativasBean {
+
+    private String selectedRadioValue = "";
+
+    private String radioValue = null;
 
     private List<GchAlternativas> todasAlternativas = new ArrayList<>();
 
@@ -49,17 +56,48 @@ public class GchFormularioAlternativasBean {
     @ManagedProperty("#{gchAlternativaPerguntasService}")
     private GchAlternativasPerguntaService gchAlternativasPerguntaService;
 
-    private GchFormulario gchFormularios;
+    private GchFormulario gchFormularios = new GchFormulario();
 
     public GchFormularioAlternativasBean() {
-        if (gchFormularios == null) {
 
-            gchFormularios = gchFormularioService.findById(1);
-
-        }
     }
 
     public void save() {
+
+    }
+
+    public List<GchPerguntas> buscaPerguntas() {
+
+        gchFormularios = gchFormularioService.findById(1);
+
+        return gchFormularios.getPerguntas();
+
+    }
+
+    public String verificaMarcado(AjaxBehaviorEvent event) {
+
+        System.out.println("Aqui primeiro");
+        
+         FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        GchAlternativas alternativa = (GchAlternativas) event.getComponent().getAttributes().get("alternativa");
+        
+        
+        if (selectedRadioValue.equals(radioValue)) {
+
+            
+            radio.put(gchAlternativas, Boolean.TRUE);
+            
+            return "checked";
+
+        } else {
+
+            radio.put(gchAlternativas, Boolean.FALSE);
+            
+            return "";
+
+        }
+
     }
 
     public List<GchAlternativas> buscaAlternativas(GchPerguntas gchPerguntas) {
@@ -155,6 +193,22 @@ public class GchFormularioAlternativasBean {
 
     public void setGchAlternativasPerguntaService(GchAlternativasPerguntaService gchAlternativasPerguntaService) {
         this.gchAlternativasPerguntaService = gchAlternativasPerguntaService;
+    }
+
+    public String getSelectedRadioValue() {
+        return selectedRadioValue;
+    }
+
+    public void setSelectedRadioValue(String selectedRadioValue) {
+        this.selectedRadioValue = selectedRadioValue;
+    }
+
+    public String getRadioValue() {
+        return radioValue;
+    }
+
+    public void setRadioValue(String radioValue) {
+        this.radioValue = radioValue;
     }
 
 }

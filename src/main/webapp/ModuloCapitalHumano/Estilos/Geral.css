@@ -14,3 +14,29 @@ and open the template in the editor.
     padding: 3px;
 
 }
+
+#loading{
+
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: white;
+    border-radius: 100%;
+    
+    //bring in the center
+    
+    position:fixed;
+    left:0;
+    right: 0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    
+    animation: round 2s linear infinite; 
+    
+}
+
+@keyframes round{
+    from{transform: rotate(0deg})
+    to{transform :rotate(360deg)}
+}

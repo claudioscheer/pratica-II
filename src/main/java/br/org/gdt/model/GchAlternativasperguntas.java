@@ -45,7 +45,7 @@ public class GchAlternativasperguntas implements Serializable {
 
     
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GchAlternativas gchAlternativas;
    
     @ManyToOne(cascade = CascadeType.REMOVE)

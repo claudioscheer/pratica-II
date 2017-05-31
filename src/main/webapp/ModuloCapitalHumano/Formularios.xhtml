@@ -11,7 +11,8 @@
             <ui:define name="head">
                 <title>Formulários cadastrados</title>
 
-                <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>
+           
+                <script src="Js/controleLoader.js" type="text/javascript"></script>
             </ui:define>
             <ui:define name="content">
                 <div id="page" style="margin-top:75px;">
@@ -35,7 +36,12 @@
 
                                         <h:form id="formFormulario">
 
-                                                  
+
+                                            <div id="wait" style="display:none">
+                                                
+                                                <p> Aguardeeeee </p>
+                                            </div>
+                                            
                                             <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
                                                 <h:column headerClass="alinhaColuna">                
@@ -57,7 +63,7 @@
                                                     <h:commandLink  action="#{gchFormularioBean.vincularPessoas(formulario)}">
                                                         <f:ajax execute="@this"  event="action" render="formFormulario" />
                                                         <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
-                                                        
+
                                                     </h:commandLink>
 
 
@@ -76,15 +82,24 @@
 
                                             </h:dataTable>
 
-                                            <p:dialog modal="true" header="Seleção de pessoas" widgetVar="dialogSelecaoPessoas" >
+                                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+                                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                                <p:graphicImage url="../ModuloCapitalHumano/Estilos/loading.gif" />
+                                            </p:dialog>
+                                             
+                                            
+                                            <p:dialog  id="dialogPessoas" modal="true" header="Seleção de pessoas" widgetVar="dialogSelecaoPessoas" >
 
+                                                <h:form id="enviarEmail">
+                                                
                                                 <div class="panel-body" style="/* a lign-items: center; */">
 
                                                     <h:dataTable class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
 
                                                         <h:column>
                                                             <h:selectBooleanCheckbox value="#{gchFormularioBean.checked[pessoa]}" >
-                      
+
                                                                 <f:attribute name="pessoa" value="#{pessoa}" />
                                                             </h:selectBooleanCheckbox>
                                                         </h:column>
@@ -101,17 +116,25 @@
 
                                                     </h:dataTable>
                                                 </div>
+                                               
 
+                                                    
                                                 <div class="form-group">
                                                     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
 
-                                                        <h:commandButton class="btn btn-primary"  actionListener="#{gchFormularioBean.salvarPessoasFormulario}" value="Cadastrar" /> 
+                                                        
+                                                        <h:commandButton id="enviarEmail" class="btn btn-primary" value="Cadastrar" >
+
+                                                            <f:ajax event="click" render="formFormulario"  listener="#{gchFormularioBean.salvarPessoasFormulario}"   />
+                                                            
+                                                        </h:commandButton>
 
                                                         <h:commandButton class="btn btn-danger"  actionListener="#{gchFormularioBean.cancelDialog()}" value="Cancelar" /> 
 
                                                     </div>
                                                 </div>    
-
+                                                </h:form>
+                                                    
                                             </p:dialog>
 
 

@@ -173,13 +173,14 @@ public class CsbffAdmissaoBean implements Serializable {
         return pessoas;
     }
 
-    public String saveAdmissao() { //remover SAVE
+    public String saveAdmissao() { 
         if (recPessoa.getRecIdpessoa() > 0) {
             recPessoaService.update(recPessoa);
         }
         recPessoaList = recPessoaService.findAll();
         this.recPessoa = new RecPessoa();
         this.formAtivo = false;
+        RecPessoa rec = new RecPessoa();
         return null;
     }
 
