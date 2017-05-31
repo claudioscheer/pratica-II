@@ -273,8 +273,14 @@ public class GchFormularioBean {
 
             RequestContext contextReq = RequestContext.getCurrentInstance();          
             
+            
+            
+            
             Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
 
+            
+            
+            
             ArrayList<ParametrosEmail> parametros = new ArrayList<>();
 
             ParametrosEmail ItemParametro;
@@ -344,7 +350,7 @@ public class GchFormularioBean {
             this.formAtivo = false;
             gchFormulariopessoa = new GchFormularioPessoa();
             checked = new HashMap<RecPessoa, Boolean>();
-
+            keyIterrator.remove();
             //Se vinculou ao menos 1 envia e-mail
             if (vinculou) {
 
@@ -354,6 +360,7 @@ public class GchFormularioBean {
 
                 try {
                     novoEnvio.EnviarEmail(parametros);
+                    parametros.clear();
                 } catch (Exception ex) {
                     Logger.getLogger(GchFormularioBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
