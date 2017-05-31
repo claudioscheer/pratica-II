@@ -9,11 +9,14 @@ import br.org.gdt.model.GchAlternativas;
 import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
+import br.org.gdt.model.GchRespostas;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
+import br.org.gdt.service.GchRespostasService;
+import br.org.gdt.service.RecPessoaService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +24,6 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 /**
@@ -38,7 +40,7 @@ public class GchFormularioAlternativasBean {
 
     private List<GchAlternativas> todasAlternativas = new ArrayList<>();
 
-    private GchAlternativas gchAlternativas = new GchAlternativas();
+    private GchAlternativas gchAlternativas;
 
     private Map<GchAlternativas, Boolean> radio = new HashMap<GchAlternativas, Boolean>();
 
@@ -53,10 +55,23 @@ public class GchFormularioAlternativasBean {
     @ManagedProperty("#{gchFormularioService}")
     private GchFormularioService gchFormularioService;
 
+    @ManagedProperty("#{gchRespostaService}")
+    private GchRespostasService gchRespostasService;
+
     @ManagedProperty("#{gchAlternativaPerguntasService}")
     private GchAlternativasPerguntaService gchAlternativasPerguntaService;
 
+    @ManagedProperty("#{recPessoaService}")
+    private RecPessoaService recPessoaService;
+
+    private List<GchRespostas> gchRespostasList = new ArrayList<>();
+
     private GchFormulario gchFormularios = new GchFormulario();
+
+    private GchRespostas gchRespostas = new GchRespostas();
+
+    private int idPessoa = 4;
+    private long idFormulario = 1;
 
     public GchFormularioAlternativasBean() {
 
@@ -64,39 +79,27 @@ public class GchFormularioAlternativasBean {
 
     public void save() {
 
+        for (GchRespostas gchResposta : gchRespostasList) {
+
+            gchResposta.setFormCodigo(1);
+
+            RecPessoa pessoa = recPessoaService.BuscarId(idPessoa);
+
+            gchResposta.setRecIdpessoa(pessoa);
+
+            gchRespostasService.update(gchResposta);
+
+        }
+
+        gchRespostasList = new ArrayList<>();
+
     }
 
     public List<GchPerguntas> buscaPerguntas() {
 
-        gchFormularios = gchFormularioService.findById(1);
+        gchFormularios = gchFormularioService.findById(idFormulario);
 
         return gchFormularios.getPerguntas();
-
-    }
-
-    public String verificaMarcado(AjaxBehaviorEvent event) {
-
-        System.out.println("Aqui primeiro");
-        
-         FacesContext facesContext = FacesContext.getCurrentInstance();
-
-        GchAlternativas alternativa = (GchAlternativas) event.getComponent().getAttributes().get("alternativa");
-        
-        
-        if (selectedRadioValue.equals(radioValue)) {
-
-            
-            radio.put(gchAlternativas, Boolean.TRUE);
-            
-            return "checked";
-
-        } else {
-
-            radio.put(gchAlternativas, Boolean.FALSE);
-            
-            return "";
-
-        }
 
     }
 
@@ -204,11 +207,55 @@ public class GchFormularioAlternativasBean {
     }
 
     public String getRadioValue() {
+
         return radioValue;
     }
 
     public void setRadioValue(String radioValue) {
+
+        String[] value = radioValue.split("-");
+
+        GchRespostas gchRespostaAux = new GchRespostas();
+
+        gchRespostaAux.setPerCodigo(Long.parseLong(value[1]));
+
+        gchRespostaAux.setAltCodigo(gchAlternativasService.findById(Long.parseLong(value[0])));
+
+        gchRespostasList.add(gchRespostaAux);
+
         this.radioValue = radioValue;
+    }
+
+    public GchRespostas getGchRespostas() {
+        return gchRespostas;
+    }
+
+    public void setGchRespostas(GchRespostas gchRespostas) {
+        this.gchRespostas = gchRespostas;
+    }
+
+    public List<GchRespostas> getGchRespostasList() {
+        return gchRespostasList;
+    }
+
+    public void setGchRespostasList(List<GchRespostas> gchRespostasList) {
+        this.gchRespostasList = gchRespostasList;
+    }
+
+    public GchRespostasService getGchRespostasService() {
+        return gchRespostasService;
+    }
+
+    public void setGchRespostasService(GchRespostasService gchRespostasService) {
+        this.gchRespostasService = gchRespostasService;
+    }
+
+    public RecPessoaService getRecPessoaService() {
+        return recPessoaService;
+    }
+
+    public void setRecPessoaService(RecPessoaService recPessoaService) {
+        this.recPessoaService = recPessoaService;
     }
 
 }
