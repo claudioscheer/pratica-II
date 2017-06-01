@@ -29,13 +29,13 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
     private Date forGeradaEm;
     private List<FpEventoPeriodo> forEventos;
     private FpStatusFolhaPeriodo forStatusFolhaPeriodo;
-    private double valorBaseINSS;
-    private double valorBaseFGTS;
-    private double valorBaseIRRF;
-    private double totalVencimentos;
-    private double totalDescontos;
-    private double totalLiquido;
-    private double valorFGTS;
+    private double forValorBaseINSS;
+    private double forValorBaseFGTS;
+    private double forValorBaseIRRF;
+    private double forTotalVencimentos;
+    private double forTotalDescontos;
+    private double forTotalLiquido;
+    private double forValorFGTS;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_folha_periodo")
@@ -102,60 +102,60 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
         }
     }
 
-    public double getValorBaseINSS() {
-        return valorBaseINSS;
+    public double getForValorBaseINSS() {
+        return forValorBaseINSS;
     }
 
-    public void setValorBaseINSS(double valorBaseINSS) {
-        this.valorBaseINSS = valorBaseINSS;
+    public void setForValorBaseINSS(double forValorBaseINSS) {
+        this.forValorBaseINSS = forValorBaseINSS;
     }
 
-    public double getValorBaseFGTS() {
-        return valorBaseFGTS;
+    public double getForValorBaseFGTS() {
+        return forValorBaseFGTS;
     }
 
-    public void setValorBaseFGTS(double valorBaseFGTS) {
-        this.valorBaseFGTS = valorBaseFGTS;
+    public void setForValorBaseFGTS(double forValorBaseFGTS) {
+        this.forValorBaseFGTS = forValorBaseFGTS;
     }
 
-    public double getValorBaseIRRF() {
-        return valorBaseIRRF;
+    public double getForValorBaseIRRF() {
+        return forValorBaseIRRF;
     }
 
-    public void setValorBaseIRRF(double valorBaseIRRF) {
-        this.valorBaseIRRF = valorBaseIRRF;
+    public void setForValorBaseIRRF(double forValorBaseIRRF) {
+        this.forValorBaseIRRF = forValorBaseIRRF;
     }
 
-    public double getTotalVencimentos() {
-        return totalVencimentos;
+    public double getForTotalVencimentos() {
+        return forTotalVencimentos;
     }
 
-    public void setTotalVencimentos(double totalVencimentos) {
-        this.totalVencimentos = totalVencimentos;
+    public void setForTotalVencimentos(double forTotalVencimentos) {
+        this.forTotalVencimentos = forTotalVencimentos;
     }
 
-    public double getTotalDescontos() {
-        return totalDescontos;
+    public double getForTotalDescontos() {
+        return forTotalDescontos;
     }
 
-    public void setTotalDescontos(double totalDescontos) {
-        this.totalDescontos = totalDescontos;
+    public void setForTotalDescontos(double forTotalDescontos) {
+        this.forTotalDescontos = forTotalDescontos;
     }
 
-    public double getTotalLiquido() {
-        return totalLiquido;
+    public double getForTotalLiquido() {
+        return forTotalLiquido;
     }
 
-    public void setTotalLiquido(double totalLiquido) {
-        this.totalLiquido = totalLiquido;
+    public void setForTotalLiquido(double forTotalLiquido) {
+        this.forTotalLiquido = forTotalLiquido;
     }
 
-    public double getValorFGTS() {
-        return valorFGTS;
+    public double getForValorFGTS() {
+        return forValorFGTS;
     }
 
-    public void setValorFGTS(double valorFGTS) {
-        this.valorFGTS = valorFGTS;
+    public void setForValorFGTS(double forValorFGTS) {
+        this.forValorFGTS = forValorFGTS;
     }
 
 }

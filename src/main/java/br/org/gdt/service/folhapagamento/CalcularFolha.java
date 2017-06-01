@@ -113,26 +113,26 @@ public class CalcularFolha {
                         .collect(Collectors.toList())
         );
 
-        fpFolhaPeriodo.setValorBaseFGTS(dadosCalculadosDoFuncionario.getValorBaseFGTS());
-        fpFolhaPeriodo.setValorBaseINSS(dadosCalculadosDoFuncionario.getValorBaseINSS());
-        fpFolhaPeriodo.setValorBaseIRRF(dadosCalculadosDoFuncionario.getValorBaseIRRF());
+        fpFolhaPeriodo.setForValorBaseFGTS(dadosCalculadosDoFuncionario.getValorBaseFGTS());
+        fpFolhaPeriodo.setForValorBaseINSS(dadosCalculadosDoFuncionario.getValorBaseINSS());
+        fpFolhaPeriodo.setForValorBaseIRRF(dadosCalculadosDoFuncionario.getValorBaseIRRF());
 
-        fpFolhaPeriodo.setValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, dadosCalculadosDoFuncionario));
+        fpFolhaPeriodo.setForValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, dadosCalculadosDoFuncionario));
 
-        fpFolhaPeriodo.setTotalDescontos(
+        fpFolhaPeriodo.setForTotalDescontos(
                 fpFolhaPeriodo.getForEventos().stream()
                         .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())
                         .mapToDouble(x -> x.getEvpValor())
                         .sum());
 
-        fpFolhaPeriodo.setTotalVencimentos(
+        fpFolhaPeriodo.setForTotalVencimentos(
                 fpFolhaPeriodo.getForEventos().stream()
                         .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento && !x.getEvpEvento().isEveNaoAlteraFolha())
                         .mapToDouble(x -> x.getEvpValor())
                         .sum());
 
         // E se o valor ficar negativo?
-        fpFolhaPeriodo.setTotalLiquido(fpFolhaPeriodo.getTotalVencimentos() - fpFolhaPeriodo.getTotalDescontos());
+        fpFolhaPeriodo.setForTotalLiquido(fpFolhaPeriodo.getForTotalVencimentos() - fpFolhaPeriodo.getForTotalDescontos());
 
         fpFolhaPeriodoService.update(fpFolhaPeriodo);
 
