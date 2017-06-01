@@ -57,6 +57,8 @@ public class Eventos {
                     mapToDouble(x -> x.getEvpValor())
                     .sum();
 
+            dadosCalculadosDoFuncionario.setValorBaseINSS(valorEventosIncideINSS);
+
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideINSS, FpEnumTabelas.INSS.ordinal() + 1);
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
                     ? fpFaixa.getFaiValor()
@@ -83,6 +85,8 @@ public class Eventos {
                     mapToDouble(x -> x.getEvpValor())
                     .sum();
 
+            dadosCalculadosDoFuncionario.setValorBaseFGTS(valorEventosIncideFGTS);
+
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideFGTS, FpEnumTabelas.FGTS.ordinal() + 1);
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiTipoValor() == FpTipoValorFaixa.Decimal
                     ? fpFaixa.getFaiValor()
@@ -106,6 +110,8 @@ public class Eventos {
                 FpFaixa fpFaixaValorPorDependente = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.ValorIRRFPorDependente.ordinal() + 1);
                 valorEventosIncideIRRF -= fpFaixaValorPorDependente.getFaiValor() * dependentes;
             }
+
+            dadosCalculadosDoFuncionario.setValorBaseIRRF(valorEventosIncideIRRF);
 
             // Joga para a tabela de IRRF.
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorEventosIncideIRRF, FpEnumTabelas.IRRF.ordinal() + 1);

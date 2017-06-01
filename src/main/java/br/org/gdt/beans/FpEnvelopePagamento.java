@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class FpEnvelopePagamento implements java.io.Serializable {
 
     private boolean mostrarTodasFolhasPeriodo = false;
@@ -92,7 +93,9 @@ public class FpEnvelopePagamento implements java.io.Serializable {
             folhaPeriodo = new FpFolhaPeriodo();
         }
         fpFolhaPeriodo = folhaPeriodo;
-        todosEventosFolhaPeriodo = folhaPeriodo.getForEventos();
+        todosEventosFolhaPeriodo = folhaPeriodo.getForEventos().stream()
+                .filter(x -> !x.getEvpEvento().isEveNaoAlteraFolha())
+                .collect(Collectors.toList());
     }
 
     public void recalcularFolhaPeriodo() {
@@ -108,7 +111,9 @@ public class FpEnvelopePagamento implements java.io.Serializable {
             dadosCalculadosDoFuncionario.setEventos(verificarEventosAjustadosManualmente());
 
             fpFolhaPeriodo = calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
-            todosEventosFolhaPeriodo = fpFolhaPeriodo.getForEventos();
+            todosEventosFolhaPeriodo = fpFolhaPeriodo.getForEventos().stream()
+                    .filter(x -> !x.getEvpEvento().isEveNaoAlteraFolha())
+                    .collect(Collectors.toList());
 
             Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "info");
         } catch (Exception e) {

@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("calcularFolha")
 public class CalcularFolha {
-
-    private List<FpEventoPeriodo> EVENTOS_PADROES;
 
     @Autowired
     private FpEventoService fpEventoService;
@@ -29,53 +28,49 @@ public class CalcularFolha {
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
     private List<FpEventoPeriodo> getEventosPadroes() {
-        if (EVENTOS_PADROES != null) {
-            return EVENTOS_PADROES;
-        }
-
-        EVENTOS_PADROES = new ArrayList<>();
+        List<FpEventoPeriodo> eventosPadroes = new ArrayList<>();
 
         FpEventoPeriodo eventoSalario = new FpEventoPeriodo();
         eventoSalario.setEvpEvento(fpEventoService.findById(FpEnumEventos.Salario.ordinal() + 1));
         eventoSalario.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoSalario);
+        eventosPadroes.add(eventoSalario);
 
         FpEventoPeriodo eventoINSS = new FpEventoPeriodo();
         eventoINSS.setEvpEvento(fpEventoService.findById(FpEnumEventos.INSS.ordinal() + 1));
         eventoINSS.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoINSS);
+        eventosPadroes.add(eventoINSS);
 
         FpEventoPeriodo eventoFGTS = new FpEventoPeriodo();
         eventoFGTS.setEvpEvento(fpEventoService.findById(FpEnumEventos.FGTS.ordinal() + 1));
         eventoFGTS.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoFGTS);
+        eventosPadroes.add(eventoFGTS);
 
         FpEventoPeriodo eventoIRRF = new FpEventoPeriodo();
         eventoIRRF.setEvpEvento(fpEventoService.findById(FpEnumEventos.IRRF.ordinal() + 1));
         eventoIRRF.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoIRRF);
+        eventosPadroes.add(eventoIRRF);
 
         FpEventoPeriodo eventoDSR = new FpEventoPeriodo();
         eventoDSR.setEvpEvento(fpEventoService.findById(FpEnumEventos.DSR.ordinal() + 1));
         eventoDSR.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoDSR);
+        eventosPadroes.add(eventoDSR);
 
         FpEventoPeriodo eventoSalarioFamilia = new FpEventoPeriodo();
         eventoSalarioFamilia.setEvpEvento(fpEventoService.findById(FpEnumEventos.SalarioFamilia.ordinal() + 1));
         eventoSalarioFamilia.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoSalarioFamilia);
+        eventosPadroes.add(eventoSalarioFamilia);
 
         FpEventoPeriodo eventoInsalubridade = new FpEventoPeriodo();
         eventoInsalubridade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Insalubridade.ordinal() + 1));
         eventoInsalubridade.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoInsalubridade);
+        eventosPadroes.add(eventoInsalubridade);
 
         FpEventoPeriodo eventoPericulosidade = new FpEventoPeriodo();
         eventoPericulosidade.setEvpEvento(fpEventoService.findById(FpEnumEventos.Periculosidade.ordinal() + 1));
         eventoPericulosidade.setEvpEventoPadrao(true);
-        EVENTOS_PADROES.add(eventoPericulosidade);
+        eventosPadroes.add(eventoPericulosidade);
 
-        return EVENTOS_PADROES;
+        return eventosPadroes;
     }
 
     public void calcularParaTodosFuncionarios() {
@@ -117,6 +112,25 @@ public class CalcularFolha {
                         .filter(x -> x.getEvpValor() != 0d)
                         .collect(Collectors.toList())
         );
+
+        fpFolhaPeriodo.setValorBaseFGTS(dadosCalculadosDoFuncionario.getValorBaseFGTS());
+        fpFolhaPeriodo.setValorBaseINSS(dadosCalculadosDoFuncionario.getValorBaseINSS());
+        fpFolhaPeriodo.setValorBaseIRRF(dadosCalculadosDoFuncionario.getValorBaseIRRF());
+
+        fpFolhaPeriodo.setTotalDescontos(
+                fpFolhaPeriodo.getForEventos().stream()
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())
+                        .mapToDouble(x -> x.getEvpValor())
+                        .sum());
+
+        fpFolhaPeriodo.setTotalVencimentos(
+                fpFolhaPeriodo.getForEventos().stream()
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento && !x.getEvpEvento().isEveNaoAlteraFolha())
+                        .mapToDouble(x -> x.getEvpValor())
+                        .sum());
+
+        // E se o valor ficar negativo?
+        fpFolhaPeriodo.setTotalLiquido(fpFolhaPeriodo.getTotalVencimentos() - fpFolhaPeriodo.getTotalDescontos());
 
         fpFolhaPeriodoService.update(fpFolhaPeriodo);
 

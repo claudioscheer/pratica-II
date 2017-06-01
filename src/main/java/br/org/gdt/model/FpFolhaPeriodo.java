@@ -29,6 +29,12 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
     private Date forGeradaEm;
     private List<FpEventoPeriodo> forEventos;
     private FpStatusFolhaPeriodo forStatusFolhaPeriodo;
+    private double valorBaseINSS;
+    private double valorBaseFGTS;
+    private double valorBaseIRRF;
+    private double totalVencimentos;
+    private double totalDescontos;
+    private double totalLiquido;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_folha_periodo")
@@ -93,6 +99,54 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
             fpEventoPeriodo.setEvpFolhaPeriodo(this);
             this.getForEventos().add(fpEventoPeriodo);
         }
+    }
+
+    public double getValorBaseINSS() {
+        return valorBaseINSS;
+    }
+
+    public void setValorBaseINSS(double valorBaseINSS) {
+        this.valorBaseINSS = valorBaseINSS;
+    }
+
+    public double getValorBaseFGTS() {
+        return valorBaseFGTS;
+    }
+
+    public void setValorBaseFGTS(double valorBaseFGTS) {
+        this.valorBaseFGTS = valorBaseFGTS;
+    }
+
+    public double getValorBaseIRRF() {
+        return valorBaseIRRF;
+    }
+
+    public void setValorBaseIRRF(double valorBaseIRRF) {
+        this.valorBaseIRRF = valorBaseIRRF;
+    }
+
+    public double getTotalVencimentos() {
+        return totalVencimentos;
+    }
+
+    public void setTotalVencimentos(double totalVencimentos) {
+        this.totalVencimentos = totalVencimentos;
+    }
+
+    public double getTotalDescontos() {
+        return totalDescontos;
+    }
+
+    public void setTotalDescontos(double totalDescontos) {
+        this.totalDescontos = totalDescontos;
+    }
+
+    public double getTotalLiquido() {
+        return totalLiquido;
+    }
+
+    public void setTotalLiquido(double totalLiquido) {
+        this.totalLiquido = totalLiquido;
     }
 
 }

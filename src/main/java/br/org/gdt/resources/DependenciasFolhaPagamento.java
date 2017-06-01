@@ -93,6 +93,7 @@ public class DependenciasFolhaPagamento {
         fpEvento.setEveIncideINSS(false);
         fpEvento.setEveIncideIRRF(false);
         fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNaoAlteraFolha(true);
         fpEvento.setEveNome("FGTS");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
         fpEventoService.update(fpEvento);

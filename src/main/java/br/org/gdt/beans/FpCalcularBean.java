@@ -115,6 +115,9 @@ public class FpCalcularBean {
             calcularFolha.calcularParaTodosFuncionarios();
         } else {
             try {
+                
+                todosFpEventoPeriodo.forEach(x -> x.setJaCalculado(false));
+                
                 DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
