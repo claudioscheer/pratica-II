@@ -24,17 +24,20 @@
             <div class="main_container">
                 <div class="col-md-3 left_col menu_fixed">
                     <div class="left_col scroll-view">
-                        <div class="navbar nav_title text-center" style="border: 3;">
-                            <span class="site_title" style="padding-left: 0">Murphy</span>
-                        </div>
+                        <h:link outcome="/index.xhtml">
+                            <div class="navbar nav_title text-center" style="border: 3;">
+                                <span class="site_title" style="padding-left: 0">Murphy</span>
+                            </div>
+                        </h:link>
 
                         <div class="clearfix"></div>
 
                         <!-- menu profile quick info -->
                         <div class="profile clearfix">
                             <div class="profile_pic">
-                                <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img" />
-                            </div>
+                                <h:link outcome="/index.xhtml">
+                                    <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img"/>
+                                </h:link></div>
                             <div class="profile_info">
                                 <span>Olá,</span>
                                 <h2>Gestor!</h2>
