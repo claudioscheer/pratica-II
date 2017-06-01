@@ -117,6 +117,8 @@ public class CalcularFolha {
         fpFolhaPeriodo.setValorBaseINSS(dadosCalculadosDoFuncionario.getValorBaseINSS());
         fpFolhaPeriodo.setValorBaseIRRF(dadosCalculadosDoFuncionario.getValorBaseIRRF());
 
+        fpFolhaPeriodo.setValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, dadosCalculadosDoFuncionario));
+
         fpFolhaPeriodo.setTotalDescontos(
                 fpFolhaPeriodo.getForEventos().stream()
                         .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())

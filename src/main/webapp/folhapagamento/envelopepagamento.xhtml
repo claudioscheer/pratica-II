@@ -108,7 +108,9 @@
                                     <div class="col-md-3 form-group">
                                         <label class="control-label">FGTS</label>
                                         <br />
-                                        <h:outputText value="asdfasdlkfjas" />
+                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.valorFGTS}">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:outputText>
                                     </div>
                                     <div class="col-md-3 form-group">
                                         <label class="control-label">Base Cálc. IRRF</label>

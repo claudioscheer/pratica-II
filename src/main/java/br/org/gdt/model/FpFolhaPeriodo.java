@@ -35,6 +35,7 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
     private double totalVencimentos;
     private double totalDescontos;
     private double totalLiquido;
+    private double valorFGTS;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_folha_periodo")
@@ -147,6 +148,14 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
 
     public void setTotalLiquido(double totalLiquido) {
         this.totalLiquido = totalLiquido;
+    }
+
+    public double getValorFGTS() {
+        return valorFGTS;
+    }
+
+    public void setValorFGTS(double valorFGTS) {
+        this.valorFGTS = valorFGTS;
     }
 
 }

@@ -181,17 +181,17 @@ public class Eventos {
         return fpEventoPeriodo;
     }
 
-    private double getValorEventoDosEventosDoFuncionario(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+    public double getValorEventoDosEventosDoFuncionario(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
         FpEventoPeriodo fpEventoPeriodo = getEventoDosEventosDoFuncionario(evento, dadosCalculadosDoFuncionario);
         return fpEventoPeriodo == null ? 0 : fpEventoPeriodo.getEvpValor();
     }
 
-    private double getValorHoraFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+    public double getValorHoraFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
         double fpEventoPeriodoSalario = getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
         return fpEventoPeriodoSalario / HORAS_MENSAIS;
     }
 
-    private FpEventoPeriodo getEventoDosEventosDoFuncionario(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+    public FpEventoPeriodo getEventoDosEventosDoFuncionario(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
         Optional<FpEventoPeriodo> optionalEventoPeriodo = dadosCalculadosDoFuncionario.getEventos().stream()
                 .filter(x -> x.getEvpEvento().getEveId() == evento.ordinal() + 1)
                 .findFirst();
@@ -201,7 +201,7 @@ public class Eventos {
         return verificarEventoJaEstaCalculado(optionalEventoPeriodo.get(), dadosCalculadosDoFuncionario);
     }
 
-    private FpEventoPeriodo verificarEventoJaEstaCalculado(FpEventoPeriodo fpEventoPeriodo, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+    public FpEventoPeriodo verificarEventoJaEstaCalculado(FpEventoPeriodo fpEventoPeriodo, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
         if (fpEventoPeriodo == null || fpEventoPeriodo.isJaCalculado()) {
             return fpEventoPeriodo;
         }
