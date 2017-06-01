@@ -82,7 +82,7 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
         this.forStatusFolhaPeriodo = forStatusFolhaPeriodo;
     }
 
-    @OrderBy("evpEvento.eveId ASC")
+    //@OrderBy("evpEvento.eveId ASC")
     @OneToMany(mappedBy = "evpFolhaPeriodo", orphanRemoval = true, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     public List<FpEventoPeriodo> getForEventos() {
         if (forEventos == null) {

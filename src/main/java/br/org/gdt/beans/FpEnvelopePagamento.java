@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -102,13 +103,18 @@ public class FpEnvelopePagamento implements java.io.Serializable {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
             dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
+            dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
                 Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
                 return;
             }
             dadosCalculadosDoFuncionario.setPessoa(recPessoa);
-            dadosCalculadosDoFuncionario.setEventos(verificarEventosAjustadosManualmente());
+
+            List<FpEventoPeriodo> eventosVerificados = verificarEventosAjustadosManualmente();
+            eventosVerificados.forEach(x -> x.setJaCalculado(false));
+
+            dadosCalculadosDoFuncionario.setEventos(eventosVerificados);
 
             fpFolhaPeriodo = calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
             todosEventosFolhaPeriodo = fpFolhaPeriodo.getForEventos().stream()
@@ -122,14 +128,23 @@ public class FpEnvelopePagamento implements java.io.Serializable {
     }
 
     private List<FpEventoPeriodo> verificarEventosAjustadosManualmente() {
-        for (int i = 0; i < todosEventosFolhaPeriodo.size(); i++) {
-            FpEventoPeriodo eventoOriginal = fpFolhaPeriodo.getForEventos().get(i);
-            FpEventoPeriodo eventoAlterado = todosEventosFolhaPeriodo.get(i);
 
-            eventoAlterado.setEventoAlteradoManualmente(eventoOriginal.getEvpValorReferencia() != eventoAlterado.getEvpValorReferencia()
+        fpFolhaPeriodo.getForEventos().forEach((eventoOriginal) -> {
+            Optional<FpEventoPeriodo> optionalEventoAlterado = todosEventosFolhaPeriodo.stream()
+                    .filter(x -> x.getEvpEvento().getEveId() == eventoOriginal.getEvpEvento().getEveId())
+                    .findFirst();
+
+            if (!optionalEventoAlterado.isPresent()) {
+                return;
+            }
+
+            FpEventoPeriodo eventoAlterado = optionalEventoAlterado.get();
+
+            eventoOriginal.setEventoAlteradoManualmente(eventoOriginal.getEvpValorReferencia() != eventoAlterado.getEvpValorReferencia()
                     || eventoOriginal.getEvpValor() != eventoAlterado.getEvpValor());
-        }
-        return todosEventosFolhaPeriodo;
+        });
+
+        return fpFolhaPeriodo.getForEventos();
     }
 
     public void gerarFolhaPagamento() {

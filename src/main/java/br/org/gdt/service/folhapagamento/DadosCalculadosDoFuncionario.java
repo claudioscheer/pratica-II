@@ -8,12 +8,21 @@ import java.util.List;
 
 public class DadosCalculadosDoFuncionario {
 
+    private boolean recalculando;
     private FpPeriodo periodo;
     private RecPessoa pessoa;
     private List<FpEventoPeriodo> eventos;
     private double valorBaseINSS;
     private double valorBaseFGTS;
     private double valorBaseIRRF;
+
+    public boolean isRecalculando() {
+        return recalculando;
+    }
+
+    public void setRecalculando(boolean recalculando) {
+        this.recalculando = recalculando;
+    }
 
     public double getValorBaseINSS() {
         return valorBaseINSS;

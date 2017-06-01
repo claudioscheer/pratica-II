@@ -85,7 +85,9 @@ public class CalcularFolha {
         fpFolhaPeriodo.setForPeriodo(dadosCalculadosDoFuncionario.getPeriodo());
         fpFolhaPeriodo.setForPessoa(dadosCalculadosDoFuncionario.getPessoa());
 
-        dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
+        if (!dadosCalculadosDoFuncionario.isRecalculando()) {
+            dadosCalculadosDoFuncionario.getEventos().addAll(getEventosPadroes());
+        }
 
         dadosCalculadosDoFuncionario.getEventos().stream()
                 .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
@@ -105,7 +107,10 @@ public class CalcularFolha {
                         throw new RuntimeException(ex);
                     }
                 });
-        fpFolhaPeriodo.setForStatusFolhaPeriodo(FpStatusFolhaPeriodo.Calculada);
+        fpFolhaPeriodo.setForStatusFolhaPeriodo(
+                dadosCalculadosDoFuncionario.isRecalculando()
+                ? FpStatusFolhaPeriodo.Validada
+                : FpStatusFolhaPeriodo.Calculada);
 
         fpFolhaPeriodo.setForEventos(
                 fpFolhaPeriodo.getForEventos().stream()
