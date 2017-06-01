@@ -6,9 +6,6 @@ import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.enums.FpTipoValorFaixa;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFaixa;
-import br.org.gdt.model.FpTabela;
-import br.org.gdt.service.FpFolhaPeriodoService;
-import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.FpTabelaService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,8 +145,10 @@ public class Eventos {
             double valorHorasNoturnas = getValorEventoDosEventosDoFuncionario(FpEnumEventos.HorasNoturnas, dadosCalculadosDoFuncionario);
 
             double valorHorasExtras = valorHorasExtras50 + valorHorasExtras100 + valorHorasNoturnas;
+            double valorReferencia = dadosCalculadosDoFuncionario.getPeriodo().getPerDiasNaoUteis() / dadosCalculadosDoFuncionario.getPeriodo().getPerDiasUteis();
 
-            fpEventoPeriodo.setEvpValor((valorHorasExtras / dadosCalculadosDoFuncionario.getPeriodo().getPerDiasUteis()) * dadosCalculadosDoFuncionario.getPeriodo().getPerDiasNaoUteis());
+            fpEventoPeriodo.setEvpValor(valorHorasExtras * valorReferencia);
+            fpEventoPeriodo.setEvpValorReferencia(valorReferencia);
 
         } else if (evento == FpEnumEventos.SalarioFamilia.ordinal()) {
             double valorSalario = getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
