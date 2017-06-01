@@ -114,7 +114,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     public void recalcularFolhaPeriodo() {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
-            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
+            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodoService.findById(fpPeriodo.getPerId()));
             dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
