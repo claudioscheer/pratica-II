@@ -126,6 +126,9 @@ public class FpEnvelopePagamento implements java.io.Serializable {
         }
     }
 
+//    private List<FpEventoPeriodo> verificarEventosParaRecalcular() {
+//
+//    }
     public void gerarFolhaPagamento() {
         try {
             Map<String, Object> parametros = new HashMap<>();
