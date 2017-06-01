@@ -37,16 +37,28 @@
 
                                                             <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                                                <h:outputLabel class="control-label requiredField" value="#{perguntas.perDescricao}"/>
-                                                                <h:inputHidden value="#{perguntas.perCodigo}" />
+                                                                <div class="panel-title text-center">
+                                                                    <h4 class="tile">
+                                                                        <h:outputLabel class="control-label requiredField" value="#{perguntas.perDescricao}"/>
+                                                                        <h:inputHidden value="#{perguntas.perCodigo}" />
+                                                                    </h4>
+                                                                </div>
 
                                                             </div>
 
 
-                                                            <h:selectOneRadio value="#{gchFormularioAlternativasBean.radioValue}" >
-                                                                <f:selectItems value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa.altCodigo}-#{perguntas.perCodigo}" itemLabel="#{alternativa.altDescricao}"/>
-                                                            </h:selectOneRadio>
 
+                                                            <div class="panel-title text-center">
+
+                                                                <h5>
+                                                                    <div style="text-align: -webkit-center;">
+                                                                        <h:selectOneRadio value="#{gchFormularioAlternativasBean.radioValue}" >
+                                                                            <f:selectItems class="mark" value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa.altCodigo}-#{perguntas.perCodigo}" itemLabel="#{alternativa.altDescricao}"/>
+                                                                        </h:selectOneRadio>
+
+                                                                    </div>  
+                                                                </h5>
+                                                            </div>
 
                                                         </div>
                                                     </ui:repeat>
