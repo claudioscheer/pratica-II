@@ -167,10 +167,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     public void gerarFolhaPagamento() {
         try {
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("pessoa", "Claudio Roberto Scheer Junior");
-
-            Helper.gerarBaixarRelatorioPDF("folha-pagamento", "/folhapagamento/relatorio/folha.jasper", parametros, fpFolhaPeriodo.getForEventos());
+            calcularFolha.gerarFolha(fpFolhaPeriodo);
         } catch (Exception e) {
             Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
         }

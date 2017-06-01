@@ -39,6 +39,7 @@ public class Helper {
         }
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JRBeanCollectionDataSource(dadosRelatorio));
+
         HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
         response.reset();
         response.setContentType("application/pdf");

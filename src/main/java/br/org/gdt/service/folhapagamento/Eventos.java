@@ -7,6 +7,7 @@ import br.org.gdt.enums.FpTipoValorFaixa;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFaixa;
 import br.org.gdt.service.FpTabelaService;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,7 +99,7 @@ public class Eventos {
                     .sum();
 
             // Descontar o valor do evento INSS.
-            valorEventosIncideIRRF -= getValorEventoDosEventosDoFuncionario(FpEnumEventos.INSS, dadosCalculadosDoFuncionario);
+            valorEventosIncideIRRF -= getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.INSS, dadosCalculadosDoFuncionario);
 
             // Quantidade de dependentes que o funcionário tem.
             int dependentes = 1;
@@ -140,9 +141,9 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(valorHoraFuncionario * fpEventoPeriodo.getEvpValorReferencia() * 1.2);
 
         } else if (evento == FpEnumEventos.DSR.ordinal()) {
-            double valorHorasExtras50 = getValorEventoDosEventosDoFuncionario(FpEnumEventos.HorasExtras50, dadosCalculadosDoFuncionario);
-            double valorHorasExtras100 = getValorEventoDosEventosDoFuncionario(FpEnumEventos.HorasExtras100, dadosCalculadosDoFuncionario);
-            double valorHorasNoturnas = getValorEventoDosEventosDoFuncionario(FpEnumEventos.HorasNoturnas, dadosCalculadosDoFuncionario);
+            double valorHorasExtras50 = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.HorasExtras50, dadosCalculadosDoFuncionario);
+            double valorHorasExtras100 = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.HorasExtras100, dadosCalculadosDoFuncionario);
+            double valorHorasNoturnas = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.HorasNoturnas, dadosCalculadosDoFuncionario);
 
             double valorHorasExtras = valorHorasExtras50 + valorHorasExtras100 + valorHorasNoturnas;
             double valorReferencia = (double) dadosCalculadosDoFuncionario.getPeriodo().getPerDiasNaoUteis() / dadosCalculadosDoFuncionario.getPeriodo().getPerDiasUteis();
@@ -151,7 +152,7 @@ public class Eventos {
             fpEventoPeriodo.setEvpValorReferencia(valorReferencia);
 
         } else if (evento == FpEnumEventos.SalarioFamilia.ordinal()) {
-            double valorSalario = getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
+            double valorSalario = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(valorSalario, FpEnumTabelas.SalarioFamilia.ordinal() + 1);
             // Buscar a quantidade de filhos abaixo de 14 anos.
             int quantidadeFilhos = 1;
@@ -167,7 +168,7 @@ public class Eventos {
             fpEventoPeriodo.setEvpValorReferencia(nivelInsalubridade);
 
         } else if (evento == FpEnumEventos.Periculosidade.ordinal()) {
-            double valorSalario = getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
+            double valorSalario = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
 
             // Buscar se a pessoa tem periculosidade.
             double nivelPericulosidade = 0.3;
@@ -180,20 +181,29 @@ public class Eventos {
         return fpEventoPeriodo;
     }
 
-    public double getValorEventoDosEventosDoFuncionario(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
-        FpEventoPeriodo fpEventoPeriodo = getEventoDosEventosDoFuncionario(evento, dadosCalculadosDoFuncionario);
-        return fpEventoPeriodo == null ? 0 : fpEventoPeriodo.getEvpValor();
-    }
-
     public double getValorHoraFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
-        double fpEventoPeriodoSalario = getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
+        double fpEventoPeriodoSalario = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
         return fpEventoPeriodoSalario / HORAS_MENSAIS;
     }
 
-    public FpEventoPeriodo getEventoDosEventosDoFuncionario(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
-        Optional<FpEventoPeriodo> optionalEventoPeriodo = dadosCalculadosDoFuncionario.getEventos().stream()
+    public Optional<FpEventoPeriodo> getEventoDosEventosDoFuncionario(FpEnumEventos evento, List<FpEventoPeriodo> eventos) throws Exception {
+        return eventos.stream()
                 .filter(x -> x.getEvpEvento().getEveId() == evento.ordinal() + 1)
                 .findFirst();
+    }
+
+    public double getValorEventoDosEventosDoFuncionario(FpEnumEventos evento, List<FpEventoPeriodo> eventos) throws Exception {
+        Optional<FpEventoPeriodo> optionalEventoPeriodo = getEventoDosEventosDoFuncionario(evento, eventos);
+        return !optionalEventoPeriodo.isPresent() ? 0 : optionalEventoPeriodo.get().getEvpValor();
+    }
+
+    public double getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+        FpEventoPeriodo fpEventoPeriodo = getEventoDosEventosDoFuncionarioVerificarJaCalculado(evento, dadosCalculadosDoFuncionario);
+        return fpEventoPeriodo == null ? 0 : fpEventoPeriodo.getEvpValor();
+    }
+
+    public FpEventoPeriodo getEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos evento, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
+        Optional<FpEventoPeriodo> optionalEventoPeriodo = getEventoDosEventosDoFuncionario(evento, dadosCalculadosDoFuncionario.getEventos());
         if (!optionalEventoPeriodo.isPresent()) {
             return null;
         }

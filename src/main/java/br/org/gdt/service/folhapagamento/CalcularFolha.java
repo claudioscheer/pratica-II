@@ -4,14 +4,18 @@ import br.org.gdt.enums.FpEnumEventos;
 import br.org.gdt.enums.FpStatusFolhaPeriodo;
 import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.model.FpEventoPeriodo;
+import br.org.gdt.model.FpEventoPeriodoRelatorio;
 import br.org.gdt.model.FpFolhaPeriodo;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpFolhaPeriodoService;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,7 +139,7 @@ public class CalcularFolha {
         fpFolhaPeriodo.setForValorBaseINSS(dadosCalculadosDoFuncionario.getValorBaseINSS());
         fpFolhaPeriodo.setForValorBaseIRRF(dadosCalculadosDoFuncionario.getValorBaseIRRF());
 
-        fpFolhaPeriodo.setForValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, dadosCalculadosDoFuncionario));
+        fpFolhaPeriodo.setForValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, fpFolhaPeriodo.getForEventos()));
 
         fpFolhaPeriodo.setForTotalDescontos(
                 fpFolhaPeriodo.getForEventos().stream()
@@ -155,6 +159,54 @@ public class CalcularFolha {
         fpFolhaPeriodoService.update(fpFolhaPeriodo);
 
         return fpFolhaPeriodo;
+    }
+
+    public void gerarFolha(FpFolhaPeriodo fpFolhaPeriodo) throws Exception {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("empresa", "Asa Delta RH");
+        parametros.put("cnpj", "66.521.415/0001-19");
+        parametros.put("dataAdmissao", "01/10/2013  ");
+        parametros.put("cargo", "Desenvolvedor Junior e Burro");
+        parametros.put("CBO", "34563456");
+
+        String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
+        parametros.put("pessoa", nomePessoa);
+        String periodo = fpFolhaPeriodo.getForPeriodo().getPerMes() + "/" + fpFolhaPeriodo.getForPeriodo().getPerAno();
+        parametros.put("periodo", periodo);
+        parametros.put("salarioBase", decimalFormat.format(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, fpFolhaPeriodo.getForEventos())));
+        parametros.put("baseCalculoINSS", decimalFormat.format(fpFolhaPeriodo.getForValorBaseINSS()));
+        parametros.put("baseCalculoFGTS", decimalFormat.format(fpFolhaPeriodo.getForValorBaseFGTS()));
+        parametros.put("baseCalculoIRRF", decimalFormat.format(fpFolhaPeriodo.getForValorBaseIRRF()));
+        parametros.put("FGTS", decimalFormat.format(fpFolhaPeriodo.getForValorFGTS()));
+        parametros.put("totalVencimentos", decimalFormat.format(fpFolhaPeriodo.getForTotalVencimentos()));
+        parametros.put("totalDescontos", decimalFormat.format(fpFolhaPeriodo.getForTotalDescontos()));
+        parametros.put("totalLiquido", decimalFormat.format(fpFolhaPeriodo.getForTotalLiquido()));
+
+        List<FpEventoPeriodoRelatorio> eventosPeriodoRelatorio = new ArrayList<>();
+
+        eventosPeriodoRelatorio.addAll(
+                fpFolhaPeriodo.getForEventos().stream()
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
+                        .map(x -> new FpEventoPeriodoRelatorio(
+                        x.getEvpEvento().getEveId(),
+                        x.getEvpEvento().getEveNome(),
+                        decimalFormat.format(x.getEvpValorReferencia()),
+                        decimalFormat.format(x.getEvpValor()),
+                        ""))
+                        .collect(Collectors.toList()));
+
+        eventosPeriodoRelatorio.addAll(
+                fpFolhaPeriodo.getForEventos().stream()
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
+                        .map(x -> new FpEventoPeriodoRelatorio(
+                        x.getEvpEvento().getEveId(),
+                        x.getEvpEvento().getEveNome(),
+                        decimalFormat.format(x.getEvpValorReferencia()),
+                        "",
+                        decimalFormat.format(x.getEvpValor())))
+                        .collect(Collectors.toList()));
+
+        Helper.gerarBaixarRelatorioPDF(periodo + " | " + nomePessoa, "/folhapagamento/relatorio/folha_land.jasper", parametros, eventosPeriodoRelatorio);
     }
 
 }
