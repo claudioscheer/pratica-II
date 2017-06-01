@@ -59,7 +59,7 @@
                         <div class="ln_solid"></div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamento.fpFolhaPeriodo.forEventos}" var="eventoVariavel">
+                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamento.todosEventosFolhaPeriodo}" var="eventoVariavel">
                                     <h:column>
                                         <f:facet name="header">Código</f:facet>
                                             #{eventoVariavel.evpEvento.eveId}

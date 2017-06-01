@@ -8,18 +8,9 @@ import java.util.List;
 
 public class DadosCalculadosDoFuncionario {
 
-    private boolean recalcular;
     private FpPeriodo periodo;
     private RecPessoa pessoa;
     private List<FpEventoPeriodo> eventos;
-
-    public boolean isRecalcular() {
-        return recalcular;
-    }
-
-    public void setRecalcular(boolean recalcular) {
-        this.recalcular = recalcular;
-    }
 
     public FpPeriodo getPeriodo() {
         if (periodo == null) {

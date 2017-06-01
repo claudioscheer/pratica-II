@@ -27,10 +27,15 @@ public class Eventos {
             return fpEventoPeriodo;
         }
 
+        if (fpEventoPeriodo.isEventoAlteradoManualmente()) {
+            fpEventoPeriodo.setJaCalculado(true);
+            return fpEventoPeriodo;
+        }
+
         int evento = FpEnumEventos.values()[(int) fpEventoPeriodo.getEvpEvento().getEveId() - 1].ordinal();
         if (evento == FpEnumEventos.Salario.ordinal()) {
             fpEventoPeriodo.setEvpValorReferencia(HORAS_MENSAIS);
-            fpEventoPeriodo.setEvpValor(1000);
+            fpEventoPeriodo.setEvpValor(4000);
 
         } else if (evento == FpEnumEventos.INSS.ordinal()) {
             // Proventos onde incide INSS.

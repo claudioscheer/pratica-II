@@ -12,9 +12,6 @@ import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
-import java.io.File;
-import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,15 +19,6 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import org.springframework.stereotype.Service;
 
 @ManagedBean
 @SessionScoped
@@ -41,6 +29,7 @@ public class FpEnvelopePagamento implements java.io.Serializable {
     private RecPessoa recPessoa = new RecPessoa();
     private FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
     private FpTipoFolha fpTipoFolha;
+    private List<FpEventoPeriodo> todosEventosFolhaPeriodo = new ArrayList<>();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -103,12 +92,12 @@ public class FpEnvelopePagamento implements java.io.Serializable {
             folhaPeriodo = new FpFolhaPeriodo();
         }
         fpFolhaPeriodo = folhaPeriodo;
+        todosEventosFolhaPeriodo = folhaPeriodo.getForEventos();
     }
 
     public void recalcularFolhaPeriodo() {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
-            dadosCalculadosDoFuncionario.setRecalcular(true);
             dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
@@ -116,9 +105,10 @@ public class FpEnvelopePagamento implements java.io.Serializable {
                 return;
             }
             dadosCalculadosDoFuncionario.setPessoa(recPessoa);
-            dadosCalculadosDoFuncionario.setEventos(fpFolhaPeriodo.getForEventos());
+            dadosCalculadosDoFuncionario.setEventos(verificarEventosAjustadosManualmente());
 
             fpFolhaPeriodo = calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
+            todosEventosFolhaPeriodo = fpFolhaPeriodo.getForEventos();
 
             Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "info");
         } catch (Exception e) {
@@ -126,9 +116,17 @@ public class FpEnvelopePagamento implements java.io.Serializable {
         }
     }
 
-//    private List<FpEventoPeriodo> verificarEventosParaRecalcular() {
-//
-//    }
+    private List<FpEventoPeriodo> verificarEventosAjustadosManualmente() {
+        for (int i = 0; i < todosEventosFolhaPeriodo.size(); i++) {
+            FpEventoPeriodo eventoOriginal = fpFolhaPeriodo.getForEventos().get(i);
+            FpEventoPeriodo eventoAlterado = todosEventosFolhaPeriodo.get(i);
+
+            eventoAlterado.setEventoAlteradoManualmente(eventoOriginal.getEvpValorReferencia() != eventoAlterado.getEvpValorReferencia()
+                    || eventoOriginal.getEvpValor() != eventoAlterado.getEvpValor());
+        }
+        return todosEventosFolhaPeriodo;
+    }
+
     public void gerarFolhaPagamento() {
         try {
             Map<String, Object> parametros = new HashMap<>();
@@ -186,6 +184,14 @@ public class FpEnvelopePagamento implements java.io.Serializable {
 
     public void setFpTipoFolha(FpTipoFolha fpTipoFolha) {
         this.fpTipoFolha = fpTipoFolha;
+    }
+
+    public List<FpEventoPeriodo> getTodosEventosFolhaPeriodo() {
+        return todosEventosFolhaPeriodo;
+    }
+
+    public void setTodosEventosFolhaPeriodo(List<FpEventoPeriodo> todosEventosFolhaPeriodo) {
+        this.todosEventosFolhaPeriodo = todosEventosFolhaPeriodo;
     }
 
     public FpPeriodoService getFpPeriodoService() {
