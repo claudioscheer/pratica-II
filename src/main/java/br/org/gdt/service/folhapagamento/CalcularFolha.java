@@ -7,6 +7,8 @@ import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpFolhaPeriodoService;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 @Service("calcularFolha")
 public class CalcularFolha {
+
+    private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
     @Autowired
     private FpEventoService fpEventoService;
@@ -115,6 +119,15 @@ public class CalcularFolha {
         fpFolhaPeriodo.setForEventos(
                 fpFolhaPeriodo.getForEventos().stream()
                         .filter(x -> x.getEvpValor() != 0d)
+                        .map((x) -> {
+                            try {
+                                x.setEvpValor(decimalFormat.parse(decimalFormat.format(x.getEvpValor())).doubleValue());
+                                x.setEvpValorReferencia(decimalFormat.parse(decimalFormat.format(x.getEvpValorReferencia())).doubleValue());
+                            } catch (NumberFormatException | ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                            return x;
+                        })
                         .collect(Collectors.toList())
         );
 
