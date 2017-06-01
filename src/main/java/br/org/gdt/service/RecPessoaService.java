@@ -61,7 +61,7 @@ public class RecPessoaService {
 
    
 
-    public RecPessoa findByRecCpf(int recCpf) {
+    public RecPessoa findByRecCpf(String recCpf) {
         return pessoaDao.findByRecCpf(recCpf);
         
        
@@ -69,4 +69,6 @@ public class RecPessoaService {
 //    public List<RecPessoa> findByCpf(int cpf) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 }

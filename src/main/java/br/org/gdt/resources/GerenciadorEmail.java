@@ -42,18 +42,20 @@ public class GerenciadorEmail {
                 props.put("mail.smtp.password", parm.get(0).getSenha());
                 props.put("mail.debug", "true");
 
-                Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(parm.get(0).getRemetente(), parm.get(0).getSenha());
-                    }
-                });
+            
         
         for (ParametrosEmail item : parm) {
 
             try {
                 
-
+                     Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+                            @Override
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(parm.get(0).getRemetente(), parm.get(0).getSenha());
+                            }
+                 });
+                
+                
                 MimeMessage message = new MimeMessage(session);
 
                 message.setHeader("Content-Type", "text/plain; charset=UTF-8; format=flowed");

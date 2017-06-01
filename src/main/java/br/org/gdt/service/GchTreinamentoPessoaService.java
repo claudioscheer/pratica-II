@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("gchTreinamentoPessoaService")
 public class GchTreinamentoPessoaService {
-    
+
     @Autowired
     private GchTreinamentoPessoasDAO gchTreinamentoPessoasDAO;
 
     @Transactional
-    public void save(GchTreinamentospessoas  gchTreinamentospessoaspessoas) {
+    public void save(GchTreinamentospessoas gchTreinamentospessoaspessoas) {
         gchTreinamentoPessoasDAO.save(gchTreinamentospessoaspessoas);
     }
 
@@ -44,9 +44,12 @@ public class GchTreinamentoPessoaService {
     public List<GchTreinamentospessoas> findAll() {
         return gchTreinamentoPessoasDAO.findAll();
     }
-    
+
     public List<GchTreinamentospessoas> verificaPessoa(long idTreinamento, long idPessoa) {
         return gchTreinamentoPessoasDAO.verificaPessoa(idTreinamento, idPessoa);
     }
-    
+
+    public List<GchTreinamentospessoas> verificaPessoasVinculadoTreinamento(long idTreinamento) {
+        return gchTreinamentoPessoasDAO.verificaPessoasVinculadoTreinamento(idTreinamento);
+    }
 }
