@@ -145,7 +145,7 @@ public class Eventos {
             double valorHorasNoturnas = getValorEventoDosEventosDoFuncionario(FpEnumEventos.HorasNoturnas, dadosCalculadosDoFuncionario);
 
             double valorHorasExtras = valorHorasExtras50 + valorHorasExtras100 + valorHorasNoturnas;
-            double valorReferencia = dadosCalculadosDoFuncionario.getPeriodo().getPerDiasNaoUteis() / dadosCalculadosDoFuncionario.getPeriodo().getPerDiasUteis();
+            double valorReferencia = (double) dadosCalculadosDoFuncionario.getPeriodo().getPerDiasNaoUteis() / dadosCalculadosDoFuncionario.getPeriodo().getPerDiasUteis();
 
             fpEventoPeriodo.setEvpValor(valorHorasExtras * valorReferencia);
             fpEventoPeriodo.setEvpValorReferencia(valorReferencia);

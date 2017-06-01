@@ -17,20 +17,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class FpEnvelopePagamento implements java.io.Serializable {
+public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     private boolean mostrarTodasFolhasPeriodo = false;
     private FpPeriodo fpPeriodo = new FpPeriodo();
     private RecPessoa recPessoa = new RecPessoa();
     private FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
     private FpTipoFolha fpTipoFolha;
+    private List<FpFolhaPeriodo> todasFolhasPeriodo = new ArrayList<>();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -47,15 +47,30 @@ public class FpEnvelopePagamento implements java.io.Serializable {
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
-    public FpEnvelopePagamento() {
+    public FpEnvelopePagamentoBean() {
 
     }
 
+    public void validarFolhaPeriodo(FpFolhaPeriodo fpFolhaPeriodo) {
+        mostrarTodasFolhasPeriodo = false;
+
+        recPessoa = fpFolhaPeriodo.getForPessoa();
+        this.fpFolhaPeriodo = fpFolhaPeriodo;
+        this.fpFolhaPeriodo.removerEventosNaoAlteraFolha();
+    }
+
     public void mostrarTodasFolhasPeriodo() {
+        if (mostrarTodasFolhasPeriodo) {
+            mostrarTodasFolhasPeriodo = false;
+            return;
+        }
+
         if (fpPeriodo.getPerId() <= 0) {
             Helper.mostrarNotificacao("Período", "Selecione um período.", "info");
             return;
         }
+
+        todasFolhasPeriodo = fpFolhaPeriodoService.findAllPeriodo(fpPeriodo);
 
         mostrarTodasFolhasPeriodo = true;
     }
@@ -207,6 +222,14 @@ public class FpEnvelopePagamento implements java.io.Serializable {
 
     public void setFpTipoFolha(FpTipoFolha fpTipoFolha) {
         this.fpTipoFolha = fpTipoFolha;
+    }
+
+    public List<FpFolhaPeriodo> getTodasFolhasPeriodo() {
+        return todasFolhasPeriodo;
+    }
+
+    public void setTodasFolhasPeriodo(List<FpFolhaPeriodo> todasFolhasPeriodo) {
+        this.todasFolhasPeriodo = todasFolhasPeriodo;
     }
 
     public FpPeriodoService getFpPeriodoService() {

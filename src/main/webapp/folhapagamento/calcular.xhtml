@@ -173,12 +173,16 @@
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Referência</f:facet>
-                                                            #{eventoVariavel.evpValorReferencia}
-                                                            <!--<h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;" />-->
+                                                        <h:outputText value="#{eventoVariavel.evpValorReferencia}">
+                                                            <f:convertNumber pattern="#0.00" />
+                                                        </h:outputText>
+                                                        <!--<h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;" />-->
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Valor</f:facet>
-                                                            #{eventoVariavel.evpValor}
+                                                        <h:outputText value="#{eventoVariavel.evpValor}">
+                                                            <f:convertNumber pattern="#0.00" />
+                                                        </h:outputText>
                                                             <!--<h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;" />-->
                                                     </h:column>
                                                     <h:column>
