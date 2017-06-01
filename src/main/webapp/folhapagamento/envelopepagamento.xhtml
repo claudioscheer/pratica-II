@@ -58,6 +58,7 @@
                         </div>
                         <div class="ln_solid"></div>
                         <div class="row">
+
                             <div class="col-md-12">
                                 <h:dataTable class="table table-striped" value="#{fpEnvelopePagamento.todosEventosFolhaPeriodo}" var="eventoVariavel">
                                     <h:column>
@@ -85,7 +86,67 @@
                                         </h:inputText>
                                     </h:column>
                                 </h:dataTable>
+                                <div class="ln_solid"></div>
                             </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label class="control-label">Base Cálc. INSS</label>
+                                        <br />
+                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.valorBaseINSS}">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:outputText>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label class="control-label">Base Cálc. FGTS</label>
+                                        <br />
+                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.valorBaseFGTS}">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:outputText>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label class="control-label">FGTS</label>
+                                        <br />
+                                        <h:outputText value="asdfasdlkfjas" />
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label class="control-label">Base Cálc. IRRF</label>
+                                        <br />
+                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.valorBaseIRRF}">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:outputText>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="ln_solid"></div>
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label class="control-label">Total vencimentos</label>
+                                        <br />
+                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.totalVencimentos}">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:outputText>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label class="control-label">Total descontos</label>
+                                        <br />
+                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.totalDescontos}">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:outputText>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label class="control-label">Total líquido</label>
+                                        <br />
+                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.totalLiquido}">
+                                            <f:convertNumber pattern="#0.00" />
+                                        </h:outputText>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="ln_solid"></div>
                         <div class="row">
