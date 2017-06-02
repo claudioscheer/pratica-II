@@ -13,9 +13,7 @@ import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -46,10 +44,6 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
-
-    public FpEnvelopePagamentoBean() {
-
-    }
 
     public void validarFolhaPeriodo(FpFolhaPeriodo fpFolhaPeriodo) {
         mostrarTodasFolhasPeriodo = false;

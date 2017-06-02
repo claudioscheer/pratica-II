@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -160,9 +159,11 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
     }
 
     public void removerEventosNaoAlteraFolha() {
-        this.forEventos = forEventos.stream()
-                .filter(x -> !x.getEvpEvento().isEveNaoAlteraFolha())
-                .collect(Collectors.toList());
+        if (this.forEventos != null) {
+            this.forEventos = forEventos.stream()
+                    .filter(x -> !x.getEvpEvento().isEveNaoAlteraFolha())
+                    .collect(Collectors.toList());
+        }
     }
 
 }
