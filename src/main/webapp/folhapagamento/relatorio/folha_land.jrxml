@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-01T18:46:08 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="folha_land" pageWidth="421" pageHeight="297" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="401" leftMargin="10" rightMargin="10" topMargin="1" bottomMargin="1" uuid="011b6724-b6e3-4559-847e-e8de3d2eee2f">
+<!-- 2017-06-01T21:03:01 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="folha_land" pageWidth="421" pageHeight="500" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="401" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="011b6724-b6e3-4559-847e-e8de3d2eee2f">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -51,11 +51,11 @@
 				<text><![CDATA[Demonstrativo de Pagamento de Salário]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="326" y="2" width="34" height="9" uuid="620fada8-7c45-4085-b1fa-4b13aadceb20">
+				<reportElement x="317" y="2" width="34" height="9" uuid="620fada8-7c45-4085-b1fa-4b13aadceb20">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[MÊS/ANO]]></text>
 			</staticText>
@@ -65,7 +65,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
 			</textField>
@@ -79,7 +79,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[EMPRESA]]></text>
 			</staticText>
@@ -95,7 +95,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[CNPJ]]></text>
 			</staticText>
@@ -114,7 +114,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[NOME]]></text>
 			</staticText>
@@ -135,7 +135,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[ADMISSÃO]]></text>
 			</staticText>
@@ -156,7 +156,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[CARGO]]></text>
 			</staticText>
@@ -183,7 +183,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[CBO]]></text>
 			</staticText>
@@ -197,51 +197,50 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="17" splitType="Stretch">
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="0" y="3" width="30" height="11" uuid="a95d5e3d-8c5c-45f6-8e6a-8d29ee96e27e">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
+				<reportElement x="0" y="3" width="30" height="9" uuid="a95d5e3d-8c5c-45f6-8e6a-8d29ee96e27e"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[CÓD.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="31" y="3" width="213" height="11" uuid="71eb8aae-73dd-4e1b-b22d-a3c1bc7c7501">
+				<reportElement x="31" y="3" width="213" height="9" uuid="71eb8aae-73dd-4e1b-b22d-a3c1bc7c7501">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[DESCRIÇÃO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="246" y="3" width="50" height="11" uuid="293b8d1a-528b-47ba-90ab-1eb075ad0584">
+				<reportElement x="246" y="3" width="50" height="9" uuid="293b8d1a-528b-47ba-90ab-1eb075ad0584">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[REF.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="298" y="3" width="50" height="11" uuid="28f118ee-3e65-4cc7-8283-d524d4032cb0">
+				<reportElement x="298" y="3" width="50" height="9" uuid="28f118ee-3e65-4cc7-8283-d524d4032cb0">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[VENC.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="3" width="50" height="11" uuid="4a81e06f-7c6c-4770-8d45-1dc161e2ab0b">
+				<reportElement x="350" y="3" width="50" height="9" uuid="4a81e06f-7c6c-4770-8d45-1dc161e2ab0b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[DESC.]]></text>
 			</staticText>
@@ -294,7 +293,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[SALÁRIO BASE]]></text>
 			</staticText>
@@ -312,7 +311,7 @@
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[BASE CÁLC. FGTS]]></text>
 			</staticText>
@@ -321,7 +320,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[FGTS]]></text>
 			</staticText>
@@ -330,7 +329,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[BASE CÁLC. IRRF]]></text>
 			</staticText>
@@ -347,7 +346,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[BASE CÁLC. INSS]]></text>
 			</staticText>
@@ -356,7 +355,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL DESC.]]></text>
 			</staticText>
@@ -366,7 +365,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL VENC.]]></text>
 			</staticText>
@@ -375,7 +374,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
+					<font size="7" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[VALOR LÍQUIDO]]></text>
 			</staticText>
