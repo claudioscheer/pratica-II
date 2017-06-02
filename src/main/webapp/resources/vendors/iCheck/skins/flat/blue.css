@@ -9,7 +9,7 @@
     padding: 0;
     width: 20px;
     height: 20px;
-    background: url(blue.png) no-repeat;
+    background: url("#{facesContext.externalContext.requestContextPath}/javax.faces.resource/iCheck/skins/flat/blue.png.xhtml?ln=vendors/") no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -29,7 +29,7 @@
     }
 
 .iradio_flat-blue {
-    background-position: -88px 0;
+    background-position: -154px 0;
 }
     .iradio_flat-blue.checked {
         background-position: -110px 0;
