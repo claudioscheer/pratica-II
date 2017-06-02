@@ -175,7 +175,9 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     private void imprimirFolhaPagamento(FpFolhaPeriodo fpFolhaPeriodo) {
         try {
-            calcularFolha.gerarFolha(fpFolhaPeriodo);
+            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
+            folhasPeriodo.add(fpFolhaPeriodo);
+            calcularFolha.gerarFolha(folhasPeriodo, fpFolhaPeriodo.getForPessoa().getRecNomecompleto());
         } catch (Exception e) {
             Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
         }

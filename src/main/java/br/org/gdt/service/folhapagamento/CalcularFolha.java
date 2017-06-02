@@ -9,6 +9,8 @@ import br.org.gdt.model.FpFolhaPeriodo;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpFolhaPeriodoService;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,6 +20,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -161,52 +174,93 @@ public class CalcularFolha {
         return fpFolhaPeriodo;
     }
 
-    public void gerarFolha(FpFolhaPeriodo fpFolhaPeriodo) throws Exception {
-        Map<String, Object> parametros = new HashMap<>();
-        parametros.put("empresa", "Asa Delta RH");
-        parametros.put("cnpj", "66.521.415/0001-19");
-        parametros.put("dataAdmissao", "01/10/2013  ");
-        parametros.put("cargo", "Desenvolvedor Junior e Burro");
-        parametros.put("CBO", "34563456");
+    public void gerarFolha(List<FpFolhaPeriodo> pessoasParaGerarFolha, String nomeArquivo) throws RuntimeException, Exception {
+        List<JasperPrint> relatorios = new ArrayList<>();
 
-        String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
-        parametros.put("pessoa", nomePessoa);
-        String periodo = fpFolhaPeriodo.getForPeriodo().getPerMes() + "/" + fpFolhaPeriodo.getForPeriodo().getPerAno();
-        parametros.put("periodo", periodo);
-        parametros.put("salarioBase", decimalFormat.format(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, fpFolhaPeriodo.getForEventos())));
-        parametros.put("baseCalculoINSS", decimalFormat.format(fpFolhaPeriodo.getForValorBaseINSS()));
-        parametros.put("baseCalculoFGTS", decimalFormat.format(fpFolhaPeriodo.getForValorBaseFGTS()));
-        parametros.put("baseCalculoIRRF", decimalFormat.format(fpFolhaPeriodo.getForValorBaseIRRF()));
-        parametros.put("FGTS", decimalFormat.format(fpFolhaPeriodo.getForValorFGTS()));
-        parametros.put("totalVencimentos", decimalFormat.format(fpFolhaPeriodo.getForTotalVencimentos()));
-        parametros.put("totalDescontos", decimalFormat.format(fpFolhaPeriodo.getForTotalDescontos()));
-        parametros.put("totalLiquido", decimalFormat.format(fpFolhaPeriodo.getForTotalLiquido()));
+        FacesContext context = FacesContext.getCurrentInstance();
 
-        List<FpEventoPeriodoRelatorio> eventosPeriodoRelatorio = new ArrayList<>();
+        String caminhoCompletoArquivo = context.getExternalContext().getRealPath("/folhapagamento/relatorio/folha_land.jasper");
+        File fileRelatorio = new File(caminhoCompletoArquivo);
+        if (!fileRelatorio.exists()) {
+            throw new Exception("O arquivo não foi encontrado.");
+        }
 
-        eventosPeriodoRelatorio.addAll(
-                fpFolhaPeriodo.getForEventos().stream()
-                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
-                        .map(x -> new FpEventoPeriodoRelatorio(
-                        x.getEvpEvento().getEveId(),
-                        x.getEvpEvento().getEveNome(),
-                        decimalFormat.format(x.getEvpValorReferencia()),
-                        decimalFormat.format(x.getEvpValor()),
-                        ""))
-                        .collect(Collectors.toList()));
+        pessoasParaGerarFolha.forEach((fpFolhaPeriodo) -> {
+            try {
+                Map<String, Object> parametros = new HashMap<>();
+                parametros.put("empresa", "Asa Delta RH");
+                parametros.put("cnpj", "66.521.415/0001-19");
+                parametros.put("dataAdmissao", "01/10/2013  ");
+                parametros.put("cargo", "Desenvolvedor Junior e Burro");
+                parametros.put("CBO", "34563456");
 
-        eventosPeriodoRelatorio.addAll(
-                fpFolhaPeriodo.getForEventos().stream()
-                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
-                        .map(x -> new FpEventoPeriodoRelatorio(
-                        x.getEvpEvento().getEveId(),
-                        x.getEvpEvento().getEveNome(),
-                        decimalFormat.format(x.getEvpValorReferencia()),
-                        "",
-                        decimalFormat.format(x.getEvpValor())))
-                        .collect(Collectors.toList()));
+                String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
+                parametros.put("pessoa", nomePessoa);
+                String periodo = fpFolhaPeriodo.getForPeriodo().getPerMes() + "/" + fpFolhaPeriodo.getForPeriodo().getPerAno();
+                parametros.put("periodo", periodo);
+                parametros.put("salarioBase", decimalFormat.format(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.Salario, fpFolhaPeriodo.getForEventos())));
+                parametros.put("baseCalculoINSS", decimalFormat.format(fpFolhaPeriodo.getForValorBaseINSS()));
+                parametros.put("baseCalculoFGTS", decimalFormat.format(fpFolhaPeriodo.getForValorBaseFGTS()));
+                parametros.put("baseCalculoIRRF", decimalFormat.format(fpFolhaPeriodo.getForValorBaseIRRF()));
+                parametros.put("FGTS", decimalFormat.format(fpFolhaPeriodo.getForValorFGTS()));
+                parametros.put("totalVencimentos", decimalFormat.format(fpFolhaPeriodo.getForTotalVencimentos()));
+                parametros.put("totalDescontos", decimalFormat.format(fpFolhaPeriodo.getForTotalDescontos()));
+                parametros.put("totalLiquido", decimalFormat.format(fpFolhaPeriodo.getForTotalLiquido()));
 
-        Helper.gerarBaixarRelatorioPDF(periodo + " | " + nomePessoa, "/folhapagamento/relatorio/folha_land.jasper", parametros, eventosPeriodoRelatorio);
+                List<FpEventoPeriodoRelatorio> eventosPeriodoRelatorio = new ArrayList<>();
+
+                eventosPeriodoRelatorio.addAll(
+                        fpFolhaPeriodo.getForEventos().stream()
+                                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
+                                .map(x -> new FpEventoPeriodoRelatorio(
+                                x.getEvpEvento().getEveId(),
+                                x.getEvpEvento().getEveNome(),
+                                decimalFormat.format(x.getEvpValorReferencia()),
+                                decimalFormat.format(x.getEvpValor()),
+                                ""))
+                                .collect(Collectors.toList()));
+
+                eventosPeriodoRelatorio.addAll(
+                        fpFolhaPeriodo.getForEventos().stream()
+                                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
+                                .map(x -> new FpEventoPeriodoRelatorio(
+                                x.getEvpEvento().getEveId(),
+                                x.getEvpEvento().getEveNome(),
+                                decimalFormat.format(x.getEvpValorReferencia()),
+                                "",
+                                decimalFormat.format(x.getEvpValor())))
+                                .collect(Collectors.toList()));
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JRBeanCollectionDataSource(eventosPeriodoRelatorio));
+                relatorios.add(jasperPrint);
+                relatorios.add(jasperPrint);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        gerarBaixarFolhasPagamento(relatorios, nomeArquivo);
+    }
+
+    public void gerarBaixarFolhasPagamento(List<JasperPrint> relatorios, String nomeArquivo) throws IOException, JRException {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+        response.reset();
+        response.setContentType("application/pdf");
+        response.setHeader("Content-disposition", "attachment; filename=" + nomeArquivo + ".pdf");
+        try (ServletOutputStream stream = response.getOutputStream()) {
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(SimpleExporterInput.getInstance(relatorios));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(stream));
+            SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+            configuration.setCreatingBatchModeBookmarks(true);
+            exporter.setConfiguration(configuration);
+            exporter.exportReport();
+
+            stream.flush();
+        }
+        context.renderResponse();
+        context.responseComplete();
     }
 
 }
