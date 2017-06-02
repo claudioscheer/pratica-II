@@ -37,7 +37,7 @@
 
                                                             <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                                                <div class="panel-title text-center">
+                                                                <div class="panel-title text-capitalize">
                                                                     <h4 class="tile">
                                                                         <h:outputLabel class="control-label requiredField" value="#{perguntas.perDescricao}"/>
                                                                         <h:inputHidden value="#{perguntas.perCodigo}" />
@@ -46,21 +46,24 @@
 
                                                             </div>
 
-
-
-                                                            <div class="panel-title text-center">
+                                                            <br class="clear"/>
+                                                            
+                                                            <div class="row">
 
 
 
                                                                 <ui:repeat value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa">
 
-                                                                    
-                                                                    <div style="float: left;">
+
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3" style="float: left;">
+
+                                                                        <div class="panel-title">
 
                                                                             <label style="margin-left: 6px;" >
 
-                                                                                <div class="iradio_flat-blue" style="position: relative;">
-                                                                                    <input class="flat" style="position: absolute; opacity: 0;" type="radio" name="#{perguntas.perCodigo}" value="#{gchFormularioAlternativasBean.radioValue}"  />    
+                                                                                <div id="#{alternativa.altCodigo}_#{perguntas.perCodigo}" name="div_#{perguntas.perCodigo}" class="iradio_flat-blue" style="position: relative;">
+                                                                                    <input class="flat" style="position: absolute; opacity: 0;" type="radio" onclick="$('div[name*=\'div_#{perguntas.perCodigo}\']').removeClass('iradio_flat-blue checked').addClass('iradio_flat-blue');
+                                                                                            $('##{alternativa.altCodigo}_#{perguntas.perCodigo}').addClass('iradio_flat-blue checked');" name="#{perguntas.perCodigo}" value="#{gchFormularioAlternativasBean.radioValue}"  />    
                                                                                 </div>
 
                                                                                 #{alternativa.altDescricao}
@@ -68,7 +71,9 @@
                                                                             </label>
 
                                                                         </div>
-                                                                  
+
+                                                                    </div>
+
 
                                                                 </ui:repeat>    
 
@@ -77,6 +82,10 @@
                                                             </div>
 
                                                         </div>
+
+                                                        <br class="clear"/>
+                                                        <br class="clear"/>
+
                                                     </ui:repeat>
 
                                                     <div class="form-group">
