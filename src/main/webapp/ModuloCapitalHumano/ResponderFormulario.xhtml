@@ -14,7 +14,7 @@
 
                 <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>
             </ui:define>
-            <ui:define name="content">
+            <ui:define name="content">                
                 <div id="page" style="margin-top:75px;">
 
                     <div class="container-fluid">
@@ -50,14 +50,30 @@
 
                                                             <div class="panel-title text-center">
 
-                                                                <h5>
-                                                                    <div style="text-align: -webkit-center;">
-                                                                        <h:selectOneRadio value="#{gchFormularioAlternativasBean.radioValue}" >
-                                                                            <f:selectItems class="mark" value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa" itemValue="#{alternativa.altCodigo}-#{perguntas.perCodigo}" itemLabel="#{alternativa.altDescricao}"/>
-                                                                        </h:selectOneRadio>
 
-                                                                    </div>  
-                                                                </h5>
+
+                                                                <ui:repeat value="#{gchFormularioAlternativasBean.buscaAlternativas(perguntas)}" var="alternativa">
+
+                                                                    
+                                                                    <div style="float: left;">
+
+                                                                            <label style="margin-left: 6px;" >
+
+                                                                                <div class="iradio_flat-blue" style="position: relative;">
+                                                                                    <input class="flat" style="position: absolute; opacity: 0;" type="radio" name="#{perguntas.perCodigo}" value="#{gchFormularioAlternativasBean.radioValue}"  />    
+                                                                                </div>
+
+                                                                                #{alternativa.altDescricao}
+
+                                                                            </label>
+
+                                                                        </div>
+                                                                  
+
+                                                                </ui:repeat>    
+
+
+
                                                             </div>
 
                                                         </div>

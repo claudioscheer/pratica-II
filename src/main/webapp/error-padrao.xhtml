@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:body>
+        <ui:composition template="/templates/template-error.xhtml">
+            <ui:define name="head">
+                <title>Error</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="container body">
+                    <div class="main_container">
+                        <div class="col-middle">
+                            <div class="text-center text-center">
+                                <h1 class="error-number">OPS!</h1>
+                                <h2>Ocorreu um erro inesperado.</h2>
+                                <p>Você sempre encontra aquilo que não está procurando. <h:link outcome="/index.html">Voltar</h:link>.</p>
+                                <h:graphicImage value="#{resource['images/general.png']}" width="150" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>

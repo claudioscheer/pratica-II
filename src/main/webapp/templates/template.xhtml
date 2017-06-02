@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <link href="#{resource['images/Logo-Murphy.png']}" rel='shortcut icon' type='image/x-icon'/>
         <link href="#{resource['images/Logo-Murphy.png']}" rel="icon" type="image/x-icon" />
@@ -17,6 +16,7 @@
         <h:outputStylesheet library="vendors/" name="bootstrap-daterangepicker/daterangepicker.css" />
         <h:outputStylesheet library="vendors/" name="pnotify/dist/pnotify.css" />
         <h:outputStylesheet library="vendors/" name="pnotify/dist/pnotify.buttons.css" />
+        <h:outputStylesheet library="vendors/" name="iCheck/skins/flat/blue.css" />        
         <h:outputStylesheet library="build/" name="css/custom.css" />
         <ui:insert name="head" />
     </h:head>
@@ -25,17 +25,20 @@
             <div class="main_container">
                 <div class="col-md-3 left_col menu_fixed">
                     <div class="left_col scroll-view">
-                        <div class="navbar nav_title text-center" style="border: 3;">
-                            <span class="site_title" style="padding-left: 0">Murphy</span>
-                        </div>
+                        <h:link outcome="/index.xhtml">
+                            <div class="navbar nav_title text-center" style="border: 3;">
+                                <span class="site_title" style="padding-left: 0">Murphy</span>
+                            </div>
+                        </h:link>
 
                         <div class="clearfix"></div>
 
                         <!-- menu profile quick info -->
                         <div class="profile clearfix">
                             <div class="profile_pic">
-                                <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img" />
-                            </div>
+                                <h:link outcome="/index.xhtml">
+                                    <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img"/>
+                                </h:link></div>
                             <div class="profile_info">
                                 <span>Olá,</span>
                                 <h2>Gestor!</h2>
@@ -51,7 +54,7 @@
                                 <h3>Geral</h3>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><li><h:link outcome="/InicializaSistema.xhtml"><i class="fa fa-calculator"></i> Inicializar dados</h:link></li></a>
+                                        <a><li><h:link outcome="/inicializar-sistema.xhtml"><i class="fa fa-calculator"></i> Inicializar dados</h:link></li></a>
                                     </li>
                                 </ul>
                                 <ul class="nav side-menu">
@@ -266,7 +269,7 @@
         <h:outputScript library="vendors/" name="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" />
         <h:outputScript library="vendors/" name="jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js" />
         <h:outputScript library="vendors/" name="pnotify/dist/pnotify.js" />
-        <h:outputScript library="vendors/" name="pnotify/dist/pnotify.buttons.js" />
+        <h:outputScript library="vendors/" name="pnotify/dist/pnotify.buttons.js" />        
         <h:outputScript library="build/" name="js/custom.js" />
         <ui:insert name="script" />
     </h:body>

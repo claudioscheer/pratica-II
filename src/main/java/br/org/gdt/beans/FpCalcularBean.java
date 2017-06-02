@@ -135,6 +135,8 @@ public class FpCalcularBean {
                 fpEventoPeriodo = new FpEventoPeriodo();
                 Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "info");
             } catch (Exception e) {
+                
+                todosFpEventoPeriodo = new ArrayList<>();
                 Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
             }
         }

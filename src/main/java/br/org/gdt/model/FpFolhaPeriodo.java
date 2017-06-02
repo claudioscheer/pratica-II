@@ -4,6 +4,7 @@ import br.org.gdt.enums.FpStatusFolhaPeriodo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -156,6 +157,12 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
 
     public void setForValorFGTS(double forValorFGTS) {
         this.forValorFGTS = forValorFGTS;
+    }
+
+    public void removerEventosNaoAlteraFolha() {
+        this.forEventos = forEventos.stream()
+                .filter(x -> !x.getEvpEvento().isEveNaoAlteraFolha())
+                .collect(Collectors.toList());
     }
 
 }
