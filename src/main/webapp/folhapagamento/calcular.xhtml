@@ -64,7 +64,7 @@
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{!fpCalcularBean.gerarTodasPessoas}">
                                     <div class="col-md-2">
-                                        <h:inputText label="Código pessoa" class="form-control" value="#{fpCalcularBean.recPessoa.recIdpessoa}">
+                                        <h:inputText label="Código da pessoa" class="form-control" value="#{fpCalcularBean.recPessoa.recIdpessoa}">
                                             <f:ajax listener="#{fpCalcularBean.selecionarPessoa()}" execute="@form" render="formEventoVariavel" event="change" />
                                         </h:inputText>
                                     </div>

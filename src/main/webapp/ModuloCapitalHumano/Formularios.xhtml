@@ -115,10 +115,8 @@
 
 
 
-                                            <p:commandButton id="enviarEmailButton" class="btn btn-primary" value="Cadastrar" >
-                                                <p:ajax listener="#{gchFormularioBean.salvarPessoasFormulario}"/>  
-                                            </p:commandButton>
-
+                                            <h:commandButton id="enviarEmailButton" class="btn btn-primary" action="#{gchFormularioBean.salvarPessoasFormulario}" value="Cadastrar" />
+                                             
                                             <h:commandButton class="btn btn-danger"  actionListener="#{gchFormularioBean.cancelDialog()}" value="Cancelar" /> 
 
                                         </p:dialog>

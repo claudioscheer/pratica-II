@@ -112,12 +112,17 @@ public class FpCalcularBean {
         }
         fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
         if (gerarTodasPessoas) {
-            calcularFolha.calcularParaTodosFuncionarios();
+            try {
+                calcularFolha.calcularParaTodosFuncionarios(fpPeriodo);
+                Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "info");
+            } catch (Exception e) {
+                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
+            }
         } else {
             try {
-                
+
                 todosFpEventoPeriodo.forEach(x -> x.setJaCalculado(false));
-                
+
                 DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
@@ -135,9 +140,9 @@ public class FpCalcularBean {
                 fpEventoPeriodo = new FpEventoPeriodo();
                 Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "info");
             } catch (Exception e) {
-                
+
                 todosFpEventoPeriodo = new ArrayList<>();
-                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
+                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
             }
         }
     }

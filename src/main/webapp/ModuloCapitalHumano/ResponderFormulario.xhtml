@@ -12,6 +12,10 @@
             <ui:define name="head">
                 <title>Cursos Cadastrados</title>
 
+                <f:metadata>  
+                    <f:viewParam name="id" value="#{gchFormularioAlternativasBean.idParm}" />  
+                </f:metadata> 
+
                 <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>
             </ui:define>
             <ui:define name="content">                
@@ -47,7 +51,7 @@
                                                             </div>
 
                                                             <br class="clear"/>
-                                                            
+
                                                             <div class="row">
 
 
@@ -62,8 +66,11 @@
                                                                             <label style="margin-left: 6px;" >
 
                                                                                 <div id="#{alternativa.altCodigo}_#{perguntas.perCodigo}" name="div_#{perguntas.perCodigo}" class="iradio_flat-blue" style="position: relative;">
-                                                                                    <input class="flat" style="position: absolute; opacity: 0;" type="radio" onclick="$('div[name*=\'div_#{perguntas.perCodigo}\']').removeClass('iradio_flat-blue checked').addClass('iradio_flat-blue');
-                                                                                            $('##{alternativa.altCodigo}_#{perguntas.perCodigo}').addClass('iradio_flat-blue checked');" name="#{perguntas.perCodigo}" value="#{gchFormularioAlternativasBean.radioValue}"  />    
+                                                                                    <input class="flat" jsf:id="input_#{alternativa.altCodigo}_#{perguntas.perCodigo}" style="position: absolute; opacity: 0;" type="radio" onclick="$('div[name*=\'div_#{perguntas.perCodigo}\']').removeClass('iradio_flat-blue checked').addClass('iradio_flat-blue');
+                                                                                            $('##{alternativa.altCodigo}_#{perguntas.perCodigo}').addClass('iradio_flat-blue checked');" jsf:name="#{perguntas.perCodigo}" jsf:value="#{gchFormularioAlternativasBean.radio[alternativa]}"  />    
+
+
+
                                                                                 </div>
 
                                                                                 #{alternativa.altDescricao}

@@ -13,9 +13,7 @@ import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -47,10 +45,6 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
-    public FpEnvelopePagamentoBean() {
-
-    }
-
     public void validarFolhaPeriodo(FpFolhaPeriodo fpFolhaPeriodo) {
         mostrarTodasFolhasPeriodo = false;
 
@@ -79,6 +73,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     }
 
     public void selecionarPeriodo() {
+        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
     }
 
     public void selecionarPessoa() {
@@ -114,7 +109,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     public void recalcularFolhaPeriodo() {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
-            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodoService.findById(fpPeriodo.getPerId()));
+            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
             dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
@@ -169,13 +164,28 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
         imprimirFolhaPagamento(fpFolhaPeriodo);
     }
 
+    public void gerarTodasFolhasPagamento() {
+        try {
+            calcularFolha.gerarFolha(todasFolhasPeriodo, fpPeriodo.getPerMes() + " - " + fpPeriodo.getPerAno());
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
+        }
+    }
+
     public void gerarFolhaPagamento() {
+        if (fpFolhaPeriodo.getForId() <= 0) {
+            Helper.mostrarNotificacao("Mensagem", "É preciso ter a folha carregada para imprimir.", "info");
+            return;
+        }
         imprimirFolhaPagamento(fpFolhaPeriodo);
+
     }
 
     private void imprimirFolhaPagamento(FpFolhaPeriodo fpFolhaPeriodo) {
         try {
-            calcularFolha.gerarFolha(fpFolhaPeriodo);
+            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
+            folhasPeriodo.add(fpFolhaPeriodo);
+            calcularFolha.gerarFolha(folhasPeriodo, fpFolhaPeriodo.getForPessoa().getRecNomecompleto());
         } catch (Exception e) {
             Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
         }
