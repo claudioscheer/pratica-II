@@ -22,6 +22,14 @@
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <!--
+                                        <p:graphicImage value="#{recPessoaBean.recPessoa.recFoto}" id="image"/>
+                                        <img src="a.jpg" class="center-block" style="height: 200px"></img>
+                                        -->
+                                    </div>
+                                    
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Nome Completo" for="NomeCompleto" />                                            
@@ -41,20 +49,23 @@
                                                          title="CPF" />
                                         </div>
                                     </div> 
-                                    <!-- FALTA COMPLETAR
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Sexo
                                             </label>
-                                            <h:selectOneMenu id="comboSexo" value="#{recPessoaBean.recPessoa.recSexo}" class="form-control" >
+                                            <h:selectOneMenu id="comboSexo" 
+                                                             value="#{recPessoaBean.recPessoa.recSexo}" 
+                                                             class="form-control" 
+                                                             disabled="true">
                                                 <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                             
                                             </h:selectOneMenu>                                                                            
                                         </div>     
                                     </div>  
-                                    -->
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">

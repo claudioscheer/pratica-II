@@ -18,7 +18,8 @@
                     <h3>Cadastro de Currículo</h3>
                 </div>
                 <br />
-                <h:form id="formCurriculo">                                        
+                <!--<h:form id="formCurriculo" enctype="multipart/form-data">                                       -->
+                    <h:form id="formCurriculo">                                        
                     <p:panel>
                         <h:inputHidden value="#{recPessoaBean.recPessoa.recIdpessoa}" />                        
                         <div class="bootstrap-iso">
@@ -41,7 +42,7 @@
                                                          value="#{recPessoaBean.recPessoa.recCpf}" title="CPF" />
                                         </div>
                                     </div> 
-                                    <!-- FALTA COMPLETAR
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
@@ -50,22 +51,25 @@
                                             <h:selectOneMenu id="comboSexo" value="#{recPessoaBean.recPessoa.recSexo}" class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                             
+                                                <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                                                                             
                                             </h:selectOneMenu>                                                                            
                                         </div>     
                                     </div>  
-                                    -->
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Estado Civil
                                             </label>
-                                            <h:selectOneMenu id="comboEstadoCivil" value="#{recPessoaBean.recPessoa.recEstadocivil}" class="form-control" >
+                                            <h:selectOneMenu id="comboEstadoCivil" 
+                                                             value="#{recPessoaBean.recPessoa.recEstadocivil}" 
+                                                             class="form-control">
                                                 <f:selectItem itemLabel="Selecione o Estado Civil" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Solteiro" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="Casado" itemValue="#{2}" />   
                                                 <f:selectItem itemLabel="Separado" itemValue="#{3}" />                                                
-                                            </h:selectOneMenu>                                                                            
+                                            </h:selectOneMenu>     
+
                                         </div>     
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -73,7 +77,9 @@
                                             <h:outputLabel value="RG" for="rg" />                                            
                                             <h:inputText class="form-control" 
                                                          id="rg" 
-                                                         value="#{recPessoaBean.recPessoa.recRg}" title="RG" />
+                                                         maxlength="10"
+                                                         value="#{recPessoaBean.recPessoa.recRg}" 
+                                                         title="RG" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -169,6 +175,16 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
+                                                Foto
+                                                <span class="required">*</span>
+                                            </label>
+                                            <p:fileUpload value="#{recPessoaBean.recFoto}"                                                           
+                                                          mode="simple" />                                                                                      
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
                                                 Objetivos Profissionais
                                                 <span class="required">*</span>
                                             </label>                                            
@@ -204,15 +220,7 @@
                                                          value="#{recPessoaBean.recPessoa.recPretencaosalarial}"/>                                            
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Foto
-                                                <span class="required">*</span>
-                                            </label>
-                                            <input class="form-control" id="number" name="text" type="text"/>
-                                        </div>
-                                    </div>
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
@@ -242,7 +250,7 @@
                                             </h:selectOneMenu>                                                                                                                        
                                         </div>     
                                     </div> 
-                                    
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
@@ -261,7 +269,7 @@
                                             </h:selectOneMenu>
                                         </div>     
                                     </div>
-                                    
+
                                 </div>
                                 <hr />
                                 <div class="row">
@@ -294,6 +302,14 @@
                                             <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recNumero}"/>                                            
                                         </div>
                                     </div> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Complemento                                                
+                                            </label>
+                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recComplemento}"/>                                            
+                                        </div>
+                                    </div> 
                                 </div>
 
                                 <hr />
@@ -303,7 +319,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
-                                                habilidade                                                
+
                                             </label>
                                             <p:autoComplete multiple="true" 
                                                             value="#{recPessoaBean.recPessoa.recHabilidadeList}" 
@@ -313,87 +329,26 @@
                                                             itemValue="#{item}" 
                                                             forceSelection="true"
                                                             converter="#{generic}">
-                                                
-                                                <p:column style="width:10%">
-                                                    <h:outputText styleClass="ui-theme ui-theme-#{item.recDescricao}" />
-                                                </p:column>
+
+
 
                                                 <p:column>
-                                                    <h:outputText class="form-control" value="#{item.recDescricao}" />
+                                                    <h:outputText value="#{item.recDescricao}" />
                                                 </p:column>
                                             </p:autoComplete>        
                                         </div>     
                                     </div>                            
                                 </div>
-                                <!-- 
-                                <div class="row">
-                                    <h3 class="text-center">Suas Habilidades</h3>   
-                                    
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">
-                                                Habilidade
-                                            </label>
-                                            <h:selectOneMenu id="comboHabilidade" value="#{recVagaBean.habilidade}"  class="form-control" >
-                                                <f:selectItem itemLabel="Selecione a Habilidade " itemValue="#{null}" />
-                                                <f:selectItems value="#{recHabilidadeBean.ListarTodas()}" var="habilidade" itemValue="#{habilidade}" itemLabel="#{habilidade.recDescricao}"/>
-                                            </h:selectOneMenu> 
-                                        </div>     
-                                    </div>                            
-                                </div>
-
-                                <div class="row">
-                                    <h:commandButton class="btn btn-success" value=" Adicionar" />                            
-                                </div>
-
-                                <div class="row">
-                                    <h:dataTable class="table table-striped">                                        
-                                        <h:column>
-                                            <f:facet name="header">Código</f:facet>
-
-                                        </h:column>     
-                                        <h:column>
-                                            <f:facet name="header">Habilidade</f:facet>
-
-                                        </h:column>   
-                                        <h:column>
-                                            <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar">
-
-                                            </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir">
-
-                                            </h:commandLink>
-                                        </h:column>                  
-                                    </h:dataTable>
-                                </div>
-                                
-                                <hr />
-                                <div class="row">
-                                    <h3 class="text-center">Suas Experiencias</h3>   
-                                    <h4 class="text-center">Descreva abaixo de forma clara as suas experiências profissionais, contendo, Nome da empresa, Cargo, Período e Atividades Realizadas.</h4>   
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Descrição
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputTextarea class="form-control" cols="40" id="txbDescCurso" rows="10"/>
-                                        </div>
-                                    </div>          
-                                </div>
-
-                                -->
 
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
+                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
                                         <h:commandButton class="btn btn-success" 
                                                          value="Salvar" 
                                                          action="#{recPessoaBean.Salvar()}" >
                                             <f:ajax execute="@form" render="formCurriculo" />
-                                        </h:commandButton>
-                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                        </h:commandButton>                                        
                                     </div>
                                 </div>
                             </div>

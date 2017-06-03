@@ -7,9 +7,13 @@ import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecPessoaService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 @RequestScoped
@@ -25,6 +29,9 @@ public class RecPessoaBean {
 
     @ManagedProperty("#{recHabilidadeService}")
     private RecHabilidadeService recHabilidadeService;
+
+    private UploadedFile recFoto;
+    private UploadedFile recAnexoCurriculo;
 
     public List<RecHabilidade> completarHabilidade(String query) {
         List<RecHabilidade> allThemes = recHabilidadeService.ListarTodas();
@@ -52,12 +59,20 @@ public class RecPessoaBean {
     public String Salvar() {
         if (ValidarCampos()) {
             if (recPessoa.getId() > 0) {
+                if (recFoto != null) {
+                    recPessoa.setRecFoto(recFoto.getContents());
+                }
                 recPessoaService.Alterar(recPessoa);
             } else {
+
+                if (recFoto != null) {
+                    recPessoa.setRecFoto(recFoto.getContents());
+                }
                 recPessoaService.Inserir(recPessoa);
             }            
+            return "cadastro_curriculo_sucesso";
         }
-        return "cadastro_curriculo_sucesso";
+        return null;
     }
 
     public String PreparaEdicao(RecPessoa pessoa) {
@@ -150,7 +165,7 @@ public class RecPessoaBean {
             Helper.mostrarNotificacao("RG", "Preencha o RG", "error");
             return false;
         }
-        if (recPessoa.getRecRg().isEmpty()) {
+        if (recPessoa.getRecOrgaoemissor().isEmpty()) {
             Helper.mostrarNotificacao("Orgão Emissor", "Preencha o Orgão Emissor do RG", "error");
             return false;
         }
@@ -180,5 +195,21 @@ public class RecPessoaBean {
             return false;
         }
         return true;
+    }
+
+    public UploadedFile getRecFoto() {
+        return recFoto;
+    }
+
+    public void setRecFoto(UploadedFile recFoto) {
+        this.recFoto = recFoto;
+    }
+
+    public UploadedFile getRecAnexoCurriculo() {
+        return recAnexoCurriculo;
+    }
+
+    public void setRecAnexoCurriculo(UploadedFile recAnexoCurriculo) {
+        this.recAnexoCurriculo = recAnexoCurriculo;
     }
 }
