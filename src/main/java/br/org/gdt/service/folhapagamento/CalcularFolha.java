@@ -254,6 +254,10 @@ public class CalcularFolha {
                                 decimalFormat.format(x.getEvpValor())))
                                 .collect(Collectors.toList()));
 
+                eventosPeriodoRelatorio = eventosPeriodoRelatorio.stream()
+                        .sorted((x, y) -> Long.compare(x.getCodigoEvento(), y.getCodigoEvento()))
+                        .collect(Collectors.toList());
+
                 JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JRBeanCollectionDataSource(eventosPeriodoRelatorio));
                 relatorios.add(jasperPrint);
                 relatorios.add(jasperPrint);

@@ -19,7 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean
+@ManagedBean(name = "fpEnvelopePagamentoBean")
 @ViewScoped
 public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
