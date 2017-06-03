@@ -7,6 +7,7 @@ package br.org.gdt.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,7 +44,7 @@ public class CsbffDependentes implements Serializable {
     private String dependenteNome;
     @Basic(optional = false)
     @Column(name = "dependente_data_nascimento")
-    private BigInteger dependenteDataNascimento;
+    private Date dependenteDataNascimento;
     @Basic(optional = false)
     @Column(name = "dependente_cpf")
     private String dependenteCpf;
@@ -67,7 +68,7 @@ public class CsbffDependentes implements Serializable {
         this.dependenteCod = dependenteCod;
     }
 
-    public CsbffDependentes(long dependenteCod, String dependenteNome, BigInteger dependenteDataNascimento, String dependenteCpf, String dependenteRgCertNascimento, boolean dependenteImpostoDeRenda) {
+    public CsbffDependentes(long dependenteCod, String dependenteNome, Date dependenteDataNascimento, String dependenteCpf, String dependenteRgCertNascimento, boolean dependenteImpostoDeRenda) {
         this.dependenteCod = dependenteCod;
         this.dependenteNome = dependenteNome;
         this.dependenteDataNascimento = dependenteDataNascimento;
@@ -92,11 +93,11 @@ public class CsbffDependentes implements Serializable {
         this.dependenteNome = dependenteNome;
     }
 
-    public BigInteger getDependenteDataNascimento() {
+    public Date getDependenteDataNascimento() {
         return dependenteDataNascimento;
     }
 
-    public void setDependenteDataNascimento(BigInteger dependenteDataNascimento) {
+    public void setDependenteDataNascimento(Date dependenteDataNascimento) {
         this.dependenteDataNascimento = dependenteDataNascimento;
     }
 
