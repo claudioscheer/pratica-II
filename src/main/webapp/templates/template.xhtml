@@ -27,7 +27,7 @@
                     <div class="left_col scroll-view">
                         <h:link outcome="/index.xhtml">
                             <div class="navbar nav_title text-center" style="border: 3;">
-                                <span class="site_title" style="padding-left: 0">Murphy</span>
+                                <span class="site_title" style="padding-left: 0">Murphy RH</span>
                             </div>
                         </h:link>
 
@@ -51,21 +51,31 @@
                         <!-- sidebar menu -->
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
-                                <h3>Geral</h3>
+                                <h3>Menu</h3>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><li><h:link outcome="/inicializar-sistema.xhtml"><i class="fa fa-calculator"></i> Inicializar dados</h:link></li></a>
+                                        <a><li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite inserir informações no Banco de Dados."><h:link outcome="/inicializar-sistema.xhtml"><i class="fa fa-magic"></i> Inicializar dados</h:link></li></a>
                                     </li>
                                 </ul>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-calculator"></i> Folha de pagamento <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-calculator"></i> Folha de Pagamento <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><h:link outcome="/folhapagamento/envelopepagamento.xhtml" value="Envelope pagamento" /></li>
-                                            <li><h:link outcome="/folhapagamento/calcular.xhtml" value="Calcular" /></li>
-                                            <li><h:link outcome="/folhapagamento/periodos.xhtml" value="Períodos" /></li>
-                                            <li><h:link outcome="/folhapagamento/tabelas.xhtml" value="Tabelas" /></li>
-                                            <li><h:link outcome="/folhapagamento/eventos.xhtml" value="Eventos" /></li>
+                                            <li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite calcular a folha de pagamento para um determinado período.">
+                                                <h:link outcome="/folhapagamento/calcular.xhtml" value="Calcular" />
+                                            </li>
+                                            <li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite validar a folha de pagamento, fazer ajustes manuais (se necessário) e imprimir relatórios.">
+                                                <h:link outcome="/folhapagamento/envelopepagamento.xhtml" value="Envelope de pagamento" />
+                                            </li>
+                                            <li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite o cadastramento de períodos e visualizar períodos cadastrados.">
+                                                <h:link outcome="/folhapagamento/periodos.xhtml" value="Períodos" />
+                                            </li>
+                                            <li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite o cadastramento de tabelas e visualizar tabelas cadastradas.">
+                                                <h:link outcome="/folhapagamento/tabelas.xhtml" value="Tabelas" />
+                                            </li>
+                                            <li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite o cadastramento de eventos e visualizar eventos cadastrados.">
+                                                <h:link outcome="/folhapagamento/eventos.xhtml" value="Eventos" />
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -83,7 +93,7 @@
                                 </ul>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-users"></i> Capital humano  <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-users"></i> Capital Humano  <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><h:link outcome="/ModuloCapitalHumano/Cursos.xhtml" value="Cursos"></h:link></li>
                                             <li><h:link outcome="/ModuloCapitalHumano/Treinamentos.xhtml" value="Treinamentos"></h:link></li>
@@ -95,7 +105,7 @@
                                 </ul>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-list"></i> Cargos <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-arrows"></i> Cargos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><h:link outcome="/c_s_b_f_f/cargo/cargo_consulta.xhtml" value="Cargos"></h:link></li>
                                         </ul>

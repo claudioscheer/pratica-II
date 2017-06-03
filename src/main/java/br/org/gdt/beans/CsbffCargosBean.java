@@ -9,12 +9,10 @@ import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffCargosService;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**

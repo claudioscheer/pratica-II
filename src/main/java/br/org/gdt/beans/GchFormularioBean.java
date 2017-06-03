@@ -313,7 +313,8 @@ public class GchFormularioBean {
 
                     System.out.println("Texto Formatado" + urlFormatada);
 
-                    String msgFormatada = "<html><div style='background-color:gray;border:1px solid black;width:80%;height:20%'><span>" + gchFormulario.getFormNome() + "</span></div></br></br><p>Você acaba de receber um formulário com algumas perguntas para que possamos lhe conhecer melhor. O prazo de respostas é até " + gchFormulario.getFormPrazoResposta().toString() + "</p></br>Para acessá-lo clique <a href='http://" + urlFormatada + "'>aqui</a></html>";
+        
+                    String msgFormatada = "<html></br></br><div style='border:2px solid #0094ff;'><h2 style='background:#87CEEB;color:white;padding:10px;color: #222;'>Formulário "+gchFormulario.getFormNome()+"</h2><div style='color:#333;padding:10px;'><p style='font-size:120%;text-shadow: 0px 2px 3px #555;'>Você acaba de receber um formulário com algumas perguntas para que possamos lhe conhecer melhor. O prazo de respostas é até \"" + gchFormulario.getFormPrazoResposta().toString() + "\"</p></br>Para acessá-lo clique <a href='http://"+ urlFormatada + "'>aqui</a></br></br><h3>Instruções de Preenchimento</h3></br><p>- Responda com sinceridade!</p><p>- Somente é possível marcar uma alternativa por pergunta!</p><p>- Só é possível responder o formulário uma única vez!</p></div><h4 style='background:#ADD8E6;padding:8px;'>Murphy RH - Todos os direitos Reservados</h4></div></html>";
 
                     System.out.println("Mensagem Formatada" + msgFormatada);
 
