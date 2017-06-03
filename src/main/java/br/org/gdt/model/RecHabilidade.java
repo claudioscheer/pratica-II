@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -74,16 +75,11 @@ public class RecHabilidade implements Serializable,SampleEntity {
     @Column(name = "rec_descricao")
     private String recDescricao;
     @Column(name = "rec_habilidadenivel")
-    private Integer recHabilidadenivel;
-    @JoinTable(name = "rec_vaga_habilidade", joinColumns = {
-        @JoinColumn(name = "rec_idhabilidade", referencedColumnName = "rec_idhabilidade")}, inverseJoinColumns = {
-        @JoinColumn(name = "rec_idvaga", referencedColumnName = "rec_idvaga")})
-    @ManyToMany
-    private List<RecVaga> recVagaList;
-    @JoinTable(name = "rec_pessoa_habilidade", joinColumns = {
-        @JoinColumn(name = "rec_idhabilidade", referencedColumnName = "rec_idhabilidade")}, inverseJoinColumns = {
-        @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")})
-    @ManyToMany
+    private Integer recHabilidadenivel;       
+    @ManyToMany(mappedBy = "recHabilidadeList")
+    private List<RecVaga> recVagaList;    
+    
+    @ManyToMany(mappedBy = "recHabilidadeList")
     private List<RecPessoa> recPessoaList;
 
     public RecHabilidade() {
