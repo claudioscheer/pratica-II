@@ -10,6 +10,8 @@ import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffPessoaDependente;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffDependentesService;
+import br.org.gdt.service.CsbffPessoaDependenteService;
+import br.org.gdt.service.RecPessoaService;
 import java.math.BigInteger;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -24,21 +26,38 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class DependenteBean {
 
-    private boolean formAtivo = false;
-
+    private boolean formAtivo = true;
+     private String recCpf;
+     private String NomeCompleto;
+     
+     
+     
+     @ManagedProperty("#{recPessoaService}")
+    private RecPessoaService recPessoaService;
     private CsbffDependentes csbffdependente = new CsbffDependentes();
     private List<CsbffDependentes> todosdependentes;
 
     @ManagedProperty("#{csbffDependenteService}")
     private CsbffDependentesService csbffDependenteService;
-
-    private RecPessoa recPessoa;
-
+    private RecPessoa recPessoa = new RecPessoa();
+    
+     
+    @ManagedProperty("#{csbffPessoaDependenteService}")
+    private CsbffPessoaDependenteService csbffPessoaDependenteService;
+    private CsbffPessoaDependente csbffPessoaDependente = new CsbffPessoaDependente();
+    
     public DependenteBean() {
 
     }
     
-    
+    public void buscarCpf() {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
+        recPessoa = recPessoaService.findByRecCpf(recCpf);
+        NomeCompleto = recPessoa.getRecNomecompleto();
+        if (recPessoa == null) {
+            recPessoa = new RecPessoa();
+        }
+    }
     
 
     public void save() {
@@ -49,23 +68,17 @@ public class DependenteBean {
         System.out.println("5" +csbffdependente.getDependenteNome());
         System.out.println("6"+ csbffdependente.getDependenteRgCertNascimento());
         System.out.println("7" +csbffdependente.getDependenteTipo());
+       
         
-        CsbffPessoaDependente dependente = new CsbffPessoaDependente();
+        csbffPessoaDependente.setColabDepCodigo(recPessoa.getRecIdpessoa());
+        csbffPessoaDependente.setDependenteCod(csbffdependente);
+        csbffPessoaDependente.setRecIdpessoa(recPessoa);
+        csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
+        csbffPessoaDependente = getCsbffPessoaDependente();
         
-        
-        
-        csbffdependente.setCsbffPessoaDependente(dependente);
-        dependente.setDependenteCod(csbffdependente);
-        
-        dependente.setRecIdpessoa(recPessoa);
-        dependente.setPossuiDependentes(PossuiDependentes.Sim);        
-        
-        csbffdependente.setDependenteTipo(BigInteger.valueOf(1));
-        csbffdependente.setDependenteImpostoDeRenda(false);
         csbffDependenteService.save(csbffdependente);
-        
-        
-
+       csbffPessoaDependenteService.save(csbffPessoaDependente);
+    
     }
 
     public void cancel() {
@@ -137,6 +150,46 @@ public class DependenteBean {
 
     public void setRecPessoa(RecPessoa recPessoa) {
         this.recPessoa = recPessoa;
+    }
+
+    public String getRecCpf() {
+        return recCpf;
+    }
+
+    public void setRecCpf(String recCpf) {
+        this.recCpf = recCpf;
+    }
+
+    public String getNomeCompleto() {
+        return NomeCompleto;
+    }
+
+    public void setNomeCompleto(String NomeCompleto) {
+        this.NomeCompleto = NomeCompleto;
+    }
+
+    public RecPessoaService getRecPessoaService() {
+        return recPessoaService;
+    }
+
+    public void setRecPessoaService(RecPessoaService recPessoaService) {
+        this.recPessoaService = recPessoaService;
+    }
+
+    public CsbffPessoaDependenteService getCsbffPessoaDependenteService() {
+        return csbffPessoaDependenteService;
+    }
+
+    public void setCsbffPessoaDependenteService(CsbffPessoaDependenteService csbffPessoaDependenteService) {
+        this.csbffPessoaDependenteService = csbffPessoaDependenteService;
+    }
+
+    public CsbffPessoaDependente getCsbffPessoaDependente() {
+        return csbffPessoaDependente;
+    }
+
+    public void setCsbffPessoaDependente(CsbffPessoaDependente csbffPessoaDependente) {
+        this.csbffPessoaDependente = csbffPessoaDependente;
     }
 
 }
