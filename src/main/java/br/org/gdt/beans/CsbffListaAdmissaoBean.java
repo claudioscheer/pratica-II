@@ -97,11 +97,12 @@ public class CsbffListaAdmissaoBean implements Serializable {
     }
 
     public String editaConsulta(RecPessoa pessoas) {
-//        this.formAtivo = true;
+        this.formAtivo = true;
         this.recPessoa = pessoas;
         selectConsulta(pessoas);
         return "dadospessoais";
     }
+    
 
     public void selectConsulta(RecPessoa pessoas) {
         this.recPessoa = pessoas;

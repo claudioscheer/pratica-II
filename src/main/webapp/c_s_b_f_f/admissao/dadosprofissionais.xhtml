@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Admissão de colaborador</title>
     </h:head>
@@ -71,9 +72,9 @@
                                             <div class="form-group ">
                                                 <label class="control-label " for="number">                                        
                                                     Número da CTPS
-                                                    <span class="required">*</span>
+                                                    <!--                                                    <span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Número da CTPS é obrigatório." class="form-control " value="#{csbffDadosProfissionaisBean.recPessoa.recNumCtps}" />
+                                                <h:inputText label="codigo" class="form-control " value="#{csbffDadosProfissionaisBean.recPessoa.recNumCtps}" />
                                             </div>
                                         </div> 
 
@@ -81,9 +82,11 @@
                                             <div class="form-group ">
                                                 <label class="control-label " for="number">                                        
                                                     Número PIS/PASEP
-                                                    <span class="required">*</span>
+                                                    <!--                                                    <span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText label="codigo" required="true" requiredMessage="Campo Número PIS/PASEP é obrigatório." class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recPispasep}" />
+                                                <h:inputText label="codigo" class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recPispasep}" />
+
+
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -94,9 +97,8 @@
                                                 </label>
                                                 <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.cargoNome}" class="form-control" converter="#{generic}">
                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.cargos}" var="cargos" itemValue="#{cargos}" itemLabel="#{cargos.cargoNome}" />
+                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.cargos}" var="cargos" itemValue="#{cargos}"  itemLabel="#{cargos.cargoNome}" />
                                                 </h:selectOneMenu>
-
                                             </div> 
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">
@@ -105,7 +107,7 @@
                                                     Código CBO
                                                     <span class="required"></span>
                                                 </label>
-                                                <h:inputText label="codigo" class="form-control" value="#{csbffDadosProfissionaisBean.csbffCargosList}" converter="#{generic}"/>
+                                                <h:inputText label="codigo" class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.cargoCbo}" converter="#{generic}"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -113,7 +115,7 @@
                                                 <label class="control-label " for="number">                                        
                                                     Salário (R$)
                                                 </label>
-                                                <h:inputText label="codigo" class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" converter="#{generic}"/>
+                                                <h:inputText class="form-control" maxlength="9" onkeypress="this.value = MascaraValorMonetario(this.value)" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" converter="#{generic}"/>
 
                                             </div>
                                         </div> 
@@ -235,30 +237,34 @@
 
                                             </div>
                                         </div>
-                                        <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" layout="block">
-                                            <h:dataTable  class="table table-striped" value="#{csbffDadosProfissionaisBean.csbffEscalaHorasList}" var="escala">
-                                                <h:column>
-                                                    <f:facet name="header"> Hora Entrada</f:facet>
-                                                        #{escala.escalaHora1}  
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header"> Hora Saída</f:facet>
-                                                        #{escala.escalaHora2}  
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header"> Hora Entrada</f:facet>
-                                                        #{escala.escalaHora3}  
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header"> Hora Saída</f:facet>
-                                                        #{escala.escalaHora4}  
-                                                </h:column>
-                                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffEscalaHorasBean.removerEscala(eh)}" onclick="return confirm('Excluir escala?')">
-                                                    <!--<f:ajax execute="@form" render="formTabela" />-->
-                                                </h:commandLink>
+                                        <br></br> <h:dataTable  class="table table-striped" value="#{csbffDadosProfissionaisBean.recPessoa.csbffEscalaHorasList}" var="escala">
+                                            <h:column>
+                                                <f:facet name="header"> Hora Entrada</f:facet>
+                                                    #{escala.escalaHora1}  
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"> Hora Saída</f:facet>
+                                                    #{escala.escalaHora2}  
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"> Hora Entrada</f:facet>
+                                                    #{escala.escalaHora3}  
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"> Hora Saída</f:facet>
+                                                    #{escala.escalaHora4}  
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Dias a Trabalhar</f:facet>
+                                                    #{escala.diaDaSemana}  
+                                            </h:column>            
 
-                                            </h:dataTable>
-                                        </h:panelGroup>	
+                                            <h:column>
+                                                <h:commandButton class="btn btn-link btn-small" value="Excluir" action="#{csbffEscalaHorasBean.removerEscala(eh)}" onclick="return confirm('Excluir escala?')">
+                                                    <!--<f:ajax execute="@form" render="formTabela" />-->
+                                                </h:commandButton>>
+                                            </h:column>            
+                                        </h:dataTable>
 
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group ">
