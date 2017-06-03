@@ -3,7 +3,6 @@ package br.org.gdt.beans;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpPeriodoService;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -21,10 +20,6 @@ public class FpPeriodoBean {
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
-
-    public FpPeriodoBean() {
-
-    }
 
     public void save() {
         String mensagemErro = this.datasSaoValidas();

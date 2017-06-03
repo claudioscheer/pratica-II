@@ -24,9 +24,6 @@ public class FpTabelaBean {
     @ManagedProperty("#{fpTabelaService}")
     private FpTabelaService fpTabelaService;
 
-    public FpTabelaBean() {
-    }
-
     public void save() {
         if (fpTabela.getTabVigencias().size() <= 0) {
             Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma vigência.", "info");
