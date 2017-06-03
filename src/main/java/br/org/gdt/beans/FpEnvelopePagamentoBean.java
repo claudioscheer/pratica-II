@@ -164,7 +164,12 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     }
 
     public void gerarFolhaPagamento() {
+        if (fpFolhaPeriodo.getForId() <= 0) {
+            Helper.mostrarNotificacao("Mensagem", "É preciso ter a folha carregada para imprimir.", "info");
+            return;
+        }
         imprimirFolhaPagamento(fpFolhaPeriodo);
+
     }
 
     private void imprimirFolhaPagamento(FpFolhaPeriodo fpFolhaPeriodo) {

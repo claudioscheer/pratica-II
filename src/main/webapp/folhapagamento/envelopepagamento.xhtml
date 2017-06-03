@@ -52,13 +52,13 @@
                                 </div>
                                 <div class="col-md-3 text-center">
                                     <div class="empty-div">&nbsp;</div>
-                                    <h:commandButton class="btn btn-primary" value="Buscar eventos" action="#{fpEnvelopePagamentoBean.buscarFolhaPeriodo()}">
+                                    <h:commandButton class="btn btn-primary" value="Visualizar folha de pagamento" action="#{fpEnvelopePagamentoBean.buscarFolhaPeriodo()}">
                                         <f:ajax execute="@form" render="formEnvelopePagamento" />
                                     </h:commandButton>
                                 </div>
                                 <div class="col-md-3 text-center">
                                     <div class="empty-div">&nbsp;</div>
-                                    <h:commandButton class="btn btn-link" value="#{!fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo ? 'Ver todas folhas' : 'Voltar'}" action="#{fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo()}">
+                                    <h:commandButton class="btn btn-primary" value="#{!fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo ? 'Ver todas folhas' : 'Voltar'}" action="#{fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo()}">
                                         <f:ajax execute="@form" render="formEnvelopePagamento" />
                                     </h:commandButton>
                                 </div>
@@ -87,11 +87,13 @@
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Opções</f:facet>
-                                                        <h:commandLink class="btn btn-link btn-small" value="Reimprimir" action="#{fpEnvelopePagamentoBean.reimprimirFolhaPagamento(folhaPeriodo)}" />
-
-                                                        <h:commandLink class="btn btn-link btn-small" value="Validar" action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}">
+                                                        
+                                                        <h:commandLink class="btn btn-success btn-sm" value="Editar" action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}">
                                                             <f:ajax execute="@form" render="formEnvelopePagamento" />
                                                         </h:commandLink>
+                                                        
+                                                        <h:commandLink class="btn btn-dark btn-sm" value="Reimprimir" action="#{fpEnvelopePagamentoBean.reimprimirFolhaPagamento(folhaPeriodo)}" />
+                                                        
                                                     </h:column>
                                                 </h:dataTable>
                                             </div>
