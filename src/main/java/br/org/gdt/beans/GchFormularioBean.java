@@ -428,7 +428,8 @@ public class GchFormularioBean {
 
                     altperg.setGchAlternativas(novaAlternativa);
                     altperg.setPerCodigo(pergunta);
-
+                    
+                    
                     gchAlternativasPerguntaService.save(altperg);
 
                 }
