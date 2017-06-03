@@ -11,20 +11,27 @@ import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.model.GchRespostas;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
 import br.org.gdt.service.GchRespostasService;
 import br.org.gdt.service.RecPessoaService;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -38,11 +45,13 @@ public class GchFormularioAlternativasBean {
 
     private String radioValue = null;
 
+    private String idParm;
+
     private List<GchAlternativas> todasAlternativas = new ArrayList<>();
 
     private GchAlternativas gchAlternativas;
 
-    private Map<GchAlternativas, Boolean> radio = new HashMap<GchAlternativas, Boolean>();
+    private Map<GchAlternativas, String> radio = new HashMap<GchAlternativas, String>();
 
     private List<GchPerguntas> todasPerguntas = new ArrayList<>();
 
@@ -70,8 +79,8 @@ public class GchFormularioAlternativasBean {
 
     private GchRespostas gchRespostas = new GchRespostas();
 
-    private int idPessoa = 4;
-    private long idFormulario = 2;
+    private int idPessoa;
+    private int idFormulario;
 
     public GchFormularioAlternativasBean() {
 
@@ -79,27 +88,63 @@ public class GchFormularioAlternativasBean {
 
     public void save() {
 
-        for (GchRespostas gchResposta : gchRespostasList) {
+        Iterator<GchAlternativas> keyIterrator = radio.keySet().iterator();
 
-            gchResposta.setFormCodigo(1);
+        while (keyIterrator.hasNext()) {
+
+            GchAlternativas alternativa = keyIterrator.next();
+            String value = radio.get(alternativa);
+
+            GchRespostas gchResposta = new GchRespostas();
+
+            gchResposta.setFormCodigo(idFormulario);
 
             RecPessoa pessoa = recPessoaService.BuscarId(idPessoa);
 
             gchResposta.setRecIdpessoa(pessoa);
+            gchResposta.setAltCodigo(alternativa);
+            gchResposta.setPerCodigo(alternativa.getPerCodigo());
 
             gchRespostasService.update(gchResposta);
 
         }
 
-        gchRespostasList = new ArrayList<>();
+        radio = new HashMap<GchAlternativas, String>();
 
+        Helper.mostrarNotificacao("Sucesso", "Resposta cadastrada!", "sucess");
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Formularios.xhtml");
+        } catch (IOException ex) {
+
+        }
+        Helper.mostrarNotificacao("Sucesso", "Resposta cadastrada!", "sucess");
     }
 
     public List<GchPerguntas> buscaPerguntas() {
 
-        gchFormularios = gchFormularioService.findById(idFormulario);
+        System.out.println("idParm:" + idParm);
 
-        return gchFormularios.getPerguntas();
+        if (idParm != null) {
+
+            byte[] bytes = Base64.getDecoder().decode(idParm);
+
+            String parametro = new String(bytes);
+
+            String[] parametros = parametro.split("&");
+
+            idFormulario = Integer.parseInt(parametros[0]);
+            idPessoa = Integer.parseInt(parametros[1]);
+
+        }
+
+        if (idFormulario == 0) {
+            idFormulario = 6;
+            idPessoa = 3;
+        }
+
+        return gchPerguntasService.buscaPergutasFormulario(idFormulario);
 
     }
 
@@ -111,11 +156,21 @@ public class GchFormularioAlternativasBean {
 
         for (GchAlternativasperguntas item : gchAlternativasPergunta) {
 
-            gchAlternativasList.add(item.getGchAlternativas());
+            GchAlternativas gchAlternativasAux = item.getGchAlternativas();
+            gchAlternativasAux.setPerCodigo(gchPerguntas.getPerCodigo());
+            gchAlternativasList.add(gchAlternativasAux);
 
         }
 
         return gchAlternativasList;
+
+    }
+
+    public String preparedEdit(GchFormulario gchFormulario) {
+
+        idFormulario = (int) gchFormulario.getFormCodigo();
+
+        return "ResponderFormulario";
 
     }
 
@@ -155,7 +210,7 @@ public class GchFormularioAlternativasBean {
 
         if (gchFormularios == null) {
 
-            gchFormularios = gchFormularioService.findById(1);
+            gchFormularios = gchFormularioService.findById(idFormulario);
 
         }
 
@@ -166,11 +221,11 @@ public class GchFormularioAlternativasBean {
         this.gchFormularios = gchFormularios;
     }
 
-    public Map<GchAlternativas, Boolean> getRadio() {
+    public Map<GchAlternativas, String> getRadio() {
         return radio;
     }
 
-    public void setRadio(Map<GchAlternativas, Boolean> radio) {
+    public void setRadio(Map<GchAlternativas, String> radio) {
         this.radio = radio;
     }
 
@@ -256,6 +311,30 @@ public class GchFormularioAlternativasBean {
 
     public void setRecPessoaService(RecPessoaService recPessoaService) {
         this.recPessoaService = recPessoaService;
+    }
+
+    public String getIdParm() {
+        return idParm;
+    }
+
+    public void setIdParm(String idParm) {
+        this.idParm = idParm;
+    }
+
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
+    public int getIdFormulario() {
+        return idFormulario;
+    }
+
+    public void setIdFormulario(int idFormulario) {
+        this.idFormulario = idFormulario;
     }
 
 }

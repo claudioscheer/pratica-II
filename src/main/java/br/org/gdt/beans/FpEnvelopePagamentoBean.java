@@ -19,7 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean
+@ManagedBean(name = "fpEnvelopePagamentoBean")
 @ViewScoped
 public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
@@ -73,6 +73,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     }
 
     public void selecionarPeriodo() {
+        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
     }
 
     public void selecionarPessoa() {
@@ -108,7 +109,8 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     public void recalcularFolhaPeriodo() {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
-            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodoService.findById(fpPeriodo.getPerId()));
+            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
+            dadosCalculadosDoFuncionario.setDeletarJaCalculada(true);
             dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
@@ -163,8 +165,21 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
         imprimirFolhaPagamento(fpFolhaPeriodo);
     }
 
+    public void gerarTodasFolhasPagamento() {
+        try {
+            calcularFolha.gerarFolha(todasFolhasPeriodo, fpPeriodo.getPerMes() + " - " + fpPeriodo.getPerAno());
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
+        }
+    }
+
     public void gerarFolhaPagamento() {
+        if (fpFolhaPeriodo.getForId() <= 0) {
+            Helper.mostrarNotificacao("Mensagem", "É preciso ter a folha carregada para imprimir.", "info");
+            return;
+        }
         imprimirFolhaPagamento(fpFolhaPeriodo);
+
     }
 
     private void imprimirFolhaPagamento(FpFolhaPeriodo fpFolhaPeriodo) {

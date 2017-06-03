@@ -55,108 +55,40 @@ public class CsbffEscalaHoras implements java.io.Serializable, SampleEntity {
     @Column(name = "escala_hora4")
 //    @Temporal(TemporalType.TIME)
     private double escalaHora4;
-    @Column(name = "escala_segunda")
-    private Boolean escalaSegunda;
-    @Column(name = "escala_terca")
-    private Boolean escalaTerca;
-    @Column(name = "escala_quarta")
-    private Boolean escalaQuarta;
-    @Column(name = "escala_quinta")
-    private Boolean escalaQuinta;
-    @Column(name = "escala_sexta")
-    private Boolean escalaSexta;
-    @Column(name = "escala_sabado")
-    private Boolean escalaSabado;
-    @Column(name = "escala_domingo")
-    private Boolean escalaDomingo;
+
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @OneToOne(optional = false)
     private RecPessoa recIdpessoa;
-//    @OneToMany
-//    private List<CsbffEscalaHoras> csbffEscalaHorasList;
-    private DiasATrabalhar diasATrabalhar;
+//    private DiasATrabalhar diasATrabalhar;
+    @Basic(optional = true)
+    @Column(name = "dia_dasemana")
     private String diaDaSemana;
+    @OneToMany
+    private List<CsbffEscalaHoras> csbffEscalaHorasList;
 
-    public CsbffEscalaHoras(long escalaCodigo, Date escalaDataVigente, double escalaHora1, double escalaHora2, double escalaHora3, double escalaHora4, Boolean escalaSegunda, Boolean escalaTerca, Boolean escalaQuarta, Boolean escalaQuinta, Boolean escalaSexta, Boolean escalaSabado, Boolean escalaDomingo, RecPessoa recIdpessoa, DiasATrabalhar diasATrabalhar, String diaDaSemana) {
+    public CsbffEscalaHoras(long escalaCodigo, Date escalaDataVigente, double escalaHora1, double escalaHora2, double escalaHora3, double escalaHora4, RecPessoa recIdpessoa, String diaDaSemana, List<CsbffEscalaHoras> csbffEscalaHorasList) {
         this.escalaCodigo = escalaCodigo;
         this.escalaDataVigente = escalaDataVigente;
         this.escalaHora1 = escalaHora1;
         this.escalaHora2 = escalaHora2;
         this.escalaHora3 = escalaHora3;
         this.escalaHora4 = escalaHora4;
-        this.escalaSegunda = escalaSegunda;
-        this.escalaTerca = escalaTerca;
-        this.escalaQuarta = escalaQuarta;
-        this.escalaQuinta = escalaQuinta;
-        this.escalaSexta = escalaSexta;
-        this.escalaSabado = escalaSabado;
-        this.escalaDomingo = escalaDomingo;
         this.recIdpessoa = recIdpessoa;
-        this.diasATrabalhar = diasATrabalhar;
+//        this.diasATrabalhar = diasATrabalhar;
         this.diaDaSemana = diaDaSemana;
+        this.csbffEscalaHorasList = csbffEscalaHorasList;
     }
 
     public CsbffEscalaHoras() {
     }
 
+    public CsbffEscalaHoras(List<CsbffEscalaHoras> csbffEscalaHorasList) {
+        this.csbffEscalaHorasList = csbffEscalaHorasList;
+    }
+    
+
     public void setEscalaDataVigente(Date escalaDataVigente) {
         this.escalaDataVigente = escalaDataVigente;
-    }
-
-    public Boolean getEscalaSegunda() {
-        return escalaSegunda;
-    }
-
-    public void setEscalaSegunda(Boolean escalaSegunda) {
-        this.escalaSegunda = escalaSegunda;
-    }
-
-    public Boolean getEscalaTerca() {
-        return escalaTerca;
-    }
-
-    public void setEscalaTerca(Boolean escalaTerca) {
-        this.escalaTerca = escalaTerca;
-    }
-
-    public Boolean getEscalaQuarta() {
-        return escalaQuarta;
-    }
-
-    public void setEscalaQuarta(Boolean escalaQuarta) {
-        this.escalaQuarta = escalaQuarta;
-    }
-
-    public Boolean getEscalaQuinta() {
-        return escalaQuinta;
-    }
-
-    public void setEscalaQuinta(Boolean escalaQuinta) {
-        this.escalaQuinta = escalaQuinta;
-    }
-
-    public Boolean getEscalaSexta() {
-        return escalaSexta;
-    }
-
-    public void setEscalaSexta(Boolean escalaSexta) {
-        this.escalaSexta = escalaSexta;
-    }
-
-    public Boolean getEscalaSabado() {
-        return escalaSabado;
-    }
-
-    public void setEscalaSabado(Boolean escalaSabado) {
-        this.escalaSabado = escalaSabado;
-    }
-
-    public Boolean getEscalaDomingo() {
-        return escalaDomingo;
-    }
-
-    public void setEscalaDomingo(Boolean escalaDomingo) {
-        this.escalaDomingo = escalaDomingo;
     }
 
     public RecPessoa getRecIdpessoa() {
@@ -199,12 +131,28 @@ public class CsbffEscalaHoras implements java.io.Serializable, SampleEntity {
         this.escalaHora4 = escalaHora4;
     }
 
-    public DiasATrabalhar getDiasATrabalhar() {
-        return diasATrabalhar;
+    @Override
+    public Long getId() {
+        return escalaCodigo;
     }
 
-    public void setDiasATrabalhar(DiasATrabalhar diasATrabalhar) {
-        this.diasATrabalhar = diasATrabalhar;
+    public long getEscalaCodigo() {
+        return escalaCodigo;
+    }
+
+    public void setEscalaCodigo(long escalaCodigo) {
+        this.escalaCodigo = escalaCodigo;
+    }
+
+    public void setEscalaCodigo(CsbffEscalaHoras csbffEscalaHoras) {
+    }
+
+    public List<CsbffEscalaHoras> getCsbffEscalaHorasList() {
+        return csbffEscalaHorasList;
+    }
+
+    public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
+        this.csbffEscalaHorasList = csbffEscalaHorasList;
     }
 
     public String getDiaDaSemana() {
@@ -216,17 +164,22 @@ public class CsbffEscalaHoras implements java.io.Serializable, SampleEntity {
     }
 
     @Override
+    public String toString() {
+        return "CsbffEscalaHoras {" + "escalaCodigo=" + escalaCodigo + '}';
+    }
+    
+
+    @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + (int) (this.escalaCodigo ^ (this.escalaCodigo >>> 32));
-        hash = 13 * hash + Objects.hashCode(this.escalaDataVigente);
-        hash = 13 * hash + (int) (Double.doubleToLongBits(this.escalaHora1) ^ (Double.doubleToLongBits(this.escalaHora1) >>> 32));
-        hash = 13 * hash + (int) (Double.doubleToLongBits(this.escalaHora2) ^ (Double.doubleToLongBits(this.escalaHora2) >>> 32));
-        hash = 13 * hash + (int) (Double.doubleToLongBits(this.escalaHora3) ^ (Double.doubleToLongBits(this.escalaHora3) >>> 32));
-        hash = 13 * hash + (int) (Double.doubleToLongBits(this.escalaHora4) ^ (Double.doubleToLongBits(this.escalaHora4) >>> 32));
-        hash = 13 * hash + Objects.hashCode(this.recIdpessoa);
-        hash = 13 * hash + Objects.hashCode(this.diasATrabalhar);
-        hash = 13 * hash + Objects.hashCode(this.diaDaSemana);
+        int hash = 3;
+        hash = 79 * hash + (int) (this.escalaCodigo ^ (this.escalaCodigo >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.escalaHora1) ^ (Double.doubleToLongBits(this.escalaHora1) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.escalaHora2) ^ (Double.doubleToLongBits(this.escalaHora2) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.escalaHora3) ^ (Double.doubleToLongBits(this.escalaHora3) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.escalaHora4) ^ (Double.doubleToLongBits(this.escalaHora4) >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.recIdpessoa);
+        hash = 79 * hash + Objects.hashCode(this.diaDaSemana);
+        hash = 79 * hash + Objects.hashCode(this.csbffEscalaHorasList);
         return hash;
     }
 
@@ -263,28 +216,10 @@ public class CsbffEscalaHoras implements java.io.Serializable, SampleEntity {
         if (!Objects.equals(this.recIdpessoa, other.recIdpessoa)) {
             return false;
         }
-        if (this.diasATrabalhar != other.diasATrabalhar) {
+        if (!Objects.equals(this.csbffEscalaHorasList, other.csbffEscalaHorasList)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public Long getId() {
-        return escalaCodigo;
-    }
-
-    public long getEscalaCodigo() {
-        return escalaCodigo;
-    }
-
-    public void setEscalaCodigo(long escalaCodigo) {
-        this.escalaCodigo = escalaCodigo;
-    }
-
-
-    public void setEscalaCodigo(CsbffEscalaHoras csbffEscalaHoras) {
-    }
-    
 
 }
