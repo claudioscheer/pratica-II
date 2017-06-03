@@ -16,20 +16,22 @@
                 <h:form id="formConsulta" style="margin-top:75px;">
                     <div class="x_panel">
                         <div class="form-group" style="float: left;margin-top: 10px">
-                            <div>
+                            <div class="col-md-12 text-right">
                                 <h:link  outcome="dadospessoais.xhtml" class="btn btn-primary " value="Novo Contrato"/>
+                                <h:commandButton class="btn btn-black" value="Imprimir Ficha Funcional" />
+                                <!--action="{csbffAdmissaoBean.gerarFichaFuncional()}"-->
                             </div>
                         </div>
-                        <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffAdmissaoBean.formAtivo}">
+                        <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffListaAdmissaoBean.formAtivo}">
                             <div class="row">
                                 <br></br><div class="title_left">
-                                    <h3>Contratos de Admissão Criados</h3>
+                                    <h3>Contratos de Admissão</h3>
                                 </div>
                             </div>
                             <div class="row">
                                 <br></br>  <div class="x_panel">
                                     <div class="x_content" >
-                                        <br></br> <h:dataTable  class="table table-striped" value="#{csbffAdmissaoBean.pessoas}" var="pessoas">
+                                        <br></br> <h:dataTable  class="table table-striped" value="#{csbffListaAdmissaoBean.pessoas}" var="pessoas">
                                             <h:column>
                                                 <f:facet name="header">Código</f:facet>
                                                     #{pessoas.recIdpessoa}
@@ -41,6 +43,10 @@
                                             <h:column>
                                                 <f:facet name="header"> Nome</f:facet>
                                                     #{pessoas.recNomecompleto} 
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Contrato </f:facet>
+                                                    #{pessoas.recContrato} 
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">Cargo </f:facet>
@@ -55,7 +61,7 @@
 
                                             </h:column>
                                             <h:column>
-                                                <h:commandLink class="btn btn-link btn-small" action="#{csbffAdmissaoBean.editaConsulta(pessoas)}">
+                                                <h:commandLink class="btn btn-link btn-small" action="#{csbffListaAdmissaoBean.editaConsulta(pessoas)}">
 
                                                     <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                 </h:commandLink>

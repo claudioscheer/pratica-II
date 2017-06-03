@@ -21,6 +21,7 @@ public class FpEvento implements java.io.Serializable {
     private boolean eveIncideFGTS;
     private boolean eveIncideIRRF;
     private boolean evePermiteExcluir;
+    private boolean eveNaoAlteraFolha;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fp_evento")
@@ -78,6 +79,14 @@ public class FpEvento implements java.io.Serializable {
 
     public void setEvePermiteExcluir(boolean evePermiteExcluir) {
         this.evePermiteExcluir = evePermiteExcluir;
+    }
+
+    public boolean isEveNaoAlteraFolha() {
+        return eveNaoAlteraFolha;
+    }
+
+    public void setEveNaoAlteraFolha(boolean eveNaoAlteraFolha) {
+        this.eveNaoAlteraFolha = eveNaoAlteraFolha;
     }
 
 }

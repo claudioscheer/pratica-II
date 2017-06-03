@@ -71,7 +71,7 @@ public class GchFormularioAlternativasBean {
     private GchRespostas gchRespostas = new GchRespostas();
 
     private int idPessoa = 4;
-    private long idFormulario = 1;
+    private long idFormulario = 2;
 
     public GchFormularioAlternativasBean() {
 

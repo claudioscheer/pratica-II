@@ -31,21 +31,21 @@
                                                 CPF
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText  class="form-control" id="cpf" maxlength="14" binding="#{campocpf}" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffAdmissaoBean.recCpf}" title="CPF" />
+                                            <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffDadosPessoaisBean.recCpf}" title="CPF" />
                                         </div>
 
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group ">
                                             <label class="control-label">Código colaborador</label>
-                                            <h:inputText label="codigo"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recIdpessoa}" disabled="true" />
+                                            <h:inputText label="codigo"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recIdpessoa}" disabled="true" />
 
                                         </div>
                                     </div> 
 
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         <div class="element">
-                                            <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffAdmissaoBean.buscarCpf()}"/>
+                                            <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffDadosPessoaisBean.buscarCpf()}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                                     Nome Colaborador
 <!--                                                    <span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNomecompleto}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recNomecompleto}" />
                                             </div>     
                                         </div> 
                                         <div class="col-md-6 col-sm-6 ">                                
@@ -73,9 +73,9 @@
                                                 <label class="control-label">
                                                     Estado Civil
                                                 </label>
-                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recEstadocivil}" class="form-control" >
+                                                <h:selectOneMenu value="#{csbffDadosPessoaisBean.recPessoa.recEstadocivil}" class="form-control" >
                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                    <f:selectItems value="#{csbffAdmissaoBean.pessoas}" var="estadoCivil" itemLabel="#{estadoCivil.recEstadocivil}" itemValue="#{estadoCivil.recEstadocivil}"/>
+                                                    <f:selectItems value="#{csbffDadosPessoaisBean.pessoas}" var="estadoCivil" itemLabel="#{estadoCivil.recEstadocivil}" itemValue="#{estadoCivil.recEstadocivil}"/>
                                                 </h:selectOneMenu>
                                             </div>     
                                         </div> 
@@ -84,7 +84,7 @@
                                                 <label class="control-label ">
                                                     Sexo
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" required="true" requiredMessage="Campo Nome deve ser preenchido." value="#{csbffAdmissaoBean.recPessoa.recSexo}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recSexo}" />
 
                                             </div>     
                                         </div>
@@ -94,7 +94,7 @@
                                                     Data de Nascimento
                                                     <!--<span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtnascimento}">
+                                                <h:inputText class="form-control has-feedback-left date-picker" value="#{csbffDadosPessoaisBean.recPessoa.recDtnascimento}">
                                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                                 </h:inputText>
                                             </div>
@@ -105,7 +105,7 @@
                                                     RG
 <!--                                                    <span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText label="number"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recRg}" />
+                                                <h:inputText label="number"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recRg}" />
                                             </div>
                                         </div> 
                                         <div class="col-md-6 col-sm-6 ">
@@ -113,7 +113,7 @@
                                                 <label class="control-label " >                                        
                                                     Órgão Emissor
                                                 </label>
-                                                <h:inputText label="number"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recOrgaoemissor}" />
+                                                <h:inputText label="number"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recOrgaoemissor}" />
                                             </div>
                                         </div>    
                                         <div class="col-md-6 col-sm-6 ">
@@ -121,7 +121,7 @@
                                                 <label class="control-label" >                                        
                                                     Data de Emissão
                                                 </label>
-                                                <h:inputText class="form-control has-feedback-left date-picker" value="#{csbffAdmissaoBean.recPessoa.recDtemissao}">
+                                                <h:inputText class="form-control has-feedback-left date-picker" value="#{csbffDadosPessoaisBean.recPessoa.recDtemissao}">
                                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                                 </h:inputText>
                                             </div>
@@ -132,7 +132,7 @@
                                                     Nome do Pai
                                                     <!--<span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNomepai}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recNomepai}" />
                                             </div>
                                         </div> 
 
@@ -142,7 +142,7 @@
                                                     Nome da Mãe
                                                     <!--<span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNomemae}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recNomemae}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">                                
@@ -150,7 +150,7 @@
                                                 <label class="control-label " for="select">
                                                     Escolaridade
                                                 </label>
-                                                <h:selectOneMenu value="#{csbffAdmissaoBean.recPessoa.recEscolaridade}" class="form-control">
+                                                <h:selectOneMenu value="#{csbffDadosPessoaisBean.recPessoa.recEscolaridade}" class="form-control">
                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                     <f:selectItem itemValue="1" itemLabel="1ºGrau Completo (Fundamental)" />
                                                     <f:selectItem itemValue="2" itemLabel="2ºGrau Completo (Ensino Médio)" />
@@ -167,7 +167,7 @@
                                                 <label class="control-label " for="number">                                        
                                                     Telefone
                                                 </label>
-                                                <h:inputText  id="telefone" maxlength="15" onkeypress="this.value = MascaraTelefone(this.value)" title="telefone"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recTelefone}" />
+                                                <h:inputText  id="telefone" maxlength="15" onkeypress="this.value = MascaraTelefone(this.value)" title="telefone"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recTelefone}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 ">
@@ -175,7 +175,7 @@
                                                 <label class="control-label " for="number">                                        
                                                     Celular
                                                 </label>
-                                                <h:inputText id="celular" maxlength="15" onkeypress="this.value = MascaraTelefone(this.value)" title="celular"   class="form-control" value="#{csbffAdmissaoBean.recPessoa.recCelular}" />
+                                                <h:inputText id="celular" maxlength="15" onkeypress="this.value = MascaraTelefone(this.value)" title="celular"   class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recCelular}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 ">
@@ -184,7 +184,7 @@
                                                     Certificado de Reservista
                                                     <!--<span class="required">*</span>-->
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recReservista}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recReservista}" />
                                             </div>
                                         </div>
 
@@ -193,7 +193,7 @@
                                                 <label class="control-label " for="select">
                                                     Nacionalidade
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNacionalidade}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recNacionalidade}" />
                                             </div>     
                                         </div>  
                                         <div class="col-md-6 col-sm-6 ">
@@ -201,7 +201,7 @@
                                                 <label class="control-label " for="number">                                        
                                                     Endereço
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recEndereco}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recEndereco}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 ">
@@ -209,7 +209,7 @@
                                                 <label class="control-label " for="number">                                        
                                                     Número
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recNumero}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recNumero}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -217,7 +217,7 @@
                                                 <label class="control-label " for="number">                                        
                                                     Bairro
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recBairro}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recBairro}" />
                                             </div>
                                         </div> 
                                         <div class="col-md-6 col-sm-6">
@@ -225,7 +225,7 @@
                                                 <label class="control-label ">                                        
                                                     E-mail
                                                 </label>
-                                                <h:inputText label="name"  class="form-control" value="#{csbffAdmissaoBean.recPessoa.recEmail}" />
+                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recEmail}" />
                                             </div>
                                         </div>
                                         <hr />
@@ -234,8 +234,8 @@
                                 </div>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <br></br><h:commandLink  immediate="true" class="btn btn-success" value="Salvar" action="#{csbffAdmissaoBean.saveAdmissao()}"/>
-                                        <h:commandLink immediate="true" class="btn btn-danger" value="Cancelar" action="#{csbffAdmissaoBean.cancel()}"/>
+                                        <br></br><h:commandLink  class="btn btn-success" value="Salvar" action="#{csbffDadosPessoaisBean.saveDadosPessoais()}"/>
+                                        <h:commandLink immediate="true" class="btn btn-danger" value="Cancelar" action="#{csbffDadosPessoaisBean.cancel()}"/>
                                         <!--<h:link class="btn btn-info" outcome="dadosprofissionais.xhtml" type="button" value="Próximo"></h:link>-->
 
                                     </div>

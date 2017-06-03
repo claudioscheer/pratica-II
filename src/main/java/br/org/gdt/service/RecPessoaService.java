@@ -55,20 +55,18 @@ public class RecPessoaService {
         return pessoaDao.findAll();
     }
 
+    public List<RecPessoa> findAllFuncionarios() {
+        return pessoaDao.findAllFuncionarios();
+    }
+
 //    public RecPessoa findByCpf(String cpf) {
 //        return pessoaDao.findByCpf(cpf);
 //    }
-
-   
-
     public RecPessoa findByRecCpf(String recCpf) {
         return pessoaDao.findByRecCpf(recCpf);
-        
-       
 
 //    public List<RecPessoa> findByCpf(int cpf) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
 }

@@ -8,17 +8,44 @@ import java.util.List;
 
 public class DadosCalculadosDoFuncionario {
 
-    private boolean recalcular;
+    private boolean recalculando;
     private FpPeriodo periodo;
     private RecPessoa pessoa;
     private List<FpEventoPeriodo> eventos;
+    private double valorBaseINSS;
+    private double valorBaseFGTS;
+    private double valorBaseIRRF;
 
-    public boolean isRecalcular() {
-        return recalcular;
+    public boolean isRecalculando() {
+        return recalculando;
     }
 
-    public void setRecalcular(boolean recalcular) {
-        this.recalcular = recalcular;
+    public void setRecalculando(boolean recalculando) {
+        this.recalculando = recalculando;
+    }
+
+    public double getValorBaseINSS() {
+        return valorBaseINSS;
+    }
+
+    public void setValorBaseINSS(double valorBaseINSS) {
+        this.valorBaseINSS = valorBaseINSS;
+    }
+
+    public double getValorBaseFGTS() {
+        return valorBaseFGTS;
+    }
+
+    public void setValorBaseFGTS(double valorBaseFGTS) {
+        this.valorBaseFGTS = valorBaseFGTS;
+    }
+
+    public double getValorBaseIRRF() {
+        return valorBaseIRRF;
+    }
+
+    public void setValorBaseIRRF(double valorBaseIRRF) {
+        this.valorBaseIRRF = valorBaseIRRF;
     }
 
     public FpPeriodo getPeriodo() {

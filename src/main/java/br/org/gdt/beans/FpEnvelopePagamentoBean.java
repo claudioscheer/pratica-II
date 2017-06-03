@@ -12,35 +12,23 @@ import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
-import java.io.File;
-import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import org.springframework.stereotype.Service;
 
 @ManagedBean
-@SessionScoped
-public class FpEnvelopePagamento implements java.io.Serializable {
+@ViewScoped
+public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     private boolean mostrarTodasFolhasPeriodo = false;
     private FpPeriodo fpPeriodo = new FpPeriodo();
     private RecPessoa recPessoa = new RecPessoa();
     private FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
     private FpTipoFolha fpTipoFolha;
+    private List<FpFolhaPeriodo> todasFolhasPeriodo = new ArrayList<>();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -57,15 +45,26 @@ public class FpEnvelopePagamento implements java.io.Serializable {
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
-    public FpEnvelopePagamento() {
+    public void validarFolhaPeriodo(FpFolhaPeriodo fpFolhaPeriodo) {
+        mostrarTodasFolhasPeriodo = false;
 
+        recPessoa = fpFolhaPeriodo.getForPessoa();
+        this.fpFolhaPeriodo = fpFolhaPeriodo;
+        this.fpFolhaPeriodo.removerEventosNaoAlteraFolha();
     }
 
     public void mostrarTodasFolhasPeriodo() {
+        if (mostrarTodasFolhasPeriodo) {
+            mostrarTodasFolhasPeriodo = false;
+            return;
+        }
+
         if (fpPeriodo.getPerId() <= 0) {
             Helper.mostrarNotificacao("Período", "Selecione um período.", "info");
             return;
         }
+
+        todasFolhasPeriodo = fpFolhaPeriodoService.findAllPeriodo(fpPeriodo);
 
         mostrarTodasFolhasPeriodo = true;
     }
@@ -103,22 +102,28 @@ public class FpEnvelopePagamento implements java.io.Serializable {
             folhaPeriodo = new FpFolhaPeriodo();
         }
         fpFolhaPeriodo = folhaPeriodo;
+        fpFolhaPeriodo.removerEventosNaoAlteraFolha();
     }
 
     public void recalcularFolhaPeriodo() {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
-            dadosCalculadosDoFuncionario.setRecalcular(true);
-            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
+            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodoService.findById(fpPeriodo.getPerId()));
+            dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
                 Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
                 return;
             }
             dadosCalculadosDoFuncionario.setPessoa(recPessoa);
-            dadosCalculadosDoFuncionario.setEventos(fpFolhaPeriodo.getForEventos());
+
+            List<FpEventoPeriodo> eventosVerificados = verificarEventosAjustadosManualmente();
+            eventosVerificados.forEach(x -> x.setJaCalculado(false));
+
+            dadosCalculadosDoFuncionario.setEventos(eventosVerificados);
 
             fpFolhaPeriodo = calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
+            fpFolhaPeriodo.removerEventosNaoAlteraFolha();
 
             Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "info");
         } catch (Exception e) {
@@ -126,12 +131,47 @@ public class FpEnvelopePagamento implements java.io.Serializable {
         }
     }
 
-    public void gerarFolhaPagamento() {
-        try {
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("pessoa", "Claudio Roberto Scheer Junior");
+    private List<FpEventoPeriodo> verificarEventosAjustadosManualmente() {
 
-            Helper.gerarBaixarRelatorioPDF("folha-pagamento", "/folhapagamento/relatorio/folha.jasper", parametros, fpFolhaPeriodo.getForEventos());
+        FpFolhaPeriodo folhaPeriodo = fpFolhaPeriodoService.findByPessoaEPeriodo(fpPeriodo, recPessoa);
+
+        folhaPeriodo.getForEventos().forEach((eventoOriginal) -> {
+            Optional<FpEventoPeriodo> optionalEventoAlterado = fpFolhaPeriodo.getForEventos().stream()
+                    .filter(x -> x.getEvpEvento().getEveId() == eventoOriginal.getEvpEvento().getEveId())
+                    .findFirst();
+
+            if (!optionalEventoAlterado.isPresent()) {
+                return;
+            }
+
+            FpEventoPeriodo eventoAlterado = optionalEventoAlterado.get();
+
+            boolean valoresAlterados = eventoOriginal.getEvpValorReferencia() != eventoAlterado.getEvpValorReferencia()
+                    || eventoOriginal.getEvpValor() != eventoAlterado.getEvpValor();
+
+            eventoOriginal.setEventoAlteradoManualmente(valoresAlterados);
+            if (valoresAlterados) {
+                eventoOriginal.setEvpValorReferencia(eventoAlterado.getEvpValorReferencia());
+                eventoOriginal.setEvpValor(eventoAlterado.getEvpValor());
+            }
+        });
+
+        return folhaPeriodo.getForEventos();
+    }
+
+    public void reimprimirFolhaPagamento(FpFolhaPeriodo fpFolhaPeriodo) {
+        imprimirFolhaPagamento(fpFolhaPeriodo);
+    }
+
+    public void gerarFolhaPagamento() {
+        imprimirFolhaPagamento(fpFolhaPeriodo);
+    }
+
+    private void imprimirFolhaPagamento(FpFolhaPeriodo fpFolhaPeriodo) {
+        try {
+            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
+            folhasPeriodo.add(fpFolhaPeriodo);
+            calcularFolha.gerarFolha(folhasPeriodo, fpFolhaPeriodo.getForPessoa().getRecNomecompleto());
         } catch (Exception e) {
             Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
         }
@@ -183,6 +223,14 @@ public class FpEnvelopePagamento implements java.io.Serializable {
 
     public void setFpTipoFolha(FpTipoFolha fpTipoFolha) {
         this.fpTipoFolha = fpTipoFolha;
+    }
+
+    public List<FpFolhaPeriodo> getTodasFolhasPeriodo() {
+        return todasFolhasPeriodo;
+    }
+
+    public void setTodasFolhasPeriodo(List<FpFolhaPeriodo> todasFolhasPeriodo) {
+        this.todasFolhasPeriodo = todasFolhasPeriodo;
     }
 
     public FpPeriodoService getFpPeriodoService() {

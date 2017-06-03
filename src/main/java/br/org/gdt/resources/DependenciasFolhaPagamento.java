@@ -6,9 +6,7 @@ import br.org.gdt.model.FpEvento;
 import br.org.gdt.model.FpPeriodo;
 import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpPeriodoService;
-import br.org.gdt.service.FpTabelaService;
 import java.util.Calendar;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +76,7 @@ public class DependenciasFolhaPagamento {
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
+        // Ajustado.
         fpEvento.setEveId(FpEnumEventos.INSS.ordinal() + 1);
         fpEvento.setEveIncideFGTS(false);
         fpEvento.setEveIncideINSS(false);
@@ -88,16 +87,19 @@ public class DependenciasFolhaPagamento {
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
+        // Ajustado.
         fpEvento.setEveId(FpEnumEventos.FGTS.ordinal() + 1);
         fpEvento.setEveIncideFGTS(false);
         fpEvento.setEveIncideINSS(false);
         fpEvento.setEveIncideIRRF(false);
         fpEvento.setEvePermiteExcluir(false);
+        fpEvento.setEveNaoAlteraFolha(true);
         fpEvento.setEveNome("FGTS");
         fpEvento.setEveTipoEvento(FpTipoEvento.Desconto);
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
+        // Ajustado.
         fpEvento.setEveId(FpEnumEventos.IRRF.ordinal() + 1);
         fpEvento.setEveIncideFGTS(false);
         fpEvento.setEveIncideINSS(false);
@@ -130,26 +132,6 @@ public class DependenciasFolhaPagamento {
         fpEventoService.update(fpEvento);
         fpEvento = new FpEvento();
 
-        // Ajustado.
-//        fpEvento.setEveId(FpEnumEventos.Insalubridade20.ordinal() + 1);
-//        fpEvento.setEveIncideFGTS(true);
-//        fpEvento.setEveIncideINSS(true);
-//        fpEvento.setEveIncideIRRF(true);
-//        fpEvento.setEvePermiteExcluir(false);
-//        fpEvento.setEveNome("Insalubridade 20");
-//        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-//        fpEventoService.update(fpEvento);
-//        fpEvento = new FpEvento();
-        // Ajustado.
-//        fpEvento.setEveId(FpEnumEventos.Insalubridade40.ordinal() + 1);
-//        fpEvento.setEveIncideFGTS(true);
-//        fpEvento.setEveIncideINSS(true);
-//        fpEvento.setEveIncideIRRF(true);
-//        fpEvento.setEvePermiteExcluir(false);
-//        fpEvento.setEveNome("Insalubridade 40");
-//        fpEvento.setEveTipoEvento(FpTipoEvento.Provento);
-//        fpEventoService.update(fpEvento);
-//        fpEvento = new FpEvento();
         // Ajustado.
         fpEvento.setEveId(FpEnumEventos.Periculosidade.ordinal() + 1);
         fpEvento.setEveIncideFGTS(true);

@@ -38,6 +38,12 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
 
         }
     }
+    
+    public List<RecPessoa> findAllFuncionarios() {
+        return entityManager.createQuery(
+                "from RecPessoa as t")//t.recFuncionario = null
+                .getResultList();
+    }
 
 }
 //    public RecPessoa findByCpf(String cpf) {
