@@ -29,7 +29,9 @@
 
                                         <div class="panel-body" style="/* align-items: center; */">
 
-                                            <h:dataTable class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
+                                            <h:dataTable class="table table-striped" value="#{gchTreinamentoPessoaBean.pessoasVinculadas}" var="pessoa">
+
+
 
                                                 <h:column>
                                                     <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa]}" >
@@ -48,7 +50,7 @@
                                                     <h:outputText value="#{pessoa.recNomecompleto}"/>                
                                                 </h:column>
 
-
+                                                <h:inputHidden value="#{gchTreinamentoPessoaBean.verificaCheck(pessoa.recIdpessoa)}" />
 
 
                                             </h:dataTable>

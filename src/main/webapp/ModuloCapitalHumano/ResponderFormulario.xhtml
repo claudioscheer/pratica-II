@@ -33,6 +33,7 @@
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <h:form id="formResposta">
+                                             <h:messages class="error" style="color: #d9534f" />
                                             <div class="container-fluid">
                                                 <div class="row">
 
@@ -98,7 +99,7 @@
                                                     <div class="form-group">
 
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                                            <h:commandButton class="btn btn-primary" value="Finalizar" action="#{gchFormularioAlternativasBean.save()}" />
+                                                            <h:commandButton class="btn btn-primary" disabled="#{gchFormularioAlternativasBean.idPessoa == 0 }" value="Finalizar" action="#{gchFormularioAlternativasBean.save()}" />
                                                         </div>
 
                                                     </div>
