@@ -60,7 +60,7 @@
                                         <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNome}" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
                                     <div class="form-group ">
@@ -70,13 +70,15 @@
                                         <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group ">
                                         <label class="control-label " for="date">
                                             Data de nascimento
                                         </label>
-                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{dependenteBean.csbffdependente.dependenteDataNascimento}" />
+                                        <h:inputText class="form-control has-feedback-left date-picker" value="#{dependenteBean.csbffdependente.dependenteDataNascimento}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:inputText>
                                     </div>
 
                                 </div>
@@ -90,29 +92,29 @@
                                             Tipo de dependente
                                         </label>
                                         <h:selectOneMenu id="combotipoDependente" value="#{dependenteBean.csbffdependente.dependenteTipo}" class="form-control" >
-                                                                    <f:selectItem itemLabel="Filho" itemValue="#{1}" />
-                                                                    <f:selectItem itemLabel="Cônjuge" itemValue="#{2}" />
-                                                                    <f:selectItem itemLabel="Enteado(a)" itemValue="#{3}" />
-                                                                    <f:selectItem itemLabel="outro" itemValue="#{4}" />
-                                                                    
-                                                                </h:selectOneMenu>
-<!--                                        <select class="select form-control" id="select" name="select">
-                                            <option value="First Choice">
-                                                Selecione
-                                            </option>
-                                            <option value="Second Choice">
-                                                Cônjuge
-                                            </option>
-                                            <option value="Third Choice">
-                                                Filho(a)
-                                            </option>
-                                            <option value="Fourth Choice">
-                                                Enteado(a)
-                                            </option>
-                                            <option value="Fifth Choice">
-                                                Outros
-                                            </option>
-                                        </select>-->
+                                            <f:selectItem itemLabel="Filho" itemValue="#{1}" />
+                                            <f:selectItem itemLabel="Cônjuge" itemValue="#{2}" />
+                                            <f:selectItem itemLabel="Enteado(a)" itemValue="#{3}" />
+                                            <f:selectItem itemLabel="outro" itemValue="#{4}" />
+
+                                        </h:selectOneMenu>
+                                        <!--                                        <select class="select form-control" id="select" name="select">
+                                                                                    <option value="First Choice">
+                                                                                        Selecione
+                                                                                    </option>
+                                                                                    <option value="Second Choice">
+                                                                                        Cônjuge
+                                                                                    </option>
+                                                                                    <option value="Third Choice">
+                                                                                        Filho(a)
+                                                                                    </option>
+                                                                                    <option value="Fourth Choice">
+                                                                                        Enteado(a)
+                                                                                    </option>
+                                                                                    <option value="Fifth Choice">
+                                                                                        Outros
+                                                                                    </option>
+                                                                                </select>-->
                                     </div>     
 
                                 </div>
@@ -139,36 +141,36 @@
                                     </div>
                                 </div>
 
-<!--                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!--                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                
+                                                                    <div class="form-group ">
+                                                                        <label class="control-label " for="select">
+                                                                            Dependente do Imposto de Renda?
+                                                                        </label>
+                                                                        <select class="select form-control" id="select" name="select">
+                                                                            <option value="First Choice">
+                                                                                Selecione
+                                                                            </option>
+                                                                            <option value="Second Choice">
+                                                                                Sim
+                                                                            </option>
+                                                                            <option value="Third Choice">
+                                                                                Não
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>     
+                                                                </div>-->
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                    <label class="control-label requiredField" for="txbCurCodigo">
+                                        Dependente de Imposto de Renda 
+                                    </label>                                                           
 
-                                    <div class="form-group ">
-                                        <label class="control-label " for="select">
-                                            Dependente do Imposto de Renda?
-                                        </label>
-                                        <select class="select form-control" id="select" name="select">
-                                            <option value="First Choice">
-                                                Selecione
-                                            </option>
-                                            <option value="Second Choice">
-                                                Sim
-                                            </option>
-                                            <option value="Third Choice">
-                                                Não
-                                            </option>
-                                        </select>
-                                    </div>     
-                                </div>-->
-                                                           <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                                                                <label class="control-label requiredField" for="txbCurCodigo">
-                                                                    Dependente de Imposto de Renda 
-                                                                </label>                                                           
+                                    <h:selectOneMenu id="comboImpostoRenda" value="#{dependenteBean.csbffdependente.dependenteImpostoDeRenda}" class="form-control" >
+                                        <f:selectItem itemLabel="Sim" itemValue="#{true}" />
+                                        <f:selectItem itemLabel="Não" itemValue="#{false}" />
 
-                                                               <h:selectOneMenu id="comboImpostoRenda" value="#{dependenteBean.csbffdependente.dependenteImpostoDeRenda}" class="form-control" >
-                                                                    <f:selectItem itemLabel="Sim" itemValue="#{true}" />
-                                                                    <f:selectItem itemLabel="Não" itemValue="#{false}" />
-                                                                    
-                                                                </h:selectOneMenu>
-                                                            </div>
+                                    </h:selectOneMenu>
+                                </div>
 
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
