@@ -44,34 +44,17 @@ public class CsbffPessoaBeneficio implements Serializable {
     @ManyToOne(optional = false)
     private RecPessoa recIdpessoa;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
-//    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
-//    @Basic(optional = true)
-//    @Column(name = "pessoa_beneficioNome")
-//    private String pessoaBeneficioNome;
     public CsbffPessoaBeneficio() {
     }
 
-//    public CsbffPessoaBeneficio(long pessoaBeneficioCodigo, RecPessoa recIdpessoa, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, String pessoaBeneficioNome) {
-//        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
-//        this.recIdpessoa = recIdpessoa;
-//        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-//        this.pessoaBeneficioNome = pessoaBeneficioNome;
-//    }
+
     public CsbffPessoaBeneficio(long pessoaBeneficioCodigo, CsbffBeneficios beneficioCodigo, RecPessoa recIdpessoa) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
         this.beneficioCodigo = beneficioCodigo;
         this.recIdpessoa = recIdpessoa;
     }
 
-//
-//    public void addBePessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
-//        if (csbffPessoaBeneficio != null) {
-//            csbffPessoaBeneficio.setCsbffPessoaBeneficioList((List<CsbffPessoaBeneficio>) this);
-//            this.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
-//
-//        }
-//    }
+
     public long getPessoaBeneficioCodigo() {
         return pessoaBeneficioCodigo;
     }
@@ -96,34 +79,6 @@ public class CsbffPessoaBeneficio implements Serializable {
         this.recIdpessoa = recIdpessoa;
     }
 
-//    public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
-//        return csbffPessoaBeneficioList;
-//    }
-//
-//    public void setCsbffPessoaBeneficioList(List<CsbffPessoaBeneficio> csbffPessoaBeneficioList) {
-//        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-//    }
-//    public CsbffBeneficios getBeneficioNome() {
-//        return beneficioNome;
-//    }
-//
-//    public void setBeneficioNome(CsbffBeneficios beneficioNome) {
-//        this.beneficioNome = beneficioNome;
-//    }
-//
-//    public CsbffBeneficios getPessoaBeneficioNome() {
-//        return pessoaBeneficioNome;
-//    }
-//    public void setPessoaBeneficioNome(CsbffBeneficios pessoaBeneficioNome) {
-//        this.pessoaBeneficioNome = pessoaBeneficioNome;
-//    }
-//    public String getPessoaBeneficioNome() {
-//        return pessoaBeneficioNome;
-//    }
-//
-//    public void setPessoaBeneficioNome(String pessoaBeneficioNome) {
-//        this.pessoaBeneficioNome = pessoaBeneficioNome;
-//    }
 
     @Override
     public int hashCode() {

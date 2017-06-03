@@ -48,8 +48,8 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     private CsbffDependentes csbffDependentes;
     private List<CsbffBeneficios> csbffBeneficiosList;
     private CsbffBeneficios csbffBeneficios = new CsbffBeneficios();
-    private CsbffEscalaHoras csbffEscalaHoras = new CsbffEscalaHoras();
-    private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
+    private CsbffEscalaHoras csbffEscalaHoras;
+//    private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
     @ManagedProperty("#{csbffEscalaHorasService}")
     private CsbffEscalaHorasService csbffEscalaHorasService;
     @ManagedProperty("#{csbffCargosService}")
@@ -72,6 +72,10 @@ public class CsbffDadosProfissionaisBean implements Serializable {
 
     public CsbffDadosProfissionaisBean() {
 
+    }
+
+    public CsbffDadosProfissionaisBean(CsbffEscalaHoras diaDaSemana) {
+        this.diaDaSemana = diaDaSemana;
     }
 
     public List<CsbffCargos> getCargos() {
@@ -108,6 +112,10 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     public String buscarPessoa() {
         recPessoa = (RecPessoa) recPessoaService.findByRecCpf(recCpf);
         return null;
+    }
+
+    public void alimentaCBO() {
+        recPessoa.setCargoCbo(csbffCargos);
     }
 
     public Sexo[] getGeneros() {
@@ -163,8 +171,9 @@ public class CsbffDadosProfissionaisBean implements Serializable {
         recPessoaList = recPessoaService.findAll();
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
-        String recContrato = ("Sim");
-        return null;
+//        String recContrato = ("Sim");
+        return "listaadmissao";
+
     }
 
     public void removerBeneficioPessoa(CsbffPessoaBeneficio bp) {
@@ -384,14 +393,6 @@ public class CsbffDadosProfissionaisBean implements Serializable {
         this.csbffEscalaHoras = csbffEscalaHoras;
     }
 
-    public List<CsbffEscalaHoras> getTodosCsbffEscalaHoras() {
-        return todosCsbffEscalaHoras;
-    }
-
-    public void setTodosCsbffEscalaHoras(List<CsbffEscalaHoras> todosCsbffEscalaHoras) {
-        this.todosCsbffEscalaHoras = todosCsbffEscalaHoras;
-    }
-
     public CsbffEscalaHorasService getCsbffEscalaHorasService() {
         return csbffEscalaHorasService;
     }
@@ -423,7 +424,5 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
         this.csbffEscalaHorasList = csbffEscalaHorasList;
     }
-
-  
 
 }
