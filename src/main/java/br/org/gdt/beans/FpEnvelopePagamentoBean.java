@@ -73,6 +73,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     }
 
     public void selecionarPeriodo() {
+        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
     }
 
     public void selecionarPessoa() {
@@ -108,7 +109,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     public void recalcularFolhaPeriodo() {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
-            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodoService.findById(fpPeriodo.getPerId()));
+            dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
             dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
@@ -161,6 +162,14 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     public void reimprimirFolhaPagamento(FpFolhaPeriodo fpFolhaPeriodo) {
         imprimirFolhaPagamento(fpFolhaPeriodo);
+    }
+
+    public void gerarTodasFolhasPagamento() {
+        try {
+            calcularFolha.gerarFolha(todasFolhasPeriodo, fpPeriodo.getPerMes() + " - " + fpPeriodo.getPerAno());
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
+        }
     }
 
     public void gerarFolhaPagamento() {
