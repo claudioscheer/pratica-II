@@ -5,6 +5,7 @@ import br.org.gdt.model.RecVaga;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecVagaService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +32,19 @@ public class RecVagaBean {
     private List<RecHabilidade> habilidades;
 
     public RecVagaBean() {
+    }
+
+    public List<RecHabilidade> completarHabilidade(String query) {
+        List<RecHabilidade> allThemes = recHabilidadeService.ListarTodas();
+        List<RecHabilidade> filteredThemes = new ArrayList<RecHabilidade>();
+
+        for (int i = 0; i < allThemes.size(); i++) {
+            RecHabilidade skin = allThemes.get(i);
+            if (skin.getRecDescricao().toLowerCase().startsWith(query)) {
+                filteredThemes.add(skin);
+            }
+        }
+        return filteredThemes;
     }
 
     public void Salvar() {
@@ -175,7 +189,6 @@ public class RecVagaBean {
         this.stringBusca = stringBusca;
     }
 
-    
     public boolean ValidarCampos() {
         if (vaga.getRecDescricao().isEmpty()) {
             Helper.mostrarNotificacao("Descrição", "Preencha a Descrição da Vaga", "error");
