@@ -49,7 +49,8 @@ public class GchTreinamentoPessoaService {
         return gchTreinamentoPessoasDAO.verificaPessoa(idTreinamento, idPessoa);
     }
 
-    public List<GchTreinamentospessoas> verificaPessoasVinculadoTreinamento(long idTreinamento) {
-        return gchTreinamentoPessoasDAO.verificaPessoasVinculadoTreinamento(idTreinamento);
+    public List<GchTreinamentospessoas> verificaPessoasVinculadoTreinamento(long idTreinamento, long idPessoa) {
+        System.out.println("verifica: " + idTreinamento + " - " + idPessoa);
+        return gchTreinamentoPessoasDAO.verificaPessoasVinculadoTreinamento(idTreinamento, idPessoa);
     }
 }

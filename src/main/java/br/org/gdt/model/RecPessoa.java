@@ -72,11 +72,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_dtemissao")
     @Temporal(TemporalType.DATE)
     private Date recDtemissao;
-
-    @Override
-    public String toString() {
-        return "RecPessoa{" + "recIdpessoa=" + recIdpessoa + ", recCpf=" + recCpf + '}';
-    }
     @Column(name = "rec_nomepai")
     private String recNomepai;
     @Column(name = "rec_nomemae")
@@ -195,10 +190,9 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String admissaoDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa", fetch = FetchType.EAGER)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
-
     @OneToOne
     private CsbffCargos cargos;
-    private DiasATrabalhar diasATrabalhar;
+//    private DiasATrabalhar diasATrabalhar;
     @OneToOne
     private CsbffCargos cargoValorSalario;
     @Column(name = "rec_contrato")
@@ -272,6 +266,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.admissaoDescricao = admissaoDescricao;
         this.csbffEscalaHorasList = csbffEscalaHorasList;
         this.cargos = cargos;
+    }
+
+    @Override
+    public String toString() {
+        return "RecPessoa{" + "recIdpessoa=" + recIdpessoa + ", recCpf=" + recCpf + '}';
     }
 
     public List<GchFormularioPessoa> getGchFormularioPessoas() {
@@ -651,12 +650,18 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.gchTreinamentospessoasList = gchTreinamentospessoasList;
     }
 
+    @XmlTransient
+    @JsonIgnore
     public List<CsbffEscalaHoras> getCsbffEscalaHorasList() {
         if (this.csbffEscalaHorasList == null) {
             this.csbffEscalaHorasList = new ArrayList<>();
 //            this.csbffEscalaHorasList.add(new CsbffEscalaHoras());
         }
         return csbffEscalaHorasList;
+    }
+
+    public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
+        this.csbffEscalaHorasList = csbffEscalaHorasList;
     }
 
     @XmlTransient
@@ -803,10 +808,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.admissaoDescricao = admissaoDescricao;
     }
 
-    public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
-        this.csbffEscalaHorasList = csbffEscalaHorasList;
-    }
-
     public List<RecPessoa> getRecPessoaList() {
         if (this.recPessoaList == null) {
             this.recPessoaList = new ArrayList<>();
@@ -826,14 +827,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         return cargos;
     }
 
-    public DiasATrabalhar getDiasATrabalhar() {
-        return diasATrabalhar;
-    }
-
-    public void setDiasATrabalhar(DiasATrabalhar diasATrabalhar) {
-        this.diasATrabalhar = diasATrabalhar;
-    }
-
     public CsbffCargos getCargoValorSalario() {
         return cargoValorSalario;
     }
@@ -849,4 +842,5 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public void setRecContrato(String recContrato) {
         this.recContrato = recContrato;
     }
+
 }

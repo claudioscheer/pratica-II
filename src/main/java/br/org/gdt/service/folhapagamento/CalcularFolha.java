@@ -114,7 +114,14 @@ public class CalcularFolha {
     }
 
     public FpFolhaPeriodo calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException, Exception {
-        fpFolhaPeriodoService.deleteByPessoaEPeriodo(dadosCalculadosDoFuncionario.getPeriodo(), dadosCalculadosDoFuncionario.getPessoa());
+        if (dadosCalculadosDoFuncionario.isDeletarJaCalculada()) {
+            fpFolhaPeriodoService.deleteByPessoaEPeriodo(dadosCalculadosDoFuncionario.getPeriodo(), dadosCalculadosDoFuncionario.getPessoa());
+        } else {
+            FpFolhaPeriodo fpFolhaPeriodoJaCalculada = fpFolhaPeriodoService.findByPessoaEPeriodo(dadosCalculadosDoFuncionario.getPeriodo(), dadosCalculadosDoFuncionario.getPessoa());
+            if (fpFolhaPeriodoJaCalculada != null) {
+                return fpFolhaPeriodoJaCalculada;
+            }
+        }
 
         FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
         fpFolhaPeriodo.setForGeradaEm(Calendar.getInstance().getTime());
@@ -144,23 +151,23 @@ public class CalcularFolha {
                     }
                 });
         fpFolhaPeriodo.setForStatusFolhaPeriodo(
-                dadosCalculadosDoFuncionario.isRecalculando()
-                        ? FpStatusFolhaPeriodo.Validada
-                        : FpStatusFolhaPeriodo.Calculada);
+                dadosCalculadosDoFuncionario.isDeletarJaCalculada()
+                ? FpStatusFolhaPeriodo.Validada
+                : FpStatusFolhaPeriodo.Calculada);
 
         fpFolhaPeriodo.setForEventos(
                 fpFolhaPeriodo.getForEventos().stream()
-                .filter(x -> x.getEvpValor() != 0d)
-                .map((x) -> {
-                    try {
-                        x.setEvpValor(decimalFormat.parse(decimalFormat.format(x.getEvpValor())).doubleValue());
-                        x.setEvpValorReferencia(decimalFormat.parse(decimalFormat.format(x.getEvpValorReferencia())).doubleValue());
-                    } catch (NumberFormatException | ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    return x;
-                })
-                .collect(Collectors.toList())
+                        .filter(x -> x.getEvpValor() != 0d)
+                        .map((x) -> {
+                            try {
+                                x.setEvpValor(decimalFormat.parse(decimalFormat.format(x.getEvpValor())).doubleValue());
+                                x.setEvpValorReferencia(decimalFormat.parse(decimalFormat.format(x.getEvpValorReferencia())).doubleValue());
+                            } catch (NumberFormatException | ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                            return x;
+                        })
+                        .collect(Collectors.toList())
         );
 
         fpFolhaPeriodo.setForValorBaseFGTS(dadosCalculadosDoFuncionario.getValorBaseFGTS());
@@ -169,24 +176,24 @@ public class CalcularFolha {
 
         fpFolhaPeriodo.setForValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, fpFolhaPeriodo.getForEventos()));
 
-        fpFolhaPeriodo.setForTotalDescontos(    
+        fpFolhaPeriodo.setForTotalDescontos(
                 fpFolhaPeriodo.getForEventos().stream()
-                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())
-                .mapToDouble(x -> x.getEvpValor())
-                .sum());
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())
+                        .mapToDouble(x -> x.getEvpValor())
+                        .sum());
 
         fpFolhaPeriodo.setForTotalVencimentos(
                 fpFolhaPeriodo.getForEventos().stream()
-                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento && !x.getEvpEvento().isEveNaoAlteraFolha())
-                .mapToDouble(x -> x.getEvpValor())
-                .sum());
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento && !x.getEvpEvento().isEveNaoAlteraFolha())
+                        .mapToDouble(x -> x.getEvpValor())
+                        .sum());
 
         // E se o valor ficar negativo?
         fpFolhaPeriodo.setForTotalLiquido(fpFolhaPeriodo.getForTotalVencimentos() - fpFolhaPeriodo.getForTotalDescontos());
 
         fpFolhaPeriodoService.update(fpFolhaPeriodo);
 
-        return fpFolhaPeriodo;
+        return fpFolhaPeriodoService.findByPessoaEPeriodo(dadosCalculadosDoFuncionario.getPeriodo(), dadosCalculadosDoFuncionario.getPessoa());
     }
 
     public void gerarFolha(List<FpFolhaPeriodo> pessoasParaGerarFolha, String nomeArquivo) throws RuntimeException, Exception {
@@ -227,25 +234,29 @@ public class CalcularFolha {
 
                 eventosPeriodoRelatorio.addAll(
                         fpFolhaPeriodo.getForEventos().stream()
-                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
-                        .map(x -> new FpEventoPeriodoRelatorio(
+                                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
+                                .map(x -> new FpEventoPeriodoRelatorio(
                                 x.getEvpEvento().getEveId(),
                                 x.getEvpEvento().getEveNome(),
                                 decimalFormat.format(x.getEvpValorReferencia()),
                                 decimalFormat.format(x.getEvpValor()),
                                 ""))
-                        .collect(Collectors.toList()));
+                                .collect(Collectors.toList()));
 
                 eventosPeriodoRelatorio.addAll(
                         fpFolhaPeriodo.getForEventos().stream()
-                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
-                        .map(x -> new FpEventoPeriodoRelatorio(
+                                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
+                                .map(x -> new FpEventoPeriodoRelatorio(
                                 x.getEvpEvento().getEveId(),
                                 x.getEvpEvento().getEveNome(),
                                 decimalFormat.format(x.getEvpValorReferencia()),
                                 "",
                                 decimalFormat.format(x.getEvpValor())))
-                        .collect(Collectors.toList()));
+                                .collect(Collectors.toList()));
+
+                eventosPeriodoRelatorio = eventosPeriodoRelatorio.stream()
+                        .sorted((x, y) -> Long.compare(x.getCodigoEvento(), y.getCodigoEvento()))
+                        .collect(Collectors.toList());
 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JRBeanCollectionDataSource(eventosPeriodoRelatorio));
                 relatorios.add(jasperPrint);
