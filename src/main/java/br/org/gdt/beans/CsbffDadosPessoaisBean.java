@@ -56,7 +56,7 @@ public class CsbffDadosPessoaisBean implements Serializable {
         recPessoaList = recPessoaService.findAll();
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
-         return null;
+         return "dadosprofissionais";
     }
 
     public String cancel() {

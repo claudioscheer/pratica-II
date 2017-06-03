@@ -171,8 +171,8 @@ public class CsbffDadosProfissionaisBean implements Serializable {
         recPessoaList = recPessoaService.findAll();
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
-        String recContrato = ("Sim");
-        return null;
+//        String recContrato = ("Sim");
+        return "listaadmissao";
 
     }
 
