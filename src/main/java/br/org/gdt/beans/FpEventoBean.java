@@ -20,10 +20,6 @@ public class FpEventoBean {
     @ManagedProperty("#{fpEventoService}")
     private FpEventoService fpEventoService;
 
-    public FpEventoBean() {
-
-    }
-
     public void save() {
         if (fpEvento.getEveId() > 0) {
             fpEventoService.update(fpEvento);

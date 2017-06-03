@@ -6,9 +6,11 @@ import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpEventoPeriodoRelatorio;
 import br.org.gdt.model.FpFolhaPeriodo;
-import br.org.gdt.resources.Helper;
+import br.org.gdt.model.FpPeriodo;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpFolhaPeriodoService;
+import br.org.gdt.service.RecPessoaService;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -19,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +45,9 @@ public class CalcularFolha {
 
     @Autowired
     private Eventos eventos;
+
+    @Autowired
+    private RecPessoaService recPessoaService;
 
     @Autowired
     private FpFolhaPeriodoService fpFolhaPeriodoService;
@@ -94,8 +98,19 @@ public class CalcularFolha {
         return eventosPadroes;
     }
 
-    public void calcularParaTodosFuncionarios() {
+    public void calcularParaTodosFuncionarios(FpPeriodo fpPeriodo) throws RuntimeException {
+        List<RecPessoa> funcionarios = recPessoaService.findAllFuncionarios();
+        funcionarios.forEach((pessoa) -> {
+            try {
+                DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
+                dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
+                dadosCalculadosDoFuncionario.setPessoa(pessoa);
 
+                calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public FpFolhaPeriodo calcularFolhaPagamentoFuncionario(DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws RuntimeException, Exception {
@@ -130,22 +145,22 @@ public class CalcularFolha {
                 });
         fpFolhaPeriodo.setForStatusFolhaPeriodo(
                 dadosCalculadosDoFuncionario.isRecalculando()
-                ? FpStatusFolhaPeriodo.Validada
-                : FpStatusFolhaPeriodo.Calculada);
+                        ? FpStatusFolhaPeriodo.Validada
+                        : FpStatusFolhaPeriodo.Calculada);
 
         fpFolhaPeriodo.setForEventos(
                 fpFolhaPeriodo.getForEventos().stream()
-                        .filter(x -> x.getEvpValor() != 0d)
-                        .map((x) -> {
-                            try {
-                                x.setEvpValor(decimalFormat.parse(decimalFormat.format(x.getEvpValor())).doubleValue());
-                                x.setEvpValorReferencia(decimalFormat.parse(decimalFormat.format(x.getEvpValorReferencia())).doubleValue());
-                            } catch (NumberFormatException | ParseException e) {
-                                throw new RuntimeException(e);
-                            }
-                            return x;
-                        })
-                        .collect(Collectors.toList())
+                .filter(x -> x.getEvpValor() != 0d)
+                .map((x) -> {
+                    try {
+                        x.setEvpValor(decimalFormat.parse(decimalFormat.format(x.getEvpValor())).doubleValue());
+                        x.setEvpValorReferencia(decimalFormat.parse(decimalFormat.format(x.getEvpValorReferencia())).doubleValue());
+                    } catch (NumberFormatException | ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return x;
+                })
+                .collect(Collectors.toList())
         );
 
         fpFolhaPeriodo.setForValorBaseFGTS(dadosCalculadosDoFuncionario.getValorBaseFGTS());
@@ -154,17 +169,17 @@ public class CalcularFolha {
 
         fpFolhaPeriodo.setForValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, fpFolhaPeriodo.getForEventos()));
 
-        fpFolhaPeriodo.setForTotalDescontos(
+        fpFolhaPeriodo.setForTotalDescontos(    
                 fpFolhaPeriodo.getForEventos().stream()
-                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())
-                        .mapToDouble(x -> x.getEvpValor())
-                        .sum());
+                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())
+                .mapToDouble(x -> x.getEvpValor())
+                .sum());
 
         fpFolhaPeriodo.setForTotalVencimentos(
                 fpFolhaPeriodo.getForEventos().stream()
-                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento && !x.getEvpEvento().isEveNaoAlteraFolha())
-                        .mapToDouble(x -> x.getEvpValor())
-                        .sum());
+                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento && !x.getEvpEvento().isEveNaoAlteraFolha())
+                .mapToDouble(x -> x.getEvpValor())
+                .sum());
 
         // E se o valor ficar negativo?
         fpFolhaPeriodo.setForTotalLiquido(fpFolhaPeriodo.getForTotalVencimentos() - fpFolhaPeriodo.getForTotalDescontos());
@@ -186,6 +201,7 @@ public class CalcularFolha {
         }
 
         pessoasParaGerarFolha.forEach((fpFolhaPeriodo) -> {
+            fpFolhaPeriodo.removerEventosNaoAlteraFolha();
             try {
                 Map<String, Object> parametros = new HashMap<>();
                 parametros.put("empresa", "Asa Delta RH");
@@ -211,25 +227,25 @@ public class CalcularFolha {
 
                 eventosPeriodoRelatorio.addAll(
                         fpFolhaPeriodo.getForEventos().stream()
-                                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
-                                .map(x -> new FpEventoPeriodoRelatorio(
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Provento)
+                        .map(x -> new FpEventoPeriodoRelatorio(
                                 x.getEvpEvento().getEveId(),
                                 x.getEvpEvento().getEveNome(),
                                 decimalFormat.format(x.getEvpValorReferencia()),
                                 decimalFormat.format(x.getEvpValor()),
                                 ""))
-                                .collect(Collectors.toList()));
+                        .collect(Collectors.toList()));
 
                 eventosPeriodoRelatorio.addAll(
                         fpFolhaPeriodo.getForEventos().stream()
-                                .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
-                                .map(x -> new FpEventoPeriodoRelatorio(
+                        .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto)
+                        .map(x -> new FpEventoPeriodoRelatorio(
                                 x.getEvpEvento().getEveId(),
                                 x.getEvpEvento().getEveNome(),
                                 decimalFormat.format(x.getEvpValorReferencia()),
                                 "",
                                 decimalFormat.format(x.getEvpValor())))
-                                .collect(Collectors.toList()));
+                        .collect(Collectors.toList()));
 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JRBeanCollectionDataSource(eventosPeriodoRelatorio));
                 relatorios.add(jasperPrint);

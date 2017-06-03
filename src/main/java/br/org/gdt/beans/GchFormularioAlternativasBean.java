@@ -18,13 +18,17 @@ import br.org.gdt.service.GchPerguntasService;
 import br.org.gdt.service.GchRespostasService;
 import br.org.gdt.service.RecPessoaService;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -38,11 +42,13 @@ public class GchFormularioAlternativasBean {
 
     private String radioValue = null;
 
+    private String idParm;
+
     private List<GchAlternativas> todasAlternativas = new ArrayList<>();
 
     private GchAlternativas gchAlternativas;
 
-    private Map<GchAlternativas, Boolean> radio = new HashMap<GchAlternativas, Boolean>();
+    private Map<GchAlternativas, String> radio = new HashMap<GchAlternativas, String>();
 
     private List<GchPerguntas> todasPerguntas = new ArrayList<>();
 
@@ -70,8 +76,8 @@ public class GchFormularioAlternativasBean {
 
     private GchRespostas gchRespostas = new GchRespostas();
 
-    private int idPessoa = 4;
-    private long idFormulario = 2;
+    private int idPessoa;
+    private long idFormulario;
 
     public GchFormularioAlternativasBean() {
 
@@ -79,19 +85,28 @@ public class GchFormularioAlternativasBean {
 
     public void save() {
 
-        for (GchRespostas gchResposta : gchRespostasList) {
+        Iterator<GchAlternativas> keyIterrator = radio.keySet().iterator();
+
+        while (keyIterrator.hasNext()) {
+
+            GchAlternativas alternativa = keyIterrator.next();
+            String value = radio.get(alternativa);
+
+            GchRespostas gchResposta = new GchRespostas();
 
             gchResposta.setFormCodigo(1);
 
             RecPessoa pessoa = recPessoaService.BuscarId(idPessoa);
 
             gchResposta.setRecIdpessoa(pessoa);
+            gchResposta.setAltCodigo(alternativa);
+            gchResposta.setPerCodigo(alternativa.getPerCodigo());
 
             gchRespostasService.update(gchResposta);
 
         }
 
-        gchRespostasList = new ArrayList<>();
+        radio = new HashMap<GchAlternativas, String>();
 
     }
 
@@ -111,12 +126,19 @@ public class GchFormularioAlternativasBean {
 
         for (GchAlternativasperguntas item : gchAlternativasPergunta) {
 
-            gchAlternativasList.add(item.getGchAlternativas());
+            GchAlternativas gchAlternativasAux = item.getGchAlternativas();
+            gchAlternativasAux.setPerCodigo(gchPerguntas.getPerCodigo());
+            gchAlternativasList.add(gchAlternativasAux);
 
         }
 
         return gchAlternativasList;
 
+    }
+
+    public void action() {
+        String value = FacesContext.getCurrentInstance().
+                getExternalContext().getRequestParameterMap().get("div_3");
     }
 
     public List<GchAlternativas> getTodasAlternativas() {
@@ -166,11 +188,11 @@ public class GchFormularioAlternativasBean {
         this.gchFormularios = gchFormularios;
     }
 
-    public Map<GchAlternativas, Boolean> getRadio() {
+    public Map<GchAlternativas, String> getRadio() {
         return radio;
     }
 
-    public void setRadio(Map<GchAlternativas, Boolean> radio) {
+    public void setRadio(Map<GchAlternativas, String> radio) {
         this.radio = radio;
     }
 
@@ -256,6 +278,29 @@ public class GchFormularioAlternativasBean {
 
     public void setRecPessoaService(RecPessoaService recPessoaService) {
         this.recPessoaService = recPessoaService;
+    }
+
+    public String getIdParm() {
+        System.out.println("idParm:" + idParm);
+
+        if (idParm != null) {
+
+            byte[] bytes = Base64.getDecoder().decode(idParm);
+
+            String parametro = new String(bytes);
+
+            String[] parametros = parametro.split("&");
+            
+            idFormulario = Integer.parseInt(parametros[0]);
+            idPessoa = Integer.parseInt(parametros[1]);
+            
+        }
+
+        return idParm;
+    }
+
+    public void setIdParm(String idParm) {
+        this.idParm = idParm;
     }
 
 }

@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -55,6 +56,8 @@ public class GchAlternativas implements Serializable {
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<GchRespostas> gchRespostasList;
 
+    @Transient //Isso diz que a coluna nao deve ser criada no banco, então não pode remover
+    private long perCodigo;
     
     public GchAlternativas() {
     }
@@ -156,6 +159,14 @@ public class GchAlternativas implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public long getPerCodigo() {
+        return perCodigo;
+    }
+
+    public void setPerCodigo(long perCodigo) {
+        this.perCodigo = perCodigo;
     }
 
 
