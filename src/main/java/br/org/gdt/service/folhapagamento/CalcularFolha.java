@@ -169,7 +169,7 @@ public class CalcularFolha {
 
         fpFolhaPeriodo.setForValorFGTS(eventos.getValorEventoDosEventosDoFuncionario(FpEnumEventos.FGTS, fpFolhaPeriodo.getForEventos()));
 
-        fpFolhaPeriodo.setForTotalDescontos(
+        fpFolhaPeriodo.setForTotalDescontos(    
                 fpFolhaPeriodo.getForEventos().stream()
                 .filter(x -> x.getEvpEvento().getEveTipoEvento() == FpTipoEvento.Desconto && !x.getEvpEvento().isEveNaoAlteraFolha())
                 .mapToDouble(x -> x.getEvpValor())
@@ -201,6 +201,7 @@ public class CalcularFolha {
         }
 
         pessoasParaGerarFolha.forEach((fpFolhaPeriodo) -> {
+            fpFolhaPeriodo.removerEventosNaoAlteraFolha();
             try {
                 Map<String, Object> parametros = new HashMap<>();
                 parametros.put("empresa", "Asa Delta RH");
