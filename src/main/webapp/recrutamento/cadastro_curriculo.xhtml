@@ -307,7 +307,7 @@
                                             <label class="control-label " for="number">                                        
                                                 Complemento                                                
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recNumero}"/>                                            
+                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recComplemento}"/>                                            
                                         </div>
                                     </div> 
                                 </div>
@@ -343,12 +343,12 @@
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
+                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
                                         <h:commandButton class="btn btn-success" 
                                                          value="Salvar" 
                                                          action="#{recPessoaBean.Salvar()}" >
                                             <f:ajax execute="@form" render="formCurriculo" />
-                                        </h:commandButton>
-                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                        </h:commandButton>                                        
                                     </div>
                                 </div>
                             </div>

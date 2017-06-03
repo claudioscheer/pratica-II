@@ -92,7 +92,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "rec_pretencaosalarial")
     private String recPretencaosalarial;
-    @Lob
+    //@Lob
     @Column(name = "rec_foto")
     //private byte[] recFoto;
     private byte[] recFoto;

@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.RecSelecao;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecSelecaoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +24,16 @@ public class RecSelecaoBean {
     }
 
     public void Salvar() {
-        if (selecao.getRecIdselecao() > 0) {
-            recSelecaoService.Alterar(selecao);
-        } else {
-            recSelecaoService.Inserir(selecao);
-        }
-        selecoes = recSelecaoService.ListarTodas();
+        if (ValidarCampos()) {
+            if (selecao.getRecIdselecao() > 0) {
+                recSelecaoService.Alterar(selecao);
+            } else {
+                recSelecaoService.Inserir(selecao);
+            }
+            selecoes = recSelecaoService.ListarTodas();
+        }else{
+            return;
+        }       
     }
 
     public List<RecSelecao> ListarTodas() {
@@ -89,5 +94,17 @@ public class RecSelecaoBean {
 
     public void setFormAtivo(boolean formAtivo) {
         this.formAtivo = formAtivo;
+    }
+
+    public boolean ValidarCampos() {
+        if (selecao.getRecIdpessoa() == null) {
+            Helper.mostrarNotificacao("Candidato", "Selecione um Candidato", "error");
+            return false;
+        }
+        if (selecao.getRecIdvaga() == null) {
+            Helper.mostrarNotificacao("Vaga", "Selecione uma Vaga", "error");
+            return false;
+        }
+        return true;
     }
 }

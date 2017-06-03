@@ -128,10 +128,13 @@
                             <hr></hr>
                             <div class="pull-right">
                                 <div class="row">
-                                    <h:commandButton class="btn btn-success" value="Salvar" action="#{recVagaBean.Salvar()}">
+                                    <h:commandButton class="btn btn-success" 
+                                                     value="Salvar" 
+                                                     action="#{recVagaBean.Salvar()}">
                                         <f:ajax execute="@form" render="formVaga" />
                                     </h:commandButton>                                        
-                                    <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                    <h:commandButton value="Cancelar" 
+                                                     class="btn btn-danger"/>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +158,9 @@
                         </div>  
                         <div class="pull-right">
                             <div class="row">
-                                <h:commandButton class="btn btn-success" value="Buscar" action="#{recVagaBean.PesquisarPorDescricao()}"/>                                                                        
+                                <h:commandButton class="btn btn-success" 
+                                                 value="Buscar" 
+                                                 action="#{recVagaBean.PesquisarPorDescricao()}"/>                                                                        
                             </div>
                         </div>
                         <h:dataTable class="table table-striped" value="#{recVagaBean.ListarTodas()}" var="item">
