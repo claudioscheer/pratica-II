@@ -75,7 +75,7 @@ public class GchFormularioAlternativasBean {
 
     private List<GchRespostas> gchRespostasList = new ArrayList<>();
 
-    private GchFormulario gchFormularios = new GchFormulario();
+    private GchFormulario gchFormularios;
 
     private GchRespostas gchRespostas = new GchRespostas();
 
@@ -126,6 +126,18 @@ public class GchFormularioAlternativasBean {
 
         System.out.println("idParm:" + idParm);
 
+        if (idFormulario == 0) {
+
+            recuperaParametro();
+
+        }
+
+        return gchPerguntasService.buscaPergutasFormulario(idFormulario);
+
+    }
+
+    public void recuperaParametro() {
+
         if (idParm != null) {
 
             byte[] bytes = Base64.getDecoder().decode(idParm);
@@ -138,13 +150,6 @@ public class GchFormularioAlternativasBean {
             idPessoa = Integer.parseInt(parametros[1]);
 
         }
-
-        if (idFormulario == 0) {
-            idFormulario = 6;
-            idPessoa = 3;
-        }
-
-        return gchPerguntasService.buscaPergutasFormulario(idFormulario);
 
     }
 
@@ -169,6 +174,7 @@ public class GchFormularioAlternativasBean {
     public String preparedEdit(GchFormulario gchFormulario) {
 
         idFormulario = (int) gchFormulario.getFormCodigo();
+        idPessoa = 0;
 
         return "ResponderFormulario";
 
@@ -208,11 +214,9 @@ public class GchFormularioAlternativasBean {
 
     public GchFormulario getGchFormularios() {
 
-        if (gchFormularios == null) {
+        recuperaParametro();
 
-            gchFormularios = gchFormularioService.findById(idFormulario);
-
-        }
+        gchFormularios = gchFormularioService.findById(idFormulario);
 
         return gchFormularios;
     }

@@ -113,9 +113,10 @@ public void init() {
 
     }
 
-    public void cancel() {
+    public String cancel() {
         this.formAtivo = false;
         this.gchCurso = new GchCursos();
+        return "Cursos";
     }
 
     public void add() {
