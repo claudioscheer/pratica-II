@@ -1,47 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="BancoPraticaRH" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="GdtPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <non-jta-data-source>BancoPraticaRH</non-jta-data-source>
-    <class>br.org.gdt.model.CsbffBeneficios</class>
-    <class>br.org.gdt.model.CsbffCargos</class>
-    <class>br.org.gdt.model.CsbffCargosHistorico</class>
-    <class>br.org.gdt.model.CsbffDependentes</class>
-    <class>br.org.gdt.model.CsbffEscalaHoras</class>
-    <class>br.org.gdt.model.CsbffHistoricoSalario</class>
-    <class>br.org.gdt.model.CsbffPessoaBeneficio</class>
-    <class>br.org.gdt.model.CsbffPessoaDependente</class>
-    <class>br.org.gdt.model.CsbffSalario</class>
-    <class>br.org.gdt.model.CsbffTiposDeCargos</class>
-    <class>br.org.gdt.model.FpEvento</class>
-    <class>br.org.gdt.model.FpEventoPeriodo</class>
-    <class>br.org.gdt.model.FpFaixa</class>
-    <class>br.org.gdt.model.FpFolhaPeriodo</class>
-    <class>br.org.gdt.model.FpPeriodo</class>
-    <class>br.org.gdt.model.FpTabela</class>
-    <class>br.org.gdt.model.FpTabelaVigencia</class>
-    <class>br.org.gdt.model.GchAlternativas</class>
-    <class>br.org.gdt.model.GchAlternativasperguntas</class>
-    <class>br.org.gdt.model.GchCursos</class>
-    <class>br.org.gdt.model.GchFormulario</class>
-    <class>br.org.gdt.model.GchFormularioPessoa</class>
-    <class>br.org.gdt.model.GchMunicipios</class>
-    <class>br.org.gdt.model.GchPerguntas</class>
-    <class>br.org.gdt.model.GchRespostas</class>
-    <class>br.org.gdt.model.GchTreinamentos</class>
-    <class>br.org.gdt.model.GchTreinamentospessoas</class>
-    <class>br.org.gdt.model.GchUfs</class>
-    <class>br.org.gdt.model.HorasTrabalhadas</class>
-    <class>br.org.gdt.model.Periodo</class>
-    <class>br.org.gdt.model.RecExperiencia</class>
-    <class>br.org.gdt.model.RecGrauensino</class>
-    <class>br.org.gdt.model.RecHabilidade</class>
-    <class>br.org.gdt.model.RecPessoa</class>
-    <class>br.org.gdt.model.RecRequisicaoVaga</class>
-    <class>br.org.gdt.model.RecSelecao</class>
-    <class>br.org.gdt.model.RecVaga</class>
+   
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <validation-mode>NONE</validation-mode>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="hibernate.show_sql" value="true"/>
