@@ -15,9 +15,10 @@
                 <div class="title_left">
                     <h3>Seleção de Candidatos</h3>
                 </div>
-                <h:form id="formVaga">                                        
+                <h:form id="formSelecao">                                        
                     <p:panel visible="#{recSelecaoBean.formAtivo}">                        
                         <br />
+                        <h:inputHidden value="#{recSelecaoBean.selecao.recIdselecao}" />                        
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
@@ -42,6 +43,7 @@
                                             </label>
                                             <input class="form-control date-picker" 
                                                    id="number" 
+                                                   value="#{recSelecaoBean.selecao.recDataEntrevista}"
                                                    name="text" 
                                                    type="text"/>
                                         </div>
@@ -69,8 +71,12 @@
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <h:commandButton class="btn btn-success" value="Salvar" />                                        
                                         <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                        <h:commandButton class="btn btn-success" 
+                                                         value="Salvar" 
+                                                         action="#{recSelecaoBean.Salvar()}"> 
+                                            <f:ajax execute="@form" render="formSelecao" />
+                                        </h:commandButton>                                        
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +89,7 @@
                             <h:commandButton class="btn btn-primary" value="Novo Registro" action="#{recSelecaoBean.Adicionar()}">                                
                             </h:commandButton>
                         </div>
-                        <h:dataTable class="table table-striped" value="#{recSelecaoBean.selecoes}" var="item">                                        
+                        <h:dataTable class="table table-striped" value="#{recSelecaoBean.ListarTodas()}" var="item">                                        
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
                                 <h:outputText value="#{item.recIdselecao}"/>                                
@@ -93,11 +99,15 @@
                                 <h:outputText value="#{item.recIdpessoa.recNomecompleto}"/>
                             </h:column>                                        
                             <h:column>
+                                <f:facet name="header">Data Entrevista</f:facet>                                                                                                                            
+                                <h:outputText value="#{item.recDataEntrevista}"/>
+                            </h:column>  
+                            <h:column>
                                 <f:facet name="header">Opções</f:facet>
-                                <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recSelecaoBean.PreparaEdicao(vaga)}">
+                                <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recSelecaoBean.PreparaEdicao(item)}">
 
                                 </h:commandLink>
-                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{recSelecaoBean.Excluir(vaga)}" onclick="return confirm('Excluir tabela?')">
+                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{recSelecaoBean.Excluir(vaga)}" onclick="return confirm('Excluir Seleção?')">
 
                                 </h:commandLink>
                             </h:column>                  

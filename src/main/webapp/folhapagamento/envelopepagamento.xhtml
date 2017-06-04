@@ -22,55 +22,55 @@
                         <div class="row">
                             <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                 <label class="control-label">Folha</label>
-                                <h:selectOneMenu value="#{fpEnvelopePagamentoBean.fpTipoFolha}" class="form-control">
-                                    <f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamentoBean.selecionarTipoFolha()}" event="change" />
+                                <h:selectOneMenu value="#{fpEnvelopePagamento.fpTipoFolha}" class="form-control">
+                                    <f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamento.selecionarTipoFolha()}" event="change" />
                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                     <f:selectItems value="#{dadosComuns.tipoFolhas}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                 <label class="control-label">Período</label>
-                                <h:selectOneMenu value="#{fpEnvelopePagamentoBean.fpPeriodo.perId}" class="form-control">
-                                    <f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamentoBean.selecionarPeriodo()}" event="change" />
+                                <h:selectOneMenu value="#{fpEnvelopePagamento.fpPeriodo.perId}" class="form-control">
+                                    <f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamento.selecionarPeriodo()}" event="change" />
                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                    <f:selectItems value="#{fpEnvelopePagamentoBean.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
+                                    <f:selectItems value="#{fpEnvelopePagamento.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
                                 </h:selectOneMenu>
                             </div>
                         </div>
 
-                        <h:panelGroup rendered="#{fpEnvelopePagamentoBean.fpTipoFolha != null and fpEnvelopePagamentoBean.fpPeriodo.perId > 0}">
+                        <h:panelGroup rendered="#{fpEnvelopePagamento.fpTipoFolha != null and fpEnvelopePagamento.fpPeriodo.perId > 0}">
                             <div class="row">
                                 <div class="form-group col-md-2">
                                     <label class="control-label">Pessoa</label>
-                                    <h:inputText label="Código pessoa" class="form-control" value="#{fpEnvelopePagamentoBean.recPessoa.recIdpessoa}">
-                                        <f:ajax listener="#{fpEnvelopePagamentoBean.selecionarPessoa()}" execute="@form" render="formEnvelopePagamento" event="change" />
+                                    <h:inputText label="Código pessoa" class="form-control" value="#{fpEnvelopePagamento.recPessoa.recIdpessoa}">
+                                        <f:ajax listener="#{fpEnvelopePagamento.selecionarPessoa()}" execute="@form" render="formEnvelopePagamento" event="change" />
                                     </h:inputText>
                                 </div>
                                 <div class="col-md-4" style="margin-top: 5px">
                                     <div class="empty-div">&nbsp;</div>
-                                    #{fpEnvelopePagamentoBean.recPessoa.recNomecompleto}
+                                    #{fpEnvelopePagamento.recPessoa.recNomecompleto}
                                 </div>
                                 <div class="col-md-3 text-center">
                                     <div class="empty-div">&nbsp;</div>
-                                    <h:commandButton class="btn btn-primary" value="Visualizar folha de pagamento" action="#{fpEnvelopePagamentoBean.buscarFolhaPeriodo()}">
+                                    <h:commandButton class="btn btn-primary" value="Visualizar folha de pagamento" action="#{fpEnvelopePagamento.buscarFolhaPeriodo()}">
                                         <f:ajax execute="@form" render="formEnvelopePagamento" />
                                     </h:commandButton>
                                 </div>
                                 <div class="col-md-3 text-center">
                                     <div class="empty-div">&nbsp;</div>
-                                    <h:commandButton class="btn btn-primary" value="#{!fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo ? 'Ver todas folhas' : 'Voltar'}" action="#{fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo()}">
+                                    <h:commandButton class="btn btn-primary" value="#{!fpEnvelopePagamento.mostrarTodasFolhasPeriodo ? 'Ver todas folhas' : 'Voltar'}" action="#{fpEnvelopePagamento.mostrarTodasFolhasPeriodo()}">
                                         <f:ajax execute="@form" render="formEnvelopePagamento" />
                                     </h:commandButton>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
 
-                            <h:panelGroup rendered="#{fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo}">
+                            <h:panelGroup rendered="#{fpEnvelopePagamento.mostrarTodasFolhasPeriodo}">
                                 <div class="row">
                                     <div class="x_panel">
                                         <div class="x_content">
                                             <div class="col-md-12">
-                                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamentoBean.todasFolhasPeriodo}" var="folhaPeriodo">
+                                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamento.todasFolhasPeriodo}" var="folhaPeriodo">
                                                     <h:column>
                                                         <f:facet name="header">Pessoa</f:facet>
                                                         #{folhaPeriodo.forPessoa.recIdpessoa} - #{folhaPeriodo.forPessoa.recNomecompleto}
@@ -88,11 +88,11 @@
                                                     <h:column>
                                                         <f:facet name="header">Opções</f:facet>
                                                         
-                                                        <h:commandLink class="btn btn-success btn-sm" value="Editar" action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}">
+                                                        <h:commandLink class="btn btn-success btn-sm" value="Editar" action="#{fpEnvelopePagamento.validarFolhaPeriodo(folhaPeriodo)}">
                                                             <f:ajax execute="@form" render="formEnvelopePagamento" />
                                                         </h:commandLink>
                                                         
-                                                        <h:commandLink class="btn btn-dark btn-sm" value="Reimprimir" action="#{fpEnvelopePagamentoBean.reimprimirFolhaPagamento(folhaPeriodo)}" />
+                                                        <h:commandLink class="btn btn-dark btn-sm" value="Reimprimir" action="#{fpEnvelopePagamento.reimprimirFolhaPagamento(folhaPeriodo)}" />
                                                         
                                                     </h:column>
                                                 </h:dataTable>
@@ -103,17 +103,17 @@
                                 <div class="ln_solid"></div>
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <h:commandButton class="btn btn-dark" value="Imprimir todas folhas" action="#{fpEnvelopePagamentoBean.gerarTodasFolhasPagamento()}" />
+                                        <h:commandButton class="btn btn-dark" value="Imprimir todas folhas" action="#{fpEnvelopePagamento.gerarTodasFolhasPagamento()}" />
                                     </div>
                                 </div>
                             </h:panelGroup>
 
-                            <h:panelGroup rendered="#{!fpEnvelopePagamentoBean.mostrarTodasFolhasPeriodo}">
+                            <h:panelGroup rendered="#{!fpEnvelopePagamento.mostrarTodasFolhasPeriodo}">
                                 <div class="row">
                                     <div class="x_panel">
                                         <div class="x_content">
                                             <div class="col-md-12">
-                                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forEventos}" var="eventoVariavel">
+                                                <h:dataTable class="table table-striped" value="#{fpEnvelopePagamento.fpFolhaPeriodo.forEventos}" var="eventoVariavel">
                                                     <h:column>
                                                         <f:facet name="header">Código</f:facet>
                                                             #{eventoVariavel.evpEvento.eveId}
@@ -147,28 +147,28 @@
                                                     <div class="col-md-3 form-group text-center">
                                                         <label class="control-label">Base Cálc. INSS</label>
                                                         <br />
-                                                        <h:outputText value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forValorBaseINSS}">
+                                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.forValorBaseINSS}">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </div>
                                                     <div class="col-md-3 form-group text-center">
                                                         <label class="control-label">Base Cálc. FGTS</label>
                                                         <br />
-                                                        <h:outputText value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forValorBaseFGTS}">
+                                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.forValorBaseFGTS}">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </div>
                                                     <div class="col-md-3 form-group text-center">
                                                         <label class="control-label">FGTS</label>
                                                         <br />
-                                                        <h:outputText value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forValorFGTS}">
+                                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.forValorFGTS}">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </div>
                                                     <div class="col-md-3 form-group text-center">
                                                         <label class="control-label">Base Cálc. IRRF</label>
                                                         <br />
-                                                        <h:outputText value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forValorBaseIRRF}">
+                                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.forValorBaseIRRF}">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </div>
@@ -181,21 +181,21 @@
                                                     <div class="col-md-4 form-group text-center">
                                                         <label class="control-label">Total vencimentos</label>
                                                         <br />
-                                                        <h:outputText value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forTotalVencimentos}">
+                                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.forTotalVencimentos}">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </div>
                                                     <div class="col-md-4 form-group text-center">
                                                         <label class="control-label">Total descontos</label>
                                                         <br />
-                                                        <h:outputText value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forTotalDescontos}">
+                                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.forTotalDescontos}">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </div>
                                                     <div class="col-md-4 form-group text-center">
                                                         <label class="control-label">Total líquido</label>
                                                         <br />
-                                                        <h:outputText value="#{fpEnvelopePagamentoBean.fpFolhaPeriodo.forTotalLiquido}">
+                                                        <h:outputText value="#{fpEnvelopePagamento.fpFolhaPeriodo.forTotalLiquido}">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </div>
@@ -207,9 +207,9 @@
                                 <div class="ln_solid"></div>
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <h:commandButton class="btn btn-dark" value="Imprimir folha" action="#{fpEnvelopePagamentoBean.gerarFolhaPagamento()}" />
+                                        <h:commandButton class="btn btn-dark" value="Imprimir folha" action="#{fpEnvelopePagamento.gerarFolhaPagamento()}" />
 
-                                        <h:commandButton class="btn btn-primary" value="Recalcular folha" action="#{fpEnvelopePagamentoBean.recalcularFolhaPeriodo()}">
+                                        <h:commandButton class="btn btn-primary" value="Recalcular folha" action="#{fpEnvelopePagamento.recalcularFolhaPeriodo()}">
                                             <f:ajax execute="@form" render="formEnvelopePagamento" />
                                         </h:commandButton>
                                     </div>

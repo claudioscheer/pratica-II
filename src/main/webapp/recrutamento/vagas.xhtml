@@ -96,55 +96,45 @@
                             <!-- Habilidades -->
                             <div class="row">
                                 <h3 class="text-center">Habilidades Necessárias</h3>   
-                                <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                    <div class="form-group ">
-                                        <label class="control-label " for="select">
-                                            Habilidade
-                                        </label>
-                                        <h:selectOneMenu id="comboHabilidade" value="#{recVagaBean.habilidade}"  class="form-control" >
-                                            <f:selectItem itemLabel="Selecione as Habilidades" itemValue="#{null}" />
-                                            <f:selectItems value="#{recHabilidadeBean.ListarTodas()}" 
-                                                           var="habilidade" itemValue="#{habilidade}" 
-                                                           itemLabel="#{habilidade.recDescricao}"/>
-                                        </h:selectOneMenu>                                 
-                                    </div>     
-                                </div>                            
+                                          <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                
+                                            </label>
+                                            <p:autoComplete multiple="true" 
+                                                            value="#{recVagaBean.vaga.recHabilidadeList}" 
+                                                            completeMethod="#{recVagaBean.completarHabilidade}"
+                                                            var="item" 
+                                                            itemLabel="#{item.recDescricao}" 
+                                                            itemValue="#{item}" 
+                                                            forceSelection="true"
+                                                            converter="#{generic}">
+                                                
+                                                <p:column style="width:10%">
+                                                    <h:outputText styleClass="ui-theme ui-theme-#{item.recDescricao}" />
+                                                </p:column>
+
+                                                <p:column>
+                                                    <h:outputText class="form-control" value="#{item.recDescricao}" />
+                                                </p:column>
+                                            </p:autoComplete>        
+                                        </div>     
+                                    </div>                             
                             </div>
 
-                            <div class="row">
-                                <h:commandButton class="btn btn-success" value="Adicionar" action="#{recVagaBean.AdicionarHabilidade()}" />                            
-                            </div>
-
-                            <div class="row">
-                                <h:dataTable class="table table-striped" value="#{recVagaBean.vaga.recHabilidadeList}" var="item">                                        
-                                    <h:column>
-                                        <f:facet name="header">Código</f:facet>
-                                        <h:outputText value="#{item.recIdhabilidade}"/>                                
-                                    </h:column>     
-                                    <h:column>
-                                        <f:facet name="header">Habilidade</f:facet>
-                                        <h:outputText value="#{item.recDescricao}"/>                                
-                                    </h:column>   
-                                    <h:column>
-                                        <f:facet name="header">Opções</f:facet>
-                                        <h:commandLink class="btn btn-link btn-small" value="Editar">
-
-                                        </h:commandLink>
-                                        <h:commandLink class="btn btn-link btn-small" value="Excluir">
-
-                                        </h:commandLink>
-                                    </h:column>                  
-                                </h:dataTable>
-                            </div>
+ 
 
 
                             <hr></hr>
                             <div class="pull-right">
                                 <div class="row">
-                                    <h:commandButton class="btn btn-success" value="Salvar" action="#{recVagaBean.Salvar()}">
+                                    <h:commandButton class="btn btn-success" 
+                                                     value="Salvar" 
+                                                     action="#{recVagaBean.Salvar()}">
                                         <f:ajax execute="@form" render="formVaga" />
                                     </h:commandButton>                                        
-                                    <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                    <h:commandButton value="Cancelar" 
+                                                     class="btn btn-danger"/>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +158,9 @@
                         </div>  
                         <div class="pull-right">
                             <div class="row">
-                                <h:commandButton class="btn btn-success" value="Buscar" action="#{recVagaBean.PesquisarPorDescricao()}"/>                                                                        
+                                <h:commandButton class="btn btn-success" 
+                                                 value="Buscar" 
+                                                 action="#{recVagaBean.PesquisarPorDescricao()}"/>                                                                        
                             </div>
                         </div>
                         <h:dataTable class="table table-striped" value="#{recVagaBean.ListarTodas()}" var="item">

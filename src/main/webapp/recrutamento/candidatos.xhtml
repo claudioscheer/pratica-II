@@ -4,63 +4,77 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">    
-    <head>
+      xmlns:p="http://primefaces.org/ui">
 
-    </head>
-    <h:body>        
-        <ui:composition template="../recrutamento/menu_recrutamento.xhtml">
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
-                <title>Cadastro de Currículo</title>
+                <title>Lista de Candidatos</title>
             </ui:define>
-            <ui:define name="content">
+            <ui:define name="content">                
                 <div class="title_left">
-                    <h3>Cadastro de Currículo</h3>
+                    <h3>Manutenção de Candidatos</h3>
                 </div>
                 <br />
-                <h:form id="formCurriculo">                                        
-                    <p:panel>
+                <h:form id="formHabilidade">
+                    <p:panel visible="#{recPessoaBean.formAtivo}">
                         <h:inputHidden value="#{recPessoaBean.recPessoa.recIdpessoa}" />                        
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <!--
+                                        <p:graphicImage value="#{recPessoaBean.recPessoa.recFoto}" id="image"/>
+                                        <img src="a.jpg" class="center-block" style="height: 200px"></img>
+                                        -->
+                                    </div>
+                                    
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Nome Completo" for="NomeCompleto" />                                            
-                                            <h:inputText class="form-control" id="NomeCompleto" value="#{recPessoaBean.recPessoa.recNomecompleto}" />
+                                            <h:inputText class="form-control" 
+                                                         id="NomeCompleto" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recNomecompleto}" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="CPF" for="cpf" />                                            
                                             <h:inputText class="form-control" 
-                                                         id="cpf"                                                          
-                                                         maxlength="14" 
-                                                         binding="#{campocpf}"
-                                                         onkeypress="this.value = MascaraCPF(this.value)"
-                                                         value="#{recPessoaBean.recPessoa.recCpf}" title="CPF" />
+                                                         id="cpf" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recCpf}" 
+                                                         title="CPF" />
                                         </div>
                                     </div> 
-                                    <!-- FALTA COMPLETAR
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Sexo
                                             </label>
-                                            <h:selectOneMenu id="comboSexo" value="#{recPessoaBean.recPessoa.recSexo}" class="form-control" >
+                                            <h:selectOneMenu id="comboSexo" 
+                                                             value="#{recPessoaBean.recPessoa.recSexo}" 
+                                                             class="form-control" 
+                                                             disabled="true">
                                                 <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                             
                                             </h:selectOneMenu>                                                                            
                                         </div>     
                                     </div>  
-                                    -->
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Estado Civil
                                             </label>
-                                            <h:selectOneMenu id="comboEstadoCivil" value="#{recPessoaBean.recPessoa.recEstadocivil}" class="form-control" >
+                                            <h:selectOneMenu 
+                                                id="comboEstadoCivil" 
+                                                disabled="true"
+                                                value="#{recPessoaBean.recPessoa.recEstadocivil}" class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Estado Civil" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Solteiro" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="Casado" itemValue="#{2}" />   
@@ -73,17 +87,17 @@
                                             <h:outputLabel value="RG" for="rg" />                                            
                                             <h:inputText class="form-control" 
                                                          id="rg" 
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recRg}" title="RG" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
-                                            <h:outputLabel 
-                                                value="Orgao Emissor" 
-                                                for="OrgaoEmissor" />                                            
+                                            <h:outputLabel value="Orgao Emissor" for="OrgaoEmissor" />                                            
                                             <h:inputText class="form-control" 
                                                          id="OrgaoEmissor" 
                                                          value="#{recPessoaBean.recPessoa.recOrgaoemissor}" 
+                                                         disabled="true"
                                                          title="OrgaoEmissor" />
                                         </div>
                                     </div>    
@@ -93,12 +107,10 @@
                                                 Data de Emissão
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="form-control date-picker" 
+                                            <input class="form-control" 
                                                    id="number" 
-                                                   name="number"
-                                                   maxlength="10"
-                                                   onkeypress="this.value = MascaraData(this.value)"
-                                                   value="#{recPessoaBean.recPessoa.recDtemissao}"
+                                                   disabled="true"
+                                                   name="number" 
                                                    type="text"/>
                                         </div>
                                     </div> 
@@ -107,6 +119,7 @@
                                             <h:outputLabel value="Nome do Pai" for="NomePai" />                                            
                                             <h:inputText class="form-control" 
                                                          id="NomePai" 
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recNomepai}" 
                                                          title="NomePai" />
                                         </div>
@@ -116,22 +129,21 @@
                                             <h:outputLabel value="Nome da Mãe" for="NomeMae" />                                            
                                             <h:inputText class="form-control" 
                                                          id="NomeMae" 
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recNomemae}" 
                                                          title="NomeMae" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
-                                            <label class="control-label" for="number">                                        
+                                            <label class="control-label " for="number">                                        
                                                 Data de Nascimento
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="form-control date-picker" 
+                                            <input class="form-control" 
                                                    id="number" 
+                                                   disabled="true"
                                                    name="number" 
-                                                   maxlength="10"
-                                                   onkeypress="this.value = MascaraData(this.value)"
-                                                   value="#{recPessoaBean.recPessoa.recDtnascimento}"
                                                    type="text"/>
                                         </div>
                                     </div> 
@@ -140,6 +152,7 @@
                                             <h:outputLabel value="E-mail" for="email" />                                            
                                             <h:inputText class="form-control" 
                                                          id="email" 
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recEmail}" 
                                                          title="email" />
                                         </div>
@@ -149,8 +162,7 @@
                                             <h:outputLabel value="Telefone" for="telefone" />                                            
                                             <h:inputText class="form-control" 
                                                          id="telefone" 
-                                                         maxlength="15"
-                                                         onkeypress="this.value = MascaraTelefone(this.value)"
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recTelefone}" 
                                                          title="telefone" />
                                         </div>
@@ -160,8 +172,7 @@
                                             <h:outputLabel value="Celular" for="celular" />                                            
                                             <h:inputText class="form-control" 
                                                          id="celular" 
-                                                         maxlength="15"
-                                                         onkeypress="this.value = MascaraTelefone(this.value)"
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recCelular}" 
                                                          title="celular" />
                                         </div>
@@ -175,6 +186,7 @@
                                             <h:inputTextarea class="form-control" 
                                                              cols="40" 
                                                              id="objProf" 
+                                                             disabled="true"
                                                              value="#{recPessoaBean.recPessoa.recObjprofissional}" 
                                                              rows="10"/>                                            
                                         </div>
@@ -189,18 +201,18 @@
                                                              cols="40" 
                                                              id="AutoAvaliacao" 
                                                              value="#{recPessoaBean.recPessoa.recAutoavaliacao}" 
+                                                             disabled="true"
                                                              rows="10"/>                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
-                                                Pretensão Salarial
+                                                Pretenção Salarial
                                                 <span class="required">*</span>
                                             </label>
                                             <h:inputText class="form-control" 
-                                                         maxlength="9"
-                                                         onkeypress="this.value = MascaraValorMonetario(this.value)"
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recPretencaosalarial}"/>                                            
                                         </div>
                                     </div>
@@ -219,7 +231,9 @@
                                                 PIS/PASEP
                                                 <span class="required">*</span>
                                             </label>                                            
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recPispasep}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recPispasep}"/>                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -228,7 +242,9 @@
                                                 Certificado de Reservista
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recReservista}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recReservista}"/>                                            
                                         </div>
                                     </div>  
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -236,9 +252,15 @@
                                             <label class="control-label " for="select">
                                                 Cor
                                             </label>
-                                            <h:selectOneMenu id="comboCor" value="#{recPessoaBean.recPessoa.recCor}"  class="form-control" >
+                                            <h:selectOneMenu id="comboCor" 
+                                                             value="#{recPessoaBean.recPessoa.recCor}"  
+                                                             disabled="true"
+                                                             class="form-control" >
                                                 <f:selectItem itemLabel="Selecione a Cor" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Branco" itemValue="#{1}" />                                                                                                                                                
+                                                <f:selectItem itemLabel="Branco" itemValue="#{1}" />                                                
+                                                <f:selectItem itemLabel="Afro" itemValue="#{2}" />
+                                                <f:selectItem itemLabel="Vermelho" itemValue="#{3}" />
+                                                <f:selectItem itemLabel="Laranjado com Amarelo" itemValue="#{4}" />
                                             </h:selectOneMenu>                                                                                                                        
                                         </div>     
                                     </div> 
@@ -248,7 +270,10 @@
                                             <label class="control-label " for="select">
                                                 Grau de Ensino
                                             </label>
-                                            <h:selectOneMenu id="comboGrauensino" value="#{recPessoaBean.recPessoa.recPesGrauEnsino}"  class="form-control" >
+                                            <h:selectOneMenu id="comboGrauensino" 
+                                                             value="#{recPessoaBean.recPessoa.recPesGrauEnsino}"  
+                                                             disabled="true"
+                                                             class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
@@ -273,6 +298,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <h:inputText class="form-control" 
+                                                         disabled="true"
                                                          value="#{recPessoaBean.recPessoa.recEndereco}"/>                                            
                                         </div>
                                     </div>        
@@ -282,7 +308,9 @@
                                                 Bairro
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recBairro}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recBairro}"/>                                            
                                         </div>
                                     </div>                                     
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -291,40 +319,14 @@
                                                 Número
                                                 <span class="required">*</span>
                                             </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recNumero}"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         disabled="true"
+                                                         value="#{recPessoaBean.recPessoa.recNumero}"/>                                            
                                         </div>
                                     </div> 
                                 </div>
 
                                 <hr />
-                                <div class="row">
-                                    <h3 class="text-center">Suas Habilidades</h3>   
-
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                habilidade                                                
-                                            </label>
-                                            <p:autoComplete multiple="true" 
-                                                            value="#{recPessoaBean.recPessoa.recHabilidadeList}" 
-                                                            completeMethod="#{recPessoaBean.completarHabilidade}"
-                                                            var="item" 
-                                                            itemLabel="#{item.recDescricao}" 
-                                                            itemValue="#{item}" 
-                                                            forceSelection="true"
-                                                            converter="#{generic}">
-                                                
-                                                <p:column style="width:10%">
-                                                    <h:outputText styleClass="ui-theme ui-theme-#{item.recDescricao}" />
-                                                </p:column>
-
-                                                <p:column>
-                                                    <h:outputText class="form-control" value="#{item.recDescricao}" />
-                                                </p:column>
-                                            </p:autoComplete>        
-                                        </div>     
-                                    </div>                            
-                                </div>
                                 <!-- 
                                 <div class="row">
                                     <h3 class="text-center">Suas Habilidades</h3>   
@@ -387,21 +389,31 @@
 
                                 <hr></hr>
                                 <div class="pull-right">
-                                    <div class="row">
-                                        <h:commandButton class="btn btn-success" 
-                                                         value="Salvar" 
-                                                         action="#{recPessoaBean.Salvar()}" >
-                                            <f:ajax execute="@form" render="formCurriculo" />
-                                        </h:commandButton>
-                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
+                                    <div class="row">                                        
+                                        <h:commandButton value="Voltar" class="btn btn-danger"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </p:panel>
-
-
-
+                    <p:panel visible="#{!recPessoaBean.formAtivo}">
+                       
+                        <h:dataTable class="table table-striped" value="#{recPessoaBean.ListarTodas()}" var="item">                                        
+                            <h:column>
+                                <f:facet name="header">Código</f:facet>                                                                                            
+                                <h:outputText value="#{item.recIdpessoa}"/>                                
+                            </h:column>                                                                                                                       
+                            <h:column>
+                                <f:facet name="header">Nome</f:facet>                                                                                            
+                                <h:outputText value="#{item.recNomecompleto}"/>                                
+                            </h:column>                                                                                                                                                   
+                            <h:column>
+                                <f:facet name="header">Opções</f:facet>                                                                                            
+                                <h:commandLink class="btn btn-link btn-small" value="Visualizar" action="#{recPessoaBean.PreparaEdicao(item)}">                                    
+                                </h:commandLink>                        
+                            </h:column>
+                        </h:dataTable>
+                    </p:panel>
                 </h:form>
             </ui:define>
             <ui:define name="script">

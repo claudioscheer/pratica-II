@@ -55,12 +55,12 @@ public class RecRequisicaoBean
     public String PreparaEdicao(RecRequisicaoVaga recRecVaga) {
         this.formAtivo = true;
         this.recRecVaga = recRecVaga;
-        return "Rec_vaga_lista";
+        return "requisicao";
     }
 
     public String Excluir(RecRequisicaoVaga recRecVaga){
         recRequisicaoVagaService.Excluir(recRecVaga.getRecIdRecquisicaoVaga());
-        return "Rec_vaga_lista";
+        return "requisicao";
     }
 
     public void Cancelar() {
