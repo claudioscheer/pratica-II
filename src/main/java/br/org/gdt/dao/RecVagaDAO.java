@@ -17,4 +17,16 @@ public class RecVagaDAO extends DAO<RecVaga> {
         query.setParameter("busca", descricao+ "%");
         return query.getResultList();
     }
+    
+    public List<RecVaga> BuscarVagasInternas(){
+        Query query = entityManager.createQuery("from RecVaga where recTipoVaga like :busca");
+        query.setParameter("busca", "Interna");
+        return query.getResultList();
+    }
+    
+    public List<RecVaga> BuscarVagasExternas(){
+        Query query = entityManager.createQuery("from RecVaga where recTipoVaga like :busca");
+        query.setParameter("busca", "Externa");
+        return query.getResultList();
+    }
 }  

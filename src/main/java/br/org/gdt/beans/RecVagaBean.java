@@ -71,6 +71,13 @@ public class RecVagaBean {
         return vagas;
     }
 
+    public List<RecVaga> ListarTodasExternas() {
+        if (vagas == null) {
+            vagas = recVagaService.ListarTodasVagasExternas();
+        }
+        return vagas;
+    }
+
     public List<RecHabilidade> ListarHabilidade() {
         if (habilidades == null) {
             habilidades = recHabilidadeService.ListarTodas();
@@ -100,7 +107,7 @@ public class RecVagaBean {
     }
 
     public String CandidatarParaVaga() {
-        return "cadastro_curriculo";
+        return "curriculo";
     }
 
     public void AdicionarHabilidade() {

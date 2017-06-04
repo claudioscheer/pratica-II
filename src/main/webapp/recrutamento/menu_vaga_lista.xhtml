@@ -109,11 +109,11 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">                                
                                     <div class="form-group">
                                         <label class="control-label " for="number">                                        
-
+                                            
                                         </label>
                                         <p:autoComplete multiple="true" 
                                                         value="#{recVagaBean.vaga.recHabilidadeList}"                                                         
-                                                        var="item"                                                                 
+                                                        var="item"
                                                         itemLabel="#{item.recDescricao}"                                                             
                                                         converter="#{generic}">
 
@@ -151,7 +151,7 @@
                                 <h:commandButton class="btn btn-success" value="Buscar" action="#{recVagaBean.PesquisarPorDescricao()}"/>                                                                        
                             </div>
                         </div>
-                        <h:dataTable class="table table-striped" value="#{recVagaBean.ListarTodas()}" var="item">
+                        <h:dataTable class="table table-striped" value="#{recVagaBean.ListarTodasExternas()}" var="item">
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
                                 <h:outputText value="#{item.recIdvaga}"/>
