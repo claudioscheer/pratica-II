@@ -46,12 +46,12 @@ public class RecSelecaoBean {
     public String PreparaEdicao(RecSelecao selecao) {
         this.formAtivo = true;
         this.selecao = selecao;
-        return "selecao_lista";
+        return "selecao";
     }
 
     public String Excluir(RecSelecao selecao) {
         recSelecaoService.Excluir(selecao.getRecIdselecao());
-        return "vaga_lista";
+        return "selecao";
     }
 
     public void Cancelar() {

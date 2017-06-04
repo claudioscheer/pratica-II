@@ -90,7 +90,7 @@ public class RecVagaBean {
     public String PreparaEdicao(RecVaga vaga) {
         this.formAtivo = true;
         this.vaga = vaga;
-        return "vaga_lista";
+        return "vagas";
     }
 
     public String VisualizarVaga(RecVaga vaga) {
@@ -111,7 +111,7 @@ public class RecVagaBean {
 
     public String Excluir(RecVaga vaga) {
         recVagaService.Excluir(vaga.getRecIdvaga());
-        return "vaga_lista";
+        return "vagas";
     }
 
     public void Cancelar() {

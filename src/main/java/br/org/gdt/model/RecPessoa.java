@@ -6,11 +6,8 @@
 package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
-import br.org.gdt.enums.DiasATrabalhar;
-import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Insalubridade;
 import br.org.gdt.enums.PossuiDependentes;
-import br.org.gdt.enums.Sexo;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +21,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -38,6 +34,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -143,8 +141,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Date recDtaDemissao;
     @Column(name = "rec_percentual_insalubridade")
     private BigInteger recPercentualInsalubridade;
-    
-    @ManyToMany
+
+    @ManyToMany()    
     private List<RecHabilidade> recHabilidadeList;
     @ManyToMany(mappedBy = "recPessoaList")
     private List<RecExperiencia> recExperienciaList;
