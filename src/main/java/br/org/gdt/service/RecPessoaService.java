@@ -73,5 +73,9 @@ public class RecPessoaService {
 //    public List<RecPessoa> findByCpf(int cpf) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public RecPessoa BuscaPessoaCPF(String cpf){
+        return pessoaDao.BuscarPessoaCFP(cpf);
+    }
 
 }

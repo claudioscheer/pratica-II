@@ -19,7 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean
+@ManagedBean(name = "fpEnvelopePagamento")
 @ViewScoped
 public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
@@ -110,6 +110,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
         try {
             DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
             dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
+            dadosCalculadosDoFuncionario.setDeletarJaCalculada(true);
             dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {

@@ -88,6 +88,9 @@ public class FpFolhaPeriodo implements java.io.Serializable, Cloneable {
         if (forEventos == null) {
             forEventos = new ArrayList<>();
         }
+        forEventos = forEventos.stream()
+                .sorted((x, y) -> Long.compare(x.getEvpEvento().getEveId(), y.getEvpEvento().getEveId()))
+                .collect(Collectors.toList());
         return forEventos;
     }
 

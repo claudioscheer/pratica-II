@@ -15,62 +15,86 @@
                 <div class="title_left">
                     <h3>Seleção de Candidatos</h3>
                 </div>
-                <h:form id="formVaga">                                        
+                <h:form id="formSelecao">                                        
                     <p:panel visible="#{recSelecaoBean.formAtivo}">                        
                         <br />
+                        <h:inputHidden value="#{recSelecaoBean.selecao.recIdselecao}" />                        
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
-                                    
+
                                     <div class="col-md-12 col-sm-12 col-xs-12">                                
                                         <div class="form-group ">
-                                            <label class="control-label " for="select">
+                                            <label class="control-label" for="select">
                                                 Candidato
                                             </label>
-                                            <h:selectOneMenu id="comboCandidato" value="#{recSelecaoBean.selecao.recIdpessoa}"  class="form-control" >
+                                            <h:selectOneMenu 
+                                                id="comboCandidato" 
+                                                value="#{recSelecaoBean.selecao.recIdpessoa}"
+                                                disabled="#{recSelecaoBean.descreverEntrevista}"
+                                                class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Candidato" itemValue="#{null}" />
                                                 <f:selectItems value="#{recPessoaBean.ListarTodas()}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.recNomecompleto}"/>
                                             </h:selectOneMenu>                                                                                                             
                                         </div>     
                                     </div> 
-                                    
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Data Entrevista
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="form-control date-picker" 
-                                                   id="number" 
-                                                   name="text" 
-                                                   type="text"/>
+                                            <input class="form-control date-picker"                                                     
+                                                   value="#{recSelecaoBean.selecao.recDataEntrevista}" />
                                         </div>
                                     </div>   
-                                    
+
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Vaga
                                             </label>
-                                            
-                                            <h:selectOneMenu id="comboVaga" value="#{recSelecaoBean.selecao.recIdvaga}"  class="form-control" >
+
+                                            <h:selectOneMenu id="comboVaga" 
+                                                             value="#{recSelecaoBean.selecao.recIdvaga}" 
+                                                             disabled="#{recSelecaoBean.descreverEntrevista}"
+                                                             class="form-control" >
                                                 <f:selectItem itemLabel="Selecione a Vaga" itemValue="#{null}" />
                                                 <f:selectItems value="#{recVagaBean.ListarTodas()}" 
                                                                var="vaga" 
                                                                itemValue="#{vaga}" 
                                                                itemLabel="#{vaga.recDescricao}"/>
                                             </h:selectOneMenu>                                                                                                             
-                                            
+
                                         </div>     
                                     </div> 
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">                                        
+                                            <h:outputLabel rendered="#{recSelecaoBean.descreverEntrevista}">
+                                                Descrição da Entrevista
+                                            </h:outputLabel>
+                                            <h:inputTextarea class="form-control" 
+                                                             cols="40"    
+                                                             rendered="#{recSelecaoBean.descreverEntrevista}"                                                             
+                                                             value="#{recSelecaoBean.selecao.recDescricaoentrevista}"                                                              
+                                                             rows="10"/>                                            
+                                        </div>
+                                    </div>
 
                                 </div>                                                                            
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <h:commandButton class="btn btn-success" value="Salvar" />                                        
                                         <h:commandButton value="Cancelar" class="btn btn-danger"/>
+
+                                        <h:commandButton class="btn btn-success" 
+                                                         value="Salvar" 
+                                                         action="#{recSelecaoBean.Salvar()}" >
+                                            <f:ajax execute="@form" render="formSelecao" />
+                                        </h:commandButton> 
                                     </div>
                                 </div>
                             </div>
@@ -80,10 +104,13 @@
 
                     <p:panel visible="#{!recSelecaoBean.formAtivo}">
                         <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Novo Registro" action="#{recSelecaoBean.Adicionar()}">                                
+                            <h:commandButton class="btn btn-primary" 
+                                             value="Novo Registro" 
+                                             action="#{recSelecaoBean.Adicionar()}">                                
+
                             </h:commandButton>
                         </div>
-                        <h:dataTable class="table table-striped" value="#{recSelecaoBean.selecoes}" var="item">                                        
+                        <h:dataTable class="table table-striped" value="#{recSelecaoBean.ListarTodas()}" var="item">                                        
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
                                 <h:outputText value="#{item.recIdselecao}"/>                                
@@ -93,11 +120,29 @@
                                 <h:outputText value="#{item.recIdpessoa.recNomecompleto}"/>
                             </h:column>                                        
                             <h:column>
+                                <f:facet name="header">Vaga</f:facet>                                                                                                                            
+                                <h:outputText value="#{item.recIdvaga.recDescricao}"/>
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Data Entrevista</f:facet>                                                                                                                            
+                                <h:outputText value="#{item.recDataEntrevista}"/>
+                            </h:column>  
+                            <h:column>
                                 <f:facet name="header">Opções</f:facet>
-                                <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recSelecaoBean.PreparaEdicao(vaga)}">
+                                <h:commandLink class="btn btn-link btn-small" 
+                                               value="Editar" 
+                                               action="#{recSelecaoBean.PreparaEdicao(item)}">
 
                                 </h:commandLink>
-                                <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{recSelecaoBean.Excluir(vaga)}" onclick="return confirm('Excluir tabela?')">
+                                <h:commandLink class="btn btn-link btn-small" 
+                                               value="Excluir" 
+                                               action="#{recSelecaoBean.Excluir(item)}" 
+                                               onclick="return confirm('Excluir Seleção?')">
+
+                                </h:commandLink>
+                                <h:commandLink class="btn btn-link btn-small" 
+                                               value="Descrever Entrevista" 
+                                               action="#{recSelecaoBean.DescreverEntrevista(selecao)}" >
 
                                 </h:commandLink>
                             </h:column>                  

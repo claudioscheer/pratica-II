@@ -11,12 +11,14 @@ import br.org.gdt.model.GchFormulario;
 import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.model.GchRespostas;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
 import br.org.gdt.service.GchRespostasService;
 import br.org.gdt.service.RecPessoaService;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -25,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -72,12 +75,12 @@ public class GchFormularioAlternativasBean {
 
     private List<GchRespostas> gchRespostasList = new ArrayList<>();
 
-    private GchFormulario gchFormularios = new GchFormulario();
+    private GchFormulario gchFormularios;
 
     private GchRespostas gchRespostas = new GchRespostas();
 
     private int idPessoa;
-    private long idFormulario;
+    private int idFormulario;
 
     public GchFormularioAlternativasBean() {
 
@@ -94,7 +97,7 @@ public class GchFormularioAlternativasBean {
 
             GchRespostas gchResposta = new GchRespostas();
 
-            gchResposta.setFormCodigo(1);
+            gchResposta.setFormCodigo(idFormulario);
 
             RecPessoa pessoa = recPessoaService.BuscarId(idPessoa);
 
@@ -108,13 +111,45 @@ public class GchFormularioAlternativasBean {
 
         radio = new HashMap<GchAlternativas, String>();
 
+        Helper.mostrarNotificacao("Sucesso", "Resposta cadastrada!", "sucess");
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("Formularios.xhtml");
+        } catch (IOException ex) {
+
+        }
+        Helper.mostrarNotificacao("Sucesso", "Resposta cadastrada!", "sucess");
     }
 
     public List<GchPerguntas> buscaPerguntas() {
 
-        gchFormularios = gchFormularioService.findById(idFormulario);
+        System.out.println("idParm:" + idParm);
 
-        return gchFormularios.getPerguntas();
+        if (idFormulario == 0) {
+
+            recuperaParametro();
+
+        }
+
+        return gchPerguntasService.buscaPergutasFormulario(idFormulario);
+
+    }
+
+    public void recuperaParametro() {
+
+        if (idParm != null) {
+
+            byte[] bytes = Base64.getDecoder().decode(idParm);
+
+            String parametro = new String(bytes);
+
+            String[] parametros = parametro.split("&");
+
+            idFormulario = Integer.parseInt(parametros[0]);
+            idPessoa = Integer.parseInt(parametros[1]);
+
+        }
 
     }
 
@@ -136,9 +171,13 @@ public class GchFormularioAlternativasBean {
 
     }
 
-    public void action() {
-        String value = FacesContext.getCurrentInstance().
-                getExternalContext().getRequestParameterMap().get("div_3");
+    public String preparedEdit(GchFormulario gchFormulario) {
+
+        idFormulario = (int) gchFormulario.getFormCodigo();
+        idPessoa = 0;
+
+        return "ResponderFormulario";
+
     }
 
     public List<GchAlternativas> getTodasAlternativas() {
@@ -175,11 +214,9 @@ public class GchFormularioAlternativasBean {
 
     public GchFormulario getGchFormularios() {
 
-        if (gchFormularios == null) {
+        recuperaParametro();
 
-            gchFormularios = gchFormularioService.findById(1);
-
-        }
+        gchFormularios = gchFormularioService.findById(idFormulario);
 
         return gchFormularios;
     }
@@ -281,26 +318,27 @@ public class GchFormularioAlternativasBean {
     }
 
     public String getIdParm() {
-        System.out.println("idParm:" + idParm);
-
-        if (idParm != null) {
-
-            byte[] bytes = Base64.getDecoder().decode(idParm);
-
-            String parametro = new String(bytes);
-
-            String[] parametros = parametro.split("&");
-            
-            idFormulario = Integer.parseInt(parametros[0]);
-            idPessoa = Integer.parseInt(parametros[1]);
-            
-        }
-
         return idParm;
     }
 
     public void setIdParm(String idParm) {
         this.idParm = idParm;
+    }
+
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
+    public int getIdFormulario() {
+        return idFormulario;
+    }
+
+    public void setIdFormulario(int idFormulario) {
+        this.idFormulario = idFormulario;
     }
 
 }

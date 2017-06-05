@@ -16,22 +16,26 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class CsbffEscalaHorasBean implements Serializable {
 
+    public void setDiasATrabalhar(DiasATrabalhar diasATrabalhar) {
+        this.diasATrabalhar = diasATrabalhar;
+    }
+
     private boolean formAtivo = false;
     private String recCpf;
 
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoaList;
-    CsbffEscalaHoras diaDaSemana;
+//    CsbffEscalaHoras diaDaSemana;
+    private CsbffEscalaHoras csbffEscalaHoras = new CsbffEscalaHoras();
 
-    private CsbffEscalaHoras csbffEscalaHoras;
-    private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
+    //    private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
     @ManagedProperty("#{csbffEscalaHorasService}")
     private CsbffEscalaHorasService csbffEscalaHorasService;
     private boolean adicionandoEscala = false;
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
-
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
+    private DiasATrabalhar diasATrabalhar;
 
     public CsbffEscalaHorasBean() {
 
@@ -61,48 +65,29 @@ public class CsbffEscalaHorasBean implements Serializable {
         this.recPessoa.getCsbffEscalaHorasList().add(eh);
     }
 
-//    public void removerEscala(CsbffEscalaHoras eh) {
-//        this.recPessoa.getCsbffEscalaHorasList().remove(eh);
-////        csbffEscalaHorasService.delete(csbffEscalaHoras.getEscalaCodigo());
-////        todosCsbffEscalaHoras.remove(csbffEscalaHoras);
-//    }
-        public void removerEscala(CsbffEscalaHoras eh) {
+    public void removerEscala(CsbffEscalaHoras eh) {
         this.recPessoa.getCsbffEscalaHorasList().remove(eh);
     }
 
-
-//    public void addEscalaColaborador() {
-//        this.formAtivo = true;
-//        this.adicionandoEscala = false;
-//        this.csbffEscalaHoras = new CsbffEscalaHoras();
-//
-//    }
 //    public String salvarEscalas() {
-////        if (recPessoa.getCsbffEscalaHorasList().size() <= 0) {
-////            Helper.mostrarNotificacao("Escala", "Preencha todos os campos.", "info");
-////            return;
-////        }
 //        if (csbffEscalaHoras.getEscalaCodigo() > 0) {
-////            this.recPessoa.getCsbffEscalaHorasList().add(new CsbffEscalaHoras());
 //            csbffEscalaHorasService.update(csbffEscalaHoras);
-////            csbffEscalaHorasService.save(csbffEscalaHoras);
 //        }
 //        todosCsbffEscalaHoras = csbffEscalaHorasService.findAll();
 //        this.csbffEscalaHoras = new CsbffEscalaHoras();
-//        this.formAtivo = false;
 //        return "dadosprofissionais";
-//
 //    }
-      public void salvarEscalas() {
-//        CsbffEscalaHoras eh = new CsbffEscalaHoras();
-        csbffEscalaHoras.setRecIdpessoa(this.recPessoa);
-        csbffEscalaHoras.setEscalaCodigo(this.csbffEscalaHoras);
-        if (this.recPessoa.getCsbffEscalaHorasList()== null) {
-            this.recPessoa.setCsbffEscalaHorasList(new ArrayList<>());
+    public String salvarEscalas() {
+        if (recPessoa.getRecIdpessoa() > 0) {
+            recPessoaService.update(recPessoa);
         }
-        this.recPessoa.getCsbffEscalaHorasList().add(csbffEscalaHoras);
+        recPessoaList = recPessoaService.findAll();
+        this.formAtivo = false;
+        this.recPessoa = new RecPessoa();
+//        String recContrato = ("Sim");
+        return "dadosprofissionais";
     }
-   
+
     public String cancelEscala() {
         this.formAtivo = false;
         this.adicionandoEscala = false;
@@ -131,29 +116,6 @@ public class CsbffEscalaHorasBean implements Serializable {
 
     public RecPessoa getRecPessoa() {
         return recPessoa;
-    }
-
-    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
-        this.csbffEscalaHoras = csbffEscalaHoras;
-    }
-
-    public CsbffEscalaHoras getCsbffEscalaHoras() {
-        if (csbffEscalaHoras == null) {
-            csbffEscalaHoras = new CsbffEscalaHoras();
-        }
-        return csbffEscalaHoras;
-
-    }
-
-    public List<CsbffEscalaHoras> getTodosCsbffEscalaHoras() {
-        if (todosCsbffEscalaHoras == null) {
-            todosCsbffEscalaHoras = csbffEscalaHorasService.findAll();
-        }
-        return todosCsbffEscalaHoras;
-    }
-
-    public void setTodosCsbffEscalaHoras(List<CsbffEscalaHoras> todosCsbffEscalaHoras) {
-        this.todosCsbffEscalaHoras = todosCsbffEscalaHoras;
     }
 
     public CsbffEscalaHorasService getCsbffEscalaHorasService() {
@@ -201,21 +163,20 @@ public class CsbffEscalaHorasBean implements Serializable {
         this.adicionandoEscala = adicionandoEscala;
     }
 
-    public CsbffEscalaHoras getDiaDaSemana() {
-        return diaDaSemana;
-    }
-
-    public void setDiaDaSemana(CsbffEscalaHoras diaDaSemana) {
-        this.diaDaSemana = diaDaSemana;
-    }
-
     public List<CsbffEscalaHoras> getCsbffEscalaHorasList() {
-        List<CsbffEscalaHoras> csbffEscalaHorasList = csbffEscalaHorasService.findAll();
         return csbffEscalaHorasList;
     }
 
     public void setCsbffEscalaHorasList(List<CsbffEscalaHoras> csbffEscalaHorasList) {
         this.csbffEscalaHorasList = csbffEscalaHorasList;
+    }
+
+    public CsbffEscalaHoras getCsbffEscalaHoras() {
+        return csbffEscalaHoras;
+    }
+
+    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
+        this.csbffEscalaHoras = csbffEscalaHoras;
     }
 
 }

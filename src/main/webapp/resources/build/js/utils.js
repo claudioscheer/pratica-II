@@ -27,12 +27,16 @@ function MascaraTelefone(telefone) {
     return telefone;
 }
 
-function MascaraValorMonetario(valor) {
-    v = valor;
-    v = v.replace(/\D/g, "");    
-    v = v.replace(/(\d{1})(\d{4})$/, "$1.$2");
-    v = v.replace(/(\d{1})(\d{1,1})$/, "$1.$2");
-    return v;
+
+
+function MascaraValorMonetario(valor){ 
+	valor=valor.replace(/\D/g,"");
+	valor=valor.replace(/(\d{1})(\d{15})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{11})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{8})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{5})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{1,2})$/,"$1,$2");
+	return valor; 
 }
 
 function cep(cep) {
@@ -41,3 +45,29 @@ function cep(cep) {
     cep = cep.replace(/(\d{3})(\d{1,3})$/, "$1-$2");
     return cep;
 }
+function MascaraHora(Hora, campo) {
+    var hora01 = '';
+    hora01 = hora01 + Hora;
+    if (hora01.length === 2) {
+        hora01 = hora01 + ':';
+        campo.value = hora01;
+    }
+    if (hora01.length === 5) {
+        Verifica_Hora(campo);
+    }
+}
+function VerificaHora(campo) {
+    hrs = (campo.value.substring(0, 2));
+    min = (campo.value.substring(3, 5));
+    estado = "";
+    if ((hrs < 00) || (hrs > 23) || (min < 00) || (min > 59)) {
+        estado = "errada";
+    }
+    if (campo.value === "") {
+        estado = "errada";
+    }
+    if (estado === "errada") {
+        alert("Hora invalida!");
+        campo.focus();
+    }
+} 
