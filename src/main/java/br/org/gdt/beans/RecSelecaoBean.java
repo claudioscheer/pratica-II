@@ -13,6 +13,7 @@ import javax.faces.bean.RequestScoped;
 public class RecSelecaoBean {
 
     private boolean formAtivo = false;
+    private boolean descreverEntrevista = false;
 
     private RecSelecao selecao = new RecSelecao();
     private List<RecSelecao> selecoes;
@@ -45,6 +46,13 @@ public class RecSelecaoBean {
 
     public String PreparaEdicao(RecSelecao selecao) {
         this.formAtivo = true;
+        this.selecao = selecao;
+        return "selecao";
+    }
+    
+    public String DescreverEntrevista(RecSelecao selecao){
+        this.formAtivo = true;
+        this.descreverEntrevista = true;
         this.selecao = selecao;
         return "selecao";
     }
@@ -106,5 +114,13 @@ public class RecSelecaoBean {
             return false;
         }
         return true;
+    }
+
+    public boolean isDescreverEntrevista() {
+        return descreverEntrevista;
+    }
+
+    public void setDescreverEntrevista(boolean descreverEntrevista) {
+        this.descreverEntrevista = descreverEntrevista;
     }
 }

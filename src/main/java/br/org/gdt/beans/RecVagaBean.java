@@ -71,6 +71,14 @@ public class RecVagaBean {
         return vagas;
     }
 
+    public String AbrirPaginaVagas() {
+        if (this.ListarTodasExternas().size() > 0) {
+            return "menu_vaga_lista";            
+        } else {
+            return "sem_vagas";
+        }
+    }
+
     public List<RecVaga> ListarTodasExternas() {
         if (vagas == null) {
             vagas = recVagaService.ListarTodasVagasExternas();
