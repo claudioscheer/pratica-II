@@ -3,12 +3,15 @@ package br.org.gdt.beans;
 import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Sexo;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecPessoaService;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -49,23 +52,56 @@ public class CsbffDadosPessoaisBean implements Serializable {
         return pessoas;
     }
 
-    public String saveDadosPessoais() {
-        if (recPessoa.getRecIdpessoa() > 0) {
-            recPessoaService.update(recPessoa);
+//    public String saveDadosPessoais() {
+//        if (recPessoa.getRecIdpessoa() > 0) {
+//            recPessoaService.update(recPessoa);
+//        }
+//        recPessoaList = recPessoaService.findAll();
+//        this.formAtivo = false;
+//        this.recPessoa = new RecPessoa();
+//         return "dadosprofissionais";
+//    }
+
+//    public String cancel() {
+//        this.formAtivo = false;
+//        this.recPessoa = new RecPessoa();
+//        return null;
+//
+//    }
+    public void cancel() {
+        this.formAtivo = false;
+        this.recPessoa = new RecPessoa();
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("listaadmissao.xhtml");
+        } catch (IOException ex) {
+
         }
-        recPessoaList = recPessoaService.findAll();
-        this.formAtivo = false;
-        this.recPessoa = new RecPessoa();
-         return "dadosprofissionais";
     }
 
-    public String cancel() {
-        this.formAtivo = false;
-        this.recPessoa = new RecPessoa();
-        return null;
+    public String saveDadosPessoais() {
+        String MsgNotificacao = "";
+        try {
+            if (recPessoa.getRecIdpessoa() > 0) {
+                recPessoaService.update(recPessoa);
+                MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
+            }
+            
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+        } catch (Exception ex) {
+            MsgNotificacao = "Os dados não foram inseridos ";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
 
+        }
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("dadosprofissionais.xhtml");
+        } catch (IOException ex) {
+        }
+        
+        return "listaadmissao";
     }
-
     public String editaConsulta(RecPessoa pessoas) {
 //        this.formAtivo = true;
         this.recPessoa = pessoas;
