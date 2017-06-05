@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -36,7 +37,7 @@ public class CsbffPessoaDependente implements Serializable {
     @Column(name = "colab_dep_codigo")
     private long colabDepCodigo;
     @JoinColumn(name = "dependente_cod", referencedColumnName = "dependente_cod")
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private CsbffDependentes dependenteCod;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @OneToOne(optional = false)

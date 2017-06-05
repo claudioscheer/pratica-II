@@ -37,7 +37,7 @@ public class DependenteBean {
     private CsbffDependentes csbffdependente = new CsbffDependentes();
     private List<CsbffDependentes> todosdependentes;
 
-    @ManagedProperty("#{csbffDependenteService}")
+    @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependenteService;
     private RecPessoa recPessoa = new RecPessoa();
     
@@ -69,13 +69,13 @@ public class DependenteBean {
         System.out.println("6"+ csbffdependente.getDependenteRgCertNascimento());
         System.out.println("7" +csbffdependente.getDependenteTipo());
        
-        
+//        
         csbffPessoaDependente.setColabDepCodigo(recPessoa.getRecIdpessoa());
         csbffPessoaDependente.setDependenteCod(csbffdependente);
         csbffPessoaDependente.setRecIdpessoa(recPessoa);
         csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
-        csbffPessoaDependente = getCsbffPessoaDependente();
-        
+        //csbffPessoaDependente = getCsbffPessoaDependente();
+        //csbffdependente.setCsbffPessoaDependente(csbffPessoaDependente);
         csbffDependenteService.save(csbffdependente);
        csbffPessoaDependenteService.save(csbffPessoaDependente);
     
@@ -137,7 +137,7 @@ public class DependenteBean {
     }
 
     public List<CsbffDependentes> getTodosdependentes() {
-        return todosdependentes;
+        return recPessoaService.findAllDependentesPessoa(recPessoa);
     }
 
     public void setTodosdependentes(List<CsbffDependentes> todosdependentes) {
