@@ -115,7 +115,7 @@ public class FpCalcularBean {
             try {
                 calcularFolha.calcularParaTodosFuncionarios(fpPeriodo);
                 Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "info");
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
             }
         } else {
@@ -124,6 +124,7 @@ public class FpCalcularBean {
                 todosFpEventoPeriodo.forEach(x -> x.setJaCalculado(false));
 
                 DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();
+                dadosCalculadosDoFuncionario.setDeletarJaCalculada(true);
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
                 if (recPessoa.getRecIdpessoa() <= 0) {

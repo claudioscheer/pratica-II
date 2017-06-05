@@ -1819,6 +1819,7 @@ function init_daterangepicker_single_call() {
 $(window).load(function () {
     if (typeof (jsf) !== 'undefined') {
         jsf.ajax.addOnEvent(function (data) {
+            $('[data-toggle="tooltip"]').tooltip('destroy');
             if (data.status === 'success') {
                 $('.date-picker').daterangepicker({
                     locale: {
@@ -1828,7 +1829,11 @@ $(window).load(function () {
                     singleClasses: "picker_4"
                 }, function (start, end, label) {
                     console.log(start.toISOString(), end.toISOString(), label);
-                });                
+                });
+                $('[data-toggle="tooltip"]').tooltip({
+                    container: 'body'
+                });
+                
             }
         });
     }
@@ -2555,7 +2560,7 @@ function  init_calendar() {
                         end: end,
                         allDay: allDay
                     },
-                    true // make the event "stick"
+                            true // make the event "stick"
                             );
                 }
 

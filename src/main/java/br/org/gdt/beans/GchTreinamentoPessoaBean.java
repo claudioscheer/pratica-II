@@ -10,6 +10,7 @@ import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.GchTreinamentoPessoaService;
 import br.org.gdt.service.GchTreinamentosService;
+import br.org.gdt.service.RecPessoaService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class GchTreinamentoPessoaBean {
 
     private Map<RecPessoa, Boolean> checked = new HashMap<RecPessoa, Boolean>();
 
-    private List<RecPessoa> pessoasVinculadas = new ArrayList<>();
+    private List<RecPessoa> pessoasVinculadas;
 
     private GchTreinamentospessoas gchTreinamentospessoas = new GchTreinamentospessoas();
     private List<GchTreinamentospessoas> todosGchTreinamentosPessoas;
@@ -46,7 +47,14 @@ public class GchTreinamentoPessoaBean {
     @ManagedProperty("#{gchTreinamentoPessoaService}")
     private GchTreinamentoPessoaService gchTreinamentospessoasService;
 
-    private RecPessoa id = new RecPessoa(); // gettter / setter
+    @ManagedProperty("#{recPessoaService}")
+    private RecPessoaService recPessoaService;
+
+    private RecPessoa inputHidden;
+
+    private RecPessoa id = new RecPessoa();
+
+    private long idTreinamento;
 
     public GchTreinamentoPessoaBean() {
 
@@ -55,7 +63,7 @@ public class GchTreinamentoPessoaBean {
     public void save() {
 
         if (gchTreinamentospessoas != null) {
-        
+
             Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
 
             while (keyIterrator.hasNext()) {
@@ -99,6 +107,7 @@ public class GchTreinamentoPessoaBean {
         this.formAtivo = false;
         this.gchTreinamentospessoas = new GchTreinamentospessoas();
         checked = new HashMap<RecPessoa, Boolean>();
+        pessoasVinculadas = new ArrayList<>();
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             context.getExternalContext().redirect("Treinamentos.xhtml");
@@ -108,10 +117,10 @@ public class GchTreinamentoPessoaBean {
     }
 
     public void add() {
-        
+
         this.formAtivo = true;
         this.gchTreinamentospessoas = new GchTreinamentospessoas();
-        
+
     }
 
     public String excluir(GchTreinamentospessoas gchTreinamentosPessoas) {
@@ -134,9 +143,11 @@ public class GchTreinamentoPessoaBean {
         this.formAtivo = true;
 
         if (gchTreinamentos != null) {
-            
+
             this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
-        
+
+            idTreinamento = gchTreinamentos.getTreiCodigo();
+
 //            List<GchTreinamentospessoas> gchTreinemntoPessoasList =  gchTreinamentospessoasService.verificaPessoasVinculadoTreinamento(gchTreinamentos.getTreiCodigo());
 //            
 //            for (GchTreinamentospessoas gchTreinamentospessoa : gchTreinemntoPessoasList){
@@ -144,7 +155,6 @@ public class GchTreinamentoPessoaBean {
 //                checked.replace(gchTreinamentospessoa.getRecIdpessoa(), true);
 //                
 //            }
-            
         }
 
         return "VincularPessoasTreinamento";
@@ -220,6 +230,19 @@ public class GchTreinamentoPessoaBean {
         return null;
     }
 
+    public String verificaCheck(long idPessoa) {
+
+        List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoasVinculadoTreinamento(idTreinamento, idPessoa);
+
+        for (GchTreinamentospessoas t : list) {
+
+            checked.replace(t.getRecIdpessoa(), true);
+
+        }
+
+        return "Ok";
+    }
+
     public boolean isFormAtivo() {
         return formAtivo;
     }
@@ -258,6 +281,11 @@ public class GchTreinamentoPessoaBean {
     }
 
     public List<RecPessoa> getPessoasVinculadas() {
+        if (pessoasVinculadas == null) {
+            pessoasVinculadas = recPessoaService.findAll();
+
+        }
+
         return pessoasVinculadas;
     }
 
@@ -279,6 +307,30 @@ public class GchTreinamentoPessoaBean {
 
     public void setId(RecPessoa id) {
         this.id = id;
+    }
+
+    public RecPessoaService getRecPessoaService() {
+        return recPessoaService;
+    }
+
+    public void setRecPessoaService(RecPessoaService recPessoaService) {
+        this.recPessoaService = recPessoaService;
+    }
+
+    public long getIdTreinamento() {
+        return idTreinamento;
+    }
+
+    public void setIdTreinamento(long idTreinamento) {
+        this.idTreinamento = idTreinamento;
+    }
+
+    public RecPessoa getInputHidden() {
+        return inputHidden;
+    }
+
+    public void setInputHidden(RecPessoa inputHidden) {
+        this.inputHidden = inputHidden;
     }
 
 }

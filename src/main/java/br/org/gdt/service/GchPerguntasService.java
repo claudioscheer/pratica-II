@@ -51,7 +51,7 @@ public class GchPerguntasService {
 
     }
 
-    public List<GchPerguntas> buscaPergutasFormulario(int id) {
+    public List<GchPerguntas> buscaPergutasFormulario(long id) {
         return gchPerguntasDAO.buscaPergutasFormulario(id);
     }
 
