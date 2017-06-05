@@ -211,7 +211,7 @@ public class GchFormularioBean {
 
         if (!Notificacao.isEmpty()) {
 
-            Helper.mostrarNotificacao("Sucesso", Notificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", Notificacao, "success");
 
             Notificacao = "";
         }
@@ -305,7 +305,7 @@ public class GchFormularioBean {
 
                     gchFormularioPessoaService.save(gchFormulariopessoa);
 
-                    String parametroUrl = gchFormulario.getFormCodigo() + "&" + pessoa.getId();
+                    String parametroUrl = gchFormulario.getFormCodigo() + "&" + pessoa.getRecIdpessoa();
 
                     String parametroBase64 = DatatypeConverter.printBase64Binary(parametroUrl.getBytes());
 
@@ -356,7 +356,7 @@ public class GchFormularioBean {
             }
 
             String MsgNotificacao = "Formulário disponibilizado para as pessoas selecionadas!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         }
         return "Formularios";
@@ -492,7 +492,7 @@ public class GchFormularioBean {
                     gchFormularioService.delete(gchFormulario.getFormCodigo());
                     gchTodosFormularios.remove(gchFormulario);
                     MsgNotificacao = "O formulário <b>" + gchFormulario.getFormNome() + " </b>foi excluído com sucesso!";
-                    Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                    Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
                 } else {
 
