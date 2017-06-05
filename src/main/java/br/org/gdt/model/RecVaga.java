@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,8 +61,8 @@ public class RecVaga implements Serializable {
     private Integer recStatus;
     @Basic(optional = true)
     @Column(name = "id_cargo")
-    private String idCargo;
-    @ManyToMany(mappedBy = "recVagaList")
+    private String idCargo;    
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<RecHabilidade> recHabilidadeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdvaga")
     private List<RecSelecao> recSelecaoList;
@@ -72,6 +73,8 @@ public class RecVaga implements Serializable {
     @ManyToOne(optional = true)
     private RecGrauensino recIdgrauensino;
     private Integer recGrauensino;
+    @Column(name = "rec_tipovaga")
+    private String recTipoVaga;
 
     public RecVaga() {
     }
@@ -183,5 +186,13 @@ public class RecVaga implements Serializable {
 
     public void setRecGrauensino(Integer recGrauensino) {
         this.recGrauensino = recGrauensino;
+    }
+
+    public String getRecTipoVaga() {
+        return recTipoVaga;
+    }
+
+    public void setRecTipoVaga(String recTipoVaga) {
+        this.recTipoVaga = recTipoVaga;
     }
 }

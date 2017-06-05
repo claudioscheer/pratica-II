@@ -359,6 +359,7 @@ public class GchFormularioBean {
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         }
+        gchTodosFormularios = null; //isso faz com que a listagem se atualize
         return "Formularios";
     }
 
@@ -442,6 +443,7 @@ public class GchFormularioBean {
 
         }
 
+        gchTodosFormularios = null; //isso faz com que a listagem se atualiz
         return "Formularios";
     }
 
@@ -524,7 +526,9 @@ public class GchFormularioBean {
 
     public List<GchFormulario> getGchTodosFormularios() {
 
-        gchTodosFormularios = gchFormularioService.findAll();
+        if (gchTodosFormularios == null){
+            gchTodosFormularios = gchFormularioService.findAll();
+        }
 
         return gchTodosFormularios;
     }

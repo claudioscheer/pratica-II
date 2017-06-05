@@ -20,11 +20,11 @@ public class RecSelecaoService {
 
     @Transactional
     public void Alterar(RecSelecao selecao) {
-        selecaoDao.save(selecao);
+        selecaoDao.update(selecao);
     }
 
     @Transactional
-    public void Excluir(int id) {
+    public void Excluir(long id) {
         selecaoDao.delete(id);
     }
 

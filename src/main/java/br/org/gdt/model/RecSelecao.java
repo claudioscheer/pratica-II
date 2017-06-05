@@ -6,15 +6,21 @@
 package br.org.gdt.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,16 +32,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RecSelecao.findAll", query = "SELECT r FROM RecSelecao r")})
+@SequenceGenerator(name = "seq_RecSelecao", sequenceName = "seq_RecSelecao", allocationSize = 1)
 public class RecSelecao implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idselecao")
-    private int recIdselecao;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_RecSelecao")
+    private long recIdselecao;
     @Column(name = "rec_descricaoentrevista")
     private String recDescricaoentrevista;
+    @Basic(optional = true)
     @Column(name = "rec_aprovado")
     private Boolean recAprovado;
+    @Column(name = "rec_dataentrevista")
+    @Temporal(TemporalType.DATE)
+    private Date recDataEntrevista;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne(optional = false)
     private RecPessoa recIdpessoa;
@@ -50,7 +62,7 @@ public class RecSelecao implements Serializable {
         this.recIdselecao = recIdselecao;
     }
 
-    public int getRecIdselecao() {
+    public long getRecIdselecao() {
         return recIdselecao;
     }
 
@@ -90,9 +102,21 @@ public class RecSelecao implements Serializable {
         this.recIdvaga = recIdvaga;
     }
     
-    @Override
-    public String toString() {
-        return "br.org.gdt.modelNew.RecSelecao[ recIdselecao=" + recIdselecao + " ]";
+//    @Override
+//    public String toString() {
+//        return "br.org.gdt.modelNew.RecSelecao[ recIdselecao=" + recIdselecao + " ]";
+//    }
+
+    public void setRecIdselecao(long recIdselecao) {
+        this.recIdselecao = recIdselecao;
+    }
+
+    public Date getRecDataEntrevista() {
+        return recDataEntrevista;
+    }
+
+    public void setRecDataEntrevista(Date recDataEntrevista) {
+        this.recDataEntrevista = recDataEntrevista;
     }
     
 }

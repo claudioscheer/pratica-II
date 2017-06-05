@@ -95,6 +95,10 @@ public class InicializaBean {
         sqls.add("INSERT INTO fp_faixa VALUES (15, 189.59, 0, 0, 0, 2);");
         sqls.add("INSERT INTO fp_faixa VALUES (16, 0, 0, 0, 0, 6);");
 
+        sqls.add("SELECT setval('seq_fp_tabela', 7, FALSE);");
+        sqls.add("SELECT setval('seq_fp_tabela_vigencia', 7, FALSE);");
+        sqls.add("SELECT setval('seq_fp_faixa', 17, FALSE);");
+
         sqls.forEach(sql -> inicializaService.inicializar(sql));
     }
 

@@ -114,16 +114,10 @@ public void init() {
 
     }
 
-    public void cancel() {
+    public String cancel() {
         this.formAtivo = false;
         this.gchCurso = new GchCursos();
-        
-         FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("Cursos.xhtml");
-        } catch (IOException ex) {
-
-        }
+        return "Cursos";
     }
 
     public void add() {

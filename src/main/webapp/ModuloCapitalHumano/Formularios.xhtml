@@ -35,8 +35,8 @@
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <h:form id="formFormulario">
-                                            
-                                            
+
+
                                             <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
                                                 <h:column headerClass="alinhaColuna">                
@@ -54,34 +54,27 @@
                                                         <i class="glyphicon glyphicon-eye-open" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
-                                               <h:column>   
+                                                <h:column>   
                                                     <h:commandLink  action="#{gchFormularioBean.vincularPessoas(formulario)}">
                                                         <f:ajax execute="@this"  event="action" render="formFormulario" />
                                                         <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
 
                                                     </h:commandLink>
-                                               </h:column>
-                                                <h:column> 
-                                                    <h:commandLink >
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
-                                                        <i class="glyphicon glyphicon-object-align-bottom" style="font-size:18px" ></i>
-
-                                                    </h:commandLink>
-                                                    
-                                                
                                                 </h:column>
 
-                                                    <h:column>   
-                                                        <f:facet name="header">Nome</f:facet>
-                                                        <h:outputText value="#{formulario.formNome}"/>                
-                                                    </h:column>
+                                                <h:column>   
+                                                    <f:facet name="header">Nome</f:facet>
+                                                    <h:outputText value="#{formulario.formNome}"/>                
+                                                </h:column>
 
-                                                    <h:column>                
-                                                        <f:facet name="header">Prazo de Resposta</f:facet>
-                                                        <h:outputText value="#{formulario.formPrazoResposta}"/>                
-                                                    </h:column>
+                                                <h:column>                
+                                                    <f:facet name="header">Prazo de Resposta</f:facet>
+                                                    <h:outputText value="#{formulario.formPrazoResposta}">
+                                                        <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                </h:column>
 
-                                                </h:dataTable>
+                                            </h:dataTable>
 
                                         </h:form> </div>
 
@@ -123,18 +116,12 @@
                                             </div>
 
                                             <h:commandButton id="enviarEmailButton" class="btn btn-primary" action="#{gchFormularioBean.salvarPessoasFormulario}" value="Cadastrar" />
-                                             
+
                                             <h:commandButton class="btn btn-danger"  actionListener="#{gchFormularioBean.cancelDialog()}" value="Cancelar" /> 
 
                                         </p:dialog>
 
                                     </h:form>
-                                   
-
-
-                                    <div class="panel-footer">
-                                        Gestão do Capital Humano - Todos os Direitos Reservados
-                                    </div>
                                 </div>
 
                             </div>

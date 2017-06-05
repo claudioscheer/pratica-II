@@ -37,4 +37,12 @@ public class RecVagaService {
     public List<RecVaga> PesquisarPorDescricao(String busca){
         return vagaDao.PesquisarPorDescricao(busca);
     }
+    
+    public List<RecVaga> ListarTodasVagasInternas(){
+        return vagaDao.BuscarVagasInternas();
+    }
+    
+    public List<RecVaga> ListarTodasVagasExternas(){
+        return vagaDao.BuscarVagasExternas();
+    }
 }

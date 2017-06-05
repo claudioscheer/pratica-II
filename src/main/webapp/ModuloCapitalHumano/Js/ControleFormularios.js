@@ -92,7 +92,7 @@ $('#SequencialPergunta')[0].value = incrementa;
 
 var divAlternativas = $('#TxbAlternativasDisponiveis');
 
-var InputText = '<div class="row" id="'+id+'"><div id="perguntas"><div class="form-group col-md-5 col-sm-5"><input type="text" name="formFormulario:j_idt56:0:j_idt58" value="" class="form-control"></div></div><div class="text-left col-md-5 col-sm-5"><div class="side-by-side clearfix"><div id="0"><select id="0" style="width:400px" data-placeholder="Selecione uma alternativa" class="chosen-select" multiple="true" tabindex="4">'+divAlternativas[0].children[0].innerHTML+'</select></div></div></div><input type="button" class="btn btn-danger" value="Remover" onclick="removerLinha('+id+')"/></div>';
+var InputText = '<div class="row" id="'+id+'"><div id="perguntas"><div class="form-group col-md-5 col-sm-5"><input type="text" name="formFormulario:j_idt56:0:j_idt58" value="" class="form-control"></div></div><div class="text-left col-md-5 col-sm-5"><div class="side-by-side clearfix"><div id="0"><select id="0" style="width:400px" data-placeholder="Selecione uma alternativa" class="chosen-select" multiple="true" tabindex="4">'+divAlternativas[0].children[0].innerHTML+'</select></div></div></div><a title="Remover" onclick="removerLinha('+id+')"><i class="glyphicon glyphicon-remove-circle" style="font-size:18px; margin-left:-30px; cursor:pointer;"></i></a></div>';
 
 divPerguntas.append(InputText);
 
