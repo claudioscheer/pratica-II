@@ -1,6 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.RecPessoaDAO;
+import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class RecPessoaService {
 
     public List<RecPessoa> findAllFuncionarios() {
         return pessoaDao.findAllFuncionarios();
+    }
+
+    public List<CsbffDependentes> findAllDependentesPessoa(RecPessoa recPessoa) {
+        return pessoaDao.findAllDependentesPessoa(recPessoa.getRecIdpessoa());
     }
 
 //    public RecPessoa findByCpf(String cpf) {
