@@ -3,7 +3,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"      
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">    
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      
+      >
+      
     <h:head>
         <title>Cadastro de treinamento</title>
 
@@ -119,17 +122,32 @@
                                                                 <!--<h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>-->
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                        
+                                                            
                                                                 <label class="control-label " for="date">
                                                                     Data de início
                                                                 </label>
-                                                                <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
+                                                                <!-- 
+                                                                
+                                                                <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
+                                                                
+                                                             
+                                                                
+                                                                
+                                                                <b:dateTimePicker value="#{dateTimeBean.justNow}"
+                                                                                  allow-input-toggle="#{dateTimeBean.allowInputToggle}"
+                                                                                  icon-position="#{dateTimeBean.iconPosition}"
+                                                                                  mode="#{dateTimeBean.mode}"
+                                                                                  side-by-side="#{dateTimeBean.sideBySide}"
+                                                                                  show-date="#{dateTimeBean.showDate}"
+                                                                                  show-time="#{dateTimeBean.showTime}"
+                                                                                  show-icon="#{dateTimeBean.showIcon}"
+                                                                                  use-current="#{dateTimeBean.useCurrent}" />
                                                                 <h:inputText class="form-control" id="dateInicio"  value="#{gchTreinamentosBean.dataInicio}" a:placeholder="dd/mm/aaaa hh:mm" /> 
                                                                 <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
-                                                                
-                                                            </div>
-                                                        </div>         
+
+                                                            
+                                                                 
 
                                                         <div class="form-group">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">

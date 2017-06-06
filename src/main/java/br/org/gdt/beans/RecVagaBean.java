@@ -71,6 +71,21 @@ public class RecVagaBean {
         return vagas;
     }
 
+    public String AbrirPaginaVagas() {
+        if (this.ListarTodasExternas().size() > 0) {
+            return "menu_vaga_lista";            
+        } else {
+            return "sem_vagas";
+        }
+    }
+
+    public List<RecVaga> ListarTodasExternas() {
+        if (vagas == null) {
+            vagas = recVagaService.ListarTodasVagasExternas();
+        }
+        return vagas;
+    }
+
     public List<RecHabilidade> ListarHabilidade() {
         if (habilidades == null) {
             habilidades = recHabilidadeService.ListarTodas();
@@ -90,7 +105,7 @@ public class RecVagaBean {
     public String PreparaEdicao(RecVaga vaga) {
         this.formAtivo = true;
         this.vaga = vaga;
-        return "vaga_lista";
+        return "vagas";
     }
 
     public String VisualizarVaga(RecVaga vaga) {
@@ -100,7 +115,7 @@ public class RecVagaBean {
     }
 
     public String CandidatarParaVaga() {
-        return "cadastro_curriculo";
+        return "curriculo";
     }
 
     public void AdicionarHabilidade() {
@@ -111,7 +126,7 @@ public class RecVagaBean {
 
     public String Excluir(RecVaga vaga) {
         recVagaService.Excluir(vaga.getRecIdvaga());
-        return "vaga_lista";
+        return "vagas";
     }
 
     public void Cancelar() {

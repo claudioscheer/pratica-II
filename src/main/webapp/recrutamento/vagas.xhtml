@@ -6,6 +6,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+    <head>
+        <h:outputScript     library="build/" name="js/utils.js" />
+        <h:outputStylesheet library="build/" name="css/theme.css" />
+        <h:outputStylesheet library="build/" name="css/components.css" />
+    </head>
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
@@ -54,7 +59,9 @@
                                             <span class="required">*</span>
                                         </label>
                                         <h:inputText class="form-control" 
-                                                     id="Salario"                                                      
+                                                     id="Salario"
+                                                     maxlength="10"
+                                                     onkeypress="this.value = MascaraValorMonetario(this.value)"
                                                      value="#{recVagaBean.vaga.recSalario}" />
                                     </div>
                                 </div>    
@@ -91,38 +98,48 @@
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                    <div class="form-group ">
+                                        <label class="control-label">
+                                            Tipo de Vaga
+                                        </label>
+                                        <h:selectOneMenu id="comboTipoVaga" value="#{recVagaBean.vaga.recTipoVaga}" class="form-control" >
+                                            <f:selectItem itemLabel="Selecione o Tipo de Vaga" itemValue="#{null}" />
+                                            <f:selectItem itemLabel="Interna" itemValue="#{'Interna'}" />                                                
+                                            <f:selectItem itemLabel="Externa" itemValue="#{'Externa'}" />                                                                                                                                             
+                                            <f:selectItem itemLabel="Interna/Externa" itemValue="#{'Interna/Externa'}" />                                                                                                                                             
+                                        </h:selectOneMenu>                                                                            
+                                    </div>     
+                                </div>  
                             </div>
 
-                            <!-- Habilidades -->
+                            <!-- Habilidades -->                            
                             <div class="row">
                                 <h3 class="text-center">Habilidades Necessárias</h3>   
-                                          <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                
-                                            </label>
-                                            <p:autoComplete multiple="true" 
-                                                            value="#{recVagaBean.vaga.recHabilidadeList}" 
-                                                            completeMethod="#{recVagaBean.completarHabilidade}"
-                                                            var="item" 
-                                                            itemLabel="#{item.recDescricao}" 
-                                                            itemValue="#{item}" 
-                                                            forceSelection="true"
-                                                            converter="#{generic}">
-                                                
-                                                <p:column style="width:10%">
-                                                    <h:outputText styleClass="ui-theme ui-theme-#{item.recDescricao}" />
-                                                </p:column>
+                                <div class="col-md-12 col-sm-12 col-xs-12">                                
+                                    <div class="form-group ">
+                                        <label class="control-label " for="number">                                        
 
-                                                <p:column>
-                                                    <h:outputText class="form-control" value="#{item.recDescricao}" />
-                                                </p:column>
-                                            </p:autoComplete>        
-                                        </div>     
-                                    </div>                             
-                            </div>
+                                        </label>
+                                        <p:autoComplete multiple="true" 
+                                                        value="#{recVagaBean.vaga.recHabilidadeList}" 
+                                                        completeMethod="#{recVagaBean.completarHabilidade}"
+                                                        var="item"                                                        
+                                                        itemLabel="#{item.recDescricao}" 
+                                                        itemValue="#{item}" 
+                                                        forceSelection="true"
+                                                        converter="#{generic}">
 
- 
+
+                                            <p:column>
+                                                <h:outputText  value="#{item.recDescricao}" />
+                                            </p:column>
+                                        </p:autoComplete>        
+                                    </div>     
+                                </div>                             
+                            </div>                            
+
 
 
                             <hr></hr>
@@ -176,6 +193,10 @@
                                 <f:facet name="header">Salário</f:facet>                                                                                            
                                 <h:outputText value="#{item.recSalario}"/>
                             </h:column>                                       
+                            <h:column>
+                                <f:facet name="header">Tipo de Vaga</f:facet>                                                                                            
+                                <h:outputText value="#{item.recTipoVaga}"/>
+                            </h:column>   
                             <h:column>
                                 <f:facet name="header">Opções</f:facet>
                                 <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recVagaBean.PreparaEdicao(item)}">

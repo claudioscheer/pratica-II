@@ -73,6 +73,8 @@ public class RecVaga implements Serializable {
     @ManyToOne(optional = true)
     private RecGrauensino recIdgrauensino;
     private Integer recGrauensino;
+    @Column(name = "rec_tipovaga")
+    private String recTipoVaga;
 
     public RecVaga() {
     }
@@ -184,5 +186,13 @@ public class RecVaga implements Serializable {
 
     public void setRecGrauensino(Integer recGrauensino) {
         this.recGrauensino = recGrauensino;
+    }
+
+    public String getRecTipoVaga() {
+        return recTipoVaga;
+    }
+
+    public void setRecTipoVaga(String recTipoVaga) {
+        this.recTipoVaga = recTipoVaga;
     }
 }

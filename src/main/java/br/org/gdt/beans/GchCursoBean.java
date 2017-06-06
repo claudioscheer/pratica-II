@@ -3,6 +3,7 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchCursos;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchCadastroCursoService;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,7 +102,7 @@ public void init() {
                 MsgNotificacao = "O curso <b>" + gchCurso.getCurNome() + " </b>foi cadastrado!";
             }
 
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         } catch (Exception ex) {
 
@@ -113,9 +114,10 @@ public void init() {
 
     }
 
-    public void cancel() {
+    public String cancel() {
         this.formAtivo = false;
         this.gchCurso = new GchCursos();
+        return "Cursos";
     }
 
     public void add() {
@@ -155,7 +157,7 @@ public void init() {
                 gchTodosCursos.remove(gchCurso);
                 MsgNotificacao = "O curso <b> " + gchCurso.getCurNome() + "</b> foi excluído!";
                 
-                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
                 
             }
             

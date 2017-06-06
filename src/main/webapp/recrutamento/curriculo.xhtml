@@ -19,8 +19,35 @@
                 </div>
                 <br />
                 <!--<h:form id="formCurriculo" enctype="multipart/form-data">                                       -->
-                    <h:form id="formCurriculo">                                        
-                    <p:panel>
+                <h:form id="formCurriculo">
+                    <p:panel visible="#{recPessoaBean.formAtivo}">
+                        <div class="bootstrap-iso">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">                                            
+                                            <h:outputLabel value="Digite seu CPF" 
+                                                           for="cpfBusca"/>                                            
+                                            <h:inputText class="form-control" 
+                                                         id="cpfBusca" 
+                                                         maxlength="14"
+                                                         onkeypress="this.value = MascaraCPF(this.value)"
+                                                         value="#{recPessoaBean.cpfBusca}" />
+                                        </div>
+                                    </div>                               
+                                </div>                     
+                                <div class="pull-right">
+                                    <div class="row">                                        
+                                        <h:commandButton class="btn btn-success" 
+                                                         value="Cadastrar Currículo" 
+                                                         action="#{recPessoaBean.BuscarPessoa()}" >                                            
+                                        </h:commandButton>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p:panel>
+                    <p:panel visible="#{!recPessoaBean.formAtivo}">
                         <h:inputHidden value="#{recPessoaBean.recPessoa.recIdpessoa}" />                        
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
@@ -32,12 +59,11 @@
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">                                            
+                                        <div class="form-group">                                            
                                             <h:outputLabel value="CPF" for="cpf" />                                            
                                             <h:inputText class="form-control" 
                                                          id="cpf"                                                          
-                                                         maxlength="14" 
-                                                         binding="#{campocpf}"
+                                                         maxlength="14"                                                          
                                                          onkeypress="this.value = MascaraCPF(this.value)"
                                                          value="#{recPessoaBean.recPessoa.recCpf}" title="CPF" />
                                         </div>
@@ -172,14 +198,27 @@
                                                          title="celular" />
                                         </div>
                                     </div>
+
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Foto
-                                                <span class="required">*</span>
-                                            </label>
-                                            <p:fileUpload value="#{recPessoaBean.recFoto}"                                                           
-                                                          mode="simple" />                                                                                      
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Anexar Foto
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <p:fileUpload value="#{recPessoaBean.recFoto}"                                                                 
+                                                              mode="simple" />                                                                                      
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group ">
+                                                <label class="control-label " for="number">                                        
+                                                    Anexar Currículo
+                                                    <span class="required">*</span>
+                                                </label>
+                                                <p:fileUpload value="#{recPessoaBean.recFoto}"                                                           
+                                                              mode="simple" />                                                                                      
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -215,7 +254,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <h:inputText class="form-control" 
-                                                         maxlength="9"
+                                                         maxlength="10"                                                                                                                  
                                                          onkeypress="this.value = MascaraValorMonetario(this.value)"
                                                          value="#{recPessoaBean.recPessoa.recPretencaosalarial}"/>                                            
                                         </div>
@@ -316,7 +355,7 @@
                                 <div class="row">
                                     <h3 class="text-center">Suas Habilidades</h3>   
 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                    <div class="col-md-12 col-sm-12 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
 
@@ -327,7 +366,7 @@
                                                             var="item" 
                                                             itemLabel="#{item.recDescricao}" 
                                                             itemValue="#{item}" 
-                                                            forceSelection="true"
+                                                            forceSelection="true"                                                            
                                                             converter="#{generic}">
 
 

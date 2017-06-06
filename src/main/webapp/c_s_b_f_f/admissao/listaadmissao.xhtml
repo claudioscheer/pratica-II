@@ -13,65 +13,72 @@
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
 
-                <h:form id="formConsulta" style="margin-top:75px;">
-                    <div class="x_panel">
-                        <div class="form-group" style="float: left;margin-top: 10px">
-                            <div class="col-md-12 text-right">
-                                <h:link  outcome="dadospessoais.xhtml" class="btn btn-primary " value="Novo Contrato"/>
-                                <h:commandButton class="btn btn-black" value="Imprimir Ficha Funcional" />
-                                <!--action="{csbffAdmissaoBean.gerarFichaFuncional()}"-->
-                            </div>
-                        </div>
-                        <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!csbffListaAdmissaoBean.formAtivo}">
-                            <div class="row">
-                                <br></br><div class="title_left">
-                                    <h3>Contratos de Admissão</h3>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <br></br>  <div class="x_panel">
-                                    <div class="x_content" >
-                                        <br></br> <h:dataTable  class="table table-striped" value="#{csbffListaAdmissaoBean.pessoas}" var="pessoas">
-                                            <h:column>
-                                                <f:facet name="header">Código</f:facet>
-                                                    #{pessoas.recIdpessoa}
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">CPF </f:facet>
-                                                    #{pessoas.recCpf}
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header"> Nome</f:facet>
-                                                    #{pessoas.recNomecompleto} 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">Contrato </f:facet>
-                                                    #{pessoas.recContrato} 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">Cargo </f:facet>
-                                                    #{pessoas.cargoNome}
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">Data da Admissão</f:facet>
-                                                    #{pessoas.recDtaAdmissao}
+                <div id="page" style="margin-top:75px;">
 
-                                            </h:column>
-                                            <h:column>
-                                                <h:commandLink class="btn btn-link btn-small" action="#{csbffListaAdmissaoBean.editaConsulta(pessoas)}">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="x_panel">
+                                    <div class="form-group" style="float: right;margin-top: 10px">
+                                        <div>
+                                            <h:link  outcome="dadospessoais.xhtml" class="btn btn-primary " value="Novo Contrato"/>
+                                        </div>
+                                    </div>
+                                    <div class="panel-heading">
+                                        <h3 class="title_left">
+                                            Contratos de Admissão
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body" style="/* align-items: center; */">
+                                        <h:form id="formConsulta">
+                                            <h:messages class="error" style="color: #d9534f" />
 
-                                                    <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
-                                                </h:commandLink>
-                                                <!--                                                <f:ajax execute="@form" render="formConsulta" />
-                                                                                            </h:commandLink>-->
-                                            </h:column>
-                                        </h:dataTable>
+                                            <h:dataTable  class="table table-striped" value="#{csbffListaAdmissaoBean.pessoas}" var="pessoas">
+
+                                                <h:column>                
+                                                    <h:commandLink title="Editar" action="#{csbffListaAdmissaoBean.editaConsulta(pessoas)}">
+                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                    </h:commandLink>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Código</f:facet>
+                                                        #{pessoas.recIdpessoa}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">CPF </f:facet>
+                                                        #{pessoas.recCpf}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"> Nome</f:facet>
+                                                        #{pessoas.recNomecompleto} 
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Contrato </f:facet>
+
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Cargo </f:facet>
+                                                        #{pessoas.cargoNome}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Data da Admissão</f:facet>
+                                                    <h:outputText value="#{pessoas.recDtaAdmissao}">
+                                                        <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+
+                                                </h:column>
+
+
+                                            </h:dataTable>
+                                        </h:form> 
                                     </div>
                                 </div>
                             </div>
-                        </h:panelGroup>
+                        </div>
                     </div>
-                </h:form>      
+                </div>
+
+
             </ui:define>
         </ui:composition>
 

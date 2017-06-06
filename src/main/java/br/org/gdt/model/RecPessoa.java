@@ -6,11 +6,8 @@
 package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
-import br.org.gdt.enums.DiasATrabalhar;
-import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Insalubridade;
 import br.org.gdt.enums.PossuiDependentes;
-import br.org.gdt.enums.Sexo;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +21,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -38,6 +34,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -143,8 +141,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Date recDtaDemissao;
     @Column(name = "rec_percentual_insalubridade")
     private BigInteger recPercentualInsalubridade;
-    
-    @ManyToMany
+
+    @ManyToMany()    
     private List<RecHabilidade> recHabilidadeList;
     @ManyToMany(mappedBy = "recPessoaList")
     private List<RecExperiencia> recExperienciaList;
@@ -199,12 +197,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    private DiasATrabalhar diasATrabalhar;
     @OneToOne
     private CsbffCargos cargoValorSalario;
-    @Column(name = "rec_contrato")
-    private String recContrato;
-
-    public RecPessoa(String recContrato) {
-        this.recContrato = recContrato;
-    }
 
     public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, int recSexo, int recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, String recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, CsbffEscalaHoras csbffEscalaHoras, List<GchTreinamentospessoas> gchTreinamentospessoasList, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Integer recPesGrauEnsino, List<RecPessoa> recPessoaList, CsbffCargos cargoCbo, CsbffCargos cargoNome, String admissaoDescricao, List<CsbffEscalaHoras> csbffEscalaHorasList, CsbffCargos cargos, String recComplemento) {
         this.recIdpessoa = recIdpessoa;
@@ -838,14 +830,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setCargoValorSalario(CsbffCargos cargoValorSalario) {
         this.cargoValorSalario = cargoValorSalario;
-    }
-
-    public String getRecContrato() {
-        return recContrato;
-    }
-
-    public void setRecContrato(String recContrato) {
-        this.recContrato = recContrato;
     }
 
     public String getRecComplemento() {

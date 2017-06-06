@@ -23,6 +23,8 @@ public class RecPessoaBean {
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoas;
 
+    private String cpfBusca;
+
     private List<RecHabilidade> pesHabilidades;
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
@@ -69,16 +71,31 @@ public class RecPessoaBean {
                     recPessoa.setRecFoto(recFoto.getContents());
                 }
                 recPessoaService.Inserir(recPessoa);
-            }            
-            return "cadastro_curriculo_sucesso";
+            }
+            return "curriculo_sucesso";
         }
         return null;
     }
 
-    public String PreparaEdicao(RecPessoa pessoa) {
-        this.formAtivo = true;
-        this.recPessoa = pessoa;
-        return "candidato_lista";
+    public String PreparaEdicao(RecPessoa pessoa) {//criar um separado para a visualização
+        formAtivo = true;
+        System.out.println("IDPes"+pessoa.getRecIdpessoa());
+        this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
+        System.out.println(""+recPessoa.getRecNomecompleto());
+        //this.recPessoa = pessoa;
+        return "candidatos";
+    }
+
+    public String BuscarPessoa() {
+        RecPessoa p = recPessoaService.BuscaPessoaCPF(cpfBusca);
+        formAtivo = true;
+        if (p != null) {
+            this.recPessoa = p;
+            return "curriculo";
+        } else {
+            recPessoa = new RecPessoa();
+            return "curriculo";
+        }        
     }
 
     public List<RecPessoa> ListarTodas() {
@@ -90,7 +107,7 @@ public class RecPessoaBean {
 
     public String Adicionar() {
         recPessoa = new RecPessoa();
-        return "cadastro_curriculo";
+        return "curriculo";
     }
 
     public RecPessoa getRecPessoa() {
@@ -211,5 +228,13 @@ public class RecPessoaBean {
 
     public void setRecAnexoCurriculo(UploadedFile recAnexoCurriculo) {
         this.recAnexoCurriculo = recAnexoCurriculo;
+    }
+
+    public String getCpfBusca() {
+        return cpfBusca;
+    }
+
+    public void setCpfBusca(String cpfBusca) {
+        this.cpfBusca = cpfBusca;
     }
 }

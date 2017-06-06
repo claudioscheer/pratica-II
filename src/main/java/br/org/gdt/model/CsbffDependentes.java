@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,6 +46,7 @@ public class CsbffDependentes implements Serializable {
     private String dependenteNome;
     @Basic(optional = false)
     @Column(name = "dependente_data_nascimento")
+    @Temporal(TemporalType.DATE)
     private Date dependenteDataNascimento;
     @Basic(optional = false)
     @Column(name = "dependente_cpf")
