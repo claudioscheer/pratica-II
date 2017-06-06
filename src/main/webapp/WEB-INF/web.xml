@@ -112,6 +112,11 @@
             <description>Recrutamento e seleção</description>
             <url-pattern>/recrutamento/*</url-pattern>
         </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>usuario</web-resource-name>
+            <description>Usuários</description>
+            <url-pattern>/usuario/*</url-pattern>
+        </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>ADMIN</role-name>
@@ -171,7 +176,7 @@
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
-        <form-login-config> 
+        <form-login-config>
             <form-login-page>/login.xhtml</form-login-page>
             <form-error-page>/error-403.xhtml</form-error-page>
         </form-login-config>
