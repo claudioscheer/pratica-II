@@ -4,6 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
+        <link href="#{resource['images/Logo-Murphy.png']}" rel='shortcut icon' type='image/x-icon'/>
+        <link href="#{resource['images/Logo-Murphy.png']}" rel="icon" type="image/x-icon" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,13 +20,13 @@
             <div class="login_wrapper">
                 <div class="form login_form">
                     <section class="login_content">
-                        <h:form>
+                        <h:form a:action="j_security_check" a:method="post">
                             <h1>Login</h1>
                             <div>
-                                <h:inputText class="form-control" id="email" a:placeholder="Email" value="#{loginBean.login.emailUsuario}" title="Email" />
+                                <h:inputText a:name="j_username" class="form-control" a:placeholder="Email" value="#{loginBean.login.emailUsuario}" />
                             </div>
                             <div>
-                                <h:inputText a:type="password" class="form-control" id="senha" a:placeholder="Senha" value="#{loginBean.login.senhaUsuario}" title="Senha" />
+                                <h:inputText a:name="j_password" a:type="password" class="form-control" a:placeholder="Senha" value="#{loginBean.login.senhaUsuario}" />
                             </div>
                             <div>
                                 <h:commandButton class="btn btn-default pull-right" value="Entrar" action="#{loginBean.entrar()}" />

@@ -1,24 +1,39 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.Login;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class LoginBean {
 
-    private Login login;
+    private Login login = new Login();
 
     public LoginBean() {
-        login = new Login();
+    }
+
+    @PostConstruct
+    public void init() {
+        sair();
     }
 
     public void entrar() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().redirect("index.xhtml");
+        } catch (Exception e) {
+        }
+    }
+
+    public void sair() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            request.getSession().invalidate();
         } catch (Exception e) {
         }
     }
