@@ -61,6 +61,7 @@ public class DependenteBean {
     
 
     public void save() {
+        
         System.out.println("testando " + csbffdependente.getDependenteCpf());
         System.out.println("2"+csbffdependente.getDependenteDataNascimento());
         System.out.println("3"+csbffdependente.getDependenteImpostoDeRenda());
@@ -69,14 +70,15 @@ public class DependenteBean {
         System.out.println("6"+ csbffdependente.getDependenteRgCertNascimento());
         System.out.println("7" +csbffdependente.getDependenteTipo());
        
-//        
+        csbffDependenteService.save(csbffdependente);
+        
         csbffPessoaDependente.setColabDepCodigo(recPessoa.getRecIdpessoa());
         csbffPessoaDependente.setDependenteCod(csbffdependente);
         csbffPessoaDependente.setRecIdpessoa(recPessoa);
         csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
         //csbffPessoaDependente = getCsbffPessoaDependente();
         //csbffdependente.setCsbffPessoaDependente(csbffPessoaDependente);
-        csbffDependenteService.save(csbffdependente);
+        
        csbffPessoaDependenteService.save(csbffPessoaDependente);
     
     }
