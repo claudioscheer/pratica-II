@@ -65,29 +65,29 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-    <error-page>
-        <!--Missing login-->
+<!--    <error-page>
+        Missing login
         <error-code>401</error-code>
         <location>/error-padrao.xhtml</location>
     </error-page>
     <error-page>
-        <!--Forbidden directory listing-->
+        Forbidden directory listing
         <error-code>403</error-code>
         <location>/error-403.xhtml</location>
     </error-page>
     <error-page>
-        <!--Missing resource-->
+        Missing resource
         <error-code>404</error-code>
         <location>/error-404.xhtml</location>
     </error-page>
     <error-page>
-        <!--Uncaught exception-->
+        Uncaught exception
         <error-code>500</error-code>
         <location>/error-padrao.xhtml</location>
     </error-page>
     <error-page>
-        <!--Unsupported servlet method-->
+        Unsupported servlet method
         <error-code>503</error-code>
         <location>/error-padrao.xhtml</location>
-    </error-page>
+    </error-page>-->
 </web-app>
