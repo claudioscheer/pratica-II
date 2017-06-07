@@ -102,9 +102,47 @@ public class InicializaBean {
         sqls.forEach(sql -> inicializaService.inicializar(sql));
     }
 
-    public void inicializarPessoas() {
+    public void inicializarHabilidades() {
         List<String> sqls = new ArrayList<>();
+        sqls.add("insert into rec_habilidade values(2,'SQL',1)");
+        sqls.add("insert into rec_habilidade values(3,'Java',1)");
+        sqls.add("insert into rec_habilidade values(4,'C#',1)");
+        sqls.add("insert into rec_habilidade values(5,'Autoconfiança',1)");
+        sqls.add("insert into rec_habilidade values(6,'Intuição',1)");
+        sqls.add("insert into rec_habilidade values(7,'Capacidade Crítica',1)");
+        sqls.add("insert into rec_habilidade values(8,'Iniciativa',1)");
+        sqls.add("insert into rec_habilidade values(9,'Compreensão',1)");
+        sqls.add("insert into rec_habilidade values(10,'Empatia',1)");
+        sqls.add("insert into rec_habilidade values(11,'Visão',1)");
+        sqls.add("insert into rec_habilidade values(12,'Relacionamento',1)");
+        sqls.add("insert into rec_habilidade values(13,'Trabalho em Equipe',1)");
+        sqls.add("insert into rec_habilidade values(14,'Networking',1)");
+        sqls.add("insert into rec_habilidade values(15,'Atitude Positiva',1)");
+        sqls.add("insert into rec_habilidade values(16,'Criatividade',1)");
+        try {
+            sqls.forEach(sql -> inicializaService.inicializar(sql));
+            Helper.mostrarNotificacao("Pessoas", "Pessoas inicializadas.", "info");
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Pessoas", e.getMessage(), "error");
+        }
+    }
 
+    public void inicializarVagas() {
+        List<String> sqls = new ArrayList<>();
+        //sqls.add("insert into rec_vaga values(3,'','','Vaga Para Vendedor',1,'1.500,000,1,1,1,0,1)");
+        
+        try {
+            sqls.forEach(sql -> inicializaService.inicializar(sql));
+            Helper.mostrarNotificacao("Pessoas", "Pessoas inicializadas.", "info");
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Pessoas", e.getMessage(), "error");
+        }
+    }
+
+    public void inicializarPessoas() {
+        inicializarHabilidades();
+        //inicializarVagas();
+        List<String> sqls = new ArrayList<>();
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (1,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'000.000.000-00','lariguder10@gmail.com','Setrem',1,'Larissa Daiane Caneppele Guder','Maria Guder','João Guder','950','Crescer na firma','SSP',7,'1.500.00','0000000000','(55) 4343-3434');");
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (2,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'111.111.111-11','claudioscheer16@gmail.com','Setrem',1,'Claudio Roberto Scheer Jr','Maria Scheer','João Scheer','950','Crescer na firma','SSP',7,'1.500.00','1111111111','(55) 4343-3434');");
         sqls.add("INSERT INTO rec_pessoa (rec_idpessoa, rec_autoavaliacao, rec_bairro, rec_celular, rec_cor, rec_cpf,rec_email,rec_endereco,rec_estadocivil,rec_nomecompleto, rec_nomemae, rec_nomepai,rec_numero, rec_objprofissional, rec_orgaoemissor, recpesgrauensino, rec_pretencaosalarial, rec_rg, rec_telefone) values (3,'Comprometido com o que faço','Centro','(55) 9999-9999',1,'222.222.222-22','dimhr12@gmail.com','Setrem',1,'Dimas Rockenbach','Maria Rockenbach','João Rockenbach','950','Crescer na firma','SSP',7,'1.500.00','2222222222','(55) 4343-3434');");

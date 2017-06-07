@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.Optional;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name = "fpEnvelopePagamento")
-@ViewScoped
+@ManagedBean
+@SessionScoped
 public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     private boolean mostrarTodasFolhasPeriodo = false;
@@ -60,7 +60,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
         }
 
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Período", "Selecione um período.", "info");
+            Helper.mostrarNotificacao("Período", "Selecione um período.", "error");
             return;
         }
 
@@ -79,7 +79,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     public void selecionarPessoa() {
         RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
         if (pessoa == null) {
-            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "error");
             recPessoa = new RecPessoa();
             return;
         }
@@ -88,18 +88,18 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     public void buscarFolhaPeriodo() {
         if (recPessoa.getRecIdpessoa() <= 0) {
-            Helper.mostrarNotificacao("Pessoa", "Selecione uma pessoa.", "info");
+            Helper.mostrarNotificacao("Pessoa", "Selecione uma pessoa.", "error");
             return;
         }
 
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Período", "Selecione um período.", "info");
+            Helper.mostrarNotificacao("Período", "Selecione um período.", "error");
             return;
         }
 
         FpFolhaPeriodo folhaPeriodo = fpFolhaPeriodoService.findByPessoaEPeriodo(fpPeriodo, recPessoa);
         if (folhaPeriodo == null) {
-            Helper.mostrarNotificacao("Folha", "Folha não encontrada para esta pessoa.", "info");
+            Helper.mostrarNotificacao("Folha", "Folha não encontrada para esta pessoa.", "error");
             folhaPeriodo = new FpFolhaPeriodo();
         }
         fpFolhaPeriodo = folhaPeriodo;
@@ -114,7 +114,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
             dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
-                Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+                Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "error");
                 return;
             }
             dadosCalculadosDoFuncionario.setPessoa(recPessoa);
@@ -127,9 +127,9 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
             fpFolhaPeriodo = calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
             fpFolhaPeriodo.removerEventosNaoAlteraFolha();
 
-            Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "info");
+            Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "success");
         } catch (Exception e) {
-            Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
+            Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
         }
     }
 
@@ -167,6 +167,8 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     public void gerarTodasFolhasPagamento() {
         try {
+            fpPeriodo.setPerPago(true);
+            fpPeriodoService.update(fpPeriodo);
             calcularFolha.gerarFolha(todasFolhasPeriodo, fpPeriodo.getPerMes() + " - " + fpPeriodo.getPerAno());
         } catch (Exception e) {
             Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
@@ -175,7 +177,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     public void gerarFolhaPagamento() {
         if (fpFolhaPeriodo.getForId() <= 0) {
-            Helper.mostrarNotificacao("Mensagem", "É preciso ter a folha carregada para imprimir.", "info");
+            Helper.mostrarNotificacao("Mensagem", "É preciso ter a folha carregada para imprimir.", "error");
             return;
         }
         imprimirFolhaPagamento(fpFolhaPeriodo);

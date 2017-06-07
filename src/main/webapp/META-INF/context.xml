@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/praticaII"/>
+<Context antiJARLocking="true" path="/praticaII">
+
+    <Realm className="org.apache.catalina.realm.JDBCRealm"
+           driverName="org.postgresql.Driver"
+           connectionURL="jdbc:postgresql://localhost:5432/murphyrh"
+           connectionName="postgres"
+           connectionPassword="postgres"
+           userTable="usuario"
+           userNameCol="login"
+           userCredCol="senha"
+           userRoleTable="usuario_role"
+           roleNameCol="papel" />
+
+</Context>

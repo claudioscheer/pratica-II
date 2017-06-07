@@ -77,10 +77,13 @@ public class RecPessoaBean {
         return null;
     }
 
-    public String PreparaEdicao(RecPessoa pessoa) {
+    public String PreparaEdicao(RecPessoa pessoa) {//criar um separado para a visualização
         formAtivo = true;
-        this.recPessoa = pessoa;
-        return "curriculo";
+        System.out.println("IDPes"+pessoa.getRecIdpessoa());
+        this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
+        System.out.println(""+recPessoa.getRecNomecompleto());
+        //this.recPessoa = pessoa;
+        return "candidatos";
     }
 
     public String BuscarPessoa() {

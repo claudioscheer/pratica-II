@@ -26,10 +26,10 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group ">
                                         <label class="control-label" >                                        
-                                            CPF do Colaboador
+                                            CPF do Colaborador
                                             <span class="required">*</span>
                                         </label>
-                                        <h:inputText label="codigo"  class="form-control" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{dependenteBean.recCpf}" />
+                                        <h:inputText label="codigo"  class="form-control" value="#{dependenteBean.recCpf}" />
                                     </div>
 
                                 </div>  
@@ -39,7 +39,7 @@
                                             Nome colaborador
                                             <span class="required">*</span>
                                         </label>
-                                        <h:inputText label="codigo"  class="form-control" value="#{dependenteBean.nomeCompleto}" />
+                                        <h:inputText label="nome"  class="form-control" value="#{dependenteBean.nomeCompleto}" />
                                     </div>
 
                                 </div> 
@@ -71,7 +71,17 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+<!--                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group ">
+                                        <label class="control-label " for="date">
+                                            Data de nascimento
+                                        </label>
+                                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{dependenteBean.csbffdependente.dependenteDataNascimento}" />
+                                    </div>
+
+                                </div>-->
+
+<div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group ">
                                         <label class="control-label " for="date">
                                             Data de nascimento
@@ -79,6 +89,8 @@
                                         <h:inputText class="form-control has-feedback-left date-picker" value="#{dependenteBean.csbffdependente.dependenteDataNascimento}">
                                             <f:convertDateTime pattern="dd/MM/yyyy" />
                                         </h:inputText>
+                                        <!--<h:inputText class="form-control" />-->
+                                        
                                     </div>
 
                                 </div>

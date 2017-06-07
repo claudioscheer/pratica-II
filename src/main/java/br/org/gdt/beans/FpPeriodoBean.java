@@ -68,15 +68,14 @@ public class FpPeriodoBean {
         this.fpPeriodo = new FpPeriodo();
     }
 
-    public String prepareEdit(FpPeriodo fpPeriodo) {
+    public void prepareEdit(FpPeriodo fpPeriodo) {
         if (fpPeriodo.isPerPago()) {
-            Helper.mostrarNotificacao("Período", "Período já está pago, não pode ser editado.", "info");
-            return "periodos";
+            Helper.mostrarNotificacao("Período", "Período já está pago, não pode ser editado.", "error");
+            return;
         }
 
         this.formAtivo = true;
         this.fpPeriodo = fpPeriodo;
-        return "periodos";
     }
 
     public boolean isFormAtivo() {

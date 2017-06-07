@@ -4,6 +4,7 @@ import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffPessoaBeneficio;
 import br.org.gdt.model.CsbffPessoaDependente;
+import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecPessoa;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,16 +42,40 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         }
     }
 
+    public RecPessoa findByIdCompleto(long id) {
+        TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa as p where p.recIdpessoa = :recIdpessoa", RecPessoa.class);
+        query.setParameter("recIdpessoa", id);
+        try {
+            RecPessoa pessoa = query.getSingleResult();
+            List<RecHabilidade> lista = new ArrayList<>();
+            for (RecHabilidade h : pessoa.getRecHabilidadeList()) {
+                lista.add(h);
+            }
+            pessoa.setRecHabilidadeList(lista);
+            return pessoa;
+
+        } catch (NoResultException e) {
+            return null;
+
+        }
+    }
+
+    public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
+        Query query = entityManager.createQuery("from RecPessoa as p where upper(p.recNomecompleto) like :recQuery or p.recCpf like :recQuery");
+        query.setParameter("recQuery", "%" + select.toUpperCase() + "%");
+
+        return query.getResultList();
+    }
+
     public List<RecPessoa> findAllFuncionarios() {
         return entityManager.createQuery(
                 "from RecPessoa as t")//t.recFuncionario = null
                 .getResultList();
     }
-    
-    
-    public RecPessoa BuscarPessoaCFP(String cpf){
+
+    public RecPessoa BuscarPessoaCFP(String cpf) {
         TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa where recCpf like :busca", RecPessoa.class);
-        query.setParameter("busca", cpf);        
+        query.setParameter("busca", cpf);
         return query.getSingleResult();
     }
 

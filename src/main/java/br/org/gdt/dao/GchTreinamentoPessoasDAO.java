@@ -21,6 +21,16 @@ public class GchTreinamentoPessoasDAO  extends DAO<GchTreinamentospessoas>{
         classe = GchTreinamentospessoas.class;
     }
     
+    public List<GchTreinamentospessoas> pessoasTreinamento(long idTreinamento){
+    
+        Query query = entityManager.createQuery("from GchTreinamentospessoas as t where t.treiCodigo.treiCodigo = :idTreinamento");
+        query.setParameter("idTreinamento", idTreinamento);   
+   
+        return query.getResultList();
+    
+    }
+    
+    
     public List<GchTreinamentospessoas> verificaPessoa(long idTreinamento, long idPessoa){
         
         Query query = entityManager.createQuery("from GchTreinamentospessoas as t where t.recIdpessoa.recIdpessoa = :idPessoa");
@@ -43,5 +53,6 @@ public class GchTreinamentoPessoasDAO  extends DAO<GchTreinamentospessoas>{
         return query.getResultList();
         
     }
+    
     
 }

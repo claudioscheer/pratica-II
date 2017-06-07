@@ -21,54 +21,55 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="x_panel">
-                                        <div class="form-group" style="float: right;margin-top: 10px">
-                                            <div>
-                                                <h:link  outcome="/ModuloCapitalHumano/CadastroTreinamentos.xhtml" class="btn btn-primary " value="Novo Treinamento"/>
-                                            </div>
-                                        </div>
+                                        <!--                                        <div class="form-group" style="float: right;margin-top: 10px">
+                                                                                    <div>
+                                                                                        <h:link  outcome="/ModuloCapitalHumano/CadastroTreinamentos.xhtml" class="btn btn-primary " value="Novo Treinamento"/>
+                                                                                    </div>
+                                                                                </div>-->
 
                                         <div class="panel-body" style="/* align-items: center; */">
 
-                                            <h:dataTable class="table table-striped" value="#{gchTreinamentoPessoaBean.pessoasVinculadas}" var="pessoa">
+                                            <div class="form-group">
+
+                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                    <p:autoComplete id="recpessoaid" value="#{gchTreinamentoPessoaBean.recPessoa}" completeMethod="#{gchTreinamentoPessoaBean.completePessoa}"
+                                                                    var="pessoa" itemLabel="#{pessoa.recNomecompleto}" itemValue="#{pessoa}" converter="#{generic}" forceSelection="true">
+                                                        <p:column>
+                                                            <h:outputText value="#{pessoa.recNomecompleto}" />
+                                                        </p:column>
+                                                    </p:autoComplete>
+                                              
+                                                    <h:commandButton class="btn btn-success"  actionListener="#{gchTreinamentoPessoaBean.save(false)}" value="Adicionar" /> 
+
+                                                </div>
+                                            </div> 
 
 
-
-                                                <h:column>
-                                                    <h:selectBooleanCheckbox value="#{gchTreinamentoPessoaBean.checked[pessoa]}" >
-                                                        <f:ajax listener="#{gchTreinamentoPessoaBean.podeVincularPessoa}" render="parentformid" />
-                                                        <f:attribute name="pessoa" value="#{pessoa}" />
-                                                    </h:selectBooleanCheckbox>
-                                                </h:column>
+                                            <h:dataTable class="table table-striped" value="#{gchTreinamentoPessoaBean.todosGchTreinamentosPessoas}" var="pessoatreinamento">
 
                                                 <h:column>      
-                                                    <f:facet name="header">Codigo</f:facet>
-                                                    <h:outputText value="#{pessoa.recIdpessoa}"/>                
+                                                    <f:facet name="header">CPF</f:facet>
+                                                    <h:outputText value="#{pessoatreinamento.recIdpessoa.recCpf}"/>                
                                                 </h:column>    
 
                                                 <h:column>      
                                                     <f:facet name="header">Nome</f:facet>
-                                                    <h:outputText value="#{pessoa.recNomecompleto}"/>                
+                                                    <h:outputText value="#{pessoatreinamento.recIdpessoa.recNomecompleto}"/>                
                                                 </h:column>
 
-                                                <h:inputHidden value="#{gchTreinamentoPessoaBean.verificaCheck(pessoa.recIdpessoa)}" />
+                                                <h:column>
+                                                    <h:commandLink title="Remover" action="#{gchTreinamentoPessoaBean.excluir(pessoatreinamento)}" >
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                    </h:commandLink>
+                                                </h:column>
 
 
                                             </h:dataTable>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-
-                                                <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentoPessoaBean.save()}" value="Cadastrar" /> 
-
-                                                <h:commandButton class="btn btn-danger"  actionListener="#{gchTreinamentoPessoaBean.cancel()}" value="Cancelar" /> 
-
-                                            </div>
-                                        </div>    
-
                                         <p:confirmDialog widgetVar="confirmDlg" message="Colaborador já vinculado em outro treinamento no mesmo período! Deseja vincular o colaborador mesmo assim?" >
-                                            <h:commandButton class="btn btn-primary"   value="Sim" />                                             
-                                            <h:commandButton class="btn btn-danger"  actionListener="#{gchTreinamentoPessoaBean.removeMarcado()}" value="Não" /> 
+                                            <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentoPessoaBean.save(true)}"  value="Sim" />                                             
+                                            <h:commandButton class="btn btn-danger"  value="Não" /> 
                                         </p:confirmDialog>
 
                                     </div>
