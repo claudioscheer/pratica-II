@@ -69,6 +69,11 @@ public class UsuarioBean {
 
     public void add() {
         this.formAtivo = true;
+        admin = false;
+        folha = false;
+        capital = false;
+        recrutamento = false;
+        ficha = false;
         this.usuario = new Usuario();
     }
 

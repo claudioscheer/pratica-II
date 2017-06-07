@@ -41,7 +41,8 @@
                             <div class="profile_pic">
                                 <h:link outcome="/index.xhtml">
                                     <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img"/>
-                                </h:link></div>
+                                </h:link>
+                            </div>
                             <div class="profile_info">
                                 <span>Olá,</span>
                                 <h2>Gestor!</h2>
@@ -57,12 +58,7 @@
                                 <h3>Menu</h3>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite inserir informações no Banco de Dados."><h:link outcome="/inicializar-sistema.xhtml"><i class="fa fa-magic"></i> Inicializar dados</h:link></li></a>
-                                    </li>
-                                </ul>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><li data-toggle="tooltip" data-placement="right" title="" data-original-title="Gerenciar usuários do sistema."><h:link outcome="/usuario/usuarios.xhtml"><i class="fa fa-magic"></i> Usuários</h:link></li></a>
+                                        <a><li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite inserir informações no Banco de Dados."><h:link outcome="/usuario/usuarios.xhtml"><i class="fa fa-users"></i> Usuários</h:link></li></a>
                                     </li>
                                 </ul>
                                 <ul class="nav side-menu">
@@ -172,25 +168,26 @@
                             </div>
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="">
+                                <li>
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                         Gestor <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                        <!--<li><a href="javascript:;"> Profile</a></li>
+                                        <!--                                        <li><a href="javascript:;"> Profile</a></li>
+                                                                                <li>
+                                                                                    <a href="javascript:;">
+                                                                                        <span class="badge bg-red pull-right">50%</span>
+                                                                                        <span>Settings</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li><a href="javascript:;">Help</a></li>-->
                                         <li>
-                                            <a href="javascript:;">
-                                                <span class="badge bg-red pull-right">50%</span>
-                                                <span>Settings</span>
-                                            </a>
-                                        </li>
-                                        <li><a href="javascript:;">Help</a></li>-->
-                                        <li><h:link outcome="/recrutamento/menu_recrutamento.xhtml">
+                                            <h:link outcome="/recrutamento/menu_recrutamento.xhtml">
                                                 <i class="fa fa-sign-out pull-right"></i> 
                                                 Visitar página da empresa
                                             </h:link>
                                         </li>
-                                        <li><h:link outcome="/login.xhtml"><i class="fa fa-sign-out pull-right"></i> Sair</h:link></li>                                        
+                                        <!--<li><h:commandLink action="#{loginBean.sair()}"><i class="fa fa-sign-out pull-right"></i> Sair</h:commandLink></li>-->                                        
                                     </ul>
                                 </li>
 

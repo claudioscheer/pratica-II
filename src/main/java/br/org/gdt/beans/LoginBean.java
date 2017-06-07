@@ -16,11 +16,6 @@ public class LoginBean {
     public LoginBean() {
     }
 
-    @PostConstruct
-    public void init() {
-        sair();
-    }
-
     public void entrar() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -34,6 +29,7 @@ public class LoginBean {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             request.getSession().invalidate();
+            context.getExternalContext().redirect("login.xhtml");
         } catch (Exception e) {
         }
     }

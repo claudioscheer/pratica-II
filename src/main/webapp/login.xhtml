@@ -23,14 +23,13 @@
                         <h:form a:action="j_security_check" a:method="post">
                             <h1>Login</h1>
                             <div>
-                                <h:inputText a:name="j_username" class="form-control" a:placeholder="Email" value="#{loginBean.login.emailUsuario}" />
+                                <input name="j_username" class="form-control" placeholder="Email" value="" />
                             </div>
                             <div>
-                                <h:inputText a:name="j_password" a:type="password" class="form-control" a:placeholder="Senha" value="#{loginBean.login.senhaUsuario}" />
+                                <input name="j_password" type="password" class="form-control" placeholder="Senha" value="" />
                             </div>
                             <div>
-                                <h:commandButton class="btn btn-default pull-right" value="Entrar" action="#{loginBean.entrar()}" />
-                                <!--<a class="reset_pass" href="#">Perdeu a senha?</a>-->
+                                <input type="submit" value="Entrar" class="btn btn-default pull-right" />
                             </div>
                             <div class="clearfix"></div>
                             <div class="separator">

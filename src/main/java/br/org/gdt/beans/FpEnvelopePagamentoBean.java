@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.Optional;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name = "fpEnvelopePagamento")
-@ViewScoped
+@ManagedBean
+@SessionScoped
 public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     private boolean mostrarTodasFolhasPeriodo = false;
