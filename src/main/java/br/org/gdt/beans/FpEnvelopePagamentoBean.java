@@ -45,6 +45,9 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
+    public FpEnvelopePagamentoBean() {
+    }
+
     public void validarFolhaPeriodo(FpFolhaPeriodo fpFolhaPeriodo) {
         mostrarTodasFolhasPeriodo = false;
 
