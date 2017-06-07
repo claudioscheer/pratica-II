@@ -60,6 +60,13 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         }
     }
 
+    public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
+        Query query = entityManager.createQuery("from RecPessoa as p where upper(p.recNomecompleto) like :recQuery or p.recCpf like :recQuery");
+        query.setParameter("recQuery", "%" + select.toUpperCase() + "%");
+
+        return query.getResultList();
+    }
+
     public List<RecPessoa> findAllFuncionarios() {
         return entityManager.createQuery(
                 "from RecPessoa as t")//t.recFuncionario = null

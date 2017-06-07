@@ -45,6 +45,10 @@ public class GchTreinamentoPessoaService {
         return gchTreinamentoPessoasDAO.findAll();
     }
 
+    public List<GchTreinamentospessoas> pessoasTreinamento(long idTreinamento){
+        return gchTreinamentoPessoasDAO.pessoasTreinamento(idTreinamento);
+    }
+    
     public List<GchTreinamentospessoas> verificaPessoa(long idTreinamento, long idPessoa) {
         return gchTreinamentoPessoasDAO.verificaPessoa(idTreinamento, idPessoa);
     }
