@@ -54,7 +54,7 @@ public class FpCalcularBean {
     public void selecionarEvento() {
         FpEvento fpEvento = fpEventoService.findById(fpEventoPeriodo.getEvpEvento().getEveId());
         if (fpEvento == null) {
-            Helper.mostrarNotificacao("Evento variável", "O evento não existe.", "info");
+            Helper.mostrarNotificacao("Evento variável", "O evento não existe.", "error");
             fpEvento = new FpEvento();
         }
         fpEventoPeriodo.setEvpEvento(fpEvento);
@@ -68,14 +68,14 @@ public class FpCalcularBean {
 
     public void adicionarEvento() {
         if (fpEventoPeriodo.getEvpEvento().getEveId() <= 0) {
-            Helper.mostrarNotificacao("Evento variável", "Selecione um evento.", "info");
+            Helper.mostrarNotificacao("Evento variável", "Selecione um evento.", "error");
             return;
         }
 
         if (todosFpEventoPeriodo.stream()
                 .filter(x -> x.getEvpEvento().getEveId() == fpEventoPeriodo.getEvpEvento().getEveId())
                 .count() > 0) {
-            Helper.mostrarNotificacao("Evento variável", "Evento já adicionado.", "info");
+            Helper.mostrarNotificacao("Evento variável", "Evento já adicionado.", "error");
             return;
         }
 
@@ -98,7 +98,7 @@ public class FpCalcularBean {
     public void selecionarPessoa() {
         RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
         if (pessoa == null) {
-            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "error");
             recPessoa = new RecPessoa();
             return;
         }
@@ -107,14 +107,14 @@ public class FpCalcularBean {
 
     public void calcularFolhaPagamento() {
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
+            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "error");
             return;
         }
         fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
         if (gerarTodasPessoas) {
             try {
                 calcularFolha.calcularParaTodosFuncionarios(fpPeriodo);
-                Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "info");
+                Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "success");
             } catch (RuntimeException e) {
                 Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
             }
@@ -128,7 +128,7 @@ public class FpCalcularBean {
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
                 if (recPessoa.getRecIdpessoa() <= 0) {
-                    Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+                    Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "error");
                     return;
                 }
                 dadosCalculadosDoFuncionario.setPessoa(recPessoa);
@@ -139,7 +139,7 @@ public class FpCalcularBean {
                 todosFpEventoPeriodo = new ArrayList<>();
                 recPessoa = new RecPessoa();
                 fpEventoPeriodo = new FpEventoPeriodo();
-                Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "info");
+                Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "success");
             } catch (Exception e) {
 
                 todosFpEventoPeriodo = new ArrayList<>();
@@ -150,11 +150,11 @@ public class FpCalcularBean {
 
     public void buscarEventosPessoaPeriodo() {
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
+            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "error");
             return;
         }
         if (recPessoa.getRecIdpessoa() <= 0) {
-            Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+            Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "error");
             return;
         }
         FpFolhaPeriodo fpFolhaPeriodo = fpFolhaPeriodoService.findByPessoaEPeriodo(fpPeriodo, recPessoa);
@@ -198,7 +198,7 @@ public class FpCalcularBean {
 //            todosFpPeriodo = fpPeriodoService.findAll();
 //        }
 //        return todosFpPeriodo;
-        return fpPeriodoService.findAll();
+        return fpPeriodoService.findAllPeriodoNaoPago();
     }
 
     public RecPessoa getRecPessoa() {
