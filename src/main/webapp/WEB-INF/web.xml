@@ -81,5 +81,4 @@
         <error-code>503</error-code>
         <location>/error-padrao.xhtml</location>
     </error-page>
-
 </web-app>
