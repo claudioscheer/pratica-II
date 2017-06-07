@@ -15,13 +15,14 @@ import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
-public class FpEnvelopePagamentoBean implements java.io.Serializable {
+@ViewScoped
+public class FpEnvelopePagamentoBean {
 
     private boolean mostrarTodasFolhasPeriodo = false;
     private FpPeriodo fpPeriodo = new FpPeriodo();
@@ -29,6 +30,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     private FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
     private FpTipoFolha fpTipoFolha;
     private List<FpFolhaPeriodo> todasFolhasPeriodo = new ArrayList<>();
+    private List<FpPeriodo> todosFpPeriodo = new ArrayList<>();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -76,7 +78,11 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     }
 
     public void selecionarPeriodo() {
-        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+        FpPeriodo periodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+        if (periodo == null) {
+            periodo = new FpPeriodo();
+        }
+        fpPeriodo = periodo;
     }
 
     public void selecionarPessoa() {
@@ -214,11 +220,15 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
-//        if (todosFpPeriodo == null) {
-//            todosFpPeriodo = fpPeriodoService.findAll();
-//        }
-//        return todosFpPeriodo;
-        return fpPeriodoService.findAll();
+        List<FpPeriodo> periodos = fpPeriodoService.findAll();
+        return periodos.stream()
+                .sorted((x, y) -> Integer.compare(x.getPerMes(), y.getPerMes()))
+                .collect(Collectors.toList());
+
+    }
+
+    public void setTodosFpPeriodo(List<FpPeriodo> todosFpPeriodo) {
+        this.todosFpPeriodo = todosFpPeriodo;
     }
 
     public RecPessoa getRecPessoa() {
