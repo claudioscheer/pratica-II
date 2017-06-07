@@ -39,28 +39,7 @@
 
                                             <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
-                                                <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
 
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
-                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-
-                                                    </h:commandLink>
-
-                                                </h:column>
-                                                <h:column>                
-                                                    <h:commandLink action="#{gchFormularioAlternativasBean.preparedEdit(formulario)}">
-
-                                                        <i class="glyphicon glyphicon-eye-open" style="font-size:18px" ></i>
-                                                    </h:commandLink>
-                                                </h:column>
-                                                <h:column>   
-                                                    <h:commandLink  action="#{gchFormularioBean.vincularPessoas(formulario)}">
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
-                                                        <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
-
-                                                    </h:commandLink>
-                                                </h:column>
 
                                                 <h:column>   
                                                     <f:facet name="header">Nome</f:facet>
@@ -73,6 +52,34 @@
                                                         <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </h:column>
+
+                                                <h:column>                
+                                                    <h:commandLink action="#{gchFormularioAlternativasBean.preparedEdit(formulario)}">
+
+                                                        <i class="glyphicon glyphicon-eye-open" style="font-size:18px" ></i>
+                                                    </h:commandLink>
+                                                </h:column>
+
+                                                <h:column>   
+                                                    <h:commandLink  action="#{gchFormularioBean.vincularPessoas(formulario)}">
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-send" style="font-size:18px" ></i>
+
+                                                    </h:commandLink>
+                                                </h:column>
+
+
+                                                <h:column headerClass="alinhaColuna">                
+                                                    <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
+
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+
+                                                    </h:commandLink>
+
+                                                </h:column>
+
+
 
                                             </h:dataTable>
 

@@ -57,12 +57,6 @@
                                                 </h:column>
 
                                                 
-                                                 <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink title="Excluir" action="#{gchTreinamentosBean.excluir(treinamento)}" onclick="return confirm('Voce realmente deseja excluir?')" >
-                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                    </h:commandLink>
-                                                </h:column>
-                                                
                                                 <h:column>                
                                                     <h:commandLink title="Editar" action="#{gchTreinamentosBean.buscaTreinamentoPorId(treinamento.treiCodigo)}">
                                                      <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
@@ -75,6 +69,14 @@
                                                      <i class="glyphicon glyphicon-user" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
+                                                
+                                                 <h:column headerClass="alinhaColuna">                
+                                                    <h:commandLink title="Excluir" action="#{gchTreinamentosBean.excluir(treinamento)}" onclick="return confirm('Voce realmente deseja excluir?')" >
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                    </h:commandLink>
+                                                </h:column>
+                                                
+                                                
                                                 
                                             </h:dataTable>
                                         </h:form> </div>                                    
