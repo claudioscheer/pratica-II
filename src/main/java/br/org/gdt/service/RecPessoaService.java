@@ -78,4 +78,7 @@ public class RecPessoaService {
         return pessoaDao.BuscarPessoaCFP(cpf);
     }
 
+    public RecPessoa FindByIdCompleto(long id){
+        return pessoaDao.findByIdCompleto(id);
+    }
 }

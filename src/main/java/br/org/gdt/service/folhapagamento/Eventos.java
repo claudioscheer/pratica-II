@@ -160,23 +160,23 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * quantidadeFilhos);
             fpEventoPeriodo.setEvpValorReferencia(quantidadeFilhos);
 
-        } else if (evento == FpEnumEventos.Insalubridade.ordinal()) { // && dadosCalculadosDoFuncionario.getPessoa().getInsalubridade() != Insalubridade.Não) {
+        } else if (evento == FpEnumEventos.Insalubridade.ordinal() && dadosCalculadosDoFuncionario.getPessoa().getInsalubridade() != null) {
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.SalarioMinimo.ordinal() + 1);
 
             double nivelInsalubridade = 0;
-//            switch (dadosCalculadosDoFuncionario.getPessoa().getInsalubridade()) {
-//                case Alto:
-//                    nivelInsalubridade = 0.4;
-//                    break;
-//
-//                case Médio:
-//                    nivelInsalubridade = 0.2;
-//                    break;
-//
-//                case Baixo:
-//                    nivelInsalubridade = 0.1;
-//                    break;
-//            }
+            switch (dadosCalculadosDoFuncionario.getPessoa().getInsalubridade()) {
+                case Alto:
+                    nivelInsalubridade = 0.4;
+                    break;
+
+                case Médio:
+                    nivelInsalubridade = 0.2;
+                    break;
+
+                case Baixo:
+                    nivelInsalubridade = 0.1;
+                    break;
+            }
 
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * nivelInsalubridade);
             fpEventoPeriodo.setEvpValorReferencia(nivelInsalubridade);
