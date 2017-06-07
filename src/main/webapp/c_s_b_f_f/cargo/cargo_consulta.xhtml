@@ -18,13 +18,24 @@
 
 
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
+                        <div class="container-fluid">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="x_panel">
+                            <div class="form-group" style="float: right;margin-top: 10px">
                             <h:commandButton class="btn btn-primary" value="Adicionar" action="#{csbffCargosBean.add()}">
                                 <!--<f:ajax execute="@form" render="formTabela" />-->
                             </h:commandButton>
                             
                         </div>
-                        <div>
+                                    <div class="panel-heading">
+                                        <h3 class="title_left">
+                                            Cargos
+                                        </h3>
+                                    </div>
+                        
+                                        
+                                                         <div>
                             <br></br> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div>
@@ -60,6 +71,7 @@
                                                     
                             
                         </div>
+                                    </div>
                         <div>
 
                             <br></br>
@@ -100,14 +112,18 @@
                                             </h:commandLink>
 
 
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffCargosBean.excluir(cargos)}" onclick="return confirm('Excluir tabela?')">
+<!--                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{csbffCargosBean.excluir(cargos)}" onclick="return confirm('Excluir tabela?')">
                                                 <f:ajax execute="@form" render="formTabela" />
-                                            </h:commandLink>
+                                            </h:commandLink>-->
                                         </h:column>                  
                                     </h:dataTable>
                                 </div>
+                        
+                            </div>
+                            </div>
                             </div>
                         </div>
+                            </div>
                     </h:panelGroup>
 
                 </h:form>      
