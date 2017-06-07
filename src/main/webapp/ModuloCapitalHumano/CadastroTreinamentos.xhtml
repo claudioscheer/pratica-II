@@ -4,9 +4,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"      
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      
+      xmlns:boot="http://bootsfaces.net/ui"
+
       >
-      
+
     <h:head>
         <title>Cadastro de treinamento</title>
 
@@ -14,6 +15,10 @@
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="content">
+
+                <script>  //Para não tretar a tela
+                    $("LINK[href*='core.css']").remove();
+                </script>
 
                 <div id="page" style="margin-top:75px;">
 
@@ -31,12 +36,14 @@
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-                                        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+
 
                                         <!-- Inline CSS based on choices in "Settings" tab -->
-                                        <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
+
 
                                         <h:form id="CadastroTreinamento">
+
+
                                             <h:messages class="error" style="color: #d9534f" />
                                             <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiCodigo}" />
                                             <h:inputHidden value="#{gchTreinamentosBean.gchTreinamentos.treiDatainclusao}">
@@ -122,44 +129,32 @@
                                                                 <!--<h:inputText class="form-control" id="txbLocalTreinamento" a:placeholder="Adicione um local"/>-->
                                                             </div>
                                                         </div>
+
+
+                                                        <!-- 
                                                         
-                                                            
-                                                                <label class="control-label " for="date">
-                                                                    Data de início
-                                                                </label>
-                                                                <!-- 
-                                                                
-                                                                <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
-                                                                
-                                                             
-                                                                
-                                                                
-                                                                <b:dateTimePicker value="#{dateTimeBean.justNow}"
-                                                                                  allow-input-toggle="#{dateTimeBean.allowInputToggle}"
-                                                                                  icon-position="#{dateTimeBean.iconPosition}"
-                                                                                  mode="#{dateTimeBean.mode}"
-                                                                                  side-by-side="#{dateTimeBean.sideBySide}"
-                                                                                  show-date="#{dateTimeBean.showDate}"
-                                                                                  show-time="#{dateTimeBean.showTime}"
-                                                                                  show-icon="#{dateTimeBean.showIcon}"
-                                                                                  use-current="#{dateTimeBean.useCurrent}" />
-                                                                <h:inputText class="form-control" id="dateInicio"  value="#{gchTreinamentosBean.dataInicio}" a:placeholder="dd/mm/aaaa hh:mm" /> 
-                                                                <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
+                                                        <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
 
-                                                            
-                                                                 
+                                                     
+                                                        <boot:dateTimePicker label="Data de Início" value="#{gchTreinamentosBean.dataInicio}" col-sm="6">
+                                                        
+                                                             <!--<f:convertDateTime pattern="dd/MM/yyyy" />-->
+                                                        
+                                                        </boot:dateTimePicker>
+                                                      
+                                                        <boot:dateTimePicker  label="Data de Fim" value="#{gchTreinamentosBean.dataFim}" col-sm="6" />
 
-                                                        <div class="form-group">
+<!--                                                        <div class="form-group">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                                                 <label class="control-label " for="date">
                                                                     Data de fim
                                                                 </label>
-                                                                <!--                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>-->
+                                                                                                                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>
                                                                 <h:inputText class="form-control" id="dateFim" value="#{gchTreinamentosBean.dataFim}" a:placeholder="dd/mm/aaaa hh:mm" />
-                                                                <!--<f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />-->
+                                                                <f:convertDateTime type="date" pattern="dd/mm/yyyy hh:MM" />
 
                                                             </div>
-                                                        </div>       
+                                                        </div>       -->
 
                                                         <div class="form-group">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
