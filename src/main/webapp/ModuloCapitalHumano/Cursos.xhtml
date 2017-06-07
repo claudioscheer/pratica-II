@@ -36,20 +36,7 @@
                                            
                                                     <h:dataTable id="tabelCursos" class="table table-striped " value="#{gchCursoBean.gchTodosCursos}" var="curso" >
 
-                                                        <h:column headerClass="alinhaColuna">                
-
-                                                            <h:commandLink action="#{gchCursoBean.excluir(curso)}" onclick="return confirm('Voce realmente deseja excluir este curso?')" >
-                                                                 <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                                <f:ajax render="formCursos" />
-                                                            </h:commandLink>
-
-                                                        </h:column>
-                                                        <h:column>                
-                                                            <h:commandLink action="#{gchCursoBean.buscaPorId(curso.curCodigo)}">
-
-                                                                <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
-                                                            </h:commandLink>
-                                                        </h:column>
+                                                       
 
                                                         <h:column>   
                                                             <f:facet name="header">Nome</f:facet>
@@ -72,6 +59,24 @@
                                                                 <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm"/>
                                                             </h:outputText>                
                                                         </h:column>
+                                                        
+                                                        
+                                                        <h:column>                
+                                                            <h:commandLink action="#{gchCursoBean.buscaPorId(curso.curCodigo)}">
+
+                                                                <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                            </h:commandLink>
+                                                        </h:column>
+                                                        
+                                                         <h:column headerClass="alinhaColuna">                
+
+                                                            <h:commandLink action="#{gchCursoBean.excluir(curso)}" onclick="return confirm('Voce realmente deseja excluir este curso?')" >
+                                                                 <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                                <f:ajax render="formCursos" />
+                                                            </h:commandLink>
+
+                                                        </h:column>
+                                                        
                                                     </h:dataTable>
                                     
                                         </h:form> </div>

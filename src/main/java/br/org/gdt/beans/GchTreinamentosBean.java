@@ -10,10 +10,16 @@ import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentosService;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -41,8 +47,8 @@ public class GchTreinamentosBean {
     private long curCodigoCombo;
     private long munCodigoCombo;
 
-    private String dataInicio;
-    private String dataFim;
+    private Date dataInicio;
+    private Date dataFim;
 
     public GchTreinamentosBean() {
 
@@ -52,12 +58,16 @@ public class GchTreinamentosBean {
 
         String MsgNotificacao = "";
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        System.out.println("Chamou");
 
+//      DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+ 
+      SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yy");
+ 
         try {
 
-            gchTreinamentos.setTreiDataInicio(formatter.parse(dataInicio));
-            gchTreinamentos.setTreiDataFim(formatter.parse(dataFim));
+            gchTreinamentos.setTreiDataInicio(dataInicio);
+            gchTreinamentos.setTreiDataFim(dataFim);
 
             if (gchTreinamentos.getTreiCodigo() > 0) {
 
@@ -74,7 +84,7 @@ public class GchTreinamentosBean {
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
 
         } catch (Exception ex) {
-
+            System.out.println("excessao" + ex.toString());
             MsgNotificacao = "Não foi possível cadastrar o treinamento " + gchTreinamentos.getTreiNome();
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
@@ -180,10 +190,12 @@ public class GchTreinamentosBean {
 
             gchTreinamentos = gchTreinamentosService.findById(id);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date a = dataInicio;
+            
+//            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-            dataInicio = formatter.format(gchTreinamentos.getTreiDataInicio());
-            dataFim = formatter.format(gchTreinamentos.getTreiDataFim());
+            dataInicio = gchTreinamentos.getTreiDataInicio();
+            dataFim = gchTreinamentos.getTreiDataFim();
 
             return "CadastroTreinamentos";
 
@@ -227,19 +239,19 @@ public class GchTreinamentosBean {
         this.gchMunicipio = gchMunicipio;
     }
 
-    public String getDataInicio() {
+    public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public String getDataFim() {
+    public Date getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(String dataFim) {
+    public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
     }
 
