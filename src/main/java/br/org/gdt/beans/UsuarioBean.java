@@ -1,16 +1,16 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.Usuario;
-import br.org.gdt.model.UsuarioPapel;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.UsuarioService;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean(name = "usuarioBean")
+@ManagedBean
 @ViewScoped
 public class UsuarioBean {
 
@@ -30,6 +30,12 @@ public class UsuarioBean {
     public void save() {
         verificarAcessos();
         if (usuario.getId() > 0) {
+            if (usuario.getSenha().isEmpty()) {
+                Usuario usuarioSelecionado = usuarioService.findById(usuario.getId());
+                if (usuarioSelecionado != null) {
+                    usuario.setSenha(usuarioSelecionado.getSenha());
+                }
+            }
             usuarioService.update(usuario);
         } else {
             try {

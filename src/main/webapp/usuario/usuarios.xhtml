@@ -33,13 +33,13 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Login<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <h:inputText required="true" requiredMessage="Campo Login é obrigatório." class="form-control col-md-7 col-xs-12" value="#{usuarioBean.usuario.login}" />
+                                                <h:inputText required="true" requiredMessage="Campo Login é obrigatório." label="Login" class="form-control col-md-7 col-xs-12" value="#{usuarioBean.usuario.login}" />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Senha<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <h:inputText a:type="password" required="true" requiredMessage="Campo Senha é obrigatório." class="form-control col-md-7 col-xs-12" value="#{usuarioBean.usuario.senha}" />
+                                                <h:inputSecret label="Senha" class="form-control col-md-7 col-xs-12" value="#{usuarioBean.usuario.senha}" />
                                             </div>
                                         </div>
                                         <div class="form-group">
