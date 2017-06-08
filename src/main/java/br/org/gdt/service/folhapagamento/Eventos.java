@@ -10,6 +10,7 @@ import br.org.gdt.model.FpFaixa;
 import br.org.gdt.service.FpTabelaService;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class Eventos {
         int evento = FpEnumEventos.values()[(int) fpEventoPeriodo.getEvpEvento().getEveId() - 1].ordinal();
         if (evento == FpEnumEventos.Salario.ordinal()) {
             fpEventoPeriodo.setEvpValorReferencia(HORAS_MENSAIS);
-            fpEventoPeriodo.setEvpValor(4000);
+            fpEventoPeriodo.setEvpValor(new Random().nextInt((6897 - 938) + 1) + 938);
 
         } else if (evento == FpEnumEventos.INSS.ordinal()) {
             // Proventos onde incide INSS.
