@@ -5,6 +5,7 @@ import br.org.gdt.resources.Helper;
 import br.org.gdt.service.FpPeriodoService;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -98,6 +99,9 @@ public class FpPeriodoBean {
         if (todosFpPeriodo == null) {
             todosFpPeriodo = fpPeriodoService.findAll();
         }
+        todosFpPeriodo = todosFpPeriodo.stream()
+                .sorted((x, y) -> Integer.compare(x.getPerMes(), y.getPerMes()))
+                .collect(Collectors.toList());
         return todosFpPeriodo;
     }
 
