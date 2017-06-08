@@ -93,6 +93,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     //@Lob
     @Column(name = "rec_foto")
     private byte[] recFoto;
+    @Column(name = "rec_anexocurriculo")
+    private byte[] recAnexoCurriculo;
     @Column(name = "rec_pispasep")
     private String recPispasep;
     @Column(name = "rec_reservista")
@@ -606,7 +608,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setCargoCodigo(CsbffCargos cargoCodigo) {
 //        this.cargoCodigo = cargoCodigo;
 //    }
-
     public GchMunicipios getMunCodigo() {
         return munCodigo;
     }
@@ -718,7 +719,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //
 //        this.cargoNome = cargoNome;
 //    }
-
     public String getAdmissaoDescricao() {
         return admissaoDescricao;
     }
@@ -806,6 +806,14 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setCsbffPessoaBeneficio(CsbffPessoaBeneficio csbffPessoaBeneficio) {
         this.csbffPessoaBeneficio = csbffPessoaBeneficio;
+    }
+
+    public byte[] getRecAnexoCurriculo() {
+        return recAnexoCurriculo;
+    }
+
+    public void setRecAnexoCurriculo(byte[] recAnexoCurriculo) {
+        this.recAnexoCurriculo = recAnexoCurriculo;
     }
 
 }
