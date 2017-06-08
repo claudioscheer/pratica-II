@@ -32,15 +32,34 @@
                                             <div class="form-group">
 
                                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                                                    <p:autoComplete id="recpessoaid" value="#{gchTreinamentoPessoaBean.recPessoa}" completeMethod="#{gchTreinamentoPessoaBean.completePessoa}"
-                                                                    var="pessoa" itemLabel="#{pessoa.recNomecompleto}" itemValue="#{pessoa}" converter="#{generic}" forceSelection="true">
-                                                        <p:column>
-                                                            <h:outputText value="#{pessoa.recNomecompleto}" />
-                                                        </p:column>
-                                                    </p:autoComplete>
-                                              
-                                                    <h:commandButton class="btn btn-success"  actionListener="#{gchTreinamentoPessoaBean.save(false)}" value="Adicionar" /> 
+                                                    <div class="form-group">
 
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <label class="control-label requiredField" for="txbnomeTreinamento">
+                                                                Busque por um CPF ou nome da pessoa:                                                                    
+                                                            </label>                                                           
+
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                                                            <p:autoComplete id="recpessoaid" value="#{gchTreinamentoPessoaBean.recPessoa}" completeMethod="#{gchTreinamentoPessoaBean.completePessoa}"
+                                                                            var="pessoa" itemLabel="#{pessoa.recNomecompleto}" itemValue="#{pessoa}" converter="#{generic}" forceSelection="true">
+                                                                <p:column>
+                                                                    <h:outputText value="#{pessoa.recNomecompleto}" />
+                                                                </p:column>
+                                                            </p:autoComplete>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-6 form-group has-feedback">
+
+                                                            <h:commandButton class="btn btn-success"  actionListener="#{gchTreinamentoPessoaBean.save(false)}" value="Adicionar" /> 
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div> 
 
@@ -65,6 +84,13 @@
 
 
                                             </h:dataTable>
+
+                                            <div class="form-group" style="margin-top: 10px">
+                                                <div>
+                                                    <h:link  outcome="Treinamentos.xhtml" class="btn btn-default " value="Voltar"/>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <p:confirmDialog widgetVar="confirmDlg" message="Colaborador já vinculado em outro treinamento no mesmo período! Deseja vincular o colaborador mesmo assim?" >
