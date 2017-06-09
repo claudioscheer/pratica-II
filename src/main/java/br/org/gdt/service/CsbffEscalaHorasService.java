@@ -16,20 +16,20 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Juliano
  */
-@Service("CsbffEscalaHorasService")
+@Service("csbffEscalaHorasService")
 public class CsbffEscalaHorasService {
 
     @Autowired
     private CsbffEscalaHorasDAO csbffEscalaHorasDAO;
 
     @Transactional
-    public void save(CsbffEscalaHoras escala) {
-        csbffEscalaHorasDAO.save(escala);
+    public void save(CsbffEscalaHoras csbffEscalaHoras) {
+        csbffEscalaHorasDAO.save(csbffEscalaHoras);
     }
 
     @Transactional
-    public void update(CsbffEscalaHoras escala) {
-        csbffEscalaHorasDAO.update(escala);
+    public void update(CsbffEscalaHoras csbffEscalaHoras) {
+        csbffEscalaHorasDAO.update(csbffEscalaHoras);
     }
 
     @Transactional

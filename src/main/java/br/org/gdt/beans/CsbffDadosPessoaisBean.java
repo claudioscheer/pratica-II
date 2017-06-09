@@ -61,7 +61,6 @@ public class CsbffDadosPessoaisBean implements Serializable {
 //        this.recPessoa = new RecPessoa();
 //         return "dadosprofissionais";
 //    }
-
 //    public String cancel() {
 //        this.formAtivo = false;
 //        this.recPessoa = new RecPessoa();
@@ -85,21 +84,15 @@ public class CsbffDadosPessoaisBean implements Serializable {
         try {
             if (recPessoa.getRecIdpessoa() > 0) {
                 recPessoaService.update(recPessoa);
-                MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
             }
-            
+            MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
         } catch (Exception ex) {
             MsgNotificacao = "Os dados não foram inseridos ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+        }
+        recPessoaList = recPessoaService.findAll();
 
-        }
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("dadosprofissionais.xhtml");
-        } catch (IOException ex) {
-        }
-        
         return "listaadmissao";
     }
     public String editaConsulta(RecPessoa pessoas) {

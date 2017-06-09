@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoFolha;
+import br.org.gdt.enums.LogModulo;
 import br.org.gdt.model.FpEvento;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFolhaPeriodo;
@@ -11,6 +12,7 @@ import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
+import br.org.gdt.service.LogService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
 import java.util.ArrayList;
@@ -18,10 +20,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class FpCalcularBean {
 
     private boolean gerarTodasPessoas;
@@ -47,8 +49,10 @@ public class FpCalcularBean {
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
-    public FpCalcularBean() {
+    @ManagedProperty("#{logService}")
+    private LogService logService;
 
+    public FpCalcularBean() {
     }
 
     public void selecionarEvento() {
@@ -114,6 +118,7 @@ public class FpCalcularBean {
         if (gerarTodasPessoas) {
             try {
                 calcularFolha.calcularParaTodosFuncionarios(fpPeriodo);
+                logService.log(LogModulo.FolhaPagamento, "Folhas de pagamento calculadas.");
                 Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "success");
             } catch (RuntimeException e) {
                 Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
@@ -136,6 +141,7 @@ public class FpCalcularBean {
 
                 calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
 
+                logService.log(LogModulo.FolhaPagamento, "Folha de pagamento calculada para pessoa " + recPessoa.getRecIdpessoa() + ".");
                 todosFpEventoPeriodo = new ArrayList<>();
                 recPessoa = new RecPessoa();
                 fpEventoPeriodo = new FpEventoPeriodo();
@@ -270,6 +276,14 @@ public class FpCalcularBean {
 
     public void setFpFolhaPeriodoService(FpFolhaPeriodoService fpFolhaPeriodoService) {
         this.fpFolhaPeriodoService = fpFolhaPeriodoService;
+    }
+
+    public LogService getLogService() {
+        return logService;
+    }
+
+    public void setLogService(LogService logService) {
+        this.logService = logService;
     }
 
 }

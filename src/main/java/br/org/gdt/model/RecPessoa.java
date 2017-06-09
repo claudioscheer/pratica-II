@@ -150,12 +150,10 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffCargosHistorico> csbffCargosHistoricoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<RecSelecao> recSelecaoList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
-    private CsbffEscalaHoras csbffEscalaHoras;
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+//    private CsbffEscalaHoras csbffEscalaHoras;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
-    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private CsbffPessoaDependente colabDepCodigo;
     @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
@@ -173,15 +171,10 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchRespostas> gchRespostasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchFormularioPessoa> gchFormularioPessoas;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
-//    private List<TipoBeneficio> csbffBeneficiosList;
     @OneToMany
     private List<CsbffBeneficios> csbffBeneficiosList;
-//    @OneToMany
     private Insalubridade insalubridade;
     private PossuiDependentes possuiDependente;
-//    @OneToMany
-//    private List<CsbffCargos> csbffCargosList;
     private Integer recPesGrauEnsino;
     @OneToMany
     private List<RecPessoa> recPessoaList;
@@ -193,10 +186,16 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa", fetch = FetchType.EAGER)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
+    private CsbffEscalaHoras csbffEscalaHoras;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+    private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
+    @OneToOne
     private CsbffCargos cargos;
 //    private DiasATrabalhar diasATrabalhar;
     @OneToOne
     private CsbffCargos cargoValorSalario;
+    @OneToOne
+    private CsbffEscalaHoras escalaCodigo;
 
     public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, int recSexo, int recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, String recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, CsbffEscalaHoras csbffEscalaHoras, List<GchTreinamentospessoas> gchTreinamentospessoasList, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Integer recPesGrauEnsino, List<RecPessoa> recPessoaList, CsbffCargos cargoCbo, CsbffCargos cargoNome, String admissaoDescricao, List<CsbffEscalaHoras> csbffEscalaHorasList, CsbffCargos cargos, String recComplemento) {
         this.recIdpessoa = recIdpessoa;
@@ -242,7 +241,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recExperienciaList = recExperienciaList;
         this.csbffCargosHistoricoList = csbffCargosHistoricoList;
         this.recSelecaoList = recSelecaoList;
-        this.csbffEscalaHoras = csbffEscalaHoras;
+//        this.csbffEscalaHoras = csbffEscalaHoras;
         this.gchTreinamentospessoasList = gchTreinamentospessoasList;
         this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
         this.colabDepCodigo = colabDepCodigo;
@@ -772,14 +771,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recPesGrauEnsino = recPesGrauEnsino;
     }
 
-    public CsbffEscalaHoras getCsbffEscalaHoras() {
-        return csbffEscalaHoras;
-    }
-
-    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
-        this.csbffEscalaHoras = csbffEscalaHoras;
-    }
-
+//    public CsbffEscalaHoras getCsbffEscalaHoras() {
+//        return csbffEscalaHoras;
+//    }
+//
+//    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
+//        this.csbffEscalaHoras = csbffEscalaHoras;
+//    }
     public CsbffCargos getCargoCbo() {
         return cargoCbo;
     }
@@ -788,13 +786,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.cargoCbo = cargoCbo;
     }
 
+    public CsbffCargos getCargoNome() {
+        return cargoNome;
+    }
+
     public void setCargoNome(CsbffCargos cargoNome) {
 
         this.cargoNome = cargoNome;
-    }
-
-    public CsbffCargos getCargoNome() {
-        return cargoNome;
     }
 
     public String getAdmissaoDescricao() {
@@ -839,5 +837,23 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public void setRecComplemento(String recComplemento) {
         this.recComplemento = recComplemento;
     }
+
+    public CsbffEscalaHoras getCsbffEscalaHoras() {
+        return csbffEscalaHoras;
+    }
+
+    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
+        this.csbffEscalaHoras = csbffEscalaHoras;
+    }
+
+    public CsbffEscalaHoras getEscalaCodigo() {
+        return escalaCodigo;
+    }
+
+    public void setEscalaCodigo(CsbffEscalaHoras escalaCodigo) {
+        this.escalaCodigo = escalaCodigo;
+    }
+    
+    
 
 }

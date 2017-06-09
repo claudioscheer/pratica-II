@@ -128,25 +128,37 @@ public class CsbffBeneficioBean {
     }
 
     public String excluir(CsbffBeneficios beneficio) {
-        csbffBeneficiosService.delete(beneficio.getBeneficioCodigo());
-        todosCsbffBeneficios.remove(beneficio);
+        String MsgNotificacao = "";
+        try {
+            csbffBeneficiosService.delete(beneficio.getBeneficioCodigo());
+            todosCsbffBeneficios.remove(beneficio);
+
+            MsgNotificacao = "O beneficio foi excluido!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+        } catch (Exception ex) {
+            MsgNotificacao = "O beneficio não pode ser excluído!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+
+        }
         return "consultabeneficios";
     }
 
     public String save() {
+//        this.formAtivo = true;
         String MsgNotificacao = "";
         try {
             if (csbffBeneficios.getBeneficioCodigo() > 0) {
                 csbffBeneficiosService.update(csbffBeneficios);
-                MsgNotificacao = "O beneficio foi atualizado com Sucesso!";
-            } else {
 
+            } else {
                 csbffBeneficiosService.save(csbffBeneficios);
-                MsgNotificacao = "O beneficio foi cadastrado com Sucesso!";
+
             }
+            MsgNotificacao = "O beneficio foi inserido com seucesso!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
         } catch (Exception ex) {
-            MsgNotificacao = "O benefício não pode ser cadastrado.";
+            MsgNotificacao = "O beneficio não pode ser inserido!";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
 
         }
