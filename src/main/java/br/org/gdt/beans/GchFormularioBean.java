@@ -217,6 +217,12 @@ public class GchFormularioBean {
         }
 
     }
+    
+    public String DirecionaGrafico(GchFormulario formulario){
+        
+        return "Estatisticas";
+        
+    }
 
     public void IsSelected(long alt) {
 
@@ -242,7 +248,7 @@ public class GchFormularioBean {
         }
 
     }
-
+    
     public void add() {
 
         this.formAtivo = true;

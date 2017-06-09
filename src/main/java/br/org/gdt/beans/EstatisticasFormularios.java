@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,6 +35,7 @@ import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
@@ -41,150 +43,171 @@ import org.primefaces.model.chart.LineChartSeries;
  */
 @ManagedBean
 public class EstatisticasFormularios implements Serializable {
-    
-    private List<LineChartModel> graficosLinha;
+
+    private List<BarChartModel> graficosLinha = new ArrayList<>();
     private BarChartModel graficosBarras;
     
-    private long codigoFormulario = 0;
-    
+    private PieChartModel graficoPizza = null;
+
+    private long codigoFormulario;
+
     @ManagedProperty("#{gchFormularioService}")
     private GchFormularioService gchFormularioService;
-    
+
     @ManagedProperty("#{gchRespostaService}")
     private GchRespostasService gchRespostasService;
-    
+
     @ManagedProperty("#{gchFormularioPessoaService}")
     private GchFormularioPessoaService gchFormularioPessoaService;
-    
+
     @ManagedProperty("#{gchAlternativaCertoService}")
     private GchCadastroAlternativaServiceCerto gchAlternativasService;
-    
+
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoasService;
-    
+
     @ManagedProperty("#{gchPerguntaService}")
     private GchPerguntasService gchPerguntasService;
-    
+
     @PostConstruct
     public void init() {
 //        createLineModels();
     }
-    
+
+    public PieChartModel getGraficoPizza() {
+        
+        
+        if(graficoPizza != null){
+        return graficoPizza;
+        
+        }else{
+            
+            return new PieChartModel();
+            
+        }
+    }
+
+    public void setGraficoPizza(PieChartModel graficoPizza) {
+        this.graficoPizza = graficoPizza;
+    }
+
     public RecPessoaService getRecPessoasService() {
         return recPessoasService;
     }
-    
+
     public long getCodigoFormulario() {
         return codigoFormulario;
     }
-    
+
     public void setCodigoFormulario(long codigoFormulario) {
         this.codigoFormulario = codigoFormulario;
     }
 
     public BarChartModel getGraficosBarras() {
-        if(graficosBarras == null){
-            
-            
+        if (graficosBarras == null) {
+
             BarChartModel vazio = new BarChartModel();
-            
+
             ChartSeries series = new ChartSeries();
             series.setLabel("seriesLabel");
             series.set("1", 0);
-            
+
             vazio.addSeries(series);
-            
+
             return vazio;
-       
-        }else{
-        
-        return graficosBarras;
+
+        } else {
+
+            return graficosBarras;
         }
     }
 
     public void setGraficosBarras(BarChartModel graficosBarras) {
         this.graficosBarras = graficosBarras;
     }
-    
+
     public void setRecPessoasService(RecPessoaService recPessoasService) {
         this.recPessoasService = recPessoasService;
     }
-    
+
     public GchCadastroAlternativaServiceCerto getGchAlternativasService() {
         return gchAlternativasService;
     }
-    
+
     public GchFormularioService getGchFormularioService() {
         return gchFormularioService;
     }
-    
+
     public void setGchFormularioService(GchFormularioService gchFormularioService) {
         this.gchFormularioService = gchFormularioService;
     }
-    
+
     public void setGchAlternativasService(GchCadastroAlternativaServiceCerto gchAlternativasService) {
         this.gchAlternativasService = gchAlternativasService;
     }
-    
-    public List<LineChartModel> getGraficosLinha() {
-        
+
+    public List<BarChartModel> getGraficosLinha() {
+
         if (graficosLinha == null) {
 
             LineChartModel vazio = new LineChartModel();
-            
+
             ChartSeries series = new ChartSeries();
             series.setLabel("seriesLabel");
             series.set("1", 0);
-            
+
             vazio.addSeries(series);
-            
-            
-            List<LineChartModel> vazio3 = new ArrayList<>();
-            
+
+            List<BarChartModel> vazio3 = new ArrayList<>();
+
             return vazio3;
         } else {
-            
+
             return graficosLinha;
         }
     }
-    
 
-    
+//    public String acessarGraficoLinha(GchFormulario formulario){
+//
+//        codigoFormulario = formulario.getFormCodigo();
+//
+//        return ""
+//
+//    }
     public GchPerguntasService getGchPerguntasService() {
         return gchPerguntasService;
     }
-    
+
     public void setGchPerguntasService(GchPerguntasService gchPerguntasService) {
         this.gchPerguntasService = gchPerguntasService;
     }
-    
+
     public GchRespostasService getGchRespostasService() {
         return gchRespostasService;
     }
-    
+
     public void setGchRespostasService(GchRespostasService gchRespostasService) {
         this.gchRespostasService = gchRespostasService;
     }
-    
+
     public GchFormularioPessoaService getGchFormularioPessoaService() {
         return gchFormularioPessoaService;
     }
-    
+
     public void setGchFormularioPessoaService(GchFormularioPessoaService gchFormularioPessoaService) {
         this.gchFormularioPessoaService = gchFormularioPessoaService;
     }
-    
+
     public EstatisticasFormularios() {
-        
+
     }
-    
+
     public void gerargraficoformulariorespondidos() {
-        
+
         if (codigoFormulario != 0) {
-            
-            LineChartModel linhaPessoa = null;
-            BarChartModel barraAlternativa = null;
-            
+
+            BarChartModel linhaPessoa = null;
+
             List<GchFormularioPessoa> pessoasFormulario = new ArrayList<>();
             List<GchRespostas> respostasEncontradas = new ArrayList<>();
 
@@ -192,96 +215,100 @@ public class EstatisticasFormularios implements Serializable {
             pessoasFormulario = gchFormularioPessoaService.findAll();
             respostasEncontradas = gchRespostasService.findAll();
 
+            int naoRespondido = 0;
+            int Respondido = 0;
+
+            for (GchFormularioPessoa fp : pessoasFormulario) {
+
+                if (fp.isFormRespondido()) {
+                    Respondido += 1;
+                } else {
+                    naoRespondido += 1;
+                }
+
+            }
+
+            graficoPizza = new PieChartModel();
+
+            graficoPizza.set("Pessoas que Responderam", Respondido);
+            graficoPizza.set("Pessoas que não Responderam", naoRespondido);
+
+            graficoPizza.setTitle("Disponibilização X Pessoas que responderam");
+            graficoPizza.setLegendPosition("w");
+
             //Busca todas as alternativas possiveis para aquele formulario
             Stream<Integer> todosFormularios = respostasEncontradas.stream().map(x -> x.getFormCodigo()).distinct()
                     .filter(x -> x == codigoFormulario);
-            
+
             Iterator<Integer> formularioIterator = todosFormularios.iterator();
             while (formularioIterator.hasNext()) {
                 int codigoFormulario = formularioIterator.next();
                 Stream<Long> todasPessoasFormulario = respostasEncontradas.stream()
                         .filter(x -> x.getFormCodigo() == codigoFormulario)
-                        .map(x -> x.getRecIdpessoa().getRecIdpessoa())
+                        .map(x -> x.getPerCodigo())
                         .distinct();
 
-                //Busca alternativas
-                Stream<Long> todasAlternativasFormulario = respostasEncontradas.stream()
-                        .filter(x -> x.getFormCodigo() == codigoFormulario)
-                        .map(x -> x.getAltCodigo().getAltCodigo())
-                        .distinct();
-                
-                barraAlternativa = new BarChartModel();
-                barraAlternativa.setAnimate(true);
-                barraAlternativa.setTitle("Total Respondido X Respostas");
-                barraAlternativa.setLegendPosition("ne");
-                
-                Axis xAxis = barraAlternativa.getAxis(AxisType.X);
-                xAxis.setLabel("Perguntas");
-                
-                Axis yAxis2 = barraAlternativa.getAxis(AxisType.Y);
-                yAxis2.setLabel("Total Respondido");
-                yAxis2.setMin(0);
-                yAxis2.setMax(200);
-                
-                GchFormulario formulario = gchFormularioService.findById(codigoFormulario);
-                
-                linhaPessoa = new LineChartModel();
-                
-                linhaPessoa.setTitle(formulario.getFormNome());
-                linhaPessoa.setAnimate(true);
-                linhaPessoa.setLegendPosition("e");
-                linhaPessoa.setShowPointLabels(false);
-                linhaPessoa.setMouseoverHighlight(true);
-                linhaPessoa.setShadow(true);
-                linhaPessoa.getAxes().put(AxisType.X, new CategoryAxis("Perguntas"));
-                linhaPessoa.getAxes().put(AxisType.Y, new CategoryAxis("Resposta"));
-                Axis yAxis = linhaPessoa.getAxis(AxisType.Y);
-                yAxis.setMin(0);
-                yAxis.setMax(100);
-                
-                Iterator<Long> pessoasIterator = todasPessoasFormulario.iterator();
-                while (pessoasIterator.hasNext()) {
-                    long codigo = pessoasIterator.next();
-                    
-                    RecPessoa pessoa = recPessoasService.BuscarId((int) codigo);
-                    
-                    ChartSeries colaborador = new ChartSeries();
-                    
-                    colaborador.setLabel(pessoa.getRecNomecompleto());
-                    
-                    List<GchRespostas> perguntaQuePessoaRespondeu = respostasEncontradas.stream()
-                            .filter(x -> x.getFormCodigo() == codigoFormulario && x.getRecIdpessoa().getRecIdpessoa() == codigo)
-                            .collect(Collectors.toList());
-                                      
-                    for (GchRespostas respostas : perguntaQuePessoaRespondeu) {
-                        
-                        ChartSeries graficoAlternativa = new ChartSeries();
-                        
-                        GchPerguntas pergunta = gchPerguntasService.findById(respostas.getPerCodigo());
-                        GchAlternativas alternativa = gchAlternativasService.findById(respostas.getAltCodigo().getAltCodigo());
-                        
-                        graficoAlternativa.setLabel(alternativa.getAltDescricao());
-                        
-                        graficoAlternativa.set(pergunta.getPerDescricao(), alternativa.getAltPrioridade());
-                        
-                        colaborador.set(pergunta.getPerDescricao(), alternativa.getAltPrioridade());
-                        barraAlternativa.addSeries(graficoAlternativa);
+                Iterator<Long> perguntaIterator = todasPessoasFormulario.iterator();
+
+                while (perguntaIterator.hasNext()) {
+
+                    linhaPessoa = new BarChartModel();
+
+                    GchFormulario formulario = gchFormularioService.findById(codigoFormulario);
+                    long codigoPergunta = perguntaIterator.next();
+
+                    GchPerguntas pergunta = gchPerguntasService.findById(codigoPergunta);
+
+                    linhaPessoa.setTitle(pergunta.getPerDescricao());
+                    linhaPessoa.setAnimate(true);
+                    linhaPessoa.setLegendPosition("e");
+                    linhaPessoa.setShowPointLabels(false);
+                    linhaPessoa.setMouseoverHighlight(true);
+                    linhaPessoa.setShadow(true);
+                    linhaPessoa.getAxes().put(AxisType.Y, new CategoryAxis(""));
+                    Axis yAxis = linhaPessoa.getAxis(AxisType.Y);
+                    yAxis.setMin(0);
+                    yAxis.setMax(100);
+
+                    Stream<Long> todasAlternativasFormulario = respostasEncontradas.stream()
+                            .filter(x -> x.getFormCodigo() == codigoFormulario && x.getPerCodigo() == codigoPergunta)
+                            .map(x -> x.getAltCodigo().getAltCodigo())
+                            .distinct();
+
+                    Iterator<Long> alternativasIterator = todasAlternativasFormulario.iterator();
+
+                    while (alternativasIterator.hasNext()) {
+
+                        long codigoAlternativa = alternativasIterator.next();
+
+                        GchAlternativas alternativa = gchAlternativasService.findById(codigoAlternativa);
+
+                        ChartSeries charAlt = new ChartSeries();
+
+                        charAlt.setLabel(alternativa.getAltDescricao());
+
+                        Stream<Long> totalPorAlternativa = respostasEncontradas.stream()
+                                .filter(x -> x.getFormCodigo() == codigoFormulario && x.getPerCodigo() == codigoPergunta && x.getAltCodigo().getAltCodigo() == codigoAlternativa)
+                                .map(x -> x.getAltCodigo().getAltCodigo());
+
+                        charAlt.set("_", totalPorAlternativa.count());
+
+                        System.out.println("entrou uhu");
+
+                        linhaPessoa.addSeries(charAlt);
                     }
-                    
-                    linhaPessoa.addSeries(colaborador);
-                    
+
+                    graficosLinha.add(linhaPessoa);
+
                 }
-                
-                graficosLinha.add(linhaPessoa);
-                graficosBarras = barraAlternativa;
-                
+
             }
-            
+
         } else {
-            
+
             System.out.println("código do formulário vazio");
-            
+
         }
     }
-    
+
 }

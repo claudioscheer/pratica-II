@@ -8,12 +8,14 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchAlternativas;
 import br.org.gdt.model.GchAlternativasperguntas;
 import br.org.gdt.model.GchFormulario;
+import br.org.gdt.model.GchFormularioPessoa;
 import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.model.GchRespostas;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchAlternativasPerguntaService;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
+import br.org.gdt.service.GchFormularioPessoaService;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
 import br.org.gdt.service.GchRespostasService;
@@ -25,6 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -73,6 +76,9 @@ public class GchFormularioAlternativasBean {
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
 
+    @ManagedProperty("#{gchFormularioPessoaService}")
+    private GchFormularioPessoaService gchFormularioPessoaService;
+
     private List<GchRespostas> gchRespostasList = new ArrayList<>();
 
     private GchFormulario gchFormularios;
@@ -82,13 +88,41 @@ public class GchFormularioAlternativasBean {
     private int idPessoa;
     private int idFormulario;
 
+    private boolean respondeu;
+
+    
+    
     public GchFormularioAlternativasBean() {
 
-    }
+    
 
+        
+    }
+    
+    public void Verifica(){
+        
+        recuperaParametro();
+
+        respondeu = gchFormularioPessoaService.VerificaSeJaRespondeu(idPessoa, idFormulario);
+        
+        if (respondeu) {
+
+            FacesContext context = FacesContext.getCurrentInstance();
+            try {
+                context.getExternalContext().redirect("Erro-FormRespondio.xhtml");
+            } catch (IOException ex) {
+
+            }
+        }
+        
+        
+    }
+ 
     public void save() {
 
         Iterator<GchAlternativas> keyIterrator = radio.keySet().iterator();
+
+        RecPessoa pessoa = recPessoaService.BuscarId(idPessoa);
 
         while (keyIterrator.hasNext()) {
 
@@ -98,9 +132,6 @@ public class GchFormularioAlternativasBean {
             GchRespostas gchResposta = new GchRespostas();
 
             gchResposta.setFormCodigo(idFormulario);
-
-            RecPessoa pessoa = recPessoaService.BuscarId(idPessoa);
-
             gchResposta.setRecIdpessoa(pessoa);
             gchResposta.setAltCodigo(alternativa);
             gchResposta.setPerCodigo(alternativa.getPerCodigo());
@@ -112,6 +143,18 @@ public class GchFormularioAlternativasBean {
         radio = new HashMap<GchAlternativas, String>();
 
         Helper.mostrarNotificacao("Sucesso", "Resposta cadastrada!", "sucess");
+
+        //Altera a flag respondido para true no banco
+        int idpesForm = gchFormularioPessoaService.BuscaPkFormularioPessoa(idPessoa, idFormulario);
+
+        GchFormularioPessoa pessoaFormulario = new GchFormularioPessoa();
+
+        pessoaFormulario.setFormPesCodigo(idpesForm);
+        pessoaFormulario.setFormRespondido(true);
+        pessoaFormulario.setFormulario(gchFormularios);
+        pessoaFormulario.setRecIdpessoa(pessoa);
+
+        gchFormularioPessoaService.update(pessoaFormulario);
 
         FacesContext context = FacesContext.getCurrentInstance();
         try {
@@ -196,6 +239,14 @@ public class GchFormularioAlternativasBean {
         this.gchAlternativas = gchAlternativas;
     }
 
+    public boolean isRespondeu() {
+        return respondeu;
+    }
+
+    public void setRespondeu(boolean respondeu) {
+        this.respondeu = respondeu;
+    }
+
     public GchCadastroAlternativaServiceCerto getGchAlternativasService() {
         return gchAlternativasService;
     }
@@ -212,10 +263,20 @@ public class GchFormularioAlternativasBean {
         this.gchFormularioService = gchFormularioService;
     }
 
+    public GchFormularioPessoaService getGchFormularioPessoaService() {
+        return gchFormularioPessoaService;
+    }
+
+    public void setGchFormularioPessoaService(GchFormularioPessoaService gchFormularioPessoaService) {
+        this.gchFormularioPessoaService = gchFormularioPessoaService;
+    }
+
     public GchFormulario getGchFormularios() {
 
         recuperaParametro();
 
+         
+        
         gchFormularios = gchFormularioService.findById(idFormulario);
 
         return gchFormularios;

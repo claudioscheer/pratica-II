@@ -68,8 +68,8 @@
                                                 </h:column>
                                                 
                                                 <h:column> 
-                                                    <h:commandLink >
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                    <h:commandLink action="#{gchFormularioBean.DirecionaGrafico(formulario)}" >
+                                                        <f:param name="sender" value="#{formulario.formCodigo}" />
                                                         <i class="glyphicon glyphicon-object-align-bottom" style="font-size:18px" ></i>
 
                                                     </h:commandLink>
