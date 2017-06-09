@@ -54,7 +54,7 @@
                                 </div>
                                 <h:panelGroup rendered="#{fpCalcularBean.gerarTodasPessoas}">
                                     <div class="col-md-6">
-                                        Serão levados em consideração para o cálculo, todos os eventos já lançados para o funcionário no período.
+                                        Serão calculadas apenas as folhas dos funcionários ainda não calculados no período.
                                     </div>
                                     <div class="col-md-3 text-center">
                                         <h:commandButton class="btn btn-primary" value="Calcular todos funcionários" action="#{fpCalcularBean.calcularFolhaPagamento()}">
@@ -87,7 +87,7 @@
                                                 <div class="col-md-2">
                                                     <label class="control-label">Código do evento </label>
                                                     <span style="cursor: pointer" data-toggle="modal" data-target="#modal-selecionar-evento">
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Visualize os eventos disponíveis"></i>
+                                                        <i class="fa fa-question-circle" style="font-size: 18px" data-toggle="tooltip" data-placement="right" title="" data-original-title="Visualize os eventos disponíveis"></i>
                                                     </span>
 
                                                     <div class="modal fade" id="modal-selecionar-evento" tabindex="-1" role="dialog" aria-hidden="true">
@@ -201,17 +201,16 @@
                                                     </h:column>
                                                 </h:dataTable>
                                             </div>
+                                            <div class="col-md-12" style="margin-top: 10px; margin-bottom: 15px">
+                                                <h:commandButton class="btn btn-primary" value="Salvar e calcular eventos" action="#{fpCalcularBean.calcularFolhaPagamento()}">
+                                                    <f:ajax execute="@form" render="formEventoVariavel" />
+                                                </h:commandButton>
+                                            </div>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="margin-top: 10px">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <h:commandButton class="btn btn-primary" value="Salvar e calcular eventos" action="#{fpCalcularBean.calcularFolhaPagamento()}">
-                                            <f:ajax execute="@form" render="formEventoVariavel" />
-                                        </h:commandButton>
-                                    </div>
-                                </div>
+
                             </h:panelGroup>
                         </div>
                     </h:panelGroup>

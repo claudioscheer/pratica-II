@@ -6,12 +6,14 @@ import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffBeneficiosService;
 import br.org.gdt.service.CsbffDependentesService;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -160,17 +162,44 @@ public class CsbffBeneficioBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
 
         }
-        todosCsbffBeneficios = csbffBeneficiosService.findAll();
-        this.csbffBeneficios = new CsbffBeneficios();
-//        this.formAtivo = false;
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("cadastrobeneficios.xhtml");
+        } catch (IOException ex) {
+        }
         return "consultabeneficios";
     }
+
+//    public String save() {
+////        this.formAtivo = true;
+//        if (csbffBeneficios.getBeneficioCodigo() > 0) {
+//            csbffBeneficiosService.update(csbffBeneficios);
+//
+//        } else {
+//            csbffBeneficiosService.save(csbffBeneficios);
+//
+//        }
+//        todosCsbffBeneficios = csbffBeneficiosService.findAll();
+//        this.csbffBeneficios = new CsbffBeneficios();
+////        this.formAtivo = false;
+//        return "consultabeneficios";
+//    }
+//    public void cancel() {
+//        this.formAtivo = false;
+//        this.csbffBeneficios = new CsbffBeneficios();
+//    }
 
     public void cancel() {
         this.formAtivo = false;
         this.csbffBeneficios = new CsbffBeneficios();
-    }
 
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("consultabeneficios.xhtml");
+        } catch (IOException ex) {
+
+        }
+    }
     public void add() {
         this.formAtivo = true;
         this.csbffBeneficios = new CsbffBeneficios();

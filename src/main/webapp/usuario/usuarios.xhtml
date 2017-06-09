@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="head">
+                <title>Usuários</title>
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="formUsuario">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <h:messages class="error" style="color: #d9534f" />
+                        </div>
+                    </div>
+
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{usuarioBean.formAtivo}">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="title_left">
+                                        <h3>Usuários</h3>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Login<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h:inputText required="true" requiredMessage="Campo Login é obrigatório." class="form-control col-md-7 col-xs-12" value="#{usuarioBean.usuario.login}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Senha<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h:inputText a:type="password" required="true" requiredMessage="Campo Senha é obrigatório." class="form-control col-md-7 col-xs-12" value="#{usuarioBean.usuario.senha}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{usuarioBean.admin}" /> É administrador?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{usuarioBean.folha}" /> Tem acesso à folha de pagamento?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{usuarioBean.capital}" /> Tem acesso ao capital humano?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{usuarioBean.recrutamento}" /> Tem acesso à recrutamento e seleção?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{usuarioBean.ficha}" /> Tem acesso à ficha funcional?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <h:commandButton class="btn btn-primary" value="Salvar" action="#{usuarioBean.save()}">
+                                                    <f:ajax execute="@form" render="formUsuario" />
+                                                </h:commandButton>
+                                                <h:commandButton immediate="true" class="btn btn-danger" value="Cancelar" action="#{usuarioBean.cancel()}">
+                                                    <f:ajax execute="@form" render="formUsuario" />
+                                                </h:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!usuarioBean.formAtivo}">
+                        <div class="row">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="title_left">
+                                                <h3>Usuários</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{usuarioBean.add()}">
+                                                <f:ajax execute="@form" render="formUsuario" />
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <h:dataTable class="table table-striped" value="#{usuarioBean.todosUsuarios}" var="usuario">
+                                        <h:column>
+                                            <f:facet name="header">Login</f:facet>
+                                                #{usuario.login}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Acessos</f:facet>
+                                                #{usuario.acessos}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Opções</f:facet>
+                                            <h:commandLink action="#{usuarioBean.prepareEdit(usuario)}" a:data-placement="left" a:data-toggle="tooltip" a:data-original-title="Editar" style="padding-right: 10px">
+                                                <f:ajax execute="@form" render="formUsuario" />
+                                                <i class="glyphicon glyphicon-pencil" style="font-size:18px"></i>
+                                            </h:commandLink>
+                                            <h:commandLink action="#{usuarioBean.excluir(usuario)}" a:data-toggle="tooltip" a:data-placement="right" a:data-original-title="Excluir" onclick="return confirm('Excluir usuário?')">
+                                                <f:ajax execute="@form" render="formUsuario" />
+                                                <i class="glyphicon glyphicon-remove-circle" style="font-size:18px" ></i>
+                                            </h:commandLink>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+            <ui:define name="script">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(document).on('focus', 'input[type="text"]', function () {
+                            $(this).select();
+                        });
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>

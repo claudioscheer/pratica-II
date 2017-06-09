@@ -12,91 +12,107 @@
                 <title>Eventos - Folha de pagamento</title>
             </ui:define>
             <ui:define name="content">
-                <div class="title_left">
-                    <h3>Eventos</h3>
-                </div>
-                <br />
                 <h:form id="formEvento">
-                    <h:messages class="error" style="color: #d9534f" />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <h:messages class="error" style="color: #d9534f" />
+                        </div>
+                    </div>
 
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{fpEventoBean.formAtivo}">
-                        <h:inputHidden value="#{fpEventoBean.fpEvento.eveId}" />
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Código</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText disabled="true" class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveId}" />
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="title_left">
+                                        <h3>Eventos</h3>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:inputText required="true" requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveNome}" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo evento<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h:selectOneMenu value="#{fpEventoBean.fpEvento.eveTipoEvento}" class="form-control">
-                                            <f:selectItems value="#{dadosComuns.tipoEventos}" />
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="checkbox">
-                                            <label>
-                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideINSS}" /> Incide INSS?
-                                            </label>
+                                <br />
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Código</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h:inputText disabled="true" class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveId}" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="checkbox">
-                                            <label>
-                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideFGTS}" /> Incide FGTS?
-                                            </label>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h:inputText required="true" requiredMessage="Campo Nome é obrigatório." class="form-control col-md-7 col-xs-12" value="#{fpEventoBean.fpEvento.eveNome}" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="checkbox">
-                                            <label>
-                                                <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideIRRF}" /> Incide IRRF?
-                                            </label>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo evento<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h:selectOneMenu value="#{fpEventoBean.fpEvento.eveTipoEvento}" class="form-control">
+                                                    <f:selectItems value="#{dadosComuns.tipoEventos}" />
+                                                </h:selectOneMenu>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{fpEventoBean.save()}">
-                                            <f:ajax execute="@form" render="formEvento" />
-                                        </h:commandButton>
-                                        <h:commandButton immediate="true" class="btn btn-default" value="Cancelar" action="#{fpEventoBean.cancel()}">
-                                            <f:ajax execute="@form" render="formEvento" />
-                                        </h:commandButton>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideINSS}" /> Incide INSS?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideFGTS}" /> Incide FGTS?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <h:selectBooleanCheckbox value="#{fpEventoBean.fpEvento.eveIncideIRRF}" /> Incide IRRF?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <h:commandButton class="btn btn-primary" value="Salvar" action="#{fpEventoBean.save()}">
+                                                    <f:ajax execute="@form" render="formEvento" />
+                                                </h:commandButton>
+                                                <h:commandButton immediate="true" class="btn btn-danger" value="Cancelar" action="#{fpEventoBean.cancel()}">
+                                                    <f:ajax execute="@form" render="formEvento" />
+                                                </h:commandButton>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </h:panelGroup>
-
                     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpEventoBean.formAtivo}">
-                        <div class="row">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpEventoBean.add()}">
-                                <f:ajax execute="@form" render="formEvento" />
-                            </h:commandButton>
-                        </div>
                         <div class="row">
                             <div class="x_panel">
                                 <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="title_left">
+                                                <h3>Eventos</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{fpEventoBean.add()}">
+                                                <f:ajax execute="@form" render="formEvento" />
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                    <br />
                                     <h:dataTable class="table table-striped" value="#{fpEventoBean.todosFpEvento}" var="evento">
                                         <h:column>
                                             <f:facet name="header">Código</f:facet>
@@ -112,11 +128,13 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{fpEventoBean.prepareEdit(evento)}">
+                                            <h:commandLink action="#{fpEventoBean.prepareEdit(evento)}" a:data-placement="left" a:data-toggle="tooltip" a:data-original-title="Editar" style="padding-right: 10px">
                                                 <f:ajax execute="@form" render="formEvento" />
+                                                <i class="glyphicon glyphicon-pencil" style="font-size:18px"></i>
                                             </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{fpEventoBean.excluir(evento)}" onclick="return confirm('Excluir evento?')">
+                                            <h:commandLink action="#{fpEventoBean.excluir(evento)}" a:data-toggle="tooltip" a:data-placement="right" a:data-original-title="Excluir" onclick="return confirm('Excluir evento?')">
                                                 <f:ajax execute="@form" render="formEvento" />
+                                                <i class="glyphicon glyphicon-remove-circle" style="font-size:18px" ></i>
                                             </h:commandLink>
                                         </h:column>
                                     </h:dataTable>

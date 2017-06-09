@@ -28,7 +28,8 @@
                                             <span class="required">*</span>
                                         </label>
                                         <h:inputText class="form-control" 
-                                                     id="Descricao" 
+                                                     id="Descricao"
+                                                     disabled="true"
                                                      value="#{recVagaBean.vaga.recDescricao}" />
                                     </div>
                                 </div>                                                     
@@ -37,7 +38,11 @@
                                         <label class="control-label " for="select">
                                             Sexo
                                         </label>
-                                        <h:selectOneMenu id="comboSexo" value="#{recVagaBean.vaga.recSexo}" class="form-control" >
+                                        <h:selectOneMenu 
+                                            id="comboSexo" 
+                                            disabled="true"
+                                            value="#{recVagaBean.vaga.recSexo}" 
+                                            class="form-control" >
                                             <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
                                             <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
                                             <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                             
@@ -54,6 +59,7 @@
                                         <h:inputText 
                                             class="form-control" 
                                             id="Salario" 
+                                            disabled="true"
                                             value="#{recVagaBean.vaga.recSalario}" />
                                     </div>
                                 </div>    
@@ -62,7 +68,11 @@
                                         <label class="control-label " for="select">
                                             Grau de Ensino
                                         </label>
-                                        <h:selectOneMenu id="comboGrauensino" value="#{recVagaBean.vaga.recGrauensino}"  class="form-control" >
+                                        <h:selectOneMenu 
+                                            id="comboGrauensino" 
+                                            value="#{recVagaBean.vaga.recGrauensino}"  
+                                            disabled="true"
+                                            class="form-control" >
                                             <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
                                             <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
                                             <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
@@ -81,14 +91,40 @@
                                         <label class="control-label " for="select">
                                             Cargo
                                         </label>                                                           
-                                        <h:selectOneMenu id="comboCargo" value="#{recVagaBean.vaga.idCargo}"  class="form-control" >
+                                        <h:selectOneMenu 
+                                            id="comboCargo" 
+                                            value="#{recVagaBean.vaga.idCargo}"
+                                            disabled="true"
+                                            class="form-control" >
                                             <f:selectItem itemLabel="Selecione o Cargo" itemValue="#{null}" />
                                             <f:selectItems value="#{csbffCargosBean.todosCargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.cargoDescricao}"/>
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
                             </div>
-                            
+
+                            <!-- Habilidades -->
+                            <div class="row">
+                                <h3 class="text-center">Habilidades Necessárias</h3>   
+                                <div class="col-md-12 col-sm-12 col-xs-12">                                
+                                    <div class="form-group">
+                                        <label class="control-label " for="number">                                        
+                                            
+                                        </label>
+                                        <p:autoComplete multiple="true" 
+                                                        value="#{recVagaBean.vaga.recHabilidadeList}"                                                         
+                                                        var="item"
+                                                        itemLabel="#{item.recDescricao}"                                                             
+                                                        converter="#{generic}">
+
+                                            <p:column>
+                                                <h:outputText class="form-control" value="#{item.recDescricao}" />
+                                            </p:column>
+                                        </p:autoComplete>        
+                                    </div>     
+                                </div>                             
+                            </div>
+
                             <hr></hr>
                             <div class="pull-right">
                                 <div class="row">
@@ -115,7 +151,7 @@
                                 <h:commandButton class="btn btn-success" value="Buscar" action="#{recVagaBean.PesquisarPorDescricao()}"/>                                                                        
                             </div>
                         </div>
-                        <h:dataTable class="table table-striped" value="#{recVagaBean.ListarTodas()}" var="item">
+                        <h:dataTable class="table table-striped" value="#{recVagaBean.ListarTodasExternas()}" var="item">
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
                                 <h:outputText value="#{item.recIdvaga}"/>

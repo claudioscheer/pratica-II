@@ -4,21 +4,21 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
- 
+
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
                 <title>Alternativas Cadastradas</title>
-                
+
                 <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>
             </ui:define>
             <ui:define name="content">
-               <div id="page" style="margin-top:75px;">
+                <div id="page" style="margin-top:75px;">
 
                     <div class="container-fluid">
                         <div class="row">
-                               <div class="col-md-12">
-                                 <div class="x_panel">
+                            <div class="col-md-12">
+                                <div class="x_panel">
                                     <div class="form-group" style="float: right;margin-top: 10px">
                                         <div>
                                             <h:link  outcome="CadastroAlternativas.xhtml" class="btn btn-primary " value="Nova Alternativa"/>
@@ -32,23 +32,8 @@
                                     <div class="panel-body" style="/* align-items: center; */">
 
                                         <h:form id="formAlternativas">
-                                           <h:messages class="error" style="color: #d9534f" />
-                                           <h:dataTable id="tabelAlternativas" class="table table-striped" value="#{gchAlternativaBean.gchTodasAlternativas}" var="alternativa" >
-
-                                               <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink  id="btnExcluir" h:tooltip="Exclui alternativa" action="#{gchAlternativaBean.excluir(alternativa)}" >
-                                                      
-                                                        <f:ajax render="formAlternativas" />
-                                                          <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                       
-                                                    </h:commandLink>
-
-                                                </h:column>
-                                                <h:column>                
-                                                    <h:commandLink id="btnEditar" action="#{gchAlternativaBean.buscaPorId(alternativa.altCodigo)}">
-                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
-                                                    </h:commandLink>
-                                                </h:column>
+                                            <h:messages class="error" style="color: #d9534f" />
+                                            <h:dataTable id="tabelAlternativas" class="table table-striped" value="#{gchAlternativaBean.gchTodasAlternativas}" var="alternativa" >
 
                                                 <h:column>   
                                                     <f:facet name="header">Descricao</f:facet>
@@ -59,7 +44,25 @@
                                                     <f:facet name="header">Prioridade</f:facet>
                                                     <h:outputText value="#{alternativa.altPrioridade}"/>                
                                                 </h:column>
-                                        
+
+                                                 <h:column>                
+                                                    <h:commandLink id="btnEditar" action="#{gchAlternativaBean.buscaPorId(alternativa.altCodigo)}">
+                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                    </h:commandLink>
+                                                </h:column>
+
+                                                
+                                                <h:column headerClass="alinhaColuna">                
+                                                    <h:commandLink  id="btnExcluir" h:tooltip="Exclui alternativa" action="#{gchAlternativaBean.excluir(alternativa)}" >
+
+                                                        <f:ajax render="formAlternativas" />
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+
+                                                    </h:commandLink>
+
+                                                </h:column>
+                                               
+
                                             </h:dataTable>
                                         </h:form> </div>                                    
                                 </div>

@@ -95,7 +95,6 @@ public class CsbffDadosPessoaisBean implements Serializable {
 
         return "listaadmissao";
     }
-
     public String editaConsulta(RecPessoa pessoas) {
 //        this.formAtivo = true;
         this.recPessoa = pessoas;

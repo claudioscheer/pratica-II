@@ -27,12 +27,16 @@ function MascaraTelefone(telefone) {
     return telefone;
 }
 
-function MascaraValorMonetario(valor) {
-    v = valor;
-    v = v.replace(/\D/g, "");
-    v = v.replace(/(\d{1})(\d{4})$/, "$1.$2");
-    v = v.replace(/(\d{1})(\d{1,1})$/, "$1.$2");
-    return v;
+
+
+function MascaraValorMonetario(valor){ 
+	valor=valor.replace(/\D/g,"");
+	valor=valor.replace(/(\d{1})(\d{15})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{11})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{8})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{5})$/,"$1.$2");
+	valor=valor.replace(/(\d{1})(\d{1,2})$/,"$1,$2");
+	return valor; 
 }
 
 function cep(cep) {

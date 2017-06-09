@@ -9,6 +9,7 @@ import java.util.List;
 public class DadosCalculadosDoFuncionario {
 
     private boolean recalculando;
+    private boolean deletarJaCalculada;
     private FpPeriodo periodo;
     private RecPessoa pessoa;
     private List<FpEventoPeriodo> eventos;
@@ -22,6 +23,14 @@ public class DadosCalculadosDoFuncionario {
 
     public void setRecalculando(boolean recalculando) {
         this.recalculando = recalculando;
+    }
+
+    public boolean isDeletarJaCalculada() {
+        return deletarJaCalculada;
+    }
+
+    public void setDeletarJaCalculada(boolean deletarJaCalculada) {
+        this.deletarJaCalculada = deletarJaCalculada;
     }
 
     public double getValorBaseINSS() {

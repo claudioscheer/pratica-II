@@ -239,6 +239,7 @@ public class CsbffDadosProfissionaisBean implements Serializable {
         alteraEscala(csbffEscalaHoras);
 
     }
+ 
 
     public void removerBeneficioPessoa(CsbffPessoaBeneficio bp) {
         this.recPessoa.getCsbffPessoaBeneficioList().remove(bp);

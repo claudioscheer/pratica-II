@@ -18,6 +18,9 @@
         <h:outputStylesheet library="vendors/" name="pnotify/dist/pnotify.buttons.css" />
         <h:outputStylesheet library="vendors/" name="iCheck/skins/flat/blue.css" />        
         <h:outputStylesheet library="build/" name="css/custom.css" />
+        <h:outputScript     library="build/" name="js/utils.js" />
+        <h:outputStylesheet library="build/" name="css/theme.css" />
+        <h:outputStylesheet library="build/" name="css/components.css" />
         <ui:insert name="head" />
     </h:head>
     <h:body class="nav-md">
@@ -38,7 +41,8 @@
                             <div class="profile_pic">
                                 <h:link outcome="/index.xhtml">
                                     <h:graphicImage value="#{resource['images/Logo-Murphy.png']}" class="img-circle profile_img"/>
-                                </h:link></div>
+                                </h:link>
+                            </div>
                             <div class="profile_info">
                                 <span>Olá,</span>
                                 <h2>Gestor!</h2>
@@ -54,7 +58,7 @@
                                 <h3>Menu</h3>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite inserir informações no Banco de Dados."><h:link outcome="/inicializar-sistema.xhtml"><i class="fa fa-magic"></i> Inicializar dados</h:link></li></a>
+                                        <a><li data-toggle="tooltip" data-placement="right" title="" data-original-title="Permite inserir informações no Banco de Dados."><h:link outcome="/usuario/usuarios.xhtml"><i class="fa fa-users"></i> Usuários</h:link></li></a>
                                     </li>
                                 </ul>
                                 <ul class="nav side-menu">
@@ -83,10 +87,10 @@
                                     <li>
                                         <a><i class="fa fa-list"></i> Recrutamento <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><h:link outcome="/recrutamento/rec_Vaga_lista.xhtml" value="Requisição de Pessoal"></h:link></li>
-                                            <li><h:link outcome="/recrutamento/vaga_lista.xhtml" value="Vagas"></h:link></li>
-                                            <li><h:link outcome="/recrutamento/candidato_lista.xhtml" value="Candidatos"></h:link></li>
-                                            <li><h:link outcome="/recrutamento/selecao_lista.xhtml" value="Seleção"></h:link></li>
+                                            <li><h:link outcome="/recrutamento/requisicao.xhtml" value="Requisição de Pessoal"></h:link></li>
+                                            <li><h:link outcome="/recrutamento/vagas.xhtml" value="Vagas"></h:link></li>
+                                            <li><h:link outcome="/recrutamento/candidatos.xhtml" value="Candidatos"></h:link></li>
+                                            <li><h:link outcome="/recrutamento/selecao.xhtml" value="Seleção"></h:link></li>
                                             <li><h:link outcome="/recrutamento/habilidades.xhtml" value="Habilidades"></h:link></li>
                                         </ul>
                                     </li>
@@ -164,20 +168,26 @@
                             </div>
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="">
+                                <li>
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                         Gestor <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                        <!--<li><a href="javascript:;"> Profile</a></li>
+                                        <!--                                        <li><a href="javascript:;"> Profile</a></li>
+                                                                                <li>
+                                                                                    <a href="javascript:;">
+                                                                                        <span class="badge bg-red pull-right">50%</span>
+                                                                                        <span>Settings</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li><a href="javascript:;">Help</a></li>-->
                                         <li>
-                                            <a href="javascript:;">
-                                                <span class="badge bg-red pull-right">50%</span>
-                                                <span>Settings</span>
-                                            </a>
+                                            <h:link outcome="/recrutamento/menu_recrutamento.xhtml">
+                                                <i class="fa fa-sign-out pull-right"></i> 
+                                                Visitar página da empresa
+                                            </h:link>
                                         </li>
-                                        <li><a href="javascript:;">Help</a></li>-->
-                                        <li><h:link outcome="/login.xhtml"><i class="fa fa-sign-out pull-right"></i> Log Out</h:link></li>
+                                        <!--<li><h:commandLink action=""><i class="fa fa-sign-out pull-right"></i> Sair</h:commandLink></li>-->                                        
                                     </ul>
                                 </li>
 
@@ -187,7 +197,7 @@
                                         <span class="badge bg-green">6</span>
                                     </a>
                                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                        <li>
+                                        <li>      
                                             <a>
                                                 <span class="image"><h:graphicImage value="#{resource['images/img.jpg']}" alt="Profile Image" /></span>
                                                 <span>

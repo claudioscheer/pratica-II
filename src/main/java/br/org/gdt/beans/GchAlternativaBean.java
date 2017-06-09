@@ -192,6 +192,8 @@ public class GchAlternativaBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
 
+        gchTodasAlternativas = null; //Limpa a variavel e garante que a lista de alternativas seja atualizada corretamente
+        
         return "Alternativas";
 
     }
@@ -261,8 +263,9 @@ public class GchAlternativaBean {
     }
 
     public List<GchAlternativas> getGchTodasAlternativas() {
-
-        gchTodasAlternativas = gchAlternativasService.findAll();
+        if (gchTodasAlternativas == null) {
+            gchTodasAlternativas = gchAlternativasService.findAll();
+        }
 
         return gchTodasAlternativas;
     }

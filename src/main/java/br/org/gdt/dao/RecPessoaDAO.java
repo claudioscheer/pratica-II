@@ -1,11 +1,14 @@
 package br.org.gdt.dao;
 
 import br.org.gdt.model.CsbffBeneficios;
-import br.org.gdt.model.CsbffEscalaHoras;
+import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffPessoaBeneficio;
+import br.org.gdt.model.CsbffPessoaDependente;
+import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecPessoa;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -24,14 +27,13 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         query.setParameter("recCpf", recCpf);
         try {
             RecPessoa pessoa = query.getSingleResult();
-            
+
 //            List<CsbffPessoaBeneficio> beneficiosPessoa = new ArrayList<>();
 //            for (CsbffPessoaBeneficio pb : pessoa.getCsbffPessoaBeneficioList() ){
 //                beneficiosPessoa.add(pb);
 //            }
 //                    
 //            pessoa.setCsbffPessoaBeneficioList(beneficiosPessoa);
-            
             return pessoa;
 
         } catch (NoResultException e) {
@@ -39,25 +41,52 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
 
         }
     }
-//    public CsbffEscalaHoras findByEscala(String recCpf) {
-//
-//        TypedQuery<CsbffEscalaHoras> query = entityManager.createQuery("from CsbffEscalaHoras as e left join fetch e.csbffEscalaHorasList where e.recCpf = :recCpf", CsbffEscalaHoras.class);
-//        query.setParameter("recCpf", recCpf);
-//        try {
-//            CsbffEscalaHoras escalaHora = query.getSingleResult();
-//           
-//            return escalaHora;
-//
-//        } catch (NoResultException e) {
-//            return null;
-//
-//        }
-//    }
-    
+
+    public RecPessoa findByIdCompleto(long id) {
+        TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa as p where p.recIdpessoa = :recIdpessoa", RecPessoa.class);
+        query.setParameter("recIdpessoa", id);
+        try {
+            RecPessoa pessoa = query.getSingleResult();
+            List<RecHabilidade> lista = new ArrayList<>();
+            for (RecHabilidade h : pessoa.getRecHabilidadeList()) {
+                lista.add(h);
+            }
+            pessoa.setRecHabilidadeList(lista);
+            return pessoa;
+
+        } catch (NoResultException e) {
+            return null;
+
+        }
+    }
+
+    public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
+        Query query = entityManager.createQuery("from RecPessoa as p where upper(p.recNomecompleto) like :recQuery or p.recCpf like :recQuery");
+        query.setParameter("recQuery", "%" + select.toUpperCase() + "%");
+
+        return query.getResultList();
+    }
+
     public List<RecPessoa> findAllFuncionarios() {
         return entityManager.createQuery(
                 "from RecPessoa as t")//t.recFuncionario = null
                 .getResultList();
+    }
+
+    public RecPessoa BuscarPessoaCFP(String cpf) {
+        TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa where recCpf like :busca", RecPessoa.class);
+        query.setParameter("busca", cpf);
+        return query.getSingleResult();
+    }
+
+    public List<CsbffDependentes> findAllDependentesPessoa(long pessoa) {
+        List<CsbffPessoaDependente> todosDependentes = entityManager.createQuery("from CsbffPessoaDependente as t where t.recIdpessoa.recIdpessoa = :pessoa")
+                .setParameter("pessoa", pessoa)
+                .getResultList();
+
+        return todosDependentes.stream()
+                .map(x -> x.getDependenteCod())
+                .collect(Collectors.toList());
     }
 
 }

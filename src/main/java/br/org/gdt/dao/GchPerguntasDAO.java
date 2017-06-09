@@ -38,7 +38,7 @@ public class GchPerguntasDAO extends DAO<GchPerguntas> {
         }
     }
 
-    public List<GchPerguntas> buscaPergutasFormulario(int id) {
+    public List<GchPerguntas> buscaPergutasFormulario(long id) {
 
         Query query = entityManager.createQuery("from GchPerguntas as t where t.formulario.formCodigo = :codigo");
         query.setParameter("codigo", id);

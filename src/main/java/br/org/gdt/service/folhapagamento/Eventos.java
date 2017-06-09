@@ -4,11 +4,13 @@ import br.org.gdt.enums.FpEnumEventos;
 import br.org.gdt.enums.FpEnumTabelas;
 import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.enums.FpTipoValorFaixa;
+import br.org.gdt.enums.Insalubridade;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFaixa;
 import br.org.gdt.service.FpTabelaService;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +35,7 @@ public class Eventos {
         int evento = FpEnumEventos.values()[(int) fpEventoPeriodo.getEvpEvento().getEveId() - 1].ordinal();
         if (evento == FpEnumEventos.Salario.ordinal()) {
             fpEventoPeriodo.setEvpValorReferencia(HORAS_MENSAIS);
-            fpEventoPeriodo.setEvpValor(4000);
+            fpEventoPeriodo.setEvpValor(new Random().nextInt((6897 - 938) + 1) + 938);
 
         } else if (evento == FpEnumEventos.INSS.ordinal()) {
             // Proventos onde incide INSS.
@@ -159,19 +161,32 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * quantidadeFilhos);
             fpEventoPeriodo.setEvpValorReferencia(quantidadeFilhos);
 
-        } else if (evento == FpEnumEventos.Insalubridade.ordinal()) {
+        } else if (evento == FpEnumEventos.Insalubridade.ordinal() && dadosCalculadosDoFuncionario.getPessoa().getInsalubridade() != null) {
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.SalarioMinimo.ordinal() + 1);
 
-            // Buscar o nível de insalubridade da pessoa.
-            double nivelInsalubridade = 0.1;
+            double nivelInsalubridade = 0;
+            switch (dadosCalculadosDoFuncionario.getPessoa().getInsalubridade()) {
+                case Alto:
+                    nivelInsalubridade = 0.4;
+                    break;
+
+                case Médio:
+                    nivelInsalubridade = 0.2;
+                    break;
+
+                case Baixo:
+                    nivelInsalubridade = 0.1;
+                    break;
+            }
+
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * nivelInsalubridade);
             fpEventoPeriodo.setEvpValorReferencia(nivelInsalubridade);
 
         } else if (evento == FpEnumEventos.Periculosidade.ordinal()) {
             double valorSalario = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
 
-            // Buscar se a pessoa tem periculosidade.
-            double nivelPericulosidade = 0.3;
+            // Buscar se a pessoa tem periculosidade. 30%.
+            double nivelPericulosidade = 0.0;
             fpEventoPeriodo.setEvpValor(valorSalario * nivelPericulosidade);
             fpEventoPeriodo.setEvpValorReferencia(nivelPericulosidade);
 

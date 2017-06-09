@@ -17,14 +17,14 @@ Repositório destinado à Prática Profissional Direcionada II.
 | Analista | Dimas Henrique Rockenbach |
 
 # MURPHY RH!
-Sistema Web para gestão de pessoas.
+Sistema Web para Gestão de Pessoas.
 Desenvolvido na linguagem `Java`, o sistema contará com cinco módulos:
 
 - Cargos, salários e benefícios e ficha funcional;
 - Capital humano;
 - Treinamento e seleção;
-- Folha de pagamento.
-- Recrutamento e Seleção
+- Folha de pagamento;
+- Recrutamento e Seleção.
 
 # Layout
 - <https://colorlib.com/polygon/gentelella/index.html> - [url download](http://www.999webtemplates.com/HAvNV)

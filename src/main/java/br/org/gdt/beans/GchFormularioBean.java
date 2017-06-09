@@ -211,7 +211,7 @@ public class GchFormularioBean {
 
         if (!Notificacao.isEmpty()) {
 
-            Helper.mostrarNotificacao("Sucesso", Notificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", Notificacao, "success");
 
             Notificacao = "";
         }
@@ -269,9 +269,6 @@ public class GchFormularioBean {
 
             Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
 
-            
-            
-            
             ArrayList<ParametrosEmail> parametros = new ArrayList<>();
 
             ParametrosEmail ItemParametro;
@@ -305,7 +302,7 @@ public class GchFormularioBean {
 
                     gchFormularioPessoaService.save(gchFormulariopessoa);
 
-                    String parametroUrl = gchFormulario.getFormCodigo() + "&" + pessoa.getId();
+                    String parametroUrl = gchFormulario.getFormCodigo() + "&" + pessoa.getRecIdpessoa();
 
                     String parametroBase64 = DatatypeConverter.printBase64Binary(parametroUrl.getBytes());
 
@@ -313,8 +310,7 @@ public class GchFormularioBean {
 
                     System.out.println("Texto Formatado" + urlFormatada);
 
-        
-                    String msgFormatada = "<html></br></br><div style='border:2px solid #0094ff;'><h2 style='background:#87CEEB;color:white;padding:10px;color: #222;'>Formulário "+gchFormulario.getFormNome()+"</h2><div style='color:#333;padding:10px;'><p style='font-size:120%;text-shadow: 0px 2px 3px #555;'>Você acaba de receber um formulário com algumas perguntas para que possamos lhe conhecer melhor. O prazo de respostas é até \"" + gchFormulario.getFormPrazoResposta().toString() + "\"</p></br>Para acessá-lo clique <a href='http://"+ urlFormatada + "'>aqui</a></br></br><h3>Instruções de Preenchimento</h3></br><p>- Responda com sinceridade!</p><p>- Somente é possível marcar uma alternativa por pergunta!</p><p>- Só é possível responder o formulário uma única vez!</p></div><h4 style='background:#ADD8E6;padding:8px;'>Murphy RH - Todos os direitos Reservados</h4></div></html>";
+                    String msgFormatada = "<html></br></br><div style='border:2px solid #0094ff;'><h2 style='background:#87CEEB;color:white;padding:10px;color: #222;'>Formulário " + gchFormulario.getFormNome() + "</h2><div style='color:#333;padding:10px;'><p style='font-size:120%;text-shadow: 0px 2px 3px #555;'>Você acaba de receber um formulário com algumas perguntas para que possamos lhe conhecer melhor. O prazo de respostas é até \"" + gchFormulario.getFormPrazoResposta().toString() + "\"</p></br>Para acessá-lo clique <a href='http://" + urlFormatada + "'>aqui</a></br></br><h3>Instruções de Preenchimento</h3></br><p>- Responda com sinceridade!</p><p>- Somente é possível marcar uma alternativa por pergunta!</p><p>- Só é possível responder o formulário uma única vez!</p></div><h4 style='background:#ADD8E6;padding:8px;'>Murphy RH - Todos os direitos Reservados</h4></div></html>";
 
                     System.out.println("Mensagem Formatada" + msgFormatada);
 
@@ -356,9 +352,10 @@ public class GchFormularioBean {
             }
 
             String MsgNotificacao = "Formulário disponibilizado para as pessoas selecionadas!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         }
+        gchTodosFormularios = null; //isso faz com que a listagem se atualize
         return "Formularios";
     }
 
@@ -379,69 +376,95 @@ public class GchFormularioBean {
 
         Date date = null;
 
-        try {
+        if (inputsCapa.length == 0 || inputsCapa[0].isEmpty()) {
 
-            // -------------- Inputs da Capa --------------------------//
-            formulario.setFormNome(inputsCapa[0]); //Nome do Formulário
-            formulario.setFormDescricao(inputsCapa[1]); // Descricao do Formulário
+            Helper.mostrarNotificacao("Validação de Campos", "Os dados da capa do formulário devem ser preenchidos!", "error");
 
-            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        } else {
 
-            date = (Date) formatter.parse(inputsCapa[2]);
+            if (Perguntas.length == 0 || Perguntas[0].isEmpty()) {
 
-            formulario.setFormPrazoResposta(date);
+                Helper.mostrarNotificacao("Validação de Campos", "É preciso inserir ao menos uma pergunta ao formulário", "error");
 
-            gchFormularioService.save(formulario);
+            } else {
 
-        } catch (ParseException ex) {
-            Logger.getLogger(GchFormularioBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                if(Alternativas.length == 0 || Alternativas[0].isEmpty()) {
+
+                    Helper.mostrarNotificacao("Validação de Campos", "É necessário vincular ao menos uma alternativa a pergunta", "error");
+                    
+                } else {
+
+                    try {
+
+                        // -------------- Inputs da Capa --------------------------//
+                        formulario.setFormNome(inputsCapa[0]); //Nome do Formulário
+                        formulario.setFormDescricao(inputsCapa[1]); // Descricao do Formulário
+
+                        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+                        date = (Date) formatter.parse(inputsCapa[2]);
+
+                        formulario.setFormPrazoResposta(date);
+
+                        gchFormularioService.save(formulario);
+
+                    } catch (ParseException ex) {
+                        Logger.getLogger(GchFormularioBean.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
 //      Somente continua se a quantidade de linhas de perguntas for igual a de alternativas
-        if (Perguntas.length == Alternativas.length) {
+                    if (Perguntas.length == Alternativas.length) {
 
-            GchPerguntas pergunta;
-            String[] altPergunta;
-            GchAlternativasperguntas altperg;
+                        GchPerguntas pergunta;
+                        String[] altPergunta;
+                        GchAlternativasperguntas altperg;
 
-            // ----------- Informações das perguntas ------------------//
-            for (int i = 0; i < Perguntas.length; i++) {
+                        // ----------- Informações das perguntas ------------------//
+                        for (int i = 0; i < Perguntas.length; i++) {
 
-                pergunta = new GchPerguntas();
+                            pergunta = new GchPerguntas();
 
-                pergunta.setPerDescricao(Perguntas[i]);
-                pergunta.setFormulario(formulario);
+                            pergunta.setPerDescricao(Perguntas[i]);
+                            pergunta.setFormulario(formulario);
 
-                gchPerguntasService.save(pergunta);
+                            gchPerguntasService.save(pergunta);
 
-                /* Busca todas alternativas de cada pergunta e armazena no array
-                 - O ponto de quebra é o caractere § e o mesmo é concatenado no arquivo ControleFormularios.Js
-                 */
-                altPergunta = Alternativas[i].split("§");
+                            /* Busca todas alternativas de cada pergunta e armazena no array
+                             - O ponto de quebra é o caractere § e o mesmo é concatenado no arquivo ControleFormularios.Js
+                             */
+                            altPergunta = Alternativas[i].split("§");
 
-                //Percorre alternativas da pergunta
-                for (int j = 0; j < altPergunta.length; j++) {
+                            //Percorre alternativas da pergunta
+                            for (int j = 0; j < altPergunta.length; j++) {
 
-                    GchAlternativas novaAlternativa = gchAlternativasService.findById(Long.parseLong(altPergunta[j]));
+                                GchAlternativas novaAlternativa = gchAlternativasService.findById(Long.parseLong(altPergunta[j]));
 
-                    altperg = new GchAlternativasperguntas();
+                                altperg = new GchAlternativasperguntas();
 
-                    altperg.setGchAlternativas(novaAlternativa);
-                    altperg.setPerCodigo(pergunta);
+                                altperg.setGchAlternativas(novaAlternativa);
+                                altperg.setPerCodigo(pergunta);
 
-                    gchAlternativasPerguntaService.save(altperg);
+                                gchAlternativasPerguntaService.save(altperg);
 
+                            }
+                        }
+
+                        //Salvou com sucesso, retorna para página de listagem
+                        Notificacao = "O formulário " + gchFormulario.getFormNome() + " foi cadastrado com sucesso!";
+
+                        gchFormulario = new GchFormulario();
+
+                    }
+                    
+                    gchTodosFormularios = null; //isso faz com que a listagem se atualiz
+                    return "Formularios";
+                    
                 }
+
             }
 
-            //Salvou com sucesso, retorna para página de listagem
-            Notificacao = "O formulário " + gchFormulario.getFormNome() + " foi cadastrado com sucesso!";
-
-            gchFormulario = new GchFormulario();
-
         }
-
-        return "Formularios";
+          return null;
     }
 
     public void responderFormulario() {
@@ -491,7 +514,7 @@ public class GchFormularioBean {
                     gchFormularioService.delete(gchFormulario.getFormCodigo());
                     gchTodosFormularios.remove(gchFormulario);
                     MsgNotificacao = "O formulário <b>" + gchFormulario.getFormNome() + " </b>foi excluído com sucesso!";
-                    Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                    Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
                 } else {
 
@@ -523,7 +546,9 @@ public class GchFormularioBean {
 
     public List<GchFormulario> getGchTodosFormularios() {
 
-        gchTodosFormularios = gchFormularioService.findAll();
+        if (gchTodosFormularios == null) {
+            gchTodosFormularios = gchFormularioService.findAll();
+        }
 
         return gchTodosFormularios;
     }

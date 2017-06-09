@@ -1,6 +1,7 @@
 package br.org.gdt.service;
 
 import br.org.gdt.dao.RecPessoaDAO;
+import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,10 @@ public class RecPessoaService {
         return pessoaDao.findAllFuncionarios();
     }
 
+    public List<CsbffDependentes> findAllDependentesPessoa(RecPessoa recPessoa) {
+        return pessoaDao.findAllDependentesPessoa(recPessoa.getRecIdpessoa());
+    }
+
 //    public RecPessoa findByCpf(String cpf) {
 //        return pessoaDao.findByCpf(cpf);
 //    }
@@ -69,4 +74,15 @@ public class RecPessoaService {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public RecPessoa BuscaPessoaCPF(String cpf) {
+        return pessoaDao.BuscarPessoaCFP(cpf);
+    }
+
+    public RecPessoa FindByIdCompleto(long id) {
+        return pessoaDao.findByIdCompleto(id);
+    }
+
+    public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
+        return pessoaDao.buscarNomes(select);
+    }
 }

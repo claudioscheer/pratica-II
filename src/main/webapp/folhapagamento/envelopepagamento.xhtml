@@ -32,7 +32,7 @@
                                 <label class="control-label">Período</label>
                                 <h:selectOneMenu value="#{fpEnvelopePagamentoBean.fpPeriodo.perId}" class="form-control">
                                     <f:ajax execute="@form" render="formEnvelopePagamento" listener="#{fpEnvelopePagamentoBean.selecionarPeriodo()}" event="change" />
-                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                    <f:selectItem itemLabel="Selecione..." itemValue="#{0}" />
                                     <f:selectItems value="#{fpEnvelopePagamentoBean.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
                                 </h:selectOneMenu>
                             </div>
