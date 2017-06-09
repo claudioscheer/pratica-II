@@ -73,10 +73,10 @@ public class GchTreinamentos implements Serializable {
     private long treiCargaHorario;
     
     @JoinColumn(name = "cur_codigo", referencedColumnName = "cur_codigo")
-    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false)
     private GchCursos curCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private GchMunicipios munCodigo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "treiCodigo")
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;

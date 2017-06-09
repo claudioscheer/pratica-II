@@ -32,8 +32,11 @@
                                             <h:commandLink value="Buscar" action="#{estatisticasFormularios.gerargraficoformulariorespondidos}"/>
                                             
                                             
-                                            <p:chart type="line" model="#{estatisticasFormularios.graficosLinha}"  rendered="#{!emptyChart}"/>
+                                            <ui:repeat value="#{estatisticasFormularios.graficosLinha}" var="FormularioItem" >
+                                            <p:chart type="line" model="#{FormularioItem}" rendered="#{!emptyChart}"/>
                              
+                                            </ui:repeat>
+                                            
                                             <p:chart type="bar" model="#{estatisticasFormularios.graficosBarras}"  rendered="#{!emptyChart}"/>
 
                                         </h:form> </div>
