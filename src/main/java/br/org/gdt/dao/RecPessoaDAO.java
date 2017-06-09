@@ -1,6 +1,7 @@
 package br.org.gdt.dao;
 
 import br.org.gdt.model.CsbffBeneficios;
+import br.org.gdt.model.CsbffEscalaHoras;
 import br.org.gdt.model.CsbffPessoaBeneficio;
 import br.org.gdt.model.RecPessoa;
 import java.util.ArrayList;
@@ -38,6 +39,20 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
 
         }
     }
+//    public CsbffEscalaHoras findByEscala(String recCpf) {
+//
+//        TypedQuery<CsbffEscalaHoras> query = entityManager.createQuery("from CsbffEscalaHoras as e left join fetch e.csbffEscalaHorasList where e.recCpf = :recCpf", CsbffEscalaHoras.class);
+//        query.setParameter("recCpf", recCpf);
+//        try {
+//            CsbffEscalaHoras escalaHora = query.getSingleResult();
+//           
+//            return escalaHora;
+//
+//        } catch (NoResultException e) {
+//            return null;
+//
+//        }
+//    }
     
     public List<RecPessoa> findAllFuncionarios() {
         return entityManager.createQuery(

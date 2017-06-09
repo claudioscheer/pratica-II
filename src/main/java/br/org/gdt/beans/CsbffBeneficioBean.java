@@ -3,6 +3,7 @@ package br.org.gdt.beans;
 import br.org.gdt.enums.AbrangenciaBeneficio;
 import br.org.gdt.enums.TipoBeneficio;
 import br.org.gdt.model.CsbffBeneficios;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffBeneficiosService;
 import br.org.gdt.service.CsbffDependentesService;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class CsbffBeneficioBean {
 
     @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependentesService;
-    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -76,8 +77,6 @@ public class CsbffBeneficioBean {
     public CsbffBeneficioBean() {
 
     }
-
- 
 
     public List<CsbffBeneficios> getBeneficios() {
         List<CsbffBeneficios> beneficios = new ArrayList<>();
@@ -127,18 +126,38 @@ public class CsbffBeneficioBean {
     }
 
     public String excluir(CsbffBeneficios beneficio) {
-        csbffBeneficiosService.delete(beneficio.getBeneficioCodigo());
-        todosCsbffBeneficios.remove(beneficio);
+        String MsgNotificacao = "";
+        try {
+            csbffBeneficiosService.delete(beneficio.getBeneficioCodigo());
+            todosCsbffBeneficios.remove(beneficio);
+
+            MsgNotificacao = "O beneficio foi excluido!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+        } catch (Exception ex) {
+            MsgNotificacao = "O beneficio não pode ser excluído!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+
+        }
         return "consultabeneficios";
     }
 
     public String save() {
 //        this.formAtivo = true;
-        if (csbffBeneficios.getBeneficioCodigo() > 0) {
-            csbffBeneficiosService.update(csbffBeneficios);
+        String MsgNotificacao = "";
+        try {
+            if (csbffBeneficios.getBeneficioCodigo() > 0) {
+                csbffBeneficiosService.update(csbffBeneficios);
 
-        } else {
-            csbffBeneficiosService.save(csbffBeneficios);
+            } else {
+                csbffBeneficiosService.save(csbffBeneficios);
+
+            }
+            MsgNotificacao = "O beneficio foi inserido com seucesso!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+
+        } catch (Exception ex) {
+            MsgNotificacao = "O beneficio não pode ser inserido!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
 
         }
         todosCsbffBeneficios = csbffBeneficiosService.findAll();

@@ -28,7 +28,7 @@ public class CsbffListaAdmissaoBean implements Serializable {
     }
 
     public void buscarCpf() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         if (recPessoa == null) {
             recPessoa = new RecPessoa();
