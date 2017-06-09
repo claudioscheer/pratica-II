@@ -154,10 +154,25 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     }
 
     public void buscarCpf() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         if (recPessoa == null) {
             recPessoa = new RecPessoa();
+        }
+    }
+
+    public void demitirColaborador() {
+
+        String MsgNotificacao = "";
+        try {
+            recPessoa.setColaboradorInativo(true);
+            recPessoa.setRecFuncionario(false);
+            recPessoaService.update(recPessoa);
+
+            MsgNotificacao = "O colaborador foi demitido e inativado!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+        } catch (Exception ex) {
+            MsgNotificacao = "O colaborador não pode ser demitido.";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
     }
 
@@ -239,7 +254,6 @@ public class CsbffDadosProfissionaisBean implements Serializable {
         alteraEscala(csbffEscalaHoras);
 
     }
- 
 
     public void removerBeneficioPessoa(CsbffPessoaBeneficio bp) {
         this.recPessoa.getCsbffPessoaBeneficioList().remove(bp);
@@ -413,7 +427,6 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     }
 
     public void setRecCpf(String recCpf) {
-        System.out.println("cpp " + recCpf);
         this.recCpf = recCpf;
     }
 
