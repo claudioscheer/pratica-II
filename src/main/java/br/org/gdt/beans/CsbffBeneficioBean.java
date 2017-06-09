@@ -162,32 +162,11 @@ public class CsbffBeneficioBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
 
         }
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("cadastrobeneficios.xhtml");
-        } catch (IOException ex) {
-        }
+        todosCsbffBeneficios = csbffBeneficiosService.findAll();
+        this.csbffBeneficios = new CsbffBeneficios();
+//        this.formAtivo = false;
         return "consultabeneficios";
     }
-
-//    public String save() {
-////        this.formAtivo = true;
-//        if (csbffBeneficios.getBeneficioCodigo() > 0) {
-//            csbffBeneficiosService.update(csbffBeneficios);
-//
-//        } else {
-//            csbffBeneficiosService.save(csbffBeneficios);
-//
-//        }
-//        todosCsbffBeneficios = csbffBeneficiosService.findAll();
-//        this.csbffBeneficios = new CsbffBeneficios();
-////        this.formAtivo = false;
-//        return "consultabeneficios";
-//    }
-//    public void cancel() {
-//        this.formAtivo = false;
-//        this.csbffBeneficios = new CsbffBeneficios();
-//    }
 
     public void cancel() {
         this.formAtivo = false;
@@ -200,6 +179,7 @@ public class CsbffBeneficioBean {
 
         }
     }
+
     public void add() {
         this.formAtivo = true;
         this.csbffBeneficios = new CsbffBeneficios();
