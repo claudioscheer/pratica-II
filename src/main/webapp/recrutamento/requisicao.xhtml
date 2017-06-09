@@ -6,141 +6,96 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+    <head>
+        <h:outputScript     library="build/" name="js/utils.js" />
+        <h:outputStylesheet library="build/" name="css/theme.css" />
+        <h:outputStylesheet library="build/" name="css/components.css" />
+    </head>
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="head">
-                <title>Requisiçao de Pessoal</title>
+                <title>Lista de Requisições</title>
             </ui:define>
             <ui:define name="content">
                 <div class="title_left">
-                    <h3>Requisiçao de Pessoal</h3>
+                    <h3>Requisição de Pessoas</h3>
                 </div>
                 <br />
-                <h:form id="formRecVaga">                                        
+                <h:form id="formRequisicao">               
+                    <h:messages class="error" style="color: #d9534f" />
                     <p:panel visible="#{recRequisicaoBean.formAtivo}">
                         <h:inputHidden value="#{recRequisicaoBean.recRecVaga.recIdRecquisicaoVaga}" />                        
-                        <div class="bootstrap-iso">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Descrição
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputText class="form-control" id="Descricao" value="#{recRequisicaoBean.recRecVaga.recDescricao}" />
-                                        </div>
-                                    </div>                                                     
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">
-                                                Sexo
-                                            </label>
-                                            <h:selectOneMenu id="comboSexo" value="#{recRequisicaoBean.recRecVaga.recSexo}" class="form-control" >
-                                                <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                             
-                                            </h:selectOneMenu>                                                                            
-                                        </div>     
-                                    </div>           
-
-
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">
-                                                Grau de Ensino
-                                            </label>
-                                            <h:selectOneMenu id="comboGrauensino" value="#{recRequisicaoBean.recRecVaga.recIdgrauensino}"  class="form-control" >
-                                                <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
-                                                <f:selectItem itemLabel="Ensino Fundamental" itemValue="#{3}" />
-                                                <f:selectItem itemLabel="Ensino Médio Completo" itemValue="#{4}" />
-                                                <f:selectItem itemLabel="Ensino Médio Incompleto" itemValue="#{5}" />
-                                                <f:selectItem itemLabel="Ensino Superior Completo" itemValue="#{6}" />
-                                                <f:selectItem itemLabel="Ensino Superior Incompleto" itemValue="#{7}" />
-                                                <f:selectItem itemLabel="Especialização" itemValue="#{8}" />                                                                                                
-                                            </h:selectOneMenu>
-                                        </div>     
-                                    </div>  
-
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">
-                                                Cargo
-                                            </label>                                                           
-                                            <h:selectOneMenu id="comboCargo" value="#{recRequisicaoBean.recRecVaga.idCargo}"  class="form-control" >
-                                                <f:selectItem itemLabel="Selecione o Cargo" itemValue="#{null}" />
-                                                <f:selectItems value="#{cargosBean.todosCargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.cargoDescricao}"/>
-                                            </h:selectOneMenu>
-                                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="form-group ">
+                                        <label class="control-label" for="number">                                        
+                                            Descrição da Requisição
+                                            <span class="required">*</span>
+                                        </label>
+                                        <h:inputText class="form-control" 
+                                                     id="Descricao" 
+                                                     value="#{recRequisicaoBean.recRecVaga.recDescricao}" />
                                     </div>
-                                </div>
+                                </div>                                                     
+                                <div class="col-md-6 col-sm-6 col-xs-6">                                
+                                    <div class="form-group ">
+                                        <label class="control-label">
+                                            Sexo
+                                        </label>
+                                        <h:selectOneMenu id="comboSexo" 
+                                                         value="#{recRequisicaoBean.recRecVaga.recSexo}" 
+                                                         class="form-control" >
+                                            <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
+                                            <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
+                                            <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                             
+                                            <f:selectItem itemLabel="Masculino/Feminino" itemValue="#{3}" />                                                                                                                                             
+                                        </h:selectOneMenu>                                                                            
+                                    </div>     
+                                </div>    
+                                <div class="col-md-6 col-sm-6 col-xs-6 alignleft">                                
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Grau de Ensino
+                                        </label>
+                                        <h:selectOneMenu id="comboGrauensino" 
+                                                         value="#{recRequisicaoBean.recRecVaga.recIdgrauensino}"  
+                                                         class="form-control" >
+                                            <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
+                                            <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
+                                            <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
+                                            <f:selectItem itemLabel="Ensino Fundamental" itemValue="#{3}" />
+                                            <f:selectItem itemLabel="Ensino Médio Completo" itemValue="#{4}" />
+                                            <f:selectItem itemLabel="Ensino Médio Incompleto" itemValue="#{5}" />                                            
+                                            <f:selectItem itemLabel="Ensino Superior Completo" itemValue="#{6}" />
+                                            <f:selectItem itemLabel="Ensino Superior Incompleto" itemValue="#{7}" />
+                                            <f:selectItem itemLabel="Especialização" itemValue="#{8}" />                                                                                                
+                                        </h:selectOneMenu>
+                                    </div>     
+                                </div>                     
+                            </div>           
 
-
+                            <hr></hr>
+                            <div class="pull-right">
                                 <div class="row">
-                                    <h3 class="text-center">Habilidades Necessárias</h3>   
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                        <div class="form-group ">
-                                            <label class="control-label " for="select">
-                                                Habilidade
-                                            </label>
-                                            <select class="select form-control" id="select" name="select">
-                                                <option value="1">
-                                                    Habilidade 1
-                                                </option>
-                                                <option value="2">
-                                                    Habilidade 2
-                                                </option>                                            
-                                            </select>
-                                        </div>     
-                                    </div>                            
-                                </div>
-
-                                <div class="row">
-                                    <h:commandButton class="btn btn-success" value=" Adicionar" />                            
-                                </div>
-
-                                <div class="row">
-                                    <h:dataTable class="table table-striped">                                        
-                                        <h:column>
-                                            <f:facet name="header">Código</f:facet>
-
-                                        </h:column>     
-                                        <h:column>
-                                            <f:facet name="header">Habilidade</f:facet>
-
-                                        </h:column>   
-                                        <h:column>
-                                            <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar">
-
-                                            </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir">
-
-                                            </h:commandLink>
-                                        </h:column>                  
-                                    </h:dataTable>
-                                </div>
-
-
-                                <hr></hr>
-                                <div class="pull-right">
-                                    <div class="row">
-                                        <h:commandButton class="btn btn-success" value="Salvar" action="#{recRequisicaoBean.Salvar()}"/>                                        
-                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
-                                    </div>
+                                    <h:commandButton class="btn btn-success" 
+                                                     value="Salvar" 
+                                                     action="#{recRequisicaoBean.Salvar()}">
+                                        <f:ajax execute="@form" render="formRequisicao" />
+                                    </h:commandButton>                                        
+                                    <h:commandButton value="Cancelar" 
+                                                     class="btn btn-danger"/>
                                 </div>
                             </div>
                         </div>
                     </p:panel>
-
-
                     <p:panel visible="#{!recRequisicaoBean.formAtivo}">
                         <div class="row">
                             <h:commandButton class="btn btn-primary" value="Novo Registro" action="#{recRequisicaoBean.Adicionar()}">                                
                             </h:commandButton>
                         </div>
+                        <hr />
+
                         <h:dataTable class="table table-striped" value="#{recRequisicaoBean.ListarTodas()}" var="item">
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
@@ -149,18 +104,17 @@
                             <h:column>
                                 <f:facet name="header">Descrição</f:facet>                                                                                            
                                 <h:outputText value="#{item.recDescricao}"/>
-                            </h:column>  
-                            <!--<h:column>
-                                <f:facet name="header">Salário</f:facet>                                                                                            
-                                <h:outputText value="#{item.recSalario}"/>
-                            </h:column>  -->                                     
+                            </h:column>                                                                            
                             <h:column>
                                 <f:facet name="header">Opções</f:facet>
+                                <h:commandLink class="btn btn-link btn-small" value="Gerar Vaga" action="#{recVagaBean.PreparaEdicao(null)}">
+
+                                </h:commandLink>
                                 <h:commandLink class="btn btn-link btn-small" value="Editar" action="#{recRequisicaoBean.PreparaEdicao(item)}">
 
                                 </h:commandLink>
                                 <h:commandLink class="btn btn-link btn-small" value="Excluir" action="#{recRequisicaoBean.Excluir(item)}" onclick="return confirm('Excluir tabela?')">
-                                    
+
                                 </h:commandLink>
                             </h:column>                  
                         </h:dataTable>
