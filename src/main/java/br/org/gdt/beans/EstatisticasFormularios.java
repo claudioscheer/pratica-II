@@ -42,7 +42,7 @@ import org.primefaces.model.chart.LineChartSeries;
 @ManagedBean
 public class EstatisticasFormularios implements Serializable {
     
-    private LineChartModel graficosLinha;
+    private List<LineChartModel> graficosLinha;
     private BarChartModel graficosBarras;
     
     private long codigoFormulario = 0;
@@ -126,7 +126,7 @@ public class EstatisticasFormularios implements Serializable {
         this.gchAlternativasService = gchAlternativasService;
     }
     
-    public LineChartModel getGraficosLinha() {
+    public List<LineChartModel> getGraficosLinha() {
         
         if (graficosLinha == null) {
 
@@ -138,16 +138,17 @@ public class EstatisticasFormularios implements Serializable {
             
             vazio.addSeries(series);
             
-            return vazio;
+            
+            List<LineChartModel> vazio3 = new ArrayList<>();
+            
+            return vazio3;
         } else {
             
             return graficosLinha;
         }
     }
     
-    public void setGraficosLinha(LineChartModel graficosLinha) {
-        this.graficosLinha = graficosLinha;
-    }
+
     
     public GchPerguntasService getGchPerguntasService() {
         return gchPerguntasService;
@@ -271,7 +272,7 @@ public class EstatisticasFormularios implements Serializable {
                     
                 }
                 
-                graficosLinha = linhaPessoa;
+                graficosLinha.add(linhaPessoa);
                 graficosBarras = barraAlternativa;
                 
             }

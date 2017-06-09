@@ -43,16 +43,16 @@
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group ">
 
-                                                                <label class="control-label ">Nome<span class="required">*</span></label>
-                                                                <h:inputText required="true" requiredMessage="Campo Nome é obrigatório." a:placeholder="Digite um nome para o benefício."  class="form-control"  value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
+                                                                <label class="control-label ">Nome</label>
+                                                                <h:inputText  a:placeholder="Digite um nome para o benefício."  class="form-control"  value="#{csbffBeneficioBean.csbffBeneficios.beneficioNome}" />
                                                             </div>
 
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group ">
 
-                                                                <label class="control-label ">Abrangência<span class="required">*</span></label>
-                                                                <h:selectOneMenu required="true" requiredMessage="Campo Abrangência deve ser escolhido." value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control">
+                                                                <label class="control-label ">Abrangência</label>
+                                                                <h:selectOneMenu value="#{csbffBeneficioBean.csbffBeneficios.abrangencia}" class="form-control">
                                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                                     <f:selectItems value="#{csbffBeneficioBean.abrangenciaBeneficio}" />
                                                                 </h:selectOneMenu>
@@ -61,9 +61,9 @@
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group ">
 
-                                                                <label class="control-label ">Tipo benefício <span class="required">*</span></label>
+                                                                <label class="control-label ">Tipo benefício </label>
 
-                                                                <h:selectOneMenu required="true" requiredMessage="Campo Tipo Benefício deve ser escolhido." value="#{csbffBeneficioBean.csbffBeneficios.tipoBeneficio}" class="form-control">
+                                                                <h:selectOneMenu  value="#{csbffBeneficioBean.csbffBeneficios.tipoBeneficio}" class="form-control">
                                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                                     <f:selectItems value="#{csbffBeneficioBean.tipoBeneficio}" />
                                                                 </h:selectOneMenu>   
@@ -85,8 +85,8 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                                                                <h:commandButton class="btn btn-primary"  action="#{csbffBeneficioBean.save()}" value="Cadastrar" /> 
-                                                                <h:commandButton class="btn btn-danger"  action="#{csbffBeneficioBean.cancel()}" value="Cancelar" /> 
+                                                                <h:commandButton class="btn btn-primary"  actionListener="#{csbffBeneficioBean.save()}" value="Cadastrar" /> 
+                                                                <h:commandButton class="btn btn-danger"  actionListener="#{csbffBeneficioBean.cancel()}" value="Cancelar" /> 
                                                             </div>
                                                         </div>
                                                     </div>

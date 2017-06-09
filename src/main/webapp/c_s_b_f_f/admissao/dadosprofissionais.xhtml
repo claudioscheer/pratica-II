@@ -4,8 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Admissão de colaborador</title>
     </h:head>
@@ -28,6 +27,7 @@
                                         <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
                                         <!-- Inline CSS based on choices in "Settings" tab -->
                                         <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
+
                                         <h:form id="DadosProfissionais">
                                             <h:messages class="error" style="color: #d9534f" />
                                             <div class="container-fluid">
@@ -39,21 +39,21 @@
                                                                     CPF
                                                                     <span class="required">*</span>
                                                                 </label>
-                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffDadosPessoaisBean.recCpf}" title="CPF" />
+                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffDadosProfissionaisBean.recCpf}" title="CPF" />
                                                             </div>
 
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group ">
                                                                 <label class="control-label">Código colaborador</label>
-                                                                <h:inputText label="codigo"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recIdpessoa}" disabled="true" />
+                                                                <h:inputText label="codigo"  class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recIdpessoa}" disabled="true" />
 
                                                             </div>
                                                         </div> 
 
                                                         <div class="col-md-12 col-sm-3 col-xs-12">
                                                             <div class="element">
-                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffDadosPessoaisBean.buscarCpf()}"/>
+                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffDadosProfissionaisBean.buscarCpf()}"/>
                                                             </div>
                                                         </div>                              
                                                         <div class="col-md-6 col-sm-6 col-xs-12">                                
@@ -62,220 +62,225 @@
                                                                     Nome Colaborador
                                                                     <!--                                                    <span class="required">*</span>-->
                                                                 </label>
-                                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recNomecompleto}" />
+                                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recNomecompleto}" />
                                                             </div>     
-                                                        </div>
-                                                        <h:panelGroup id="panelDados" layout="block">
+                                                        </div> 
 
-                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="number">                                        
-                                                                        Número da CTPS
-                                                                        <!--                                                    <span class="required">*</span>-->
-                                                                    </label>
-                                                                    <h:inputText label="codigo" class="form-control " a:placeholder="Digite o número da Carteira de Trabalho." value="#{csbffDadosProfissionaisBean.recPessoa.recNumCtps}" />
-                                                                </div>
-                                                            </div> 
-
-                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="number">                                        
-                                                                        Número PIS/PASEP
-                                                                        <!--                                                    <span class="required">*</span>-->
-                                                                    </label>
-                                                                    <h:inputText label="codigo"  a:placeholder="Digite o número do PIS/PASEP." class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recPispasep}" />
-
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="number">                                        
-                                                                        Banco que possui conta
-                                                                    </label>
-                                                                    <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recNomeBanco}" class="form-control">
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                        <f:selectItems value="#{csbffDadosProfissionaisBean.nomeBanco}" />
-                                                                    </h:selectOneMenu>
-                                                                    <!--                                                <input class="form-control" id="number" name="text" type="text"/>-->
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-md-6 col-sm-6 col-xs-12">                                
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="select">
-                                                                        Número da agência
-                                                                    </label>
-                                                                    <h:inputText label="codigo" a:placeholder="Digite o número da agência que possui conta." class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recAgenciaBancaria}" />
-
-                                                                </div>     
-                                                            </div> 
-                                                            <div class="col-md-6 col-sm-12 col-xs-12">                                
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="number">
-                                                                        Número da conta
-                                                                    </label>
-                                                                    <h:inputText label="codigo" a:placeholder="Digite o número da conta bancária." class="form-control " value="#{csbffDadosProfissionaisBean.recPessoa.recNumeroContaBanco}"/>
-                                                                </div>     
-                                                            </div>  
-                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="number">                                        
-                                                                        Cargo ocupado
-                                                                        <span class="required">*</span>
-                                                                    </label>
-                                                                    <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.cargoNome}" class="form-control" converter="#{generic}">
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                        <f:selectItems value="#{csbffDadosProfissionaisBean.cargos}" var="cargos" itemValue="#{cargos}"  itemLabel="#{cargos.cargoNome}" />
-                                                                    </h:selectOneMenu>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="number">                                        
-                                                                        Código CBO
-                                                                        <span class="required"></span>
-                                                                    </label>
-                                                                    <h:inputText label="codigo" class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.cargoCbo}" converter="#{generic}"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="number">                                        
-                                                                        Salário (R$)
-                                                                    </label>
-                                                                    <h:inputText class="form-control" maxlength="9" onkeypress="this.value = MascaraValorMonetario(this.value)" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" converter="#{generic}"/>
-
-                                                                </div>
-                                                            </div> 
-
-                                                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="date">                                        
-                                                                        Data de Admissão
-                                                                    </label>
-                                                                    <div class="xdisplay_inputx form-group has-feedback">
-                                                                        <h:inputText class="form-control has-feedback date-picker" value="#{csbffDadosProfissionaisBean.recPessoa.recDtaAdmissao}" a:placeholder="dd/mm/aaaa hh:mm">
-                                                                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                                        </h:inputText>
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="select">                                        
-                                                                        Possui dependentes?
-                                                                    </label>
-
-                                                                    <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.possuiDependente}" class="form-control">
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                        <f:selectItems value="#{csbffDadosProfissionaisBean.possuiDependentes}" />
-                                                                    </h:selectOneMenu>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="select">                                        
-                                                                        Insalubridade
-                                                                    </label>
-                                                                    <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recInsalubridade}" class="form-control">
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                        <f:selectItems value="#{csbffDadosProfissionaisBean.insalubridade}" />
-                                                                    </h:selectOneMenu>                               
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="select">                                        
-                                                                        Recebe seguro desemprego?
-                                                                    </label>
-                                                                    <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recSegurodesemprego}" class="form-control">
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                        <f:selectItems value="#{csbffDadosProfissionaisBean.seguroDesemprego}" />
-                                                                    </h:selectOneMenu>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="select">                                        
-                                                                        Periculosidade
-                                                                    </label>
-                                                                    <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recPericulosidade}" class="form-control">
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                        <f:selectItems value="#{csbffDadosProfissionaisBean.periculosidade}" />
-                                                                    </h:selectOneMenu>                           
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-12 col-sm-6 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label " for="select">                                        
-                                                                        Benefício
-                                                                    </label>
-                                                                    <h:selectOneMenu value="#{csbffDadosProfissionaisBean.csbffBeneficios}" class="form-control" converter="#{generic}">
-                                                                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                        <f:selectItems value="#{csbffDadosProfissionaisBean.csbffBeneficiosList}" var="beneficio" itemValue="#{beneficio}" itemLabel="#{beneficio.beneficioNome}" />
-                                                                    </h:selectOneMenu>
-                                                                    <div class="form-group">
-                                                                        <br></br><h:commandButton class="btn btn-primary" value="Adicionar Benefício" action="#{csbffDadosProfissionaisBean.addBeneficioPessoa()}">
-                                                                            <!--                                                        <f:ajax execute="@form" render="dadosprofissionais"/>-->
-                                                                        </h:commandButton>
-                                                                    </div>
-                                                                    <h:dataTable  class="table" value="#{csbffDadosProfissionaisBean.recPessoa.csbffPessoaBeneficioList}" var="pb">
-                                                                        <h:column headerClass="alinhaColuna">                
-                                                                            <h:commandLink title="Remover Benefício" action="#{csbffDadosProfissionaisBean.removerBeneficioPessoa(pb)}" onclick="return confirm('Voce realmente deseja remover o benefício?')" >
-                                                                                <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                                            </h:commandLink>
-                                                                        </h:column>
-
-                                                                        <h:column >
-                                                                            <f:facet name="header"> Código</f:facet>
-                                                                            <h:outputText value="#{pb.beneficioCodigo.id}"/>
-                                                                        </h:column>
-                                                                        <h:column >
-                                                                            <f:facet name="header"> Nome</f:facet>
-                                                                            <h:outputText value="#{pb.beneficioCodigo.beneficioNome}"/>
-                                                                        </h:column>
-
-                                                                    </h:dataTable>
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                <div class="form-group ">
-                                                                    <label class="control-label ">
-                                                                        Anotações Contratuais
-                                                                    </label>
-                                                                    <br></br><h:outputText value="Após 90 dias, o contrato de experiência passará a vigorar por tempo indeterminado. #{csbffDadosProfissionaisBean.recPessoa.admissaoDescricao}"/>
-
-                                                                    <h:inputTextarea onkeyup="if (this.value.length > 255) {
-                                                                                this.value = this.value.substring(0, 255);
-                                                                                alert('tamanho maximo encontrado ');
-                                                                            }" class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.admissaoDescricao}" />
-
-                                                                </div>
-                                                            </div> 
-
-                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                <label class="form-group" >                                        
-                                                                    Contrato Ativo
-                                                                    <!--<span class="required">*</span>-->
-                                                                </label>
-                                                                <label class="control-label ">       
-                                                                    <!--<h:selectBooleanCheckbox required="true" requiredMessage="Contrato deve ser ativado."/>-->
-                                                                </label>
-                                                            </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group ">
-                                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                                                                    <h:commandButton class="btn btn-primary"  action="#{csbffDadosProfissionaisBean.saveDadosProfissionais()}" value="Salvar" /> 
-                                                                    <h:commandButton class="btn btn-danger"  action="#{csbffDadosProfissionaisBean.cancel()}" value="Cancelar" /> 
+                                                                <label class="control-label " for="number">                                        
+                                                                    Número da CTPS
+                                                                    <!--                                                    <span class="required">*</span>-->
+                                                                </label>
+                                                                <h:inputText label="codigo" maxlength="15" class="form-control " a:placeholder="Digite o número da Carteira de Trabalho." value="#{csbffDadosProfissionaisBean.recPessoa.recNumCtps}" />
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="number">                                        
+                                                                    Número PIS/PASEP
+                                                                    <!--                                                    <span class="required">*</span>-->
+                                                                </label>
+                                                                <h:inputText label="codigo" maxlength="15" a:placeholder="Digite o número do PIS/PASEP." class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recPispasep}" />
+
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="number">                                        
+                                                                    Banco que possui conta
+                                                                </label>
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recNomeBanco}" class="form-control">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.nomeBanco}" />
+                                                                </h:selectOneMenu>
+                                                                <!--                                                <input class="form-control" id="number" name="text" type="text"/>-->
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">
+                                                                    Número da agência
+                                                                </label>
+                                                                <h:inputText label="codigo" a:placeholder="Digite o número da agência que possui conta." class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.recAgenciaBancaria}" />
+
+                                                            </div>     
+                                                        </div> 
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="number">
+                                                                    Número da conta
+                                                                </label>
+                                                                <h:inputText label="codigo" a:placeholder="Digite o número da conta bancária." class="form-control " value="#{csbffDadosProfissionaisBean.recPessoa.recNumeroContaBanco}"/>
+                                                            </div>     
+                                                        </div> 
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="number">                                        
+                                                                    Cargo ocupado
+                                                                </label>
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.cargoNome}" class="form-control" converter="#{generic}">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.cargos}" var="cargos" itemValue="#{cargos}"  itemLabel="#{cargos.cargoNome}" />
+                                                                </h:selectOneMenu>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">                                        
+                                                                    Possui dependentes?
+                                                                </label>
+
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.possuiDependente}" class="form-control">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.possuiDependentes}" />
+                                                                </h:selectOneMenu>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="date">                                        
+                                                                    Data de Admissão
+                                                                </label>
+                                                                <div class="xdisplay_inputx form-group has-feedback">
+                                                                    <h:inputText class="form-control has-feedback date-picker" value="#{csbffDadosProfissionaisBean.recPessoa.recDtaAdmissao}" a:placeholder="dd/mm/aaaa hh:mm">
+                                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                                    </h:inputText>
                                                                 </div>
                                                             </div>
-                                                        </h:panelGroup>
+                                                        </div> 
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="number">                                        
+                                                                    Salário (R$)
+                                                                </label>
+                                                                <h:inputText class="form-control" maxlength="9" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" converter="#{generic}"/>
+
+                                                            </div>
+                                                        </div> 
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">                                        
+                                                                    Insalubridade
+                                                                </label>
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recInsalubridade}" class="form-control">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.insalubridade}" />
+                                                                </h:selectOneMenu>                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">                                        
+                                                                    Insalubridade
+                                                                </label>
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recInsalubridade}" class="form-control">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.insalubridade}" />
+                                                                </h:selectOneMenu>                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">                                        
+                                                                    Recebe seguro desemprego?
+                                                                </label>
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recSegurodesemprego}" class="form-control">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.seguroDesemprego}" />
+                                                                </h:selectOneMenu>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">                                        
+                                                                    Periculosidade
+                                                                </label>
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recPericulosidade}" class="form-control">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.periculosidade}" />
+                                                                </h:selectOneMenu>                           
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12 col-sm-6 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">                                        
+                                                                    Benefício
+                                                                </label>
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.csbffBeneficios}" class="form-control" converter="#{generic}">
+                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.csbffBeneficiosList}" var="beneficio" itemValue="#{beneficio}" itemLabel="#{beneficio.beneficioNome}" />
+                                                                </h:selectOneMenu>
+                                                                <div class="form-group">
+                                                                    <br></br><h:commandButton class="btn btn-primary" value="Adicionar Benefício" action="#{csbffDadosProfissionaisBean.addBeneficioPessoa()}">
+                                                                        <!--                                                        <f:ajax execute="@form" render="dadosprofissionais"/>-->
+                                                                    </h:commandButton>
+                                                                </div>
+                                                                <h:dataTable  class="table" value="#{csbffDadosProfissionaisBean.recPessoa.csbffPessoaBeneficioList}" var="pb">
+                                                                    <h:column >
+                                                                        <f:facet name="header"> Código</f:facet>
+                                                                        <h:outputText value="#{pb.beneficioCodigo.id}"/>
+                                                                    </h:column>
+                                                                    <h:column >
+                                                                        <f:facet name="header"> Nome</f:facet>
+                                                                        <h:outputText value="#{pb.beneficioCodigo.beneficioNome}"/>
+                                                                    </h:column>
+                                                                    <h:column >
+                                                                        <f:facet name="header"> Tipo Benefício</f:facet>
+                                                                        <h:outputText value="#{pb.beneficioCodigo.tipoBeneficio}"/>
+                                                                    </h:column>
+                                                                    <h:column headerClass="alinhaColuna">  
+                                                                        <f:facet name="header"> Opções</f:facet>
+                                                                        <h:commandLink title="Remover Benefício" action="#{csbffDadosProfissionaisBean.removerBeneficioPessoa(bp)}" onclick="return confirm('Voce realmente deseja remover o benefício?')" >
+                                                                            <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                                        </h:commandLink>
+                                                                    </h:column>
+
+                                                                </h:dataTable>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="form-group ">
+                                                                <br></br><label class="control-label ">
+                                                                    Anotações Contratuais
+                                                                </label>
+                                                                <br></br><h:outputText value="Após 90 dias, o contrato de experiência passará a vigorar por tempo indeterminado. #{csbffDadosProfissionaisBean.recPessoa.admissaoDescricao}"/>
+
+                                                                <h:inputTextarea onkeyup="if (this.value.length > 255) {
+                                                                            this.value = this.value.substring(0, 255);
+                                                                            alert('tamanho maximo encontrado ');
+                                                                        }" class="form-control" value="#{csbffDadosProfissionaisBean.recPessoa.admissaoDescricao}" />
+
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-12 col-sm-3 col-xs-12">
+                                                            <div class="element">
+                                                                <h:commandButton class="btn btn-danger"  value="Demitir Colaborador" action="#{csbffDadosProfissionaisBean.demitirColaborador()}"/>
+                                                            </div>
+                                                        </div> 
+
+
+
+                                                        <div class="form-group ">
+                                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                <h:commandButton class="btn btn-primary"  action="#{csbffDadosProfissionaisBean.saveDadosProfissionais()}" value="Salvar" /> 
+                                                                <h:commandButton class="btn btn-danger"  action="#{csbffDadosProfissionaisBean.cancel()}" value="Cancelar" /> 
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </h:form>
                                     </div>
                                 </div>
@@ -283,6 +288,7 @@
                         </div>
                     </div>
                 </div>
+
             </ui:define>
         </ui:composition>
 
