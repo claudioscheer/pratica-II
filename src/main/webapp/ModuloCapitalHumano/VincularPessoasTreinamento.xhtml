@@ -43,7 +43,7 @@
 
                                                         <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
                                                             <p:autoComplete id="recpessoaid" value="#{gchTreinamentoPessoaBean.recPessoa}" completeMethod="#{gchTreinamentoPessoaBean.completePessoa}"
-                                                                            var="pessoa" itemLabel="#{pessoa.recNomecompleto}" itemValue="#{pessoa}" converter="#{generic}" forceSelection="true">
+                                                                            var="pessoa" widgetVar="suggestpessoa" onfocus="PF('suggestpessoa').search(PF('suggestpessoa').input.val())" itemLabel="#{pessoa.recNomecompleto}" itemValue="#{pessoa}" converter="#{generic}" forceSelection="true">
                                                                 <p:column>
                                                                     <h:outputText value="#{pessoa.recNomecompleto}" />
                                                                 </p:column>

@@ -7,8 +7,14 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.GchTreinamentos;
+import br.org.gdt.model.GchUfs;
 import br.org.gdt.resources.Helper;
+import br.org.gdt.service.GchMunicipiosService;
 import br.org.gdt.service.GchTreinamentosService;
+import br.org.gdt.service.GchUFsService;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,13 +28,14 @@ import javax.faces.bean.RequestScoped;
  * @author Diego
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class GchTreinamentosBean {
 
 //    private boolean formAtivo = false;
 
     private GchTreinamentos gchTreinamentos = new GchTreinamentos();
     private List<GchTreinamentos> todosGchTreinamentos;
+    private List<GchMunicipios> todosGchMunicipiosUF;
 
     @ManagedProperty("#{gchTreinamentosService}")
     private GchTreinamentosService gchTreinamentosService;
@@ -41,6 +48,16 @@ public class GchTreinamentosBean {
     private Date dataInicio;
     private Date dataFim;
 
+    private long ufCodigoCombo;
+
+    @ManagedProperty("#{gchMunicipiosService}")
+    private GchMunicipiosService gchMunicipiosService;
+
+    private List<GchUfs> todosGchUfs;
+
+    @ManagedProperty("#{gchUFsService}")
+    private GchUFsService gchUFsService;
+
     public GchTreinamentosBean() {
 
     }
@@ -52,9 +69,8 @@ public class GchTreinamentosBean {
         System.out.println("Chamou");
 
 //      DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
- 
-      SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yy");
- 
+        SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yy");
+
         try {
 
             gchTreinamentos.setTreiDataInicio(dataInicio);
@@ -80,6 +96,12 @@ public class GchTreinamentosBean {
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
 
+        todosGchMunicipiosUF = null;
+        gchTreinamentos = null;
+        todosGchUfs = null;
+        todosGchMunicipiosUF = null;
+        todosGchTreinamentos = null;
+        
         return "Treinamentos";
 
     }
@@ -166,9 +188,13 @@ public class GchTreinamentosBean {
             gchTreinamentos = gchTreinamentosService.findById(id);
 
             Date a = dataInicio;
+
+          ufCodigoCombo = gchTreinamentos.getMunCodigo().getUfCodigo().getUfCodigo();
+            
+            
+             carregaMunicipios();
             
 //            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
             dataInicio = gchTreinamentos.getTreiDataInicio();
             dataFim = gchTreinamentos.getTreiDataFim();
 
@@ -176,6 +202,14 @@ public class GchTreinamentosBean {
 
         }
         return null;
+    }
+
+    public void carregaMunicipios() {
+
+        if (ufCodigoCombo != 0){
+            todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
+        }
+
     }
 
     public void setTodosGchTreinamentos(List<GchTreinamentos> todosGchTreinamentos) {
@@ -228,6 +262,53 @@ public class GchTreinamentosBean {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public GchMunicipiosService getGchMunicipiosService() {
+        return gchMunicipiosService;
+    }
+
+    public void setGchMunicipiosService(GchMunicipiosService gchMunicipiosService) {
+        this.gchMunicipiosService = gchMunicipiosService;
+    }
+
+    public List<GchUfs> getTodosGchUfs() {
+
+        if (todosGchUfs == null) {
+
+            todosGchUfs = gchUFsService.findAll();
+
+        }
+
+        return todosGchUfs;
+    }
+
+    public void setTodosGchUfs(List<GchUfs> todosGchUfs) {
+        this.todosGchUfs = todosGchUfs;
+    }
+
+    public GchUFsService getGchUFsService() {
+        return gchUFsService;
+    }
+
+    public void setGchUFsService(GchUFsService gchUFsService) {
+        this.gchUFsService = gchUFsService;
+    }
+
+    public List<GchMunicipios> getTodosGchMunicipiosUF() {
+        return todosGchMunicipiosUF;
+    }
+
+    public void setTodosGchMunicipiosUF(List<GchMunicipios> todosGchMunicipiosUF) {
+        this.todosGchMunicipiosUF = todosGchMunicipiosUF;
+    }
+
+    public long getUfCodigoCombo() {
+        return ufCodigoCombo;
+    }
+
+    public void setUfCodigoCombo(long ufCodigoCombo) {
+        this.ufCodigoCombo = ufCodigoCombo;
     }
 
 }

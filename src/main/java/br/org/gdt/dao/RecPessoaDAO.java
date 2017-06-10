@@ -61,7 +61,7 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
     }
 
     public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
-        Query query = entityManager.createQuery("from RecPessoa as p where upper(p.recNomecompleto) like :recQuery or p.recCpf like :recQuery");
+        Query query = entityManager.createQuery("from RecPessoa as p where (upper(p.recNomecompleto) like :recQuery or p.recCpf like :recQuery) and p.recFuncionario = true");
         query.setParameter("recQuery", "%" + select.toUpperCase() + "%");
 
         return query.getResultList();
@@ -89,6 +89,13 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
                 .collect(Collectors.toList());
     }
 
+     public List<RecPessoa> buscarColaboradores() { 
+        Query query = entityManager.createQuery("from RecPessoa as p where p.recFuncionario = true");
+        
+        return query.getResultList();
+    }
+    
+    
 }
 //    public RecPessoa findByCpf(String cpf) {
 ////        try {

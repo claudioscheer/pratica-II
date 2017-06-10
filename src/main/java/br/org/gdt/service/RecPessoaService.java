@@ -85,4 +85,9 @@ public class RecPessoaService {
     public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
         return pessoaDao.buscarNomes(select);
     }
+    
+    public List<RecPessoa> buscarColaboradores() { 
+        return pessoaDao.buscarColaboradores();
+    }
+    
 }
