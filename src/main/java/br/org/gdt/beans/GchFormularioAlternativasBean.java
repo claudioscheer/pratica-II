@@ -159,8 +159,6 @@ public class GchFormularioAlternativasBean {
 
     public List<GchPerguntas> buscaPerguntas() {
 
-        System.out.println("idParm:" + idParm);
-
         if (idFormulario == 0) {
 
             recuperaParametro();

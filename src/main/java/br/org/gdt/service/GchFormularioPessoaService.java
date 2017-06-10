@@ -19,7 +19,7 @@ public class GchFormularioPessoaService {
     public void save(GchFormularioPessoa formPess) {
         gchFormularioPessoaDAO.save(formPess);
         
-        System.out.println("chamou para salvar");
+        
     }
 
     @Transactional
@@ -37,7 +37,7 @@ public class GchFormularioPessoaService {
     }
 
     public List<GchFormularioPessoa> findAll() {
-        System.out.println("Aqui estou eu");
+        
         return gchFormularioPessoaDAO.findAll();
     }
     

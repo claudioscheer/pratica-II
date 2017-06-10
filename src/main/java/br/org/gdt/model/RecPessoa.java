@@ -883,6 +883,29 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + (int) (this.recIdpessoa ^ (this.recIdpessoa >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RecPessoa other = (RecPessoa) obj;
+        if (this.recIdpessoa != other.recIdpessoa) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 

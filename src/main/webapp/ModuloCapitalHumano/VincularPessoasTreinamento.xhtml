@@ -13,8 +13,7 @@
     <h:body>
         <ui:composition template="../templates/template.xhtml">
             <ui:define name="content">
-                <h:form id="parentformid">
-                    <h:messages class="error" style="color: #d9534f" />
+                <h:form id="parentformid">                  
                     <div id="page" style="margin-top:75px;">
 
                         <div class="container-fluid">
@@ -41,14 +40,16 @@
 
                                                         </div>
 
-                                                        <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                                                            <p:autoComplete id="recpessoaid" value="#{gchTreinamentoPessoaBean.recPessoa}" completeMethod="#{gchTreinamentoPessoaBean.completePessoa}"
-                                                                            var="pessoa" widgetVar="suggestpessoa" onfocus="PF('suggestpessoa').search(PF('suggestpessoa').input.val())" itemLabel="#{pessoa.recNomecompleto}" itemValue="#{pessoa}" converter="#{generic}" forceSelection="true">
-                                                                <p:column>
-                                                                    <h:outputText value="#{pessoa.recNomecompleto}" />
-                                                                </p:column>
-                                                            </p:autoComplete>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                                                                <p:autoComplete id="recpessoaid" value="#{gchTreinamentoPessoaBean.recPessoa}" maxResults="10" completeMethod="#{gchTreinamentoPessoaBean.completePessoa}"
+                                                                                var="pessoa" widgetVar="suggestpessoa" onclick="PF('suggestpessoa').search(PF('suggestpessoa').input.val())"  itemLabel="#{pessoa.recNomecompleto}" itemValue="#{pessoa}" converter="#{generic}" forceSelection="true">
+                                                                    <p:column>
+                                                                        <h:outputText value="#{pessoa.recNomecompleto}" />
+                                                                    </p:column>
+                                                                </p:autoComplete>
 
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -63,32 +64,40 @@
                                                 </div>
                                             </div> 
 
+                                            <div class="form-group" style="margin-top: 10px">
 
-                                            <h:dataTable class="table table-striped" value="#{gchTreinamentoPessoaBean.todosGchTreinamentosPessoas}" var="pessoatreinamento">
+                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                    <h:dataTable class="table table-striped" value="#{gchTreinamentoPessoaBean.todosGchTreinamentosPessoas}" var="pessoatreinamento">
 
-                                                <h:column>      
-                                                    <f:facet name="header">CPF</f:facet>
-                                                    <h:outputText value="#{pessoatreinamento.recIdpessoa.recCpf}"/>                
-                                                </h:column>    
+                                                        <h:column>      
+                                                            <f:facet name="header">CPF</f:facet>
+                                                            <h:outputText value="#{pessoatreinamento.recIdpessoa.recCpf}"/>                
+                                                        </h:column>    
 
-                                                <h:column>      
-                                                    <f:facet name="header">Nome</f:facet>
-                                                    <h:outputText value="#{pessoatreinamento.recIdpessoa.recNomecompleto}"/>                
-                                                </h:column>
+                                                        <h:column>      
+                                                            <f:facet name="header">Nome</f:facet>
+                                                            <h:outputText value="#{pessoatreinamento.recIdpessoa.recNomecompleto}"/>                
+                                                        </h:column>
 
-                                                <h:column>
-                                                    <h:commandLink title="Remover" action="#{gchTreinamentoPessoaBean.excluir(pessoatreinamento)}" >
-                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                    </h:commandLink>
-                                                </h:column>
+                                                        <h:column>
+                                                            <h:commandLink title="Remover" action="#{gchTreinamentoPessoaBean.excluir(pessoatreinamento)}" >
+                                                                <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                            </h:commandLink>
+                                                        </h:column>
 
 
-                                            </h:dataTable>
+                                                    </h:dataTable>
+
+                                                </div>
+                                            </div>
 
                                             <div class="form-group" style="margin-top: 10px">
-                                                <div>
-                                                    <h:link  outcome="Treinamentos.xhtml" class="btn btn-default " value="Voltar"/>
-                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                    <div>
+                                                        <h:link  outcome="Treinamentos.xhtml" class="btn btn-default " value="Voltar"/>
+                                                    </div>
+
+                                                </div>    
                                             </div>
 
                                         </div>
@@ -97,6 +106,12 @@
                                             <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentoPessoaBean.save(true)}"  value="Sim" />                                             
                                             <h:commandButton class="btn btn-danger"  value="Não" /> 
                                         </p:confirmDialog>
+
+                                        <p:confirmDialog style="" widgetVar="erroMessage" message="Colaborador já vinculado neste treinamento." >
+                                            <h:commandButton class="btn btn-default"  value="Ok" /> 
+                                        </p:confirmDialog>
+
+
 
                                     </div>
 

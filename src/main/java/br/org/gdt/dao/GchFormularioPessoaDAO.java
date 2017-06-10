@@ -12,7 +12,7 @@ public class GchFormularioPessoaDAO extends DAO<GchFormularioPessoa> {
 
     public GchFormularioPessoaDAO() {
         classe = GchFormularioPessoa.class;
-        System.out.println("Classe: " + classe.getName());
+        
     }
 
     

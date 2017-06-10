@@ -22,6 +22,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -32,7 +33,6 @@ import javax.faces.bean.RequestScoped;
 public class GchTreinamentosBean {
 
 //    private boolean formAtivo = false;
-
     private GchTreinamentos gchTreinamentos = new GchTreinamentos();
     private List<GchTreinamentos> todosGchTreinamentos;
     private List<GchMunicipios> todosGchMunicipiosUF;
@@ -66,8 +66,7 @@ public class GchTreinamentosBean {
 
         String MsgNotificacao = "";
 
-        System.out.println("Chamou");
-
+     
 //      DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yy");
 
@@ -91,7 +90,7 @@ public class GchTreinamentosBean {
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         } catch (Exception ex) {
-            System.out.println("excessao" + ex.toString());
+          
             MsgNotificacao = "Não foi possível cadastrar o treinamento " + gchTreinamentos.getTreiNome();
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
@@ -101,7 +100,7 @@ public class GchTreinamentosBean {
         todosGchUfs = null;
         todosGchMunicipiosUF = null;
         todosGchTreinamentos = null;
-        
+
         return "Treinamentos";
 
     }
@@ -126,21 +125,35 @@ public class GchTreinamentosBean {
     public String cancel() {
 //        this.formAtivo = false;
         this.gchTreinamentos = new GchTreinamentos();
-        
+
         return "Treinamentos";
-        
+
     }
 
     public void add() {
-        System.out.println("Aqui tambem ta tretando");
+        
 //        this.formAtivo = true;
         this.gchTreinamentos = new GchTreinamentos();
     }
 
     public String excluir(GchTreinamentos gchTreinamentos) {
-        gchTreinamentosService.delete(gchTreinamentos.getTreiCodigo());
-        todosGchTreinamentos.remove(gchTreinamentos);
+        try {
+            gchTreinamentosService.delete(gchTreinamentos.getTreiCodigo());
+            todosGchTreinamentos.remove(gchTreinamentos);
 
+             Helper.mostrarNotificacao("Sucesso", "Treinamento <b>" + gchTreinamentos.getTreiNome() + "</b> foi excluído com sucesso!", "success");
+            
+        } catch (Exception e) {
+
+            //Formulário já vinculado a uma pessoa
+            if (e.toString().indexOf("fk_im6u1b5d9yqnf8r9ai7jiad1x") > 0) {
+
+                Helper.mostrarNotificacao("Erro", "Este treinamento já possui colaboradores vinculados!", "error");
+            } else {
+
+                Helper.mostrarNotificacao("Erro", "Uma Exceção não tratada impediu a exclusão do treinamento! : " + e.getMessage(), "error");
+            }
+        }
         return "Treinamentos";
     }
 
@@ -153,7 +166,6 @@ public class GchTreinamentosBean {
 //    public boolean isFormAtivo() {
 //        return formAtivo;
 //    }
-
     public GchTreinamentos getGchTreinamentos() {
         return gchTreinamentos;
     }
@@ -164,11 +176,11 @@ public class GchTreinamentosBean {
 
     public List<GchTreinamentos> getTodosGchTreinamentos() {
 
-        System.out.println("Aqui");
+        
 
         if (todosGchTreinamentos == null) {
 
-            System.out.println("Aqui tambem");
+            
 
             todosGchTreinamentos = new ArrayList<>();
 
@@ -181,7 +193,7 @@ public class GchTreinamentosBean {
 
     public String buscaTreinamentoPorId(int id) {
 
-        System.out.println("Id Treinamento" + id);
+        
 
         if (id != 0) {
 
@@ -189,11 +201,10 @@ public class GchTreinamentosBean {
 
             Date a = dataInicio;
 
-          ufCodigoCombo = gchTreinamentos.getMunCodigo().getUfCodigo().getUfCodigo();
-            
-            
-             carregaMunicipios();
-            
+            ufCodigoCombo = gchTreinamentos.getMunCodigo().getUfCodigo().getUfCodigo();
+
+            carregaMunicipios();
+
 //            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             dataInicio = gchTreinamentos.getTreiDataInicio();
             dataFim = gchTreinamentos.getTreiDataFim();
@@ -206,7 +217,7 @@ public class GchTreinamentosBean {
 
     public void carregaMunicipios() {
 
-        if (ufCodigoCombo != 0){
+        if (ufCodigoCombo != 0) {
             todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
         }
 

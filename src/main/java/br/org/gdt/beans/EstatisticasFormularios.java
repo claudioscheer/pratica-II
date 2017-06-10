@@ -335,7 +335,6 @@ public class EstatisticasFormularios implements Serializable {
 
                         charAlt.set("_", totalPorAlternativa.count());
 
-                        System.out.println("entrou uhu");
 
                         linhaPessoa.addSeries(charAlt);
                     }
@@ -348,7 +347,7 @@ public class EstatisticasFormularios implements Serializable {
 
         } else {
 
-            System.out.println("código do formulário vazio");
+//            System.out.println("código do formulário vazio");
 
         }
     }

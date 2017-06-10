@@ -21,7 +21,7 @@ public class GchAlternativasPerguntaService {
     public void save(GchAlternativasperguntas alt) {
         gchAlternativasPerguntasDAO.save(alt);
         
-        System.out.println("chamou para salvar");
+        
     }
 
     @Transactional

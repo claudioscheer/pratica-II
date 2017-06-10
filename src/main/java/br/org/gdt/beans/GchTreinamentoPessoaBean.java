@@ -8,6 +8,7 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentoPessoaService;
 import br.org.gdt.service.GchTreinamentosService;
 import br.org.gdt.service.RecPessoaService;
@@ -50,6 +51,8 @@ public class GchTreinamentoPessoaBean {
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
 
+    private List<RecPessoa> todosColaboradores;
+
     private RecPessoa inputHidden;
 
     private RecPessoa recPessoa;
@@ -78,14 +81,27 @@ public class GchTreinamentoPessoaBean {
 
     public void salvar() {
 
-        gchTreinamentospessoas.setRecIdpessoa(recPessoa);
-        gchTreinamentospessoas.setTreiPesDataInicio(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio());
-        gchTreinamentospessoas.setTreiPesDataFim(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim());
+        if (recPessoa != null) {
 
-        gchTreinamentospessoasService.update(gchTreinamentospessoas);
-        todosGchTreinamentosPessoas = null;
-        recPessoa = null;
+            gchTreinamentospessoas.setRecIdpessoa(recPessoa);
+            gchTreinamentospessoas.setTreiPesDataInicio(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio());
+            gchTreinamentospessoas.setTreiPesDataFim(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim());
 
+            boolean existe = todosGchTreinamentosPessoas.stream().filter(o -> o.getRecIdpessoa().equals(gchTreinamentospessoas.getRecIdpessoa())).findFirst().isPresent();
+
+            if (!existe) {
+
+                gchTreinamentospessoasService.update(gchTreinamentospessoas);
+                todosGchTreinamentosPessoas = null;
+                recPessoa = null;
+
+            } else {
+
+                RequestContext.getCurrentInstance().execute("PF('erroMessage').show();");
+
+            }
+
+        }
     }
 
 //    public void save() {
@@ -132,7 +148,9 @@ public class GchTreinamentoPessoaBean {
 
     public List<RecPessoa> completePessoa(String query) {
 
-        return recPessoaService.buscarNomes(query);
+        todosColaboradores = recPessoaService.buscarNomes(query);
+
+        return todosColaboradores;
 
     }
 
@@ -159,6 +177,7 @@ public class GchTreinamentoPessoaBean {
     public String excluir(GchTreinamentospessoas gchTreinamentosPessoas) {
         gchTreinamentospessoasService.delete(gchTreinamentosPessoas.getTreiPescodigo());
         todosGchTreinamentosPessoas.remove(gchTreinamentosPessoas);
+        Helper.mostrarNotificacao("Sucesso", "<b>" + gchTreinamentosPessoas.getRecIdpessoa().getRecNomecompleto() + "</b> foi removido com sucesso!", "success");
         return "VincularPessoasTreinamento";
     }
 
@@ -177,6 +196,7 @@ public class GchTreinamentoPessoaBean {
 
         if (gchTreinamentos != null) {
 
+            todosGchTreinamentosPessoas = null;
             this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
 
             idTreinamento = gchTreinamentos.getTreiCodigo();
@@ -195,19 +215,21 @@ public class GchTreinamentoPessoaBean {
 
     public boolean podeVincularPessoa() {
 
-        List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoa(gchTreinamentospessoas.getTreiCodigo().getTreiCodigo(), recPessoa.getRecIdpessoa());
+        if (recPessoa != null) {
 
-        for (GchTreinamentospessoas t : list) {
+            List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoa(gchTreinamentospessoas.getTreiCodigo().getTreiCodigo(), recPessoa.getRecIdpessoa());
 
-            if (!verificaPessoa(t)) {
+            for (GchTreinamentospessoas t : list) {
 
-                RequestContext.getCurrentInstance().execute("PF('confirmDlg').show();");
+                if (!verificaPessoa(t) && !t.getTreiCodigo().equals(gchTreinamentospessoas.getTreiCodigo())) {
 
-                return false;
+                    RequestContext.getCurrentInstance().execute("PF('confirmDlg').show();");
+
+                    return false;
+                }
+
             }
-
         }
-
         return true;
     }
 
@@ -241,7 +263,6 @@ public class GchTreinamentoPessoaBean {
 
     public String buscaTreinamentoPorId(long id) {
 
-        System.out.println("Id Treinamento" + id);
         gchTreinamentospessoas = null;
         if (id != 0) {
 
@@ -355,6 +376,14 @@ public class GchTreinamentoPessoaBean {
 
     public void setRecPessoa(RecPessoa recPessoa) {
         this.recPessoa = recPessoa;
+    }
+
+    public List<RecPessoa> getTodosColaboradores() {
+        return todosColaboradores;
+    }
+
+    public void setTodosColaboradores(List<RecPessoa> todosColaboradores) {
+        this.todosColaboradores = todosColaboradores;
     }
 
 }
