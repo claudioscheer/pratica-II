@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <h:body>
         <ui:composition template="../templates/template.xhtml">
@@ -91,7 +92,7 @@
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Opções</f:facet>
-                                                        <h:commandLink class="btn btn-success btn-sm" value="#{fpEnvelopePagamentoBean.fpPeriodo.perPago? 'Visualizar' : 'Editar'}" action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}">
+                                                        <h:commandLink action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}" a:data-placement="left" a:data-toggle="tooltip" a:data-original-title="Editar" >
                                                             <f:ajax execute="@form" render="formEnvelopePagamento" />
                                                         </h:commandLink>
 
