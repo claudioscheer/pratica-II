@@ -21,6 +21,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -61,12 +62,12 @@ public class CsbffEscalaHoras implements Serializable, SampleEntity {
     private double escalaHora4;
 
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
-    @OneToOne
+    @ManyToOne
     private RecPessoa recIdpessoa;
 //    private DiasATrabalhar diasATrabalhar;
     @Basic(optional = true)
     @Column(name = "dia_dasemana")
-    private String diaDaSemana;
+    public String diaDaSemana;
     @OneToMany
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     private DiasATrabalhar diasATrabalhar;

@@ -29,11 +29,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@SessionScoped
-public class CsbffDadosProfissionaisBean implements Serializable {
+@ViewScoped
+public class CsbffDadosProfissionaisBean {
 
     private boolean formAtivo = false;
     private String recCpf;
@@ -43,6 +44,7 @@ public class CsbffDadosProfissionaisBean implements Serializable {
 
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
+
     @ManagedProperty("#{csbffBeneficiosService}")
     private CsbffBeneficiosService csbffBeneficiosService;
     private List<TipoBeneficio> csbffTipoBeneficiosList;
@@ -52,6 +54,7 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     private List<CsbffBeneficios> beneficios;
     private CsbffBeneficios csbffBeneficios = new CsbffBeneficios();
 //    private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
+
     @ManagedProperty("#{csbffCargosService}")
     private CsbffCargosService csbffCargosService;
     private List<CsbffCargos> csbffCargosList;
@@ -60,22 +63,27 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     private RecPessoa recContrato;
     private SeguroDesemprego seguroDesemprego;
     private RecPessoa admissaoDescricao;
+
     @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependentesService;
     private CsbffBeneficios beneficioNome;
 
+    @ManagedProperty("#{csbffPessoaBeneficioService}")
     private CsbffPessoaBeneficioService csbffPessoaBeneficioService;
-    private CsbffPessoaBeneficio csbffPessoaBeneficio;
+    private CsbffPessoaBeneficio csbffPessoaBeneficio = new CsbffPessoaBeneficio();
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
+    private CsbffPessoaBeneficio pessoaBeneficioCodigo;
 
     private boolean adicionandoEscala = false;
     private CsbffEscalaHoras csbffEscalaHoras;
     private CsbffEscalaHoras diaDaSemana;
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
+
     @ManagedProperty("#{csbffEscalaHorasService}")
     private CsbffEscalaHorasService csbffEscalaHorasService;
     private CsbffEscalaHoras escalaCodigo;
     private boolean recFuncionario;
+    private boolean colaboradorInativo;
 
     public CsbffDadosProfissionaisBean() {
 
@@ -155,12 +163,24 @@ public class CsbffDadosProfissionaisBean implements Serializable {
 
     public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
+        String MsgNotificacao = "";
+        if (recPessoa == null) {
+            MsgNotificacao = "A pessoa não existe.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "error");
+            return;
+        }
+        if (recPessoa.colaboradorInativo == true) {
+            MsgNotificacao = "O colaborador está inativo.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
+        }
         if (recPessoa == null) {
             recPessoa = new RecPessoa();
+
         }
+
     }
 
-    public void demitirColaborador() {
+    public String demitirColaborador() {
 
         String MsgNotificacao = "";
         try {
@@ -169,11 +189,13 @@ public class CsbffDadosProfissionaisBean implements Serializable {
             recPessoaService.update(recPessoa);
 
             MsgNotificacao = "O colaborador foi demitido e inativado!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
         } catch (Exception ex) {
             MsgNotificacao = "O colaborador não pode ser demitido.";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
+        return "listaadmissao";
+
     }
 
     public List<RecPessoa> getPessoas() {
@@ -182,28 +204,6 @@ public class CsbffDadosProfissionaisBean implements Serializable {
         return pessoas;
     }
 
-//    public String saveDadosProfissionais() {
-//        if (recPessoa.getRecIdpessoa() > 0) {
-//            recPessoaService.update(recPessoa);
-//        }
-//        recPessoaList = recPessoaService.findAll();
-//        this.formAtivo = false;
-//        this.recPessoa = new RecPessoa();
-////        String recContrato = ("Sim");
-//        return "listaadmissao";
-//
-//    }
-//    public String saveDadosProfissionais() {
-//        if (recPessoa.getRecIdpessoa() > 0) {
-//            recPessoaService.update(recPessoa);
-//        }
-//        recPessoaList = recPessoaService.findAll();
-//        this.formAtivo = false;
-//        this.recPessoa = new RecPessoa();
-////        String recContrato = ("Sim");
-//        return "listaadmissao";
-//
-//    }
     public String saveDadosProfissionais() {
         String MsgNotificacao = "";
         try {
@@ -211,14 +211,18 @@ public class CsbffDadosProfissionaisBean implements Serializable {
 //                this.recFuncionario = true;
                 recPessoa.setRecFuncionario(true);
                 recPessoaService.update(recPessoa);
-
             }
             MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
         } catch (Exception ex) {
-            MsgNotificacao = "Os dados não foram inseridos ";
+            MsgNotificacao = "Os dados não foram atualizados ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        try {
+//            context.getExternalContext().redirect("dadosprofissionais.xhtml");
+//        } catch (IOException ex) {
+//        }
         recPessoaList = recPessoaService.findAll();
         return "listaadmissao";
     }
@@ -249,32 +253,40 @@ public class CsbffDadosProfissionaisBean implements Serializable {
     }
 
     public void selectEscala(CsbffEscalaHoras csbffEscalaHoras) {
+
         this.csbffEscalaHoras = csbffEscalaHoras;
         escalaCodigo = csbffEscalaHoras;
         alteraEscala(csbffEscalaHoras);
 
     }
 
-    public void removerBeneficioPessoa(CsbffPessoaBeneficio bp) {
-        this.recPessoa.getCsbffPessoaBeneficioList().remove(bp);
+    public String removerBeneficioPessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
+        String MsgNotificacao = "";
+        try {
+            this.recPessoa.getCsbffPessoaBeneficioList().remove(csbffPessoaBeneficio);
+            MsgNotificacao = "O beneficio foi excluído!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+        } catch (Exception ex) {
+            MsgNotificacao = "O beneficio não pode ser excluído!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+
+        }
+//        RequestContext.getCurrentInstance().update("csbffEscalaHorasList");
+
+        return "dadosprofissionais";
     }
 
     public void addBeneficioPessoa() {
-        CsbffPessoaBeneficio pb = new CsbffPessoaBeneficio();
-        pb.setRecIdpessoa(this.recPessoa);
-        pb.setBeneficioCodigo(this.csbffBeneficios);
+
+        csbffPessoaBeneficio.setRecIdpessoa(this.recPessoa);
+        csbffPessoaBeneficio.setPessoaBeneficioCodigo(this.csbffPessoaBeneficio);
+
         if (this.recPessoa.getCsbffPessoaBeneficioList() == null) {
             this.recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());
         }
-        this.recPessoa.getCsbffPessoaBeneficioList().add(pb);
+        this.recPessoa.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
     }
 
-//    public String cancel() {
-//        this.formAtivo = false;
-//        this.recPessoa = new RecPessoa();
-//        return null;
-//
-//    }
     public String editaConsulta(RecPessoa pessoas) {
 //        this.formAtivo = true;
         this.recPessoa = pessoas;
@@ -524,6 +536,22 @@ public class CsbffDadosProfissionaisBean implements Serializable {
 
     public void setRecFuncionario(boolean recFuncionario) {
         this.recFuncionario = recFuncionario;
+    }
+
+    public boolean isColaboradorInativo() {
+        return colaboradorInativo;
+    }
+
+    public void setColaboradorInativo(boolean colaboradorInativo) {
+        this.colaboradorInativo = colaboradorInativo;
+    }
+
+    public CsbffPessoaBeneficio getPessoaBeneficioCodigo() {
+        return pessoaBeneficioCodigo;
+    }
+
+    public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio pessoaBeneficioCodigo) {
+        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
 }
