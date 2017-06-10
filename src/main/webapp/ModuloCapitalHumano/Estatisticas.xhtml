@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                                    
+
                                     <div class="panel-heading">
                                         <h3 class="title_left">
                                             Estatísticas dos Formulários
@@ -25,21 +25,47 @@
                                     </div>
 
                                     <div class="panel-body" style="/* align-items: center; */">
-                                        <h:form id="parentformid">
-                                            
+
+                                        <h:form id="teste">
+
                                             <h:inputText label="Digite o código do formulário que deseja gerar o gráfico" value="#{estatisticasFormularios.codigoFormulario}" />
-                                            
+
                                             <h:commandLink value="Buscar" action="#{estatisticasFormularios.gerargraficoformulariorespondidos}"/>
+
+
+                                        </h:form>
+
+                                        <h:form id="parentformid">
+                                            <h:inputHidden value="#{estatisticasFormularios.codigoFormulario}" />
+
+                                            <div class="bg-blue">
+                                                <h4 class="text-center" style="">
+                                                    Estatísticas Gerais
+                                                </h4>
+                                            </div>
                                             
+                                            <p:chart type="pie" model="#{estatisticasFormularios.graficoPizza}" />
                                             
+                                        </h:form> 
+                                    
+                                        <h:form id="estatisticasPerguntas">
+                                            
+                                            <div class="bg-blue">
+                                                <h4 class="text-center" style="">
+                                                    Perguntas X Respostas
+                                                </h4>
+                                            </div>
+
                                             <ui:repeat value="#{estatisticasFormularios.graficosLinha}" var="FormularioItem" >
-                                            <p:chart type="line" model="#{FormularioItem}" rendered="#{!emptyChart}"/>
-                             
+                                                <div class="col-md-6 col-sm-6 col-xs-6" style="padding:6px 6px 20px 15px">
+                                                    <p:chart type="bar" model="#{FormularioItem}" rendered="#{!emptyChart}"/>
+                                                </div>
                                             </ui:repeat>
                                             
-                                            <p:chart type="bar" model="#{estatisticasFormularios.graficosBarras}"  rendered="#{!emptyChart}"/>
-
-                                        </h:form> </div>
+                                        </h:form>
+                                    
+                                    
+                                    </div>
                                     <div class="panel-footer">
                                         Gestão do Capital Humano - Todos os Direitos Reservados
                                     </div>

@@ -204,7 +204,7 @@ public class FpCalcularBean {
 //            todosFpPeriodo = fpPeriodoService.findAll();
 //        }
 //        return todosFpPeriodo;
-        return fpPeriodoService.findAllPeriodoNaoPago();
+        return fpPeriodoService.findAllPeriodoNaoFechado();
     }
 
     public RecPessoa getRecPessoa() {

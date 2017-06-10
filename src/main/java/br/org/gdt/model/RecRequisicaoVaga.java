@@ -49,23 +49,9 @@ public class RecRequisicaoVaga implements Serializable
     @Column(name = "rec_datavencimento")
     @Temporal(TemporalType.DATE)
     private Date recDatavencimento;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-   
     @Column(name = "rec_status")
-    private Integer recStatus;
-    @Basic(optional = true)
-    @Column(name = "id_cargo")
-    private String idCargo;
-    @ManyToMany(mappedBy = "recVagaList")
-    private List<RecHabilidade> recHabilidadeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdvaga")
-    private List<RecSelecao> recSelecaoList;
-    @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
-    @ManyToOne(optional = true)
-    private CsbffCargos cargoCodigo;
-    @JoinColumn(name = "rec_idgrauensino", referencedColumnName = "rec_idgrauensino")
-    @ManyToOne(optional = true)
-    private RecGrauensino recIdgrauensino;
+    private Integer recStatus;                
+    private int recIdgrauensino;
 
     public RecRequisicaoVaga()
     {
@@ -119,54 +105,14 @@ public class RecRequisicaoVaga implements Serializable
     public void setRecStatus(Integer recStatus)
     {
         this.recStatus = recStatus;
-    }
+    }  
 
-    public String getIdCargo()
-    {
-        return idCargo;
-    }
-
-    public void setIdCargo(String idCargo)
-    {
-        this.idCargo = idCargo;
-    }
-
-    public List<RecHabilidade> getRecHabilidadeList()
-    {
-        return recHabilidadeList;
-    }
-
-    public void setRecHabilidadeList(List<RecHabilidade> recHabilidadeList)
-    {
-        this.recHabilidadeList = recHabilidadeList;
-    }
-
-    public List<RecSelecao> getRecSelecaoList()
-    {
-        return recSelecaoList;
-    }
-
-    public void setRecSelecaoList(List<RecSelecao> recSelecaoList)
-    {
-        this.recSelecaoList = recSelecaoList;
-    }
-
-    public CsbffCargos getCargoCodigo()
-    {
-        return cargoCodigo;
-    }
-
-    public void setCargoCodigo(CsbffCargos cargoCodigo)
-    {
-        this.cargoCodigo = cargoCodigo;
-    }
-
-    public RecGrauensino getRecIdgrauensino()
+    public int getRecIdgrauensino()
     {
         return recIdgrauensino;
     }
 
-    public void setRecIdgrauensino(RecGrauensino recIdgrauensino)
+    public void setRecIdgrauensino(int recIdgrauensino)
     {
         this.recIdgrauensino = recIdgrauensino;
     }
