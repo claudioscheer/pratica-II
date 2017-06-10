@@ -99,7 +99,7 @@ public class CalcularFolha {
     }
 
     public void calcularParaTodosFuncionarios(FpPeriodo fpPeriodo) throws RuntimeException {
-        List<RecPessoa> funcionarios = recPessoaService.findAllFuncionarios();
+        List<RecPessoa> funcionarios = recPessoaService.buscarColaboradores();
         funcionarios.forEach((pessoa) -> {
             try {
                 DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario = new DadosCalculadosDoFuncionario();

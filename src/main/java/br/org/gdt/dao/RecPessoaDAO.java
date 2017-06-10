@@ -67,12 +67,6 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         return query.getResultList();
     }
 
-    public List<RecPessoa> findAllFuncionarios() {
-        return entityManager.createQuery(
-                "from RecPessoa as t")//t.recFuncionario = null
-                .getResultList();
-    }
-
     public RecPessoa BuscarPessoaCFP(String cpf) {
         TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa where recCpf like :busca", RecPessoa.class);
         query.setParameter("busca", cpf);

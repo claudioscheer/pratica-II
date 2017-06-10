@@ -35,7 +35,7 @@ public class Eventos {
         int evento = FpEnumEventos.values()[(int) fpEventoPeriodo.getEvpEvento().getEveId() - 1].ordinal();
         if (evento == FpEnumEventos.Salario.ordinal()) {
             fpEventoPeriodo.setEvpValorReferencia(HORAS_MENSAIS);
-            fpEventoPeriodo.setEvpValor(new Random().nextInt((6897 - 938) + 1) + 938);
+            fpEventoPeriodo.setEvpValor(dadosCalculadosDoFuncionario.getPessoa().getCargoValorSalario());
 
         } else if (evento == FpEnumEventos.INSS.ordinal()) {
             // Proventos onde incide INSS.
@@ -164,7 +164,7 @@ public class Eventos {
         } else if (evento == FpEnumEventos.Insalubridade.ordinal() && dadosCalculadosDoFuncionario.getPessoa().getInsalubridade() != null) {
             FpFaixa fpFaixa = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.SalarioMinimo.ordinal() + 1);
 
-            double nivelInsalubridade = 0;
+            double nivelInsalubridade = 0.0;
             switch (dadosCalculadosDoFuncionario.getPessoa().getInsalubridade()) {
                 case Alto:
                     nivelInsalubridade = 0.4;
@@ -182,11 +182,16 @@ public class Eventos {
             fpEventoPeriodo.setEvpValor(fpFaixa.getFaiValor() * nivelInsalubridade);
             fpEventoPeriodo.setEvpValorReferencia(nivelInsalubridade);
 
-        } else if (evento == FpEnumEventos.Periculosidade.ordinal()) {
+        } else if (evento == FpEnumEventos.Periculosidade.ordinal() && dadosCalculadosDoFuncionario.getPessoa().getRecPericulosidade() != null) {
             double valorSalario = getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.Salario, dadosCalculadosDoFuncionario);
 
-            // Buscar se a pessoa tem periculosidade. 30%.
             double nivelPericulosidade = 0.0;
+            switch (dadosCalculadosDoFuncionario.getPessoa().getRecPericulosidade()) {
+                case Sim:
+                    nivelPericulosidade = 0.3;
+                    break;
+            }
+
             fpEventoPeriodo.setEvpValor(valorSalario * nivelPericulosidade);
             fpEventoPeriodo.setEvpValorReferencia(nivelPericulosidade);
 

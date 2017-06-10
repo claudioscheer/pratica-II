@@ -56,10 +56,6 @@ public class RecPessoaService {
         return pessoaDao.findAll();
     }
 
-    public List<RecPessoa> findAllFuncionarios() {
-        return pessoaDao.findAllFuncionarios();
-    }
-
     public List<CsbffDependentes> findAllDependentesPessoa(RecPessoa recPessoa) {
         return pessoaDao.findAllDependentesPessoa(recPessoa.getRecIdpessoa());
     }

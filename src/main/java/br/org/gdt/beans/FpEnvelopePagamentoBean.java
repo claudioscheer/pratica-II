@@ -98,7 +98,12 @@ public class FpEnvelopePagamentoBean {
             Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "error");
             recPessoa = new RecPessoa();
             return;
+        } else if (!pessoa.getRecFuncionario()) {
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não é um colaborador.", "error");
+            recPessoa = new RecPessoa();
+            return;
         }
+
         recPessoa = pessoa;
     }
 
