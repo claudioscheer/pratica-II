@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="head">
+                <title>Fechamento período - Folha de pagamento</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="title_left">
+                    <h3>Fechamento período</h3>
+                </div>
+                <br />
+                <h:form id="formFechamentoPeriodo">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <h:messages class="error" style="color: #d9534f" />
+                        </div>
+                    </div>
+
+                    <h:panelGroup id="panelTipoFolhaPagamento" layout="block" class="col-md-12">
+                        <div class="row">
+                            <div class="form-group col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="control-label">Período para fazer o fechamento</label>
+                                <h:selectOneMenu value="#{fpFechamentoPeriodo.fpPeriodo.perId}" class="form-control">
+                                    <f:ajax execute="@form" render="formFechamentoPeriodo" listener="#{fpFechamentoPeriodo.selecionarPeriodo()}" event="change" />
+                                    <f:selectItem itemLabel="Selecione..." itemValue="#{0}" />
+                                    <f:selectItems value="#{fpFechamentoPeriodo.todosFpPeriodo}" var="periodo" itemValue="#{periodo.perId}" itemLabel="#{periodo.perMes}/#{periodo.perAno}"  />
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" rendered='#{fpFechamentoPeriodo.fpPeriodo.perId > 0}'>
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="col-md-12">
+                                    <h5 style="color: #d9534f">
+                                        Após fechar o período, o mesmo não poderá ser mais reaberto para alterações.
+                                        <br />
+                                        <br />
+                                        As folhas de pagamento já calculadas ainda estarão disponíveis para reimpressão.
+                                    </h5>
+                                </div>
+                                <div class="col-md-12" style="margin-top: 20px">
+                                    <h:commandButton class="btn btn-danger" value="Fechar período" action="#{fpFechamentoPeriodo.fecharPeriodo()}" onclick="return confirm('Deseja fechar o período?')">
+                                        <f:ajax execute="@form" render="formFechamentoPeriodo" />
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:form>
+            </ui:define>
+            <ui:define name="script">
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
