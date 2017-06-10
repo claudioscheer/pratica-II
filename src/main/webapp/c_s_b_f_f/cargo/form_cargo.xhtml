@@ -19,6 +19,9 @@
                 <div class="bootstrap-iso">
                     <div class="container-fluid">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="x_panel">
+                            <div class="form-group" style="float: right;margin-top: 10px">
                             <h:form id="cargos">
                                 <h:messages class=" error" style="color: red"/>
 
@@ -96,7 +99,7 @@
                                         <br/>
                                         
 
-                                        <h:commandLink class="btn btn-success" value="Salvar" action="#{csbffCargosBean.save()}" />
+                                        <h:commandLink class="btn btn-primary" value="Salvar" action="#{csbffCargosBean.save()}" />
                                         <h:commandButton value="Cancelar" class="btn btn-danger" action="cargo_consulta.xhtml"/>
 <!--                                        <h:commandButton class="btn btn" value=" Voltar " action="cargo_consulta.xhtml" />-->
                                     </div>
@@ -112,6 +115,9 @@
                     </div>
                 </div>
 
+                             </div>
+                         </div>
+                     </div>
 
             </ui:define>
         </ui:composition>
