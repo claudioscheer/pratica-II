@@ -17,29 +17,61 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                                    
+
                                     <div class="panel-heading">
                                         <h3 class="title_left">
-                                            Estatísticas dos Formulários
+                                            <h:outputLabel value="#{estatisticasFormularios.nomeFormulario}"/>
                                         </h3>
                                     </div>
 
                                     <div class="panel-body" style="/* align-items: center; */">
                                         <h:form id="parentformid">
-                                            
-                                            <h:inputText label="Digite o código do formulário que deseja gerar o gráfico" value="#{estatisticasFormularios.codigoFormulario}" />
-                                            
-                                            <h:commandLink value="Buscar" action="#{estatisticasFormularios.gerargraficoformulariorespondidos}"/>
-                                            
-                                            
-                                            <p:chart type="line" model="#{estatisticasFormularios.graficosLinha}"  rendered="#{!emptyChart}"/>
-                             
-                                            <p:chart type="bar" model="#{estatisticasFormularios.graficosBarras}"  rendered="#{!emptyChart}"/>
+                                            <h:inputHidden value="#{estatisticasFormularios.codigoFormulario}" />
 
-                                        </h:form> </div>
-                                    <div class="panel-footer">
-                                        Gestão do Capital Humano - Todos os Direitos Reservados
+                                            <div class="bg-blue">
+                                                <h4 class="text-center" style="">
+                                                    Estatísticas Gerais
+                                                </h4>
+                                            </div>
+
+                                            <p:chart type="pie" model="#{estatisticasFormularios.graficoPizza}" />
+
+                                            <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+                                                <p:graphicImage url="../ModuloCapitalHumano/Estilos/loading.gif" />
+                                            </p:dialog>
+
+                                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                                        </h:form> 
+
+                                        <h:form id="estatisticasPerguntas">
+
+                                            <div class="bg-blue">
+                                                <h4 class="text-center" style="">
+                                                    Perguntas X Respostas
+                                                </h4>
+                                            </div>
+
+                                            <ui:repeat value="#{estatisticasFormularios.graficosLinha}" var="FormularioItem" >
+                                                <div class="col-md-6 col-sm-6 col-xs-6" style="padding:6px 6px 20px 15px">
+                                                    <p:chart type="bar" model="#{FormularioItem}" rendered="#{!emptyChart}"/>
+                                                </div>
+                                            </ui:repeat>
+
+                                        </h:form>
+
+                                        
+                                        <h:form>
+                                        <div class="form-group">
+                                            <div>
+
+                                                <h:commandButton class="btn btn-danger" value="Cancelar" action="#{estatisticasFormularios.cancel()}"/>
+
+                                            </div>
+                                        </div>
+
+</h:form>
                                     </div>
+
                                 </div>
 
                             </div>

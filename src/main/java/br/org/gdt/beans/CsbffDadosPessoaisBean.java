@@ -11,11 +11,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@SessionScoped
-public class CsbffDadosPessoaisBean implements Serializable {
+@ViewScoped
+public class CsbffDadosPessoaisBean {
 
     private boolean formAtivo = false;
     private String recCpf;
@@ -25,6 +26,7 @@ public class CsbffDadosPessoaisBean implements Serializable {
 
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
+    private boolean colaboradorInativo;
 
     public CsbffDadosPessoaisBean() {
 
@@ -39,11 +41,22 @@ public class CsbffDadosPessoaisBean implements Serializable {
     }
 
     public void buscarCpf() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
         recPessoa = recPessoaService.findByRecCpf(recCpf);
+        String MsgNotificacao = "";
+        if (recPessoa == null) {
+            MsgNotificacao = "A pessoa não existe.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "error");
+            return;
+        }
+        if (recPessoa.colaboradorInativo == true) {
+            MsgNotificacao = "O colaborador está inativo.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
+        }
         if (recPessoa == null) {
             recPessoa = new RecPessoa();
+
         }
+
     }
 
     public List<RecPessoa> getPessoas() {
@@ -61,7 +74,6 @@ public class CsbffDadosPessoaisBean implements Serializable {
 //        this.recPessoa = new RecPessoa();
 //         return "dadosprofissionais";
 //    }
-
 //    public String cancel() {
 //        this.formAtivo = false;
 //        this.recPessoa = new RecPessoa();
@@ -85,23 +97,18 @@ public class CsbffDadosPessoaisBean implements Serializable {
         try {
             if (recPessoa.getRecIdpessoa() > 0) {
                 recPessoaService.update(recPessoa);
-                MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
             }
-            
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
         } catch (Exception ex) {
             MsgNotificacao = "Os dados não foram inseridos ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+        }
+        recPessoaList = recPessoaService.findAll();
 
-        }
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("dadosprofissionais.xhtml");
-        } catch (IOException ex) {
-        }
-        
-        return "listaadmissao";
+        return "dadosprofissionais";
     }
+
     public String editaConsulta(RecPessoa pessoas) {
 //        this.formAtivo = true;
         this.recPessoa = pessoas;
@@ -166,8 +173,15 @@ public class CsbffDadosPessoaisBean implements Serializable {
     }
 
     public void setRecCpf(String recCpf) {
-        System.out.println("cpp " + recCpf);
         this.recCpf = recCpf;
+    }
+
+    public boolean isColaboradorInativo() {
+        return colaboradorInativo;
+    }
+
+    public void setColaboradorInativo(boolean colaboradorInativo) {
+        this.colaboradorInativo = colaboradorInativo;
     }
 
 }

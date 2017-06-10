@@ -35,11 +35,6 @@
 
                                             <h:dataTable  class="table table-striped" value="#{csbffListaAdmissaoBean.pessoas}" var="pessoas">
 
-                                                <h:column>                
-                                                    <h:commandLink title="Editar" action="#{csbffListaAdmissaoBean.editaConsulta(pessoas)}">
-                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
-                                                    </h:commandLink>
-                                                </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Código</f:facet>
                                                         #{pessoas.recIdpessoa}
@@ -53,8 +48,12 @@
                                                         #{pessoas.recNomecompleto} 
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">Contrato </f:facet>
-
+                                                    <f:facet name="header">Contratado </f:facet>
+                                                    <h:selectBooleanCheckbox disabled="true" value="#{pessoas.recFuncionario}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Inativo</f:facet>
+                                                    <h:selectBooleanCheckbox disabled="true" value="#{pessoas.colaboradorInativo}"/>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Cargo </f:facet>
@@ -66,6 +65,12 @@
                                                         <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
 
+                                                </h:column>
+                                                <h:column>   
+                                                    <f:facet name="header">Opções </f:facet>
+                                                    <h:commandLink title="Editar" action="#{csbffListaAdmissaoBean.editaConsulta(pessoas)}">
+                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                    </h:commandLink>
                                                 </h:column>
 
 

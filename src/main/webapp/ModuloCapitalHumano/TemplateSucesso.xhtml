@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <link href="#{resource['images/Logo-Murphy.png']}" rel='shortcut icon' type='image/x-icon'/>
+        <link href="#{resource['images/Logo-Murphy.png']}" rel="icon" type="image/x-icon" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <h:outputStylesheet library="vendors/" name="bootstrap/dist/css/bootstrap.min.css" />
+        <h:outputStylesheet library="vendors/" name="font-awesome/css/font-awesome.min.css" />
+        <h:outputStylesheet library="vendors/" name="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
+        <h:outputStylesheet library="vendors/" name="bootstrap-daterangepicker/daterangepicker.css" />
+        <h:outputStylesheet library="vendors/" name="pnotify/dist/pnotify.css" />
+        <h:outputStylesheet library="vendors/" name="pnotify/dist/pnotify.buttons.css" />
+        <h:outputStylesheet library="build/" name="css/custom.min.css" />
+        <h:outputScript     library="build/" name="js/utils.js" />
+        <h:outputStylesheet library="build/" name="css/theme.css" />
+        <h:outputStylesheet library="build/" name="css/components.css" />
+        <ui:insert name="head" />
+    </h:head>
+    <h:body class="nav-md">
+        <div style="margin-top: 140px" class="container body center">
+          
+
+            <!-- page content -->
+            <div role="main">
+                <div >
+                    <ui:insert name="content" />
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+                         
+        </div>
+     
+
+
+        <h:outputScript library="vendors/" name="bootstrap/dist/js/bootstrap.min.js" />
+        <h:outputScript library="vendors/" name="moment/min/moment.min.js" />
+        <h:outputScript library="vendors/" name="bootstrap-daterangepicker/daterangepicker.js" />
+        <h:outputScript library="vendors/" name="fastclick/lib/fastclick.js" />
+        <h:outputScript library="vendors/" name="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript library="vendors/" name="pnotify/dist/pnotify.js" />
+        <h:outputScript library="vendors/" name="pnotify/dist/pnotify.buttons.js" />
+        <h:outputScript library="build/" name="js/custom.js" />
+        <ui:insert name="script" />
+    </h:body>
+</html>
+

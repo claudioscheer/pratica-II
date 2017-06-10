@@ -6,10 +6,10 @@ import br.org.gdt.service.FpEventoService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class FpEventoBean {
 
     private boolean formAtivo = false;
@@ -41,20 +41,18 @@ public class FpEventoBean {
         this.fpEvento = new FpEvento();
     }
 
-    public String excluir(FpEvento fpEvento) {
+    public void excluir(FpEvento fpEvento) {
         if (!fpEvento.isEvePermiteExcluir()) {
-            Helper.mostrarNotificacao("Evento", "Evento não pode ser excluído.", "info");
+            Helper.mostrarNotificacao("Evento", "Evento não pode ser excluído.", "error");
         } else {
             fpEventoService.delete(fpEvento.getEveId());
             todosFpEvento.remove(fpEvento);
         }
-        return "eventos";
     }
 
-    public String prepareEdit(FpEvento fpEvento) {
+    public void prepareEdit(FpEvento fpEvento) {
         this.formAtivo = true;
         this.fpEvento = fpEvento;
-        return "eventos";
     }
 
     public boolean isFormAtivo() {

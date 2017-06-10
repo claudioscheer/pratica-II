@@ -56,10 +56,6 @@ public class RecPessoaService {
         return pessoaDao.findAll();
     }
 
-    public List<RecPessoa> findAllFuncionarios() {
-        return pessoaDao.findAllFuncionarios();
-    }
-
     public List<CsbffDependentes> findAllDependentesPessoa(RecPessoa recPessoa) {
         return pessoaDao.findAllDependentesPessoa(recPessoa.getRecIdpessoa());
     }
@@ -73,12 +69,21 @@ public class RecPessoaService {
 //    public List<RecPessoa> findByCpf(int cpf) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public RecPessoa BuscaPessoaCPF(String cpf){
+
+    public RecPessoa BuscaPessoaCPF(String cpf) {
         return pessoaDao.BuscarPessoaCFP(cpf);
     }
 
-    public RecPessoa FindByIdCompleto(long id){
+    public RecPessoa FindByIdCompleto(long id) {
         return pessoaDao.findByIdCompleto(id);
     }
+
+    public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
+        return pessoaDao.buscarNomes(select);
+    }
+    
+    public List<RecPessoa> buscarColaboradores() { 
+        return pessoaDao.buscarColaboradores();
+    }
+    
 }

@@ -13,7 +13,7 @@ public class GchAlternativasPerguntasDAO extends DAO<GchAlternativasperguntas> {
 
     public GchAlternativasPerguntasDAO() {
         classe = GchAlternativasperguntas.class;
-        System.out.println("Classe: " + classe.getName());
+        
     }
 
     

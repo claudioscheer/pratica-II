@@ -19,7 +19,7 @@ public class GchCadastroCursoService {
     public void save(GchCursos curso) {
         gchCursoDAO.save(curso);
         
-        System.out.println("chamou para salvar");
+        
     }
 
     @Transactional
@@ -37,7 +37,7 @@ public class GchCadastroCursoService {
     }
 
     public List<GchCursos> findAll() {
-        System.out.println("Aqui estou eu");
+        
         return gchCursoDAO.findAll();
     }
 }

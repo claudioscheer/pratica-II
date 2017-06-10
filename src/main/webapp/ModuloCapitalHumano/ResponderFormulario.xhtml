@@ -13,7 +13,8 @@
                 <title>Responder Formulário</title>
 
                 <f:metadata>  
-                    <f:viewParam name="id" value="#{gchFormularioAlternativasBean.idParm}" />  
+                    <f:viewParam name="id" value="#{gchFormularioAlternativasBean.idParm}" />
+                    <f:viewAction action="#{gchFormularioAlternativasBean.Verifica}" />
                 </f:metadata> 
 
                 <h:outputStylesheet library="ModuloCapitalHumano/Estilos/" name="Geral.css"/>

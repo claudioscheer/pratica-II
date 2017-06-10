@@ -19,7 +19,7 @@ public class GchFormularioPessoaService {
     public void save(GchFormularioPessoa formPess) {
         gchFormularioPessoaDAO.save(formPess);
         
-        System.out.println("chamou para salvar");
+        
     }
 
     @Transactional
@@ -37,7 +37,25 @@ public class GchFormularioPessoaService {
     }
 
     public List<GchFormularioPessoa> findAll() {
-        System.out.println("Aqui estou eu");
+        
         return gchFormularioPessoaDAO.findAll();
     }
+    
+    public int BuscaPkFormularioPessoa(long idpessoa, long idformulario){     
+        return gchFormularioPessoaDAO.retornaPkFormularioPessoa(idpessoa, idformulario);
+    }
+    
+    public boolean VerificaSeJaRespondeu(long idpessoa, long idformulario){
+        
+        return gchFormularioPessoaDAO.VerificaSeJaRespondeu(idpessoa, idformulario);
+        
+        
+    }
+    
+    public List<GchFormularioPessoa> VerificaExistenciaFormulario(long idFormulario){
+        
+        return gchFormularioPessoaDAO.formularioExistentes(idFormulario);
+        
+    }
+    
 }

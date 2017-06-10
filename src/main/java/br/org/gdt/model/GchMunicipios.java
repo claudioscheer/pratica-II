@@ -120,7 +120,7 @@ public class GchMunicipios implements Serializable, SampleEntity {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.munCodigo);
+        hash = 53 * hash + Objects.hashCode(this.munCodigo);
         return hash;
     }
 
@@ -138,6 +138,8 @@ public class GchMunicipios implements Serializable, SampleEntity {
         }
         return true;
     }
+
+   
 
     
 

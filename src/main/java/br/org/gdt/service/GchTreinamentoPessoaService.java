@@ -45,12 +45,16 @@ public class GchTreinamentoPessoaService {
         return gchTreinamentoPessoasDAO.findAll();
     }
 
+    public List<GchTreinamentospessoas> pessoasTreinamento(long idTreinamento){
+        return gchTreinamentoPessoasDAO.pessoasTreinamento(idTreinamento);
+    }
+    
     public List<GchTreinamentospessoas> verificaPessoa(long idTreinamento, long idPessoa) {
         return gchTreinamentoPessoasDAO.verificaPessoa(idTreinamento, idPessoa);
     }
 
     public List<GchTreinamentospessoas> verificaPessoasVinculadoTreinamento(long idTreinamento, long idPessoa) {
-        System.out.println("verifica: " + idTreinamento + " - " + idPessoa);
+        
         return gchTreinamentoPessoasDAO.verificaPessoasVinculadoTreinamento(idTreinamento, idPessoa);
     }
 }

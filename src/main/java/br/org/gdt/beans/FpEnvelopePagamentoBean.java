@@ -15,13 +15,14 @@ import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean(name = "fpEnvelopePagamento")
+@ManagedBean
 @ViewScoped
-public class FpEnvelopePagamentoBean implements java.io.Serializable {
+public class FpEnvelopePagamentoBean {
 
     private boolean mostrarTodasFolhasPeriodo = false;
     private FpPeriodo fpPeriodo = new FpPeriodo();
@@ -29,6 +30,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     private FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
     private FpTipoFolha fpTipoFolha;
     private List<FpFolhaPeriodo> todasFolhasPeriodo = new ArrayList<>();
+    private List<FpPeriodo> todosFpPeriodo = new ArrayList<>();
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -45,6 +47,9 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
+    public FpEnvelopePagamentoBean() {
+    }
+
     public void validarFolhaPeriodo(FpFolhaPeriodo fpFolhaPeriodo) {
         mostrarTodasFolhasPeriodo = false;
 
@@ -60,7 +65,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
         }
 
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Período", "Selecione um período.", "info");
+            Helper.mostrarNotificacao("Período", "Selecione um período.", "error");
             return;
         }
 
@@ -69,37 +74,53 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
         mostrarTodasFolhasPeriodo = true;
     }
 
+    public void reiniciarTodaTela() {
+        fpFolhaPeriodo = new FpFolhaPeriodo();
+        mostrarTodasFolhasPeriodo = false;
+    }
+
     public void selecionarTipoFolha() {
+        reiniciarTodaTela();
     }
 
     public void selecionarPeriodo() {
-        fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+        reiniciarTodaTela();
+        FpPeriodo periodo = fpPeriodoService.findById(fpPeriodo.getPerId());
+        if (periodo == null) {
+            periodo = new FpPeriodo();
+        }
+        fpPeriodo = periodo;
     }
 
     public void selecionarPessoa() {
         RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
         if (pessoa == null) {
-            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "error");
+            recPessoa = new RecPessoa();
+            return;
+        } else if (!pessoa.getRecFuncionario()) {
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não é um colaborador.", "error");
             recPessoa = new RecPessoa();
             return;
         }
+
         recPessoa = pessoa;
     }
 
     public void buscarFolhaPeriodo() {
         if (recPessoa.getRecIdpessoa() <= 0) {
-            Helper.mostrarNotificacao("Pessoa", "Selecione uma pessoa.", "info");
+            Helper.mostrarNotificacao("Pessoa", "Selecione uma pessoa.", "error");
             return;
         }
 
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Período", "Selecione um período.", "info");
+            Helper.mostrarNotificacao("Período", "Selecione um período.", "error");
             return;
         }
 
         FpFolhaPeriodo folhaPeriodo = fpFolhaPeriodoService.findByPessoaEPeriodo(fpPeriodo, recPessoa);
         if (folhaPeriodo == null) {
-            Helper.mostrarNotificacao("Folha", "Folha não encontrada para esta pessoa.", "info");
+            Helper.mostrarNotificacao("Folha", "Folha não encontrada para esta pessoa.", "error");
             folhaPeriodo = new FpFolhaPeriodo();
         }
         fpFolhaPeriodo = folhaPeriodo;
@@ -114,7 +135,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
             dadosCalculadosDoFuncionario.setRecalculando(true);
 
             if (recPessoa.getRecIdpessoa() <= 0) {
-                Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+                Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "error");
                 return;
             }
             dadosCalculadosDoFuncionario.setPessoa(recPessoa);
@@ -127,9 +148,9 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
             fpFolhaPeriodo = calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
             fpFolhaPeriodo.removerEventosNaoAlteraFolha();
 
-            Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "info");
+            Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "success");
         } catch (Exception e) {
-            Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "info");
+            Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
         }
     }
 
@@ -175,7 +196,7 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
 
     public void gerarFolhaPagamento() {
         if (fpFolhaPeriodo.getForId() <= 0) {
-            Helper.mostrarNotificacao("Mensagem", "É preciso ter a folha carregada para imprimir.", "info");
+            Helper.mostrarNotificacao("Mensagem", "É preciso ter a folha carregada para imprimir.", "error");
             return;
         }
         imprimirFolhaPagamento(fpFolhaPeriodo);
@@ -209,11 +230,15 @@ public class FpEnvelopePagamentoBean implements java.io.Serializable {
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
-//        if (todosFpPeriodo == null) {
-//            todosFpPeriodo = fpPeriodoService.findAll();
-//        }
-//        return todosFpPeriodo;
-        return fpPeriodoService.findAll();
+        List<FpPeriodo> periodos = fpPeriodoService.findAll();
+        return periodos.stream()
+                .sorted((x, y) -> Integer.compare(x.getPerMes(), y.getPerMes()))
+                .collect(Collectors.toList());
+
+    }
+
+    public void setTodosFpPeriodo(List<FpPeriodo> todosFpPeriodo) {
+        this.todosFpPeriodo = todosFpPeriodo;
     }
 
     public RecPessoa getRecPessoa() {

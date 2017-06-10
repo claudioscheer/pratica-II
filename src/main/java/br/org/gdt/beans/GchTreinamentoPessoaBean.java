@@ -8,6 +8,7 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentoPessoaService;
 import br.org.gdt.service.GchTreinamentosService;
 import br.org.gdt.service.RecPessoaService;
@@ -50,7 +51,11 @@ public class GchTreinamentoPessoaBean {
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
 
+    private List<RecPessoa> todosColaboradores;
+
     private RecPessoa inputHidden;
+
+    private RecPessoa recPessoa;
 
     private RecPessoa id = new RecPessoa();
 
@@ -60,47 +65,93 @@ public class GchTreinamentoPessoaBean {
 
     }
 
-    public void save() {
+    public void save(boolean isPoupup) {
 
-        if (gchTreinamentospessoas != null) {
+        if (!isPoupup) {
 
-            Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
-
-            while (keyIterrator.hasNext()) {
-
-                RecPessoa pessoa = keyIterrator.next();
-                Boolean value = checked.get(pessoa);
-
-                if (value) {
-
-                    gchTreinamentospessoas.setRecIdpessoa(pessoa);
-                    gchTreinamentospessoas.setTreiPesDataInicio(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio());
-                    gchTreinamentospessoas.setTreiPesDataFim(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim());
-
-                    gchTreinamentospessoasService.update(gchTreinamentospessoas);
-                }
+            if (podeVincularPessoa()) {
+                salvar();
             }
 
-            this.formAtivo = false;
-            gchTreinamentospessoas = new GchTreinamentospessoas();
-            checked = new HashMap<RecPessoa, Boolean>();
-
-            FacesContext context = FacesContext.getCurrentInstance();
-            try {
-                context.getExternalContext().redirect("Treinamentos.xhtml");
-            } catch (IOException ex) {
-
-            }
-
+        } else {
+            salvar();
         }
 
     }
 
+    public void salvar() {
+
+        if (recPessoa != null) {
+
+            gchTreinamentospessoas.setRecIdpessoa(recPessoa);
+            gchTreinamentospessoas.setTreiPesDataInicio(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio());
+            gchTreinamentospessoas.setTreiPesDataFim(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim());
+
+            boolean existe = todosGchTreinamentosPessoas.stream().filter(o -> o.getRecIdpessoa().equals(gchTreinamentospessoas.getRecIdpessoa())).findFirst().isPresent();
+
+            if (!existe) {
+
+                gchTreinamentospessoasService.update(gchTreinamentospessoas);
+                todosGchTreinamentosPessoas = null;
+                recPessoa = null;
+
+            } else {
+
+                RequestContext.getCurrentInstance().execute("PF('erroMessage').show();");
+
+            }
+
+        }
+    }
+
+//    public void save() {
+//
+//        if (gchTreinamentospessoas != null) {
+//
+//            Iterator<RecPessoa> keyIterrator = checked.keySet().iterator();
+//
+//            while (keyIterrator.hasNext()) {
+//
+//                RecPessoa pessoa = keyIterrator.next();
+//                Boolean value = checked.get(pessoa);
+//
+//                if (value) {
+//
+//                    gchTreinamentospessoas.setRecIdpessoa(pessoa);
+//                    gchTreinamentospessoas.setTreiPesDataInicio(gchTreinamentospessoas.getTreiCodigo().getTreiDataInicio());
+//                    gchTreinamentospessoas.setTreiPesDataFim(gchTreinamentospessoas.getTreiCodigo().getTreiDataFim());
+//
+//                    gchTreinamentospessoasService.update(gchTreinamentospessoas);
+//                }
+//            }
+//
+//            this.formAtivo = false;
+//            gchTreinamentospessoas = new GchTreinamentospessoas();
+//            checked = new HashMap<RecPessoa, Boolean>();
+//
+//            FacesContext context = FacesContext.getCurrentInstance();
+//            try {
+//                context.getExternalContext().redirect("Treinamentos.xhtml");
+//            } catch (IOException ex) {
+//
+//            }
+//
+//        }
+//
+//    }
     public void removeMarcado() {
 
         checked.replace(id, false);
 
         id = new RecPessoa();
+    }
+
+    public List<RecPessoa> completePessoa(String query) {
+
+        todosColaboradores = recPessoaService.buscarNomes(query);
+
+        return todosColaboradores;
+
     }
 
     public void cancel() {
@@ -126,7 +177,8 @@ public class GchTreinamentoPessoaBean {
     public String excluir(GchTreinamentospessoas gchTreinamentosPessoas) {
         gchTreinamentospessoasService.delete(gchTreinamentosPessoas.getTreiPescodigo());
         todosGchTreinamentosPessoas.remove(gchTreinamentosPessoas);
-        return "Treinamentos";
+        Helper.mostrarNotificacao("Sucesso", "<b>" + gchTreinamentosPessoas.getRecIdpessoa().getRecNomecompleto() + "</b> foi removido com sucesso!", "success");
+        return "VincularPessoasTreinamento";
     }
 
     public void adicionaPessoa(RecPessoa recPessoa) {
@@ -144,6 +196,7 @@ public class GchTreinamentoPessoaBean {
 
         if (gchTreinamentos != null) {
 
+            todosGchTreinamentosPessoas = null;
             this.gchTreinamentospessoas.setTreiCodigo(gchTreinamentos);
 
             idTreinamento = gchTreinamentos.getTreiCodigo();
@@ -160,33 +213,24 @@ public class GchTreinamentoPessoaBean {
         return "VincularPessoasTreinamento";
     }
 
-    public void podeVincularPessoa(AjaxBehaviorEvent event) {
+    public boolean podeVincularPessoa() {
 
-        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (recPessoa != null) {
 
-        RecPessoa pessoa = (RecPessoa) event.getComponent().getAttributes().get("pessoa");
-
-        id = pessoa;
-
-        boolean marcou = checked.get(pessoa);
-
-        if (marcou) {
-
-            List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoa(gchTreinamentospessoas.getTreiCodigo().getTreiCodigo(), pessoa.getRecIdpessoa());
+            List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoa(gchTreinamentospessoas.getTreiCodigo().getTreiCodigo(), recPessoa.getRecIdpessoa());
 
             for (GchTreinamentospessoas t : list) {
 
-                if (!verificaPessoa(t)) {
+                if (!verificaPessoa(t) && !t.getTreiCodigo().equals(gchTreinamentospessoas.getTreiCodigo())) {
 
                     RequestContext.getCurrentInstance().execute("PF('confirmDlg').show();");
 
-                    break;
+                    return false;
                 }
 
             }
-
         }
-
+        return true;
     }
 
     private boolean verificaPessoa(GchTreinamentospessoas t) {
@@ -219,7 +263,6 @@ public class GchTreinamentoPessoaBean {
 
     public String buscaTreinamentoPorId(long id) {
 
-        System.out.println("Id Treinamento" + id);
         gchTreinamentospessoas = null;
         if (id != 0) {
 
@@ -228,19 +271,6 @@ public class GchTreinamentoPessoaBean {
             return "VincularPessoasTreinamento";
         }
         return null;
-    }
-
-    public String verificaCheck(long idPessoa) {
-
-        List<GchTreinamentospessoas> list = gchTreinamentospessoasService.verificaPessoasVinculadoTreinamento(idTreinamento, idPessoa);
-
-        for (GchTreinamentospessoas t : list) {
-
-            checked.replace(t.getRecIdpessoa(), true);
-
-        }
-
-        return "Ok";
     }
 
     public boolean isFormAtivo() {
@@ -256,6 +286,13 @@ public class GchTreinamentoPessoaBean {
     }
 
     public List<GchTreinamentospessoas> getTodosGchTreinamentosPessoas() {
+
+        if (todosGchTreinamentosPessoas == null) {
+
+            todosGchTreinamentosPessoas = gchTreinamentospessoasService.pessoasTreinamento(idTreinamento);
+
+        }
+
         return todosGchTreinamentosPessoas;
     }
 
@@ -331,6 +368,22 @@ public class GchTreinamentoPessoaBean {
 
     public void setInputHidden(RecPessoa inputHidden) {
         this.inputHidden = inputHidden;
+    }
+
+    public RecPessoa getRecPessoa() {
+        return recPessoa;
+    }
+
+    public void setRecPessoa(RecPessoa recPessoa) {
+        this.recPessoa = recPessoa;
+    }
+
+    public List<RecPessoa> getTodosColaboradores() {
+        return todosColaboradores;
+    }
+
+    public void setTodosColaboradores(List<RecPessoa> todosColaboradores) {
+        this.todosColaboradores = todosColaboradores;
     }
 
 }

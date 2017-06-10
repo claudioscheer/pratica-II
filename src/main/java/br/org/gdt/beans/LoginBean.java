@@ -16,28 +16,23 @@ public class LoginBean {
     public LoginBean() {
     }
 
-    @PostConstruct
-    public void init() {
-        sair();
-    }
-
-    public void entrar() {
-        try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect("index.xhtml");
-        } catch (Exception e) {
-        }
-    }
-
-    public void sair() {
-        try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-            request.getSession().invalidate();
-        } catch (Exception e) {
-        }
-    }
-
+//    public void entrar() {
+//        try {
+//            FacesContext context = FacesContext.getCurrentInstance();
+//            context.getExternalContext().redirect("index.xhtml");
+//        } catch (Exception e) {
+//        }
+//    }
+//
+//    public void sair() {
+//        try {
+//            FacesContext context = FacesContext.getCurrentInstance();
+//            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+//            request.getSession().invalidate();
+//            context.getExternalContext().redirect("login.xhtml");
+//        } catch (Exception e) {
+//        }
+//    }
     public Login getLogin() {
         return login;
     }

@@ -76,8 +76,9 @@
                                             </label>
                                             <h:selectOneMenu id="comboSexo" value="#{recPessoaBean.recPessoa.recSexo}" class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                                                                             
+                                                <f:selectItems value="#{recPessoaBean.sexo}" />
+<!--                                                <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
+                                                <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                                                                             -->
                                             </h:selectOneMenu>                                                                            
                                         </div>     
                                     </div>  
@@ -91,11 +92,12 @@
                                                              value="#{recPessoaBean.recPessoa.recEstadocivil}" 
                                                              class="form-control">
                                                 <f:selectItem itemLabel="Selecione o Estado Civil" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Solteiro(a)" itemValue="#{1}" />                                                
+                                                <f:selectItems value="#{recPessoaBean.estadoCivil}" />
+<!--                                                <f:selectItem itemLabel="Solteiro(a)" itemValue="#{1}" />                                                
                                                 <f:selectItem itemLabel="Casado(a)" itemValue="#{2}" />   
                                                 <f:selectItem itemLabel="Separado(a)" itemValue="#{3}" />                                                
                                                 <f:selectItem itemLabel="Divorciado(a)" itemValue="#{4}" />      
-                                                <f:selectItem itemLabel="Viúvo(a)" itemValue="#{5}" />                                                      
+                                                <f:selectItem itemLabel="Viúvo(a)" itemValue="#{5}" />                                                      -->
                                             </h:selectOneMenu>     
 
                                         </div>     

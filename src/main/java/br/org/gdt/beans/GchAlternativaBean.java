@@ -66,8 +66,6 @@ public class GchAlternativaBean {
 
     public List<String> completeText(String query) {
 
-        System.out.println("Agora vai");
-
         List<String> results = new ArrayList<String>();
         for (int i = 0; i < 10; i++) {
             results.add(query + i);
@@ -79,8 +77,6 @@ public class GchAlternativaBean {
     public void onItemSelect(SelectEvent event) {
 //    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item Selecionado", event.getObject().toString()));
 
-        System.out.println("OLAAAA");
-        //
 
     }
 
@@ -89,9 +85,7 @@ public class GchAlternativaBean {
         Map<String, String> parameterMap = (Map<String, String>) event.getExternalContext().getRequestParameterMap();
 
         String param = parameterMap.get("valorPerguntas");
-
-        System.out.println("Valor recebido por parametro" + param);
-
+      
         return "1";
     }
 
@@ -100,9 +94,7 @@ public class GchAlternativaBean {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
         String param = params.get("valorPerguntas");
-
-        System.out.println("valor recebido" + param);
-
+       
         FacesContext context = FacesContext.getCurrentInstance();
         String a = (String) UIComponent.getCurrentComponent(context).getAttributes().get("teste");
 
@@ -116,8 +108,6 @@ public class GchAlternativaBean {
 //        pergunta.setPerDescricao(perg.getPerDescricao());
 //        altPergunta.setPerCodigo(pergunta);
         altPerLista.add(altPergunta);
-
-        System.out.println("Entrou");
 
         return null;
     }
@@ -167,8 +157,6 @@ public class GchAlternativaBean {
 
     public String save() {
 
-        System.out.println("Chegou");
-
         String MsgNotificacao = "";
         try {
             if (gchAlternativas.getAltCodigo() > 0) {
@@ -184,7 +172,7 @@ public class GchAlternativaBean {
                 MsgNotificacao = "A alternativa <b>" + gchAlternativas.getAltDescricao() + " </b>foi cadastrada com sucesso!";
             }
 
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         } catch (Exception ex) {
 
@@ -199,8 +187,6 @@ public class GchAlternativaBean {
     }
 
     public String buscaPorId(int idAlternativa) {
-
-        System.out.println("Id do curso" + idAlternativa);
 
         if (idAlternativa != 0) {
 
@@ -225,7 +211,7 @@ public class GchAlternativaBean {
                 gchAlternativasService.delete(gchAlternativas.getAltCodigo());
                 gchTodasAlternativas.remove(gchAlternativas);
                 MsgNotificacao = "A alternativa <b>" + gchAlternativas.getAltDescricao() + " </b>foi excluída com sucesso!";
-                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
             }
 
