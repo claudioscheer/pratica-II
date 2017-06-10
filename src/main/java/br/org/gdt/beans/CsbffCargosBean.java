@@ -42,6 +42,7 @@ public class CsbffCargosBean {
     public String pg(CsbffCargos cargo) {
         this.csbffcargos = cargo;
           return "form_cargo";
+          
     }
 
 
