@@ -212,10 +212,10 @@ public class CalcularFolha {
             try {
                 Map<String, Object> parametros = new HashMap<>();
                 parametros.put("empresa", "Asa Delta RH");
-                parametros.put("cnpj", "66.521.415/0001-19");
-                parametros.put("dataAdmissao", "01/10/2013  ");
-                parametros.put("cargo", "Desenvolvedor Junior e Burro");
-                parametros.put("CBO", "34563456");
+                parametros.put("cnpj", "98.039.852/0004-3");
+                parametros.put("dataAdmissao", fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao());
+                parametros.put("cargo", fpFolhaPeriodo.getForPessoa().getCargoNome());
+                parametros.put("CBO", fpFolhaPeriodo.getForPessoa().getCargoCbo());
 
                 String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
                 parametros.put("pessoa", nomePessoa);
