@@ -11,6 +11,7 @@ import br.org.gdt.model.GchFormularioPessoa;
 import br.org.gdt.model.GchPerguntas;
 import br.org.gdt.model.GchRespostas;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchCadastroAlternativaServiceCerto;
 import br.org.gdt.service.GchFormularioPessoaService;
 import br.org.gdt.service.GchFormularioService;
@@ -28,12 +29,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LegendPlacement;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.PieChartModel;
 
@@ -42,6 +45,7 @@ import org.primefaces.model.chart.PieChartModel;
  * @author Alisson Allebrandt
  */
 @ManagedBean
+@SessionScoped
 public class EstatisticasFormularios implements Serializable {
 
     private List<BarChartModel> graficosLinha = new ArrayList<>();
@@ -50,6 +54,8 @@ public class EstatisticasFormularios implements Serializable {
     private PieChartModel graficoPizza = null;
 
     private long codigoFormulario;
+    
+    private String NomeFormulario;
 
     @ManagedProperty("#{gchFormularioService}")
     private GchFormularioService gchFormularioService;
@@ -87,8 +93,42 @@ public class EstatisticasFormularios implements Serializable {
         }
     }
 
+    
+    public String CarregarGraficoFormulario(GchFormulario formulario){  
+        codigoFormulario = formulario.getFormCodigo();   
+        NomeFormulario   = formulario.getFormNome();
+       
+       boolean existe = gchFormularioPessoaService.VerificaExistenciaFormulario(codigoFormulario);
+      
+       if(existe){
+        gerargraficoformulariorespondidos();
+        
+        return "Estatisticas";
+       }else{
+           
+           Helper.mostrarNotificacao("Informação", "Ainda não existem estatísticas para este formulário!", "info");
+           return null;
+       } 
+        
+    }
+    
+    
+    public String cancel(){
+        
+        return "Formularios";
+        
+    }
+    
     public void setGraficoPizza(PieChartModel graficoPizza) {
         this.graficoPizza = graficoPizza;
+    }
+
+    public String getNomeFormulario() {
+        return NomeFormulario;
+    }
+
+    public void setNomeFormulario(String NomeFormulario) {
+        this.NomeFormulario = NomeFormulario;
     }
 
     public RecPessoaService getRecPessoasService() {
@@ -206,6 +246,8 @@ public class EstatisticasFormularios implements Serializable {
 
         if (codigoFormulario != 0) {
 
+            graficosLinha.clear();
+            
             BarChartModel linhaPessoa = null;
 
             List<GchFormularioPessoa> pessoasFormulario = new ArrayList<>();
@@ -261,7 +303,7 @@ public class EstatisticasFormularios implements Serializable {
 
                     linhaPessoa.setTitle(pergunta.getPerDescricao());
                     linhaPessoa.setAnimate(true);
-                    linhaPessoa.setLegendPosition("e");
+                    linhaPessoa.setLegendPosition(LegendPlacement.OUTSIDEGRID.toString());
                     linhaPessoa.setShowPointLabels(false);
                     linhaPessoa.setMouseoverHighlight(true);
                     linhaPessoa.setShadow(true);

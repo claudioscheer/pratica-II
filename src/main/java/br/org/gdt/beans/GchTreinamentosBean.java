@@ -9,22 +9,13 @@ import br.org.gdt.model.GchMunicipios;
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentosService;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -34,7 +25,7 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class GchTreinamentosBean {
 
-    private boolean formAtivo = false;
+//    private boolean formAtivo = false;
 
     private GchTreinamentos gchTreinamentos = new GchTreinamentos();
     private List<GchTreinamentos> todosGchTreinamentos;
@@ -81,19 +72,12 @@ public class GchTreinamentosBean {
                 MsgNotificacao = "O treinamento " + gchTreinamentos.getTreiNome() + " foi cadastrado com sucesso!";
             }
 
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         } catch (Exception ex) {
             System.out.println("excessao" + ex.toString());
             MsgNotificacao = "Não foi possível cadastrar o treinamento " + gchTreinamentos.getTreiNome();
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-        }
-
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("Treinamentos.xhtml");
-        } catch (IOException ex) {
-
         }
 
         return "Treinamentos";
@@ -117,45 +101,36 @@ public class GchTreinamentosBean {
 
     }
 
-    public void cancel() {
-        this.formAtivo = false;
+    public String cancel() {
+//        this.formAtivo = false;
         this.gchTreinamentos = new GchTreinamentos();
-
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("Treinamentos.xhtml");
-        } catch (IOException ex) {
-
-        }
+        
+        return "Treinamentos";
+        
     }
 
     public void add() {
         System.out.println("Aqui tambem ta tretando");
-        this.formAtivo = true;
+//        this.formAtivo = true;
         this.gchTreinamentos = new GchTreinamentos();
     }
 
     public String excluir(GchTreinamentos gchTreinamentos) {
         gchTreinamentosService.delete(gchTreinamentos.getTreiCodigo());
         todosGchTreinamentos.remove(gchTreinamentos);
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        try {
-//            context.getExternalContext().redirect("Treinamentos.xhtml");
-//        } catch (IOException ex) {
-//
-//        }
+
         return "Treinamentos";
     }
 
     public String prepareEdit(GchTreinamentos gchTreinamentos) {
-        this.formAtivo = true;
+//        this.formAtivo = true;
         this.gchTreinamentos = gchTreinamentos;
         return "treinamentos";
     }
 
-    public boolean isFormAtivo() {
-        return formAtivo;
-    }
+//    public boolean isFormAtivo() {
+//        return formAtivo;
+//    }
 
     public GchTreinamentos getGchTreinamentos() {
         return gchTreinamentos;

@@ -52,4 +52,10 @@ public class GchFormularioPessoaService {
         
     }
     
+    public boolean VerificaExistenciaFormulario(long idFormulario){
+        
+        return gchFormularioPessoaDAO.formularioExiste(idFormulario);
+        
+    }
+    
 }

@@ -1,6 +1,8 @@
 package br.org.gdt.dao;
 
 import br.org.gdt.model.GchFormularioPessoa;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
@@ -41,6 +43,23 @@ public class GchFormularioPessoaDAO extends DAO<GchFormularioPessoa> {
        
        return fp.isFormRespondido();
         
+        
+    }
+    
+    public boolean formularioExiste(long idformulario){
+        
+        Query query = entityManager.createQuery("from GchFormularioPessoa as s where s.formulario.formCodigo = :codigoform");
+        query.setParameter("codigoform", idformulario);
+       
+       List<GchFormularioPessoa> fp = new ArrayList<>();
+       
+       fp = (List<GchFormularioPessoa>) query.getResultList();
+       
+       if(fp.size() > 0){       
+           return true;
+       }else{ //Formulario já disponibilizado para uma pessoa
+           return false;
+       } 
         
     }
     
