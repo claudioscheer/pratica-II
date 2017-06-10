@@ -6,8 +6,11 @@
 package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
+import br.org.gdt.enums.EstadoCivil;
 import br.org.gdt.enums.Insalubridade;
+import br.org.gdt.enums.Periculosidade;
 import br.org.gdt.enums.PossuiDependentes;
+import br.org.gdt.enums.Sexo;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,9 +63,9 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_cpf")
     public String recCpf;
     @Column(name = "rec_sexo")
-    private int recSexo;
+    private Sexo recSexo;
     @Column(name = "rec_estadocivil")
-    private int recEstadocivil;
+    private EstadoCivil recEstadocivil;
     @Column(name = "rec_rg")
     private String recRg;
     @Column(name = "rec_orgaoemissor")
@@ -126,10 +129,10 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_segurodesemprego")
     private String recSegurodesemprego;
     @Basic(optional = true)
-    @Column(name = "rec_insalubridade")
-    private String recInsalubridade;
+//    @Column(name = "rec_insalubridade")
+//    private String recInsalubridade;
     @Column(name = "rec_periculosidade")
-    private String recPericulosidade;
+    private Periculosidade recPericulosidade;
     @Column(name = "rec_NomeBanco")
     private String recNomeBanco;
     @Column(name = "rec_num_titu_eleitor")
@@ -139,8 +142,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_dta_demissao")
     @Temporal(TemporalType.DATE)
     private Date recDtaDemissao;
-    @Column(name = "rec_percentual_insalubridade")
-    private BigInteger recPercentualInsalubridade;
+//    @Column(name = "rec_percentual_insalubridade")
+//    private BigInteger recPercentualInsalubridade;
 
     @ManyToMany()    
     private List<RecHabilidade> recHabilidadeList;
@@ -183,90 +186,95 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @OneToOne
     private CsbffCargos cargoNome;
     private String admissaoDescricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
     private CsbffEscalaHoras csbffEscalaHoras;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
     @OneToOne
     private CsbffCargos cargos;
 //    private DiasATrabalhar diasATrabalhar;
-    @OneToOne
-    private CsbffCargos cargoValorSalario;
+//    @OneToOne
+    private double cargoValorSalario;
     @OneToOne
     private CsbffEscalaHoras escalaCodigo;
-    private boolean colaboradorInativo;
+    public boolean colaboradorInativo;
+    @OneToOne
+    private CsbffPessoaBeneficio pessoaBeneficioCodigo;
 
-    public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, int recSexo, int recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, String recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recComplemento, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, String recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, BigInteger recPercentualInsalubridade, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, List<GchTreinamentospessoas> gchTreinamentospessoasList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<GchFormularioPessoa> gchFormularioPessoas, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Integer recPesGrauEnsino, List<RecPessoa> recPessoaList, CsbffCargos cargoCbo, CsbffCargos cargoNome, String admissaoDescricao, List<CsbffEscalaHoras> csbffEscalaHorasList, CsbffEscalaHoras csbffEscalaHoras, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffCargos cargos, CsbffCargos cargoValorSalario, CsbffEscalaHoras escalaCodigo, boolean colaboradorInativo) {
-        this.recIdpessoa = recIdpessoa;
-        this.recNomecompleto = recNomecompleto;
-        this.recCpf = recCpf;
-        this.recSexo = recSexo;
-        this.recEstadocivil = recEstadocivil;
-        this.recRg = recRg;
-        this.recOrgaoemissor = recOrgaoemissor;
-        this.recDtemissao = recDtemissao;
-        this.recNomepai = recNomepai;
-        this.recNomemae = recNomemae;
-        this.recDtnascimento = recDtnascimento;
-        this.recEmail = recEmail;
-        this.recCelular = recCelular;
-        this.recTelefone = recTelefone;
-        this.recObjprofissional = recObjprofissional;
-        this.recAutoavaliacao = recAutoavaliacao;
-        this.recPretencaosalarial = recPretencaosalarial;
-        this.recFoto = recFoto;
-        this.recPispasep = recPispasep;
-        this.recReservista = recReservista;
-        this.recEndereco = recEndereco;
-        this.recBairro = recBairro;
-        this.recNumero = recNumero;
-        this.recComplemento = recComplemento;
-        this.recCor = recCor;
-        this.recFuncionario = recFuncionario;
-        this.recNacionalidade = recNacionalidade;
-        this.recNumCtps = recNumCtps;
-        this.recNumeroContaBanco = recNumeroContaBanco;
-        this.recAgenciaBancaria = recAgenciaBancaria;
-        this.recEscolaridade = recEscolaridade;
-        this.recDtaAdmissao = recDtaAdmissao;
-        this.recSegurodesemprego = recSegurodesemprego;
-        this.recInsalubridade = recInsalubridade;
-        this.recPericulosidade = recPericulosidade;
-        this.recNomeBanco = recNomeBanco;
-        this.recNumTituEleitor = recNumTituEleitor;
-        this.recCertificadoReservista = recCertificadoReservista;
-        this.recDtaDemissao = recDtaDemissao;
-        this.recPercentualInsalubridade = recPercentualInsalubridade;
-        this.recHabilidadeList = recHabilidadeList;
-        this.recExperienciaList = recExperienciaList;
-        this.csbffCargosHistoricoList = csbffCargosHistoricoList;
-        this.recSelecaoList = recSelecaoList;
-        this.gchTreinamentospessoasList = gchTreinamentospessoasList;
-        this.colabDepCodigo = colabDepCodigo;
-        this.cargoCodigo = cargoCodigo;
-        this.munCodigo = munCodigo;
-        this.recIdgrauensino = recIdgrauensino;
-        this.csbffHistoricoSalarioList = csbffHistoricoSalarioList;
-        this.gchRespostasList = gchRespostasList;
-        this.gchFormularioPessoas = gchFormularioPessoas;
-        this.csbffBeneficiosList = csbffBeneficiosList;
-        this.insalubridade = insalubridade;
-        this.possuiDependente = possuiDependente;
-        this.recPesGrauEnsino = recPesGrauEnsino;
-        this.recPessoaList = recPessoaList;
-        this.cargoCbo = cargoCbo;
-        this.cargoNome = cargoNome;
-        this.admissaoDescricao = admissaoDescricao;
-        this.csbffEscalaHorasList = csbffEscalaHorasList;
-        this.csbffEscalaHoras = csbffEscalaHoras;
-        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-        this.cargos = cargos;
-        this.cargoValorSalario = cargoValorSalario;
-        this.escalaCodigo = escalaCodigo;
-        this.colaboradorInativo = colaboradorInativo;
-    }
+//    public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, int recSexo, int recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, String recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recComplemento, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, Periculosidade recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, List<GchTreinamentospessoas> gchTreinamentospessoasList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<GchFormularioPessoa> gchFormularioPessoas, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Integer recPesGrauEnsino, List<RecPessoa> recPessoaList, CsbffCargos cargoCbo, CsbffCargos cargoNome, String admissaoDescricao, List<CsbffEscalaHoras> csbffEscalaHorasList, CsbffEscalaHoras csbffEscalaHoras, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffCargos cargos, CsbffCargos cargoValorSalario, CsbffEscalaHoras escalaCodigo, boolean colaboradorInativo, CsbffPessoaBeneficio pessoaBeneficioCodigo) {
+//        this.recIdpessoa = recIdpessoa;
+//        this.recNomecompleto = recNomecompleto;
+//        this.recCpf = recCpf;
+//        this.recSexo = recSexo;
+//        this.recEstadocivil = recEstadocivil;
+//        this.recRg = recRg;
+//        this.recOrgaoemissor = recOrgaoemissor;
+//        this.recDtemissao = recDtemissao;
+//        this.recNomepai = recNomepai;
+//        this.recNomemae = recNomemae;
+//        this.recDtnascimento = recDtnascimento;
+//        this.recEmail = recEmail;
+//        this.recCelular = recCelular;
+//        this.recTelefone = recTelefone;
+//        this.recObjprofissional = recObjprofissional;
+//        this.recAutoavaliacao = recAutoavaliacao;
+//        this.recPretencaosalarial = recPretencaosalarial;
+//        this.recFoto = recFoto;
+//        this.recPispasep = recPispasep;
+//        this.recReservista = recReservista;
+//        this.recEndereco = recEndereco;
+//        this.recBairro = recBairro;
+//        this.recNumero = recNumero;
+//        this.recComplemento = recComplemento;
+//        this.recCor = recCor;
+//        this.recFuncionario = recFuncionario;
+//        this.recNacionalidade = recNacionalidade;
+//        this.recNumCtps = recNumCtps;
+//        this.recNumeroContaBanco = recNumeroContaBanco;
+//        this.recAgenciaBancaria = recAgenciaBancaria;
+//        this.recEscolaridade = recEscolaridade;
+//        this.recDtaAdmissao = recDtaAdmissao;
+//        this.recSegurodesemprego = recSegurodesemprego;
+//        this.recInsalubridade = recInsalubridade;
+//        this.recPericulosidade = recPericulosidade;
+//        this.recNomeBanco = recNomeBanco;
+//        this.recNumTituEleitor = recNumTituEleitor;
+//        this.recCertificadoReservista = recCertificadoReservista;
+//        this.recDtaDemissao = recDtaDemissao;
+////        this.recPercentualInsalubridade = recPercentualInsalubridade;
+//        this.recHabilidadeList = recHabilidadeList;
+//        this.recExperienciaList = recExperienciaList;
+//        this.csbffCargosHistoricoList = csbffCargosHistoricoList;
+//        this.recSelecaoList = recSelecaoList;
+//        this.gchTreinamentospessoasList = gchTreinamentospessoasList;
+//        this.colabDepCodigo = colabDepCodigo;
+//        this.cargoCodigo = cargoCodigo;
+//        this.munCodigo = munCodigo;
+//        this.recIdgrauensino = recIdgrauensino;
+//        this.csbffHistoricoSalarioList = csbffHistoricoSalarioList;
+//        this.gchRespostasList = gchRespostasList;
+//        this.gchFormularioPessoas = gchFormularioPessoas;
+//        this.csbffBeneficiosList = csbffBeneficiosList;
+//        this.insalubridade = insalubridade;
+//        this.possuiDependente = possuiDependente;
+//        this.recPesGrauEnsino = recPesGrauEnsino;
+//        this.recPessoaList = recPessoaList;
+//        this.cargoCbo = cargoCbo;
+//        this.cargoNome = cargoNome;
+//        this.admissaoDescricao = admissaoDescricao;
+//        this.csbffEscalaHorasList = csbffEscalaHorasList;
+//        this.csbffEscalaHoras = csbffEscalaHoras;
+//        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
+//        this.cargos = cargos;
+//        this.cargoValorSalario = cargoValorSalario;
+//        this.escalaCodigo = escalaCodigo;
+//        this.colaboradorInativo = colaboradorInativo;
+//        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
+//    }
+
+    
 
     
 
@@ -314,19 +322,19 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recCpf = recCpf;
     }
 
-    public int getRecSexo() {
+    public Sexo getRecSexo() {
         return recSexo;
     }
 
-    public void setRecSexo(int recSexo) {
+    public void setRecSexo(Sexo recSexo) {
         this.recSexo = recSexo;
     }
 
-    public int getRecEstadocivil() {
+    public EstadoCivil getRecEstadocivil() {
         return recEstadocivil;
     }
 
-    public void setRecEstadocivil(int recEstadocivil) {
+    public void setRecEstadocivil(EstadoCivil recEstadocivil) {
         this.recEstadocivil = recEstadocivil;
     }
 
@@ -546,19 +554,19 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recSegurodesemprego = recSegurodesemprego;
     }
 
-    public String getRecInsalubridade() {
-        return recInsalubridade;
-    }
+//    public String getRecInsalubridade() {
+//        return recInsalubridade;
+//    }
+//
+//    public void setRecInsalubridade(String recInsalubridade) {
+//        this.recInsalubridade = recInsalubridade;
+//    }
 
-    public void setRecInsalubridade(String recInsalubridade) {
-        this.recInsalubridade = recInsalubridade;
-    }
-
-    public String getRecPericulosidade() {
+    public Periculosidade getRecPericulosidade() {
         return recPericulosidade;
     }
 
-    public void setRecPericulosidade(String recPericulosidade) {
+    public void setRecPericulosidade(Periculosidade recPericulosidade) {
         this.recPericulosidade = recPericulosidade;
     }
 
@@ -594,13 +602,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recDtaDemissao = recDtaDemissao;
     }
 
-    public BigInteger getRecPercentualInsalubridade() {
-        return recPercentualInsalubridade;
-    }
-
-    public void setRecPercentualInsalubridade(BigInteger recPercentualInsalubridade) {
-        this.recPercentualInsalubridade = recPercentualInsalubridade;
-    }
+//    public BigInteger getRecPercentualInsalubridade() {
+//        return recPercentualInsalubridade;
+//    }
+//
+//    public void setRecPercentualInsalubridade(BigInteger recPercentualInsalubridade) {
+//        this.recPercentualInsalubridade = recPercentualInsalubridade;
+//    }
 
     @XmlTransient
     @JsonIgnore
@@ -828,11 +836,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         return cargos;
     }
 
-    public CsbffCargos getCargoValorSalario() {
+    public double getCargoValorSalario() {
         return cargoValorSalario;
     }
 
-    public void setCargoValorSalario(CsbffCargos cargoValorSalario) {
+    public void setCargoValorSalario(double cargoValorSalario) {
         this.cargoValorSalario = cargoValorSalario;
     }
 
@@ -866,6 +874,14 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setColaboradorInativo(boolean colaboradorInativo) {
         this.colaboradorInativo = colaboradorInativo;
+    }
+
+    public CsbffPessoaBeneficio getPessoaBeneficioCodigo() {
+        return pessoaBeneficioCodigo;
+    }
+
+    public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio pessoaBeneficioCodigo) {
+        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
     
     

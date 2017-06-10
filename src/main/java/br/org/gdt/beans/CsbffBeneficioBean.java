@@ -13,10 +13,11 @@ import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class CsbffBeneficioBean {
 
     private CsbffBeneficios nomeBeneficio;
@@ -134,7 +135,7 @@ public class CsbffBeneficioBean {
             todosCsbffBeneficios.remove(beneficio);
 
             MsgNotificacao = "O beneficio foi excluido!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
         } catch (Exception ex) {
             MsgNotificacao = "O beneficio não pode ser excluído!";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
@@ -149,13 +150,11 @@ public class CsbffBeneficioBean {
         try {
             if (csbffBeneficios.getBeneficioCodigo() > 0) {
                 csbffBeneficiosService.update(csbffBeneficios);
-
-            } else {
-                csbffBeneficiosService.save(csbffBeneficios);
-
+                MsgNotificacao = "O beneficio foi inserido com seucesso!";
+                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+//            } else {
+//                csbffBeneficiosService.save(csbffBeneficios);
             }
-            MsgNotificacao = "O beneficio foi inserido com seucesso!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
 
         } catch (Exception ex) {
             MsgNotificacao = "O beneficio não pode ser inserido!";
@@ -164,20 +163,17 @@ public class CsbffBeneficioBean {
         }
         todosCsbffBeneficios = csbffBeneficiosService.findAll();
         this.csbffBeneficios = new CsbffBeneficios();
-//        this.formAtivo = false;
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        try {
+//            context.getExternalContext().redirect("consultabeneficios.xhtml");
+//        } catch (IOException ex) {
+//        }
         return "consultabeneficios";
     }
 
     public void cancel() {
         this.formAtivo = false;
         this.csbffBeneficios = new CsbffBeneficios();
-
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("consultabeneficios.xhtml");
-        } catch (IOException ex) {
-
-        }
     }
 
     public void add() {

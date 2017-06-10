@@ -37,9 +37,8 @@
                                                             <div class="form-group ">
                                                                 <label class="control-label" >                                        
                                                                     CPF
-                                                                    <span class="required">*</span>
                                                                 </label>
-                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffDadosProfissionaisBean.recCpf}" title="CPF" />
+                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)"  value="#{csbffDadosProfissionaisBean.recCpf}" title="CPF" />
                                                             </div>
 
                                                         </div>
@@ -158,8 +157,7 @@
                                                                 <label class="control-label " for="number">                                        
                                                                     Salário (R$)
                                                                 </label>
-                                                                <h:inputText class="form-control" maxlength="9" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" converter="#{generic}"/>
-
+                                                                <h:inputText class="form-control" maxlength="9" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" />
                                                             </div>
                                                         </div> 
 
@@ -168,23 +166,13 @@
                                                                 <label class="control-label " for="select">                                        
                                                                     Insalubridade
                                                                 </label>
-                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recInsalubridade}" class="form-control">
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.insalubridade}" class="form-control">
                                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                                     <f:selectItems value="#{csbffDadosProfissionaisBean.insalubridade}" />
                                                                 </h:selectOneMenu>                               
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group ">
-                                                                <label class="control-label " for="select">                                        
-                                                                    Insalubridade
-                                                                </label>
-                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.recInsalubridade}" class="form-control">
-                                                                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.insalubridade}" />
-                                                                </h:selectOneMenu>                               
-                                                            </div>
-                                                        </div>
+
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group ">
                                                                 <label class="control-label " for="select">                                        
@@ -238,7 +226,7 @@
                                                                     </h:column>
                                                                     <h:column headerClass="alinhaColuna">  
                                                                         <f:facet name="header"> Opções</f:facet>
-                                                                        <h:commandLink title="Remover Benefício" action="#{csbffDadosProfissionaisBean.removerBeneficioPessoa(bp)}" onclick="return confirm('Voce realmente deseja remover o benefício?')" >
+                                                                        <h:commandLink title="Remover Benefício" action="#{csbffDadosProfissionaisBean.removerBeneficioPessoa(pb)}" onclick="return confirm('Voce realmente deseja remover o benefício?')" >
                                                                             <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
                                                                         </h:commandLink>
                                                                     </h:column>
@@ -264,7 +252,7 @@
                                                         </div> 
                                                         <div class="col-md-12 col-sm-3 col-xs-12">
                                                             <div class="element">
-                                                                <h:commandButton class="btn btn-danger"  value="Demitir Colaborador" action="#{csbffDadosProfissionaisBean.demitirColaborador()}"/>
+                                                                <h:commandButton class="btn btn-primary"  value="Demitir Colaborador" action="#{csbffDadosProfissionaisBean.demitirColaborador()}"/>
                                                             </div>
                                                         </div> 
 

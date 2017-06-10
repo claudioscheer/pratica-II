@@ -50,8 +50,8 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
     @Basic(optional = true)
     @Column(name = "abrangencia")
     private String abrangencia;
-    @Column(name = "beneficio_valor")
-    private Double beneficioValor;
+//    @Column(name = "beneficio_valor")
+//    private Double beneficioValor;
     @Column(name = "befencio_data_vigente")
     @Temporal(TemporalType.DATE)
     private Date befencioDataVigente;
@@ -108,14 +108,6 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
         this.abrangencia = abrangencia;
     }
 
-    public Double getBeneficioValor() {
-        return beneficioValor;
-    }
-
-    public void setBeneficioValor(Double beneficioValor) {
-        this.beneficioValor = beneficioValor;
-    }
-
     public Date getBefencioDataVigente() {
         return befencioDataVigente;
     }
@@ -153,8 +145,6 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
         return true;
     }
 
-    
-
     @Override
     public String toString() {
         return beneficioNome;
@@ -173,6 +163,7 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
         return this.beneficioCodigo;
 
     }
+
     public List<CsbffBeneficios> getCsbffBeneficiosList() {
 //        if (this.csbffBeneficiosList == null) {
 //            this.csbffBeneficiosList = new ArrayList<>();

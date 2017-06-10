@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.DiasATrabalhar;
+import static br.org.gdt.enums.DiasATrabalhar.SegundaFeira;
 import br.org.gdt.model.CsbffEscalaHoras;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
@@ -14,12 +15,13 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 @ManagedBean
-@SessionScoped
-public class CsbffEscalaHorasBean implements Serializable {
+@ViewScoped
+public class CsbffEscalaHorasBean {
 
     private boolean formAtivo = false;
     private String recCpf;
@@ -35,6 +37,7 @@ public class CsbffEscalaHorasBean implements Serializable {
     private RecPessoaService recPessoaService;
     private DiasATrabalhar diasATrabalhar;
     private List<CsbffEscalaHoras> todasCsbffEscalaHoras;
+    private boolean colaboradorInativo;
 
     public CsbffEscalaHorasBean() {
 
@@ -48,12 +51,23 @@ public class CsbffEscalaHorasBean implements Serializable {
         this.todasCsbffEscalaHoras = todasCsbffEscalaHoras;
     }
 
-    public void buscarCpf() {
-//        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
+   public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
+        String MsgNotificacao = "";
+        if (recPessoa == null) {
+            MsgNotificacao = "A pessoa não existe.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "error");
+            return;
+        }
+        if (recPessoa.colaboradorInativo == true) {
+            MsgNotificacao = "O colaborador está inativo.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
+        }
         if (recPessoa == null) {
             recPessoa = new RecPessoa();
+
         }
+
     }
 
     public List<RecPessoa> getPessoas() {
@@ -63,33 +77,34 @@ public class CsbffEscalaHorasBean implements Serializable {
     }
 
     public void addNovaEscala() {
+        String MsgNotificacao = "";
+
 //        CsbffEscalaHoras eh = new CsbffEscalaHoras();
         csbffEscalaHoras.setRecIdpessoa(this.recPessoa);
         csbffEscalaHoras.setEscalaCodigo(this.csbffEscalaHoras);
+
+        if (csbffEscalaHoras.diaDaSemana != null) {
+
+            MsgNotificacao = "Este dia já possui uma escala.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
+        }
         if (this.recPessoa.getCsbffEscalaHorasList() == null) {
             this.recPessoa.setCsbffEscalaHorasList(new ArrayList<>());
         }
         csbffEscalaHoras.setEscalaDataVigente(new Date());
         this.recPessoa.getCsbffEscalaHorasList().add(csbffEscalaHoras);
-        this.csbffEscalaHorasService.update(csbffEscalaHoras);
+        //this.csbffEscalaHorasService.update(csbffEscalaHoras);
+
     }
 
-//    public String removerEscala(CsbffEscalaHoras eh) {
-//        csbffEscalaHorasService.delete(eh.getEscalaCodigo());
-//        csbffEscalaHorasList.remove(eh);
-////        this.recPessoa.getCsbffEscalaHorasList().remove(eh);
-//        return "escalacolaborador";
-//    }
-//    public void removerEscala(CsbffEscalaHoras csbffEscalaHoras) {
-//        this.recPessoa.getCsbffEscalaHorasList().remove(csbffEscalaHoras);
     public String removerEscala(CsbffEscalaHoras eh) {
         String MsgNotificacao = "";
         try {
-            this.recPessoa.getCsbffEscalaHorasList().remove(eh);
+            //this.csbffEscalaHorasService.delete(eh.getEscalaCodigo());
 //            recPessoaService.delete(eh.getEscalaCodigo());
-//            this.recPessoa.getCsbffEscalaHorasList().remove(eh);
+            this.recPessoa.getCsbffEscalaHorasList().remove(eh);
             MsgNotificacao = "A escala foi excluída!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         } catch (Exception ex) {
             MsgNotificacao = "A escala não pode ser excluída!";
@@ -101,55 +116,38 @@ public class CsbffEscalaHorasBean implements Serializable {
         return "escalacolaborador";
     }
 
-//    public String salvarEscalas() {
-//        if (csbffEscalaHoras.getEscalaCodigo() > 0) {
-//            csbffEscalaHorasService.update(csbffEscalaHoras);
-//        }
-//        todosCsbffEscalaHoras = csbffEscalaHorasService.findAll();
-//        this.csbffEscalaHoras = new CsbffEscalaHoras();
-//        return "dadosprofissionais";
-//    }
+
     public String salvarEscalas() {
         String MsgNotificacao = "";
         try {
             if (recPessoa.getRecIdpessoa() > 0) {
                 recPessoaService.update(recPessoa);
                 MsgNotificacao = "Os dados da escala foram alterados com Sucesso!";
-                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
+                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
 //            } else {
 //                recPessoaService.save(recPessoa);
 //                MsgNotificacao = "Os dados da escala foram salvos com Sucesso!";
 //                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
-
             }
         } catch (Exception ex) {
             MsgNotificacao = "Os dados não foram alterados ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("dadosprofissionais.xhtml");
-        } catch (IOException ex) {
-        }
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        try {
+//            context.getExternalContext().redirect("dadosprofissionais.xhtml");
+//        } catch (IOException ex) {
+//        }
 
 //        recPessoa.setRecContrato(false);
 //        recPessoaList = recPessoaService.findAll();
 //        todasCsbffEscalaHoras = csbffEscalaHorasService.findAll();
-        return "listaadmissao";
+        return "escalacolaborador";
 
     }
 
-//    public String salvarEscalas() {
-//        if (recPessoa.getRecIdpessoa() > 0) {
-//            recPessoaService.update(recPessoa);
-//        }
-//        recPessoaList = recPessoaService.findAll();
-//        this.formAtivo = false;
-//        this.recPessoa = new RecPessoa();
-////        String recContrato = ("Sim");
-//        return "dadosprofissionais";
-//    }
+
     public void cancel() {
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
@@ -249,6 +247,14 @@ public class CsbffEscalaHorasBean implements Serializable {
 
     public void setTodasCsbffEscalaHoras(List<CsbffEscalaHoras> todasCsbffEscalaHoras) {
         this.todasCsbffEscalaHoras = todasCsbffEscalaHoras;
+    }
+
+    public boolean isColaboradorInativo() {
+        return colaboradorInativo;
+    }
+
+    public void setColaboradorInativo(boolean colaboradorInativo) {
+        this.colaboradorInativo = colaboradorInativo;
     }
 
 }
