@@ -108,11 +108,11 @@
                                                                                                                         <div class="form-group">-->
                                                             <div class="form-horizontal">
                                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                    <h:selectOneMenu id="comboUF" value="#{gchMunicipiosBean.ufCodigoCombo}" class="form-control" >
-                                                                        <f:ajax execute="comboUF" render="comboMunicipio" listener="#{gchMunicipiosBean.carregaMunicipios}" event="change"/>
+                                                                    <h:selectOneMenu id="comboUF" value="#{gchTreinamentosBean.ufCodigoCombo}" class="form-control" >
+                                                                        <f:ajax execute="comboUF" render="comboMunicipio" listener="#{gchTreinamentosBean.carregaMunicipios}" event="change"/>
 
                                                                         <f:selectItem itemLabel="Selecione o estado" itemValue="" />
-                                                                        <f:selectItems value="#{gchUFsBean.todosGchUFs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
+                                                                        <f:selectItems value="#{gchTreinamentosBean.todosGchUfs}" var="uf" itemValue="#{uf.ufCodigo}" itemLabel="#{uf.ufNome}"/>
                                                                     </h:selectOneMenu>
 
                                                                 </div>
@@ -121,7 +121,7 @@
                                                                     <!--<h:form>-->
                                                                     <h:selectOneMenu id="comboMunicipio" value="#{gchTreinamentosBean.gchTreinamentos.munCodigo}" converter="#{generic}" class="form-control"  >
                                                                         <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />                                                                        
-                                                                        <f:selectItems value="#{gchMunicipiosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.munDescricao}"  />
+                                                                        <f:selectItems value="#{gchTreinamentosBean.todosGchMunicipiosUF}" var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.munDescricao}"  />
                                                                     </h:selectOneMenu>
                                                                     <!--</h:form>-->
                                                                     <!--</h:panelGroup>-->
@@ -163,8 +163,8 @@
                                                                                                                                 </button>-->
 
 
-                                                                <h:commandButton class="btn btn-primary"  actionListener="#{gchTreinamentosBean.save()}" value="Cadastrar" /> 
-                                                                <h:commandButton class="btn btn-danger"  actionListener="#{gchTreinamentosBean.cancel()}" value="Cancelar" /> 
+                                                                <h:commandButton class="btn btn-primary"  action="#{gchTreinamentosBean.save()}" value="Cadastrar" /> 
+                                                                <h:commandButton class="btn btn-danger"  action="#{gchTreinamentosBean.cancel()}" value="Cancelar" /> 
 
                                                             </div>
                                                         </div>

@@ -67,9 +67,11 @@
                                                     </h:commandLink>
                                                 </h:column>
                                                 
+                                                
                                                 <h:column> 
-                                                    <h:commandLink >
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                    <h:commandLink action="#{estatisticasFormularios.CarregarGraficoFormulario(formulario)}" >
+                                                        <f:param name="sender" value="#{formulario.formCodigo}" />
+                                                      
                                                         <i class="glyphicon glyphicon-object-align-bottom" style="font-size:18px" ></i>
 
                                                     </h:commandLink>
@@ -99,7 +101,7 @@
 
                                     <h:form id="formDialog">
 
-                                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                        <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
                                             <p:graphicImage url="../ModuloCapitalHumano/Estilos/loading.gif" />
                                         </p:dialog>
 

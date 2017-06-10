@@ -168,8 +168,8 @@
                                                 </h:outputText>
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header">Pago?</f:facet>
-                                                <h:selectBooleanCheckbox disabled="true" value="#{periodo.perPago}" />
+                                                <f:facet name="header">Fechado?</f:facet>
+                                                    #{periodo.perPago ? "Sim" : "Não"}
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">Opções</f:facet>

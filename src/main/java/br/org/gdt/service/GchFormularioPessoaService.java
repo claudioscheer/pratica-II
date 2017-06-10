@@ -40,4 +40,22 @@ public class GchFormularioPessoaService {
         System.out.println("Aqui estou eu");
         return gchFormularioPessoaDAO.findAll();
     }
+    
+    public int BuscaPkFormularioPessoa(long idpessoa, long idformulario){     
+        return gchFormularioPessoaDAO.retornaPkFormularioPessoa(idpessoa, idformulario);
+    }
+    
+    public boolean VerificaSeJaRespondeu(long idpessoa, long idformulario){
+        
+        return gchFormularioPessoaDAO.VerificaSeJaRespondeu(idpessoa, idformulario);
+        
+        
+    }
+    
+    public boolean VerificaExistenciaFormulario(long idFormulario){
+        
+        return gchFormularioPessoaDAO.formularioExiste(idFormulario);
+        
+    }
+    
 }

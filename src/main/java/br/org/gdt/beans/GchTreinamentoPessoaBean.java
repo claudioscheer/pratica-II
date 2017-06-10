@@ -84,6 +84,7 @@ public class GchTreinamentoPessoaBean {
 
         gchTreinamentospessoasService.update(gchTreinamentospessoas);
         todosGchTreinamentosPessoas = null;
+        recPessoa = null;
 
     }
 

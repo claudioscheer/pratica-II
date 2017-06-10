@@ -74,10 +74,17 @@ public class FpEnvelopePagamentoBean {
         mostrarTodasFolhasPeriodo = true;
     }
 
+    public void reiniciarTodaTela() {
+        fpFolhaPeriodo = new FpFolhaPeriodo();
+        mostrarTodasFolhasPeriodo = false;
+    }
+
     public void selecionarTipoFolha() {
+        reiniciarTodaTela();
     }
 
     public void selecionarPeriodo() {
+        reiniciarTodaTela();
         FpPeriodo periodo = fpPeriodoService.findById(fpPeriodo.getPerId());
         if (periodo == null) {
             periodo = new FpPeriodo();
@@ -176,8 +183,6 @@ public class FpEnvelopePagamentoBean {
 
     public void gerarTodasFolhasPagamento() {
         try {
-            fpPeriodo.setPerPago(true);
-            fpPeriodoService.update(fpPeriodo);
             calcularFolha.gerarFolha(todasFolhasPeriodo, fpPeriodo.getPerMes() + " - " + fpPeriodo.getPerAno());
         } catch (Exception e) {
             Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");

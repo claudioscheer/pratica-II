@@ -16,7 +16,11 @@
                 </div>
                 <br />
                 <h:form id="formEnvelopePagamento">
-                    <h:messages class="error" style="color: #d9534f" />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <h:messages class="error" style="color: #d9534f" />
+                        </div>
+                    </div>
 
                     <div class="col-md-12">
                         <div class="row">
@@ -87,13 +91,11 @@
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Opções</f:facet>
-                                                        
-                                                        <h:commandLink class="btn btn-success btn-sm" value="Editar" action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}">
+                                                        <h:commandLink class="btn btn-success btn-sm" value="#{fpEnvelopePagamentoBean.fpPeriodo.perPago? 'Visualizar' : 'Editar'}" action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}">
                                                             <f:ajax execute="@form" render="formEnvelopePagamento" />
                                                         </h:commandLink>
-                                                        
+
                                                         <h:commandLink class="btn btn-dark btn-sm" value="Reimprimir" action="#{fpEnvelopePagamentoBean.reimprimirFolhaPagamento(folhaPeriodo)}" />
-                                                        
                                                     </h:column>
                                                 </h:dataTable>
                                             </div>
@@ -128,13 +130,13 @@
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Referência</f:facet>
-                                                        <h:inputText label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;">
+                                                        <h:inputText disabled="#{fpEnvelopePagamentoBean.fpPeriodo.perPago}" label="Valor referência" class="form-control" value="#{eventoVariavel.evpValorReferencia}" style="max-width: 100px;">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:inputText>
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Valor</f:facet>
-                                                        <h:inputText label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;">
+                                                        <h:inputText disabled="#{fpEnvelopePagamentoBean.fpPeriodo.perPago}" label="Valor evento" class="form-control" value="#{eventoVariavel.evpValor}" style="max-width: 200px;">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:inputText>
                                                     </h:column>
@@ -209,7 +211,7 @@
                                     <div class="col-md-12 text-right">
                                         <h:commandButton class="btn btn-dark" value="Imprimir folha" action="#{fpEnvelopePagamentoBean.gerarFolhaPagamento()}" />
 
-                                        <h:commandButton class="btn btn-primary" value="Recalcular folha" action="#{fpEnvelopePagamentoBean.recalcularFolhaPeriodo()}">
+                                        <h:commandButton rendered="#{!fpEnvelopePagamentoBean.fpPeriodo.perPago}" class="btn btn-primary" value="Recalcular folha" action="#{fpEnvelopePagamentoBean.recalcularFolhaPeriodo()}">
                                             <f:ajax execute="@form" render="formEnvelopePagamento" />
                                         </h:commandButton>
                                     </div>

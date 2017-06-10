@@ -76,9 +76,9 @@ public class GchTreinamentos implements Serializable {
     @ManyToOne(optional = false)
     private GchCursos curCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
-    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
+    @ManyToOne(optional = false)
     private GchMunicipios munCodigo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treiCodigo")
+    @OneToMany(mappedBy = "treiCodigo")
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
     
 
@@ -176,8 +176,7 @@ public class GchTreinamentos implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + (int) (this.treiCodigo ^ (this.treiCodigo >>> 32));
-        hash = 53 * hash + Objects.hashCode(this.treiNome);
+        hash = 59 * hash + (int) (this.treiCodigo ^ (this.treiCodigo >>> 32));
         return hash;
     }
 
@@ -193,11 +192,10 @@ public class GchTreinamentos implements Serializable {
         if (this.treiCodigo != other.treiCodigo) {
             return false;
         }
-        if (!Objects.equals(this.treiNome, other.treiNome)) {
-            return false;
-        }
         return true;
     }
+
+   
 
    
     

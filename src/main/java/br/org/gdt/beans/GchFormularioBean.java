@@ -217,6 +217,12 @@ public class GchFormularioBean {
         }
 
     }
+    
+    public String DirecionaGrafico(GchFormulario formulario){
+        
+        return "Estatisticas";
+        
+    }
 
     public void IsSelected(long alt) {
 
@@ -242,7 +248,7 @@ public class GchFormularioBean {
         }
 
     }
-
+    
     public void add() {
 
         this.formAtivo = true;
@@ -526,8 +532,19 @@ public class GchFormularioBean {
             }
 
         } catch (Exception ex) {
+            
+            //Formulário já vinculado a uma pessoa
+            if(ex.toString().indexOf("fk_avlxdbfi5b3pnkm06qlu5v4ax") > 0){
+                
+                MsgNotificacao = "Este formulário já foi disponibilizado para os colaboradores!";
+                Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+            }else{
+            
+            
             MsgNotificacao = "Uma Exceção não tratada impediu a exclusão do formulário!";
             Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
+            
+            }
         }
 
         RequestContext.getCurrentInstance().update("formFormulario:tabelFormularios");
