@@ -15,6 +15,9 @@
                     <h:commandButton class="btn btn-dark" action="#{inicializaBean.inicializar()}" value="Inicializar">
                         <f:ajax execute="@form" render="formInicializaSistema" />
                     </h:commandButton>
+                     <h:commandButton class="btn btn-dark" action="#{inicializaBean.inicializaCursos()}" value="Inicializar modulo capital humano">
+                        <f:ajax execute="@form" render="formInicializaSistema" />
+                    </h:commandButton>
                     <h:commandButton class="btn btn-dark" action="#{inicializaBean.inicializarPessoas()}" value="Inicializar pessoas">
                         <f:ajax execute="@form" render="formInicializaSistema" />
                     </h:commandButton>

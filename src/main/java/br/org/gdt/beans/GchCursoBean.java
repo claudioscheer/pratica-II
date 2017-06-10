@@ -56,7 +56,7 @@ public class GchCursoBean {
 
     public GchCursoBean() {
 
-        System.out.println("Id do Curso" + cursoID);
+//        System.out.println("Id do Curso" + cursoID);
 
 //        gchCurso = buscaPorId(cursoID);
     }
@@ -68,7 +68,6 @@ public void init() {
 
     public String buscaPorId(int idCurso) {
 
-        System.out.println("Id do curso" + idCurso);
 
         if (idCurso != 0) {
 

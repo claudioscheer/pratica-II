@@ -9,7 +9,7 @@ public class GchCursoDAO extends DAO<GchCursos> {
 
     public GchCursoDAO() {
         classe = GchCursos.class;
-        System.out.println("Classe: " + classe.getName());
+        
     }
 
     

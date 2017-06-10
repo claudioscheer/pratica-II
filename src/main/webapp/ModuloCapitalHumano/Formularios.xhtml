@@ -39,15 +39,20 @@
 
                                             <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
-                                                <h:column headerClass="alinhaColuna">                
-                                                    <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
-
-                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
-                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-
-                                                    </h:commandLink>
-
+                                               
+                                                <h:column>   
+                                                    <f:facet name="header">Nome</f:facet>
+                                                    <h:outputText value="#{formulario.formNome}"/>                
                                                 </h:column>
+
+                                                <h:column>                
+                                                    <f:facet name="header">Prazo de Resposta</f:facet>
+                                                    <h:outputText value="#{formulario.formPrazoResposta}">
+                                                        <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                </h:column>
+
+                                                
                                                 <h:column>                
                                                     <h:commandLink action="#{gchFormularioAlternativasBean.preparedEdit(formulario)}">
 
@@ -61,26 +66,42 @@
 
                                                     </h:commandLink>
                                                 </h:column>
+                                                
+                                                
+                                                <h:column> 
+                                                    <h:commandLink action="#{estatisticasFormularios.CarregarGraficoFormulario(formulario)}" >
+                                                        <f:param name="sender" value="#{formulario.formCodigo}" />
+                                                      
+                                                        <i class="glyphicon glyphicon-object-align-bottom" style="font-size:18px" ></i>
 
-                                                <h:column>   
-                                                    <f:facet name="header">Nome</f:facet>
-                                                    <h:outputText value="#{formulario.formNome}"/>                
+                                                    </h:commandLink>
+                                                    
+                                                
+                                                </h:column>
+                                                
+                                                <h:column>
+                                                    
+                                                    
+                                                </h:column>
+                                                
+                                                 <h:column headerClass="alinhaColuna">                
+                                                    <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
+
+                                                        <f:ajax execute="@this"  event="action" render="formFormulario" />
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+
+                                                    </h:commandLink>
+
                                                 </h:column>
 
-                                                <h:column>                
-                                                    <f:facet name="header">Prazo de Resposta</f:facet>
-                                                    <h:outputText value="#{formulario.formPrazoResposta}">
-                                                        <f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy"/>
-                                                    </h:outputText>
-                                                </h:column>
-
+                                                
                                             </h:dataTable>
 
                                         </h:form> </div>
 
                                     <h:form id="formDialog">
 
-                                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                        <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
                                             <p:graphicImage url="../ModuloCapitalHumano/Estilos/loading.gif" />
                                         </p:dialog>
 
@@ -93,7 +114,7 @@
 
                                             <div class="panel-body" style="/* a lign-items: center; */">
 
-                                                <h:dataTable  id="tabelaPessoas" class="table table-striped" value="#{recPessoaBean.recPessoas}" var="pessoa">
+                                                <h:dataTable  id="tabelaPessoas" class="table table-striped" value="#{gchFormularioBean.pessoasEmail}" var="pessoa">
 
                                                     <h:column>
                                                         <h:selectBooleanCheckbox value="#{gchFormularioBean.checked[pessoa]}" >

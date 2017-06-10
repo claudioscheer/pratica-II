@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.FpTipoFolha;
+import br.org.gdt.enums.LogModulo;
 import br.org.gdt.model.FpEvento;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFolhaPeriodo;
@@ -11,6 +12,7 @@ import br.org.gdt.service.FpEventoService;
 import br.org.gdt.service.FpFolhaPeriodoService;
 import br.org.gdt.service.folhapagamento.CalcularFolha;
 import br.org.gdt.service.FpPeriodoService;
+import br.org.gdt.service.LogService;
 import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.folhapagamento.DadosCalculadosDoFuncionario;
 import java.util.ArrayList;
@@ -47,14 +49,16 @@ public class FpCalcularBean {
     @ManagedProperty("#{fpFolhaPeriodoService}")
     private FpFolhaPeriodoService fpFolhaPeriodoService;
 
-    public FpCalcularBean() {
+    @ManagedProperty("#{logService}")
+    private LogService logService;
 
+    public FpCalcularBean() {
     }
 
     public void selecionarEvento() {
         FpEvento fpEvento = fpEventoService.findById(fpEventoPeriodo.getEvpEvento().getEveId());
         if (fpEvento == null) {
-            Helper.mostrarNotificacao("Evento variável", "O evento não existe.", "info");
+            Helper.mostrarNotificacao("Evento variável", "O evento não existe.", "error");
             fpEvento = new FpEvento();
         }
         fpEventoPeriodo.setEvpEvento(fpEvento);
@@ -68,14 +72,14 @@ public class FpCalcularBean {
 
     public void adicionarEvento() {
         if (fpEventoPeriodo.getEvpEvento().getEveId() <= 0) {
-            Helper.mostrarNotificacao("Evento variável", "Selecione um evento.", "info");
+            Helper.mostrarNotificacao("Evento variável", "Selecione um evento.", "error");
             return;
         }
 
         if (todosFpEventoPeriodo.stream()
                 .filter(x -> x.getEvpEvento().getEveId() == fpEventoPeriodo.getEvpEvento().getEveId())
                 .count() > 0) {
-            Helper.mostrarNotificacao("Evento variável", "Evento já adicionado.", "info");
+            Helper.mostrarNotificacao("Evento variável", "Evento já adicionado.", "error");
             return;
         }
 
@@ -98,23 +102,29 @@ public class FpCalcularBean {
     public void selecionarPessoa() {
         RecPessoa pessoa = recPessoaService.BuscarId((int) recPessoa.getRecIdpessoa());
         if (pessoa == null) {
-            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "info");
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não existe.", "error");
+            recPessoa = new RecPessoa();
+            return;
+        } else if (!pessoa.getRecFuncionario()) {
+            Helper.mostrarNotificacao("Dados inválidos", "A pessoa não é um colaborador.", "error");
             recPessoa = new RecPessoa();
             return;
         }
+
         recPessoa = pessoa;
     }
 
     public void calcularFolhaPagamento() {
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
+            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "error");
             return;
         }
         fpPeriodo = fpPeriodoService.findById(fpPeriodo.getPerId());
         if (gerarTodasPessoas) {
             try {
                 calcularFolha.calcularParaTodosFuncionarios(fpPeriodo);
-                Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "info");
+                logService.log(LogModulo.FolhaPagamento, "Folhas de pagamento calculadas.");
+                Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "success");
             } catch (RuntimeException e) {
                 Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
             }
@@ -128,7 +138,7 @@ public class FpCalcularBean {
                 dadosCalculadosDoFuncionario.setPeriodo(fpPeriodo);
 
                 if (recPessoa.getRecIdpessoa() <= 0) {
-                    Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+                    Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "error");
                     return;
                 }
                 dadosCalculadosDoFuncionario.setPessoa(recPessoa);
@@ -136,10 +146,11 @@ public class FpCalcularBean {
 
                 calcularFolha.calcularFolhaPagamentoFuncionario(dadosCalculadosDoFuncionario);
 
+                logService.log(LogModulo.FolhaPagamento, "Folha de pagamento calculada para pessoa " + recPessoa.getRecIdpessoa() + ".");
                 todosFpEventoPeriodo = new ArrayList<>();
                 recPessoa = new RecPessoa();
                 fpEventoPeriodo = new FpEventoPeriodo();
-                Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "info");
+                Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "success");
             } catch (Exception e) {
 
                 todosFpEventoPeriodo = new ArrayList<>();
@@ -150,11 +161,11 @@ public class FpCalcularBean {
 
     public void buscarEventosPessoaPeriodo() {
         if (fpPeriodo.getPerId() <= 0) {
-            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "info");
+            Helper.mostrarNotificacao("Calcular folha", "Selecione um período. Se necessário, cadastre um novo.", "error");
             return;
         }
         if (recPessoa.getRecIdpessoa() <= 0) {
-            Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "info");
+            Helper.mostrarNotificacao("Dados inválidos", "Selecione um colaborador.", "error");
             return;
         }
         FpFolhaPeriodo fpFolhaPeriodo = fpFolhaPeriodoService.findByPessoaEPeriodo(fpPeriodo, recPessoa);
@@ -198,7 +209,7 @@ public class FpCalcularBean {
 //            todosFpPeriodo = fpPeriodoService.findAll();
 //        }
 //        return todosFpPeriodo;
-        return fpPeriodoService.findAll();
+        return fpPeriodoService.findAllPeriodoNaoFechado();
     }
 
     public RecPessoa getRecPessoa() {
@@ -270,6 +281,14 @@ public class FpCalcularBean {
 
     public void setFpFolhaPeriodoService(FpFolhaPeriodoService fpFolhaPeriodoService) {
         this.fpFolhaPeriodoService = fpFolhaPeriodoService;
+    }
+
+    public LogService getLogService() {
+        return logService;
+    }
+
+    public void setLogService(LogService logService) {
+        this.logService = logService;
     }
 
 }

@@ -11,7 +11,7 @@ public class GchAlternativaCertoDAO extends DAO<GchAlternativas> {
 
     public GchAlternativaCertoDAO() {
         classe = GchAlternativas.class;
-        System.out.println("Classe: " + classe.getName());
+      
     }
     
 }

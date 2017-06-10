@@ -1,7 +1,11 @@
 package br.org.gdt.resources;
 
+import br.org.gdt.enums.LogModulo;
+import br.org.gdt.model.Log;
+import br.org.gdt.service.LogService;
 import java.io.File;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -12,6 +16,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.primefaces.context.RequestContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Helper {
 

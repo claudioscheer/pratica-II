@@ -7,10 +7,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
-public class CsbffListaAdmissaoBean implements Serializable {
+@ViewScoped
+public class CsbffListaAdmissaoBean {
 
     private boolean formAtivo = false;
     private String recCpf;
@@ -28,7 +29,7 @@ public class CsbffListaAdmissaoBean implements Serializable {
     }
 
     public void buscarCpf() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         if (recPessoa == null) {
             recPessoa = new RecPessoa();

@@ -1,5 +1,7 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.enums.EstadoCivil;
+import br.org.gdt.enums.Sexo;
 import br.org.gdt.model.RecHabilidade;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
@@ -216,6 +218,14 @@ public class RecPessoaBean {
 
     public UploadedFile getRecFoto() {
         return recFoto;
+    }
+    
+    public EstadoCivil[] getEstadoCivil() {
+        return EstadoCivil.values();
+    }
+    
+    public Sexo[] getSexo() {
+        return Sexo.values();
     }
 
     public void setRecFoto(UploadedFile recFoto) {

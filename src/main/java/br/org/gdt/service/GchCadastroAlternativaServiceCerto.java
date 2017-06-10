@@ -19,7 +19,7 @@ public class GchCadastroAlternativaServiceCerto {
     public void save(GchAlternativas alt) {
         gchAlternativaCertoDAO.save(alt);
         
-        System.out.println("chamou para salvar");
+        
     }
 
     @Transactional
@@ -37,7 +37,7 @@ public class GchCadastroAlternativaServiceCerto {
     }
 
     public List<GchAlternativas> findAll() {
-        System.out.println("Aqui estou eu");
+        
         return gchAlternativaCertoDAO.findAll();
     }
 }

@@ -71,7 +71,7 @@ public class GchMunicipiosBean {
 
 //        ufCodigoCombo = (long)evento.getNewValue();
         
-        System.out.println("Codigo: " + ufCodigoCombo);
+        
         todosGchMunicipiosUF = gchMunicipiosService.findUfCodigo(ufCodigoCombo);
 
     }

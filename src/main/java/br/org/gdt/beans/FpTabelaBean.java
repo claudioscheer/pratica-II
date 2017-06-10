@@ -8,10 +8,10 @@ import br.org.gdt.service.FpTabelaService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class FpTabelaBean {
 
     private boolean formAtivo = false;
@@ -26,7 +26,7 @@ public class FpTabelaBean {
 
     public void save() {
         if (fpTabela.getTabVigencias().size() <= 0) {
-            Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma vigência.", "info");
+            Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma vigência.", "error");
             return;
         }
 
@@ -42,7 +42,7 @@ public class FpTabelaBean {
 
     public void saveTabelaVigencia() {
         if (fpTabelaVigencia.getTabVigenciaFaixas().size() <= 0) {
-            Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma faixa.", "info");
+            Helper.mostrarNotificacao("Tabela", "Adicione pelo menos uma faixa.", "error");
             return;
         }
 
@@ -86,20 +86,18 @@ public class FpTabelaBean {
         this.fpTabela = new FpTabela();
     }
 
-    public String excluir(FpTabela fpTabela) {
+    public void excluir(FpTabela fpTabela) {
         if (!fpTabela.isTabPermiteExcluir()) {
-            Helper.mostrarNotificacao("Tabela", "A tabela não pode ser excluída.", "info");
+            Helper.mostrarNotificacao("Tabela", "A tabela não pode ser excluída.", "error");
         } else {
             fpTabelaService.delete(fpTabela.getTabId());
             todasFpTabela.remove(fpTabela);
         }
-        return "tabelas";
     }
 
-    public String prepareEdit(FpTabela fpTabela) {
+    public void prepareEdit(FpTabela fpTabela) {
         this.formAtivo = true;
         this.fpTabela = fpTabela;
-        return "tabelas";
     }
 
     public void editarVigencia(FpTabelaVigencia fpTabelaVigencia) {

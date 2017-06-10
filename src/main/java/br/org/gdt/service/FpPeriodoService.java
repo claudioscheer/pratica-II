@@ -35,6 +35,10 @@ public class FpPeriodoService {
     public List<FpPeriodo> findAll() {
         return fpPeriodoDAO.findAll();
     }
+    
+    public List<FpPeriodo> findAllPeriodoNaoFechado() {
+        return fpPeriodoDAO.findAllPeriodoNaoPago();
+    }
 
     public FpPeriodo getPeriodoAtivo() {
         return fpPeriodoDAO.getPeriodoAtivo();

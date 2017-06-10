@@ -36,18 +36,6 @@
 
                                                 <h:dataTable  class="table table-striped" value="#{csbffBeneficioBean.todosCsbffBeneficios}" var="beneficio">
 
-                                                    <h:column headerClass="alinhaColuna">                
-                                                        <h:commandLink title="Excluir" action="#{csbffBeneficioBean.excluir(beneficio)}" onclick="return confirm('Voce realmente deseja excluir?')" >
-                                                            <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                        </h:commandLink>
-                                                    </h:column>
-
-                                                    <h:column>                
-                                                        <h:commandLink title="Editar" action="#{csbffBeneficioBean.edita(beneficio)}">
-                                                            <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
-                                                        </h:commandLink>
-                                                    </h:column>
-
                                                     <h:column>
                                                         <f:facet name="header">Código</f:facet>
                                                             #{beneficio.beneficioCodigo}
@@ -63,6 +51,17 @@
                                                     <h:column>
                                                         <f:facet name="header">Tipo Benefício </f:facet>
                                                             #{beneficio.tipoBeneficio}
+                                                    </h:column>
+
+                                                    <h:column headerClass="alinhaColuna">  
+                                                        <f:facet name="header"> Opções</f:facet>
+
+                                                        <h:commandLink title="Editar" action="#{csbffBeneficioBean.edita(beneficio)}">
+                                                            <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                        </h:commandLink>
+                                                        <h:commandLink title="Excluir" action="#{csbffBeneficioBean.excluir(beneficio)}" onclick="return confirm('Voce realmente deseja excluir?')" >
+                                                            <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                        </h:commandLink>
                                                     </h:column>
 
                                                 </h:dataTable>
