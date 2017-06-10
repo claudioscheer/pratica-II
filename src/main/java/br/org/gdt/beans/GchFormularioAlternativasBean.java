@@ -118,7 +118,7 @@ public class GchFormularioAlternativasBean {
         
     }
  
-    public void save() {
+    public String save() {
 
         Iterator<GchAlternativas> keyIterrator = radio.keySet().iterator();
 
@@ -142,8 +142,6 @@ public class GchFormularioAlternativasBean {
 
         radio = new HashMap<GchAlternativas, String>();
 
-        Helper.mostrarNotificacao("Sucesso", "Resposta cadastrada!", "sucess");
-
         //Altera a flag respondido para true no banco
         int idpesForm = gchFormularioPessoaService.BuscaPkFormularioPessoa(idPessoa, idFormulario);
 
@@ -156,13 +154,7 @@ public class GchFormularioAlternativasBean {
 
         gchFormularioPessoaService.update(pessoaFormulario);
 
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("Formularios.xhtml");
-        } catch (IOException ex) {
-
-        }
-        Helper.mostrarNotificacao("Sucesso", "Resposta cadastrada!", "sucess");
+         return "SucessoEnviarFormulario";
     }
 
     public List<GchPerguntas> buscaPerguntas() {

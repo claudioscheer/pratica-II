@@ -138,13 +138,13 @@ public class GchTreinamentosBean {
     public String excluir(GchTreinamentos gchTreinamentos) {
         gchTreinamentosService.delete(gchTreinamentos.getTreiCodigo());
         todosGchTreinamentos.remove(gchTreinamentos);
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            context.getExternalContext().redirect("Treinamentos.xhtml");
-        } catch (IOException ex) {
-
-        }
-        return "treinamentos";
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        try {
+//            context.getExternalContext().redirect("Treinamentos.xhtml");
+//        } catch (IOException ex) {
+//
+//        }
+        return "Treinamentos";
     }
 
     public String prepareEdit(GchTreinamentos gchTreinamentos) {

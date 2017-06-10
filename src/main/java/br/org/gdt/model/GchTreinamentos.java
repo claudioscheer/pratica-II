@@ -76,9 +76,9 @@ public class GchTreinamentos implements Serializable {
     @ManyToOne(optional = false)
     private GchCursos curCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
-    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
+    @ManyToOne(optional = false)
     private GchMunicipios munCodigo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treiCodigo")
+    @OneToMany(mappedBy = "treiCodigo")
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
     
 

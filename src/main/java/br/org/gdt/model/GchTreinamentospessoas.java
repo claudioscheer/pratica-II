@@ -54,10 +54,10 @@ public class GchTreinamentospessoas implements Serializable {
     private Date treiPesDataFim;
 
     @JoinColumn(name = "trei_codigo", referencedColumnName = "trei_codigo")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private GchTreinamentos treiCodigo;
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private RecPessoa recIdpessoa;
 
     public GchTreinamentospessoas() {
