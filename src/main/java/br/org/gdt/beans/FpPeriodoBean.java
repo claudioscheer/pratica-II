@@ -25,7 +25,8 @@ public class FpPeriodoBean {
     public void save() {
         String mensagemErro = this.datasSaoValidas();
         if (!mensagemErro.isEmpty()) {
-            Helper.setMensagemDeErro(mensagemErro);
+            
+            Helper.mostrarNotificacao("Período", mensagemErro, "error");
             return;
         }
 
