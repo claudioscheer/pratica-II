@@ -98,9 +98,9 @@ public class EstatisticasFormularios implements Serializable {
         codigoFormulario = formulario.getFormCodigo();   
         NomeFormulario   = formulario.getFormNome();
        
-       boolean existe = gchFormularioPessoaService.VerificaExistenciaFormulario(codigoFormulario);
+       List<GchFormularioPessoa> formulariosPessoa = gchFormularioPessoaService.VerificaExistenciaFormulario(codigoFormulario);
       
-       if(existe){
+       if(formulariosPessoa.size() > 0){
         gerargraficoformulariorespondidos();
         
         return "Estatisticas";
@@ -262,12 +262,16 @@ public class EstatisticasFormularios implements Serializable {
 
             for (GchFormularioPessoa fp : pessoasFormulario) {
 
+                
+                if(fp.getFormulario().getFormCodigo() == codigoFormulario){
+                
                 if (fp.isFormRespondido()) {
                     Respondido += 1;
                 } else {
                     naoRespondido += 1;
                 }
 
+                }
             }
 
             graficoPizza = new PieChartModel();

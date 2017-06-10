@@ -22,6 +22,7 @@ import br.org.gdt.service.GchFormularioPessoaService;
 import br.org.gdt.service.GchFormularioService;
 import br.org.gdt.service.GchPerguntasService;
 import br.org.gdt.service.GchRespostasService;
+import br.org.gdt.service.RecPessoaService;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -43,6 +44,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.xml.bind.DatatypeConverter;
+import org.apache.commons.collections.IteratorUtils;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -66,6 +68,9 @@ public class GchFormularioBean {
     private Map<RecPessoa, Boolean> checked = new HashMap<RecPessoa, Boolean>();
     private GchFormularioPessoa gchFormulariopessoa = new GchFormularioPessoa();
     private List<RecPessoa> pessoasVinculadas = new ArrayList<>();
+
+    private List<RecPessoa> pessoasEmail = new ArrayList<>();
+
     private RecPessoa id = new RecPessoa();
     private String Notificacao = "";
 
@@ -87,12 +92,59 @@ public class GchFormularioBean {
     @ManagedProperty("#{gchFormularioPessoaService}")
     private GchFormularioPessoaService gchFormularioPessoaService;
 
+    @ManagedProperty("#{recPessoaService}")
+    private RecPessoaService recPessoaService;
+
     public String getNotificacao() {
         return Notificacao;
     }
 
     public void setNotificacao(String Notificacao) {
         this.Notificacao = Notificacao;
+    }
+
+    public List<RecPessoa> getPessoasEmail() {
+
+       
+       pessoasEmail = recPessoaService.buscarColaboradores();
+
+//        Iterator<RecPessoa> pessoas = pessoasencontradas.iterator();
+//
+//        List<GchFormularioPessoa> formPess = gchFormularioPessoaService.VerificaExistenciaFormulario(gchFormulario.getFormCodigo());
+//
+//        while (pessoas.hasNext()) {
+//
+//            RecPessoa pessoaAtual = pessoas.next();
+//
+//            for (GchFormularioPessoa fp : formPess) {
+//
+//                if (pessoaAtual.getRecIdpessoa() == fp.getRecIdpessoa().getRecIdpessoa() && fp.isFormRespondido()) {
+//
+//                    pessoas.remove();
+//
+//                }
+//
+//            }
+//
+//        }
+//
+//        while (pessoas.hasNext()) {
+//            pessoasEmail.add(pessoas.next());
+//        }
+
+        return pessoasEmail;
+    }
+
+    public void setPessoasEmail(List<RecPessoa> pessoasEmail) {
+        this.pessoasEmail = pessoasEmail;
+    }
+
+    public RecPessoaService getRecPessoaService() {
+        return recPessoaService;
+    }
+
+    public void setRecPessoaService(RecPessoaService recPessoaService) {
+        this.recPessoaService = recPessoaService;
     }
 
     public Map<RecPessoa, Boolean> getChecked() {
@@ -217,11 +269,11 @@ public class GchFormularioBean {
         }
 
     }
-    
-    public String DirecionaGrafico(GchFormulario formulario){
-        
+
+    public String DirecionaGrafico(GchFormulario formulario) {
+
         return "Estatisticas";
-        
+
     }
 
     public void IsSelected(long alt) {
@@ -248,7 +300,7 @@ public class GchFormularioBean {
         }
 
     }
-    
+
     public void add() {
 
         this.formAtivo = true;
@@ -394,10 +446,10 @@ public class GchFormularioBean {
 
             } else {
 
-                if(Alternativas.length == 0 || Alternativas[0].isEmpty()) {
+                if (Alternativas.length == 0 || Alternativas[0].isEmpty()) {
 
                     Helper.mostrarNotificacao("Validação de Campos", "É necessário vincular ao menos uma alternativa a pergunta", "error");
-                    
+
                 } else {
 
                     try {
@@ -461,16 +513,16 @@ public class GchFormularioBean {
                         gchFormulario = new GchFormulario();
 
                     }
-                    
+
                     gchTodosFormularios = null; //isso faz com que a listagem se atualiz
                     return "Formularios";
-                    
+
                 }
 
             }
 
         }
-          return null;
+        return null;
     }
 
     public void responderFormulario() {
@@ -494,9 +546,15 @@ public class GchFormularioBean {
 
         gchFormulario = formulario;
 
-        RequestContext context = RequestContext.getCurrentInstance();
-        context.execute("PF('dialogSelecaoPessoas').show();");
+        if (pessoasEmail.size() > 0) {
 
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('dialogSelecaoPessoas').show();");
+        } else {
+
+            Helper.mostrarNotificacao("Informação", "Nenhum colaborador disponível para enviar o formulário", "info");
+
+        }
     }
 
     public void removerPergunta(int index) {
@@ -532,18 +590,17 @@ public class GchFormularioBean {
             }
 
         } catch (Exception ex) {
-            
+
             //Formulário já vinculado a uma pessoa
-            if(ex.toString().indexOf("fk_avlxdbfi5b3pnkm06qlu5v4ax") > 0){
-                
+            if (ex.toString().indexOf("fk_avlxdbfi5b3pnkm06qlu5v4ax") > 0) {
+
                 MsgNotificacao = "Este formulário já foi disponibilizado para os colaboradores!";
                 Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-            }else{
-            
-            
-            MsgNotificacao = "Uma Exceção não tratada impediu a exclusão do formulário!";
-            Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
-            
+            } else {
+
+                MsgNotificacao = "Uma Exceção não tratada impediu a exclusão do formulário!";
+                Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
+
             }
         }
 

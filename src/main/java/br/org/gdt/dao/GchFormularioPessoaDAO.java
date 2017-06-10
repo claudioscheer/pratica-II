@@ -46,7 +46,7 @@ public class GchFormularioPessoaDAO extends DAO<GchFormularioPessoa> {
         
     }
     
-    public boolean formularioExiste(long idformulario){
+    public List<GchFormularioPessoa> formularioExistentes(long idformulario){
         
         Query query = entityManager.createQuery("from GchFormularioPessoa as s where s.formulario.formCodigo = :codigoform");
         query.setParameter("codigoform", idformulario);
@@ -55,12 +55,8 @@ public class GchFormularioPessoaDAO extends DAO<GchFormularioPessoa> {
        
        fp = (List<GchFormularioPessoa>) query.getResultList();
        
-       if(fp.size() > 0){       
-           return true;
-       }else{ //Formulario já disponibilizado para uma pessoa
-           return false;
-       } 
-        
+       
+       return fp;
     }
     
     
