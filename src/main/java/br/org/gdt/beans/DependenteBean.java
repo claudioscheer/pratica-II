@@ -27,12 +27,10 @@ import javax.faces.bean.SessionScoped;
 public class DependenteBean {
 
     private boolean formAtivo = true;
-     private String recCpf;
-     private String NomeCompleto;
-     
-     
-     
-     @ManagedProperty("#{recPessoaService}")
+    private String recCpf;
+    private String NomeCompleto;
+
+    @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
     private CsbffDependentes csbffdependente = new CsbffDependentes();
     private List<CsbffDependentes> todosdependentes;
@@ -40,16 +38,16 @@ public class DependenteBean {
     @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependenteService;
     private RecPessoa recPessoa = new RecPessoa();
-    
-     
+
     @ManagedProperty("#{csbffPessoaDependenteService}")
     private CsbffPessoaDependenteService csbffPessoaDependenteService;
     private CsbffPessoaDependente csbffPessoaDependente = new CsbffPessoaDependente();
-    
+
     public DependenteBean() {
+     
 
     }
-    
+
     public void buscarCpf() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
         recPessoa = recPessoaService.findByRecCpf(recCpf);
@@ -58,29 +56,39 @@ public class DependenteBean {
             recPessoa = new RecPessoa();
         }
     }
-    
+
+    public String pg(CsbffDependentes dependente) {
+        this.csbffdependente = dependente;
+        return "dependente.xhtml";
+    }
 
     public void save() {
         
-        System.out.println("testando " + csbffdependente.getDependenteCpf());
-        System.out.println("2"+csbffdependente.getDependenteDataNascimento());
-        System.out.println("3"+csbffdependente.getDependenteImpostoDeRenda());
-        System.out.println("4"+ csbffdependente.getDependenteNaturalidade());
-        System.out.println("5" +csbffdependente.getDependenteNome());
-        System.out.println("6"+ csbffdependente.getDependenteRgCertNascimento());
-        System.out.println("7" +csbffdependente.getDependenteTipo());
-       
-        csbffDependenteService.save(csbffdependente);
         
-        csbffPessoaDependente.setColabDepCodigo(recPessoa.getRecIdpessoa());
+        if(csbffdependente.getDependenteCod() > 0){
+           csbffDependenteService.update(csbffdependente);
+            add();
+        
+
+        }else{
+            
+        
+        csbffDependenteService.save(csbffdependente);
+//        csbffPessoaDependente.setColabDepCodigo(recPessoa.getRecIdpessoa());
         csbffPessoaDependente.setDependenteCod(csbffdependente);
         csbffPessoaDependente.setRecIdpessoa(recPessoa);
         csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
         //csbffPessoaDependente = getCsbffPessoaDependente();
         //csbffdependente.setCsbffPessoaDependente(csbffPessoaDependente);
+
+        csbffPessoaDependenteService.save(csbffPessoaDependente);
+
         
-       csbffPessoaDependenteService.save(csbffPessoaDependente);
-    
+            add();
+        }
+        
+        
+        
     }
 
     public void cancel() {

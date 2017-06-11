@@ -50,7 +50,7 @@
 
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 <div>&nbsp;</div>
-                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{dependenteBean.buscarCpf()}"/>
+                                                <h:commandButton class="btn btn-primary" value="Buscar Dados" action="#{dependenteBean.buscarCpf()}"/>
 
                                                 <br></br>
                                             </div> 
@@ -72,7 +72,7 @@
                                                     <label class="control-label " for="nome">
                                                         CPF
                                                     </label>
-                                                    <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
+                                                    <h:inputText class="form-control" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
                                                 </div>
                                             </div>
 
@@ -151,7 +151,7 @@
                                                 <div>
                                                     <div class="row">
 
-                                                        <h:commandButton class="btn btn-success" value=" salvar" action="#{dependenteBean.save()}"/>                                  
+                                                        <h:commandButton class="btn btn-primary" value=" salvar" action="#{dependenteBean.save()}"/>                                  
                                                         <h:commandButton value="Cancelar" class="btn btn-danger" action="#{dependenteBean.add()}"/>
 
 
@@ -186,7 +186,11 @@
                                                                     <h:commandLink class="btn btn-link btn-small" action="#{dependenteBean.pg(dependete)}">
                                                                         <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                                     </h:commandLink>
-                                                                </h:column>                  
+                                                                
+                                                                    <h:commandLink title="Excluir" action="#{dependenteBean.excluir(dependente)}" onclick="return confirm('Voce realmente deseja excluir?')" >
+                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                    </h:commandLink>
+                                                </h:column>
                                                             </h:dataTable>
 
                                                         </div>
