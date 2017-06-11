@@ -36,9 +36,9 @@
                                                             <div class="form-group ">
                                                                 <label class="control-label" >                                        
                                                                     CPF
-                                                                    <span class="required">*</span>
+<!--                                                                    <span class="required">*</span>-->
                                                                 </label>
-                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." value="#{csbffEscalaHorasBean.recCpf}" title="CPF" />
+                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" value="#{csbffEscalaHorasBean.recCpf}" title="CPF" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
@@ -66,8 +66,8 @@
                                                                 <label class="control-label " >
                                                                     Hora Entrada
                                                                 </label>
-                                                                <h:inputText class="form-control" maxlength="6" a:placeholder="00"  value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora1}" title="Hora Entrada" >
-                                                                    <f:convertNumber pattern="##:##"/>
+                                                                <h:inputText class="form-control" maxlength="8" a:placeholder="00:00"  value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora1}" title="Hora Entrada" >
+                                                                    <f:convertNumber pattern="####"/>
                                                                 </h:inputText>
                                                             </div>
                                                         </div>
@@ -76,8 +76,8 @@
                                                                 <label class="control-label " >
                                                                     Hora Saída
                                                                 </label>
-                                                                <h:inputText class="form-control" maxlength="6" a:placeholder="00"  value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora2}" title="Hora Saída Intervalo">
-                                                                    <f:convertNumber pattern="##:##"/>
+                                                                <h:inputText class="form-control" maxlength="8" a:placeholder="00:00"  value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora2}" title="Hora Saída Intervalo">
+                                                                    <f:convertNumber pattern="####"/>
                                                                 </h:inputText>
                                                             </div>
                                                         </div>
@@ -86,8 +86,8 @@
                                                                 <label class="control-label " >
                                                                     Hora Entrada
                                                                 </label>
-                                                                <h:inputText class="form-control" maxlength="6" a:placeholder="00" value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora3}" title="Hora Retorno Intervalo">
-                                                                    <f:convertNumber pattern="##:##"/>
+                                                                <h:inputText class="form-control" maxlength="8" a:placeholder="00:00" value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora3}" title="Hora Retorno Intervalo">
+                                                                    <f:convertNumber pattern="####"/>
                                                                 </h:inputText>
                                                             </div>
                                                         </div>
@@ -96,8 +96,8 @@
                                                                 <label class="control-label " >
                                                                     Hora Saída
                                                                 </label>
-                                                                <h:inputText class="form-control" maxlength="6" a:placeholder="00"  value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora4}" title="Hora Saída">
-                                                                    <f:convertNumber pattern="##:##"/>
+                                                                <h:inputText class="form-control" maxlength="8" a:placeholder="00:00"  value="#{csbffEscalaHorasBean.csbffEscalaHoras.escalaHora4}" title="Hora Saída">
+                                                                    <f:convertNumber pattern="####"/>
                                                                 </h:inputText>
                                                             </div>
                                                         </div>
@@ -126,20 +126,25 @@
 
                                                                     <h:column>
                                                                         <f:facet name="header"> Hora Entrada</f:facet>
-                                                                        <h:outputText value="#{eh.escalaHora1}"/>
+                                                                        <h:outputText value="#{eh.escalaHora1}">
+                                                                            <f:convertNumber pattern="####"/>
+                                                                        </h:outputText>
                                                                     </h:column>
                                                                     <h:column>
                                                                         <f:facet name="header"> Hora Saída</f:facet>
-                                                                        <h:outputText value="#{eh.escalaHora2}"/>
-                                                                    </h:column>
+                                                                        <h:outputText value="#{eh.escalaHora2}">
+                                                                            <f:convertNumber pattern="####"/>
+                                                                        </h:outputText>                                                                    </h:column>
                                                                     <h:column>
                                                                         <f:facet name="header"> Hora Entrada</f:facet>
-                                                                        <h:outputText value="#{eh.escalaHora3}"/>
-                                                                    </h:column>
+                                                                        <h:outputText value="#{eh.escalaHora3}">
+                                                                            <f:convertNumber pattern="####"/>
+                                                                        </h:outputText>                                                                    </h:column>
                                                                     <h:column>
                                                                         <f:facet name="header"> Hora Saída</f:facet>
-                                                                        <h:outputText value="#{eh.escalaHora4}"/>
-                                                                    </h:column>
+                                                                        <h:outputText value="#{eh.escalaHora4}">
+                                                                            <f:convertNumber pattern="####"/>
+                                                                        </h:outputText>                                                                    </h:column>
                                                                     <h:column>
                                                                         <f:facet name="header">Dia da Semana</f:facet>
                                                                         <h:outputText value="#{eh.diasATrabalhar}"/>

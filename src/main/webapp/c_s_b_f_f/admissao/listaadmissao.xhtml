@@ -33,7 +33,7 @@
                                         <h:form id="formConsulta">
                                             <h:messages class="error" style="color: #d9534f" />
 
-                                            <h:dataTable  class="table table-striped" value="#{csbffListaAdmissaoBean.pessoas}" var="pessoas">
+                                            <h:dataTable  class="table table-striped" value="#{csbffDadosPessoaisBean.pessoas}" var="pessoas">
 
                                                 <h:column>
                                                     <f:facet name="header">Código</f:facet>
@@ -68,7 +68,7 @@
                                                 </h:column>
                                                 <h:column>   
                                                     <f:facet name="header">Opções </f:facet>
-                                                    <h:commandLink title="Editar" action="#{csbffListaAdmissaoBean.editaConsulta(pessoas)}">
+                                                    <h:commandLink title="Editar" action="#{csbffDadosPessoaisBean.editaConsulta(pessoas)}">
                                                         <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                     </h:commandLink>
                                                 </h:column>
