@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class CsbffBeneficioBean {
 
     private CsbffBeneficios nomeBeneficio;
@@ -34,49 +35,6 @@ public class CsbffBeneficioBean {
     @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependentesService;
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.csbffBeneficios);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CsbffBeneficioBean other = (CsbffBeneficioBean) obj;
-        if (!Objects.equals(this.csbffBeneficios, other.csbffBeneficios)) {
-            return false;
-        }
-        return true;
-    }
-
-    public CsbffBeneficioBean(CsbffBeneficios codigoBeneficio) {
-        this.codigoBeneficio = codigoBeneficio;
-    }
-
-    public CsbffBeneficioBean(List<CsbffBeneficios> todosCsbffBeneficios, TipoBeneficio tipoBeneficio, List<TipoBeneficio> csbffTipoBeneficiosList, CsbffBeneficiosService csbffBeneficiosService) {
-        this.todosCsbffBeneficios = todosCsbffBeneficios;
-        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
-        this.csbffBeneficiosService = csbffBeneficiosService;
-    }
-
-    public List<TipoBeneficio> getCsbffTipoBeneficiosList() {
-        return csbffTipoBeneficiosList;
-    }
-
-    public void setCsbffTipoBeneficiosList(List<TipoBeneficio> csbffTipoBeneficiosList) {
-        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
-    }
-
     public CsbffBeneficioBean() {
 
     }
@@ -87,19 +45,6 @@ public class CsbffBeneficioBean {
         return beneficios;
     }
 
-//    public String buscaNome() {
-//
-//        if (nomeBeneficio !=0) {
-//            csbffBeneficios = (CsbffBeneficios) csbffBeneficiosService.findAll();
-//        }
-//        return csbffBeneficios.getBeneficioNome();
-//
-//    }
-//     public String prepareEdit(CsbffBeneficios beneficio) {
-//        this.formAtivo = true;
-//        this.csbffBeneficios = beneficio;
-//        return "beneficio";
-//    }
     public String altera(CsbffBeneficios beneficio) {
         codigoBeneficio = beneficio;
         csbffBeneficiosService.update(beneficio);
@@ -150,30 +95,31 @@ public class CsbffBeneficioBean {
         try {
             if (csbffBeneficios.getBeneficioCodigo() > 0) {
                 csbffBeneficiosService.update(csbffBeneficios);
-                MsgNotificacao = "O beneficio foi inserido com seucesso!";
-                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
-//            } else {
-//                csbffBeneficiosService.save(csbffBeneficios);
+
+            } else {
+                csbffBeneficiosService.save(csbffBeneficios);
             }
+            MsgNotificacao = "O beneficio foi inserido com seucesso!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
         } catch (Exception ex) {
             MsgNotificacao = "O beneficio não pode ser inserido!";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-
         }
         todosCsbffBeneficios = csbffBeneficiosService.findAll();
-        this.csbffBeneficios = new CsbffBeneficios();
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        try {
-//            context.getExternalContext().redirect("consultabeneficios.xhtml");
-//        } catch (IOException ex) {
-//        }
         return "consultabeneficios";
     }
 
     public void cancel() {
         this.formAtivo = false;
         this.csbffBeneficios = new CsbffBeneficios();
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("consultabeneficios.xhtml");
+        } catch (IOException ex) {
+
+        }
     }
 
     public void add() {
@@ -239,5 +185,13 @@ public class CsbffBeneficioBean {
 
     public void setNomeBeneficio(CsbffBeneficios nomeBeneficio) {
         this.nomeBeneficio = nomeBeneficio;
+    }
+
+    public List<TipoBeneficio> getCsbffTipoBeneficiosList() {
+        return csbffTipoBeneficiosList;
+    }
+
+    public void setCsbffTipoBeneficiosList(List<TipoBeneficio> csbffTipoBeneficiosList) {
+        this.csbffTipoBeneficiosList = csbffTipoBeneficiosList;
     }
 }

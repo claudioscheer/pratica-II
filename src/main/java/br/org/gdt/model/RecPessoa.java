@@ -145,7 +145,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    @Column(name = "rec_percentual_insalubridade")
 //    private BigInteger recPercentualInsalubridade;
 
-    @ManyToMany()    
+    @ManyToMany()
     private List<RecHabilidade> recHabilidadeList;
     @ManyToMany(mappedBy = "recPessoaList")
     private List<RecExperiencia> recExperienciaList;
@@ -197,8 +197,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    private DiasATrabalhar diasATrabalhar;
 //    @OneToOne
     private double cargoValorSalario;
-    @OneToOne
-    private CsbffEscalaHoras escalaCodigo;
+//    @OneToOne
+//    private CsbffEscalaHoras escalaCodigo;
     public boolean colaboradorInativo;
     @OneToOne
     private CsbffPessoaBeneficio pessoaBeneficioCodigo;
@@ -273,11 +273,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //        this.colaboradorInativo = colaboradorInativo;
 //        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
 //    }
-
-    
-
-    
-
     @Override
     public String toString() {
         return "RecPessoa{" + "recIdpessoa=" + recIdpessoa + ", recCpf=" + recCpf + '}';
@@ -561,7 +556,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setRecInsalubridade(String recInsalubridade) {
 //        this.recInsalubridade = recInsalubridade;
 //    }
-
     public Periculosidade getRecPericulosidade() {
         return recPericulosidade;
     }
@@ -609,7 +603,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setRecPercentualInsalubridade(BigInteger recPercentualInsalubridade) {
 //        this.recPercentualInsalubridade = recPercentualInsalubridade;
 //    }
-
     @XmlTransient
     @JsonIgnore
     public List<RecHabilidade> getRecHabilidadeList() {
@@ -860,14 +853,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.csbffEscalaHoras = csbffEscalaHoras;
     }
 
-    public CsbffEscalaHoras getEscalaCodigo() {
-        return escalaCodigo;
-    }
-
-    public void setEscalaCodigo(CsbffEscalaHoras escalaCodigo) {
-        this.escalaCodigo = escalaCodigo;
-    }
-
     public boolean isColaboradorInativo() {
         return colaboradorInativo;
     }
@@ -905,8 +890,5 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         }
         return true;
     }
-    
-    
-    
 
 }

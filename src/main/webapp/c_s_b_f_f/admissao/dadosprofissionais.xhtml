@@ -121,7 +121,7 @@
                                                                 <label class="control-label " for="number">                                        
                                                                     Cargo ocupado
                                                                 </label>
-                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.cargoNome}" class="form-control" converter="#{generic}">
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.cargos}" class="form-control" converter="#{generic}">
                                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
                                                                     <f:selectItems value="#{csbffDadosProfissionaisBean.cargos}" var="cargos" itemValue="#{cargos}"  itemLabel="#{cargos.cargoNome}" />
                                                                 </h:selectOneMenu>
@@ -250,16 +250,14 @@
 
                                                             </div>
                                                         </div> 
-                                                        <div class="col-md-12 col-sm-3 col-xs-12">
-                                                            <div class="element">
-                                                                <h:commandButton class="btn btn-primary"  value="Demitir Colaborador" action="#{csbffDadosProfissionaisBean.demitirColaborador()}"/>
-                                                            </div>
-                                                        </div> 
+
 
 
 
                                                         <div class="form-group ">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                <h:commandButton class="btn btn-primary"  value="Demitir Colaborador" action="#{csbffDadosProfissionaisBean.demitirColaborador()}"/>
+
                                                                 <h:commandButton class="btn btn-primary"  action="#{csbffDadosProfissionaisBean.saveDadosProfissionais()}" value="Salvar" /> 
                                                                 <h:commandButton class="btn btn-danger"  action="#{csbffDadosProfissionaisBean.cancel()}" value="Cancelar" /> 
                                                             </div>

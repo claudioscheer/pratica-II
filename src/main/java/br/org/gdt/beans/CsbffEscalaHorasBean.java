@@ -14,13 +14,14 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class CsbffEscalaHorasBean {
 
     private boolean formAtivo = false;
@@ -51,10 +52,10 @@ public class CsbffEscalaHorasBean {
         this.todasCsbffEscalaHoras = todasCsbffEscalaHoras;
     }
 
-   public void buscarCpf() {
+     public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         String MsgNotificacao = "";
-        if (recPessoa == null) {
+        while (recPessoa == null) {
             MsgNotificacao = "A pessoa não existe.";
             Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "error");
             return;
@@ -83,11 +84,11 @@ public class CsbffEscalaHorasBean {
         csbffEscalaHoras.setRecIdpessoa(this.recPessoa);
         csbffEscalaHoras.setEscalaCodigo(this.csbffEscalaHoras);
 
-        if (csbffEscalaHoras.diaDaSemana != null) {
-
-            MsgNotificacao = "Este dia já possui uma escala.";
-            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
-        }
+//        if (csbffEscalaHoras.diaDaSemana != null) {
+//
+//            MsgNotificacao = "Este dia já possui uma escala.";
+//            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
+//        }
         if (this.recPessoa.getCsbffEscalaHorasList() == null) {
             this.recPessoa.setCsbffEscalaHorasList(new ArrayList<>());
         }
@@ -98,24 +99,14 @@ public class CsbffEscalaHorasBean {
     }
 
     public String removerEscala(CsbffEscalaHoras eh) {
-        String MsgNotificacao = "";
-        try {
-            //this.csbffEscalaHorasService.delete(eh.getEscalaCodigo());
+
+        //this.csbffEscalaHorasService.delete(eh.getEscalaCodigo());
 //            recPessoaService.delete(eh.getEscalaCodigo());
-            this.recPessoa.getCsbffEscalaHorasList().remove(eh);
-            MsgNotificacao = "A escala foi excluída!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+        this.recPessoa.getCsbffEscalaHorasList().remove(eh);
 
-        } catch (Exception ex) {
-            MsgNotificacao = "A escala não pode ser excluída!";
-            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-
-        }
 //        RequestContext.getCurrentInstance().update("csbffEscalaHorasList");
-
         return "escalacolaborador";
     }
-
 
     public String salvarEscalas() {
         String MsgNotificacao = "";
@@ -146,7 +137,6 @@ public class CsbffEscalaHorasBean {
         return "escalacolaborador";
 
     }
-
 
     public void cancel() {
         this.formAtivo = false;
@@ -210,7 +200,6 @@ public class CsbffEscalaHorasBean {
     }
 
     public void setRecCpf(String recCpf) {
-        System.out.println("cpp " + recCpf);
         this.recCpf = recCpf;
     }
 

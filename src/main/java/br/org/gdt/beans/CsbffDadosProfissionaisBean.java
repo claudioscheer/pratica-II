@@ -23,17 +23,16 @@ import br.org.gdt.service.CsbffEscalaHorasService;
 import br.org.gdt.service.CsbffPessoaBeneficioService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class CsbffDadosProfissionaisBean {
 
     private boolean formAtivo = false;
@@ -53,8 +52,6 @@ public class CsbffDadosProfissionaisBean {
     private CsbffDependentes csbffDependentes;
     private List<CsbffBeneficios> beneficios;
     private CsbffBeneficios csbffBeneficios = new CsbffBeneficios();
-//    private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
-
     @ManagedProperty("#{csbffCargosService}")
     private CsbffCargosService csbffCargosService;
     private List<CsbffCargos> csbffCargosList;
@@ -125,9 +122,9 @@ public class CsbffDadosProfissionaisBean {
         return null;
     }
 
-    public void alimentaCBO() {
-        recPessoa.setCargoCbo(csbffCargos);
-    }
+//    public void alimentaCBO() {
+//        recPessoa.setCargoCbo(csbffCargos);
+//    }
 
     public Sexo[] getGeneros() {
         return Sexo.values();
@@ -161,10 +158,10 @@ public class CsbffDadosProfissionaisBean {
         return TipoBeneficio.values();
     }
 
-    public void buscarCpf() {
+  public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         String MsgNotificacao = "";
-        if (recPessoa == null) {
+        while (recPessoa == null) {
             MsgNotificacao = "A pessoa não existe.";
             Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "error");
             return;
