@@ -24,6 +24,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -89,13 +90,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_objprofissional")
     private String recObjprofissional;
     @Column(name = "rec_autoavaliacao")
-    private String recAutoavaliacao;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    private String recAutoavaliacao;    
     @Column(name = "rec_pretencaosalarial")
     private String recPretencaosalarial;
     //@Lob
-    @Column(name = "rec_foto")
-    //private byte[] recFoto;
+    @Column(name = "rec_foto")    
     private byte[] recFoto;
     @Column(name = "rec_pispasep")
     private String recPispasep;
@@ -129,8 +128,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_segurodesemprego")
     private String recSegurodesemprego;
     @Basic(optional = true)
-//    @Column(name = "rec_insalubridade")
-//    private String recInsalubridade;
     @Column(name = "rec_periculosidade")
     private Periculosidade recPericulosidade;
     @Column(name = "rec_NomeBanco")
@@ -142,10 +139,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_dta_demissao")
     @Temporal(TemporalType.DATE)
     private Date recDtaDemissao;
-//    @Column(name = "rec_percentual_insalubridade")
-//    private BigInteger recPercentualInsalubridade;
-
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<RecHabilidade> recHabilidadeList;
     @ManyToMany(mappedBy = "recPessoaList")
     private List<RecExperiencia> recExperienciaList;
@@ -153,8 +147,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffCargosHistorico> csbffCargosHistoricoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<RecSelecao> recSelecaoList;
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
-//    private CsbffEscalaHoras csbffEscalaHoras;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
@@ -194,11 +186,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
     @OneToOne
     private CsbffCargos cargos;
-//    private DiasATrabalhar diasATrabalhar;
-//    @OneToOne
     private double cargoValorSalario;
-//    @OneToOne
-//    private CsbffEscalaHoras escalaCodigo;
     public boolean colaboradorInativo;
     @OneToOne
     private CsbffPessoaBeneficio pessoaBeneficioCodigo;
