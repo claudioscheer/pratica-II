@@ -190,7 +190,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
     private CsbffEscalaHoras csbffEscalaHoras;
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa")
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
     @OneToOne
     private CsbffCargos cargos;
