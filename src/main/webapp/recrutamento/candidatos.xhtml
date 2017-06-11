@@ -16,21 +16,23 @@
                     <h3>Manutenção de Candidatos</h3>
                 </div>
                 <br />
-                <h:form id="formHabilidade">
+                <h:form id="formHabilidade" enctype="multipart/form-data">
                     <p:panel visible="#{recPessoaBean.formAtivo}">
                         <h:inputHidden value="#{recPessoaBean.recPessoa.recIdpessoa}" />                        
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <!--
-                                        <p:graphicImage value="#{recPessoaBean.recPessoa.recFoto.stream()}" id="image"/>
+
+                                        <p:graphicImage 
+                                            value="#{recPessoaBean.fotoPerfil}" 
+                                            id="image"
+                                            class="center-block"
+                                            style="width:500px;width:500px"/>                                                                                                                       
                                         
-                                        <img src="a.jpg" class="center-block" style="height: 200px"></img>
-                                        -->
                                     </div>
-                                    
-                                    
+
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Nome Completo" for="NomeCompleto" />                                            
@@ -50,39 +52,34 @@
                                                          title="CPF" />
                                         </div>
                                     </div> 
-                                    
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Sexo
                                             </label>
                                             <h:selectOneMenu id="comboSexo" 
+                                                             disabled="true"
                                                              value="#{recPessoaBean.recPessoa.recSexo}" 
-                                                             class="form-control" 
-                                                             disabled="true">
+                                                             class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                             
-                                            </h:selectOneMenu>                                                                            
+                                                <f:selectItems value="#{recPessoaBean.sexo}" />
+                                            </h:selectOneMenu>                                                                           
                                         </div>     
                                     </div>  
-                                    
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Estado Civil
                                             </label>
-                                            <h:selectOneMenu 
-                                                id="comboEstadoCivil" 
-                                                disabled="true"
-                                                value="#{recPessoaBean.recPessoa.recEstadocivil}" class="form-control" >
+                                            <h:selectOneMenu id="comboEstadoCivil" 
+                                                             disabled="true"
+                                                             value="#{recPessoaBean.recPessoa.recEstadocivil}" 
+                                                             class="form-control">
                                                 <f:selectItem itemLabel="Selecione o Estado Civil" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Solteiro(a)" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Casado(a)" itemValue="#{2}" />   
-                                                <f:selectItem itemLabel="Separado(a)" itemValue="#{3}" />                                                
-                                                <f:selectItem itemLabel="Divorciado(a)" itemValue="#{4}" />      
-                                                <f:selectItem itemLabel="Viúvo(a)" itemValue="#{5}" />                                              
-                                            </h:selectOneMenu>                                                                            
+                                                <f:selectItems value="#{recPessoaBean.estadoCivil}" /><!--                                                                                             -->
+                                            </h:selectOneMenu>                                                                           
                                         </div>     
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -267,7 +264,7 @@
                                             </h:selectOneMenu>                                                                                                                        
                                         </div>     
                                     </div> 
-                                    
+
                                     <div class="col-md-6 col-sm-6 col-xs-12">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
@@ -289,7 +286,7 @@
                                             </h:selectOneMenu>
                                         </div>     
                                     </div>
-                                    
+
                                 </div>
                                 <hr />
                                 <div class="row">
@@ -330,66 +327,33 @@
                                 </div>
 
                                 <hr />
-                                <!-- 
+                             
                                 <div class="row">
                                     <h3 class="text-center">Suas Habilidades</h3>   
-                                    
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12">                                
                                         <div class="form-group ">
-                                            <label class="control-label " for="select">
-                                                Habilidade
+                                            <label class="control-label " for="number">                                        
+
                                             </label>
-                                            <h:selectOneMenu id="comboHabilidade" value="#{recVagaBean.habilidade}"  class="form-control" >
-                                                <f:selectItem itemLabel="Selecione a Habilidade " itemValue="#{null}" />
-                                                <f:selectItems value="#{recHabilidadeBean.ListarTodas()}" var="habilidade" itemValue="#{habilidade}" itemLabel="#{habilidade.recDescricao}"/>
-                                            </h:selectOneMenu> 
+                                            <p:autoComplete multiple="true" 
+                                                            value="#{recPessoaBean.recPessoa.recHabilidadeList}" 
+                                                            completeMethod="#{recPessoaBean.completarHabilidade}"
+                                                            var="item" 
+                                                            itemLabel="#{item.recDescricao}" 
+                                                            itemValue="#{item}" 
+                                                            forceSelection="true"                                                            
+                                                            converter="#{generic}">
+
+
+
+                                                <p:column>
+                                                    <h:outputText value="#{item.recDescricao}" />
+                                                </p:column>
+                                            </p:autoComplete>        
                                         </div>     
                                     </div>                            
                                 </div>
-
-                                <div class="row">
-                                    <h:commandButton class="btn btn-success" value=" Adicionar" />                            
-                                </div>
-
-                                <div class="row">
-                                    <h:dataTable class="table table-striped">                                        
-                                        <h:column>
-                                            <f:facet name="header">Código</f:facet>
-
-                                        </h:column>     
-                                        <h:column>
-                                            <f:facet name="header">Habilidade</f:facet>
-
-                                        </h:column>   
-                                        <h:column>
-                                            <f:facet name="header">Opções</f:facet>
-                                            <h:commandLink class="btn btn-link btn-small" value="Editar">
-
-                                            </h:commandLink>
-                                            <h:commandLink class="btn btn-link btn-small" value="Excluir">
-
-                                            </h:commandLink>
-                                        </h:column>                  
-                                    </h:dataTable>
-                                </div>
-                                
-                                <hr />
-                                <div class="row">
-                                    <h3 class="text-center">Suas Experiencias</h3>   
-                                    <h4 class="text-center">Descreva abaixo de forma clara as suas experiências profissionais, contendo, Nome da empresa, Cargo, Período e Atividades Realizadas.</h4>   
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Descrição
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputTextarea class="form-control" cols="40" id="txbDescCurso" rows="10"/>
-                                        </div>
-                                    </div>          
-                                </div>
-
-                                -->
-
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">                                        
@@ -400,7 +364,7 @@
                         </div>
                     </p:panel>
                     <p:panel visible="#{!recPessoaBean.formAtivo}">
-                       
+
                         <h:dataTable class="table table-striped" value="#{recPessoaBean.ListarTodas()}" var="item">                                        
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
@@ -412,7 +376,7 @@
                             </h:column>                                                                                                                                                   
                             <h:column>
                                 <f:facet name="header">Opções</f:facet>                                                                                            
-                                <h:commandLink class="btn btn-link btn-small" value="Visualizar" action="#{recPessoaBean.PreparaEdicao(item)}">                                    
+                                <h:commandLink class="btn btn-link btn-small" value="Visualizar" action="#{recPessoaBean.VerCurriculo(item)}">                                    
                                 </h:commandLink>                        
                             </h:column>
                         </h:dataTable>

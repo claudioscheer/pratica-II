@@ -7,15 +7,29 @@ import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecHabilidadeService;
 import br.org.gdt.service.RecPessoaService;
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.event.FileUploadEvent;
+import javax.faces.event.PhaseId;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
+import sun.misc.IOUtils;
 
 @ManagedBean
 @RequestScoped
@@ -36,6 +50,8 @@ public class RecPessoaBean {
 
     private UploadedFile recFoto;
     private UploadedFile recAnexoCurriculo;
+
+    private StreamedContent fotoPerfil;    
 
     public List<RecHabilidade> completarHabilidade(String query) {
         List<RecHabilidade> allThemes = recHabilidadeService.ListarTodas();
@@ -60,17 +76,29 @@ public class RecPessoaBean {
     public RecPessoaBean() {
     }
 
-    public String Salvar() {
+    public String Salvar() throws IOException {
         if (ValidarCampos()) {
             if (recPessoa.getId() > 0) {
                 if (recFoto != null) {
-                    recPessoa.setRecFoto(recFoto.getContents());
+                    InputStream input = recFoto.getInputstream();
+                    ByteArrayOutputStream output = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[10240];
+                    for (int length = 0; (length = input.read(buffer)) > 0;) {
+                        output.write(buffer, 0, length);
+                    }
+                    recPessoa.setRecFoto(output.toByteArray());
                 }
                 recPessoaService.Alterar(recPessoa);
             } else {
 
                 if (recFoto != null) {
-                    recPessoa.setRecFoto(recFoto.getContents());
+                    InputStream input = recFoto.getInputstream();
+                    ByteArrayOutputStream output = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[10240];
+                    for (int length = 0; (length = input.read(buffer)) > 0;) {
+                        output.write(buffer, 0, length);
+                    }
+                    recPessoa.setRecFoto(output.toByteArray());
                 }
                 recPessoaService.Inserir(recPessoa);
             }
@@ -79,13 +107,34 @@ public class RecPessoaBean {
         return null;
     }
 
-    public String PreparaEdicao(RecPessoa pessoa) {//criar um separado para a visualização
+    public String PreparaEdicao(RecPessoa pessoa) {
         formAtivo = true;
-        System.out.println("IDPes"+pessoa.getRecIdpessoa());
         this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
-        System.out.println(""+recPessoa.getRecNomecompleto());
-        //this.recPessoa = pessoa;
         return "candidatos";
+    }
+
+    public String VerCurriculo(RecPessoa pessoa) throws IOException {
+        this.formAtivo = true;
+        this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());        
+        if (recPessoa.getRecFoto() != null) {
+            //fotoPerfil = RenderizarFoto(pessoa.getRecFoto());                        
+        }
+        return "candidatos";
+    }
+
+ 
+
+    public DefaultStreamedContent RenderizarFoto(byte[] img) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            return new DefaultStreamedContent();
+        } else {
+            if (img == null) {
+                return new DefaultStreamedContent();
+            } else {
+                return new DefaultStreamedContent(new ByteArrayInputStream(img), "image/png");
+            }
+        }
     }
 
     public String BuscarPessoa() {
@@ -97,7 +146,7 @@ public class RecPessoaBean {
         } else {
             recPessoa = new RecPessoa();
             return "curriculo";
-        }        
+        }
     }
 
     public List<RecPessoa> ListarTodas() {
@@ -219,11 +268,11 @@ public class RecPessoaBean {
     public UploadedFile getRecFoto() {
         return recFoto;
     }
-    
+
     public EstadoCivil[] getEstadoCivil() {
         return EstadoCivil.values();
     }
-    
+
     public Sexo[] getSexo() {
         return Sexo.values();
     }
@@ -246,5 +295,13 @@ public class RecPessoaBean {
 
     public void setCpfBusca(String cpfBusca) {
         this.cpfBusca = cpfBusca;
+    }
+
+    public StreamedContent getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(StreamedContent fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 }

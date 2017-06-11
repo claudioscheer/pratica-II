@@ -68,10 +68,7 @@ public class RecVaga implements Serializable {
     private List<RecSelecao> recSelecaoList;
     @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
     @ManyToOne(optional = true)
-    private CsbffCargos cargoCodigo;
-    @JoinColumn(name = "rec_idgrauensino", referencedColumnName = "rec_idgrauensino")
-    @ManyToOne(optional = true)
-    private RecGrauensino recIdgrauensino;
+    private CsbffCargos cargoCodigo;   
     private Integer recGrauensino;
     @Column(name = "rec_tipovaga")
     private String recTipoVaga;
@@ -170,15 +167,7 @@ public class RecVaga implements Serializable {
 
     public void setCargoCodigo(CsbffCargos cargoCodigo) {
         this.cargoCodigo = cargoCodigo;
-    }
-
-    public RecGrauensino getRecIdgrauensino() {
-        return recIdgrauensino;
-    }
-
-    public void setRecIdgrauensino(RecGrauensino recIdgrauensino) {
-        this.recIdgrauensino = recIdgrauensino;
-    }         
+    }      
 
     public Integer getRecGrauensino() {
         return recGrauensino;
