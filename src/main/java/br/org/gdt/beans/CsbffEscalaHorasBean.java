@@ -1,24 +1,19 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.enums.DiasATrabalhar;
-import static br.org.gdt.enums.DiasATrabalhar.SegundaFeira;
 import br.org.gdt.model.CsbffEscalaHoras;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffEscalaHorasService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @SessionScoped

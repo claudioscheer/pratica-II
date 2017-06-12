@@ -126,7 +126,6 @@ public class CsbffDadosProfissionaisBean {
 //    public void alimentaCBO() {
 //        recPessoa.setCargoCbo(csbffCargos);
 //    }
-
     public Sexo[] getGeneros() {
         return Sexo.values();
     }
@@ -159,7 +158,7 @@ public class CsbffDadosProfissionaisBean {
         return TipoBeneficio.values();
     }
 
-  public void buscarCpf() {
+    public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         String MsgNotificacao = "";
         while (recPessoa == null) {
@@ -259,17 +258,8 @@ public class CsbffDadosProfissionaisBean {
     }
 
     public String removerBeneficioPessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
-        String MsgNotificacao = "";
-        try {
-            this.recPessoa.getCsbffPessoaBeneficioList().remove(csbffPessoaBeneficio);
-            MsgNotificacao = "O beneficio foi excluído!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
-        } catch (Exception ex) {
-            MsgNotificacao = "O beneficio não pode ser excluído!";
-            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
 
-        }
-//        RequestContext.getCurrentInstance().update("csbffEscalaHorasList");
+        this.recPessoa.getCsbffPessoaBeneficioList().remove(csbffPessoaBeneficio);
 
         return "dadosprofissionais";
     }
@@ -277,7 +267,7 @@ public class CsbffDadosProfissionaisBean {
     public void addBeneficioPessoa() {
 
         csbffPessoaBeneficio.setRecIdpessoa(this.recPessoa);
-        csbffPessoaBeneficio.setPessoaBeneficioCodigo(this.csbffPessoaBeneficio);
+        csbffPessoaBeneficio.setBeneficioCodigo(this.csbffBeneficios);
 
         if (this.recPessoa.getCsbffPessoaBeneficioList() == null) {
             this.recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());

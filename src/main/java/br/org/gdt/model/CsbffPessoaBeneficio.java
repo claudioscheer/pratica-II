@@ -7,8 +7,10 @@ package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,16 +30,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Diego
  */
 @Entity
-@Table(name = "csbff_pessoa_beneficio")
-@SequenceGenerator(name = "seq_csbff_pessoa_beneficio", sequenceName = "seq_csbff_pessoa_beneficio", allocationSize = 1)
-
+@SequenceGenerator(name = "seq_csbffpessoabeneficio", sequenceName = "seq_csbffpessoabeneficio", allocationSize = 1)
+@Table(name = "csbffpessoabeneficio")
 public class CsbffPessoaBeneficio implements Serializable, SampleEntity {
 
     private static final long serialVersionUID = -2790083349568956163L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "pessoa_beneficio_codigo")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_csbff_pessoa_beneficio")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_csbffpessoabeneficio")
     private long pessoaBeneficioCodigo;
 
     @JoinColumn(name = "beneficio_codigo", referencedColumnName = "beneficio_codigo")
@@ -46,6 +49,8 @@ public class CsbffPessoaBeneficio implements Serializable, SampleEntity {
     @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
     @ManyToOne
     private RecPessoa recIdpessoa;
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa")
+    private List<CsbffBeneficios> csbffBeneficiosList;
 
     public CsbffPessoaBeneficio() {
     }
@@ -56,20 +61,12 @@ public class CsbffPessoaBeneficio implements Serializable, SampleEntity {
         this.recIdpessoa = recIdpessoa;
     }
 
-    @Override
-    public Long getId() {
-        return pessoaBeneficioCodigo;
-    }
-
     public long getPessoaBeneficioCodigo() {
         return pessoaBeneficioCodigo;
     }
 
     public void setPessoaBeneficioCodigo(long pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
-    }
-
-    public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio csbffPessoaBeneficio) {
     }
 
     public CsbffBeneficios getBeneficioCodigo() {
@@ -90,10 +87,10 @@ public class CsbffPessoaBeneficio implements Serializable, SampleEntity {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (int) (this.pessoaBeneficioCodigo ^ (this.pessoaBeneficioCodigo >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.beneficioCodigo);
-        hash = 29 * hash + Objects.hashCode(this.recIdpessoa);
+        int hash = 5;
+        hash = 53 * hash + (int) (this.pessoaBeneficioCodigo ^ (this.pessoaBeneficioCodigo >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.beneficioCodigo);
+        hash = 53 * hash + Objects.hashCode(this.recIdpessoa);
         return hash;
     }
 
@@ -119,6 +116,19 @@ public class CsbffPessoaBeneficio implements Serializable, SampleEntity {
             return false;
         }
         return true;
+    }
+
+    public List<CsbffBeneficios> getCsbffBeneficiosList() {
+        return csbffBeneficiosList;
+    }
+
+    public void setCsbffBeneficiosList(List<CsbffBeneficios> csbffBeneficiosList) {
+        this.csbffBeneficiosList = csbffBeneficiosList;
+    }
+
+    @Override
+    public Long getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -24,7 +24,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -38,8 +37,6 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.FetchMode;
-import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -90,11 +87,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_objprofissional")
     private String recObjprofissional;
     @Column(name = "rec_autoavaliacao")
-    private String recAutoavaliacao;    
+    private String recAutoavaliacao;
     @Column(name = "rec_pretencaosalarial")
     private String recPretencaosalarial;
     //@Lob
-    @Column(name = "rec_foto")    
+    @Column(name = "rec_foto")
     private byte[] recFoto;
     @Column(name = "rec_pispasep")
     private String recPispasep;
@@ -166,6 +163,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchRespostas> gchRespostasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchFormularioPessoa> gchFormularioPessoas;
+
     @OneToMany
     private List<CsbffBeneficios> csbffBeneficiosList;
     private Insalubridade insalubridade;
@@ -188,8 +186,9 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private CsbffCargos cargos;
     private double cargoValorSalario;
     public boolean colaboradorInativo;
+
     @OneToOne
-    private CsbffPessoaBeneficio pessoaBeneficioCodigo;
+    private CsbffPessoaBeneficio csbffPessoaBeneficio;
 
     @Override
     public String toString() {
@@ -590,7 +589,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
         if (this.csbffPessoaBeneficioList == null) {
             this.csbffPessoaBeneficioList = new ArrayList<>();
-//            this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
+            this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
         }
 
         return csbffPessoaBeneficioList;
@@ -779,14 +778,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.colaboradorInativo = colaboradorInativo;
     }
 
-    public CsbffPessoaBeneficio getPessoaBeneficioCodigo() {
-        return pessoaBeneficioCodigo;
-    }
-
-    public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio pessoaBeneficioCodigo) {
-        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -807,6 +798,14 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
             return false;
         }
         return true;
+    }
+
+    public CsbffPessoaBeneficio getCsbffPessoaBeneficio() {
+        return csbffPessoaBeneficio;
+    }
+
+    public void setCsbffPessoaBeneficio(CsbffPessoaBeneficio csbffPessoaBeneficio) {
+        this.csbffPessoaBeneficio = csbffPessoaBeneficio;
     }
 
 }
