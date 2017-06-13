@@ -40,14 +40,14 @@
                                                                 <label class="control-label" >                                        
                                                                     CPF
                                                                 </label>
-                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{csbffDadosPessoaisBean.recCpf}" title="CPF" />
+                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{csbffFichaFuncionalBean.recCpf}" title="CPF" />
                                                             </div>
 
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group ">
                                                                 <label class="control-label">Código colaborador</label>
-                                                                <h:inputText label="codigo"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recIdpessoa}" disabled="true" />
+                                                                <h:inputText label="codigo"  class="form-control" value="#{csbffFichaFuncionalBean.recPessoa.recIdpessoa}" disabled="true" />
 
                                                             </div>
                                                         </div> 
@@ -58,15 +58,19 @@
                                                                     Nome Colaborador
                                                                     <!--                                                    <span class="required">*</span>-->
                                                                 </label>
-                                                                <h:inputText label="name"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recNomecompleto}" />
+                                                                <h:inputText label="name"  class="form-control" value="#{csbffFichaFuncionalBean.recPessoa.recNomecompleto}" />
                                                             </div>     
                                                         </div> 
-                                                        <div class="col-md-12 col-sm-3 col-xs-12">
+                                                        <div class="col-md-6 col-sm-3 col-xs-12">
                                                             <div class="element">
-                                                                <h:commandButton class="btn btn-primary"  value="Imprimir Ficha Funcional" action="#{csbffDadosPessoaisBean.buscarCpf()}"/>
+                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffFichaFuncionalBean.buscarCpf()}"/>
                                                             </div>
                                                         </div>
-
+                                                        <div class="col-md-6 col-sm-3 col-xs-12">
+                                                            <div class="element">
+                                                                <h:commandButton class="btn btn-primary"  value="Imprimir Ficha Funcional" action="#{csbffFichaFuncionalBean.imprimirFichaFuncional()}"/>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                 </div>
