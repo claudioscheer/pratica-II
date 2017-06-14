@@ -173,8 +173,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<RecPessoa> recPessoaList;
     @OneToOne
     private CsbffCargos cargoCbo;
-    @OneToOne
-    private CsbffCargos cargoNome;
+//    @OneToMany
+    private String cargoNome;
     private String admissaoDescricao;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
@@ -710,11 +710,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.cargoCbo = cargoCbo;
     }
 
-    public CsbffCargos getCargoNome() {
+    public String getCargoNome() {
         return cargoNome;
     }
 
-    public void setCargoNome(CsbffCargos cargoNome) {
+    public void setCargoNome(String cargoNome) {
 
         this.cargoNome = cargoNome;
     }
