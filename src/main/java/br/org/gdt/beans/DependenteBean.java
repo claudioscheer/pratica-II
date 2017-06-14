@@ -61,6 +61,7 @@ public class DependenteBean {
         return "dependente.xhtml";
     }
 
+
     public void save() {
         
         
@@ -89,6 +90,7 @@ public class DependenteBean {
         
         
     }
+    
 
     public void cancel() {
         this.formAtivo = false;
@@ -105,6 +107,7 @@ public class DependenteBean {
         todosdependentes.remove(dependente);
         return "dependente";
     }
+    
 
     public String prepareEdit(CsbffDependentes dependente) {
         this.formAtivo = true;
@@ -153,13 +156,7 @@ public class DependenteBean {
         this.todosdependentes = todosdependentes;
     }
 
-    public RecPessoa getRecPessoa() {
-        return recPessoa;
-    }
-
-    public void setRecPessoa(RecPessoa recPessoa) {
-        this.recPessoa = recPessoa;
-    }
+   
 
     public String getRecCpf() {
         return recCpf;
@@ -199,6 +196,14 @@ public class DependenteBean {
 
     public void setCsbffPessoaDependente(CsbffPessoaDependente csbffPessoaDependente) {
         this.csbffPessoaDependente = csbffPessoaDependente;
+    }
+
+    public RecPessoa getRecPessoa() {
+        return recPessoa;
+    }
+
+    public void setRecPessoa(RecPessoa recPessoa) {
+        this.recPessoa = recPessoa;
     }
 
 }

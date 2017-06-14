@@ -66,6 +66,7 @@
                                                     <label class="control-label " for="nome">
                                                         <div>&nbsp;</div>
                                                         Nome dependente
+                                                        <span class="required">*</span>
                                                     </label>
                                                     <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNome}" />
                                                 </div>
@@ -74,8 +75,10 @@
                                             <div class="col-md-6 col-sm-6 col-xs-12">
 
                                                 <div class="form-group ">
+                                                    <div>&nbsp;</div>
                                                     <label class="control-label " for="nome">
                                                         CPF
+                                                        <span class="required">*</span>
                                                     </label>
                                                     <h:inputText class="form-control" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
                                                 </div>
@@ -85,6 +88,7 @@
                                                 <div class="form-group ">
                                                     <label class="control-label " for="date">
                                                         Data de nascimento
+                                                        <span class="required">*</span>
                                                     </label>
                                                     <h:inputText class="form-control has-feedback-left date-picker" value="#{dependenteBean.csbffdependente.dependenteDataNascimento}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -101,6 +105,7 @@
                                                 <div class="form-group ">
                                                     <label class="control-label " for="select">
                                                         Tipo de dependente
+                                                        <span class="required">*</span>
                                                     </label>
                                                     <h:selectOneMenu id="combotipoDependente" value="#{dependenteBean.csbffdependente.dependenteTipo}" class="form-control" >
                                                         <f:selectItem itemLabel="Filho" itemValue="#{1}" />
@@ -119,6 +124,7 @@
 
                                                     <label class="control-label " for="number">
                                                         Naturalidade
+                                                        <span class="required">*</span>
                                                     </label>
 
                                                     <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNaturalidade}" />
@@ -131,6 +137,7 @@
 
                                                     <label class="control-label " for="number">
                                                         Número termo/certidão nascimento
+                                                        <span class="required">*</span>
                                                     </label>
                                                     <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteRgCertNascimento}" />
                                                 </div>
@@ -140,7 +147,7 @@
                                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                 <div class="form-group ">
                                                     <label class="control-label requiredField" for="txbCurCodigo">
-                                                        Dependente de Imposto de Renda 
+                                                        Dependente de Imposto de Renda
                                                     </label>                                                           
 
 

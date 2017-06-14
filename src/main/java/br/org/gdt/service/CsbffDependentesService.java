@@ -45,5 +45,13 @@ public class CsbffDependentesService {
     public List<CsbffDependentes> findAll() {
         return csbffdependenteDAO.findAll();
     }
+
+    public CsbffDependenteDao getCsbffdependenteDAO() {
+        return csbffdependenteDAO;
+    }
+
+    public void setCsbffdependenteDAO(CsbffDependenteDao csbffdependenteDAO) {
+        this.csbffdependenteDAO = csbffdependenteDAO;
+    }
     
 }

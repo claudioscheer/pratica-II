@@ -183,5 +183,9 @@ public class CsbffDependentes implements Serializable {
     public String toString() {
         return "br.org.gdt.modelNew.CsbffDependentes[ dependenteCod=" + dependenteCod + " ]";
     }
+
+    public boolean isDependenteImpostoDeRenda() {
+        return dependenteImpostoDeRenda;
+    }
     
 }
