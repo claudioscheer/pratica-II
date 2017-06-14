@@ -7,13 +7,28 @@ import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.FichaFuncional.FichaFuncional;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecPessoaService;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import org.olap4j.impl.ArrayMap;
 
 @ManagedBean
 @RequestScoped
@@ -75,6 +90,8 @@ public class CsbffFichaFuncionalBean {
 //        return null;
 //
 //    }
+
+    
     public void cancel() {
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
@@ -86,11 +103,11 @@ public class CsbffFichaFuncionalBean {
 
         }
     }
-    public void imprimirFichaFuncional() {
+    public void imprimirFichaFuncional(RecPessoa pessoa) {
         try {
 //            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
 //            folhasPeriodo.add(fpFolhaPeriodo);
-            fichaFuncional.gerarFichaFuncional();
+            fichaFuncional.gerarFichaFuncional(pessoa);
         } catch (Exception e) {
             Helper.mostrarNotificacao("Erro", e.getMessage(), "error");
         }

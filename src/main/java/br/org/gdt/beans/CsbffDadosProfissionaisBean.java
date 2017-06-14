@@ -24,6 +24,7 @@ import br.org.gdt.service.CsbffPessoaBeneficioService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -182,6 +183,7 @@ public class CsbffDadosProfissionaisBean {
         String MsgNotificacao = "";
         try {
             recPessoa.setColaboradorInativo(true);
+            recPessoa.setRecDtaDemissao(new Date());
             recPessoa.setRecFuncionario(false);
             recPessoaService.update(recPessoa);
 
