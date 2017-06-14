@@ -7,6 +7,7 @@ package br.org.gdt.service;
 
 import br.org.gdt.dao.GchTreinamentoPessoasDAO;
 import br.org.gdt.model.GchTreinamentospessoas;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,4 +58,12 @@ public class GchTreinamentoPessoaService {
         
         return gchTreinamentoPessoasDAO.verificaPessoasVinculadoTreinamento(idTreinamento, idPessoa);
     }
+    
+    public List<GchTreinamentospessoas> treinamentosPessoa(RecPessoa pessoa){
+        
+        return gchTreinamentoPessoasDAO.treinamentosPessoa(pessoa);
+        
+        
+    }
+    
 }

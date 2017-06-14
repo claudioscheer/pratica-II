@@ -5,8 +5,12 @@
  */
 package br.org.gdt.dao;
 
+import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.CsbffEscalaHoras;
+import br.org.gdt.model.RecPessoa;
+import java.util.List;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +38,19 @@ public class CsbffEscalaHorasDAO extends DAO<CsbffEscalaHoras> {
 
         }
     }
+   
+   public List<CsbffEscalaHoras> buscaEscalasPessoa(RecPessoa pessoa){
+       
+        Query query = entityManager.createQuery("from CsbffEscalaHoras as t where t.recIdpessoa.recIdpessoa = :idPessoa");
+        query.setParameter("idPessoa", pessoa.getRecIdpessoa());
+        
+        List<CsbffEscalaHoras> lista = query.getResultList();
+        
+        return lista;
+      
+   }
+   
+   
 
 }
 

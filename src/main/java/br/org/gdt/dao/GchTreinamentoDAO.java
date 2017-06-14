@@ -6,6 +6,7 @@
 package br.org.gdt.dao;
 
 import br.org.gdt.model.GchTreinamentos;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;

@@ -7,6 +7,7 @@ package br.org.gdt.service;
 
 import br.org.gdt.dao.CsbffEscalaHorasDAO;
 import br.org.gdt.model.CsbffEscalaHoras;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,13 @@ public class CsbffEscalaHorasService {
 
     public List<CsbffEscalaHoras> findAll() {
         return csbffEscalaHorasDAO.findAll();
+    }
+    
+    public List<CsbffEscalaHoras> buscarEscalasPessoa(RecPessoa pessoa){
+        
+        return csbffEscalaHorasDAO.buscaEscalasPessoa(pessoa);
+        
+        
     }
 
 }

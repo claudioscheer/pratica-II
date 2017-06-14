@@ -7,7 +7,10 @@ package br.org.gdt.dao;
 
 
 import br.org.gdt.model.CsbffBeneficios;
+import br.org.gdt.model.GchTreinamentospessoas;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -23,4 +26,16 @@ public class CsbffBeneficioDAO extends DAO<CsbffBeneficios>{
     public List<CsbffBeneficios> findAll(long nomeBeneficio) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<CsbffBeneficios> buscaBeneficiosPessoa(RecPessoa pessoa){
+        
+        Query query = entityManager.createQuery("from CsbffBeneficios as t where t.recIdpessoa.recIdpessoa = :idPessoa");
+        query.setParameter("idPessoa", pessoa.getRecIdpessoa());
+        
+        List<CsbffBeneficios> lista = query.getResultList();
+        
+        return lista;
+
+    }
+    
 }

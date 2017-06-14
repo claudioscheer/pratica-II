@@ -18,17 +18,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
-import org.olap4j.impl.ArrayMap;
+
 
 @ManagedBean
 @RequestScoped
@@ -103,11 +93,12 @@ public class CsbffFichaFuncionalBean {
 
         }
     }
-    public void imprimirFichaFuncional(RecPessoa pessoa) {
+    public void imprimirFichaFuncional() {
         try {
 //            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
 //            folhasPeriodo.add(fpFolhaPeriodo);
-            fichaFuncional.gerarFichaFuncional(pessoa);
+ 
+            fichaFuncional.gerarFichaFuncional(recPessoa);
         } catch (Exception e) {
             Helper.mostrarNotificacao("Erro", e.getMessage(), "error");
         }

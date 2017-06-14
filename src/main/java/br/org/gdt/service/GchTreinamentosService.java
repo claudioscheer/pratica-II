@@ -7,6 +7,7 @@ package br.org.gdt.service;
 
 import br.org.gdt.dao.GchTreinamentoDAO;
 import br.org.gdt.model.GchTreinamentos;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,7 @@ public class GchTreinamentosService {
        return gchTreinamentoDAO.buscaPorCurso(id);
        
    }
-    
+   
+ 
     
 }

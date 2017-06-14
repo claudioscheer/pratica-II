@@ -5,7 +5,9 @@
  */
 package br.org.gdt.dao;
 
+import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
@@ -52,6 +54,18 @@ public class GchTreinamentoPessoasDAO  extends DAO<GchTreinamentospessoas>{
         
         return query.getResultList();
         
+    }
+    
+    public List<GchTreinamentospessoas> treinamentosPessoa(RecPessoa pessoa){
+        
+     
+        Query query = entityManager.createQuery("from GchTreinamentospessoas as t where t.recIdpessoa.recIdpessoa = :idPessoa");
+        query.setParameter("idPessoa", pessoa.getRecIdpessoa());
+        
+        List<GchTreinamentospessoas> lista = query.getResultList();
+        
+        return lista;
+   
     }
     
     

@@ -2,6 +2,7 @@ package br.org.gdt.service;
 
 import br.org.gdt.dao.CsbffBeneficioDAO;
 import br.org.gdt.model.CsbffBeneficios;
+import br.org.gdt.model.RecPessoa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,4 +44,13 @@ public class CsbffBeneficiosService {
     public List<CsbffBeneficios> findAll() {
         return csbffBeneficioDAO.findAll();
     }
+    
+    public List<CsbffBeneficios> TodosBeneficiosPessoa(RecPessoa pessoa){
+        
+        return csbffBeneficioDAO.buscaBeneficiosPessoa(pessoa);
+        
+    }
+    
+    
+    
 }
