@@ -49,7 +49,6 @@ public class DependenteBean {
     }
 
     public void buscarCpf() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>  CPF:  " + recCpf);
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         NomeCompleto = recPessoa.getRecNomecompleto();
         if (recPessoa == null) {
