@@ -47,22 +47,30 @@
 
                         <!-- sidebar menu -->
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                            <h:form>
-                                <div class="menu_section">                                    
+                            <div class="menu_section">   
+                                <ul class="nav side-menu" style="padding: 0px">
+                                    <li data-toggle="tooltip" 
+                                        data-placement="right" 
+                                        title="" 
+                                        data-original-title="Visualizar Vagas">
+                                        <h:link outcome="#{recVagaBean.AbrirPaginaVagas()}" >
+                                            <i class="fa fa-users">                                                            
+                                            </i> Vagas Disponíveis
+                                        </h:link>
+                                    </li>
 
-                                    <ul class="nav side-menu">
-                                        <li>
-                                            <a><i class="fa fa-list"></i> Trabalhe Conosco <span class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu">
-                                                <li><h:link outcome="#{recVagaBean.AbrirPaginaVagas()}" 
-                                                            value="Vagas Disponíveis"></h:link></li>
-                                                <li><h:link outcome="/recrutamento/curriculo.xhtml" 
-                                                            value="Cadastrar Seu Currículo"></h:link></li>                                                                                                
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </h:form>
+
+                                    <li data-toggle="tooltip" 
+                                        data-placement="right" 
+                                        title="" 
+                                        data-original-title="Visualizar Vagas">
+                                        <h:link outcome="/recrutamento/curriculo.xhtml" >
+                                            <i class="fa fa-user">                                                            
+                                            </i> Cadastre seu Currículo
+                                        </h:link>
+                                    </li>
+                                </ul>        
+                            </div>
                         </div>
                         <!-- /sidebar menu -->                        
                     </div>

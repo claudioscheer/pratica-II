@@ -37,8 +37,6 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.FetchMode;
-import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -90,12 +88,10 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recObjprofissional;
     @Column(name = "rec_autoavaliacao")
     private String recAutoavaliacao;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "rec_pretencaosalarial")
     private String recPretencaosalarial;
     //@Lob
     @Column(name = "rec_foto")
-    //private byte[] recFoto;
     private byte[] recFoto;
     @Column(name = "rec_pispasep")
     private String recPispasep;
@@ -129,8 +125,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_segurodesemprego")
     private String recSegurodesemprego;
     @Basic(optional = true)
-//    @Column(name = "rec_insalubridade")
-//    private String recInsalubridade;
     @Column(name = "rec_periculosidade")
     private Periculosidade recPericulosidade;
     @Column(name = "rec_NomeBanco")
@@ -142,10 +136,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_dta_demissao")
     @Temporal(TemporalType.DATE)
     private Date recDtaDemissao;
-//    @Column(name = "rec_percentual_insalubridade")
-//    private BigInteger recPercentualInsalubridade;
-
-    @ManyToMany()    
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<RecHabilidade> recHabilidadeList;
     @ManyToMany(mappedBy = "recPessoaList")
     private List<RecExperiencia> recExperienciaList;
@@ -153,8 +144,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffCargosHistorico> csbffCargosHistoricoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<RecSelecao> recSelecaoList;
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
-//    private CsbffEscalaHoras csbffEscalaHoras;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
@@ -174,6 +163,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchRespostas> gchRespostasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchFormularioPessoa> gchFormularioPessoas;
+
     @OneToMany
     private List<CsbffBeneficios> csbffBeneficiosList;
     private Insalubridade insalubridade;
@@ -190,93 +180,15 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
     private CsbffEscalaHoras csbffEscalaHoras;
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa")
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
     @OneToOne
     private CsbffCargos cargos;
-//    private DiasATrabalhar diasATrabalhar;
-//    @OneToOne
     private double cargoValorSalario;
-    @OneToOne
-    private CsbffEscalaHoras escalaCodigo;
     public boolean colaboradorInativo;
+
     @OneToOne
-    private CsbffPessoaBeneficio pessoaBeneficioCodigo;
-
-//    public RecPessoa(long recIdpessoa, String recNomecompleto, String recCpf, int recSexo, int recEstadocivil, String recRg, String recOrgaoemissor, Date recDtemissao, String recNomepai, String recNomemae, Date recDtnascimento, String recEmail, String recCelular, String recTelefone, String recObjprofissional, String recAutoavaliacao, String recPretencaosalarial, byte[] recFoto, String recPispasep, String recReservista, String recEndereco, String recBairro, String recNumero, String recComplemento, String recCor, Boolean recFuncionario, String recNacionalidade, BigInteger recNumCtps, BigInteger recNumeroContaBanco, BigInteger recAgenciaBancaria, BigInteger recEscolaridade, Date recDtaAdmissao, String recSegurodesemprego, String recInsalubridade, Periculosidade recPericulosidade, String recNomeBanco, BigInteger recNumTituEleitor, BigInteger recCertificadoReservista, Date recDtaDemissao, List<RecHabilidade> recHabilidadeList, List<RecExperiencia> recExperienciaList, List<CsbffCargosHistorico> csbffCargosHistoricoList, List<RecSelecao> recSelecaoList, List<GchTreinamentospessoas> gchTreinamentospessoasList, CsbffPessoaDependente colabDepCodigo, CsbffCargos cargoCodigo, GchMunicipios munCodigo, RecGrauensino recIdgrauensino, List<CsbffHistoricoSalario> csbffHistoricoSalarioList, List<GchRespostas> gchRespostasList, List<GchFormularioPessoa> gchFormularioPessoas, List<CsbffBeneficios> csbffBeneficiosList, Insalubridade insalubridade, PossuiDependentes possuiDependente, Integer recPesGrauEnsino, List<RecPessoa> recPessoaList, CsbffCargos cargoCbo, CsbffCargos cargoNome, String admissaoDescricao, List<CsbffEscalaHoras> csbffEscalaHorasList, CsbffEscalaHoras csbffEscalaHoras, List<CsbffPessoaBeneficio> csbffPessoaBeneficioList, CsbffCargos cargos, CsbffCargos cargoValorSalario, CsbffEscalaHoras escalaCodigo, boolean colaboradorInativo, CsbffPessoaBeneficio pessoaBeneficioCodigo) {
-//        this.recIdpessoa = recIdpessoa;
-//        this.recNomecompleto = recNomecompleto;
-//        this.recCpf = recCpf;
-//        this.recSexo = recSexo;
-//        this.recEstadocivil = recEstadocivil;
-//        this.recRg = recRg;
-//        this.recOrgaoemissor = recOrgaoemissor;
-//        this.recDtemissao = recDtemissao;
-//        this.recNomepai = recNomepai;
-//        this.recNomemae = recNomemae;
-//        this.recDtnascimento = recDtnascimento;
-//        this.recEmail = recEmail;
-//        this.recCelular = recCelular;
-//        this.recTelefone = recTelefone;
-//        this.recObjprofissional = recObjprofissional;
-//        this.recAutoavaliacao = recAutoavaliacao;
-//        this.recPretencaosalarial = recPretencaosalarial;
-//        this.recFoto = recFoto;
-//        this.recPispasep = recPispasep;
-//        this.recReservista = recReservista;
-//        this.recEndereco = recEndereco;
-//        this.recBairro = recBairro;
-//        this.recNumero = recNumero;
-//        this.recComplemento = recComplemento;
-//        this.recCor = recCor;
-//        this.recFuncionario = recFuncionario;
-//        this.recNacionalidade = recNacionalidade;
-//        this.recNumCtps = recNumCtps;
-//        this.recNumeroContaBanco = recNumeroContaBanco;
-//        this.recAgenciaBancaria = recAgenciaBancaria;
-//        this.recEscolaridade = recEscolaridade;
-//        this.recDtaAdmissao = recDtaAdmissao;
-//        this.recSegurodesemprego = recSegurodesemprego;
-//        this.recInsalubridade = recInsalubridade;
-//        this.recPericulosidade = recPericulosidade;
-//        this.recNomeBanco = recNomeBanco;
-//        this.recNumTituEleitor = recNumTituEleitor;
-//        this.recCertificadoReservista = recCertificadoReservista;
-//        this.recDtaDemissao = recDtaDemissao;
-////        this.recPercentualInsalubridade = recPercentualInsalubridade;
-//        this.recHabilidadeList = recHabilidadeList;
-//        this.recExperienciaList = recExperienciaList;
-//        this.csbffCargosHistoricoList = csbffCargosHistoricoList;
-//        this.recSelecaoList = recSelecaoList;
-//        this.gchTreinamentospessoasList = gchTreinamentospessoasList;
-//        this.colabDepCodigo = colabDepCodigo;
-//        this.cargoCodigo = cargoCodigo;
-//        this.munCodigo = munCodigo;
-//        this.recIdgrauensino = recIdgrauensino;
-//        this.csbffHistoricoSalarioList = csbffHistoricoSalarioList;
-//        this.gchRespostasList = gchRespostasList;
-//        this.gchFormularioPessoas = gchFormularioPessoas;
-//        this.csbffBeneficiosList = csbffBeneficiosList;
-//        this.insalubridade = insalubridade;
-//        this.possuiDependente = possuiDependente;
-//        this.recPesGrauEnsino = recPesGrauEnsino;
-//        this.recPessoaList = recPessoaList;
-//        this.cargoCbo = cargoCbo;
-//        this.cargoNome = cargoNome;
-//        this.admissaoDescricao = admissaoDescricao;
-//        this.csbffEscalaHorasList = csbffEscalaHorasList;
-//        this.csbffEscalaHoras = csbffEscalaHoras;
-//        this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
-//        this.cargos = cargos;
-//        this.cargoValorSalario = cargoValorSalario;
-//        this.escalaCodigo = escalaCodigo;
-//        this.colaboradorInativo = colaboradorInativo;
-//        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
-//    }
-
-    
-
-    
+    private CsbffPessoaBeneficio csbffPessoaBeneficio;
 
     @Override
     public String toString() {
@@ -561,7 +473,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setRecInsalubridade(String recInsalubridade) {
 //        this.recInsalubridade = recInsalubridade;
 //    }
-
     public Periculosidade getRecPericulosidade() {
         return recPericulosidade;
     }
@@ -609,7 +520,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setRecPercentualInsalubridade(BigInteger recPercentualInsalubridade) {
 //        this.recPercentualInsalubridade = recPercentualInsalubridade;
 //    }
-
     @XmlTransient
     @JsonIgnore
     public List<RecHabilidade> getRecHabilidadeList() {
@@ -679,7 +589,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
         if (this.csbffPessoaBeneficioList == null) {
             this.csbffPessoaBeneficioList = new ArrayList<>();
-//            this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
+            this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
         }
 
         return csbffPessoaBeneficioList;
@@ -860,28 +770,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.csbffEscalaHoras = csbffEscalaHoras;
     }
 
-    public CsbffEscalaHoras getEscalaCodigo() {
-        return escalaCodigo;
-    }
-
-    public void setEscalaCodigo(CsbffEscalaHoras escalaCodigo) {
-        this.escalaCodigo = escalaCodigo;
-    }
-
     public boolean isColaboradorInativo() {
         return colaboradorInativo;
     }
 
     public void setColaboradorInativo(boolean colaboradorInativo) {
         this.colaboradorInativo = colaboradorInativo;
-    }
-
-    public CsbffPessoaBeneficio getPessoaBeneficioCodigo() {
-        return pessoaBeneficioCodigo;
-    }
-
-    public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio pessoaBeneficioCodigo) {
-        this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
     }
 
     @Override
@@ -905,8 +799,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         }
         return true;
     }
-    
-    
-    
+
+    public CsbffPessoaBeneficio getCsbffPessoaBeneficio() {
+        return csbffPessoaBeneficio;
+    }
+
+    public void setCsbffPessoaBeneficio(CsbffPessoaBeneficio csbffPessoaBeneficio) {
+        this.csbffPessoaBeneficio = csbffPessoaBeneficio;
+    }
 
 }

@@ -6,10 +6,9 @@
 package br.org.gdt.model;
 
 import br.org.gdt.converts.SampleEntity;
+import br.org.gdt.enums.AbrangenciaBeneficio;
 import br.org.gdt.enums.TipoBeneficio;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,9 +16,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -49,33 +49,30 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
     private String beneficioDescricao;
     @Basic(optional = true)
     @Column(name = "abrangencia")
-    private String abrangencia;
+    private AbrangenciaBeneficio abrangencia;
 //    @Column(name = "beneficio_valor")
 //    private Double beneficioValor;
     @Column(name = "befencio_data_vigente")
     @Temporal(TemporalType.DATE)
     private Date befencioDataVigente;
     private TipoBeneficio tipoBeneficio;
-    @OneToMany
-    private List<CsbffBeneficios> csbffBeneficiosList;
-
-    public CsbffBeneficios(List<CsbffBeneficios> csbffBeneficiosList) {
-        this.csbffBeneficiosList = csbffBeneficiosList;
-    }
-
-    public CsbffBeneficios(TipoBeneficio tipoBeneficio) {
-        this.tipoBeneficio = tipoBeneficio;
-    }
+    
+    @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
+    @ManyToOne
+    private RecPessoa recIdpessoa;
 
     public CsbffBeneficios() {
     }
 
-    public CsbffBeneficios(long beneficioCodigo) {
+    public CsbffBeneficios(long beneficioCodigo, String beneficioNome, String beneficioDescricao, AbrangenciaBeneficio abrangencia, Date befencioDataVigente, TipoBeneficio tipoBeneficio) {
         this.beneficioCodigo = beneficioCodigo;
+        this.beneficioNome = beneficioNome;
+        this.beneficioDescricao = beneficioDescricao;
+        this.abrangencia = abrangencia;
+        this.befencioDataVigente = befencioDataVigente;
+        this.tipoBeneficio = tipoBeneficio;
     }
 
-//    public CsbffBeneficios(String string) {
-//    }
     public long getBeneficioCodigo() {
         return beneficioCodigo;
     }
@@ -100,11 +97,11 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
         this.beneficioDescricao = beneficioDescricao;
     }
 
-    public String getAbrangencia() {
+    public AbrangenciaBeneficio getAbrangencia() {
         return abrangencia;
     }
 
-    public void setAbrangencia(String abrangencia) {
+    public void setAbrangencia(AbrangenciaBeneficio abrangencia) {
         this.abrangencia = abrangencia;
     }
 
@@ -116,11 +113,22 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
         this.befencioDataVigente = befencioDataVigente;
     }
 
+    public TipoBeneficio getTipoBeneficio() {
+        return tipoBeneficio;
+    }
+
+    public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + (int) (this.beneficioCodigo ^ (this.beneficioCodigo >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.beneficioNome);
+        int hash = 7;
+        hash = 17 * hash + (int) (this.beneficioCodigo ^ (this.beneficioCodigo >>> 32));
+        hash = 17 * hash + Objects.hashCode(this.beneficioNome);
+        hash = 17 * hash + Objects.hashCode(this.beneficioDescricao);
+        hash = 17 * hash + Objects.hashCode(this.abrangencia);
+        hash = 17 * hash + Objects.hashCode(this.tipoBeneficio);
         return hash;
     }
 
@@ -142,38 +150,31 @@ public class CsbffBeneficios implements java.io.Serializable, SampleEntity {
         if (!Objects.equals(this.beneficioNome, other.beneficioNome)) {
             return false;
         }
+        if (!Objects.equals(this.beneficioDescricao, other.beneficioDescricao)) {
+            return false;
+        }
+        if (this.abrangencia != other.abrangencia) {
+            return false;
+        }
+        if (this.tipoBeneficio != other.tipoBeneficio) {
+            return false;
+        }
         return true;
     }
 
     @Override
-    public String toString() {
-        return beneficioNome;
-    }
-
-    public TipoBeneficio getTipoBeneficio() {
-        return tipoBeneficio;
-    }
-
-    public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
-        this.tipoBeneficio = tipoBeneficio;
-    }
-
-    @Override
     public Long getId() {
-        return this.beneficioCodigo;
+        return beneficioCodigo;
 
     }
 
-    public List<CsbffBeneficios> getCsbffBeneficiosList() {
-//        if (this.csbffBeneficiosList == null) {
-//            this.csbffBeneficiosList = new ArrayList<>();
-//        }
-//        
-        return csbffBeneficiosList;
+    public RecPessoa getRecIdpessoa() {
+        return recIdpessoa;
     }
 
-    public void setCsbffBeneficiosList(List<CsbffBeneficios> csbffBeneficiosList) {
-        this.csbffBeneficiosList = csbffBeneficiosList;
+    public void setRecIdpessoa(RecPessoa recIdpessoa) {
+        this.recIdpessoa = recIdpessoa;
     }
+   
 
 }

@@ -92,11 +92,14 @@
                                                     </h:column>
                                                     <h:column>
                                                         <f:facet name="header">Opções</f:facet>
-                                                        <h:commandLink action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}" a:data-placement="left" a:data-toggle="tooltip" a:data-original-title="Editar" >
+                                                        <h:commandLink action="#{fpEnvelopePagamentoBean.validarFolhaPeriodo(folhaPeriodo)}" a:data-placement="left" a:data-toggle="tooltip" a:data-original-title='#{fpEnvelopePagamentoBean.fpPeriodo.perPago? "Visualizar" : "Editar"}' style="padding-right: 10px">
+                                                            <i class='#{fpEnvelopePagamentoBean.fpPeriodo.perPago ? "glyphicon glyphicon-eye-open" : "glyphicon glyphicon-edit"}' style="font-size:18px"></i>
                                                             <f:ajax execute="@form" render="formEnvelopePagamento" />
                                                         </h:commandLink>
 
-                                                        <h:commandLink class="btn btn-dark btn-sm" value="Reimprimir" action="#{fpEnvelopePagamentoBean.reimprimirFolhaPagamento(folhaPeriodo)}" />
+                                                        <h:commandLink action="#{fpEnvelopePagamentoBean.reimprimirFolhaPagamento(folhaPeriodo)}"  a:data-placement="left" a:data-toggle="tooltip" a:data-original-title="Reimprimir">
+                                                            <i class="glyphicon glyphicon-print" style="font-size:18px"></i>
+                                                        </h:commandLink>
                                                     </h:column>
                                                 </h:dataTable>
                                             </div>

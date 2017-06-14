@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
 import br.org.gdt.model.RecHabilidade;
+import br.org.gdt.model.RecRequisicaoVaga;
 import br.org.gdt.model.RecVaga;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecHabilidadeService;
@@ -73,7 +74,7 @@ public class RecVagaBean {
 
     public String AbrirPaginaVagas() {
         if (this.ListarTodasExternas().size() > 0) {
-            return "menu_vaga_lista";            
+            return "menu_vaga_lista";
         } else {
             return "sem_vagas";
         }
@@ -105,6 +106,14 @@ public class RecVagaBean {
     public String PreparaEdicao(RecVaga vaga) {
         this.formAtivo = true;
         this.vaga = vaga;
+        return "vagas";
+    }
+
+    public String GerarVaga(RecRequisicaoVaga req) {
+        this.formAtivo = true;        
+        vaga.setRecDescricao(req.getRecDescricao());
+        vaga.setRecSexo(req.getRecSexo());
+        vaga.setRecGrauensino(req.getRecIdgrauensino());
         return "vagas";
     }
 

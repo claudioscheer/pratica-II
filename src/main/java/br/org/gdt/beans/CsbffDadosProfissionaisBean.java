@@ -23,17 +23,17 @@ import br.org.gdt.service.CsbffEscalaHorasService;
 import br.org.gdt.service.CsbffPessoaBeneficioService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class CsbffDadosProfissionaisBean {
 
     private boolean formAtivo = false;
@@ -53,8 +53,6 @@ public class CsbffDadosProfissionaisBean {
     private CsbffDependentes csbffDependentes;
     private List<CsbffBeneficios> beneficios;
     private CsbffBeneficios csbffBeneficios = new CsbffBeneficios();
-//    private List<CsbffEscalaHoras> todosCsbffEscalaHoras;
-
     @ManagedProperty("#{csbffCargosService}")
     private CsbffCargosService csbffCargosService;
     private List<CsbffCargos> csbffCargosList;
@@ -125,10 +123,9 @@ public class CsbffDadosProfissionaisBean {
         return null;
     }
 
-    public void alimentaCBO() {
-        recPessoa.setCargoCbo(csbffCargos);
-    }
-
+//    public void alimentaCBO() {
+//        recPessoa.setCargoCbo(csbffCargos);
+//    }
     public Sexo[] getGeneros() {
         return Sexo.values();
     }
@@ -164,7 +161,7 @@ public class CsbffDadosProfissionaisBean {
     public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         String MsgNotificacao = "";
-        if (recPessoa == null) {
+        while (recPessoa == null) {
             MsgNotificacao = "A pessoa não existe.";
             Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "error");
             return;
@@ -261,17 +258,8 @@ public class CsbffDadosProfissionaisBean {
     }
 
     public String removerBeneficioPessoa(CsbffPessoaBeneficio csbffPessoaBeneficio) {
-        String MsgNotificacao = "";
-        try {
-            this.recPessoa.getCsbffPessoaBeneficioList().remove(csbffPessoaBeneficio);
-            MsgNotificacao = "O beneficio foi excluído!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
-        } catch (Exception ex) {
-            MsgNotificacao = "O beneficio não pode ser excluído!";
-            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
 
-        }
-//        RequestContext.getCurrentInstance().update("csbffEscalaHorasList");
+        this.recPessoa.getCsbffPessoaBeneficioList().remove(csbffPessoaBeneficio);
 
         return "dadosprofissionais";
     }
@@ -279,7 +267,7 @@ public class CsbffDadosProfissionaisBean {
     public void addBeneficioPessoa() {
 
         csbffPessoaBeneficio.setRecIdpessoa(this.recPessoa);
-        csbffPessoaBeneficio.setPessoaBeneficioCodigo(this.csbffPessoaBeneficio);
+        csbffPessoaBeneficio.setBeneficioCodigo(this.csbffBeneficios);
 
         if (this.recPessoa.getCsbffPessoaBeneficioList() == null) {
             this.recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());

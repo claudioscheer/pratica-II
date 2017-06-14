@@ -18,8 +18,7 @@
                     <h3>Cadastro de Currículo</h3>
                 </div>
                 <br />
-                <!--<h:form id="formCurriculo" enctype="multipart/form-data">                                       -->
-                <h:form id="formCurriculo">
+                <h:form id="formCurriculo" enctype="multipart/form-data">                                                       
                     <p:panel visible="#{recPessoaBean.formAtivo}">
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
@@ -74,11 +73,11 @@
                                             <label class="control-label " for="select">
                                                 Sexo
                                             </label>
-                                            <h:selectOneMenu id="comboSexo" value="#{recPessoaBean.recPessoa.recSexo}" class="form-control" >
+                                            <h:selectOneMenu id="comboSexo" 
+                                                             value="#{recPessoaBean.recPessoa.recSexo}" 
+                                                             class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
                                                 <f:selectItems value="#{recPessoaBean.sexo}" />
-<!--                                                <f:selectItem itemLabel="Masculino" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Feminino" itemValue="#{2}" />                                                                                                                                                                                             -->
                                             </h:selectOneMenu>                                                                            
                                         </div>     
                                     </div>  
@@ -92,12 +91,7 @@
                                                              value="#{recPessoaBean.recPessoa.recEstadocivil}" 
                                                              class="form-control">
                                                 <f:selectItem itemLabel="Selecione o Estado Civil" itemValue="#{null}" />
-                                                <f:selectItems value="#{recPessoaBean.estadoCivil}" />
-<!--                                                <f:selectItem itemLabel="Solteiro(a)" itemValue="#{1}" />                                                
-                                                <f:selectItem itemLabel="Casado(a)" itemValue="#{2}" />   
-                                                <f:selectItem itemLabel="Separado(a)" itemValue="#{3}" />                                                
-                                                <f:selectItem itemLabel="Divorciado(a)" itemValue="#{4}" />      
-                                                <f:selectItem itemLabel="Viúvo(a)" itemValue="#{5}" />                                                      -->
+                                                <f:selectItems value="#{recPessoaBean.estadoCivil}" /><!--                                                                                             -->
                                             </h:selectOneMenu>     
 
                                         </div>     
@@ -115,7 +109,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel 
-                                                value="Orgao Emissor" 
+                                                value="Orgão Emissor" 
                                                 for="OrgaoEmissor" />                                            
                                             <h:inputText class="form-control" 
                                                          id="OrgaoEmissor" 
