@@ -55,11 +55,16 @@
                                                 <br></br>
                                             </div> 
 
+                                            <div>
+                                                <br></br>
+                                            </div>
+
 
                                             <div class="col-md-6 col-sm-6 col-xs-6">
 
                                                 <div class="form-group ">
                                                     <label class="control-label " for="nome">
+                                                        <div>&nbsp;</div>
                                                         Nome dependente
                                                     </label>
                                                     <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNome}" />
@@ -151,6 +156,7 @@
                                                 <div>
                                                     <div class="row">
 
+                                                        <div>&nbsp;</div>
                                                         <h:commandButton class="btn btn-primary" value=" salvar" action="#{dependenteBean.save()}"/>                                  
                                                         <h:commandButton value="Cancelar" class="btn btn-danger" action="#{dependenteBean.add()}"/>
 
@@ -159,8 +165,29 @@
                                                 </div>
 
                                             </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div>
+                                                    <div class="row">
+
+                                                        <div>&nbsp;</div>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div>
+                                                    <div class="row">
+
+                                                        <div>&nbsp;</div>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
 
 
+                                            <div>&nbsp;</div>
                                             <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
                                                 <div class="row">
                                                     <div class="x_panel">
@@ -186,11 +213,11 @@
                                                                     <h:commandLink class="btn btn-link btn-small" action="#{dependenteBean.pg(dependete)}">
                                                                         <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                                     </h:commandLink>
-                                                                
+
                                                                     <h:commandLink title="Excluir" action="#{dependenteBean.excluir(dependente)}" onclick="return confirm('Voce realmente deseja excluir?')" >
-                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                    </h:commandLink>
-                                                </h:column>
+                                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                                    </h:commandLink>
+                                                                </h:column>
                                                             </h:dataTable>
 
                                                         </div>
