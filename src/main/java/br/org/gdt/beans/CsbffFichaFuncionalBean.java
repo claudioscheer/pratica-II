@@ -1,25 +1,17 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.enums.EstadoCivil;
-import static br.org.gdt.enums.LogModulo.FichaFuncional;
-import br.org.gdt.enums.Sexo;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.FichaFuncional.FichaFuncional;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecPessoaService;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 
 @ManagedBean
 @SessionScoped
@@ -66,23 +58,6 @@ public class CsbffFichaFuncionalBean {
         return pessoas;
     }
 
-//    public String saveDadosPessoais() {
-//        if (recPessoa.getRecIdpessoa() > 0) {
-//            recPessoaService.update(recPessoa);
-//        }
-//        recPessoaList = recPessoaService.findAll();
-//        this.formAtivo = false;
-//        this.recPessoa = new RecPessoa();
-//         return "dadosprofissionais";
-//    }
-//    public String cancel() {
-//        this.formAtivo = false;
-//        this.recPessoa = new RecPessoa();
-//        return null;
-//
-//    }
-
-    
     public void cancel() {
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();

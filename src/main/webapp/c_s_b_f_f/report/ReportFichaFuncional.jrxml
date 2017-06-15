@@ -214,9 +214,9 @@
 	<title>
 		<band height="66" splitType="Stretch">
 			<staticText>
-				<reportElement x="150" y="0" width="229" height="30" uuid="c4e2fd4b-d0fc-4771-98c5-59fa0daedd9d"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+				<reportElement x="150" y="0" width="229" height="60" uuid="c4e2fd4b-d0fc-4771-98c5-59fa0daedd9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FICHA FUNCIONAL]]></text>
 			</staticText>
@@ -251,6 +251,23 @@
 				</textElement>
 				<text><![CDATA[DADOS COLABORADOR]]></text>
 			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="552" height="1" uuid="0071bc0e-4cb2-48b1-a97f-0167c980c741">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="9" width="259" height="22" uuid="2df22372-814b-44f4-9a0c-ec71f9842864"/>
+				<textFieldExpression><![CDATA[$P{empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="10" width="211" height="20" uuid="422917da-4dc3-443d-a394-d3d45df7cd03"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cnpj}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -905,12 +922,20 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="8" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="237" y="10" width="110" height="25" uuid="a83d30fb-2062-4711-8ced-cb1a98a5a1f7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sistema Murphy RH]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="11" splitType="Stretch"/>
 	</summary>
 </jasperReport>

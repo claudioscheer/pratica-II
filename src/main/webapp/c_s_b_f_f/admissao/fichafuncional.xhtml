@@ -51,7 +51,6 @@
 
                                                             </div>
                                                         </div> 
-
                                                         <div class="col-md-12 col-sm-12 col-xs-12">                                
                                                             <div class="form-group ">
                                                                 <label class="control-label " >
@@ -61,17 +60,22 @@
                                                                 <h:inputText label="name"  class="form-control" value="#{csbffFichaFuncionalBean.recPessoa.recNomecompleto}" />
                                                             </div>     
                                                         </div> 
-                                                        <div class="col-md-6 col-sm-3 col-xs-12">
+                                                        <div class="col-md-2 col-sm-3">
                                                             <div class="element">
                                                                 <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffFichaFuncionalBean.buscarCpf()}"/>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 col-sm-3 col-xs-12">
+                                                        <div class="col-md-2 col-sm-3">
+                                                            <div class="element">
+                                                                <h:commandButton class="btn btn-danger" action="#{csbffFichaFuncionalBean.cancel()}" value="Cancelar" /> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-3 ">
                                                             <div class="element">
                                                                 <h:commandButton class="btn btn-primary"  value="Imprimir Ficha Funcional" action="#{csbffFichaFuncionalBean.imprimirFichaFuncional()}"/>
                                                             </div>
                                                         </div>
-
+                                            
                                                     </div>
                                                 </div>
                                             </div>
