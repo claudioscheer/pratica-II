@@ -203,29 +203,6 @@ public class CsbffDadosProfissionaisBean {
         return pessoas;
     }
 
-    public String saveDadosProfissionais() {
-        String MsgNotificacao = "";
-        try {
-            if (recPessoa.getRecIdpessoa() > 0) {
-//                this.recFuncionario = true;
-                recPessoa.setRecFuncionario(true);
-                recPessoaService.update(recPessoa);
-            }
-            MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
-        } catch (Exception ex) {
-            MsgNotificacao = "Os dados não foram atualizados ";
-            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
-        }
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        try {
-//            context.getExternalContext().redirect("dadosprofissionais.xhtml");
-//        } catch (IOException ex) {
-//        }
-        recPessoaList = recPessoaService.findAll();
-        return "listaadmissao";
-    }
-
     public void cancel() {
         this.formAtivo = false;
         this.recPessoa = new RecPessoa();
@@ -275,6 +252,25 @@ public class CsbffDadosProfissionaisBean {
             this.recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());
         }
         this.recPessoa.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
+    }
+
+    public String saveDadosProfissionais() {
+        String MsgNotificacao = "";
+        try {
+            if (recPessoa.getRecIdpessoa() > 0) {
+//                this.recFuncionario = true;
+                recPessoa.setRecFuncionario(true);
+                recPessoaService.update(recPessoa);
+            }
+            MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+        } catch (Exception ex) {
+            MsgNotificacao = "Os dados não foram atualizados ";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+        }
+
+        recPessoaList = recPessoaService.findAll();
+        return "listaadmissao";
     }
 
     public String editaConsulta(RecPessoa pessoas) {

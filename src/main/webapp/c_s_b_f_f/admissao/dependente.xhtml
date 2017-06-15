@@ -13,225 +13,209 @@
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content"> 
-                <div class="title_left">
-                    <h3>Cadastro de dependente</h3>
-                </div>
+                <div id="page" style="margin-top:75px;">
 
-                <div class="bootstrap-iso">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                                    <div class="form-group" style="float: right;margin-top: 10px">
-                                        <h:form>
-                                            <h:messages class=" error" style="color: red"/>
-
-
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="form-group ">
-                                                    <label class="control-label" >                                        
-                                                        CPF do Colaborador
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <h:inputText label="codigo" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" required="true" requiredMessage="Campo CPF deve ser preenchido." class="form-control" value="#{dependenteBean.recCpf}" />
-                                                </div>
-
-                                            </div>  
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="form-group ">
-                                                    <label class="control-label" >                                        
-                                                        Nome colaborador
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <h:inputText label="nome"  class="form-control" value="#{dependenteBean.nomeCompleto}" />
-                                                </div>
-
-                                            </div> 
-
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div>&nbsp;</div>
-                                                <h:commandButton class="btn btn-primary" value="Buscar Dados" action="#{dependenteBean.buscarCpf()}"/>
-
-                                                <br></br>
-                                            </div> 
-
-                                            <div>
-                                                <br></br>
-                                            </div>
-
-
-                                            <div class="col-md-6 col-sm-6 col-xs-6">
-
-                                                <div class="form-group ">
-                                                    <label class="control-label " for="nome">
-                                                        <div>&nbsp;</div>
-                                                        Nome dependente
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNome}" />
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                                <div class="form-group ">
-                                                    <div>&nbsp;</div>
-                                                    <label class="control-label " for="nome">
-                                                        CPF
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <h:inputText class="form-control" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <div class="form-group ">
-                                                    <label class="control-label " for="date">
-                                                        Data de nascimento
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <h:inputText class="form-control has-feedback-left date-picker" value="#{dependenteBean.csbffdependente.dependenteDataNascimento}">
-                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                    </h:inputText>
-
-                                                </div>
-
-                                            </div>
-
-
-
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                                <div class="form-group ">
-                                                    <label class="control-label " for="select">
-                                                        Tipo de dependente
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <h:selectOneMenu id="combotipoDependente" value="#{dependenteBean.csbffdependente.dependenteTipo}" class="form-control" >
-                                                        <f:selectItem itemLabel="Filho" itemValue="#{1}" />
-                                                        <f:selectItem itemLabel="Cônjuge" itemValue="#{2}" />
-                                                        <f:selectItem itemLabel="Enteado(a)" itemValue="#{3}" />
-                                                        <f:selectItem itemLabel="outro" itemValue="#{4}" />
-
-                                                    </h:selectOneMenu>
-
-                                                </div>     
-
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                                <div class="form-group ">
-
-                                                    <label class="control-label " for="number">
-                                                        Naturalidade
-                                                        <span class="required">*</span>
-                                                    </label>
-
-                                                    <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNaturalidade}" />
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                                <div class="form-group ">
-
-                                                    <label class="control-label " for="number">
-                                                        Número termo/certidão nascimento
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteRgCertNascimento}" />
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                <div class="form-group ">
-                                                    <label class="control-label requiredField" for="txbCurCodigo">
-                                                        Dependente de Imposto de Renda
-                                                    </label>                                                           
-
-
-                                                    <h:selectOneMenu id="comboImpostoRenda" value="#{dependenteBean.csbffdependente.dependenteImpostoDeRenda}" class="form-control" >
-                                                        <f:selectItem itemLabel="Sim" itemValue="#{true}" />
-                                                        <f:selectItem itemLabel="Não" itemValue="#{false}" />
-
-                                                    </h:selectOneMenu>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <div>
-                                                    <div class="row">
-
-                                                        <div>&nbsp;</div>
-                                                        <h:commandButton class="btn btn-primary" value=" salvar" action="#{dependenteBean.save()}"/>                                  
-                                                        <h:commandButton value="Cancelar" class="btn btn-danger" action="#{dependenteBean.add()}"/>
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <div>
-                                                    <div class="row">
-
-                                                        <div>&nbsp;</div>
-                                                        
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <div>
-                                                    <div class="row">
-
-                                                        <div>&nbsp;</div>
-                                                        
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div>&nbsp;</div>
-                                            <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
+                                    <div class="panel-heading">
+                                        <h3 class="title_left">
+                                            Cadastro de Dependentes
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body" style="/* align-items: center; */">
+                                        <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+                                        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+                                        <!-- Inline CSS based on choices in "Settings" tab -->
+                                        <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
+                                        <h:form id="dependentes">
+                                            <h:messages class="error" style="color: #d9534f" />
+                                            <div class="container-fluid">
                                                 <div class="row">
-                                                    <div class="x_panel">
-                                                        <div class="x_content">
-                                                            <h:dataTable class="table table-striped" value="#{dependenteBean.todosdependentes}" var="dependete">
-                                                                <h:column>
-                                                                    <f:facet name="header">Código</f:facet>
-                                                                        #{dependete.dependenteCod}
-                                                                </h:column>
-                                                                <h:column>
-                                                                    <f:facet name="header">Nome</f:facet>
-                                                                        #{dependete.dependenteNome}
-                                                                </h:column>
-                                                                <h:column>
-                                                                    <f:facet name="header">CPF</f:facet>
-                                                                        #{dependete.dependenteCpf}
-                                                                </h:column>
-                                                                <h:column>
-                                                                    <f:facet name="header">Data de nascimento</f:facet>
-                                                                    #{dependete.dependenteDataNascimento}" 
-                                                                </h:column>
-                                                                <h:column>
-                                                                    <h:commandLink class="btn btn-link btn-small" action="#{dependenteBean.pg(dependete)}">
-                                                                        <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
-                                                                    </h:commandLink>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group ">
+                                                                <label class="control-label" >                                        
+                                                                    CPF
+                                                                    <!--                                                                    <span class="required">*</span>-->
+                                                                </label>
+                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" value="#{csbffEscalaHorasBean.recCpf}" title="CPF" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group ">
+                                                                <label class="control-label">Código colaborador</label>
+                                                                <h:inputText label="codigo"  class="form-control" value="#{csbffEscalaHorasBean.recPessoa.recIdpessoa}" disabled="true" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label class="control-label " >
+                                                                    Nome Colaborador
+                                                                </label>
+                                                                <h:inputText label="name"  class="form-control" value="#{csbffEscalaHorasBean.recPessoa.recNomecompleto}" disabled="true"/>
+                                                            </div>     
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-3 col-xs-12">
+                                                            <div class="element">
+                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffEscalaHorasBean.buscarCpf()}"/>
+                                                            </div>
+                                                        </div> 
 
-                                                                    <h:commandLink title="Excluir" action="#{dependenteBean.excluir(dependente)}" onclick="return confirm('Voce realmente deseja excluir?')" >
-                                                                        <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
-                                                                    </h:commandLink>
-                                                                </h:column>
-                                                            </h:dataTable>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-6">
+
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="nome">
+                                                                    <div>&nbsp;</div>
+                                                                    Nome dependente
+                                                                    <span class="required">*</span>
+                                                                </label>
+                                                                <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNome}" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                            <div class="form-group ">
+                                                                <div>&nbsp;</div>
+                                                                <label class="control-label " for="nome">
+                                                                    CPF
+                                                                    <span class="required">*</span>
+                                                                </label>
+                                                                <h:inputText class="form-control" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="select">
+                                                                    Tipo de dependente
+                                                                    <span class="required">*</span>
+                                                                </label>
+                                                                <h:selectOneMenu id="combotipoDependente" value="#{dependenteBean.csbffdependente.dependenteTipo}" class="form-control" >
+                                                                    <f:selectItem itemLabel="Filho" itemValue="#{1}" />
+                                                                    <f:selectItem itemLabel="Cônjuge" itemValue="#{2}" />
+                                                                    <f:selectItem itemLabel="Enteado(a)" itemValue="#{3}" />
+                                                                    <f:selectItem itemLabel="outro" itemValue="#{4}" />
+
+                                                                </h:selectOneMenu>
+
+                                                            </div>     
 
                                                         </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                            <div class="form-group ">
+
+                                                                <label class="control-label " for="number">
+                                                                    Naturalidade
+                                                                    <span class="required">*</span>
+                                                                </label>
+
+                                                                <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNaturalidade}" />
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                            <div class="form-group ">
+
+                                                                <label class="control-label " for="number">
+                                                                    Número termo/certidão nascimento
+                                                                    <span class="required">*</span>
+                                                                </label>
+                                                                <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteRgCertNascimento}" />
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                            <div class="form-group ">
+                                                                <label class="control-label requiredField" for="txbCurCodigo">
+                                                                    Dependente de Imposto de Renda
+                                                                </label>                                                           
+
+
+                                                                <h:selectOneMenu id="comboImpostoRenda" value="#{dependenteBean.csbffdependente.dependenteImpostoDeRenda}" class="form-control" >
+                                                                    <f:selectItem itemLabel="Sim" itemValue="#{true}" />
+                                                                    <f:selectItem itemLabel="Não" itemValue="#{false}" />
+
+                                                                </h:selectOneMenu>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 ">
+                                                            <div class="controls ">
+                                                                <label class="control-label " for="date">                                        
+                                                                    Data de Nascimento
+                                                                </label>
+                                                                <div class="xdisplay_inputx form-group has-feedback">
+                                                                    <h:inputText class="form-control has-feedback date-picker" id="dateNascimento" value="#{dependenteBean.csbffdependente.dependenteDataNascimento}" a:placeholder="dd/mm/aaaa hh:mm" >
+                                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                                    </h:inputText>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group ">
+                                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                                                                <h:commandButton class="btn btn-primary" value=" salvar" action="#{dependenteBean.save()}"/>                                  
+                                                                <h:commandButton value="Cancelar" class="btn btn-danger" action="#{dependenteBean.add()}"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div>
+                                                                <div class="row">
+
+                                                                    <div>&nbsp;</div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div>&nbsp;</div>
+                                                        <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
+                                                            <div class="row">
+                                                                <div class="x_panel">
+                                                                    <div class="x_content">
+                                                                        <h:dataTable class="table table-striped" value="#{dependenteBean.todosdependentes}" var="dependete">
+                                                                            <h:column>
+                                                                                <f:facet name="header">Código</f:facet>
+                                                                                    #{dependete.dependenteCod}
+                                                                            </h:column>
+                                                                            <h:column>
+                                                                                <f:facet name="header">Nome</f:facet>
+                                                                                    #{dependete.dependenteNome}
+                                                                            </h:column>
+                                                                            <h:column>
+                                                                                <f:facet name="header">CPF</f:facet>
+                                                                                    #{dependete.dependenteCpf}
+                                                                            </h:column>
+                                                                            <h:column>
+                                                                                <f:facet name="header">Data de nascimento</f:facet>
+                                                                                #{dependete.dependenteDataNascimento}" 
+                                                                            </h:column>
+                                                                            <h:column>
+                                                                                <h:commandLink class="btn btn-link btn-small" action="#{dependenteBean.pg(dependete)}">
+                                                                                    <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                                                </h:commandLink>
+
+                                                                                <h:commandLink title="Excluir" action="#{dependenteBean.excluir(dependente)}" onclick="return confirm('Voce realmente deseja excluir?')" >
+                                                                                    <i class="glyphicon glyphicon-remove-circle" style="font-size:18px"></i>
+                                                                                </h:commandLink>
+                                                                            </h:column>
+                                                                        </h:dataTable>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </h:panelGroup>
                                                     </div>
                                                 </div>
-                                            </h:panelGroup>
-
+                                            </div>
 
                                         </h:form>
                                     </div>

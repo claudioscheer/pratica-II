@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-      
+
         <title>cargos</title>
     </h:head>
 
@@ -14,116 +14,100 @@
 
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">  
-                <h:form id="formTabela">
+                <div id="page" style="margin-top:75px;">
 
-
-                    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
-                        <div class="container-fluid">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                            <div class="form-group" style="float: right;margin-top: 10px">
-                            <h:commandButton class="btn btn-primary" value="Adicionar" action="#{csbffCargosBean.add()}">
-                                <!--<f:ajax execute="@form" render="formTabela" />-->
-                            </h:commandButton>
-                            
-                        </div>
-                                    <div class="panel-heading">
-                                        <h3 class="title_left">
-                                            Cargos
-                                        </h3>
-                                    </div>
-                        
-                                        
-                                                         <div>
-                            <br></br> 
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div>
-                                    <label class="control-label " for="name">
-                                        Buscar Nome
-                                    </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar nome" value="#{csbffCargosBean.nomeCBO}"></h:inputText>
+                                    <h:form id="formConsulta">
+                                        <h:messages class="error" style="color: #d9534f" />
+                                        <div class="form-group" style="float: right;margin-top: 10px">
+                                            <div>
+                                                <h:commandButton class="btn btn-primary" value="Adicionar" action="#{csbffCargosBean.add()}">
+                                                    <!--<f:ajax execute="@form" render="formTabela" />-->
+                                                </h:commandButton>                                        </div>
+                                        </div>
+                                        <div class="panel-heading">
+                                            <h3 class="title_left">
+                                                Cargos Cadastrados
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body" style="/* align-items: center; */">
+                                            <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="x_panel">
 
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <div>
+                                                                        <label class="control-label " for="name">
+                                                                            Buscar Nome
+                                                                        </label>
+                                                                        <h:inputText class="form-control" a:placeholder=" Buscar nome" value="#{csbffCargosBean.nomeCBO}"></h:inputText>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                                                    <div>
+                                                                        <label class="control-label " for="name">
+                                                                            Buscar CBO
+                                                                        </label>
+                                                                        <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{csbffCargosBean.numeroCBO}"></h:inputText>
+
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                                                    <div>&nbsp;</div>
+                                                                    <div class="element">
+
+                                                                        <h:commandButton class="btn btn-primary , form-control" value="Buscar" action="#{csbffCargosBean.buscaPorCbo()}"/>
+                                                                    </div>
+                                                                    <br></br>
+                                                                </div>
+                                                                <h:dataTable class="table table-striped" value="#{csbffCargosBean.todosCargos}" var="cargos" >
+                                                                    <h:column>
+                                                                        <f:facet name="header">Código</f:facet>
+                                                                            #{cargos.cargoCodigo}
+                                                                    </h:column>
+                                                                    <h:column>
+                                                                        <f:facet name="header">Cargo</f:facet>
+                                                                            #{cargos.cargoNome}
+                                                                    </h:column>
+                                                                    <h:column>
+                                                                        <f:facet name="header">CBO</f:facet>
+                                                                            #{cargos.cargoCbo}
+                                                                    </h:column>
+                                                                    <h:column>
+
+                                                                        <f:facet name="header"> Salário Base</f:facet>
+                                                                        #{cargos.cargoValorSalario}" 
+                                                                    </h:column>
+                                                                    <h:column>
+
+                                                                        <h:commandLink action="#{csbffCargosBean.pg(cargos)}">
+
+                                                                            <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
+                                                                        </h:commandLink>
+
+                                                                    </h:column>                  
+                                                                </h:dataTable>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </h:panelGroup>
+                                        </div>
+                                    </h:form> 
                                 </div>
                             </div>
-
-
-                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div>
-                                    <label class="control-label " for="name">
-                                        Buscar CBO
-                                    </label>
-                                    <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{csbffCargosBean.numeroCBO}"></h:inputText>
-
-                                </div>
-                            </div> 
-                            
-
-                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div>&nbsp;</div>
-                                <div class="element">
-
-                                    <h:commandButton class="btn btn-primary , form-control" value="Buscar" action="#{csbffCargosBean.buscaPorCbo()}"/>
-                                </div>
-                                <br></br>
-                            </div>
-                            
-                                                    
-                            
                         </div>
-                                    </div>
-                        <div>
+                    </div>
+                </div>
 
-                            <br></br>
-                        </div>
-                        <div class="row">
-                            <div class="x_panel">
-                                <div class="x_content">
-                                    <h:dataTable class="table table-striped" value="#{csbffCargosBean.todosCargos}" var="cargos" >
-                                        <h:column>
-                                            <f:facet name="header">Código</f:facet>
-                                                #{cargos.cargoCodigo}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Cargo</f:facet>
-                                                #{cargos.cargoNome}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">CBO</f:facet>
-                                                #{cargos.cargoCbo}
-                                        </h:column>
-                                        <h:column>
-
-                                            <f:facet name="header"> Salário Base</f:facet>
-                                            #{cargos.cargoValorSalario}" 
-                                        </h:column>
-                                        <h:column>
-
-                                            <h:commandLink action="#{csbffCargosBean.pg(cargos)}">
-
-                                                <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
-                                            </h:commandLink>
-
-
-                                        </h:column>                  
-                                    </h:dataTable>
-                                </div>
-                        
-                            </div>
-                            </div>
-                            </div>
-                        </div>
-                            </div>
-                    </h:panelGroup>
-
-                </h:form>      
             </ui:define>
         </ui:composition>
-
-
-
-
-
     </h:body>
 </html>
 

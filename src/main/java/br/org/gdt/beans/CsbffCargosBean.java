@@ -7,13 +7,16 @@ package br.org.gdt.beans;
 
 import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffCargosService;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -35,17 +38,14 @@ public class CsbffCargosBean {
     private RecPessoa recPessoa;
 
     public CsbffCargosBean() {
-       
 
     }
 
     public String pg(CsbffCargos cargo) {
         this.csbffcargos = cargo;
-          return "form_cargo";
-          
+        return "form_cargo";
+
     }
-
-
 
     public String buscaNomeCBO() {
 
@@ -71,40 +71,37 @@ public class CsbffCargosBean {
 
     public String save() {
 
-      System.out.println("Salvando: " + csbffcargos.getCargoNome());
+//        System.out.println("Salvando: " + csbffcargos.getCargoNome());
+        String MsgNotificacao = "";
+        try {
+            if (csbffcargos.getCargoCodigo() > 0) {
+                csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+                csbffcargos.setCargoDataDeCriacao(new Date());
+                csbffcargos.setCargoDataUltimaAlteracao(new Date());
+                csbffCargosService.update(csbffcargos);
 
-        if (csbffcargos.getCargoCodigo() > 0) {
-            csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
-            csbffcargos.setCargoDataDeCriacao(new Date());
-            csbffcargos.setCargoDataUltimaAlteracao(new Date());
-            csbffCargosService.update(csbffcargos);
+            } else {
 
-        } else {
+                csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
+                csbffcargos.setCargoDataDeCriacao(new Date());
+                csbffcargos.setCargoDataUltimaAlteracao(new Date());
+                csbffCargosService.save(csbffcargos);
 
-            csbffcargos.setCargoCodigoSuperior(BigInteger.valueOf(1));
-            csbffcargos.setCargoDataDeCriacao(new Date());
-            csbffcargos.setCargoDataUltimaAlteracao(new Date());
-            csbffCargosService.save(csbffcargos);
+            }
+            MsgNotificacao = "O cargo foi cadastrado com sucesso!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+            this.formAtivo = true;
+            this.csbffcargos = new CsbffCargos();
 
+            todosCargos = null;
+            return "cargo_consulta";
+        } catch (Exception ex) {
+            MsgNotificacao = "O cargo não pode ser cadastrado. ";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
-        this.formAtivo = true;
-        this.csbffcargos = new CsbffCargos();
-
-        todosCargos = null;
         return "cargo_consulta";
     }
-    
-    
-    
-    
 
-//   public String novo() {
-//
-//        save();
-//
-//        return "cargo_consulta";
-//
-//    }
     public String buscaPorId(int idcargo) {
         if (idcargo != 0) {
             csbffcargos = csbffCargosService.findById(idcargo);
@@ -122,6 +119,13 @@ public class CsbffCargosBean {
     public void cancel() {
         this.formAtivo = false;
         this.csbffcargos = new CsbffCargos();
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("cargo_consulta.xhtml");
+        } catch (IOException ex) {
+
+        }
     }
 
     public String add() {

@@ -589,7 +589,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
         if (this.csbffPessoaBeneficioList == null) {
             this.csbffPessoaBeneficioList = new ArrayList<>();
-            this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
+        //    this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
         }
 
         return csbffPessoaBeneficioList;

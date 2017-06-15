@@ -47,7 +47,7 @@ public class CsbffEscalaHorasBean {
         this.todasCsbffEscalaHoras = todasCsbffEscalaHoras;
     }
 
-     public void buscarCpf() {
+    public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         String MsgNotificacao = "";
         while (recPessoa == null) {
@@ -73,7 +73,6 @@ public class CsbffEscalaHorasBean {
     }
 
     public void addNovaEscala() {
-        String MsgNotificacao = "";
 
 //        CsbffEscalaHoras eh = new CsbffEscalaHoras();
         csbffEscalaHoras.setRecIdpessoa(this.recPessoa);
@@ -90,6 +89,7 @@ public class CsbffEscalaHorasBean {
         csbffEscalaHoras.setEscalaDataVigente(new Date());
         this.recPessoa.getCsbffEscalaHorasList().add(csbffEscalaHoras);
         //this.csbffEscalaHorasService.update(csbffEscalaHoras);
+//        recPessoaService.update(recPessoa);
 
     }
 
@@ -111,24 +111,11 @@ public class CsbffEscalaHorasBean {
                 MsgNotificacao = "Os dados da escala foram alterados com Sucesso!";
                 Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
 
-//            } else {
-//                recPessoaService.save(recPessoa);
-//                MsgNotificacao = "Os dados da escala foram salvos com Sucesso!";
-//                Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "sucess");
             }
         } catch (Exception ex) {
             MsgNotificacao = "Os dados não foram alterados ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        try {
-//            context.getExternalContext().redirect("dadosprofissionais.xhtml");
-//        } catch (IOException ex) {
-//        }
-
-//        recPessoa.setRecContrato(false);
-//        recPessoaList = recPessoaService.findAll();
-//        todasCsbffEscalaHoras = csbffEscalaHorasService.findAll();
         return "escalacolaborador";
 
     }

@@ -12,112 +12,113 @@
     <h:body>
         <ui:composition template="../../templates/template.xhtml">
             <ui:define name="content">   
-                <div class="title_left">
-                    <h3>Cargos</h3>
-                </div>
-                <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
-                <div class="bootstrap-iso">
+                <div id="page" style="margin-top:75px;">
+
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
-                            <div class="form-group" style="float: right;margin-top: 10px">
-                            <h:form id="cargos">
-                                <h:messages class=" error" style="color: red"/>
+                                    <div class="panel-heading">
+                                        <h3 class="title_left">
+                                            Cadastro de Cargos
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body" style="/* align-items: center; */">
+                                        <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+                                        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+                                        <!-- Inline CSS based on choices in "Settings" tab -->
+                                        <style>.bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}</style>
+                                        <h:form id="formCargos">
+                                            <h:messages class="error" style="color: #d9534f" />
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="form-group ">
+
+                                                            <label class="control-label " for="number">
+                                                                <h2><a href="http://www.mtecbo.gov.br/cbosite/pages/pesquisas/BuscaPorTituloA-Z.jsf;jsessionid=D1jf6B8p1pS1iUyl60T8vcWc.slave23:mte-cbo" target="_blank">Clique-me para verificar o cargo e o CBO desejado</a></h2>
+                                                            </label>
 
 
-                                <div class="form-group ">
+                                                        </div>
 
-                                    <label class="control-label " for="number">
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                        <a href="http://www.mtecbo.gov.br/cbosite/pages/pesquisas/BuscaPorTituloA-Z.jsf;jsessionid=D1jf6B8p1pS1iUyl60T8vcWc.slave23:mte-cbo" target="_blank">Clique para verificar o cargo e o código desejado</a>
-                                    </label>
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="name">
+                                                                    Nome*
+                                                                </label>
+                                                                <!--<input class="form-control" id="name0" name="name" type="text"/>-->
 
-
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                    <div class="form-group ">
-                                        <label class="control-label " for="name">
-                                            Nome*
-                                        </label>
-                                        <!--<input class="form-control" id="name0" name="name" type="text"/>-->
-
-                                        <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoNome}"/>
+                                                                <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoNome}"/>
 
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                            <div class="form-group ">
+
+                                                                <label class="control-label " for="number">
+                                                                    CBO*
+                                                                </label>
+
+                                                                <!--<input class="form-control" id="number" name="number" type="text"/>-->
+                                                                <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoCbo}" id="cbo" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+
+                                                            <div class="form-group ">
+                                                                <label class="control-label " for="message1">
+                                                                    Descrição e Requisitos*
+                                                                </label>
+                                                                <!--<textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>-->
+                                                                <h:inputTextarea onkeyup="if (this.value.length > 255) {
+                                                                            this.value = this.value.substring(0, 255);
+                                                                            alert('tamanho maximo encontrado ');
+                                                                        }" class="form-control" cols="10" rows="5" a:placeholder="Descreva uma breve descrição e os requisitos necessários" value="#{csbffCargosBean.cargoCodigo.cargoDescricao}" />
+                                                            </div>
+                                                        </div>  
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                            <div class="form-group ">
+
+                                                                <label class="control-label " for="number">
+                                                                    Salário Base*
+                                                                </label>
+
+                                                                <!--<input class="form-control" id="number" name="number" type="text"/>-->
+                                                                <h:inputText class="form-control" maxlength="10" value="#{csbffCargosBean.cargoCodigo.cargoValorSalario}" >
+                                                                    <f:convertNumber pattern="#0.00" />
+                                                                </h:inputText>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                                                <h:commandButton class="btn btn-primary"  action="#{csbffCargosBean.save()}" value="Cadastrar" /> 
+                                                                <h:commandButton class="btn btn-danger"  action="#{csbffCargosBean.cancel()}" value="Cancelar" /> 
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </h:form>
                                     </div>
 
                                 </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                            </div>
 
-                                    <div class="form-group ">
-
-                                        <label class="control-label " for="number">
-                                            CBO*
-                                        </label>
-
-                                        <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoCbo}" id="cbo" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '-', 'digits': 4, 'digitsOptional': true, 'placeholder': '0000'"/>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                    <div class="form-group ">
-
-                                        <label class="control-label " for="number">
-                                            Salário Base*
-                                        </label>
-
-                                        <!--<input class="form-control" id="number" name="number" type="text"/>-->
-                                        <h:inputText class="form-control" value="#{csbffCargosBean.cargoCodigo.cargoValorSalario}" a:data-inputmask="'alias': 'numeric', 'groupSeparator': '.', 'digits': 2, 'digitsOptional': false, 'placeholder': '0'"/>
-                                    </div>
-
-                                </div>
-                                
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-
-
-                                    <div class="form-group ">
-                                        <label class="control-label " for="message1">
-                                            Descrição e Requisitos*
-                                        </label>
-                                        <!--<textarea class="form-control" cols="40" id="message1" name="message1" rows="10"></textarea>-->
-                                        <h:inputTextarea class="form-control" cols="10" rows="5" a:placeholder="Descreva uma breve descrição juntamente com os requisitos necessários" value="#{csbffCargosBean.cargoCodigo.cargoDescricao}" />
-                                    </div>
-
-                                </div>         
-
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-
-
-                                    <div class="row">
-
-                                        <br/>
-                                        
-
-                                        <h:commandLink class="btn btn-primary" value="Salvar" action="#{csbffCargosBean.save()}" />
-                                        <h:commandButton value="Cancelar" class="btn btn-danger" action="cargo_consulta.xhtml"/>
-<!--                                        <h:commandButton class="btn btn" value=" Voltar " action="cargo_consulta.xhtml" />-->
-                                    </div>
-
-
-
-                                </div>
-
-
-                            </h:form>
                         </div>
-
                     </div>
                 </div>
-
-                             </div>
-                         </div>
-                     </div>
 
             </ui:define>
         </ui:composition>

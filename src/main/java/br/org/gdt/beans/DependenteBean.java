@@ -9,6 +9,7 @@ import br.org.gdt.enums.PossuiDependentes;
 import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffPessoaDependente;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffDependentesService;
 import br.org.gdt.service.CsbffPessoaDependenteService;
 import br.org.gdt.service.RecPessoaService;
@@ -44,7 +45,6 @@ public class DependenteBean {
     private CsbffPessoaDependente csbffPessoaDependente = new CsbffPessoaDependente();
 
     public DependenteBean() {
-     
 
     }
 
@@ -61,36 +61,35 @@ public class DependenteBean {
         return "dependente.xhtml";
     }
 
-
     public void save() {
-        
-        
-        if(csbffdependente.getDependenteCod() > 0){
-           csbffDependenteService.update(csbffdependente);
-            add();
-        
+        String MsgNotificacao = "";
+        try {
+            if (csbffdependente.getDependenteCod() > 0) {
+                csbffDependenteService.update(csbffdependente);
+                add();
 
-        }else{
-            
-        
-        csbffDependenteService.save(csbffdependente);
+            } else {
+
+                csbffDependenteService.save(csbffdependente);
 //        csbffPessoaDependente.setColabDepCodigo(recPessoa.getRecIdpessoa());
-        csbffPessoaDependente.setDependenteCod(csbffdependente);
-        csbffPessoaDependente.setRecIdpessoa(recPessoa);
-        csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
-        //csbffPessoaDependente = getCsbffPessoaDependente();
-        //csbffdependente.setCsbffPessoaDependente(csbffPessoaDependente);
+                csbffPessoaDependente.setDependenteCod(csbffdependente);
+                csbffPessoaDependente.setRecIdpessoa(recPessoa);
+                csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
+                //csbffPessoaDependente = getCsbffPessoaDependente();
+                //csbffdependente.setCsbffPessoaDependente(csbffPessoaDependente);
 
-        csbffPessoaDependenteService.save(csbffPessoaDependente);
+                csbffPessoaDependenteService.save(csbffPessoaDependente);
 
-        
-            add();
+                add();
+            }
+            MsgNotificacao = "O dependente foi adicionado ao colaborador!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+        } catch (Exception ex) {
+            MsgNotificacao = "O colaborador não pode ser adicionado. ";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
-        
-        
-        
+
     }
-    
 
     public void cancel() {
         this.formAtivo = false;
@@ -107,7 +106,6 @@ public class DependenteBean {
         todosdependentes.remove(dependente);
         return "dependente";
     }
-    
 
     public String prepareEdit(CsbffDependentes dependente) {
         this.formAtivo = true;
@@ -155,8 +153,6 @@ public class DependenteBean {
     public void setTodosdependentes(List<CsbffDependentes> todosdependentes) {
         this.todosdependentes = todosdependentes;
     }
-
-   
 
     public String getRecCpf() {
         return recCpf;

@@ -188,7 +188,9 @@
                                                                 <label class="control-label " for="number">                                        
                                                                     Salário (R$)
                                                                 </label>
-                                                                <h:inputText class="form-control" maxlength="9" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" />
+                                                                <h:inputText class="form-control" maxlength="10" value="#{csbffDadosProfissionaisBean.recPessoa.cargoValorSalario}" >
+                                                                    <f:convertNumber pattern="#0.00" />
+                                                                </h:inputText>
                                                             </div>
                                                         </div> 
                                                         <div class="col-md-12 col-sm-6 ">

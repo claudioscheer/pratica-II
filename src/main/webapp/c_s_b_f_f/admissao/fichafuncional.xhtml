@@ -57,25 +57,18 @@
                                                                     Nome Colaborador
                                                                     <!--                                                    <span class="required">*</span>-->
                                                                 </label>
-                                                                <h:inputText label="name"  class="form-control" value="#{csbffFichaFuncionalBean.recPessoa.recNomecompleto}" />
+                                                                <h:inputText label="name"  class="form-control" value="#{csbffFichaFuncionalBean.recPessoa.recNomecompleto}" disabled="true"/>
                                                             </div>     
                                                         </div> 
-                                                        <div class="col-md-2 col-sm-3">
-                                                            <div class="element">
+                                                        <div class="form-group ">
+                                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                                                 <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffFichaFuncionalBean.buscarCpf()}"/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-3">
-                                                            <div class="element">
                                                                 <h:commandButton class="btn btn-danger" action="#{csbffFichaFuncionalBean.cancel()}" value="Cancelar" /> 
+                                                                <h:commandButton class="btn btn-dark"  value="Imprimir Ficha Funcional" action="#{csbffFichaFuncionalBean.imprimirFichaFuncional()}"/>
+
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 col-sm-3 ">
-                                                            <div class="element">
-                                                                <h:commandButton class="btn btn-primary"  value="Imprimir Ficha Funcional" action="#{csbffFichaFuncionalBean.imprimirFichaFuncional()}"/>
-                                                            </div>
-                                                        </div>
-                                            
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
