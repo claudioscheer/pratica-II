@@ -9,6 +9,7 @@ package br.org.gdt.dao;
 import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
@@ -33,6 +34,10 @@ public class CsbffBeneficioDAO extends DAO<CsbffBeneficios>{
         query.setParameter("idPessoa", pessoa.getRecIdpessoa());
         
         List<CsbffBeneficios> lista = query.getResultList();
+        
+        if(lista.isEmpty()){  
+            return new ArrayList<>();   
+        }
         
         return lista;
 
