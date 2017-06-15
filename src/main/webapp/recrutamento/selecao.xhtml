@@ -34,7 +34,9 @@
                                                 disabled="#{recSelecaoBean.descreverEntrevista}"
                                                 class="form-control" >
                                                 <f:selectItem itemLabel="Selecione o Candidato" itemValue="#{null}" />
-                                                <f:selectItems value="#{recPessoaBean.ListarTodas()}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.recNomecompleto}"/>
+                                                <f:selectItems value="#{recPessoaBean.ListarTodas()}" 
+                                                               var="pessoa" itemValue="#{pessoa}" 
+                                                               itemLabel="#{pessoa.recNomecompleto}"/>
                                             </h:selectOneMenu>                                                                                                             
                                         </div>     
                                     </div> 
@@ -57,15 +59,15 @@
                                                 Vaga
                                             </label>
 
-                                            <h:selectOneMenu id="comboVaga" 
+                                            <h:selectOneMenu id="comboVagas" 
                                                              value="#{recSelecaoBean.selecao.recIdvaga}" 
                                                              disabled="#{recSelecaoBean.descreverEntrevista}"
                                                              class="form-control" >
                                                 <f:selectItem itemLabel="Selecione a Vaga" itemValue="#{null}" />
                                                 <f:selectItems value="#{recVagaBean.ListarTodas()}" 
-                                                               var="vaga" 
-                                                               itemValue="#{vaga}" 
-                                                               itemLabel="#{vaga.recDescricao}"/>
+                                                               var="vagas" 
+                                                               itemValue="#{vagas}" 
+                                                               itemLabel="#{vagas.recDescricao}"/>
                                             </h:selectOneMenu>                                                                                                             
 
                                         </div>     
@@ -88,13 +90,14 @@
                                 <hr></hr>
                                 <div class="pull-right">
                                     <div class="row">
-                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
-
                                         <h:commandButton class="btn btn-success" 
                                                          value="Salvar" 
                                                          action="#{recSelecaoBean.Salvar()}" >
                                             <f:ajax execute="@form" render="formSelecao" />
                                         </h:commandButton> 
+                                        <h:commandButton value="Cancelar" class="btn btn-danger"/>
+
+
                                     </div>
                                 </div>
                             </div>

@@ -1,8 +1,14 @@
 package br.org.gdt.beans;
 
+import br.org.gdt.dao.RecPessoaDAO;
+import br.org.gdt.model.RecPessoa;
 import br.org.gdt.model.RecSelecao;
+import br.org.gdt.model.RecVaga;
 import br.org.gdt.resources.Helper;
+import br.org.gdt.service.RecPessoaService;
 import br.org.gdt.service.RecSelecaoService;
+import br.org.gdt.service.RecVagaService;
+import java.sql.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -21,20 +27,32 @@ public class RecSelecaoBean {
     @ManagedProperty("#{recSelecaoService}")
     private RecSelecaoService recSelecaoService;
 
+//    @ManagedProperty("#{recPessoaService}")
+//    private RecPessoaService recPessoaService;
+//
+//    @ManagedProperty("#{recVagaService}")
+//    private RecVagaService recVagaService;
+
     public RecSelecaoBean() {
     }
 
     public void Salvar() {
-        if (ValidarCampos()) {
+//        Date data = new Date(2017, 1, 20);
+//        RecPessoa p = recPessoaService.BuscarId(1);
+//        System.out.println("pessoaaaaaa" + p.getRecIdpessoa());
+//        RecVaga v = recVagaService.BuscarId(3);
+//        RecSelecao selec = new RecSelecao(1, null, false, data, p, v);
+//        recSelecaoService.Inserir(selecao);
+        //if (ValidarCampos()) {
             if (selecao.getRecIdselecao() > 0) {
                 recSelecaoService.Alterar(selecao);
             } else {
                 recSelecaoService.Inserir(selecao);
             }
             selecoes = recSelecaoService.ListarTodas();
-        }else{
-            return;
-        }       
+//        }else{
+//            return;
+//        }       
     }
 
     public List<RecSelecao> ListarTodas() {
@@ -49,8 +67,8 @@ public class RecSelecaoBean {
         this.selecao = selecao;
         return "selecao";
     }
-    
-    public String DescreverEntrevista(RecSelecao selecao){
+
+    public String DescreverEntrevista(RecSelecao selecao) {
         this.formAtivo = true;
         this.descreverEntrevista = true;
         this.selecao = selecao;
@@ -123,4 +141,20 @@ public class RecSelecaoBean {
     public void setDescreverEntrevista(boolean descreverEntrevista) {
         this.descreverEntrevista = descreverEntrevista;
     }
+
+//    public RecPessoaService getRecPessoaService() {
+//        return recPessoaService;
+//    }
+//
+//    public void setRecPessoaService(RecPessoaService recPessoaService) {
+//        this.recPessoaService = recPessoaService;
+//    }
+//
+//    public RecVagaService getRecVagaService() {
+//        return recVagaService;
+//    }
+//
+//    public void setRecVagaService(RecVagaService recVagaService) {
+//        this.recVagaService = recVagaService;
+//    }
 }
