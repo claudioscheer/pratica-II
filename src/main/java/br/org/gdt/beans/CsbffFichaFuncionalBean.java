@@ -9,10 +9,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CsbffFichaFuncionalBean {
 
     private boolean formAtivo = false;
@@ -67,13 +69,15 @@ public class CsbffFichaFuncionalBean {
 
         }
     }
-
-    public void imprimirFichaFuncional() {
-        try {
+    public void imprimirFichaFuncional() throws Exception {
+//        try {
+//            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
+//            folhasPeriodo.add(fpFolhaPeriodo);
+ 
             fichaFuncional.gerarFichaFuncional(recPessoa);
-        } catch (Exception e) {
-            Helper.mostrarNotificacao("Erro", e.getMessage(), "error");
-        }
+//        } catch (Exception e) {
+//            Helper.mostrarNotificacao("Erro", e.getMessage(), "error");
+//        }
     }
 
     public boolean isFormAtivo() {

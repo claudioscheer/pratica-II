@@ -17,6 +17,7 @@ import br.org.gdt.service.GchTreinamentosService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +27,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
@@ -49,18 +53,17 @@ public class FichaFuncional {
     @Autowired
     private RecPessoaService recPessoaService;
 
-    @ManagedProperty("#{csbffBeneficiosService}")
+    @Autowired
     private CsbffBeneficiosService csbffBeneficiosService;
 
-    @ManagedProperty("#{csbffEscalaHorasService}")
+    @Autowired
     private CsbffEscalaHorasService csbffEscalaHorasService;
 
-    @ManagedProperty("#{gchTreinamentosService}")
+    @Autowired
     private GchTreinamentosService gchTreinamentosService;
 
-    @ManagedProperty("#{gchTreinamentoPessoaService}")
+    @Autowired
     private GchTreinamentoPessoaService gchTreinamentospessoasService;
-
 
     public RecPessoaService getRecPessoaService() {
         return recPessoaService;
@@ -68,6 +71,22 @@ public class FichaFuncional {
 
     public CsbffEscalaHorasService getCsbffEscalaHorasService() {
         return csbffEscalaHorasService;
+    }
+
+    public GchTreinamentosService getGchTreinamentosService() {
+        return gchTreinamentosService;
+    }
+
+    public void setGchTreinamentosService(GchTreinamentosService gchTreinamentosService) {
+        this.gchTreinamentosService = gchTreinamentosService;
+    }
+
+    public GchTreinamentoPessoaService getGchTreinamentospessoasService() {
+        return gchTreinamentospessoasService;
+    }
+
+    public void setGchTreinamentospessoasService(GchTreinamentoPessoaService gchTreinamentospessoasService) {
+        this.gchTreinamentospessoasService = gchTreinamentospessoasService;
     }
 
     public void setCsbffEscalaHorasService(CsbffEscalaHorasService csbffEscalaHorasService) {
@@ -93,7 +112,9 @@ public class FichaFuncional {
         FacesContext context = FacesContext.getCurrentInstance();
 
         String caminhoCompletoArquivo = context.getExternalContext().getRealPath("/c_s_b_f_f/report/ReportFichaFuncional.jasper");
+
         File fileRelatorio = new File(caminhoCompletoArquivo);
+
         if (!fileRelatorio.exists()) {
             throw new Exception("O arquivo não foi encontrado.");
         }
@@ -140,15 +161,46 @@ public class FichaFuncional {
         //Dependentes do colaborador
         List<CsbffDependentes> dependentes = recPessoaService.findAllDependentesPessoa(pessoa);
 
+        JRBeanCollectionDataSource dependentesCollection = new JRBeanCollectionDataSource(dependentes);
+
+        parametros.put("dependentes", dependentesCollection);
+
         //Benefícios do colaborador
-        List<CsbffBeneficios> beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
+        List<CsbffBeneficios> beneficios = new ArrayList<>();
+
+        beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
+        JRBeanCollectionDataSource beneficiosCollection = new JRBeanCollectionDataSource(beneficios);
+        parametros.put("beneficios", beneficiosCollection);
 
         List<CsbffEscalaHoras> escalas = csbffEscalaHorasService.buscarEscalasPessoa(pessoa);
 
-        List<GchTreinamentospessoas> treinamentos = gchTreinamentospessoasService.treinamentosPessoa(pessoa);
-          
-            
-        JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JRBeanCollectionDataSource(dependentes));
+        JRBeanCollectionDataSource escalasCollection = new JRBeanCollectionDataSource(escalas);
+        
+        parametros.put("escalaHorarios", escalasCollection);
+
+        List<GchTreinamentospessoas> treinamentosPessoa = gchTreinamentospessoasService.treinamentosPessoa(pessoa);
+
+        List<Treinamentos> treinamentos = new ArrayList<>();
+
+        for (GchTreinamentospessoas tp : treinamentosPessoa) {
+
+            GchTreinamentos treinamento = gchTreinamentosService.findById(tp.getTreiCodigo().getTreiCodigo());
+
+            treinamento.getTreiNome();
+
+            Treinamentos novo = new Treinamentos();
+
+            novo.setTreinamentoNome(treinamento.getTreiNome());
+
+            treinamentos.add(novo);
+
+        }
+
+        JRBeanCollectionDataSource treinamentosCollection = new JRBeanCollectionDataSource(treinamentos);
+
+        parametros.put("treinamentos", treinamentosCollection);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JREmptyDataSource());
         relatorios.add(jasperPrint);
         relatorios.add(jasperPrint);
 

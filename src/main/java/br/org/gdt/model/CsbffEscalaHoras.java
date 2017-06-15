@@ -79,8 +79,6 @@ public class CsbffEscalaHoras implements Serializable, SampleEntity {
         this.csbffEscalaHorasList = csbffEscalaHorasList;
     }
 
-    
-
     public CsbffEscalaHoras() {
     }
 
@@ -90,6 +88,10 @@ public class CsbffEscalaHoras implements Serializable, SampleEntity {
 
     public RecPessoa getRecIdpessoa() {
         return recIdpessoa;
+    }
+
+    public Date getEscalaDataVigente() {
+        return escalaDataVigente;
     }
 
     public void setRecIdpessoa(RecPessoa recIdpessoa) {

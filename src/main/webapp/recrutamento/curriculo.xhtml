@@ -19,10 +19,10 @@
                 </div>
                 <br />
                 <h:form id="formCurriculo" enctype="multipart/form-data">                                                       
-                    <p:panel visible="#{recPessoaBean.formAtivo}">
+                    <p:panel visible="#{recPessoaBean.formAtivo}" >
                         <div class="bootstrap-iso">
                             <div class="container-fluid">
-                                <div class="row">
+                                <div class="row col-md-12 col-sm-12 col-xs-12">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">                                            
                                             <h:outputLabel value="Digite seu CPF" 
@@ -54,7 +54,9 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
                                             <h:outputLabel value="Nome Completo" for="NomeCompleto" />                                            
-                                            <h:inputText class="form-control" id="NomeCompleto" value="#{recPessoaBean.recPessoa.recNomecompleto}" />
+                                            <h:inputText class="form-control" 
+                                                         id="NomeCompleto" 
+                                                         value="#{recPessoaBean.recPessoa.recNomecompleto}" />
                                         </div>
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -245,7 +247,8 @@
                                                              rows="10"/>                                            
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Pretensão Salarial
@@ -258,7 +261,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 PIS/PASEP
@@ -267,28 +270,26 @@
                                             <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recPispasep}"/>                                            
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group ">
-                                            <label class="control-label " for="number">                                        
-                                                Certificado de Reservista
-                                                <span class="required">*</span>
-                                            </label>
-                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recReservista}"/>                                            
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+
+
+
+                                    <div class="col-md-6 col-sm-6 col-xs-6">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Cor
                                             </label>
                                             <h:selectOneMenu id="comboCor" value="#{recPessoaBean.recPessoa.recCor}"  class="form-control" >
                                                 <f:selectItem itemLabel="Selecione a Cor" itemValue="#{null}" />
-                                                <f:selectItem itemLabel="Branco" itemValue="#{1}" />                                                                                                                                                
+                                                <f:selectItem itemLabel="Branco(a)" itemValue="#{1}" />
+                                                <f:selectItem itemLabel="Pardo(a)" itemValue="#{2}" />
+                                                <f:selectItem itemLabel="Preto(a)" itemValue="#{3}" />                                                
+                                                <f:selectItem itemLabel="Amarelo(a)" itemValue="#{4}" />
+                                                <f:selectItem itemLabel="Indígena(a)" itemValue="#{5}" />
+                                                <f:selectItem itemLabel="Não Declarar" itemValue="#{6}" />
                                             </h:selectOneMenu>                                                                                                                        
                                         </div>     
                                     </div> 
-
-                                    <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                    <div class="col-md-6 col-sm-6 col-xs-6">                                
                                         <div class="form-group ">
                                             <label class="control-label " for="select">
                                                 Grau de Ensino
@@ -305,8 +306,16 @@
                                                 <f:selectItem itemLabel="Especialização" itemValue="#{8}" />                                                                                                
                                             </h:selectOneMenu>
                                         </div>     
-                                    </div>
-
+                                    </div>      
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <div class="form-group ">
+                                            <label class="control-label " for="number">                                        
+                                                Certificado de Reservista
+                                                <span class="required">*</span>
+                                            </label>
+                                            <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recReservista}"/>                                            
+                                        </div>
+                                    </div>  
                                 </div>
                                 <hr />
                                 <div class="row">

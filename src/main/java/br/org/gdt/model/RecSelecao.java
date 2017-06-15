@@ -8,8 +8,10 @@ package br.org.gdt.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,12 +50,23 @@ public class RecSelecao implements Serializable {
     @Column(name = "rec_dataentrevista")
     @Temporal(TemporalType.DATE)
     private Date recDataEntrevista;
-    @JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
-    @ManyToOne(optional = false)
+    //@JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
+    @ManyToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private RecPessoa recIdpessoa;
-    @JoinColumn(name = "rec_idvaga", referencedColumnName = "rec_idvaga")
-    @ManyToOne(optional = false)
+    //@JoinColumn(name = "rec_idvaga", referencedColumnName = "rec_idvaga")
+    @ManyToOne(optional = true)
     private RecVaga recIdvaga;
+
+    public RecSelecao(long recIdselecao, String recDescricaoentrevista, Boolean recAprovado, Date recDataEntrevista, RecPessoa recIdpessoa, RecVaga recIdvaga) {
+        this.recIdselecao = recIdselecao;
+        this.recDescricaoentrevista = recDescricaoentrevista;
+        this.recAprovado = recAprovado;
+        this.recDataEntrevista = recDataEntrevista;
+        this.recIdpessoa = recIdpessoa;
+        this.recIdvaga = recIdvaga;
+    }
+
+    
 
     public RecSelecao() {
     }
