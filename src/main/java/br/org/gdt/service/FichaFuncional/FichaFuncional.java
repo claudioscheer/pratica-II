@@ -6,8 +6,10 @@
 package br.org.gdt.service.FichaFuncional;
 
 import br.org.gdt.model.CsbffBeneficios;
+import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffEscalaHoras;
+import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffBeneficiosService;
@@ -17,22 +19,18 @@ import br.org.gdt.service.GchTreinamentosService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
@@ -138,7 +136,7 @@ public class FichaFuncional {
 
         parametros.put("recNomepai", pessoa.getRecNomepai());
         parametros.put("recNomemae", pessoa.getRecNomemae());
-        parametros.put("recNumCtps", pessoa.getRecNumCtps());
+//        parametros.put("recNumCtps", pessoa.getRecNumCtps());
         parametros.put("recPispasep", pessoa.getRecPispasep());
         parametros.put("recEndereco", pessoa.getRecEndereco());
         parametros.put("recNumero", pessoa.getRecNumero());
@@ -153,11 +151,13 @@ public class FichaFuncional {
         parametros.put("recDtaDemissao", pessoa.getRecDtaDemissao());
         parametros.put("insalubridade", pessoa.getInsalubridade());
         parametros.put("recPericulosidade", pessoa.getRecPericulosidade());
+        parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor());
 
         parametros.put("recNomeBanco", pessoa.getRecNomeBanco());
         parametros.put("recAgenciaBancaria", pessoa.getRecAgenciaBancaria());
         parametros.put("recNumeroContaBanco", pessoa.getRecNumeroContaBanco());
 
+   
         //Dependentes do colaborador
         List<CsbffDependentes> dependentes = recPessoaService.findAllDependentesPessoa(pessoa);
 
@@ -175,7 +175,7 @@ public class FichaFuncional {
         List<CsbffEscalaHoras> escalas = csbffEscalaHorasService.buscarEscalasPessoa(pessoa);
 
         JRBeanCollectionDataSource escalasCollection = new JRBeanCollectionDataSource(escalas);
-        
+
         parametros.put("escalaHorarios", escalasCollection);
 
         List<GchTreinamentospessoas> treinamentosPessoa = gchTreinamentospessoasService.treinamentosPessoa(pessoa);
