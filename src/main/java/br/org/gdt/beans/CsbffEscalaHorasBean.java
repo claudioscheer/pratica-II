@@ -76,7 +76,7 @@ public class CsbffEscalaHorasBean {
 
 //        CsbffEscalaHoras eh = new CsbffEscalaHoras();
         csbffEscalaHoras.setRecIdpessoa(this.recPessoa);
-        csbffEscalaHoras.setEscalaCodigo(this.csbffEscalaHoras);
+//        csbffEscalaHoras.setEscalaCodigo(this.csbffEscalaHoras);
 
 //        if (csbffEscalaHoras.diaDaSemana != null) {
 //

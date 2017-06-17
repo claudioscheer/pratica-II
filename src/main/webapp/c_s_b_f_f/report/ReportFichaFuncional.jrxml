@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-16T17:23:37 -->
+<!-- 2017-06-17T00:04:38 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportFichaFuncional." pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="493fecfc-8039-4f02-bbb6-9916f739b6c2">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -162,7 +162,7 @@
 	<parameter name="recDtemissao" class="java.sql.Date"/>
 	<parameter name="recNacionalidade" class="java.lang.String"/>
 	<parameter name="recReservista" class="java.lang.String"/>
-	<parameter name="recEscolaridade" class="java.lang.Integer"/>
+	<parameter name="recEscolaridade" class="java.lang.Double"/>
 	<parameter name="recNomepai" class="java.lang.String"/>
 	<parameter name="recNomemae" class="java.lang.String"/>
 	<parameter name="recNumCtps" class="java.lang.Double"/>
@@ -186,10 +186,10 @@
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
 	<parameter name="recNomeBanco" class="java.lang.String"/>
-	<parameter name="recAgenciaBancaria" class="java.lang.Integer">
+	<parameter name="recAgenciaBancaria" class="java.lang.Double">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="recNumeroContaBanco" class="java.lang.Long">
+	<parameter name="recNumeroContaBanco" class="java.lang.Double">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
 	<parameter name="dependentes" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
@@ -206,7 +206,7 @@
 	<parameter name="cnpj" class="java.lang.String">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="recNumTituEleitor" class="java.lang.String">
+	<parameter name="recNumTituEleitor" class="java.lang.Double">
 		<parameterDescription><![CDATA[recNumTituEleitor]]></parameterDescription>
 	</parameter>
 	<queryString>

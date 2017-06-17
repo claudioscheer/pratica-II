@@ -59,7 +59,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_nomecompleto")
     private String recNomecompleto;
     @Column(name = "rec_cpf")
-    public String recCpf;
+    private String recCpf;
     @Column(name = "rec_sexo")
     private Sexo recSexo;
     @Column(name = "rec_estadocivil")
@@ -148,9 +148,9 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private CsbffPessoaDependente colabDepCodigo;
-    @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
-    @ManyToOne
-    private CsbffCargos cargoCodigo;
+//    @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
+//    @ManyToOne
+//    private CsbffCargos cargoCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
     @ManyToOne(optional = true)
     private GchMunicipios munCodigo;
@@ -171,10 +171,10 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Integer recPesGrauEnsino;
     @OneToMany
     private List<RecPessoa> recPessoaList;
-    @OneToOne
-    private CsbffCargos cargoCbo;
+//    @OneToOne
+//    private CsbffCargos cargoCbo;
 //    @OneToMany
-    private String cargoNome;
+//    private String cargoNome;
     private String admissaoDescricao;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
@@ -182,8 +182,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private CsbffEscalaHoras csbffEscalaHoras;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa")
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
-    @OneToOne
-    private CsbffCargos cargos;
+    @ManyToOne
+    private CsbffCargos cargoCodigo;
     private double cargoValorSalario;
     public boolean colaboradorInativo;
 
@@ -599,13 +599,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
     }
 
-    public CsbffCargos getCargoCodigo() {
-        return cargoCodigo;
-    }
-
-    public void setCargoCodigo(CsbffCargos cargoCodigo) {
-        this.cargoCodigo = cargoCodigo;
-    }
+//    public CsbffCargos getCargoCodigo() {
+//        return cargoCodigo;
+//    }
+//
+//    public void setCargoCodigo(CsbffCargos cargoCodigo) {
+//        this.cargoCodigo = cargoCodigo;
+//    }
 
     public GchMunicipios getMunCodigo() {
         return munCodigo;
@@ -702,22 +702,22 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
 //        this.csbffEscalaHoras = csbffEscalaHoras;
 //    }
-    public CsbffCargos getCargoCbo() {
-        return cargoCbo;
-    }
-
-    public void setCargoCbo(CsbffCargos cargoCbo) {
-        this.cargoCbo = cargoCbo;
-    }
-
-    public String getCargoNome() {
-        return cargoNome;
-    }
-
-    public void setCargoNome(String cargoNome) {
-
-        this.cargoNome = cargoNome;
-    }
+//    public CsbffCargos getCargoCbo() {
+//        return cargoCbo;
+//    }
+//
+//    public void setCargoCbo(CsbffCargos cargoCbo) {
+//        this.cargoCbo = cargoCbo;
+//    }
+//
+//    public String getCargoNome() {
+//        return cargoNome;
+//    }
+//
+//    public void setCargoNome(String cargoNome) {
+//
+//        this.cargoNome = cargoNome;
+//    }
 
     public String getAdmissaoDescricao() {
         return admissaoDescricao;
@@ -738,12 +738,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recPessoaList = recPessoaList;
     }
 
-    public void setCargos(CsbffCargos cargos) {
-        this.cargos = cargos;
+    public void setCargoCodigo(CsbffCargos cargoCodigo) {
+        this.cargoCodigo = cargoCodigo;
     }
 
-    public CsbffCargos getCargos() {
-        return cargos;
+    public CsbffCargos getCargoCodigo() {
+        return cargoCodigo;
     }
 
     public double getCargoValorSalario() {

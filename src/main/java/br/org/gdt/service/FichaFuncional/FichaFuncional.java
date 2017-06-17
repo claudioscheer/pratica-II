@@ -118,8 +118,7 @@ public class FichaFuncional {
         }
 
         Map<String, Object> parametros = new HashMap<>();
-
-        parametros.put("empresa", "Asa Delta RH");
+        parametros.put("empresa", "Asa Delta");
         parametros.put("cnpj", "98.039.852/0004-3");
         parametros.put("recIdpessoa", pessoa.getRecIdpessoa());
         parametros.put("recCpf", pessoa.getRecCpf());
@@ -132,11 +131,11 @@ public class FichaFuncional {
         parametros.put("recDtemissao", pessoa.getRecDtemissao());
         parametros.put("recNacionalidade", pessoa.getRecNacionalidade());
         parametros.put("recReservista", pessoa.getRecReservista());
-        parametros.put("recEscolaridade", pessoa.getRecEscolaridade());
+        parametros.put("recEscolaridade", pessoa.getRecEscolaridade().doubleValue());
 
         parametros.put("recNomepai", pessoa.getRecNomepai());
         parametros.put("recNomemae", pessoa.getRecNomemae());
-//        parametros.put("recNumCtps", pessoa.getRecNumCtps());
+        parametros.put("recNumCtps", pessoa.getRecNumCtps().doubleValue());
         parametros.put("recPispasep", pessoa.getRecPispasep());
         parametros.put("recEndereco", pessoa.getRecEndereco());
         parametros.put("recNumero", pessoa.getRecNumero());
@@ -145,17 +144,17 @@ public class FichaFuncional {
         parametros.put("recTelefone", pessoa.getRecTelefone());
         parametros.put("recCelular", pessoa.getRecCelular());
 
-        parametros.put("cargonome", pessoa.getCargoNome());
+        parametros.put("cargonome", pessoa.getCargoCodigo().getCargoNome());
         parametros.put("cargoValorSalario", pessoa.getCargoValorSalario());
         parametros.put("recDtaAdmissao", pessoa.getRecDtaAdmissao());
         parametros.put("recDtaDemissao", pessoa.getRecDtaDemissao());
         parametros.put("insalubridade", pessoa.getInsalubridade());
         parametros.put("recPericulosidade", pessoa.getRecPericulosidade());
-        parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor());
+        parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor().doubleValue());
 
         parametros.put("recNomeBanco", pessoa.getRecNomeBanco());
-        parametros.put("recAgenciaBancaria", pessoa.getRecAgenciaBancaria());
-        parametros.put("recNumeroContaBanco", pessoa.getRecNumeroContaBanco());
+        parametros.put("recAgenciaBancaria", pessoa.getRecAgenciaBancaria().doubleValue());
+        parametros.put("recNumeroContaBanco", pessoa.getRecNumeroContaBanco().doubleValue());
 
    
         //Dependentes do colaborador

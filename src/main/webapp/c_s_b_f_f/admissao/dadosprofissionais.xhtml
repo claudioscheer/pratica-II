@@ -177,9 +177,9 @@
                                                                 <label class="control-label " for="number">                                        
                                                                     Cargo ocupado
                                                                 </label>
-                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.cargoNome}" class="form-control" converter="#{generic}">
+                                                                <h:selectOneMenu value="#{csbffDadosProfissionaisBean.recPessoa.cargoCodigo}" class="form-control" converter="#{generic}">
                                                                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
-                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.cargos}" var="cargos" itemValue="#{cargos}"  itemLabel="#{cargos.cargoNome}" />
+                                                                    <f:selectItems value="#{csbffDadosProfissionaisBean.cargos}"/>
                                                                 </h:selectOneMenu>
                                                             </div> 
                                                         </div>

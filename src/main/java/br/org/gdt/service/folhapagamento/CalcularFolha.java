@@ -214,8 +214,8 @@ public class CalcularFolha {
                 parametros.put("empresa", "Asa Delta RH");
                 parametros.put("cnpj", "98.039.852/0004-3");
                 parametros.put("dataAdmissao", fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao());
-                parametros.put("cargo", fpFolhaPeriodo.getForPessoa().getCargoNome());
-                parametros.put("CBO", fpFolhaPeriodo.getForPessoa().getCargoCbo());
+                parametros.put("cargo", "");
+                parametros.put("CBO", "");
 
                 String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
                 parametros.put("pessoa", nomePessoa);
