@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <link href="#{resource['images/Logo-Murphy.png']}" rel='shortcut icon' type='image/x-icon'/>
@@ -13,23 +14,36 @@
         <title>Login</title>
         <h:outputStylesheet library="vendors/" name="bootstrap/dist/css/bootstrap.min.css" />
         <h:outputStylesheet library="vendors/" name="font-awesome/css/font-awesome.min.css" />
-        <h:outputStylesheet library="build/" name="css/custom.min.css" />
+        <h:outputStylesheet library="vendors/" name="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
+        <h:outputStylesheet library="vendors/" name="bootstrap-daterangepicker/daterangepicker.css" />
+        <h:outputStylesheet library="vendors/" name="pnotify/dist/pnotify.css" />
+        <h:outputStylesheet library="vendors/" name="pnotify/dist/pnotify.buttons.css" />
+        <h:outputStylesheet library="vendors/" name="iCheck/skins/flat/blue.css" />        
+        <h:outputStylesheet library="build/" name="css/custom.css" />
+        <h:outputScript     library="build/" name="js/utils.js" />
+        <h:outputStylesheet library="build/" name="css/theme.css" />
+        <h:outputStylesheet library="build/" name="css/components.css" />
     </h:head>
     <h:body class="login">
         <div>
             <div class="login_wrapper">
                 <div class="form login_form">
                     <section class="login_content">
-                        <h:form a:action="j_security_check" a:method="post">
+                        <h:form id="formLogin">
                             <h1>Login</h1>
                             <div>
-                                <input name="j_username" class="form-control" placeholder="Email" value="" />
+                                <h:messages class="error" style="color: #d9534f" />
                             </div>
                             <div>
-                                <input name="j_password" type="password" class="form-control" placeholder="Senha" value="" />
+                                <h:inputText label="Login" required="true" value="#{loginBean.login}" class="form-control" a:placeholder="Email" />
                             </div>
                             <div>
-                                <input type="submit" value="Entrar" class="btn btn-default pull-right" />
+                                <h:inputSecret label="Senha" required="true" value="#{loginBean.senha}" class="form-control" a:placeholder="Senha" />
+                            </div>
+                            <div>
+                                <h:commandButton action="#{loginBean.entrar()}" class="btn btn-default pull-right" value="Entrar">
+                                    <f:ajax execute="@form" render="formLogin" />
+                                </h:commandButton>
                             </div>
                             <div class="clearfix"></div>
                             <div class="separator">
@@ -45,5 +59,17 @@
                 </div>
             </div>
         </div>
+
+        <h:outputScript     library="build/" name="js/utils.js" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript library="vendors/" name="bootstrap/dist/js/bootstrap.min.js" />
+        <h:outputScript library="vendors/" name="moment/min/moment.min.js" />
+        <h:outputScript library="vendors/" name="bootstrap-daterangepicker/daterangepicker.js" />
+        <h:outputScript library="vendors/" name="fastclick/lib/fastclick.js" />
+        <h:outputScript library="vendors/" name="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" />
+        <h:outputScript library="vendors/" name="jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js" />
+        <h:outputScript library="vendors/" name="pnotify/dist/pnotify.js" />
+        <h:outputScript library="vendors/" name="pnotify/dist/pnotify.buttons.js" />        
+        <h:outputScript library="build/" name="js/custom.js" />
     </h:body>
 </html>

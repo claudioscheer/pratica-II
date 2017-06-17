@@ -74,6 +74,7 @@ public class Usuario implements java.io.Serializable {
         getUsuarioPapeis().add(novoPapel);
     }
 
+    @Transient
     public String getAcessos() {
         return String.join(", ", getUsuarioPapeis().stream()
                 .map(x -> x.getPapel())

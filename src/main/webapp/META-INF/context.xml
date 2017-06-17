@@ -3,9 +3,9 @@
 
     <Realm className="org.apache.catalina.realm.JDBCRealm"
            driverName="org.postgresql.Driver"
-           connectionURL="jdbc:postgresql://localhost:5432/BancoPraticaRH"
+           connectionURL="jdbc:postgresql://localhost:5432/murphyrh"
            connectionName="postgres"
-           connectionPassword="root"
+           connectionPassword="postgres"
            userTable="usuario"
            userNameCol="login"
            userCredCol="senha"
