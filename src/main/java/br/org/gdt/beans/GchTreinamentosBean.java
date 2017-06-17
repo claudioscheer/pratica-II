@@ -96,11 +96,13 @@ public class GchTreinamentosBean {
         }
 
         todosGchMunicipiosUF = null;
-        gchTreinamentos = null;
+        gchTreinamentos = new GchTreinamentos();
         todosGchUfs = null;
         todosGchMunicipiosUF = null;
         todosGchTreinamentos = null;
-
+        dataInicio = null;
+        dataFim = null;
+        ufCodigoCombo = 0;
         return "Treinamentos";
 
     }
