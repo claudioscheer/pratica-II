@@ -152,9 +152,8 @@ public class FpCalcularBean {
                 fpEventoPeriodo = new FpEventoPeriodo();
                 Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "success");
             } catch (Exception e) {
-
                 todosFpEventoPeriodo = new ArrayList<>();
-                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
+                Helper.mostrarNotificacao("Calcular folha", "Ocorreu um erro ao calcular a folha de pagamento.", "error");
             }
         }
     }
@@ -205,11 +204,10 @@ public class FpCalcularBean {
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
-//        if (todosFpPeriodo == null) {
-//            todosFpPeriodo = fpPeriodoService.findAll();
-//        }
-//        return todosFpPeriodo;
-        return fpPeriodoService.findAllPeriodoNaoFechado();
+        if (todosFpPeriodo == null) {
+            todosFpPeriodo = fpPeriodoService.findAllPeriodoNaoFechado();
+        }
+        return todosFpPeriodo;
     }
 
     public RecPessoa getRecPessoa() {

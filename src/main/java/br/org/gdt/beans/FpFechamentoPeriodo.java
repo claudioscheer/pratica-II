@@ -62,7 +62,10 @@ public class FpFechamentoPeriodo {
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
-        return fpPeriodoService.findAllPeriodoNaoFechado();
+        if (todosFpPeriodo == null) {
+            todosFpPeriodo = fpPeriodoService.findAllPeriodoNaoFechado();
+        }
+        return todosFpPeriodo;
     }
 
     public void setTodosFpPeriodo(List<FpPeriodo> todosFpPeriodo) {

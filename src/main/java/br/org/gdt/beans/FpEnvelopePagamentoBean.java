@@ -30,7 +30,7 @@ public class FpEnvelopePagamentoBean {
     private FpFolhaPeriodo fpFolhaPeriodo = new FpFolhaPeriodo();
     private FpTipoFolha fpTipoFolha;
     private List<FpFolhaPeriodo> todasFolhasPeriodo = new ArrayList<>();
-    private List<FpPeriodo> todosFpPeriodo = new ArrayList<>();
+    private List<FpPeriodo> todosFpPeriodo;
 
     @ManagedProperty("#{fpPeriodoService}")
     private FpPeriodoService fpPeriodoService;
@@ -150,7 +150,7 @@ public class FpEnvelopePagamentoBean {
 
             Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento recalculada.", "success");
         } catch (Exception e) {
-            Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
+            Helper.mostrarNotificacao("Calcular folha", "Não foi possível recalcular a folha de pagamento.", "error");
         }
     }
 
@@ -190,7 +190,7 @@ public class FpEnvelopePagamentoBean {
         try {
             calcularFolha.gerarFolha(todasFolhasPeriodo, fpPeriodo.getPerMes() + " - " + fpPeriodo.getPerAno());
         } catch (Exception e) {
-            Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
+            Helper.mostrarNotificacao("Relatório", "Ocorreu um erro ao gerar as folhas de pagamento.", "error");
         }
     }
 
@@ -209,7 +209,7 @@ public class FpEnvelopePagamentoBean {
             folhasPeriodo.add(fpFolhaPeriodo);
             calcularFolha.gerarFolha(folhasPeriodo, fpFolhaPeriodo.getForPessoa().getRecNomecompleto());
         } catch (Exception e) {
-            Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
+            Helper.mostrarNotificacao("Relatório", "Ocorreu um erro ao gerar a folha de pagamento.", "error");
         }
     }
 
@@ -230,10 +230,12 @@ public class FpEnvelopePagamentoBean {
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
-        List<FpPeriodo> periodos = fpPeriodoService.findAll();
-        return periodos.stream()
-                .sorted((x, y) -> Integer.compare(x.getPerMes(), y.getPerMes()))
-                .collect(Collectors.toList());
+        if (todosFpPeriodo == null) {
+            todosFpPeriodo = fpPeriodoService.findAll().stream()
+                    .sorted((x, y) -> Integer.compare(x.getPerMes(), y.getPerMes()))
+                    .collect(Collectors.toList());
+        }
+        return todosFpPeriodo;
 
     }
 
