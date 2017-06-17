@@ -112,7 +112,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_nacionalidade")
     private String recNacionalidade;
     @Column(name = "rec_num_ctps")
-    private BigInteger recNumCtps;
+    private Integer recNumCtps;
     @Column(name = "rec_numero_conta_banco")
     private BigInteger recNumeroContaBanco;
     @Column(name = "rec_agencia_bancaria")
@@ -130,7 +130,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_NomeBanco")
     private String recNomeBanco;
     @Column(name = "rec_num_titu_eleitor")
-    private BigInteger recNumTituEleitor;
+    private Integer recNumTituEleitor;
     @Column(name = "rec_certificado_reservista")
     private BigInteger recCertificadoReservista;
     @Column(name = "rec_dta_demissao")
@@ -175,7 +175,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    private CsbffCargos cargoCbo;
 //    @OneToMany
 //    private String cargoNome;
-    private String admissaoDescricao;
+//    private String admissaoDescricao;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
@@ -186,6 +186,9 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private CsbffCargos cargoCodigo;
     private double cargoValorSalario;
     public boolean colaboradorInativo;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date recProrrogaContrato;
+    private int diasProrrogados;
 
     @OneToOne
     private CsbffPessoaBeneficio csbffPessoaBeneficio;
@@ -418,11 +421,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recNacionalidade = recNacionalidade;
     }
 
-    public BigInteger getRecNumCtps() {
+    public Integer getRecNumCtps() {
         return recNumCtps;
     }
 
-    public void setRecNumCtps(BigInteger recNumCtps) {
+    public void setRecNumCtps(Integer recNumCtps) {
         this.recNumCtps = recNumCtps;
     }
 
@@ -489,11 +492,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recNomeBanco = recNomeBanco;
     }
 
-    public BigInteger getRecNumTituEleitor() {
+    public Integer getRecNumTituEleitor() {
         return recNumTituEleitor;
     }
 
-    public void setRecNumTituEleitor(BigInteger recNumTituEleitor) {
+    public void setRecNumTituEleitor(Integer recNumTituEleitor) {
         this.recNumTituEleitor = recNumTituEleitor;
     }
 
@@ -606,7 +609,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setCargoCodigo(CsbffCargos cargoCodigo) {
 //        this.cargoCodigo = cargoCodigo;
 //    }
-
     public GchMunicipios getMunCodigo() {
         return munCodigo;
     }
@@ -657,6 +659,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     }
 
     public Insalubridade getInsalubridade() {
+
         return insalubridade;
     }
 
@@ -718,14 +721,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //
 //        this.cargoNome = cargoNome;
 //    }
-
-    public String getAdmissaoDescricao() {
-        return admissaoDescricao;
-    }
-
-    public void setAdmissaoDescricao(String admissaoDescricao) {
-        this.admissaoDescricao = admissaoDescricao;
-    }
+//    public String getAdmissaoDescricao() {
+//        return admissaoDescricao;
+//    }
+//
+//    public void setAdmissaoDescricao(String admissaoDescricao) {
+//        this.admissaoDescricao = admissaoDescricao;
+//    }
 
     public List<RecPessoa> getRecPessoaList() {
         if (this.recPessoaList == null) {
@@ -806,6 +808,22 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setCsbffPessoaBeneficio(CsbffPessoaBeneficio csbffPessoaBeneficio) {
         this.csbffPessoaBeneficio = csbffPessoaBeneficio;
+    }
+
+    public Date getRecProrrogaContrato() {
+        return recProrrogaContrato;
+    }
+
+    public void setRecProrrogaContrato(Date recProrrogaContrato) {
+        this.recProrrogaContrato = recProrrogaContrato;
+    }
+
+    public int getDiasProrrogados() {
+        return diasProrrogados;
+    }
+
+    public void setDiasProrrogados(int diasProrrogados) {
+        this.diasProrrogados = diasProrrogados;
     }
 
 }

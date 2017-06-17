@@ -58,7 +58,7 @@ public class CsbffDependentes implements Serializable {
     @Column(name = "dependente_imposto_de_renda")
     private boolean dependenteImpostoDeRenda;
     @Column(name = "dependente_tipo")
-    private BigInteger dependenteTipo;
+    private Integer dependenteTipo;
     @Column(name = "dependente_naturalidade")
     private String dependenteNaturalidade;
     @OneToOne(mappedBy = "dependenteCod")
@@ -128,11 +128,11 @@ public class CsbffDependentes implements Serializable {
         this.dependenteImpostoDeRenda = dependenteImpostoDeRenda;
     }
 
-    public BigInteger getDependenteTipo() {
+    public Integer getDependenteTipo() {
         return dependenteTipo;
     }
 
-    public void setDependenteTipo(BigInteger dependenteTipo) {
+    public void setDependenteTipo(Integer dependenteTipo) {
         this.dependenteTipo = dependenteTipo;
     }
 

@@ -119,7 +119,7 @@ public class FichaFuncional {
 
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("empresa", "Asa Delta");
-        parametros.put("cnpj", "98.039.852/0004-3");
+        parametros.put("cnpj", "98.039.852/0004-33");
         parametros.put("recIdpessoa", pessoa.getRecIdpessoa());
         parametros.put("recCpf", pessoa.getRecCpf());
         parametros.put("recNomecompleto", pessoa.getRecNomecompleto());
@@ -131,11 +131,11 @@ public class FichaFuncional {
         parametros.put("recDtemissao", pessoa.getRecDtemissao());
         parametros.put("recNacionalidade", pessoa.getRecNacionalidade());
         parametros.put("recReservista", pessoa.getRecReservista());
-        parametros.put("recEscolaridade", pessoa.getRecEscolaridade().doubleValue());
+        parametros.put("recPesGrauEnsino", pessoa.getRecPesGrauEnsino());
 
         parametros.put("recNomepai", pessoa.getRecNomepai());
         parametros.put("recNomemae", pessoa.getRecNomemae());
-        parametros.put("recNumCtps", pessoa.getRecNumCtps().doubleValue());
+        parametros.put("recNumCtps", pessoa.getRecNumCtps());
         parametros.put("recPispasep", pessoa.getRecPispasep());
         parametros.put("recEndereco", pessoa.getRecEndereco());
         parametros.put("recNumero", pessoa.getRecNumero());
@@ -150,13 +150,13 @@ public class FichaFuncional {
         parametros.put("recDtaDemissao", pessoa.getRecDtaDemissao());
         parametros.put("insalubridade", pessoa.getInsalubridade());
         parametros.put("recPericulosidade", pessoa.getRecPericulosidade());
-        parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor().doubleValue());
+        parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor());
+
 
         parametros.put("recNomeBanco", pessoa.getRecNomeBanco());
-        parametros.put("recAgenciaBancaria", pessoa.getRecAgenciaBancaria().doubleValue());
-        parametros.put("recNumeroContaBanco", pessoa.getRecNumeroContaBanco().doubleValue());
+        parametros.put("recAgenciaBancaria", String.valueOf(pessoa.getRecAgenciaBancaria().doubleValue()));
+        parametros.put("recNumeroContaBanco", String.valueOf(pessoa.getRecNumeroContaBanco().doubleValue()));
 
-   
         //Dependentes do colaborador
         List<CsbffDependentes> dependentes = recPessoaService.findAllDependentesPessoa(pessoa);
 
@@ -177,31 +177,30 @@ public class FichaFuncional {
 
         parametros.put("escalaHorarios", escalasCollection);
 
-        List<GchTreinamentospessoas> treinamentosPessoa = gchTreinamentospessoasService.treinamentosPessoa(pessoa);
-
-        List<Treinamentos> treinamentos = new ArrayList<>();
-
-        for (GchTreinamentospessoas tp : treinamentosPessoa) {
-
-            GchTreinamentos treinamento = gchTreinamentosService.findById(tp.getTreiCodigo().getTreiCodigo());
-
-            treinamento.getTreiNome();
-
-            Treinamentos novo = new Treinamentos();
-
-            novo.setTreinamentoNome(treinamento.getTreiNome());
-
-            treinamentos.add(novo);
-
-        }
-
-        JRBeanCollectionDataSource treinamentosCollection = new JRBeanCollectionDataSource(treinamentos);
-
-        parametros.put("treinamentos", treinamentosCollection);
-
+//        List<GchTreinamentospessoas> treinamentosPessoa = gchTreinamentospessoasService.treinamentosPessoa(pessoa);
+//
+//        List<Treinamentos> treinamentos = new ArrayList<>();
+//
+//        for (GchTreinamentospessoas tp : treinamentosPessoa) {
+//
+//            GchTreinamentos treinamento = gchTreinamentosService.findById(tp.getTreiCodigo().getTreiCodigo());
+//
+//            treinamento.getTreiNome();
+//
+//            Treinamentos novo = new Treinamentos();
+//
+//            novo.setTreinamentoNome(treinamento.getTreiNome());
+//
+//            treinamentos.add(novo);
+//
+//        }
+//
+//        JRBeanCollectionDataSource treinamentosCollection = new JRBeanCollectionDataSource(treinamentos);
+//
+//        parametros.put("treinamentos", treinamentosCollection);
         JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JREmptyDataSource());
         relatorios.add(jasperPrint);
-        relatorios.add(jasperPrint);
+//        relatorios.add(jasperPrint);
 
         //Retorna o PDFF via HTTP Response
         HTTPResponseReturnPDF(relatorios, caminhoCompletoArquivo);
