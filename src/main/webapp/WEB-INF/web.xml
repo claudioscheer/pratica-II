@@ -74,4 +74,145 @@
         <error-code>503</error-code>
         <location>/error-padrao.xhtml</location>
     </error-page>
+    <security-constraint>
+        <display-name>admin_access</display-name>
+        <web-resource-collection>
+            <web-resource-name>capital</web-resource-name>
+            <description>Capital humano</description>
+            <url-pattern>/ModuloCapitalHumano/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>ficha</web-resource-name>
+            <description>Ficha funcional</description>
+            <url-pattern>/c_s_b_f_f/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>folha</web-resource-name>
+            <description>Folha pagamento</description>
+            <url-pattern>/folhapagamento/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>recrutamento</web-resource-name>
+            <description>Recrutamento e seleção</description>
+            <url-pattern>/recrutamento/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>usuario</web-resource-name>
+            <description>Usuários</description>
+            <url-pattern>/usuario/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Index</web-resource-name>
+            <description>Index</description>
+            <url-pattern>/index.xhtml</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Inicializar sistema</web-resource-name>
+            <description>Inicializar sistema</description>
+            <url-pattern>/inicializar-sistema.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>folha_access</display-name>
+        <web-resource-collection>
+            <web-resource-name>folha</web-resource-name>
+            <description>Folha de pagamento</description>
+            <url-pattern>/folhapagamento/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Index</web-resource-name>
+            <description>Index</description>
+            <url-pattern>/index.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>FOLHA</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>capital_access</display-name>
+        <web-resource-collection>
+            <web-resource-name>capital</web-resource-name>
+            <description>Capital humano</description>
+            <url-pattern>/ModuloCapitalHumano/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Index</web-resource-name>
+            <description>Index</description>
+            <url-pattern>/index.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>CAPITAL</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>recrutamento_access</display-name>
+        <web-resource-collection>
+            <web-resource-name>recrutamento</web-resource-name>
+            <description>Recrutamento e seleção</description>
+            <url-pattern>/recrutamento/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Index</web-resource-name>
+            <description>Index</description>
+            <url-pattern>/index.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>RECRUTAMENTO</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ficha_access</display-name>
+        <web-resource-collection>
+            <web-resource-name>ficha</web-resource-name>
+            <description>Ficha funcional</description>
+            <url-pattern>/c_s_b_f_f/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Index</web-resource-name>
+            <description>Index</description>
+            <url-pattern>/index.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>FICHA</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/error-403.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>Administrador do sistema</description>
+        <role-name>ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description>Folha de pagamento</description>
+        <role-name>FOLHA</role-name>
+    </security-role>
+    <security-role>
+        <description>Capital humano</description>
+        <role-name>CAPITAL</role-name>
+    </security-role>
+    <security-role>
+        <description>Recrutamento e seleção</description>
+        <role-name>RECRUTAMENTO</role-name>
+    </security-role>
+    <security-role>
+        <description>Ficha funcional</description>
+        <role-name>FICHA</role-name>
+    </security-role>
 </web-app>
