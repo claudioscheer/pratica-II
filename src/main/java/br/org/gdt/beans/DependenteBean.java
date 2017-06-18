@@ -60,7 +60,7 @@ public class DependenteBean {
 
     public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
-//        NomeCompleto = recPessoa.getRecNomecompleto();
+        NomeCompleto = recPessoa.getRecNomecompleto();
 
         String MsgNotificacao = "";
         while (recPessoa == null) {
@@ -78,7 +78,6 @@ public class DependenteBean {
         }
 
     }
-    
 
     public String pg(CsbffDependentes dependente) {
         this.csbffdependente = dependente;
