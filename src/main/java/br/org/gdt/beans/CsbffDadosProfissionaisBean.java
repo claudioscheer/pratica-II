@@ -37,6 +37,7 @@ public class CsbffDadosProfissionaisBean {
 
     private boolean formAtivo = false;
     private String recCpf;
+    private boolean habilitar;
 
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoaList;
@@ -84,6 +85,18 @@ public class CsbffDadosProfissionaisBean {
 
     public CsbffDadosProfissionaisBean() {
 
+    }
+
+    public void selecionarInsalubridade() {
+        if (recPessoa.getInsalubridade() != null && recPessoa.getInsalubridade() != Insalubridade.Não) {
+            recPessoa.setRecPericulosidade(null);
+        }
+    }
+
+    public void selecionarPericulosidade() {
+        if (recPessoa.getRecPericulosidade() != null && recPessoa.getRecPericulosidade() != Periculosidade.Não) {
+            recPessoa.setInsalubridade(null);
+        }
     }
 
     public CsbffDadosProfissionaisBean(CsbffEscalaHoras diaDaSemana) {
@@ -536,6 +549,14 @@ public class CsbffDadosProfissionaisBean {
 
     public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
+    }
+
+    public boolean isHabilitar() {
+        return habilitar;
+    }
+
+    public void setHabilitar(boolean habilitar) {
+        this.habilitar = habilitar;
     }
 
 }

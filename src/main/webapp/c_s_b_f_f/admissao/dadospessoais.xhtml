@@ -55,7 +55,7 @@
                                                                 <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffDadosPessoaisBean.buscarCpf()}"/>
                                                             </div>
                                                         </div>                              
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">                                
                                                             <div class="form-group ">
                                                                 <label class="control-label " >
                                                                     Nome Colaborador
@@ -69,11 +69,9 @@
                                                                 <label class="control-label " for="date">                                        
                                                                     Data de Nascimento
                                                                 </label>
-                                                                <div class="xdisplay_inputx form-group has-feedback">
-                                                                    <h:inputText class="form-control has-feedback date-picker" id="dateNascimento" value="#{csbffDadosPessoaisBean.recPessoa.recDtnascimento}" a:placeholder="dd/mm/aaaa hh:mm" >
-                                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                                    </h:inputText>
-                                                                </div>
+                                                                <h:inputText class="form-control date-picker" maxlength="10" onkeypress="this.value = MascaraData(this.value)" value="#{csbffDadosPessoaisBean.recPessoa.recDtnascimento}" a:placeholder="dd/mm/aaaa" >
+                                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                                </h:inputText>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 ">                                
@@ -121,7 +119,7 @@
                                                                 <label class="control-label" >                                        
                                                                     Data de Emissão
                                                                 </label>
-                                                                <h:inputText class="form-control has-feedback date-picker" value="#{csbffDadosPessoaisBean.recPessoa.recDtemissao}">
+                                                                <h:inputText class="form-control date-picker" maxlength="10" onkeypress="this.value = MascaraData(this.value)" value="#{csbffDadosPessoaisBean.recPessoa.recDtemissao}" a:placeholder="dd/mm/aaaa" >
                                                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                                                 </h:inputText>
                                                             </div>
@@ -217,7 +215,7 @@
                                                                 <label class="control-label " for="select">
                                                                     Escolaridade
                                                                 </label>
-                                                                <h:selectOneMenu value="#{csbffDadosPessoaisBean.recPessoa.recEscolaridade}" class="form-control">
+                                                                <h:selectOneMenu value="#{csbffDadosPessoaisBean.recPessoa.recPesGrauEnsino}" class="form-control">
                                                                     <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
                                                                     <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
                                                                     <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />

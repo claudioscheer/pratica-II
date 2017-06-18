@@ -40,13 +40,13 @@
                                                                     CPF
                                                                     <!--                                                                    <span class="required">*</span>-->
                                                                 </label>
-                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" value="#{csbffEscalaHorasBean.recCpf}" title="CPF" />
+                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.recCpf}" title="CPF" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group ">
                                                                 <label class="control-label">Código colaborador</label>
-                                                                <h:inputText label="codigo"  class="form-control" value="#{csbffEscalaHorasBean.recPessoa.recIdpessoa}" disabled="true" />
+                                                                <h:inputText label="codigo"  class="form-control" value="#{dependenteBean.recPessoa.recIdpessoa}" disabled="true" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 col-sm-12">
@@ -54,12 +54,12 @@
                                                                 <label class="control-label " >
                                                                     Nome Colaborador
                                                                 </label>
-                                                                <h:inputText label="name"  class="form-control" value="#{csbffEscalaHorasBean.recPessoa.recNomecompleto}" disabled="true"/>
+                                                                <h:inputText label="name"  class="form-control" value="#{dependenteBean.recPessoa.recNomecompleto}" disabled="true"/>
                                                             </div>     
                                                         </div>
                                                         <div class="col-md-12 col-sm-3 col-xs-12">
                                                             <div class="element">
-                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffEscalaHorasBean.buscarCpf()}"/>
+                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{dependenteBean.buscarCpf()}"/>
                                                             </div>
                                                         </div> 
 
@@ -84,7 +84,7 @@
                                                                     CPF
                                                                     <span class="required">*</span>
                                                                 </label>
-                                                                <h:inputText class="form-control" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
+                                                                <h:inputText class="form-control"  maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
