@@ -26,12 +26,14 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">                                            
                                             <h:outputLabel value="Digite seu CPF" 
-                                                           for="cpfBusca"/>                                            
+                                                           for="cpfBusca"/>       
+                                            
                                             <h:inputText class="form-control" 
                                                          id="cpfBusca" 
                                                          maxlength="14"
                                                          onkeypress="this.value = MascaraCPF(this.value)"
                                                          value="#{recPessoaBean.cpfBusca}" />
+                                            
                                         </div>
                                     </div>                               
                                 </div>                     
@@ -53,7 +55,9 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
-                                            <h:outputLabel value="Nome Completo" for="NomeCompleto" />                                            
+                                            <h:outputLabel value="Nome Completo" 
+                                                           for="NomeCompleto" />                                            
+                                            <span class="required" style="color: red">*</span>
                                             <h:inputText class="form-control" 
                                                          id="NomeCompleto" 
                                                          value="#{recPessoaBean.recPessoa.recNomecompleto}" />
@@ -61,7 +65,9 @@
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">                                            
-                                            <h:outputLabel value="CPF" for="cpf" />                                            
+                                            <h:outputLabel value="CPF" 
+                                                           for="cpf" />                                            
+                                            <span class="required" style="color: red">*</span>
                                             <h:inputText class="form-control" 
                                                          id="cpf"                                                          
                                                          maxlength="14"                                                          
@@ -100,7 +106,9 @@
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
-                                            <h:outputLabel value="RG" for="rg" />                                            
+                                            <h:outputLabel value="RG" 
+                                                           for="rg" />                                            
+                                            <span class="required" style="color: red">*</span>
                                             <h:inputText class="form-control" 
                                                          id="rg" 
                                                          maxlength="10"
@@ -112,7 +120,8 @@
                                         <div class="form-group ">                                            
                                             <h:outputLabel 
                                                 value="Orgão Emissor" 
-                                                for="OrgaoEmissor" />                                            
+                                                for="OrgaoEmissor" />      
+                                            <span class="required" style="color: red">*</span>
                                             <h:inputText class="form-control" 
                                                          id="OrgaoEmissor" 
                                                          value="#{recPessoaBean.recPessoa.recOrgaoemissor}" 
@@ -123,7 +132,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Data de Emissão
-                                                <span class="required">*</span>
+                                                
                                             </label>
                                             <input class="form-control date-picker" 
                                                    id="number" 
@@ -156,7 +165,7 @@
                                         <div class="form-group ">
                                             <label class="control-label" for="number">                                        
                                                 Data de Nascimento
-                                                <span class="required">*</span>
+                                                
                                             </label>
                                             <input class="form-control date-picker" 
                                                    id="number" 
@@ -169,7 +178,9 @@
                                     </div> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
-                                            <h:outputLabel value="E-mail" for="email" />                                            
+                                            <h:outputLabel value="E-mail" 
+                                                           for="email" />  
+                                            <span class="required" style="color: red">*</span>
                                             <h:inputText class="form-control" 
                                                          id="email" 
                                                          value="#{recPessoaBean.recPessoa.recEmail}" 
@@ -178,7 +189,9 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
-                                            <h:outputLabel value="Telefone" for="telefone" />                                            
+                                            <h:outputLabel value="Telefone" 
+                                                           for="telefone" />      
+                                            <span class="required" style="color: red">*</span>
                                             <h:inputText class="form-control" 
                                                          id="telefone" 
                                                          maxlength="15"
@@ -189,7 +202,9 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group ">                                            
-                                            <h:outputLabel value="Celular" for="celular" />                                            
+                                            <h:outputLabel value="Celular" 
+                                                           for="celular" />                                            
+                                            <span class="required" style="color: red">*</span>
                                             <h:inputText class="form-control" 
                                                          id="celular" 
                                                          maxlength="15"
@@ -204,28 +219,31 @@
                                             <div class="form-group ">
                                                 <label class="control-label " for="number">                                        
                                                     Anexar Foto
-                                                    <span class="required">*</span>
+                                                    
                                                 </label>
-                                                <p:fileUpload value="#{recPessoaBean.recFoto}"                                                                 
+                                                <p:fileUpload value="#{recPessoaBean.recFoto}"                                                               
+                                                              label="Procurar"                                                                                                                            
                                                               mode="simple" />                                                                                      
                                             </div>
                                         </div>
+                            
                                         <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="form-group ">
                                                 <label class="control-label " for="number">                                        
                                                     Anexar Currículo
-                                                    <span class="required">*</span>
+                                                    
                                                 </label>
-                                                <p:fileUpload value="#{recPessoaBean.recFoto}"                                                           
+                                                <p:fileUpload value="#{recPessoaBean.recFoto}"   
+                                                              allowTypes="*.pdf"
                                                               mode="simple" />                                                                                      
                                             </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Objetivos Profissionais
-                                                <span class="required">*</span>
+                                                
                                             </label>                                            
                                             <h:inputTextarea class="form-control" 
                                                              cols="40" 
@@ -238,7 +256,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Auto Avaliação
-                                                <span class="required">*</span>
+                                                
                                             </label>
                                             <h:inputTextarea class="form-control" 
                                                              cols="40" 
@@ -252,7 +270,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Pretensão Salarial
-                                                <span class="required">*</span>
+                                                
                                             </label>
                                             <h:inputText class="form-control" 
                                                          maxlength="10"                                                                                                                  
@@ -265,7 +283,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 PIS/PASEP
-                                                <span class="required">*</span>
+                                                
                                             </label>                                            
                                             <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recPispasep}"/>                                            
                                         </div>
@@ -311,7 +329,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Certificado de Reservista
-                                                <span class="required">*</span>
+                                                
                                             </label>
                                             <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recReservista}"/>                                            
                                         </div>
@@ -324,7 +342,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Endereço
-                                                <span class="required">*</span>
+                                                <span class="required" style="color: red">*</span>
                                             </label>
                                             <h:inputText class="form-control" 
                                                          value="#{recPessoaBean.recPessoa.recEndereco}"/>                                            
@@ -334,7 +352,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Bairro
-                                                <span class="required">*</span>
+                                                <span class="required" style="color: red">*</span>
                                             </label>
                                             <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recBairro}"/>                                            
                                         </div>
@@ -343,7 +361,7 @@
                                         <div class="form-group ">
                                             <label class="control-label " for="number">                                        
                                                 Número
-                                                <span class="required">*</span>
+                                                <span class="required" style="color: red">*</span>
                                             </label>
                                             <h:inputText class="form-control" value="#{recPessoaBean.recPessoa.recNumero}"/>                                            
                                         </div>

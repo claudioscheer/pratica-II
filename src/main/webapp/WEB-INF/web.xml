@@ -56,6 +56,10 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>primafaces.UPLOADER</param-name>
+        <param-value>native</param-value>
+    </context-param>
 <!--    <error-page>
         Missing login
         <error-code>401</error-code>
