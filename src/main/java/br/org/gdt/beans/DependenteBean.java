@@ -14,7 +14,6 @@ import br.org.gdt.service.CsbffDependentesService;
 import br.org.gdt.service.CsbffPessoaDependenteService;
 import br.org.gdt.service.RecPessoaService;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -57,10 +56,9 @@ public class DependenteBean {
 //            recPessoa = new RecPessoa();
 //        }
 //    }
-
     public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
-        NomeCompleto = recPessoa.getRecNomecompleto();
+//        NomeCompleto = recPessoa.getRecNomecompleto();
 
         String MsgNotificacao = "";
         while (recPessoa == null) {
@@ -107,6 +105,7 @@ public class DependenteBean {
             MsgNotificacao = "O colaborador não pode ser adicionado. ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
+        this.csbffdependente = new CsbffDependentes();
         return "dependente";
 
     }
@@ -140,8 +139,8 @@ public class DependenteBean {
     public String excluir(CsbffDependentes dependente) {
         String MsgNotificacao = "";
         try {
-        csbffDependenteService.delete(dependente.getDependenteCod());
-        todosdependentes.remove(dependente);
+            csbffDependenteService.delete(dependente.getDependenteCod());
+            todosdependentes.remove(dependente);
 
             MsgNotificacao = "O dependente foi excluido!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");

@@ -190,8 +190,7 @@ public class FpEnvelopePagamentoBean {
         try {
             calcularFolha.gerarFolha(todasFolhasPeriodo, fpPeriodo.getPerMes() + " - " + fpPeriodo.getPerAno());
         } catch (Exception e) {
-//            Helper.mostrarNotificacao("Relatório", "Ocorreu um erro ao gerar as folhas de pagamento.", "error");
-            Helper.mostrarNotificacao("Relatório", e.getMessage(), "error");
+            Helper.mostrarNotificacao("Relatório", "Ocorreu um erro ao gerar as folhas de pagamento.", "error");
         }
     }
 

@@ -35,10 +35,10 @@
                                 <h:messages class="error" style="color: #d9534f" />
                             </div>
                             <div>
-                                <h:inputText requiredMessage="Campo Login é obrigatório." label="Login" required="true" value="#{loginBean.login}" class="form-control" a:placeholder="Email" />
+                                <h:inputText label="Login" required="true" value="#{loginBean.login}" class="form-control" a:placeholder="Email" />
                             </div>
                             <div>
-                                <h:inputSecret requiredMessage="Campo Senha é obrigatório." label="Senha" required="true" value="#{loginBean.senha}" class="form-control" a:placeholder="Senha" />
+                                <h:inputSecret label="Senha" required="true" value="#{loginBean.senha}" class="form-control" a:placeholder="Senha" />
                             </div>
                             <div>
                                 <h:commandButton action="#{loginBean.entrar()}" class="btn btn-default pull-right" value="Entrar">

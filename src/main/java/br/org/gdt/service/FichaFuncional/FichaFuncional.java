@@ -119,23 +119,23 @@ public class FichaFuncional {
 
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("empresa", "Asa Delta");
-        parametros.put("cnpj", "98.039.852/0004-3");
+        parametros.put("cnpj", "98.039.852/0004-33");
         parametros.put("recIdpessoa", pessoa.getRecIdpessoa());
         parametros.put("recCpf", pessoa.getRecCpf());
         parametros.put("recNomecompleto", pessoa.getRecNomecompleto());
         parametros.put("recRg", pessoa.getRecRg());
         parametros.put("recDtnascimento", pessoa.getRecDtnascimento());
         parametros.put("recEstadocivil", pessoa.getRecEstadocivil());
-        parametros.put("SEXO", pessoa.getRecSexo());
+        parametros.put("recSexo", pessoa.getRecSexo());
         parametros.put("recOrgaoemissor", pessoa.getRecOrgaoemissor());
         parametros.put("recDtemissao", pessoa.getRecDtemissao());
-        parametros.put("recNacionalidade", pessoa.getRecNacionalidade());
+        parametros.put("recCor", pessoa.getRecCor());
         parametros.put("recReservista", pessoa.getRecReservista());
-        parametros.put("recEscolaridade", pessoa.getRecEscolaridade().doubleValue());
+        parametros.put("recPesGrauEnsino", pessoa.getRecPesGrauEnsino());
 
         parametros.put("recNomepai", pessoa.getRecNomepai());
         parametros.put("recNomemae", pessoa.getRecNomemae());
-        parametros.put("recNumCtps", pessoa.getRecNumCtps().doubleValue());
+        parametros.put("recNumCtps", pessoa.getRecNumCtps());
         parametros.put("recPispasep", pessoa.getRecPispasep());
         parametros.put("recEndereco", pessoa.getRecEndereco());
         parametros.put("recNumero", pessoa.getRecNumero());
@@ -144,19 +144,18 @@ public class FichaFuncional {
         parametros.put("recTelefone", pessoa.getRecTelefone());
         parametros.put("recCelular", pessoa.getRecCelular());
 
-        parametros.put("cargonome", pessoa.getCargoCodigo().getCargoNome());
+        parametros.put("cargoCodigo", pessoa.getCargoCodigo().getCargoNome());
         parametros.put("cargoValorSalario", pessoa.getCargoValorSalario());
         parametros.put("recDtaAdmissao", pessoa.getRecDtaAdmissao());
         parametros.put("recDtaDemissao", pessoa.getRecDtaDemissao());
         parametros.put("insalubridade", pessoa.getInsalubridade());
         parametros.put("recPericulosidade", pessoa.getRecPericulosidade());
-        parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor().doubleValue());
+        parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor());
 
         parametros.put("recNomeBanco", pessoa.getRecNomeBanco());
-        parametros.put("recAgenciaBancaria", pessoa.getRecAgenciaBancaria().doubleValue());
-        parametros.put("recNumeroContaBanco", pessoa.getRecNumeroContaBanco().doubleValue());
+        parametros.put("recAgenciaBancaria", pessoa.getRecAgenciaBancaria());
+        parametros.put("recNumeroContaBanco", pessoa.getRecNumeroContaBanco());
 
-   
         //Dependentes do colaborador
         List<CsbffDependentes> dependentes = recPessoaService.findAllDependentesPessoa(pessoa);
 
@@ -165,43 +164,45 @@ public class FichaFuncional {
         parametros.put("dependentes", dependentesCollection);
 
         //Benefícios do colaborador
-        List<CsbffBeneficios> beneficios = new ArrayList<>();
+        List<CsbffBeneficios> beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
 
-        beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
+//        beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
+        
         JRBeanCollectionDataSource beneficiosCollection = new JRBeanCollectionDataSource(beneficios);
+        
         parametros.put("beneficios", beneficiosCollection);
-
+        
+        //escalas do colaborador
         List<CsbffEscalaHoras> escalas = csbffEscalaHorasService.buscarEscalasPessoa(pessoa);
 
         JRBeanCollectionDataSource escalasCollection = new JRBeanCollectionDataSource(escalas);
 
         parametros.put("escalaHorarios", escalasCollection);
 
-        List<GchTreinamentospessoas> treinamentosPessoa = gchTreinamentospessoasService.treinamentosPessoa(pessoa);
-
-        List<Treinamentos> treinamentos = new ArrayList<>();
-
-        for (GchTreinamentospessoas tp : treinamentosPessoa) {
-
-            GchTreinamentos treinamento = gchTreinamentosService.findById(tp.getTreiCodigo().getTreiCodigo());
-
-            treinamento.getTreiNome();
-
-            Treinamentos novo = new Treinamentos();
-
-            novo.setTreinamentoNome(treinamento.getTreiNome());
-
-            treinamentos.add(novo);
-
-        }
-
-        JRBeanCollectionDataSource treinamentosCollection = new JRBeanCollectionDataSource(treinamentos);
-
-        parametros.put("treinamentos", treinamentosCollection);
-
+//        List<GchTreinamentospessoas> treinamentosPessoa = gchTreinamentospessoasService.treinamentosPessoa(pessoa);
+//
+//        List<Treinamentos> treinamentos = new ArrayList<>();
+//
+//        for (GchTreinamentospessoas tp : treinamentosPessoa) {
+//
+//            GchTreinamentos treinamento = gchTreinamentosService.findById(tp.getTreiCodigo().getTreiCodigo());
+//
+//            treinamento.getTreiNome();
+//
+//            Treinamentos novo = new Treinamentos();
+//
+//            novo.setTreinamentoNome(treinamento.getTreiNome());
+//
+//            treinamentos.add(novo);
+//
+//        }
+//
+//        JRBeanCollectionDataSource treinamentosCollection = new JRBeanCollectionDataSource(treinamentos);
+//
+//        parametros.put("treinamentos", treinamentosCollection);
         JasperPrint jasperPrint = JasperFillManager.fillReport(fileRelatorio.getPath(), parametros, new JREmptyDataSource());
         relatorios.add(jasperPrint);
-        relatorios.add(jasperPrint);
+//        relatorios.add(jasperPrint);
 
         //Retorna o PDFF via HTTP Response
         HTTPResponseReturnPDF(relatorios, caminhoCompletoArquivo);

@@ -212,11 +212,11 @@ public class CalcularFolha {
             fpFolhaPeriodo.removerEventosNaoAlteraFolha();
             try {
                 Map<String, Object> parametros = new HashMap<>();
-                parametros.put("empresa", "Asa Delta");
-                parametros.put("cnpj", "98.039.852/0004-83");
+                parametros.put("empresa", "Asa Delta RH");
+                parametros.put("cnpj", "98.039.852/0004-3");
                 parametros.put("dataAdmissao", new SimpleDateFormat("dd/MM/yyyy").format(fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao()));
                 parametros.put("cargo", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoNome());
-                parametros.put("CBO", String.valueOf(fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoCbo()));
+                parametros.put("CBO", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoCbo());
 
                 String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
                 parametros.put("pessoa", nomePessoa);
