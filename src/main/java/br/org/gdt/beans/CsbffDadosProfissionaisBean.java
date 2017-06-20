@@ -242,14 +242,27 @@ public class CsbffDadosProfissionaisBean {
     }
 
     public void addBeneficioPessoa() {
+        if (this.csbffBeneficios == null) {
+            Helper.mostrarNotificacao("Benefício", "Selecione um benefício.", "error");
+            return;
+        }
 
-        csbffPessoaBeneficio.setRecIdpessoa(this.recPessoa);
-        csbffPessoaBeneficio.setBeneficioCodigo(this.csbffBeneficios);
+        CsbffPessoaBeneficio pessoaBeneficio = new CsbffPessoaBeneficio();
+        pessoaBeneficio.setRecIdpessoa(this.recPessoa);
+        pessoaBeneficio.setBeneficioCodigo(this.csbffBeneficios);
 
         if (this.recPessoa.getCsbffPessoaBeneficioList() == null) {
             this.recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());
         }
-        this.recPessoa.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
+
+        if (this.recPessoa.getCsbffPessoaBeneficioList().stream()
+                .filter(x -> x.getBeneficioCodigo().getBeneficioCodigo() == this.csbffBeneficios.getBeneficioCodigo())
+                .count() > 0) {
+            Helper.mostrarNotificacao("Benefício", "Este benefício já foi adicionado.", "error");
+            return;
+        }
+
+        this.recPessoa.getCsbffPessoaBeneficioList().add(pessoaBeneficio);
     }
 
     public String saveDadosProfissionais() {

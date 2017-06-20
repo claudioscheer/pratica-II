@@ -138,6 +138,7 @@ function init_sidebar() {
     if ($.fn.mCustomScrollbar) {
         $('.menu_fixed').mCustomScrollbar({
             autoHideScrollbar: false,
+            mouseWheelPixels: 200,
             theme: 'minimal',
             mouseWheel: {preventDefault: true}
         });
@@ -1833,7 +1834,7 @@ $(window).load(function () {
                 $('[data-toggle="tooltip"]').tooltip({
                     container: 'body'
                 });
-                
+
             }
         });
     }
