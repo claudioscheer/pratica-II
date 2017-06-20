@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-17T19:20:13 -->
+<!-- 2017-06-19T17:20:18 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportFichaFuncional." pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="493fecfc-8039-4f02-bbb6-9916f739b6c2">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -120,7 +120,7 @@
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 		<field name="dependenteCpf" class="java.lang.String"/>
-		<field name="dependenteDataNascimento" class="java.sql.Date"/>
+		<field name="dependenteDataNascimento" class="java.util.Date"/>
 		<field name="dependenteRgCertNascimento" class="java.lang.String"/>
 		<field name="dependenteNaturalidade" class="java.lang.String"/>
 	</subDataset>
@@ -131,7 +131,7 @@
 		<field name="beneficioNome" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="tipoBeneficio" class="java.lang.String">
+		<field name="tipoBeneficio" class="java.lang.Enum">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 	</subDataset>
@@ -156,17 +156,17 @@
 	<parameter name="recCpf" class="java.lang.String"/>
 	<parameter name="recNomecompleto" class="java.lang.String"/>
 	<parameter name="recRg" class="java.lang.String"/>
-	<parameter name="recDtnascimento" class="java.sql.Date"/>
+	<parameter name="recDtnascimento" class="java.util.Date"/>
 	<parameter name="recEstadocivil" class="java.lang.Enum"/>
 	<parameter name="recSexo" class="java.lang.Enum"/>
 	<parameter name="recOrgaoemissor" class="java.lang.String"/>
 	<parameter name="recDtemissao" class="java.sql.Date"/>
-	<parameter name="recNacionalidade" class="java.lang.String"/>
+	<parameter name="recCor" class="java.lang.String"/>
 	<parameter name="recReservista" class="java.lang.String"/>
 	<parameter name="recPesGrauEnsino" class="java.lang.Integer"/>
 	<parameter name="recNomepai" class="java.lang.String"/>
 	<parameter name="recNomemae" class="java.lang.String"/>
-	<parameter name="recNumCtps" class="java.lang.Integer"/>
+	<parameter name="recNumCtps" class="java.lang.String"/>
 	<parameter name="recPispasep" class="java.lang.String"/>
 	<parameter name="recEndereco" class="java.lang.String"/>
 	<parameter name="recNumero" class="java.lang.String"/>
@@ -174,12 +174,12 @@
 	<parameter name="recEmail" class="java.lang.String"/>
 	<parameter name="recTelefone" class="java.lang.String"/>
 	<parameter name="recCelular" class="java.lang.String"/>
-	<parameter name="cargoCodigo" class="java.lang.Double"/>
+	<parameter name="cargoCodigo" class="java.lang.String"/>
 	<parameter name="cargoValorSalario" class="java.lang.Double">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="recDtaAdmissao" class="java.sql.Date"/>
-	<parameter name="recDtaDemissao" class="java.sql.Date"/>
+	<parameter name="recDtaAdmissao" class="java.util.Date"/>
+	<parameter name="recDtaDemissao" class="java.util.Date"/>
 	<parameter name="insalubridade" class="java.lang.Enum">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -292,7 +292,7 @@
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[NACIONALIDADE]]></text>
+				<text><![CDATA[RAÇA/COR]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -646,7 +646,7 @@ DEMISSÃO]]></text>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{recNacionalidade}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{recCor}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="374" y="-38" width="73" height="20" uuid="0e47a2ff-1de6-4ab1-9201-65e64e48974d"/>
@@ -911,6 +911,9 @@ DEMISSÃO]]></text>
 						<jr:tableHeader height="20">
 							<staticText>
 								<reportElement x="0" y="0" width="250" height="20" uuid="9ffd6864-c33b-4fd4-9767-8a3f664e3796"/>
+								<textElement>
+									<font size="8" isBold="true"/>
+								</textElement>
 								<text><![CDATA[NOME]]></text>
 							</staticText>
 						</jr:tableHeader>

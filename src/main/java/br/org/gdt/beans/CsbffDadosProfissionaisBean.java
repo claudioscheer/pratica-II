@@ -272,6 +272,8 @@ public class CsbffDadosProfissionaisBean {
 //                this.recFuncionario = true;
                 recPessoa.setRecFuncionario(true);
                 recPessoaService.update(recPessoa);
+//            }else{
+//                recPessoaService.save(recPessoa);
             }
             MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");

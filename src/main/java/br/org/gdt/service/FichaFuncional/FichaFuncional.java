@@ -126,10 +126,10 @@ public class FichaFuncional {
         parametros.put("recRg", pessoa.getRecRg());
         parametros.put("recDtnascimento", pessoa.getRecDtnascimento());
         parametros.put("recEstadocivil", pessoa.getRecEstadocivil());
-        parametros.put("SEXO", pessoa.getRecSexo());
+        parametros.put("recSexo", pessoa.getRecSexo());
         parametros.put("recOrgaoemissor", pessoa.getRecOrgaoemissor());
         parametros.put("recDtemissao", pessoa.getRecDtemissao());
-        parametros.put("recNacionalidade", pessoa.getRecNacionalidade());
+        parametros.put("recCor", pessoa.getRecCor());
         parametros.put("recReservista", pessoa.getRecReservista());
         parametros.put("recPesGrauEnsino", pessoa.getRecPesGrauEnsino());
 
@@ -144,7 +144,7 @@ public class FichaFuncional {
         parametros.put("recTelefone", pessoa.getRecTelefone());
         parametros.put("recCelular", pessoa.getRecCelular());
 
-        parametros.put("cargonome", pessoa.getCargoCodigo().getCargoNome());
+        parametros.put("cargoCodigo", pessoa.getCargoCodigo().getCargoNome());
         parametros.put("cargoValorSalario", pessoa.getCargoValorSalario());
         parametros.put("recDtaAdmissao", pessoa.getRecDtaAdmissao());
         parametros.put("recDtaDemissao", pessoa.getRecDtaDemissao());
@@ -152,10 +152,9 @@ public class FichaFuncional {
         parametros.put("recPericulosidade", pessoa.getRecPericulosidade());
         parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor());
 
-
         parametros.put("recNomeBanco", pessoa.getRecNomeBanco());
-        parametros.put("recAgenciaBancaria", String.valueOf(pessoa.getRecAgenciaBancaria().doubleValue()));
-        parametros.put("recNumeroContaBanco", String.valueOf(pessoa.getRecNumeroContaBanco().doubleValue()));
+        parametros.put("recAgenciaBancaria", pessoa.getRecAgenciaBancaria());
+        parametros.put("recNumeroContaBanco", pessoa.getRecNumeroContaBanco());
 
         //Dependentes do colaborador
         List<CsbffDependentes> dependentes = recPessoaService.findAllDependentesPessoa(pessoa);
@@ -165,12 +164,15 @@ public class FichaFuncional {
         parametros.put("dependentes", dependentesCollection);
 
         //Benefícios do colaborador
-        List<CsbffBeneficios> beneficios = new ArrayList<>();
+        List<CsbffBeneficios> beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
 
-        beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
+//        beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
+        
         JRBeanCollectionDataSource beneficiosCollection = new JRBeanCollectionDataSource(beneficios);
+        
         parametros.put("beneficios", beneficiosCollection);
-
+        
+        //escalas do colaborador
         List<CsbffEscalaHoras> escalas = csbffEscalaHorasService.buscarEscalasPessoa(pessoa);
 
         JRBeanCollectionDataSource escalasCollection = new JRBeanCollectionDataSource(escalas);
