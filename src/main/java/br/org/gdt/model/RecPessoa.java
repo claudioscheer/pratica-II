@@ -825,6 +825,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setRecNumTituEleitor(String recNumTituEleitor) {
         this.recNumTituEleitor = recNumTituEleitor;
+    }
     public String getRecFotoPath() {
         return recFotoPath;
     }
