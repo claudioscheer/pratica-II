@@ -31,6 +31,16 @@ public class LoginBean {
         }
     }
 
+    public void verVagas() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+
+        try {
+            context.getExternalContext().redirect(request.getContextPath() + "/public/sem_vagas.xhtml");
+        } catch (IOException e) {
+        }
+    }
+
     public void entrar() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();

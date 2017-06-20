@@ -35,13 +35,21 @@
                                 <h:messages class="error" style="color: #d9534f" />
                             </div>
                             <div>
-                                <h:inputText label="Login" required="true" value="#{loginBean.login}" class="form-control" a:placeholder="Email" />
+                                <h:inputText label="Login" required="true" value="#{loginBean.login}" class="form-control" a:placeholder="Login" />
                             </div>
                             <div>
                                 <h:inputSecret label="Senha" required="true" value="#{loginBean.senha}" class="form-control" a:placeholder="Senha" />
                             </div>
                             <div>
                                 <h:commandButton action="#{loginBean.entrar()}" class="btn btn-default pull-right" value="Entrar">
+                                    <f:ajax execute="@form" render="formLogin" />
+                                </h:commandButton>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="separator"></div>
+                            <div class="clearfix"></div>
+                            <div>
+                                <h:commandButton style="margin: 0" immediate="true" action="#{loginBean.verVagas()}" class="btn btn-primary full-width" value="Ver vagas">
                                     <f:ajax execute="@form" render="formLogin" />
                                 </h:commandButton>
                             </div>

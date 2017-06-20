@@ -126,7 +126,7 @@ public class FpCalcularBean {
                 logService.log(LogModulo.FolhaPagamento, "Folhas de pagamento calculadas.");
                 Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "success");
             } catch (RuntimeException e) {
-                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
+                Helper.mostrarNotificacao("Calcular folha", "Ocorreu um erro ao calcular as folhas de pagamento.", "error");
             }
         } else {
             try {
