@@ -244,7 +244,7 @@ public class CsbffDadosProfissionaisBean {
     public void addBeneficioPessoa() {
         if (this.csbffBeneficios == null) {
             Helper.mostrarNotificacao("Benefício", "Selecione um benefício.", "error");
-            return;
+            return; 
         }
 
         CsbffPessoaBeneficio pessoaBeneficio = new CsbffPessoaBeneficio();
