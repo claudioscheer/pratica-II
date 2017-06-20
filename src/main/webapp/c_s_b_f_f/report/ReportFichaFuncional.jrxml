@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-19T17:20:18 -->
+<!-- 2017-06-20T18:54:07 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportFichaFuncional." pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="493fecfc-8039-4f02-bbb6-9916f739b6c2">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -152,15 +152,15 @@
 		</queryString>
 		<field name="curNome" class="java.lang.String"/>
 	</subDataset>
-	<parameter name="recIdPessoa" class="java.lang.Long"/>
+	<parameter name="recIdPessoa" class="java.lang.String"/>
 	<parameter name="recCpf" class="java.lang.String"/>
 	<parameter name="recNomecompleto" class="java.lang.String"/>
 	<parameter name="recRg" class="java.lang.String"/>
-	<parameter name="recDtnascimento" class="java.util.Date"/>
+	<parameter name="recDtnascimento" class="java.lang.String"/>
 	<parameter name="recEstadocivil" class="java.lang.Enum"/>
 	<parameter name="recSexo" class="java.lang.Enum"/>
 	<parameter name="recOrgaoemissor" class="java.lang.String"/>
-	<parameter name="recDtemissao" class="java.sql.Date"/>
+	<parameter name="recDtemissao" class="java.lang.String"/>
 	<parameter name="recCor" class="java.lang.String"/>
 	<parameter name="recReservista" class="java.lang.String"/>
 	<parameter name="recPesGrauEnsino" class="java.lang.Integer"/>
@@ -178,8 +178,8 @@
 	<parameter name="cargoValorSalario" class="java.lang.Double">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="recDtaAdmissao" class="java.util.Date"/>
-	<parameter name="recDtaDemissao" class="java.util.Date"/>
+	<parameter name="recDtaAdmissao" class="java.lang.String"/>
+	<parameter name="recDtaDemissao" class="java.lang.String"/>
 	<parameter name="insalubridade" class="java.lang.Enum">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -193,10 +193,10 @@
 	<parameter name="recNumeroContaBanco" class="java.lang.String">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="dependentes" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
+	<parameter name="dependentePessoa" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="beneficios" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
+	<parameter name="beneficioPessoa" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
 	<parameter name="escalaHorarios" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
@@ -207,7 +207,7 @@
 	<parameter name="cnpj" class="java.lang.String">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="recNumTituEleitor" class="java.lang.Integer">
+	<parameter name="recNumTituEleitor" class="java.lang.String">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
 	<queryString>
@@ -254,7 +254,7 @@
 				<text><![CDATA[CNPJ:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="488" y="0" width="65" height="69" uuid="c3e51827-1b3b-4189-91c1-1a83c4e8ce49"/>
+				<reportElement x="480" y="0" width="73" height="69" uuid="c3e51827-1b3b-4189-91c1-1a83c4e8ce49"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="510" y="27" width="31" height="15" uuid="28df9747-dc2d-47ba-80be-85277f728714"/>
@@ -385,21 +385,21 @@ EMISSÃO]]></text>
 				<text><![CDATA[CERTIFICADO RESERVISTA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="453" y="-58" width="98" height="20" uuid="8b4204e8-992e-4518-a566-3289f9f09933"/>
+				<reportElement x="448" y="-58" width="103" height="20" uuid="8b4204e8-992e-4518-a566-3289f9f09933"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESCOLARIDADE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="-8" width="168" height="20" uuid="fba416de-94d4-48ac-ab0e-4686ebccf695"/>
+				<reportElement x="1" y="-8" width="152" height="20" uuid="fba416de-94d4-48ac-ab0e-4686ebccf695"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[NOME DO PAI]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="181" y="-8" width="158" height="20" uuid="140cff1d-7a2c-452d-8950-872b44df77a7"/>
+				<reportElement x="160" y="-8" width="179" height="20" uuid="140cff1d-7a2c-452d-8950-872b44df77a7"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -607,7 +607,7 @@ DEMISSÃO]]></text>
 				<textFieldExpression><![CDATA[$P{recRg}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="469" y="-88" width="79" height="20" uuid="2b22fbb8-d97e-45df-a069-e0ffaa3d8285"/>
+				<reportElement x="469" y="-88" width="83" height="20" uuid="2b22fbb8-d97e-45df-a069-e0ffaa3d8285"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -656,21 +656,21 @@ DEMISSÃO]]></text>
 				<textFieldExpression><![CDATA[$P{recReservista}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="453" y="-38" width="99" height="20" uuid="1ea96198-e9d4-4abf-b8b0-85dc788c39ff"/>
+				<reportElement x="448" y="-38" width="104" height="20" uuid="1ea96198-e9d4-4abf-b8b0-85dc788c39ff"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{recPesGrauEnsino}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="-1" y="12" width="170" height="20" uuid="33649e29-b2da-44de-8337-e537d8c7dbc5"/>
+				<reportElement x="-1" y="12" width="154" height="20" uuid="33649e29-b2da-44de-8337-e537d8c7dbc5"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{recNomepai}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="181" y="12" width="158" height="20" uuid="dd62cc26-3e11-4b1d-8dec-86c89d1abac9"/>
+				<reportElement x="160" y="12" width="179" height="20" uuid="dd62cc26-3e11-4b1d-8dec-86c89d1abac9"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>

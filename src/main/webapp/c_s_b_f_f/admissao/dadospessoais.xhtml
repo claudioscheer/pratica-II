@@ -105,18 +105,19 @@
                                                                 </label>
                                                                 <h:inputText label="number"  class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recOrgaoemissor}" />
                                                             </div>
-                                                        </div>    
+                                                        </div>  
                                                         <div class="col-md-6 col-sm-6 ">
                                                             <div class="form-group ">
-                                                                <label class="control-label" for="date">                                        
+                                                                <label class="control-label " for="date">                                        
                                                                     Data de Emissão
                                                                 </label>
-                                                                <h:inputText label="DataEmissao" class="form-control date-picker" value="#{csbffDadosPessoaisBean.recPessoa.recDtemissao}" >
+
+                                                                <h:inputText label="Data Emissão" class="form-control date-picker" value="#{csbffDadosPessoaisBean.recPessoa.recDtemissao}" a:placeholder="dd/mm/aaaa" >
                                                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                                                 </h:inputText>
-                                                            </div>
-                                                        </div> 
 
+                                                            </div>
+                                                        </div>
                                                         <div class="col-md-6 col-sm-6 ">
                                                             <div class="form-group ">
                                                                 <label class="control-label " >                                        
@@ -197,19 +198,18 @@
                                                                 <h:inputText class="form-control" value="#{csbffDadosPessoaisBean.recPessoa.recBairro}" />
                                                             </div>
                                                         </div> 
-
-
                                                         <div class="col-md-6 col-sm-6 ">
-                                                            <div class="form-group">
+                                                            <div class="form-group ">
                                                                 <label class="control-label " for="date">                                        
                                                                     Data de Nascimento
                                                                 </label>
-                                                                <h:inputText label="DataNascimento" class="form-control date-picker" value="#{csbffDadosPessoaisBean.recPessoa.recDtnascimento}" >
+
+                                                                <h:inputText label="Data Nascimento" class="form-control date-picker" value="#{csbffDadosPessoaisBean.recPessoa.recDtnascimento}" a:placeholder="dd/mm/aaaa" >
                                                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                                                 </h:inputText>
+
                                                             </div>
                                                         </div>
-                                
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group ">
                                                                 <label class="control-label ">                                        
@@ -253,7 +253,7 @@
                                                                 </h:selectOneMenu>
                                                             </div>     
                                                         </div>
-                                                        
+
                                                         <div class="form-group">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                                                                 <h:commandButton class="btn btn-primary"  action="#{csbffDadosPessoaisBean.saveDadosPessoais()}" value="Salvar" /> 
