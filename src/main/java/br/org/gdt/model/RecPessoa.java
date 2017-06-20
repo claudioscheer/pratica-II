@@ -93,6 +93,10 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private byte[] recFoto;
     @Column(name = "rec_anexocurriculo")
     private byte[] recAnexoCurriculo;
+    @Column(name = "rec_fotopath")
+    private String recFotoPath;
+    @Column(name = "rec_anexopath")
+    private String recAnexoPath;
     @Column(name = "rec_pispasep")
     private String recPispasep;
     @Column(name = "rec_reservista")
@@ -821,6 +825,20 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setRecNumTituEleitor(String recNumTituEleitor) {
         this.recNumTituEleitor = recNumTituEleitor;
+    public String getRecFotoPath() {
+        return recFotoPath;
+    }
+
+    public void setRecFotoPath(String recFotoPath) {
+        this.recFotoPath = recFotoPath;
+    }
+
+    public String getRecAnexoPath() {
+        return recAnexoPath;
+    }
+
+    public void setRecAnexoPath(String recAnexoPath) {
+        this.recAnexoPath = recAnexoPath;
     }
 
 }
