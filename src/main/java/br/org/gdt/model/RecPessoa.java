@@ -11,7 +11,6 @@ import br.org.gdt.enums.Insalubridade;
 import br.org.gdt.enums.Periculosidade;
 import br.org.gdt.enums.PossuiDependentes;
 import br.org.gdt.enums.Sexo;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +32,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -44,13 +42,13 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 @Entity
 @Table(name = "rec_pessoa")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
+//@XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
 @SequenceGenerator(name = "seq_RecPessoa", sequenceName = "seq_RecPessoa", allocationSize = 1)
 public class RecPessoa implements java.io.Serializable, SampleEntity {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2790083349568956163L;
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idpessoa")
@@ -59,7 +57,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Column(name = "rec_nomecompleto")
     private String recNomecompleto;
     @Column(name = "rec_cpf")
-    public String recCpf;
+    private String recCpf;
     @Column(name = "rec_sexo")
     private Sexo recSexo;
     @Column(name = "rec_estadocivil")
@@ -68,15 +66,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recRg;
     @Column(name = "rec_orgaoemissor")
     private String recOrgaoemissor;
-    @Column(name = "rec_dtemissao")
-    @Temporal(TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtemissao;
     @Column(name = "rec_nomepai")
     private String recNomepai;
     @Column(name = "rec_nomemae")
     private String recNomemae;
-    @Column(name = "rec_dtnascimento")
-    @Temporal(TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtnascimento;
     @Column(name = "rec_email")
     private String recEmail;
@@ -90,9 +86,14 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recAutoavaliacao;
     @Column(name = "rec_pretencaosalarial")
     private String recPretencaosalarial;
-    //@Lob
     @Column(name = "rec_foto")
     private byte[] recFoto;
+    @Column(name = "rec_anexocurriculo")
+    private byte[] recAnexoCurriculo;
+    @Column(name = "rec_fotopath")
+    private String recFotoPath;
+    @Column(name = "rec_anexopath")
+    private String recAnexoPath;
     @Column(name = "rec_pispasep")
     private String recPispasep;
     @Column(name = "rec_reservista")
@@ -109,18 +110,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recCor;
     @Column(name = "rec_funcionario")
     private Boolean recFuncionario;
-    @Column(name = "rec_nacionalidade")
-    private String recNacionalidade;
     @Column(name = "rec_num_ctps")
-    private BigInteger recNumCtps;
+    private String recNumCtps;
     @Column(name = "rec_numero_conta_banco")
-    private BigInteger recNumeroContaBanco;
+    private String recNumeroContaBanco;
     @Column(name = "rec_agencia_bancaria")
-    private BigInteger recAgenciaBancaria;
-    @Column(name = "rec_escolaridade")
-    private BigInteger recEscolaridade;
-    @Column(name = "rec_dta_admissao")
-    @Temporal(TemporalType.DATE)
+    private String recAgenciaBancaria;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtaAdmissao;
     @Column(name = "rec_segurodesemprego")
     private String recSegurodesemprego;
@@ -129,12 +125,8 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Periculosidade recPericulosidade;
     @Column(name = "rec_NomeBanco")
     private String recNomeBanco;
-    @Column(name = "rec_num_titu_eleitor")
-    private BigInteger recNumTituEleitor;
-    @Column(name = "rec_certificado_reservista")
-    private BigInteger recCertificadoReservista;
-    @Column(name = "rec_dta_demissao")
-    @Temporal(TemporalType.DATE)
+    private String recNumTituEleitor;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtaDemissao;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<RecHabilidade> recHabilidadeList;
@@ -148,9 +140,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private CsbffPessoaDependente colabDepCodigo;
-    @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
-    @ManyToOne
-    private CsbffCargos cargoCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
     @ManyToOne(optional = true)
     private GchMunicipios munCodigo;
@@ -163,7 +152,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchRespostas> gchRespostasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchFormularioPessoa> gchFormularioPessoas;
-
     @OneToMany
     private List<CsbffBeneficios> csbffBeneficiosList;
     private Insalubridade insalubridade;
@@ -171,28 +159,28 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Integer recPesGrauEnsino;
     @OneToMany
     private List<RecPessoa> recPessoaList;
-    @OneToOne
-    private CsbffCargos cargoCbo;
-//    @OneToMany
-    private String cargoNome;
-    private String admissaoDescricao;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
     private CsbffEscalaHoras csbffEscalaHoras;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa")
     private List<CsbffPessoaBeneficio> csbffPessoaBeneficioList;
-    @OneToOne
-    private CsbffCargos cargos;
+    @ManyToOne
+    private CsbffCargos cargoCodigo;
     private double cargoValorSalario;
     public boolean colaboradorInativo;
-
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date recProrrogaContrato;
+    private int diasProrrogados;
     @OneToOne
     private CsbffPessoaBeneficio csbffPessoaBeneficio;
 
     @Override
     public String toString() {
         return "RecPessoa{" + "recIdpessoa=" + recIdpessoa + ", recCpf=" + recCpf + '}';
+    }
+    public RecPessoa(long recIdpessoa) {
+        this.recIdpessoa = recIdpessoa;
     }
 
     public List<GchFormularioPessoa> getGchFormularioPessoas() {
@@ -210,7 +198,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //        this.csbffBeneficiosList = csbffBeneficiosList;
 //    }
     public long getRecIdpessoa() {
-        return recIdpessoa;
+        return this.recIdpessoa;
 
     }
 
@@ -266,14 +254,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recOrgaoemissor = recOrgaoemissor;
     }
 
-    public Date getRecDtemissao() {
-        return recDtemissao;
-    }
-
-    public void setRecDtemissao(Date recDtemissao) {
-        this.recDtemissao = recDtemissao;
-    }
-
     public String getRecNomepai() {
         return recNomepai;
     }
@@ -288,14 +268,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setRecNomemae(String recNomemae) {
         this.recNomemae = recNomemae;
-    }
-
-    public Date getRecDtnascimento() {
-        return recDtnascimento;
-    }
-
-    public void setRecDtnascimento(Date recDtnascimento) {
-        this.recDtnascimento = recDtnascimento;
     }
 
     public String getRecEmail() {
@@ -410,54 +382,29 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recFuncionario = recFuncionario;
     }
 
-    public String getRecNacionalidade() {
-        return recNacionalidade;
-    }
-
-    public void setRecNacionalidade(String recNacionalidade) {
-        this.recNacionalidade = recNacionalidade;
-    }
-
-    public BigInteger getRecNumCtps() {
-        return recNumCtps;
-    }
-
-    public void setRecNumCtps(BigInteger recNumCtps) {
-        this.recNumCtps = recNumCtps;
-    }
-
-    public BigInteger getRecNumeroContaBanco() {
+    public String getRecNumeroContaBanco() {
         return recNumeroContaBanco;
     }
 
-    public void setRecNumeroContaBanco(BigInteger recNumeroContaBanco) {
+    public void setRecNumeroContaBanco(String recNumeroContaBanco) {
         this.recNumeroContaBanco = recNumeroContaBanco;
     }
 
-    public BigInteger getRecAgenciaBancaria() {
+    public String getRecAgenciaBancaria() {
         return recAgenciaBancaria;
     }
 
-    public void setRecAgenciaBancaria(BigInteger recAgenciaBancaria) {
+    public void setRecAgenciaBancaria(String recAgenciaBancaria) {
         this.recAgenciaBancaria = recAgenciaBancaria;
     }
 
-    public BigInteger getRecEscolaridade() {
-        return recEscolaridade;
-    }
-
-    public void setRecEscolaridade(BigInteger recEscolaridade) {
-        this.recEscolaridade = recEscolaridade;
-    }
-
-    public Date getRecDtaAdmissao() {
-        return recDtaAdmissao;
-    }
-
-    public void setRecDtaAdmissao(Date recDtaAdmissao) {
-        this.recDtaAdmissao = recDtaAdmissao;
-    }
-
+//    public BigInteger getRecEscolaridade() {
+//        return recEscolaridade;
+//    }
+//
+//    public void setRecEscolaridade(BigInteger recEscolaridade) {
+//        this.recEscolaridade = recEscolaridade;
+//    }
     public String getRecSegurodesemprego() {
         return recSegurodesemprego;
     }
@@ -489,30 +436,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.recNomeBanco = recNomeBanco;
     }
 
-    public BigInteger getRecNumTituEleitor() {
-        return recNumTituEleitor;
-    }
-
-    public void setRecNumTituEleitor(BigInteger recNumTituEleitor) {
-        this.recNumTituEleitor = recNumTituEleitor;
-    }
-
-    public BigInteger getRecCertificadoReservista() {
-        return recCertificadoReservista;
-    }
-
-    public void setRecCertificadoReservista(BigInteger recCertificadoReservista) {
-        this.recCertificadoReservista = recCertificadoReservista;
-    }
-
-    public Date getRecDtaDemissao() {
-        return recDtaDemissao;
-    }
-
-    public void setRecDtaDemissao(Date recDtaDemissao) {
-        this.recDtaDemissao = recDtaDemissao;
-    }
-
+//    public BigInteger getRecCertificadoReservista() {
+//        return recCertificadoReservista;
+//    }
+//
+//    public void setRecCertificadoReservista(BigInteger recCertificadoReservista) {
+//        this.recCertificadoReservista = recCertificadoReservista;
+//    }
 //    public BigInteger getRecPercentualInsalubridade() {
 //        return recPercentualInsalubridade;
 //    }
@@ -589,7 +519,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public List<CsbffPessoaBeneficio> getCsbffPessoaBeneficioList() {
         if (this.csbffPessoaBeneficioList == null) {
             this.csbffPessoaBeneficioList = new ArrayList<>();
-        //    this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
+            //    this.csbffPessoaBeneficioList.add(new CsbffPessoaBeneficio());
         }
 
         return csbffPessoaBeneficioList;
@@ -599,14 +529,13 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
         this.csbffPessoaBeneficioList = csbffPessoaBeneficioList;
     }
 
-    public CsbffCargos getCargoCodigo() {
-        return cargoCodigo;
-    }
-
-    public void setCargoCodigo(CsbffCargos cargoCodigo) {
-        this.cargoCodigo = cargoCodigo;
-    }
-
+//    public CsbffCargos getCargoCodigo() {
+//        return cargoCodigo;
+//    }
+//
+//    public void setCargoCodigo(CsbffCargos cargoCodigo) {
+//        this.cargoCodigo = cargoCodigo;
+//    }
     public GchMunicipios getMunCodigo() {
         return munCodigo;
     }
@@ -653,10 +582,11 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     @Override
     public Long getId() {
-        return Long.reverse(recIdpessoa);
+        return recIdpessoa;
     }
 
     public Insalubridade getInsalubridade() {
+
         return insalubridade;
     }
 
@@ -702,31 +632,29 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //    public void setCsbffEscalaHoras(CsbffEscalaHoras csbffEscalaHoras) {
 //        this.csbffEscalaHoras = csbffEscalaHoras;
 //    }
-    public CsbffCargos getCargoCbo() {
-        return cargoCbo;
-    }
-
-    public void setCargoCbo(CsbffCargos cargoCbo) {
-        this.cargoCbo = cargoCbo;
-    }
-
-    public String getCargoNome() {
-        return cargoNome;
-    }
-
-    public void setCargoNome(String cargoNome) {
-
-        this.cargoNome = cargoNome;
-    }
-
-    public String getAdmissaoDescricao() {
-        return admissaoDescricao;
-    }
-
-    public void setAdmissaoDescricao(String admissaoDescricao) {
-        this.admissaoDescricao = admissaoDescricao;
-    }
-
+//    public CsbffCargos getCargoCbo() {
+//        return cargoCbo;
+//    }
+//
+//    public void setCargoCbo(CsbffCargos cargoCbo) {
+//        this.cargoCbo = cargoCbo;
+//    }
+//
+//    public String getCargoNome() {
+//        return cargoNome;
+//    }
+//
+//    public void setCargoNome(String cargoNome) {
+//
+//        this.cargoNome = cargoNome;
+//    }
+//    public String getAdmissaoDescricao() {
+//        return admissaoDescricao;
+//    }
+//
+//    public void setAdmissaoDescricao(String admissaoDescricao) {
+//        this.admissaoDescricao = admissaoDescricao;
+//    }
     public List<RecPessoa> getRecPessoaList() {
         if (this.recPessoaList == null) {
             this.recPessoaList = new ArrayList<>();
@@ -736,14 +664,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setRecPessoaList(List<RecPessoa> recPessoaList) {
         this.recPessoaList = recPessoaList;
-    }
-
-    public void setCargos(CsbffCargos cargos) {
-        this.cargos = cargos;
-    }
-
-    public CsbffCargos getCargos() {
-        return cargos;
     }
 
     public double getCargoValorSalario() {
@@ -806,6 +726,102 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     public void setCsbffPessoaBeneficio(CsbffPessoaBeneficio csbffPessoaBeneficio) {
         this.csbffPessoaBeneficio = csbffPessoaBeneficio;
+    }
+
+    public byte[] getRecAnexoCurriculo() {
+        return recAnexoCurriculo;
+    }
+
+    public void setRecAnexoCurriculo(byte[] recAnexoCurriculo) {
+        this.recAnexoCurriculo = recAnexoCurriculo;
+    }
+
+    public Date getRecProrrogaContrato() {
+        return recProrrogaContrato;
+    }
+
+    public void setRecProrrogaContrato(Date recProrrogaContrato) {
+        this.recProrrogaContrato = recProrrogaContrato;
+    }
+
+    public int getDiasProrrogados() {
+        return diasProrrogados;
+    }
+
+    public void setDiasProrrogados(int diasProrrogados) {
+        this.diasProrrogados = diasProrrogados;
+    }
+
+    public Date getRecDtemissao() {
+        return recDtemissao;
+    }
+
+    public void setRecDtemissao(Date recDtemissao) {
+        this.recDtemissao = recDtemissao;
+    }
+
+    public Date getRecDtnascimento() {
+        return recDtnascimento;
+    }
+
+    public void setRecDtnascimento(Date recDtnascimento) {
+        this.recDtnascimento = recDtnascimento;
+    }
+
+    public String getRecNumCtps() {
+        return recNumCtps;
+    }
+
+    public void setRecNumCtps(String recNumCtps) {
+        this.recNumCtps = recNumCtps;
+    }
+
+    public Date getRecDtaAdmissao() {
+        return recDtaAdmissao;
+    }
+
+    public void setRecDtaAdmissao(Date recDtaAdmissao) {
+        this.recDtaAdmissao = recDtaAdmissao;
+    }
+
+    public Date getRecDtaDemissao() {
+        return recDtaDemissao;
+    }
+
+    public void setRecDtaDemissao(Date recDtaDemissao) {
+        this.recDtaDemissao = recDtaDemissao;
+    }
+
+    public CsbffCargos getCargoCodigo() {
+        return cargoCodigo;
+    }
+
+    public void setCargoCodigo(CsbffCargos cargoCodigo) {
+        this.cargoCodigo = cargoCodigo;
+    }
+
+    public String getRecNumTituEleitor() {
+        return recNumTituEleitor;
+    }
+
+    public void setRecNumTituEleitor(String recNumTituEleitor) {
+        this.recNumTituEleitor = recNumTituEleitor;
+    }
+
+    public String getRecFotoPath() {
+        return recFotoPath;
+    }
+
+    public void setRecFotoPath(String recFotoPath) {
+        this.recFotoPath = recFotoPath;
+    }
+
+    public String getRecAnexoPath() {
+        return recAnexoPath;
+    }
+
+    public void setRecAnexoPath(String recAnexoPath) {
+        this.recAnexoPath = recAnexoPath;
     }
 
 }

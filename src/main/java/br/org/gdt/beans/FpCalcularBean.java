@@ -126,7 +126,7 @@ public class FpCalcularBean {
                 logService.log(LogModulo.FolhaPagamento, "Folhas de pagamento calculadas.");
                 Helper.mostrarNotificacao("Calcular folha", "Folhas de pagamento calculadas.", "success");
             } catch (RuntimeException e) {
-                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
+                Helper.mostrarNotificacao("Calcular folha", "Ocorreu um erro ao calcular as folhas de pagamento.", "error");
             }
         } else {
             try {
@@ -152,9 +152,8 @@ public class FpCalcularBean {
                 fpEventoPeriodo = new FpEventoPeriodo();
                 Helper.mostrarNotificacao("Calcular folha", "Folha de pagamento calculada.", "success");
             } catch (Exception e) {
-
                 todosFpEventoPeriodo = new ArrayList<>();
-                Helper.mostrarNotificacao("Calcular folha", e.getMessage(), "error");
+                Helper.mostrarNotificacao("Calcular folha", "Ocorreu um erro ao calcular a folha de pagamento.", "error");
             }
         }
     }
@@ -205,11 +204,10 @@ public class FpCalcularBean {
     }
 
     public List<FpPeriodo> getTodosFpPeriodo() {
-//        if (todosFpPeriodo == null) {
-//            todosFpPeriodo = fpPeriodoService.findAll();
-//        }
-//        return todosFpPeriodo;
-        return fpPeriodoService.findAllPeriodoNaoFechado();
+        if (todosFpPeriodo == null) {
+            todosFpPeriodo = fpPeriodoService.findAllPeriodoNaoFechado();
+        }
+        return todosFpPeriodo;
     }
 
     public RecPessoa getRecPessoa() {

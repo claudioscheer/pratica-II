@@ -11,6 +11,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +22,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
+import org.primefaces.event.FileUploadEvent;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -32,6 +37,7 @@ public class RecPessoaBean {
     private List<RecPessoa> recPessoas;
 
     private String cpfBusca;
+    private String caminho;
 
     private List<RecHabilidade> pesHabilidades;
     @ManagedProperty("#{recPessoaService}")
@@ -43,7 +49,7 @@ public class RecPessoaBean {
     private UploadedFile recFoto;
     private UploadedFile recAnexoCurriculo;
 
-    private StreamedContent fotoPerfil;    
+    private StreamedContent fotoPerfil;
 
     public List<RecHabilidade> completarHabilidade(String query) {
         List<RecHabilidade> allThemes = recHabilidadeService.ListarTodas();
@@ -72,31 +78,45 @@ public class RecPessoaBean {
         if (ValidarCampos()) {
             if (recPessoa.getId() > 0) {
                 if (recFoto != null) {
-                    InputStream input = recFoto.getInputstream();
-                    ByteArrayOutputStream output = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[10240];
-                    for (int length = 0; (length = input.read(buffer)) > 0;) {
-                        output.write(buffer, 0, length);
-                    }
-                    recPessoa.setRecFoto(output.toByteArray());
+                    recPessoa.setRecFoto(FotoParaBytes());
                 }
                 recPessoaService.Alterar(recPessoa);
             } else {
-
                 if (recFoto != null) {
-                    InputStream input = recFoto.getInputstream();
-                    ByteArrayOutputStream output = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[10240];
-                    for (int length = 0; (length = input.read(buffer)) > 0;) {
-                        output.write(buffer, 0, length);
-                    }
-                    recPessoa.setRecFoto(output.toByteArray());
+                    recPessoa.setRecFoto(FotoParaBytes());
+                    //Path origem = Paths.get(getCaminho());
+                    //System.out.println("Origem" + origem);
+                    //Path destino = Paths.get("C:/Temp/imagem.jpg");
+                    //Files.copy(origem, destino, StandardCopyOption.REPLACE_EXISTING); //copia para a pasta
                 }
                 recPessoaService.Inserir(recPessoa);
             }
             return "curriculo_sucesso";
         }
         return null;
+    }
+
+    public void upload(FileUploadEvent evento) {       
+        try {
+            UploadedFile arquivo = evento.getFile();
+            Path arquivoTemporario = Files.createTempFile(null, null);
+            Files.copy(arquivo.getInputstream(), arquivoTemporario, StandardCopyOption.REPLACE_EXISTING);
+            setCaminho(arquivoTemporario.toString());
+            System.out.println("arquivo temp" + arquivoTemporario.toString());
+            System.out.println("CAMINHO" + getCaminho());
+        } catch (IOException ex) {
+
+        }
+    }
+
+    public byte[] FotoParaBytes() throws IOException {
+        InputStream input = recFoto.getInputstream();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[10240];
+        for (int length = 0; (length = input.read(buffer)) > 0;) {
+            output.write(buffer, 0, length);
+        }
+        return output.toByteArray();
     }
 
     public String PreparaEdicao(RecPessoa pessoa) {
@@ -107,14 +127,12 @@ public class RecPessoaBean {
 
     public String VerCurriculo(RecPessoa pessoa) throws IOException {
         this.formAtivo = true;
-        this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());        
+        this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
         if (recPessoa.getRecFoto() != null) {
             //fotoPerfil = RenderizarFoto(pessoa.getRecFoto());                        
         }
         return "candidatos";
     }
-
- 
 
     public DefaultStreamedContent RenderizarFoto(byte[] img) {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -295,5 +313,13 @@ public class RecPessoaBean {
 
     public void setFotoPerfil(StreamedContent fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
+    }
+
+    public String getCaminho() {
+        return caminho;
+    }
+
+    public void setCaminho(String caminho) {
+        this.caminho = caminho;
     }
 }

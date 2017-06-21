@@ -73,24 +73,28 @@ public class CsbffEscalaHorasBean {
     }
 
     public void addNovaEscala() {
+        CsbffEscalaHoras eh = new CsbffEscalaHoras();
+        eh.setRecIdpessoa(this.recPessoa);
+        eh.setEscalaHora1(csbffEscalaHoras.getEscalaHora1());
+        eh.setEscalaHora2(csbffEscalaHoras.getEscalaHora2());
+        eh.setEscalaHora3(csbffEscalaHoras.getEscalaHora3());
+        eh.setEscalaHora4(csbffEscalaHoras.getEscalaHora4());
+        eh.setDiasATrabalhar(csbffEscalaHoras.getDiasATrabalhar());
+        eh.setEscalaDataVigente(new Date());
 
-//        CsbffEscalaHoras eh = new CsbffEscalaHoras();
-        csbffEscalaHoras.setRecIdpessoa(this.recPessoa);
-        csbffEscalaHoras.setEscalaCodigo(this.csbffEscalaHoras);
-
-//        if (csbffEscalaHoras.diaDaSemana != null) {
-//
-//            MsgNotificacao = "Este dia já possui uma escala.";
-//            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
-//        }
         if (this.recPessoa.getCsbffEscalaHorasList() == null) {
             this.recPessoa.setCsbffEscalaHorasList(new ArrayList<>());
         }
-        csbffEscalaHoras.setEscalaDataVigente(new Date());
-        this.recPessoa.getCsbffEscalaHorasList().add(csbffEscalaHoras);
-        //this.csbffEscalaHorasService.update(csbffEscalaHoras);
-//        recPessoaService.update(recPessoa);
 
+        if (this.recPessoa.getCsbffEscalaHorasList().stream()
+                .filter(x -> x.getDiasATrabalhar() == eh.getDiasATrabalhar())
+                .count() > 0) {
+            Helper.mostrarNotificacao("Escala", "Este dia da semana já tem uma escala.", "error");
+            return;
+        }
+
+        this.recPessoa.getCsbffEscalaHorasList().add(eh);
+        csbffEscalaHoras = new CsbffEscalaHoras();
     }
 
     public String removerEscala(CsbffEscalaHoras eh) {

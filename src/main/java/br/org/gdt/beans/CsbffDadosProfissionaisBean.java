@@ -28,9 +28,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
@@ -39,6 +37,7 @@ public class CsbffDadosProfissionaisBean {
 
     private boolean formAtivo = false;
     private String recCpf;
+    private boolean habilitar;
 
     private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoaList;
@@ -61,7 +60,7 @@ public class CsbffDadosProfissionaisBean {
     private boolean adicionandoBenficio = false;
     private RecPessoa recContrato;
     private SeguroDesemprego seguroDesemprego;
-    private RecPessoa admissaoDescricao;
+//    private RecPessoa admissaoDescricao;
 
     @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependentesService;
@@ -86,6 +85,18 @@ public class CsbffDadosProfissionaisBean {
 
     public CsbffDadosProfissionaisBean() {
 
+    }
+
+    public void selecionarInsalubridade() {
+        if (recPessoa.getInsalubridade() != null && recPessoa.getInsalubridade() != Insalubridade.Não) {
+            recPessoa.setRecPericulosidade(null);
+        }
+    }
+
+    public void selecionarPericulosidade() {
+        if (recPessoa.getRecPericulosidade() != null && recPessoa.getRecPericulosidade() != Periculosidade.Não) {
+            recPessoa.setInsalubridade(null);
+        }
     }
 
     public CsbffDadosProfissionaisBean(CsbffEscalaHoras diaDaSemana) {
@@ -244,14 +255,27 @@ public class CsbffDadosProfissionaisBean {
     }
 
     public void addBeneficioPessoa() {
+        if (this.csbffBeneficios == null) {
+            Helper.mostrarNotificacao("Benefício", "Selecione um benefício.", "error");
+            return; 
+        }
 
-        csbffPessoaBeneficio.setRecIdpessoa(this.recPessoa);
-        csbffPessoaBeneficio.setBeneficioCodigo(this.csbffBeneficios);
+        CsbffPessoaBeneficio pessoaBeneficio = new CsbffPessoaBeneficio();
+        pessoaBeneficio.setRecIdpessoa(this.recPessoa);
+        pessoaBeneficio.setBeneficioCodigo(this.csbffBeneficios);
 
         if (this.recPessoa.getCsbffPessoaBeneficioList() == null) {
             this.recPessoa.setCsbffPessoaBeneficioList(new ArrayList<>());
         }
-        this.recPessoa.getCsbffPessoaBeneficioList().add(csbffPessoaBeneficio);
+
+        if (this.recPessoa.getCsbffPessoaBeneficioList().stream()
+                .filter(x -> x.getBeneficioCodigo().getBeneficioCodigo() == this.csbffBeneficios.getBeneficioCodigo())
+                .count() > 0) {
+            Helper.mostrarNotificacao("Benefício", "Este benefício já foi adicionado.", "error");
+            return;
+        }
+
+        this.recPessoa.getCsbffPessoaBeneficioList().add(pessoaBeneficio);
     }
 
     public String saveDadosProfissionais() {
@@ -261,6 +285,8 @@ public class CsbffDadosProfissionaisBean {
 //                this.recFuncionario = true;
                 recPessoa.setRecFuncionario(true);
                 recPessoaService.update(recPessoa);
+//            }else{
+//                recPessoaService.save(recPessoa);
             }
             MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
@@ -404,13 +430,13 @@ public class CsbffDadosProfissionaisBean {
         this.csbffPessoaBeneficio = csbffPessoaBeneficio;
     }
 
-    public RecPessoa getAdmissaoDescricao() {
-        return admissaoDescricao;
-    }
-
-    public void setAdmissaoDescricao(RecPessoa admissaoDescricao) {
-        this.admissaoDescricao = admissaoDescricao;
-    }
+//    public RecPessoa getAdmissaoDescricao() {
+//        return admissaoDescricao;
+//    }
+//
+//    public void setAdmissaoDescricao(RecPessoa admissaoDescricao) {
+//        this.admissaoDescricao = admissaoDescricao;
+//    }
 
     public CsbffDependentesService getCsbffDependentesService() {
         return csbffDependentesService;
@@ -538,6 +564,14 @@ public class CsbffDadosProfissionaisBean {
 
     public void setPessoaBeneficioCodigo(CsbffPessoaBeneficio pessoaBeneficioCodigo) {
         this.pessoaBeneficioCodigo = pessoaBeneficioCodigo;
+    }
+
+    public boolean isHabilitar() {
+        return habilitar;
+    }
+
+    public void setHabilitar(boolean habilitar) {
+        this.habilitar = habilitar;
     }
 
 }

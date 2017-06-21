@@ -1,6 +1,7 @@
 package br.org.gdt.beans;
 
-import br.org.gdt.model.Login;
+import br.org.gdt.resources.Helper;
+import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -11,33 +12,60 @@ import javax.servlet.http.HttpServletRequest;
 @ViewScoped
 public class LoginBean {
 
-    private Login login = new Login();
+    private String login;
+    private String senha;
 
     public LoginBean() {
     }
 
-//    public void entrar() {
-//        try {
-//            FacesContext context = FacesContext.getCurrentInstance();
-//            context.getExternalContext().redirect("index.xhtml");
-//        } catch (Exception e) {
-//        }
-//    }
-//
-//    public void sair() {
-//        try {
-//            FacesContext context = FacesContext.getCurrentInstance();
-//            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-//            request.getSession().invalidate();
-//            context.getExternalContext().redirect("login.xhtml");
-//        } catch (Exception e) {
-//        }
-//    }
-    public Login getLogin() {
+    @PostConstruct
+    public void init() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+
+        if (request.getRemoteUser() != null) {
+            try {
+                context.getExternalContext().redirect(request.getContextPath() + "/index.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public void verVagas() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+
+        try {
+            context.getExternalContext().redirect(request.getContextPath() + "/public/sem_vagas.xhtml");
+        } catch (IOException e) {
+        }
+    }
+
+    public void entrar() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        try {
+            request.login(login, senha);
+            context.getExternalContext().redirect(request.getContextPath() + "/index.xhtml");
+        } catch (Exception e) {
+            Helper.mostrarNotificacao("Login", "Usuário ou senha incorretos.", "error");
+        }
+    }
+
+    public String getLogin() {
         return login;
     }
 
-    public void setLogin(Login login) {
+    public void setLogin(String login) {
         this.login = login;
     }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
 }

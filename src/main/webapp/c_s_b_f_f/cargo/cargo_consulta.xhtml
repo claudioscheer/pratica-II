@@ -40,23 +40,23 @@
                                                         <div class="col-md-12">
                                                             <div class="x_panel">
 
-                                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                    <div>
-                                                                        <label class="control-label " for="name">
-                                                                            Buscar Nome
-                                                                        </label>
-                                                                        <h:inputText class="form-control" a:placeholder=" Buscar nome" value="#{csbffCargosBean.nomeCBO}"></h:inputText>
+                                                                <!--                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                                                                                    <div>
+                                                                                                                                        <label class="control-label " for="name">
+                                                                                                                                            Buscar Nome
+                                                                                                                                        </label>
+                                                                                                                                        <h:inputText class="form-control" a:placeholder=" Buscar nome" value="{csbffCargosBean.nomeCBO}"></h:inputText>
+                                                                
+                                                                                                                                    </div>
+                                                                                                                                </div>-->
+                                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                                    <!--<div>-->
+                                                                    <label class="control-label " for="name">
+                                                                        Buscar CBO
+                                                                    </label>
+                                                                    <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{csbffCargosBean.numeroCBO}"></h:inputText>
 
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3 col-sm-3 col-xs-12">
-                                                                    <div>
-                                                                        <label class="control-label " for="name">
-                                                                            Buscar CBO
-                                                                        </label>
-                                                                        <h:inputText class="form-control" a:placeholder=" Buscar código" value="#{csbffCargosBean.numeroCBO}"></h:inputText>
-
-                                                                    </div>
+                                                                    <!--</div>-->
                                                                 </div> 
                                                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                                                     <div>&nbsp;</div>
@@ -82,7 +82,7 @@
                                                                     <h:column>
 
                                                                         <f:facet name="header"> Salário Base</f:facet>
-                                                                        #{cargos.cargoValorSalario}" 
+                                                                            #{cargos.cargoValorSalario} 
                                                                     </h:column>
                                                                     <h:column>
 

@@ -13,11 +13,12 @@ import br.org.gdt.resources.Helper;
 import br.org.gdt.service.CsbffDependentesService;
 import br.org.gdt.service.CsbffPessoaDependenteService;
 import br.org.gdt.service.RecPessoaService;
-import java.math.BigInteger;
+import java.io.IOException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -27,7 +28,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class DependenteBean {
 
-    private boolean formAtivo = true;
+    private boolean formAtivo = false;
     private String recCpf;
     private String NomeCompleto;
 
@@ -48,12 +49,32 @@ public class DependenteBean {
 
     }
 
+//    public void buscarCpf() {
+//        recPessoa = recPessoaService.findByRecCpf(recCpf);
+//        NomeCompleto = recPessoa.getRecNomecompleto();
+//        if (recPessoa == null) {
+//            recPessoa = new RecPessoa();
+//        }
+//    }
     public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
-        NomeCompleto = recPessoa.getRecNomecompleto();
+//        NomeCompleto = recPessoa.getRecNomecompleto();
+
+        String MsgNotificacao = "";
+        while (recPessoa == null) {
+            MsgNotificacao = "A pessoa não existe.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "error");
+            return;
+        }
+        if (recPessoa.colaboradorInativo == true) {
+            MsgNotificacao = "O colaborador está inativo.";
+            Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
+        }
         if (recPessoa == null) {
             recPessoa = new RecPessoa();
+
         }
+
     }
 
     public String pg(CsbffDependentes dependente) {
@@ -61,12 +82,12 @@ public class DependenteBean {
         return "dependente.xhtml";
     }
 
-    public void save() {
+    public String save() {
         String MsgNotificacao = "";
         try {
             if (csbffdependente.getDependenteCod() > 0) {
-                csbffDependenteService.update(csbffdependente);
                 add();
+                csbffDependenteService.update(csbffdependente);
 
             } else {
 
@@ -75,35 +96,59 @@ public class DependenteBean {
                 csbffPessoaDependente.setDependenteCod(csbffdependente);
                 csbffPessoaDependente.setRecIdpessoa(recPessoa);
                 csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
-                //csbffPessoaDependente = getCsbffPessoaDependente();
-                //csbffdependente.setCsbffPessoaDependente(csbffPessoaDependente);
 
-                csbffPessoaDependenteService.save(csbffPessoaDependente);
-
-                add();
             }
+            todosdependentes = csbffDependenteService.findAll();
             MsgNotificacao = "O dependente foi adicionado ao colaborador!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
         } catch (Exception ex) {
             MsgNotificacao = "O colaborador não pode ser adicionado. ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
+        this.csbffdependente = new CsbffDependentes();
+        return "dependente";
 
     }
 
     public void cancel() {
         this.formAtivo = false;
         this.csbffdependente = new CsbffDependentes();
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            context.getExternalContext().redirect("listaadmissao.xhtml");
+        } catch (IOException ex) {
+
+        }
     }
+//    public void cancel() {
+//        this.formAtivo = false;
+//        this.csbffdependente = new CsbffDependentes();
+//    }
 
     public void add() {
         this.formAtivo = true;
         this.csbffdependente = new CsbffDependentes();
     }
 
+//    public String excluir(CsbffDependentes dependente) {
+//        csbffDependenteService.delete(dependente.getDependenteCod());
+//        todosdependentes.remove(dependente);
+//        return "dependente";
+//    }
     public String excluir(CsbffDependentes dependente) {
-        csbffDependenteService.delete(dependente.getDependenteCod());
-        todosdependentes.remove(dependente);
+        String MsgNotificacao = "";
+        try {
+            csbffDependenteService.delete(dependente.getDependenteCod());
+            todosdependentes.remove(dependente);
+
+            MsgNotificacao = "O dependente foi excluido!";
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+        } catch (Exception ex) {
+            MsgNotificacao = "O dependente não pode ser excluído!";
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+
+        }
         return "dependente";
     }
 
@@ -147,7 +192,10 @@ public class DependenteBean {
     }
 
     public List<CsbffDependentes> getTodosdependentes() {
-        return recPessoaService.findAllDependentesPessoa(recPessoa);
+        if (todosdependentes == null) {
+            todosdependentes = csbffDependenteService.findAll();
+        }
+        return todosdependentes;
     }
 
     public void setTodosdependentes(List<CsbffDependentes> todosdependentes) {

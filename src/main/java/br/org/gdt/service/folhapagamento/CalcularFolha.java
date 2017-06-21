@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -213,9 +214,9 @@ public class CalcularFolha {
                 Map<String, Object> parametros = new HashMap<>();
                 parametros.put("empresa", "Asa Delta RH");
                 parametros.put("cnpj", "98.039.852/0004-3");
-                parametros.put("dataAdmissao", fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao());
-                parametros.put("cargo", fpFolhaPeriodo.getForPessoa().getCargoNome());
-                parametros.put("CBO", fpFolhaPeriodo.getForPessoa().getCargoCbo());
+                parametros.put("dataAdmissao", new SimpleDateFormat("dd/MM/yyyy").format(fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao()));
+                parametros.put("cargo", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoNome());
+                parametros.put("CBO", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoCbo());
 
                 String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
                 parametros.put("pessoa", nomePessoa);

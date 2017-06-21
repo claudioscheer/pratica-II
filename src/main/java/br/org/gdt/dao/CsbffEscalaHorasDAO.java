@@ -8,6 +8,7 @@ package br.org.gdt.dao;
 import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.CsbffEscalaHoras;
 import br.org.gdt.model.RecPessoa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -24,13 +25,14 @@ public class CsbffEscalaHorasDAO extends DAO<CsbffEscalaHoras> {
     public CsbffEscalaHorasDAO() {
         classe = CsbffEscalaHoras.class;
     }
-   public CsbffEscalaHoras findByRecCpf(String recCpf) {
+
+    public CsbffEscalaHoras findByRecCpf(String recCpf) {
 
         TypedQuery<CsbffEscalaHoras> query = entityManager.createQuery("from CsbffEscalaHoras as e left join fetch e.csbffEscalaHorasList where e.recCpf = :recCpf", CsbffEscalaHoras.class);
         query.setParameter("recCpf", recCpf);
         try {
             CsbffEscalaHoras escalaHora = query.getSingleResult();
-           
+
             return escalaHora;
 
         } catch (NoResultException e) {
@@ -38,20 +40,18 @@ public class CsbffEscalaHorasDAO extends DAO<CsbffEscalaHoras> {
 
         }
     }
-   
-   public List<CsbffEscalaHoras> buscaEscalasPessoa(RecPessoa pessoa){
-       
+
+    public List<CsbffEscalaHoras> buscaEscalasPessoa(RecPessoa pessoa) {
+
         Query query = entityManager.createQuery("from CsbffEscalaHoras as t where t.recIdpessoa.recIdpessoa = :idPessoa");
         query.setParameter("idPessoa", pessoa.getRecIdpessoa());
-        
+
         List<CsbffEscalaHoras> lista = query.getResultList();
-        
+        if (lista.isEmpty()) {
+            return new ArrayList<>();
+        }
         return lista;
-      
-   }
-   
-   
+
+    }
 
 }
-
-    

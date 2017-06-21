@@ -40,13 +40,13 @@
                                                                     CPF
                                                                     <!--                                                                    <span class="required">*</span>-->
                                                                 </label>
-                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" value="#{csbffEscalaHorasBean.recCpf}" title="CPF" />
+                                                                <h:inputText  class="form-control" id="cpf" maxlength="14" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.recCpf}" title="CPF" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group ">
                                                                 <label class="control-label">Código colaborador</label>
-                                                                <h:inputText label="codigo"  class="form-control" value="#{csbffEscalaHorasBean.recPessoa.recIdpessoa}" disabled="true" />
+                                                                <h:inputText label="codigo"  class="form-control" value="#{dependenteBean.recPessoa.recIdpessoa}" disabled="true" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 col-sm-12">
@@ -54,12 +54,12 @@
                                                                 <label class="control-label " >
                                                                     Nome Colaborador
                                                                 </label>
-                                                                <h:inputText label="name"  class="form-control" value="#{csbffEscalaHorasBean.recPessoa.recNomecompleto}" disabled="true"/>
+                                                                <h:inputText label="name"  class="form-control" value="#{dependenteBean.recPessoa.recNomecompleto}" disabled="true"/>
                                                             </div>     
                                                         </div>
                                                         <div class="col-md-12 col-sm-3 col-xs-12">
                                                             <div class="element">
-                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{csbffEscalaHorasBean.buscarCpf()}"/>
+                                                                <h:commandButton class="btn btn-primary"  value="Buscar Dados" action="#{dependenteBean.buscarCpf()}"/>
                                                             </div>
                                                         </div> 
 
@@ -84,7 +84,7 @@
                                                                     CPF
                                                                     <span class="required">*</span>
                                                                 </label>
-                                                                <h:inputText class="form-control" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
+                                                                <h:inputText class="form-control"  maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -162,7 +162,7 @@
                                                         <div class="form-group ">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                                                 <h:commandButton class="btn btn-primary" value=" salvar" action="#{dependenteBean.save()}"/>                                  
-                                                                <h:commandButton value="Cancelar" class="btn btn-danger" action="#{dependenteBean.add()}"/>
+                                                                <h:commandButton value="Cancelar" class="btn btn-danger" action="#{dependenteBean.cancel()}"/>
                                                             </div>
                                                         </div>
 
@@ -177,29 +177,29 @@
 
                                                         </div>
                                                         <div>&nbsp;</div>
-                                                        <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!fpTabelaBean.formAtivo}">
+                                                        <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{!dependenteBean.formAtivo}">
                                                             <div class="row">
                                                                 <div class="x_panel">
                                                                     <div class="x_content">
-                                                                        <h:dataTable class="table table-striped" value="#{dependenteBean.todosdependentes}" var="dependete">
+                                                                        <h:dataTable class="table table-striped" value="#{dependenteBean.todosdependentes}" var="dependente">
                                                                             <h:column>
                                                                                 <f:facet name="header">Código</f:facet>
-                                                                                    #{dependete.dependenteCod}
+                                                                                    #{dependente.dependenteCod}
                                                                             </h:column>
                                                                             <h:column>
                                                                                 <f:facet name="header">Nome</f:facet>
-                                                                                    #{dependete.dependenteNome}
+                                                                                    #{dependente.dependenteNome}
                                                                             </h:column>
                                                                             <h:column>
                                                                                 <f:facet name="header">CPF</f:facet>
-                                                                                    #{dependete.dependenteCpf}
+                                                                                    #{dependente.dependenteCpf}
                                                                             </h:column>
                                                                             <h:column>
                                                                                 <f:facet name="header">Data de nascimento</f:facet>
-                                                                                #{dependete.dependenteDataNascimento}" 
+                                                                                #{dependente.dependenteDataNascimento} 
                                                                             </h:column>
                                                                             <h:column>
-                                                                                <h:commandLink class="btn btn-link btn-small" action="#{dependenteBean.pg(dependete)}">
+                                                                                <h:commandLink class="btn btn-link btn-small" action="#{dependenteBean.pg(dependente)}">
                                                                                     <i class="glyphicon glyphicon-pencil" style="font-size:18px" ></i>
                                                                                 </h:commandLink>
 
