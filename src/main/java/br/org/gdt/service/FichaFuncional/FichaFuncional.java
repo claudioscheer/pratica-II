@@ -8,6 +8,7 @@ package br.org.gdt.service.FichaFuncional;
 import br.org.gdt.model.CsbffBeneficios;
 import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffEscalaHoras;
+import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffBeneficiosService;
