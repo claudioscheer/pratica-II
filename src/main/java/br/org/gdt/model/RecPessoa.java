@@ -179,6 +179,9 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public String toString() {
         return "RecPessoa{" + "recIdpessoa=" + recIdpessoa + ", recCpf=" + recCpf + '}';
     }
+    public RecPessoa(long recIdpessoa) {
+        this.recIdpessoa = recIdpessoa;
+    }
 
     public List<GchFormularioPessoa> getGchFormularioPessoas() {
         return gchFormularioPessoas;
