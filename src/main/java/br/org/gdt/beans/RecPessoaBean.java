@@ -142,7 +142,7 @@ public class RecPessoaBean {
         this.formAtivo = true;
         this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
         if (recPessoa.getRecFoto() != null) {
-            //fotoPerfil = RenderizarFoto(pessoa.getRecFoto());                        
+            fotoPerfil = RenderizarFoto(pessoa.getRecFoto());                        
         }
         return "candidatos";
     }
@@ -155,7 +155,7 @@ public class RecPessoaBean {
             if (img == null) {
                 return new DefaultStreamedContent();
             } else {
-                return new DefaultStreamedContent(new ByteArrayInputStream(img), "image/png");
+                return new DefaultStreamedContent(new ByteArrayInputStream(img), "image/jpeg");
             }
         }
     }

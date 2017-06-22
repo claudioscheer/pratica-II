@@ -23,13 +23,17 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-
+                                        <!--
                                         <p:graphicImage 
                                             value="#{recPessoaBean.fotoPerfil}" 
                                             id="image"
                                             class="center-block"
                                             width="250"
-                                            height="250"/>                                                                                                                                                               
+                                            height="250"/>     -->
+                                        
+                                        <img src="user.png" 
+                                             class="center-block"
+                                             style="height: 250px; width: 250px"></img>
                                     </div>
 
 
@@ -389,6 +393,10 @@
                                   <h:commandLink class="btn btn-link btn-small" 
                                                value="Agendar Entrevista" 
                                                action="#{recSelecaoBean.AgendarEntrevista()}">                                    
+                                </h:commandLink>   
+                                 <h:commandLink class="btn btn-link btn-small" 
+                                               value="Download Currículo" 
+                                               >                                    
                                 </h:commandLink>   
                             </h:column>
                         </h:dataTable>
