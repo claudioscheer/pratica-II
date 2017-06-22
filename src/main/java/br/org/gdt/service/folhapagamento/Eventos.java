@@ -102,9 +102,9 @@ public class Eventos {
 
             // Descontar o valor do evento INSS.
             valorEventosIncideIRRF -= getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.INSS, dadosCalculadosDoFuncionario);
-
+            
             // Quantidade de dependentes que o funcionário tem.
-            int dependentes = 1;
+            int dependentes = 0;
             if (dependentes > 0) {
                 // Se o funcionário tem dependentes desconta R$ 189 por dependentes.
                 FpFaixa fpFaixaValorPorDependente = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.ValorIRRFPorDependente.ordinal() + 1);
