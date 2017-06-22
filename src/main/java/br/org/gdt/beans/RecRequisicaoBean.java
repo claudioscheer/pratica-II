@@ -60,6 +60,7 @@ public class RecRequisicaoBean
 
     public String Excluir(RecRequisicaoVaga recRecVaga){
         recRequisicaoVagaService.Excluir(recRecVaga.getRecIdRecquisicaoVaga());
+        ListRec_Requisicao = recRequisicaoVagaService.ListarTodas();
         return "requisicao";
     }
 

@@ -89,6 +89,9 @@ public class RecPessoaBean {
                     //Path destino = Paths.get("C:/Temp/imagem.jpg");
                     //Files.copy(origem, destino, StandardCopyOption.REPLACE_EXISTING); //copia para a pasta
                 }
+                if(recAnexoCurriculo != null){
+                    recPessoa.setRecAnexoCurriculo(AnexoParaBytes());
+                }
                 recPessoaService.Inserir(recPessoa);
             }
             return "curriculo_sucesso";
@@ -96,7 +99,7 @@ public class RecPessoaBean {
         return null;
     }
 
-    public void upload(FileUploadEvent evento) {       
+    public void upload(FileUploadEvent evento) {
         try {
             UploadedFile arquivo = evento.getFile();
             Path arquivoTemporario = Files.createTempFile(null, null);
@@ -111,6 +114,16 @@ public class RecPessoaBean {
 
     public byte[] FotoParaBytes() throws IOException {
         InputStream input = recFoto.getInputstream();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[10240];
+        for (int length = 0; (length = input.read(buffer)) > 0;) {
+            output.write(buffer, 0, length);
+        }
+        return output.toByteArray();
+    }
+
+    public byte[] AnexoParaBytes() throws IOException {
+        InputStream input = recAnexoCurriculo.getInputstream();
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         byte[] buffer = new byte[10240];
         for (int length = 0; (length = input.read(buffer)) > 0;) {
