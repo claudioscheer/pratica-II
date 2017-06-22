@@ -183,6 +183,7 @@ public class RecPessoaBean {
         recPessoa = new RecPessoa();
         return "curriculo";
     }
+     
 
     public RecPessoa getRecPessoa() {
         return recPessoa;

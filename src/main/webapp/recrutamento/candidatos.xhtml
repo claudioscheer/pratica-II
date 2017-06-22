@@ -377,9 +377,19 @@
                                 <h:outputText value="#{item.recNomecompleto}"/>                                
                             </h:column>                                                                                                                                                   
                             <h:column>
+                                <f:facet name="header">CPF</f:facet>                                                                                            
+                                <h:outputText value="#{item.recCpf}"/>                                
+                            </h:column>   
+                            <h:column>
                                 <f:facet name="header">Opções</f:facet>                                                                                            
-                                <h:commandLink class="btn btn-link btn-small" value="Visualizar" action="#{recPessoaBean.VerCurriculo(item)}">                                    
-                                </h:commandLink>                        
+                                <h:commandLink class="btn btn-link btn-small" 
+                                               value="Visualizar" 
+                                               action="#{recPessoaBean.VerCurriculo(item)}">                                    
+                                </h:commandLink>      
+                                  <h:commandLink class="btn btn-link btn-small" 
+                                               value="Agendar Entrevista" 
+                                               action="#{recSelecaoBean.AgendarEntrevista()}">                                    
+                                </h:commandLink>   
                             </h:column>
                         </h:dataTable>
                     </p:panel>
