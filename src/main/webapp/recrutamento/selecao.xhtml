@@ -15,7 +15,8 @@
                 <div class="title_left">
                     <h3>Seleção de Candidatos</h3>
                 </div>
-                <h:form id="formSelecao">                                        
+                <h:form id="formSelecao">   
+                    <h:messages class="error" style="color: #d9534f" />
                     <p:panel visible="#{recSelecaoBean.formAtivo}">                        
                         <br />
                         <h:inputHidden value="#{recSelecaoBean.selecao.recIdselecao}" />                        
@@ -30,12 +31,11 @@
                                             </label>
                                             <h:selectOneMenu 
                                                 id="comboCandidato" 
-                                                value="#{recSelecaoBean.selecao.recIdpessoa}"
-                                                disabled="#{recSelecaoBean.descreverEntrevista}"
-                                                class="form-control" >
-                                                <f:selectItem itemLabel="Selecione o Candidato" itemValue="#{null}" />
+                                                value="#{recSelecaoBean.selecao.recIdpessoa.recIdpessoa}"
+                                                class="form-control">
+                                                <f:selectItem itemLabel="Selecione o Candidato" itemValue="#{0}" />
                                                 <f:selectItems value="#{recPessoaBean.ListarTodas()}" 
-                                                               var="pessoa" itemValue="#{pessoa}" 
+                                                               var="pessoa" itemValue="#{pessoa.recIdpessoa}" 
                                                                itemLabel="#{pessoa.recNomecompleto}"/>
                                             </h:selectOneMenu>                                                                                                             
                                         </div>     
@@ -47,8 +47,10 @@
                                                 Data Entrevista
                                                 <span class="required">*</span>
                                             </label>
-                                            <input class="form-control date-picker"                                                     
-                                                   value="#{recSelecaoBean.selecao.recDataEntrevista}" />
+                                            <h:inputText class="form-control date-picker"                                                     
+                                                         value="#{recSelecaoBean.selecao.recDataEntrevista}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:inputText>
                                         </div>
                                     </div>   
 
@@ -60,14 +62,13 @@
                                             </label>
 
                                             <h:selectOneMenu id="comboVagas" 
-                                                             value="#{recSelecaoBean.selecao.recIdvaga}" 
-                                                             disabled="#{recSelecaoBean.descreverEntrevista}"
-                                                             class="form-control" >
-                                                <f:selectItem itemLabel="Selecione a Vaga" itemValue="#{null}" />
+                                                             value="#{recSelecaoBean.selecao.recIdvaga.recIdvaga}" 
+                                                             class="form-control">
+                                                <f:selectItem itemLabel="Selecione a Vaga" itemValue="#{0}" />
                                                 <f:selectItems value="#{recVagaBean.ListarTodas()}" 
-                                                               var="vagas" 
-                                                               itemValue="#{vagas}" 
-                                                               itemLabel="#{vagas.recDescricao}"/>
+                                                               var="vaga" 
+                                                               itemValue="#{vaga.recIdvaga}" 
+                                                               itemLabel="#{vaga.recDescricao}"/>
                                             </h:selectOneMenu>                                                                                                             
 
                                         </div>     
@@ -75,14 +76,19 @@
 
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">                                        
-                                            <h:outputLabel rendered="#{recSelecaoBean.descreverEntrevista}">
+                                            <h:outputLabel>
                                                 Descrição da Entrevista
                                             </h:outputLabel>
                                             <h:inputTextarea class="form-control" 
-                                                             cols="40"    
-                                                             rendered="#{recSelecaoBean.descreverEntrevista}"                                                             
+                                                             cols="40"                                                            
                                                              value="#{recSelecaoBean.selecao.recDescricaoentrevista}"                                                              
                                                              rows="10"/>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">                                        
+                                            <h:outputText value="Candidato Aprovado " />
+                                            <p:selectBooleanCheckbox value="#{recSelecaoBean.selecao.recAprovado}" />                                         
                                         </div>
                                     </div>
 
@@ -145,10 +151,10 @@
                                 </h:commandLink>
                                 <h:commandLink class="btn btn-link btn-small" 
                                                value="Descrever Entrevista" 
-                                               action="#{recSelecaoBean.DescreverEntrevista(selecao)}" >
+                                               action="#{recSelecaoBean.DescreverEntrevista(item)}" >
 
                                 </h:commandLink>
-                            </h:column>                  
+                                </h:column> 
                         </h:dataTable>
                     </p:panel>
                 </h:form>

@@ -16,7 +16,8 @@ import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
-public class RecSelecaoBean {
+public class RecSelecaoBean
+{
 
     private boolean formAtivo = false;
     private boolean descreverEntrevista = false;
@@ -27,15 +28,16 @@ public class RecSelecaoBean {
     @ManagedProperty("#{recSelecaoService}")
     private RecSelecaoService recSelecaoService;
 
-//    @ManagedProperty("#{recPessoaService}")
-//    private RecPessoaService recPessoaService;
-//
+    @ManagedProperty("#{recPessoaService}")
+    private RecPessoaService recPessoaService;
+
 //    @ManagedProperty("#{recVagaService}")
 //    private RecVagaService recVagaService;
     public RecSelecaoBean() {
     }
 
-    public void Salvar() {
+    public void Salvar()
+    {
 //        Date data = new Date(2017, 1, 20);
 //        RecPessoa p = recPessoaService.BuscarId(1);
 //        System.out.println("pessoaaaaaa" + p.getRecIdpessoa());
@@ -43,11 +45,12 @@ public class RecSelecaoBean {
 //        RecSelecao selec = new RecSelecao(1, null, false, data, p, v);
 //        recSelecaoService.Inserir(selecao);
         //if (ValidarCampos()) {
-        if (selecao.getRecIdselecao() > 0) {
-            recSelecaoService.Alterar(selecao);
-        } else {
-            recSelecaoService.Inserir(selecao);
-        }
+
+        //selecao.setRecDescricaoentrevista("dfsdafads");
+        //selecao.setRecAprovado(true);
+      // selecao.setRecIdpessoa(recPessoaService.FindByIdCompleto(selecao.getRecIdpessoa().getRecIdpessoa()));
+        recSelecaoService.Alterar(selecao);
+       
         selecoes = recSelecaoService.ListarTodas();
 //        }else{
 //            return;
@@ -61,32 +64,39 @@ public class RecSelecaoBean {
         return selecoes;
     }
 
-    public String PreparaEdicao(RecSelecao selecao) {
+    public String PreparaEdicao(RecSelecao selecao)
+    {
         this.formAtivo = true;
         this.selecao = selecao;
         return "selecao";
     }
 
-    public String DescreverEntrevista(RecSelecao selecao) {
+    public String DescreverEntrevista(RecSelecao selecao)
+    {
         this.formAtivo = true;
         this.descreverEntrevista = true;
         this.selecao = selecao;
         return "selecao";
     }
 
-    public String Excluir(RecSelecao selecao) {
+    public String Excluir(RecSelecao selecao)
+    {
         recSelecaoService.Excluir(selecao.getRecIdselecao());
+        selecoes = recSelecaoService.ListarTodas();
         return "selecao";
     }
 
-    public void Cancelar() {
+    public void Cancelar()
+    {
         this.formAtivo = false;
         this.selecao = new RecSelecao();
     }
 
-    public void Adicionar() {
+    public void Adicionar()
+    {
         this.formAtivo = true;
         this.selecao = new RecSelecao();
+        this.selecao.setRecIdvaga(new RecVaga());
     }
 
     public String AgendarEntrevista() {
@@ -99,53 +109,67 @@ public class RecSelecaoBean {
         return selecao;
     }
 
-    public void setSelecao(RecSelecao selecao) {
+    public void setSelecao(RecSelecao selecao)
+    {
         this.selecao = selecao;
     }
 
-    public List<RecSelecao> getSelecoes() {
+    public List<RecSelecao> getSelecoes()
+    {
         return selecoes;
     }
 
-    public void setSelecoes(List<RecSelecao> selecoes) {
+    public void setSelecoes(List<RecSelecao> selecoes)
+    {
         this.selecoes = selecoes;
     }
 
-    public RecSelecaoService getRecSelecaoService() {
+    public RecSelecaoService getRecSelecaoService()
+    {
         return recSelecaoService;
     }
 
-    public void setRecSelecaoService(RecSelecaoService recSelecaoService) {
+    public void setRecSelecaoService(RecSelecaoService recSelecaoService)
+    {
         this.recSelecaoService = recSelecaoService;
     }
 
-    public boolean isFormAtivo() {
+    public boolean isFormAtivo()
+    {
         return formAtivo;
     }
 
-    public void setFormAtivo(boolean formAtivo) {
+    public void setFormAtivo(boolean formAtivo)
+    {
         this.formAtivo = formAtivo;
     }
 
-    public boolean ValidarCampos() {
-        if (selecao.getRecIdpessoa() == null) {
+    public boolean ValidarCampos()
+    {
+        if (selecao.getRecIdpessoa() == null)
+        {
             Helper.mostrarNotificacao("Candidato", "Selecione um Candidato", "error");
             return false;
         }
-        if (selecao.getRecIdvaga() == null) {
+        if (selecao.getRecIdvaga() == null)
+        {
             Helper.mostrarNotificacao("Vaga", "Selecione uma Vaga", "error");
             return false;
         }
         return true;
     }
 
-    public boolean isDescreverEntrevista() {
+    public boolean isDescreverEntrevista()
+    {
         return descreverEntrevista;
     }
 
-    public void setDescreverEntrevista(boolean descreverEntrevista) {
+    public void setDescreverEntrevista(boolean descreverEntrevista)
+    {
         this.descreverEntrevista = descreverEntrevista;
     }
+    
+    
 
 //    public RecPessoaService getRecPessoaService() {
 //        return recPessoaService;
@@ -162,4 +186,14 @@ public class RecSelecaoBean {
 //    public void setRecVagaService(RecVagaService recVagaService) {
 //        this.recVagaService = recVagaService;
 //    }
+
+    public RecPessoaService getRecPessoaService()
+    {
+        return recPessoaService;
+    }
+
+    public void setRecPessoaService(RecPessoaService recPessoaService)
+    {
+        this.recPessoaService = recPessoaService;
+    }
 }

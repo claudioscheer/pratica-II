@@ -32,11 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "rec_selecao")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "RecSelecao.findAll", query = "SELECT r FROM RecSelecao r")})
 @SequenceGenerator(name = "seq_RecSelecao", sequenceName = "seq_RecSelecao", allocationSize = 1)
-public class RecSelecao implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class RecSelecao implements Serializable
+{
+
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idselecao")
@@ -51,13 +50,14 @@ public class RecSelecao implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date recDataEntrevista;
     //@JoinColumn(name = "rec_idpessoa", referencedColumnName = "rec_idpessoa")
-    @ManyToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private RecPessoa recIdpessoa;
     //@JoinColumn(name = "rec_idvaga", referencedColumnName = "rec_idvaga")
     @ManyToOne(optional = true)
     private RecVaga recIdvaga;
 
-    public RecSelecao(long recIdselecao, String recDescricaoentrevista, Boolean recAprovado, Date recDataEntrevista, RecPessoa recIdpessoa, RecVaga recIdvaga) {
+    public RecSelecao(long recIdselecao, String recDescricaoentrevista, Boolean recAprovado, Date recDataEntrevista, RecPessoa recIdpessoa, RecVaga recIdvaga)
+    {
         this.recIdselecao = recIdselecao;
         this.recDescricaoentrevista = recDescricaoentrevista;
         this.recAprovado = recAprovado;
@@ -66,70 +66,90 @@ public class RecSelecao implements Serializable {
         this.recIdvaga = recIdvaga;
     }
 
-    
-
-    public RecSelecao() {
+    public RecSelecao()
+    {
     }
 
-    public RecSelecao(int recIdselecao) {
+    public RecSelecao(int recIdselecao)
+    {
         this.recIdselecao = recIdselecao;
     }
 
-    public long getRecIdselecao() {
+    public long getRecIdselecao()
+    {
         return recIdselecao;
     }
 
-    public void setRecIdselecao(int recIdselecao) {
+    public void setRecIdselecao(int recIdselecao)
+    {
         this.recIdselecao = recIdselecao;
     }
 
-    public String getRecDescricaoentrevista() {
+    public String getRecDescricaoentrevista()
+    {
         return recDescricaoentrevista;
     }
 
-    public void setRecDescricaoentrevista(String recDescricaoentrevista) {
+    public void setRecDescricaoentrevista(String recDescricaoentrevista)
+    {
         this.recDescricaoentrevista = recDescricaoentrevista;
     }
 
-    public Boolean getRecAprovado() {
+    public Boolean getRecAprovado()
+    {
         return recAprovado;
     }
 
-    public void setRecAprovado(Boolean recAprovado) {
+    public void setRecAprovado(Boolean recAprovado)
+    {
         this.recAprovado = recAprovado;
     }
 
-    public RecPessoa getRecIdpessoa() {
+    public RecPessoa getRecIdpessoa()
+    {
+        if (recIdpessoa == null)
+        {
+            recIdpessoa = new RecPessoa();
+        }
         return recIdpessoa;
     }
 
-    public void setRecIdpessoa(RecPessoa recIdpessoa) {
+    public void setRecIdpessoa(RecPessoa recIdpessoa)
+    {
         this.recIdpessoa = recIdpessoa;
     }
 
-    public RecVaga getRecIdvaga() {
+    public RecVaga getRecIdvaga()
+    {
+        if (recIdvaga == null)
+        {
+            recIdvaga = new RecVaga();
+        }
         return recIdvaga;
     }
 
-    public void setRecIdvaga(RecVaga recIdvaga) {
+    public void setRecIdvaga(RecVaga recIdvaga)
+    {
         this.recIdvaga = recIdvaga;
     }
-    
+
 //    @Override
 //    public String toString() {
 //        return "br.org.gdt.modelNew.RecSelecao[ recIdselecao=" + recIdselecao + " ]";
 //    }
-
-    public void setRecIdselecao(long recIdselecao) {
+    public void setRecIdselecao(long recIdselecao)
+    {
         this.recIdselecao = recIdselecao;
     }
 
-    public Date getRecDataEntrevista() {
+    public Date getRecDataEntrevista()
+    {
         return recDataEntrevista;
     }
 
-    public void setRecDataEntrevista(Date recDataEntrevista) {
+    public void setRecDataEntrevista(Date recDataEntrevista)
+    {
         this.recDataEntrevista = recDataEntrevista;
     }
-    
+
 }
