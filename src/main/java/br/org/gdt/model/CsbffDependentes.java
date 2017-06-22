@@ -59,6 +59,8 @@ public class CsbffDependentes implements Serializable {
     private boolean dependenteImpostoDeRenda;
     @Column(name = "dependente_tipo")
     private Integer dependenteTipo;
+    @Column (name ="vinculoPessoa")
+    private long vinculoPessoa;
     @Column(name = "dependente_naturalidade")
     private String dependenteNaturalidade;
     @OneToOne(mappedBy = "dependenteCod")
@@ -151,6 +153,14 @@ public class CsbffDependentes implements Serializable {
     public void setCsbffPessoaDependente(CsbffPessoaDependente csbffPessoaDependente) {
         this.csbffPessoaDependente = csbffPessoaDependente;
     }
+    
+    public long getVinculoPessoa() {
+        return vinculoPessoa;
+    }
+
+    public void setVinculoPessoa(long vinculoPessoa) {
+        this.vinculoPessoa = vinculoPessoa;
+    }
 
     @Override
     public int hashCode() {
@@ -187,5 +197,7 @@ public class CsbffDependentes implements Serializable {
     public boolean isDependenteImpostoDeRenda() {
         return dependenteImpostoDeRenda;
     }
+
+    
     
 }

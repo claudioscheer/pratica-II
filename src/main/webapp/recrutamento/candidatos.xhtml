@@ -23,13 +23,17 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-
+                                        <!--
                                         <p:graphicImage 
                                             value="#{recPessoaBean.fotoPerfil}" 
                                             id="image"
                                             class="center-block"
-                                            style="width:500px;width:500px"/>                                                                                                                       
+                                            width="250"
+                                            height="250"/>     -->
                                         
+                                        <img src="user.png" 
+                                             class="center-block"
+                                             style="height: 250px; width: 250px"></img>
                                     </div>
 
 
@@ -377,9 +381,23 @@
                                 <h:outputText value="#{item.recNomecompleto}"/>                                
                             </h:column>                                                                                                                                                   
                             <h:column>
+                                <f:facet name="header">CPF</f:facet>                                                                                            
+                                <h:outputText value="#{item.recCpf}"/>                                
+                            </h:column>   
+                            <h:column>
                                 <f:facet name="header">Opções</f:facet>                                                                                            
-                                <h:commandLink class="btn btn-link btn-small" value="Visualizar" action="#{recPessoaBean.VerCurriculo(item)}">                                    
-                                </h:commandLink>                        
+                                <h:commandLink class="btn btn-link btn-small" 
+                                               value="Visualizar" 
+                                               action="#{recPessoaBean.VerCurriculo(item)}">                                    
+                                </h:commandLink>      
+                                  <h:commandLink class="btn btn-link btn-small" 
+                                               value="Agendar Entrevista" 
+                                               action="#{recSelecaoBean.AgendarEntrevista()}">                                    
+                                </h:commandLink>   
+                                 <h:commandLink class="btn btn-link btn-small" 
+                                               value="Download Currículo" 
+                                               >                                    
+                                </h:commandLink>   
                             </h:column>
                         </h:dataTable>
                     </p:panel>

@@ -42,13 +42,13 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 @Entity
 @Table(name = "rec_pessoa")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
+//@XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "RecPessoa.findAll", query = "SELECT r FROM RecPessoa r")})
 @SequenceGenerator(name = "seq_RecPessoa", sequenceName = "seq_RecPessoa", allocationSize = 1)
 public class RecPessoa implements java.io.Serializable, SampleEntity {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2790083349568956163L;
     @Id
     @Basic(optional = false)
     @Column(name = "rec_idpessoa")
@@ -66,14 +66,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recRg;
     @Column(name = "rec_orgaoemissor")
     private String recOrgaoemissor;
-    @Column(name = "rec_dtemissao")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtemissao;
     @Column(name = "rec_nomepai")
     private String recNomepai;
     @Column(name = "rec_nomemae")
     private String recNomemae;
-    @Column(name = "rec_dtnascimento")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtnascimento;
     @Column(name = "rec_email")
@@ -88,7 +86,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recAutoavaliacao;
     @Column(name = "rec_pretencaosalarial")
     private String recPretencaosalarial;
-    //@Lob
     @Column(name = "rec_foto")
     private byte[] recFoto;
     @Column(name = "rec_anexocurriculo")
@@ -113,17 +110,12 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private String recCor;
     @Column(name = "rec_funcionario")
     private Boolean recFuncionario;
-//    @Column(name = "rec_nacionalidade")
-//    private String recNacionalidade;
     @Column(name = "rec_num_ctps")
     private String recNumCtps;
     @Column(name = "rec_numero_conta_banco")
     private String recNumeroContaBanco;
     @Column(name = "rec_agencia_bancaria")
     private String recAgenciaBancaria;
-//    @Column(name = "rec_escolaridade")
-//    private BigInteger recEscolaridade;
-    @Column(name = "rec_dta_admissao")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtaAdmissao;
     @Column(name = "rec_segurodesemprego")
@@ -133,11 +125,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Periculosidade recPericulosidade;
     @Column(name = "rec_NomeBanco")
     private String recNomeBanco;
-    @Column(name = "rec_num_titu_eleitor")
     private String recNumTituEleitor;
-//    @Column(name = "rec_certificado_reservista")
-//    private BigInteger recCertificadoReservista;
-    @Column(name = "rec_dta_demissao")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date recDtaDemissao;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -152,9 +140,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchTreinamentospessoas> gchTreinamentospessoasList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private CsbffPessoaDependente colabDepCodigo;
-//    @JoinColumn(name = "cargo_codigo", referencedColumnName = "cargo_codigo")
-//    @ManyToOne
-//    private CsbffCargos cargoCodigo;
     @JoinColumn(name = "mun_codigo", referencedColumnName = "mun_codigo")
     @ManyToOne(optional = true)
     private GchMunicipios munCodigo;
@@ -167,7 +152,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private List<GchRespostas> gchRespostasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recIdpessoa")
     private List<GchFormularioPessoa> gchFormularioPessoas;
-
     @OneToMany
     private List<CsbffBeneficios> csbffBeneficiosList;
     private Insalubridade insalubridade;
@@ -175,11 +159,6 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     private Integer recPesGrauEnsino;
     @OneToMany
     private List<RecPessoa> recPessoaList;
-//    @OneToOne
-//    private CsbffCargos cargoCbo;
-//    @OneToMany
-//    private String cargoNome;
-//    private String admissaoDescricao;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recIdpessoa", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CsbffEscalaHoras> csbffEscalaHorasList;
     @OneToOne
@@ -193,13 +172,15 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date recProrrogaContrato;
     private int diasProrrogados;
-
     @OneToOne
     private CsbffPessoaBeneficio csbffPessoaBeneficio;
 
     @Override
     public String toString() {
         return "RecPessoa{" + "recIdpessoa=" + recIdpessoa + ", recCpf=" + recCpf + '}';
+    }
+    public RecPessoa(long recIdpessoa) {
+        this.recIdpessoa = recIdpessoa;
     }
 
     public List<GchFormularioPessoa> getGchFormularioPessoas() {
@@ -217,7 +198,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 //        this.csbffBeneficiosList = csbffBeneficiosList;
 //    }
     public long getRecIdpessoa() {
-        return recIdpessoa;
+        return this.recIdpessoa;
 
     }
 
@@ -601,7 +582,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
 
     @Override
     public Long getId() {
-        return Long.reverse(recIdpessoa);
+        return recIdpessoa;
     }
 
     public Insalubridade getInsalubridade() {
@@ -826,6 +807,7 @@ public class RecPessoa implements java.io.Serializable, SampleEntity {
     public void setRecNumTituEleitor(String recNumTituEleitor) {
         this.recNumTituEleitor = recNumTituEleitor;
     }
+
     public String getRecFotoPath() {
         return recFotoPath;
     }

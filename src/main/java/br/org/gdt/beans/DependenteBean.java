@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -75,6 +76,8 @@ public class DependenteBean {
 
         }
 
+        todosdependentes = csbffDependenteService.BuscaDependentePessoa(recPessoa.getRecIdpessoa());
+
     }
 
     public String pg(CsbffDependentes dependente) {
@@ -86,24 +89,26 @@ public class DependenteBean {
         String MsgNotificacao = "";
         try {
             if (csbffdependente.getDependenteCod() > 0) {
-                add();
+
                 csbffDependenteService.update(csbffdependente);
 
+                add();
             } else {
 
+                if (recPessoa.getRecIdpessoa() == 0) {
+                    recPessoa = recPessoaService.findByRecCpf(recCpf);
+                }
+                csbffdependente.setVinculoPessoa(recPessoa.getRecIdpessoa());
                 csbffDependenteService.save(csbffdependente);
-//        csbffPessoaDependente.setColabDepCodigo(recPessoa.getRecIdpessoa());
-                csbffPessoaDependente.setDependenteCod(csbffdependente);
-                csbffPessoaDependente.setRecIdpessoa(recPessoa);
-                csbffPessoaDependente.setPossuiDependentes(PossuiDependentes.Sim);
 
             }
-            todosdependentes = csbffDependenteService.findAll();
+
+            todosdependentes = csbffDependenteService.BuscaDependentePessoa(recPessoa.getRecIdpessoa());
             MsgNotificacao = "O dependente foi adicionado ao colaborador!";
-            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
+            Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");           
         } catch (Exception ex) {
             MsgNotificacao = "O colaborador não pode ser adicionado. ";
-            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
+            Helper.mostrarNotificacao("Erro", MsgNotificacao + ex.toString(), "error");
         }
         this.csbffdependente = new CsbffDependentes();
         return "dependente";
@@ -192,8 +197,9 @@ public class DependenteBean {
     }
 
     public List<CsbffDependentes> getTodosdependentes() {
-        if (todosdependentes == null) {
-            todosdependentes = csbffDependenteService.findAll();
+
+        if (todosdependentes == null && recPessoa.getRecIdpessoa() != 0) {
+            todosdependentes = csbffDependenteService.BuscaDependentePessoa(recPessoa.getRecIdpessoa());
         }
         return todosdependentes;
     }

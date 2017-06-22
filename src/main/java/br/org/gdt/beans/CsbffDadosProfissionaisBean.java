@@ -60,7 +60,7 @@ public class CsbffDadosProfissionaisBean {
     private boolean adicionandoBenficio = false;
     private RecPessoa recContrato;
     private SeguroDesemprego seguroDesemprego;
-    private RecPessoa admissaoDescricao;
+//    private RecPessoa admissaoDescricao;
 
     @ManagedProperty("#{csbffDependentesService}")
     private CsbffDependentesService csbffDependentesService;
@@ -430,13 +430,13 @@ public class CsbffDadosProfissionaisBean {
         this.csbffPessoaBeneficio = csbffPessoaBeneficio;
     }
 
-    public RecPessoa getAdmissaoDescricao() {
-        return admissaoDescricao;
-    }
-
-    public void setAdmissaoDescricao(RecPessoa admissaoDescricao) {
-        this.admissaoDescricao = admissaoDescricao;
-    }
+//    public RecPessoa getAdmissaoDescricao() {
+//        return admissaoDescricao;
+//    }
+//
+//    public void setAdmissaoDescricao(RecPessoa admissaoDescricao) {
+//        this.admissaoDescricao = admissaoDescricao;
+//    }
 
     public CsbffDependentesService getCsbffDependentesService() {
         return csbffDependentesService;

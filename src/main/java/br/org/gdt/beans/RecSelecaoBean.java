@@ -32,7 +32,6 @@ public class RecSelecaoBean {
 //
 //    @ManagedProperty("#{recVagaService}")
 //    private RecVagaService recVagaService;
-
     public RecSelecaoBean() {
     }
 
@@ -44,12 +43,12 @@ public class RecSelecaoBean {
 //        RecSelecao selec = new RecSelecao(1, null, false, data, p, v);
 //        recSelecaoService.Inserir(selecao);
         //if (ValidarCampos()) {
-            if (selecao.getRecIdselecao() > 0) {
-                recSelecaoService.Alterar(selecao);
-            } else {
-                recSelecaoService.Inserir(selecao);
-            }
-            selecoes = recSelecaoService.ListarTodas();
+        if (selecao.getRecIdselecao() > 0) {
+            recSelecaoService.Alterar(selecao);
+        } else {
+            recSelecaoService.Inserir(selecao);
+        }
+        selecoes = recSelecaoService.ListarTodas();
 //        }else{
 //            return;
 //        }       
@@ -88,6 +87,12 @@ public class RecSelecaoBean {
     public void Adicionar() {
         this.formAtivo = true;
         this.selecao = new RecSelecao();
+    }
+
+    public String AgendarEntrevista() {
+        this.formAtivo = true;
+        this.selecao = new RecSelecao();
+        return "selecao";
     }
 
     public RecSelecao getSelecao() {

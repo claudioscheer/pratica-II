@@ -20,6 +20,7 @@ import br.org.gdt.service.RecPessoaService;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -124,11 +125,11 @@ public class FichaFuncional {
         parametros.put("recCpf", pessoa.getRecCpf());
         parametros.put("recNomecompleto", pessoa.getRecNomecompleto());
         parametros.put("recRg", pessoa.getRecRg());
-        parametros.put("recDtnascimento", pessoa.getRecDtnascimento());
+        parametros.put("recDtnascimento", new SimpleDateFormat("dd/MM/yyyy").format(pessoa.getRecDtnascimento()));
         parametros.put("recEstadocivil", pessoa.getRecEstadocivil());
         parametros.put("recSexo", pessoa.getRecSexo());
         parametros.put("recOrgaoemissor", pessoa.getRecOrgaoemissor());
-        parametros.put("recDtemissao", pessoa.getRecDtemissao());
+        parametros.put("recDtemissao", new SimpleDateFormat("dd/MM/yyyy").format(pessoa.getRecDtemissao()));
         parametros.put("recCor", pessoa.getRecCor());
         parametros.put("recReservista", pessoa.getRecReservista());
         parametros.put("recPesGrauEnsino", pessoa.getRecPesGrauEnsino());
@@ -146,8 +147,8 @@ public class FichaFuncional {
 
         parametros.put("cargoCodigo", pessoa.getCargoCodigo().getCargoNome());
         parametros.put("cargoValorSalario", pessoa.getCargoValorSalario());
-        parametros.put("recDtaAdmissao", pessoa.getRecDtaAdmissao());
-        parametros.put("recDtaDemissao", pessoa.getRecDtaDemissao());
+        parametros.put("recDtaAdmissao", new SimpleDateFormat("dd/MM/yyyy").format(pessoa.getRecDtaAdmissao()));
+        parametros.put("recDtaDemissao", new SimpleDateFormat("dd/MM/yyyy").format(pessoa.getRecDtaDemissao()));
         parametros.put("insalubridade", pessoa.getInsalubridade());
         parametros.put("recPericulosidade", pessoa.getRecPericulosidade());
         parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor());
@@ -161,7 +162,7 @@ public class FichaFuncional {
 
         JRBeanCollectionDataSource dependentesCollection = new JRBeanCollectionDataSource(dependentes);
 
-        parametros.put("dependentes", dependentesCollection);
+        parametros.put("dependentePessoa", dependentesCollection);
 
         //Benefícios do colaborador
         List<CsbffBeneficios> beneficios = csbffBeneficiosService.TodosBeneficiosPessoa(pessoa);
@@ -170,7 +171,7 @@ public class FichaFuncional {
         
         JRBeanCollectionDataSource beneficiosCollection = new JRBeanCollectionDataSource(beneficios);
         
-        parametros.put("beneficios", beneficiosCollection);
+        parametros.put("beneficioPessoa", beneficiosCollection);
         
         //escalas do colaborador
         List<CsbffEscalaHoras> escalas = csbffEscalaHorasService.buscarEscalasPessoa(pessoa);

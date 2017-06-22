@@ -47,8 +47,7 @@ public class RecVagaBean {
         return filteredThemes;
     }
 
-    public void Salvar() {
-
+    public void Salvar() {                        
         if (ValidarCampos()) {
             if (vaga.getRecIdvaga() > 0) {
                 if (habilidades != null) {
@@ -60,9 +59,11 @@ public class RecVagaBean {
                     vaga.setRecHabilidadeList(habilidades);
                 }
                 recVagaService.Inserir(vaga);
-            }
+            }              
             vagas = recVagaService.ListarTodas();
-        }
+        }else{
+            formAtivo = true;    
+        }                
     }
 
     public List<RecVaga> ListarTodas() {
@@ -135,6 +136,7 @@ public class RecVagaBean {
 
     public String Excluir(RecVaga vaga) {
         recVagaService.Excluir(vaga.getRecIdvaga());
+        vagas = recVagaService.ListarTodas();
         return "vagas";
     }
 

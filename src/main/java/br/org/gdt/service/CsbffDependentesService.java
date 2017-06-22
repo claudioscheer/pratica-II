@@ -54,4 +54,10 @@ public class CsbffDependentesService {
         this.csbffdependenteDAO = csbffdependenteDAO;
     }
     
+    public List<CsbffDependentes> BuscaDependentePessoa(long idPessoa){
+        
+        return csbffdependenteDAO.BuscaDependentesPessoa(idPessoa);
+        
+    }
+    
 }

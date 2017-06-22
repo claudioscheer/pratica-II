@@ -31,7 +31,7 @@
                                     <div class="form-group ">
                                         <label class="control-label" for="number">                                        
                                             Descrição da Vaga
-                                            <span class="required">*</span>
+                                            <span class="required" style="color: red">*</span>
                                         </label>
                                         <h:inputText class="form-control" 
                                                      id="Descricao" 
@@ -42,6 +42,7 @@
                                     <div class="form-group ">
                                         <label class="control-label">
                                             Sexo
+                                            <span class="required" style="color: red">*</span>
                                         </label>
                                         <h:selectOneMenu id="comboSexo" value="#{recVagaBean.vaga.recSexo}" class="form-control" >
                                             <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
@@ -55,8 +56,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12 pull-right">
                                     <div class="form-group ">
                                         <label class="control-label">                                        
-                                            Salário
-                                            <span class="required">*</span>
+                                            Salário                                            
                                         </label>
                                         <h:inputText class="form-control" 
                                                      id="Salario"
@@ -69,6 +69,7 @@
                                     <div class="form-group ">
                                         <label class="control-label " for="select">
                                             Grau de Ensino
+                                            <span class="required" style="color: red">*</span>
                                         </label>
                                         <h:selectOneMenu id="comboGrauensino" value="#{recVagaBean.vaga.recGrauensino}"  class="form-control" >
                                             <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
@@ -94,7 +95,7 @@
                                             <f:selectItems value="#{csbffCargosBean.todosCargos}" 
                                                            var="cargo" 
                                                            itemValue="#{cargo}" 
-                                                           itemLabel="#{cargo.cargoDescricao}"/>
+                                                           itemLabel="#{cargo.cargoNome}"/>
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
@@ -103,6 +104,7 @@
                                     <div class="form-group ">
                                         <label class="control-label">
                                             Tipo de Vaga
+                                            <span class="required" style="color: red">*</span>
                                         </label>
                                         <h:selectOneMenu id="comboTipoVaga" value="#{recVagaBean.vaga.recTipoVaga}" class="form-control" >
                                             <f:selectItem itemLabel="Selecione o Tipo de Vaga" itemValue="#{null}" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-19T17:20:18 -->
+<!-- 2017-06-20T21:25:01 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportFichaFuncional." pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="493fecfc-8039-4f02-bbb6-9916f739b6c2">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -116,11 +116,9 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="dependenteNome" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
+		<field name="dependenteNome" class="java.lang.String"/>
 		<field name="dependenteCpf" class="java.lang.String"/>
-		<field name="dependenteDataNascimento" class="java.util.Date"/>
+		<field name="dependenteDataNascimento" class="java.lang.String"/>
 		<field name="dependenteRgCertNascimento" class="java.lang.String"/>
 		<field name="dependenteNaturalidade" class="java.lang.String"/>
 	</subDataset>
@@ -128,12 +126,8 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="beneficioNome" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-		<field name="tipoBeneficio" class="java.lang.Enum">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
+		<field name="beneficioNome" class="java.lang.String"/>
+		<field name="tipoBeneficio" class="java.lang.Enum"/>
 	</subDataset>
 	<subDataset name="EscalasDataset" uuid="31266b0c-5b27-4a4d-ab8d-8323ef95e656">
 		<queryString>
@@ -152,15 +146,15 @@
 		</queryString>
 		<field name="curNome" class="java.lang.String"/>
 	</subDataset>
-	<parameter name="recIdPessoa" class="java.lang.Long"/>
+	<parameter name="recIdpessoa" class="java.lang.Long"/>
 	<parameter name="recCpf" class="java.lang.String"/>
 	<parameter name="recNomecompleto" class="java.lang.String"/>
 	<parameter name="recRg" class="java.lang.String"/>
-	<parameter name="recDtnascimento" class="java.util.Date"/>
+	<parameter name="recDtnascimento" class="java.lang.String"/>
 	<parameter name="recEstadocivil" class="java.lang.Enum"/>
 	<parameter name="recSexo" class="java.lang.Enum"/>
 	<parameter name="recOrgaoemissor" class="java.lang.String"/>
-	<parameter name="recDtemissao" class="java.sql.Date"/>
+	<parameter name="recDtemissao" class="java.lang.String"/>
 	<parameter name="recCor" class="java.lang.String"/>
 	<parameter name="recReservista" class="java.lang.String"/>
 	<parameter name="recPesGrauEnsino" class="java.lang.Integer"/>
@@ -178,8 +172,8 @@
 	<parameter name="cargoValorSalario" class="java.lang.Double">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="recDtaAdmissao" class="java.util.Date"/>
-	<parameter name="recDtaDemissao" class="java.util.Date"/>
+	<parameter name="recDtaAdmissao" class="java.lang.String"/>
+	<parameter name="recDtaDemissao" class="java.lang.String"/>
 	<parameter name="insalubridade" class="java.lang.Enum">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -207,7 +201,7 @@
 	<parameter name="cnpj" class="java.lang.String">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="recNumTituEleitor" class="java.lang.Integer">
+	<parameter name="recNumTituEleitor" class="java.lang.String">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
 	<queryString>
@@ -233,14 +227,14 @@
 				<textFieldExpression><![CDATA[$P{empresa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="280" y="40" width="172" height="20" uuid="6d7b729d-f392-4a57-be03-77170e8df6fa"/>
+				<reportElement x="280" y="40" width="189" height="20" uuid="6d7b729d-f392-4a57-be03-77170e8df6fa"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{cnpj}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-1" y="40" width="48" height="20" uuid="a55bcf7f-42ac-4a1e-b592-f4abb3ee7113"/>
+				<reportElement x="-1" y="40" width="60" height="20" uuid="a55bcf7f-42ac-4a1e-b592-f4abb3ee7113"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -254,10 +248,10 @@
 				<text><![CDATA[CNPJ:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="488" y="0" width="65" height="69" uuid="c3e51827-1b3b-4189-91c1-1a83c4e8ce49"/>
+				<reportElement x="488" y="0" width="64" height="69" uuid="c3e51827-1b3b-4189-91c1-1a83c4e8ce49"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="510" y="27" width="31" height="15" uuid="28df9747-dc2d-47ba-80be-85277f728714"/>
+				<reportElement x="510" y="27" width="30" height="15" uuid="28df9747-dc2d-47ba-80be-85277f728714"/>
 				<textElement>
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -583,7 +577,7 @@ DEMISSÃO]]></text>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{recIdPessoa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{recIdpessoa}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="70" y="-88" width="79" height="20" uuid="efce1607-cc4b-4239-873d-61053415fb8f"/>

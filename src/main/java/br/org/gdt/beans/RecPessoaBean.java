@@ -89,6 +89,9 @@ public class RecPessoaBean {
                     //Path destino = Paths.get("C:/Temp/imagem.jpg");
                     //Files.copy(origem, destino, StandardCopyOption.REPLACE_EXISTING); //copia para a pasta
                 }
+                if(recAnexoCurriculo != null){
+                    recPessoa.setRecAnexoCurriculo(AnexoParaBytes());
+                }
                 recPessoaService.Inserir(recPessoa);
             }
             return "curriculo_sucesso";
@@ -96,7 +99,7 @@ public class RecPessoaBean {
         return null;
     }
 
-    public void upload(FileUploadEvent evento) {       
+    public void upload(FileUploadEvent evento) {
         try {
             UploadedFile arquivo = evento.getFile();
             Path arquivoTemporario = Files.createTempFile(null, null);
@@ -119,6 +122,16 @@ public class RecPessoaBean {
         return output.toByteArray();
     }
 
+    public byte[] AnexoParaBytes() throws IOException {
+        InputStream input = recAnexoCurriculo.getInputstream();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[10240];
+        for (int length = 0; (length = input.read(buffer)) > 0;) {
+            output.write(buffer, 0, length);
+        }
+        return output.toByteArray();
+    }
+
     public String PreparaEdicao(RecPessoa pessoa) {
         formAtivo = true;
         this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
@@ -129,7 +142,7 @@ public class RecPessoaBean {
         this.formAtivo = true;
         this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
         if (recPessoa.getRecFoto() != null) {
-            //fotoPerfil = RenderizarFoto(pessoa.getRecFoto());                        
+            fotoPerfil = RenderizarFoto(pessoa.getRecFoto());                        
         }
         return "candidatos";
     }
@@ -142,7 +155,7 @@ public class RecPessoaBean {
             if (img == null) {
                 return new DefaultStreamedContent();
             } else {
-                return new DefaultStreamedContent(new ByteArrayInputStream(img), "image/png");
+                return new DefaultStreamedContent(new ByteArrayInputStream(img), "image/jpeg");
             }
         }
     }
@@ -170,6 +183,7 @@ public class RecPessoaBean {
         recPessoa = new RecPessoa();
         return "curriculo";
     }
+     
 
     public RecPessoa getRecPessoa() {
         return recPessoa;
