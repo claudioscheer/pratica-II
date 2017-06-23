@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -22,7 +23,10 @@ public class Helper {
 
     public static int getIdadeDaPessoa(Date dataNascimento) {
         LocalDate dataAtual = LocalDate.now();
-        LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Calendar calendarDataNascimento = Calendar.getInstance();
+        calendarDataNascimento.setTime(dataNascimento);
+
+        LocalDate dataNascimentoLocal = LocalDate.of(calendarDataNascimento.get(Calendar.YEAR), calendarDataNascimento.get(Calendar.MONTH), calendarDataNascimento.get(Calendar.DATE));
         Period periodo = Period.between(dataNascimentoLocal, dataAtual);
         return periodo.getYears();
     }

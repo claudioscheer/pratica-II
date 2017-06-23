@@ -92,7 +92,7 @@ public class InicializaBean {
         sqls.add("INSERT INTO fp_faixa VALUES (nextval('seq_fp_faixa'), 0, 0, 608.44, 0, 1);");
         sqls.add("INSERT INTO fp_faixa VALUES (nextval('seq_fp_faixa'), 859.88, 0,44.09, 0, 6);");
         sqls.add("INSERT INTO fp_faixa VALUES (nextval('seq_fp_faixa'), 1292.43, 0, 31.07, 0, 6);");
-        sqls.add("INSERT INTO fp_faixa VALUES (nextval('seq_fp_faixa'), 189.59, 0, 0, 0, 2);");
+        sqls.add("INSERT INTO fp_faixa VALUES (nextval('seq_fp_faixa'), 189.59, 0, 189.59, 0, 2);");
         sqls.add("INSERT INTO fp_faixa VALUES (nextval('seq_fp_faixa'), 0, 0, 0, 0, 6);");
 
         sqls.forEach(sql -> inicializaService.inicializar(sql));
