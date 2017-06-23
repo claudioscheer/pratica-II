@@ -6,11 +6,8 @@
 package br.org.gdt.service.FichaFuncional;
 
 import br.org.gdt.model.CsbffBeneficios;
-import br.org.gdt.model.CsbffCargos;
 import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.CsbffEscalaHoras;
-import br.org.gdt.model.GchTreinamentos;
-import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
 import br.org.gdt.service.CsbffBeneficiosService;
 import br.org.gdt.service.CsbffEscalaHorasService;
@@ -217,7 +214,7 @@ public class FichaFuncional {
         HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
         response.reset();
         response.setContentType("application/pdf");
-        response.setHeader("Content-disposition", "attachment; filename=" + nomeArquivo + ".pdf");
+        response.setHeader("", "filename=" + nomeArquivo + ".pdf");
         try (ServletOutputStream stream = response.getOutputStream()) {
             JRPdfExporter exporter = new JRPdfExporter();
             exporter.setExporterInput(SimpleExporterInput.getInstance(relatorios));

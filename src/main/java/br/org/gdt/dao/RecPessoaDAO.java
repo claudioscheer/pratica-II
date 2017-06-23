@@ -74,13 +74,17 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
     }
 
     public List<CsbffDependentes> findAllDependentesPessoa(long pessoa) {
-        List<CsbffPessoaDependente> todosDependentes = entityManager.createQuery("from CsbffPessoaDependente as t where t.recIdpessoa.recIdpessoa = :pessoa")
-                .setParameter("pessoa", pessoa)
-                .getResultList();
+       
+         Query query = entityManager.createQuery("from CsbffDependentes as t where t.vinculoPessoa = :pessoa");
+       query.setParameter("pessoa", pessoa);
+         
+        List<CsbffDependentes> todosDependentes = query.getResultList();
+                
 
-        return todosDependentes.stream()
-                .map(x -> x.getDependenteCod())
-                .collect(Collectors.toList());
+//        return todosDependentes.stream()
+//                .map(x -> x.getDependenteCod())
+//                .collect(Collectors.toList());
+        return todosDependentes;
     }
 
      public List<RecPessoa> buscarColaboradores() { 
