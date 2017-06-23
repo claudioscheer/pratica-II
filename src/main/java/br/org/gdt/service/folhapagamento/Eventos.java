@@ -5,12 +5,16 @@ import br.org.gdt.enums.FpEnumTabelas;
 import br.org.gdt.enums.FpTipoEvento;
 import br.org.gdt.enums.FpTipoValorFaixa;
 import br.org.gdt.enums.Insalubridade;
+import br.org.gdt.model.CsbffDependentes;
 import br.org.gdt.model.FpEventoPeriodo;
 import br.org.gdt.model.FpFaixa;
+import br.org.gdt.resources.Helper;
+import br.org.gdt.service.CsbffDependentesService;
 import br.org.gdt.service.FpTabelaService;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,9 @@ public class Eventos {
 
     @Autowired
     private FpTabelaService fpTabelaService;
+
+    @Autowired
+    private CsbffDependentesService csbffDependentesService;
 
     public FpEventoPeriodo calcularEvento(FpEventoPeriodo fpEventoPeriodo, DadosCalculadosDoFuncionario dadosCalculadosDoFuncionario) throws Exception {
         if (fpEventoPeriodo.isJaCalculado()) {
@@ -102,9 +109,13 @@ public class Eventos {
 
             // Descontar o valor do evento INSS.
             valorEventosIncideIRRF -= getValorEventoDosEventosDoFuncionarioVerificarJaCalculado(FpEnumEventos.INSS, dadosCalculadosDoFuncionario);
-            
+
+            Stream<CsbffDependentes> dependentesDaPessoa = csbffDependentesService.BuscaDependentePessoa(
+                    dadosCalculadosDoFuncionario.getPessoa().getRecIdpessoa()).stream()
+                    .filter(x -> Helper.getIdadeDaPessoa(x.getDependenteDataNascimento()) <= 14);
+
             // Quantidade de dependentes que o funcionário tem.
-            int dependentes = 0;
+            int dependentes = (int) dependentesDaPessoa.count();
             if (dependentes > 0) {
                 // Se o funcionário tem dependentes desconta R$ 189 por dependentes.
                 FpFaixa fpFaixaValorPorDependente = fpTabelaService.encontrarFaixaDaTabela(0, FpEnumTabelas.ValorIRRFPorDependente.ordinal() + 1);
