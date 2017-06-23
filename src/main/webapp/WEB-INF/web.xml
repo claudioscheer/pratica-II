@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <param-value>Production</param-value>
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -60,31 +60,26 @@
         <param-name>primafaces.UPLOADER</param-name>
         <param-value>native</param-value>
     </context-param>
-    <!--    <error-page>
-        Missing login
+    <error-page>
         <error-code>401</error-code>
         <location>/error-padrao.xhtml</location>
     </error-page>
     <error-page>
-        Forbidden directory listing
         <error-code>403</error-code>
         <location>/error-403.xhtml</location>
     </error-page>
     <error-page>
-        Missing resource
         <error-code>404</error-code>
         <location>/error-404.xhtml</location>
     </error-page>
     <error-page>
-        Uncaught exception
         <error-code>500</error-code>
         <location>/error-padrao.xhtml</location>
     </error-page>
     <error-page>
-        Unsupported servlet method
         <error-code>503</error-code>
         <location>/error-padrao.xhtml</location>
-    </error-page>-->
+    </error-page>
     <security-constraint>
         <display-name>admin_access</display-name>
         <web-resource-collection>
