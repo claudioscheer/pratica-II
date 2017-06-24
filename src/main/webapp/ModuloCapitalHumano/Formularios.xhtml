@@ -39,7 +39,7 @@
 
                                             <h:dataTable id="tabelFormularios" class="table table-striped " value="#{gchFormularioBean.gchTodosFormularios}" var="formulario" >
 
-                                               
+
                                                 <h:column>   
                                                     <f:facet name="header">Nome</f:facet>
                                                     <h:outputText value="#{formulario.formNome}"/>                
@@ -52,7 +52,7 @@
                                                     </h:outputText>
                                                 </h:column>
 
-                                                
+
                                                 <h:column>                
                                                     <h:commandLink action="#{gchFormularioAlternativasBean.preparedEdit(formulario)}">
 
@@ -66,25 +66,25 @@
 
                                                     </h:commandLink>
                                                 </h:column>
-                                                
-                                                
+
+
                                                 <h:column> 
                                                     <h:commandLink action="#{estatisticasFormularios.CarregarGraficoFormulario(formulario)}" >
                                                         <f:param name="sender" value="#{formulario.formCodigo}" />
-                                                      
+
                                                         <i class="glyphicon glyphicon-object-align-bottom" style="font-size:18px" ></i>
 
                                                     </h:commandLink>
-                                                    
-                                                
+
+
                                                 </h:column>
-                                                
+
                                                 <h:column>
-                                                    
-                                                    
+
+
                                                 </h:column>
-                                                
-                                                 <h:column headerClass="alinhaColuna">                
+
+                                                <h:column headerClass="alinhaColuna">                
                                                     <h:commandLink  id="btnExcluir" action="#{gchFormularioBean.excluir(formulario)}" onclick="return confirm('Voce realmente deseja excluir este formulário?')" >
 
                                                         <f:ajax execute="@this"  event="action" render="formFormulario" />
@@ -94,7 +94,7 @@
 
                                                 </h:column>
 
-                                                
+
                                             </h:dataTable>
 
                                         </h:form> </div>
@@ -106,13 +106,13 @@
                                         </p:dialog>
 
 
-                                        <p:dialog  id="dialogPessoas" modal="true" header="Seleção de pessoas" widgetVar="dialogSelecaoPessoas" >
+                                        <p:dialog height="400" id="dialogPessoas" modal="true" header="Seleção de pessoas" widgetVar="dialogSelecaoPessoas" >
 
                                             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
 
 
-                                            <div class="panel-body" style="/* a lign-items: center; */">
+                                            <div class="panel-body" style="overflow:auto; /* a lign-items: center; */">
 
                                                 <h:dataTable  id="tabelaPessoas" class="table table-striped" value="#{gchFormularioBean.pessoasEmail}" var="pessoa">
 
