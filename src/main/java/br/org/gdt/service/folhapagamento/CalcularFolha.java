@@ -214,9 +214,18 @@ public class CalcularFolha {
                 Map<String, Object> parametros = new HashMap<>();
                 parametros.put("empresa", "Asa Delta RH");
                 parametros.put("cnpj", "98.039.852/0004-3");
-                parametros.put("dataAdmissao", new SimpleDateFormat("dd/MM/yyyy").format(fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao()));
-                parametros.put("cargo", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoNome());
-                parametros.put("CBO", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoCbo());
+                if (fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao() != null) {
+                    parametros.put("dataAdmissao", new SimpleDateFormat("dd/MM/yyyy").format(fpFolhaPeriodo.getForPessoa().getRecDtaAdmissao()));
+                } else {
+                    parametros.put("dataAdmissao", "");
+                }
+                if (fpFolhaPeriodo.getForPessoa().getCargoCodigo() != null) {
+                    parametros.put("cargo", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoNome());
+                    parametros.put("CBO", fpFolhaPeriodo.getForPessoa().getCargoCodigo().getCargoCbo());
+                } else {
+                    parametros.put("cargo", "");
+                    parametros.put("CBO", "");
+                }
 
                 String nomePessoa = fpFolhaPeriodo.getForPessoa().getRecIdpessoa() + " - " + fpFolhaPeriodo.getForPessoa().getRecNomecompleto();
                 parametros.put("pessoa", nomePessoa);

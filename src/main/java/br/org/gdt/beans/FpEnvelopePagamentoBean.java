@@ -125,6 +125,7 @@ public class FpEnvelopePagamentoBean {
         }
         fpFolhaPeriodo = folhaPeriodo;
         fpFolhaPeriodo.removerEventosNaoAlteraFolha();
+        mostrarTodasFolhasPeriodo = false;
     }
 
     public void recalcularFolhaPeriodo() {
