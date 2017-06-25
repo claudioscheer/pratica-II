@@ -30,7 +30,7 @@
                                             class="center-block"
                                             width="250"
                                             height="250"/>     -->
-                                        
+
                                         <img src="user.png" 
                                              class="center-block"
                                              style="height: 250px; width: 250px"></img>
@@ -333,7 +333,7 @@
                                 </div>
 
                                 <hr />
-                             
+
                                 <div class="row">
                                     <h3 class="text-center">Suas Habilidades</h3>   
 
@@ -370,7 +370,88 @@
                         </div>
                     </p:panel>
                     <p:panel visible="#{!recPessoaBean.formAtivo}">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group ">
+                                <label class="control-label" for="number">                                        
+                                    Buscar Candidato Pelo Nome
+                                </label>
+                                <h:inputText class="form-control" 
+                                             id="busca"                   
+                                             value="#{recPessoaBean.nomeFiltro}"/>
+                            </div>                            
+                        </div>     
+                        <div class="col-md-6 col-sm-6 col-xs-12">                                
+                            <div class="form-group ">
+                                <label class="control-label " for="select">
+                                    Sexo
+                                </label>
+                                <h:selectOneMenu id="comboSexoBusca" 
+                                                 value="#{recPessoaBean.sexoFiltro}"
+                                                 class="form-control" >
+                                    <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{null}" />
+                                    <f:selectItems value="#{recPessoaBean.sexo}" />
+                                </h:selectOneMenu>                                                                           
+                            </div>     
+                        </div> 
+                        <div class="col-md-6 col-sm-6 col-xs-12">                                
+                            <div class="form-group ">
+                                <label class="control-label " for="select">
+                                    Estado Civil
+                                </label>
+                                <h:selectOneMenu id="comboEstadoCivilBusca" 
+                                                 value="#{recPessoaBean.estadoCivilFiltro}"                                                 
+                                                 class="form-control">
+                                    <f:selectItem itemLabel="Selecione o Estado Civil" itemValue="#{null}" />
+                                    <f:selectItems value="#{recPessoaBean.estadoCivil}" /><!--                                                                                             -->
+                                </h:selectOneMenu>     
 
+                            </div>     
+                        </div> 
+                        <div class="col-md-6 col-sm-6 col-xs-6">                                
+                            <div class="form-group ">
+                                <label class="control-label " for="select">
+                                    Cor
+                                </label>
+                                <h:selectOneMenu id="comboCorBusca" 
+                                                 value="#{recPessoaBean.corFiltro}"  
+                                                 class="form-control" >
+                                    <f:selectItem itemLabel="Selecione a Cor" itemValue="#{null}" />
+                                    <f:selectItem itemLabel="Branco(a)" itemValue="#{1}" />
+                                    <f:selectItem itemLabel="Pardo(a)" itemValue="#{2}" />
+                                    <f:selectItem itemLabel="Preto(a)" itemValue="#{3}" />                                                
+                                    <f:selectItem itemLabel="Amarelo(a)" itemValue="#{4}" />
+                                    <f:selectItem itemLabel="Indígena(a)" itemValue="#{5}" />
+                                    <f:selectItem itemLabel="Não Declarar" itemValue="#{6}" />
+                                </h:selectOneMenu>                                                                                                                        
+                            </div>     
+                        </div> 
+                        <div class="col-md-6 col-sm-6 col-xs-6">                                
+                            <div class="form-group ">
+                                <label class="control-label " for="select">
+                                    Grau de Ensino
+                                </label>
+                                <h:selectOneMenu id="comboGrauensinoBusca" 
+                                                 value="#{recPessoaBean.grauEnsinoFiltro}"  
+                                                 class="form-control" >
+                                    <f:selectItem itemLabel="Selecione o Grau de Ensino" itemValue="#{null}" />
+                                    <f:selectItem itemLabel="Até 5º Série" itemValue="#{1}" />                                                
+                                    <f:selectItem itemLabel="5º a 9º Série" itemValue="#{2}" />
+                                    <f:selectItem itemLabel="Ensino Fundamental" itemValue="#{3}" />
+                                    <f:selectItem itemLabel="Ensino Médio Completo" itemValue="#{4}" />
+                                    <f:selectItem itemLabel="Ensino Médio Incompleto" itemValue="#{5}" />
+                                    <f:selectItem itemLabel="Ensino Superior Completo" itemValue="#{6}" />
+                                    <f:selectItem itemLabel="Ensino Superior Incompleto" itemValue="#{7}" />
+                                    <f:selectItem itemLabel="Especialização" itemValue="#{8}" />                                                                                                
+                                </h:selectOneMenu>
+                            </div>     
+                        </div> 
+                        <div class="pull-right">
+                            <div class="row">
+                                <h:commandButton class="btn btn-success" 
+                                                 value="Buscar" 
+                                                 action="#{recPessoaBean.FiltroPessoa()}"/>                                                                        
+                            </div>
+                        </div>
                         <h:dataTable class="table table-striped" value="#{recPessoaBean.ListarTodas()}" var="item">                                        
                             <h:column>
                                 <f:facet name="header">Código</f:facet>                                                                                            
@@ -390,11 +471,11 @@
                                                value="Visualizar" 
                                                action="#{recPessoaBean.VerCurriculo(item)}">                                    
                                 </h:commandLink>      
-                                  <h:commandLink class="btn btn-link btn-small" 
+                                <h:commandLink class="btn btn-link btn-small" 
                                                value="Agendar Entrevista" 
                                                action="#{recSelecaoBean.AgendarEntrevista()}">                                    
                                 </h:commandLink>   
-                                 <h:commandLink class="btn btn-link btn-small" 
+                                <h:commandLink class="btn btn-link btn-small" 
                                                value="Download Currículo" 
                                                >                                    
                                 </h:commandLink>   

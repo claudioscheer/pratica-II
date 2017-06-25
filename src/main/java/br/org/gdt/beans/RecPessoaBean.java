@@ -137,7 +137,7 @@ public class RecPessoaBean {
         this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
         return "candidatos";
     }
-
+    
     public String VerCurriculo(RecPessoa pessoa) throws IOException {
         this.formAtivo = true;
         this.recPessoa = recPessoaService.FindByIdCompleto(pessoa.getRecIdpessoa());
@@ -171,7 +171,14 @@ public class RecPessoaBean {
             return "curriculo";
         }
     }
-
+    private int grauEnsinoFiltro;
+    private int sexoFiltro;
+    private String nomeFiltro;
+    private int estadoCivilFiltro;
+    private int corFiltro;
+    public List<RecPessoa> FiltroPessoa(){
+        return null;
+    }
     public List<RecPessoa> ListarTodas() {
         if (recPessoas == null) {
             recPessoas = recPessoaService.ListarTodas();
@@ -335,5 +342,45 @@ public class RecPessoaBean {
 
     public void setCaminho(String caminho) {
         this.caminho = caminho;
+    }
+
+    public int getGrauEnsinoFiltro() {
+        return grauEnsinoFiltro;
+    }
+
+    public void setGrauEnsinoFiltro(int grauEnsinoFiltro) {
+        this.grauEnsinoFiltro = grauEnsinoFiltro;
+    }
+
+    public int getSexoFiltro() {
+        return sexoFiltro;
+    }
+
+    public void setSexoFiltro(int sexoFiltro) {
+        this.sexoFiltro = sexoFiltro;
+    }
+
+    public String getNomeFiltro() {
+        return nomeFiltro;
+    }
+
+    public void setNomeFiltro(String nomeFiltro) {
+        this.nomeFiltro = nomeFiltro;
+    }
+
+    public int getEstadoCivilFiltro() {
+        return estadoCivilFiltro;
+    }
+
+    public void setEstadoCivilFiltro(int estadoCivilFiltro) {
+        this.estadoCivilFiltro = estadoCivilFiltro;
+    }
+
+    public int getCorFiltro() {
+        return corFiltro;
+    }
+
+    public void setCorFiltro(int corFiltro) {
+        this.corFiltro = corFiltro;
     }
 }

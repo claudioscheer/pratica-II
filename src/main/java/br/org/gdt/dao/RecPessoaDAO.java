@@ -60,6 +60,10 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         }
     }
 
+    public List<RecPessoa> FiltroPessoa(int grauEnsino, int sexo, String nome, int estadoCivil, int cor) {
+        return null;
+    }
+
     public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
         Query query = entityManager.createQuery("from RecPessoa as p where (upper(p.recNomecompleto) like :recQuery or p.recCpf like :recQuery) and p.recFuncionario = true");
         query.setParameter("recQuery", "%" + select.toUpperCase() + "%");
@@ -74,12 +78,11 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
     }
 
     public List<CsbffDependentes> findAllDependentesPessoa(long pessoa) {
-       
-         Query query = entityManager.createQuery("from CsbffDependentes as t where t.vinculoPessoa = :pessoa");
-       query.setParameter("pessoa", pessoa);
-         
+
+        Query query = entityManager.createQuery("from CsbffDependentes as t where t.vinculoPessoa = :pessoa");
+        query.setParameter("pessoa", pessoa);
+
         List<CsbffDependentes> todosDependentes = query.getResultList();
-                
 
 //        return todosDependentes.stream()
 //                .map(x -> x.getDependenteCod())
@@ -87,13 +90,12 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
         return todosDependentes;
     }
 
-     public List<RecPessoa> buscarColaboradores() { 
+    public List<RecPessoa> buscarColaboradores() {
         Query query = entityManager.createQuery("from RecPessoa as p where p.recFuncionario = true");
-        
+
         return query.getResultList();
     }
-    
-    
+
 }
 //    public RecPessoa findByCpf(String cpf) {
 ////        try {

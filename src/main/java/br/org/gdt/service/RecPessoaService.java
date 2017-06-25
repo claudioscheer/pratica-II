@@ -56,6 +56,10 @@ public class RecPessoaService {
         return pessoaDao.findAll();
     }
 
+    public List<RecPessoa> FiltroPessoa(int grauEnsino, int sexo, String nome, int estadoCivil, int cor) {
+        return pessoaDao.FiltroPessoa(grauEnsino, sexo, nome, estadoCivil, cor);
+    }
+
     public List<CsbffDependentes> findAllDependentesPessoa(RecPessoa recPessoa) {
         return pessoaDao.findAllDependentesPessoa(recPessoa.getRecIdpessoa());
     }
@@ -81,9 +85,9 @@ public class RecPessoaService {
     public List<RecPessoa> buscarNomes(String select) { //usado em um sugest
         return pessoaDao.buscarNomes(select);
     }
-    
-    public List<RecPessoa> buscarColaboradores() { 
+
+    public List<RecPessoa> buscarColaboradores() {
         return pessoaDao.buscarColaboradores();
     }
-    
+
 }
