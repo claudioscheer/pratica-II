@@ -80,7 +80,7 @@
         <error-code>503</error-code>
         <location>/error-padrao.xhtml</location>
     </error-page>
-    <security-constraint>
+    <!--<security-constraint>
         <display-name>admin_access</display-name>
         <web-resource-collection>
             <web-resource-name>capital</web-resource-name>
@@ -220,5 +220,5 @@
     <security-role>
         <description>Ficha funcional</description>
         <role-name>FICHA</role-name>
-    </security-role>
+    </security-role>-->
 </web-app>
