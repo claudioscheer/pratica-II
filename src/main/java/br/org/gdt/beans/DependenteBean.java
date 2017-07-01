@@ -32,6 +32,7 @@ public class DependenteBean {
     private boolean formAtivo = false;
     private String recCpf;
     private String NomeCompleto;
+    private boolean campos= false;
 
     @ManagedProperty("#{recPessoaService}")
     private RecPessoaService recPessoaService;
@@ -50,16 +51,9 @@ public class DependenteBean {
 
     }
 
-//    public void buscarCpf() {
-//        recPessoa = recPessoaService.findByRecCpf(recCpf);
-//        NomeCompleto = recPessoa.getRecNomecompleto();
-//        if (recPessoa == null) {
-//            recPessoa = new RecPessoa();
-//        }
-//    }
     public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
-//        NomeCompleto = recPessoa.getRecNomecompleto();
+
 
         String MsgNotificacao = "";
         while (recPessoa == null) {
@@ -70,13 +64,22 @@ public class DependenteBean {
         if (recPessoa.colaboradorInativo == true) {
             MsgNotificacao = "O colaborador está inativo.";
             Helper.mostrarNotificacao("Atenção!", MsgNotificacao, "info");
+            campos = true;
+        }else if(recPessoa.colaboradorInativo == false){
+            campos = false;
+            
         }
         if (recPessoa == null) {
             recPessoa = new RecPessoa();
 
+        }else{
+            
+            
+        todosdependentes = csbffDependenteService.BuscaDependentePessoa(recPessoa.getRecIdpessoa());
+         
         }
 
-        todosdependentes = csbffDependenteService.BuscaDependentePessoa(recPessoa.getRecIdpessoa());
+        
 
     }
 
@@ -102,7 +105,6 @@ public class DependenteBean {
                 csbffDependenteService.save(csbffdependente);
 
             }
-
             todosdependentes = csbffDependenteService.BuscaDependentePessoa(recPessoa.getRecIdpessoa());
             MsgNotificacao = "O dependente foi adicionado ao colaborador!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");           
@@ -114,7 +116,6 @@ public class DependenteBean {
         return "dependente";
 
     }
-
     public void cancel() {
         this.formAtivo = false;
         this.csbffdependente = new CsbffDependentes();
@@ -126,21 +127,11 @@ public class DependenteBean {
 
         }
     }
-//    public void cancel() {
-//        this.formAtivo = false;
-//        this.csbffdependente = new CsbffDependentes();
-//    }
-
     public void add() {
         this.formAtivo = true;
         this.csbffdependente = new CsbffDependentes();
     }
 
-//    public String excluir(CsbffDependentes dependente) {
-//        csbffDependenteService.delete(dependente.getDependenteCod());
-//        todosdependentes.remove(dependente);
-//        return "dependente";
-//    }
     public String excluir(CsbffDependentes dependente) {
         String MsgNotificacao = "";
         try {
@@ -254,6 +245,14 @@ public class DependenteBean {
 
     public void setRecPessoa(RecPessoa recPessoa) {
         this.recPessoa = recPessoa;
+    }
+
+    public boolean isCampos() {
+        return campos;
+    }
+
+    public void setCampos(boolean campos) {
+        this.campos = campos;
     }
 
 }

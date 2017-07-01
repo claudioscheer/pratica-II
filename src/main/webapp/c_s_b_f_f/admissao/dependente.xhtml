@@ -72,7 +72,7 @@
                                                                     Nome dependente
                                                                     <span class="required">*</span>
                                                                 </label>
-                                                                <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNome}" />
+                                                                <h:inputText class="form-control" value="#{dependenteBean.csbffdependente.dependenteNome}" disabled="#{dependenteBean.campos}" />
                                                             </div>
                                                         </div>
 
@@ -84,7 +84,7 @@
                                                                     CPF
                                                                     <span class="required">*</span>
                                                                 </label>
-                                                                <h:inputText class="form-control"  maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" />
+                                                                <h:inputText class="form-control"  maxlength="14" a:placeholder="Digite um CPF válido no formato '000.000.000-00'" onkeypress="this.value = MascaraCPF(this.value)" value="#{dependenteBean.csbffdependente.dependenteCpf}" disabled="#{dependenteBean.campos}"/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -161,7 +161,7 @@
 
                                                         <div class="form-group ">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                                                                <h:commandButton class="btn btn-primary" value=" salvar" action="#{dependenteBean.save()}"/>                                  
+                                                                <h:commandButton class="btn btn-primary" value=" salvar" action="#{dependenteBean.save()}" disabled="#{dependenteBean.campos}"/>                                  
                                                                 <h:commandButton value="Cancelar" class="btn btn-danger" action="#{dependenteBean.cancel()}"/>
                                                             </div>
                                                         </div>
