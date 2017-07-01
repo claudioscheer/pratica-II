@@ -39,7 +39,7 @@ public class CsbffDadosProfissionaisBean {
     private String recCpf;
     private boolean habilitar;
 
-    private RecPessoa recPessoa = new RecPessoa();
+    private RecPessoa recPessoa;
     private List<RecPessoa> recPessoaList;
 
     @ManagedProperty("#{recPessoaService}")
@@ -257,7 +257,7 @@ public class CsbffDadosProfissionaisBean {
     public void addBeneficioPessoa() {
         if (this.csbffBeneficios == null) {
             Helper.mostrarNotificacao("Benefício", "Selecione um benefício.", "error");
-            return; 
+            return;
         }
 
         CsbffPessoaBeneficio pessoaBeneficio = new CsbffPessoaBeneficio();
@@ -299,27 +299,20 @@ public class CsbffDadosProfissionaisBean {
         return "listaadmissao";
     }
 
-    public String editaConsulta(RecPessoa pessoas) {
-//        this.formAtivo = true;
-        this.recPessoa = pessoas;
-        selectConsulta(pessoas);
-        return "dadospessoais";
-    }
-
-    public void selectConsulta(RecPessoa pessoas) {
-        this.recPessoa = pessoas;
-
-        alteraConsulta(pessoas);
-
-    }
-
-    public String alteraConsulta(RecPessoa pessoas) {
-
-        recPessoaService.update(pessoas);
-
-        return "pessoas";
-    }
-
+//     public void selectConsulta(RecPessoa pessoas) {
+//        this.recPessoa = pessoas;
+//        alteraConsulta(pessoas);
+//    }
+//
+//    public String alteraConsulta(RecPessoa pessoas) {
+//        recPessoaService.update(pessoas);
+//        return "pessoas";
+//    }
+//    public String criaContrato(RecPessoa pessoas) {
+//        this.recPessoa = pessoas;
+//        selectConsulta(pessoas);
+//        return "dadosprofissionais";
+//    }
     public String excluir(RecPessoa pessoas) {
         recPessoaService.delete(pessoas.getRecIdpessoa());
         recPessoaList.remove(pessoas);
@@ -437,7 +430,6 @@ public class CsbffDadosProfissionaisBean {
 //    public void setAdmissaoDescricao(RecPessoa admissaoDescricao) {
 //        this.admissaoDescricao = admissaoDescricao;
 //    }
-
     public CsbffDependentesService getCsbffDependentesService() {
         return csbffDependentesService;
     }

@@ -115,7 +115,7 @@ public class FichaFuncional {
             throw new Exception("O arquivo não foi encontrado.");
         }
 
-        Map<String, Object> parametros = new HashMap<>();
+        HashMap parametros = new HashMap();
         parametros.put("empresa", "Asa Delta");
         parametros.put("cnpj", "98.039.852/0004-33");
         parametros.put("recIdpessoa", pessoa.getRecIdpessoa());

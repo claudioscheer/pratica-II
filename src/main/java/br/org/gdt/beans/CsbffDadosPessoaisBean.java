@@ -38,7 +38,7 @@ public class CsbffDadosPessoaisBean {
         return EstadoCivil.values();
     }
 
-   public void buscarCpf() {
+    public void buscarCpf() {
         recPessoa = recPessoaService.findByRecCpf(recCpf);
         String MsgNotificacao = "";
         while (recPessoa == null) {
@@ -96,19 +96,20 @@ public class CsbffDadosPessoaisBean {
             if (recPessoa.getRecIdpessoa() > 0) {
                 recPessoaService.update(recPessoa);
             }
-            MsgNotificacao = "Os dados do colaborador foram atualizados com Sucesso!";
+            MsgNotificacao = "Os dados pessoais do colaborador foram atualizados com Sucesso!";
             Helper.mostrarNotificacao("Sucesso", MsgNotificacao, "success");
         } catch (Exception ex) {
-            MsgNotificacao = "Os dados não foram inseridos ";
+            MsgNotificacao = "Os dados pessoais não foram atualizados ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
-        recPessoaList = recPessoaService.findAll();
+//        recPessoa = recPessoaService.findByRecCpf(recCpf);
+                recPessoa = (RecPessoa) recPessoaService.findByRecCpf(recCpf);
+
 
         return "dadosprofissionais";
     }
 
     public String editaConsulta(RecPessoa pessoas) {
-//        this.formAtivo = true;
         this.recPessoa = pessoas;
         selectConsulta(pessoas);
         return "dadospessoais";
@@ -116,16 +117,18 @@ public class CsbffDadosPessoaisBean {
 
     public void selectConsulta(RecPessoa pessoas) {
         this.recPessoa = pessoas;
-
         alteraConsulta(pessoas);
-
     }
 
     public String alteraConsulta(RecPessoa pessoas) {
-
         recPessoaService.update(pessoas);
-
         return "pessoas";
+    }
+
+    public String criaContrato(RecPessoa pessoas) {
+        this.recPessoa = pessoas;
+        selectConsulta(pessoas);
+        return "dadospessoais";
     }
 
     public String excluir(RecPessoa pessoas) {

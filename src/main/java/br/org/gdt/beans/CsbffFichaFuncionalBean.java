@@ -5,6 +5,7 @@ import br.org.gdt.service.FichaFuncional.FichaFuncional;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.RecPessoaService;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -26,6 +27,7 @@ public class CsbffFichaFuncionalBean {
     private boolean colaboradorInativo;
     @ManagedProperty("#{fichaFuncional}")
     private FichaFuncional fichaFuncional;
+    private  Date recDtaDemissao;
 
     public CsbffFichaFuncionalBean() {
 
@@ -67,15 +69,23 @@ public class CsbffFichaFuncionalBean {
 
         }
     }
+
     public void imprimirFichaFuncional() throws Exception {
-//        try {
+        String MsgNotificacao = "";
+
+        try {
 //            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
 //            folhasPeriodo.add(fpFolhaPeriodo);
- 
+
             fichaFuncional.gerarFichaFuncional(recPessoa);
-//        } catch (Exception e) {
-//            Helper.mostrarNotificacao("Erro", e.getMessage(), "error");
-//        }
+        } catch (Exception e) {
+            if (  recDtaDemissao == null){
+                
+            }
+            MsgNotificacao = "Todos os dados devem estar preenchidos!";
+
+            Helper.mostrarNotificacao("Erro", e.getMessage(), "error");
+        }
     }
 
     public boolean isFormAtivo() {
@@ -132,6 +142,14 @@ public class CsbffFichaFuncionalBean {
 
     public void setFichaFuncional(FichaFuncional fichaFuncional) {
         this.fichaFuncional = fichaFuncional;
+    }
+
+    public Date getRecDtaDemissao() {
+        return recDtaDemissao;
+    }
+
+    public void setRecDtaDemissao(Date recDtaDemissao) {
+        this.recDtaDemissao = recDtaDemissao;
     }
 
 }
