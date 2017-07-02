@@ -91,7 +91,7 @@ public class RecPessoaDAO extends DAO<RecPessoa> {
     }
 
     public List<RecPessoa> buscarColaboradores() {
-        Query query = entityManager.createQuery("from RecPessoa as p where p.recFuncionario = true");
+        TypedQuery<RecPessoa> query = entityManager.createQuery("from RecPessoa as p where p.recFuncionario = true", RecPessoa.class);
 
         return query.getResultList();
     }
