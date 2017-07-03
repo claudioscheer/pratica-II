@@ -8,6 +8,7 @@ package br.org.gdt.beans;
 import br.org.gdt.model.GchTreinamentos;
 import br.org.gdt.model.GchTreinamentospessoas;
 import br.org.gdt.model.RecPessoa;
+import br.org.gdt.resources.GerenciadorEmail;
 import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentoPessoaService;
 import br.org.gdt.service.GchTreinamentosService;
@@ -273,6 +274,32 @@ public class GchTreinamentoPessoaBean {
         return null;
     }
 
+    public void enviarEmail(){
+    
+//        GerenciadorEmail email = new GerenciadorEmail();
+    
+        String destinatarios = "";
+        String assunto = "Treinamento";
+        String mensagem = "Você foi vinculado ao treinamento";
+        
+        for (GchTreinamentospessoas pessoa : todosGchTreinamentosPessoas){
+        
+            if (destinatarios.isEmpty()){
+            
+                destinatarios = pessoa.getRecIdpessoa().getRecEmail();
+                
+            }else{
+            
+                destinatarios += ";" + pessoa.getRecIdpessoa().getRecEmail();
+            
+            }
+        
+        }
+        
+        boolean enviou = new GerenciadorEmail().enviarEmail(destinatarios, assunto, mensagem);
+        
+    }
+    
     public boolean isFormAtivo() {
         return formAtivo;
     }
