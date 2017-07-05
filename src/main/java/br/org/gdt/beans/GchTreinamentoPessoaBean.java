@@ -13,6 +13,7 @@ import br.org.gdt.resources.Helper;
 import br.org.gdt.service.GchTreinamentoPessoaService;
 import br.org.gdt.service.GchTreinamentosService;
 import br.org.gdt.service.RecPessoaService;
+import com.oracle.jrockit.jfr.ContentType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.mail.Address;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -274,7 +276,7 @@ public class GchTreinamentoPessoaBean {
         return null;
     }
 
-    public void enviarEmail(){
+    public String enviarEmail(){
     
 //        GerenciadorEmail email = new GerenciadorEmail();
     
@@ -290,13 +292,26 @@ public class GchTreinamentoPessoaBean {
                 
             }else{
             
-                destinatarios += ";" + pessoa.getRecIdpessoa().getRecEmail();
+                destinatarios += "," + pessoa.getRecIdpessoa().getRecEmail();
             
             }
         
         }
         
+        
         boolean enviou = new GerenciadorEmail().enviarEmail(destinatarios, assunto, mensagem);
+        
+        if (enviou){
+        
+            Helper.mostrarNotificacao("Sucesso", "Notificação por e-mail enviado com sucesso!", "success");
+        
+        }else{
+        
+            Helper.mostrarNotificacao("Erro", "Não foi possível realizar o envio da notificação por e-mail.", "error");
+            
+        }
+        
+        return "VincularPessoasTreinamento";
         
     }
     

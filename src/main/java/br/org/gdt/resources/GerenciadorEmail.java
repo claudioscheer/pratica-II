@@ -78,6 +78,7 @@ public class GerenciadorEmail {
         String emailResponsavel = "murphyrhnotifica@gmail.com";
         String senha = "murphy2017";
 
+        
         Properties props = new Properties();
 
         props.setProperty("mail.transport.protocol", "smtp");
@@ -91,8 +92,7 @@ public class GerenciadorEmail {
         props.put("mail.smtp.user", emailResponsavel);
         props.put("mail.smtp.password", senha);
         props.put("mail.debug", "true");
-        
-        
+
         try {
 
             Session session = Session.getInstance(props, new javax.mail.Authenticator() {
@@ -110,15 +110,15 @@ public class GerenciadorEmail {
             message.setHeader("User-Agent", "Sistema FaleConosco");
             message.setHeader("Organization", "E4W");
             message.setFrom(new InternetAddress(emailResponsavel));
-            message.setRecipients(Message.RecipientType.TO, destinatario);
+            message.setRecipients(Message.RecipientType.CC, destinatario);
             message.setSubject(assunto);
             message.setText(mensagem, "utf-8", "html");
             Transport.send(message);
 
             return true;
-            
+
         } catch (Exception ex) {
-            System.err.println("Ocorreu erro ao enviar e-mail: " + ex.getMessage());
+            System.err.println("Ocorreu erro ao enviar e-mail: " + ex.toString());
             return false;
         }
 
