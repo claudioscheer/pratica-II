@@ -39,17 +39,18 @@ public class CsbffEscalaHorasDAO extends DAO<CsbffEscalaHoras> {
             return null;
 
         }
+        
     }
 
     public List<CsbffEscalaHoras> buscaEscalasPessoa(RecPessoa pessoa) {
 
-        Query query = entityManager.createQuery("from CsbffEscalaHoras as t where t.recIdpessoa.recIdpessoa = :idPessoa");
+        Query query = entityManager.createQuery("from CsbffEscalaHoras as t left join fetch t.csbffEscalaHorasList where t.recIdpessoa.recIdpessoa = :idPessoa");
         query.setParameter("idPessoa", pessoa.getRecIdpessoa());
 
         List<CsbffEscalaHoras> lista = query.getResultList();
-        if (lista.isEmpty()) {
-            return new ArrayList<>();
-        }
+//        if (lista.isEmpty()) {
+//            return new ArrayList<>();
+//        }
         return lista;
 
     }

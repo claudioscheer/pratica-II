@@ -145,7 +145,7 @@ public class FichaFuncional {
         parametros.put("cargoCodigo", pessoa.getCargoCodigo().getCargoNome());
         parametros.put("cargoValorSalario", pessoa.getCargoValorSalario());
         parametros.put("recDtaAdmissao", new SimpleDateFormat("dd/MM/yyyy").format(pessoa.getRecDtaAdmissao()));
-        parametros.put("recDtaDemissao", new SimpleDateFormat("dd/MM/yyyy").format(pessoa.getRecDtaDemissao()));
+        parametros.put("recDtaDemissao", pessoa.getRecDtaDemissao());
         parametros.put("insalubridade", pessoa.getInsalubridade());
         parametros.put("recPericulosidade", pessoa.getRecPericulosidade());
         parametros.put("recNumTituEleitor", pessoa.getRecNumTituEleitor());

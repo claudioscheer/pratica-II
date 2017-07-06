@@ -39,7 +39,7 @@ public class CsbffDadosProfissionaisBean {
     private String recCpf;
     private boolean habilitar;
 
-    private RecPessoa recPessoa;
+    private RecPessoa recPessoa = new RecPessoa();
     private List<RecPessoa> recPessoaList;
 
     @ManagedProperty("#{recPessoaService}")

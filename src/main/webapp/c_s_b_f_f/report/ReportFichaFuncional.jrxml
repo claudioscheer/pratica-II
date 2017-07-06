@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-20T21:25:01 -->
+<!-- 2017-07-03T16:50:41 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportFichaFuncional." pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="493fecfc-8039-4f02-bbb6-9916f739b6c2">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -173,7 +173,7 @@
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
 	<parameter name="recDtaAdmissao" class="java.lang.String"/>
-	<parameter name="recDtaDemissao" class="java.lang.String"/>
+	<parameter name="recDtaDemissao" class="java.util.Date"/>
 	<parameter name="insalubridade" class="java.lang.Enum">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -338,7 +338,7 @@ NASCIMENTO]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="420">
+		<band height="444">
 			<property name="local_mesure_unitheight" value="pixel"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
@@ -740,14 +740,14 @@ DEMISSÃO]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{cargoValorSalario}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="170" y="112" width="90" height="20" uuid="687fc6f4-d2af-4705-a95f-deb11eeb9823"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{recDtaAdmissao}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement x="260" y="112" width="89" height="20" uuid="4e2d1fba-09a2-4303-8a54-b6fb0d928baa"/>
 				<textElement>
 					<font size="8" isBold="true"/>
@@ -882,7 +882,7 @@ DEMISSÃO]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:columnHeader height="21">
-							<textField>
+							<textField pattern="dd/MM/yyy">
 								<reportElement x="0" y="0" width="140" height="21" uuid="c628f19e-a636-48b4-a972-cbdbb294b342"/>
 								<textElement>
 									<font size="8" isBold="true"/>
@@ -963,16 +963,16 @@ DEMISSÃO]]></text>
 								<text><![CDATA[DIA DA SEMANA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:columnHeader height="20">
+						<jr:columnHeader height="50">
 							<textField>
-								<reportElement x="0" y="0" width="100" height="20" uuid="373e95cf-b1f9-4559-b41e-2861c917f222"/>
+								<reportElement x="0" y="0" width="100" height="50" uuid="373e95cf-b1f9-4559-b41e-2861c917f222"/>
 								<textElement>
 									<font size="8" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{diasATrabalhar}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
-						<jr:detailCell height="10"/>
+						<jr:detailCell height="2"/>
 					</jr:column>
 					<jr:column width="78" uuid="d12c0f44-d551-43ac-bbb8-f26f9b7f9bc5">
 						<jr:tableHeader height="20">
@@ -984,16 +984,16 @@ DEMISSÃO]]></text>
 								<text><![CDATA[HORA ENTRADA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:columnHeader height="20">
+						<jr:columnHeader height="50">
 							<textField>
-								<reportElement x="0" y="0" width="78" height="20" uuid="24106d80-8532-40c8-aa85-cbb4803beb88"/>
+								<reportElement x="0" y="0" width="78" height="50" uuid="24106d80-8532-40c8-aa85-cbb4803beb88"/>
 								<textElement>
 									<font size="8" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{escalaHora1}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
-						<jr:detailCell height="10"/>
+						<jr:detailCell height="2"/>
 					</jr:column>
 					<jr:column width="82" uuid="434365ea-a798-4d07-9a28-65788a3f1041">
 						<jr:tableHeader height="20">
@@ -1005,16 +1005,16 @@ DEMISSÃO]]></text>
 								<text><![CDATA[HORA SAÍDA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:columnHeader height="20">
+						<jr:columnHeader height="50">
 							<textField>
-								<reportElement x="0" y="0" width="82" height="20" uuid="a5613ba6-5297-4b2f-a0bd-66cda0f6a74a"/>
+								<reportElement x="0" y="0" width="82" height="50" uuid="a5613ba6-5297-4b2f-a0bd-66cda0f6a74a"/>
 								<textElement>
 									<font size="8" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{escalaHora2}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
-						<jr:detailCell height="10"/>
+						<jr:detailCell height="2"/>
 					</jr:column>
 					<jr:column width="100" uuid="236408b2-4bf0-4195-8d55-6eec4365c27f">
 						<jr:tableHeader height="20">
@@ -1026,16 +1026,16 @@ DEMISSÃO]]></text>
 								<text><![CDATA[HORA ENTRADA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:columnHeader height="20">
+						<jr:columnHeader height="50">
 							<textField>
-								<reportElement x="0" y="0" width="100" height="20" uuid="b9b4b306-e710-43bb-9afa-68a0cbca2266"/>
+								<reportElement x="0" y="0" width="100" height="50" uuid="b9b4b306-e710-43bb-9afa-68a0cbca2266"/>
 								<textElement>
 									<font size="8" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{escalaHora3}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
-						<jr:detailCell height="10"/>
+						<jr:detailCell height="2"/>
 					</jr:column>
 					<jr:column width="90" uuid="b1c3cc8d-c25a-4d2f-9f60-76a471fd8af7">
 						<jr:tableHeader height="20">
@@ -1047,16 +1047,16 @@ DEMISSÃO]]></text>
 								<text><![CDATA[HORA SAÍDA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:columnHeader height="20">
+						<jr:columnHeader height="50">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="f5ef12ff-03b1-49a3-81c8-8448fcbbc5b4"/>
+								<reportElement x="0" y="0" width="90" height="50" uuid="f5ef12ff-03b1-49a3-81c8-8448fcbbc5b4"/>
 								<textElement>
 									<font size="8" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{escalaHora4}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
-						<jr:detailCell height="10"/>
+						<jr:detailCell height="2"/>
 					</jr:column>
 					<jr:column width="90" uuid="b3dce7ee-2667-475c-9d3c-85703b9d59e3">
 						<jr:tableHeader height="20">
@@ -1068,16 +1068,16 @@ DEMISSÃO]]></text>
 								<text><![CDATA[DATA ALTERAÇÃO]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:columnHeader height="20">
-							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="a9de19b3-481b-4c8e-9231-478dea4992ca"/>
+						<jr:columnHeader height="50">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement x="0" y="0" width="90" height="50" uuid="a9de19b3-481b-4c8e-9231-478dea4992ca"/>
 								<textElement>
 									<font size="8" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{escalaDataVigente}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
-						<jr:detailCell height="10"/>
+						<jr:detailCell height="2"/>
 					</jr:column>
 				</jr:table>
 			</componentElement>

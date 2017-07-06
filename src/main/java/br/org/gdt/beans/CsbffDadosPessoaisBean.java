@@ -102,9 +102,8 @@ public class CsbffDadosPessoaisBean {
             MsgNotificacao = "Os dados pessoais não foram atualizados ";
             Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
-//        recPessoa = recPessoaService.findByRecCpf(recCpf);
-                recPessoa = (RecPessoa) recPessoaService.findByRecCpf(recCpf);
-
+        recPessoaList = recPessoaService.findAll();
+        
 
         return "dadosprofissionais";
     }
@@ -124,7 +123,6 @@ public class CsbffDadosPessoaisBean {
         recPessoaService.update(pessoas);
         return "pessoas";
     }
-
     public String criaContrato(RecPessoa pessoas) {
         this.recPessoa = pessoas;
         selectConsulta(pessoas);

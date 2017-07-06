@@ -27,7 +27,7 @@ public class CsbffFichaFuncionalBean {
     private boolean colaboradorInativo;
     @ManagedProperty("#{fichaFuncional}")
     private FichaFuncional fichaFuncional;
-    private  Date recDtaDemissao;
+    private Date recDtaDemissao;
 
     public CsbffFichaFuncionalBean() {
 
@@ -70,21 +70,17 @@ public class CsbffFichaFuncionalBean {
         }
     }
 
-    public void imprimirFichaFuncional() throws Exception {
+    public void imprimirFichaFuncional() {
         String MsgNotificacao = "";
 
         try {
-//            List<FpFolhaPeriodo> folhasPeriodo = new ArrayList<>();
-//            folhasPeriodo.add(fpFolhaPeriodo);
 
             fichaFuncional.gerarFichaFuncional(recPessoa);
         } catch (Exception e) {
-            if (  recDtaDemissao == null){
-                
-            }
+//            if (recDtaDemissao == null) {
+////            }
             MsgNotificacao = "Todos os dados devem estar preenchidos!";
-
-            Helper.mostrarNotificacao("Erro", e.getMessage(), "error");
+            Helper.mostrarNotificacao("Erro", MsgNotificacao, "error");
         }
     }
 
