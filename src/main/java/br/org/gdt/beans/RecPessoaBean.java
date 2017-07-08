@@ -171,13 +171,18 @@ public class RecPessoaBean {
             return "curriculo";
         }
     }
-    private int grauEnsinoFiltro;
-    private int sexoFiltro;
+    private int grauEnsinoFiltro = 0;
+    private int sexoFiltro = 0;
     private String nomeFiltro;
-    private int estadoCivilFiltro;
-    private int corFiltro;
+    private int estadoCivilFiltro = 0;
+    private int corFiltro = 0;
     public List<RecPessoa> FiltroPessoa(){
-        return null;
+        recPessoas = recPessoaService.FiltroPessoa(grauEnsinoFiltro, 
+                                                   sexoFiltro, 
+                                                   nomeFiltro, 
+                                                   estadoCivilFiltro, 
+                                                   corFiltro);
+        return recPessoas;
     }
     public List<RecPessoa> ListarTodas() {
         if (recPessoas == null) {
